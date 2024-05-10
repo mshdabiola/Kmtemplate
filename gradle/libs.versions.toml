@@ -14,7 +14,7 @@ androidxLifecycle = "2.7.0"
 
 lifecycleViewmodelCompose = "2.8.0-rc01"
 monitor = "1.6.1"
-navigationCompose = "2.7.0-alpha04"
+navigationCompose = "2.8.0-dev1623"
 pagingComposeCommon = "3.3.0-alpha02-0.5.1"
 turbine = "1.0.0"
 timber = "5.0.1"
