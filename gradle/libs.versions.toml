@@ -12,7 +12,7 @@ androidxSavedState = "1.2.1"
 androidxLifecycle = "2.7.0"
 
 
-lifecycleViewmodelCompose = "2.8.0-rc01"
+lifecycleViewmodelCompose = "2.8.0-dev1623"
 monitor = "1.6.1"
 navigationCompose = "2.7.0-alpha04"
 pagingComposeCommon = "3.3.0-alpha02-0.5.1"
