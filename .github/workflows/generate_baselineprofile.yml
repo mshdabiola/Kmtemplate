@@ -28,7 +28,7 @@ jobs:
       #          mv benchmark/build/outputs/managed_device_android_test_additional_output/pixel2Api31/BaselineProfileGenerator_generate-baseline-prof.txt app/src/main/baseline-prof.txt
 
       - name: Create pull request
-        uses: peter-evans/create-pull-request@v5.0.2
+        uses: peter-evans/create-pull-request@v6.0.5
         with:
           commit-message: Updated baseline profiles
           title: Updated baseline profiles
