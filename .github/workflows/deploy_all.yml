@@ -46,7 +46,7 @@ jobs:
           java-version: '17'
 
       - name: Setup Android SDK
-        uses: android-actions/setup-android@v2
+        uses: android-actions/setup-android@v3
         if: ${{ matrix.runtime == 'android' }}
 
       - name: Setup build tool version variable
