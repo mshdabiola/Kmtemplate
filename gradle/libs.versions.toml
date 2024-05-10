@@ -30,7 +30,7 @@ androidxConstraintLayout = "1.1.0-alpha13"
 androidxCoreSplashscreen = "1.0.1"
 androidxMetrics = "1.0.0-beta01"
 
-decomposeVersion = "3.0.0-alpha09"
+decomposeVersion = "3.0.0"
 
 
 koin = "3.6.0-wasm-alpha2"
