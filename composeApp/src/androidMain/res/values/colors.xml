@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+     abiola 2024
+
+-->
+<resources>
+    <color name="primary">#914278</color>
+
+    <!-- Status bar -->
+    <color name="black30">#4D000000</color>
+
+    <color name="ic_launcher_background_tint">#000000</color>
+    <color name="ic_launcher_foreground_tint">#FCFCFC</color>
+</resources>

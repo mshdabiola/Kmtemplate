@@ -1,0 +1,37 @@
+name: Generate Baseline Profiles
+
+on:
+  push:
+    tags:
+      - 'b[0-9]+.[0-9]+.[0-9]+'
+
+jobs:
+  generate-baseline-profiles:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v2
+
+      - name: set up JDK
+        uses: actions/setup-java@v3
+        with:
+          java-version: 17
+          distribution: zulu
+          cache: gradle
+
+      - name: Generate baseline profile
+        run: |
+          ./gradlew :app:cleanManagedDevices --unused-only
+          ./gradlew :app:generateReleaseBaselineProfile -Pandroid.testoptions.manageddevices.emulator.gpu="swiftshader_indirect" -Pandroid.testInstrumentationRunnerArguments.androidx.benchmark.enabledRules=BaselineProfile
+      #          mv benchmark/build/outputs/managed_device_android_test_additional_output/pixel2Api31/BaselineProfileGenerator_generate-baseline-prof.txt app/src/main/baseline-prof.txt
+
+      - name: Create pull request
+        uses: peter-evans/create-pull-request@v5.0.2
+        with:
+          commit-message: Updated baseline profiles
+          title: Updated baseline profiles
+          body: ""
+          branch: update-baseline-profiles
+          base: develop
