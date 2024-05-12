@@ -61,7 +61,8 @@ class AndroidRoomConventionPlugin : Plugin<Project> {
 
             extensions.configure<KotlinMultiplatformExtension> {
                 androidTarget()
-                jvm("desktop")
+                jvm()
+                jvmToolchain(17)
                 // val libs = extensions.getByType<VersionCatalogsExtension>().named("libs")
                 with(sourceSets) {
 

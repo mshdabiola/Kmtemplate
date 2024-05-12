@@ -8,9 +8,11 @@ import org.koin.dsl.module
 actual val datastoreModule: Module
     get() = module {
         includes(commonModule)
+
         single {
             val context: Context = get()
 
             createDataStoreUserData { context.filesDir.resolve("userdata").absolutePath }
         }
+
     }

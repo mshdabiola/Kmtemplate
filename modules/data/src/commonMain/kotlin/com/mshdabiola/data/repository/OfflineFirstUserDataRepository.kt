@@ -5,43 +5,58 @@
 package com.mshdabiola.data.repository
 
 import com.mshdabiola.analytics.AnalyticsHelper
-import com.mshdabiola.datastore.MultiplatformSettings
+import com.mshdabiola.data.model.toData
+import com.mshdabiola.datastore.Store
 import com.mshdabiola.model.Contrast
 import com.mshdabiola.model.DarkThemeConfig
 import com.mshdabiola.model.ThemeBrand
 import com.mshdabiola.model.UserData
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 
 internal class OfflineFirstUserDataRepository(
-    private val settings: MultiplatformSettings,
+    private val settings: Store,
     private val analyticsHelper: AnalyticsHelper,
 ) : UserDataRepository {
 
+
     override val userData: Flow<UserData> =
-        settings.userData
+        settings
+            .userData
+            .map { it.toData() }
 
     override suspend fun setThemeBrand(themeBrand: ThemeBrand) {
-        settings.setThemeBrand(themeBrand)
+        settings.updateUserData {
+            it.copy(themeBrand)
+        }
         analyticsHelper.logThemeChanged(themeBrand.name)
     }
 
     override suspend fun setThemeContrast(contrast: Contrast) {
-        settings.setThemeContrast(contrast)
+        settings.updateUserData {
+            it.copy(contrast = contrast)
+        }
         analyticsHelper.logContrastChanged(contrast.name)
     }
 
     override suspend fun setDarkThemeConfig(darkThemeConfig: DarkThemeConfig) {
-        settings.setDarkThemeConfig(darkThemeConfig)
+        settings.updateUserData {
+            it.copy(darkThemeConfig = darkThemeConfig)
+        }
         analyticsHelper.logDarkThemeConfigChanged(darkThemeConfig.name)
     }
 
     override suspend fun setDynamicColorPreference(useDynamicColor: Boolean) {
-        settings.setDynamicColorPreference(useDynamicColor)
+        settings.updateUserData {
+            it.copy(useDynamicColor = useDynamicColor)
+        }
         analyticsHelper.logDynamicColorPreferenceChanged(useDynamicColor)
     }
 
     override suspend fun setShouldHideOnboarding(shouldHideOnboarding: Boolean) {
-        settings.setShouldHideOnboarding(shouldHideOnboarding)
+        settings.updateUserData {
+            it.copy(shouldHideOnboarding = shouldHideOnboarding)
+        }
         analyticsHelper.logOnboardingStateChanged(shouldHideOnboarding)
     }
 }

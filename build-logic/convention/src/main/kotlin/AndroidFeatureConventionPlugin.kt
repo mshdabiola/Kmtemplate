@@ -85,14 +85,14 @@ class AndroidFeatureConventionPlugin : Plugin<Project> {
                         }
 
                     }
-                    getByName("desktopMain") {
+                    getByName("jvmMain") {
                         this.dependencies {
                             // implementation(libs.findLibrary("koin.core").get())
 
                         }
 
                     }
-                    getByName("desktopTest") {
+                    getByName("jvmTest") {
                         this.dependencies {
 
                         }

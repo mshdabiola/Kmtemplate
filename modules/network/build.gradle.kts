@@ -47,7 +47,7 @@ kotlin {
         }
 
 
-        val desktopMain by getting {
+        val jvmMain by getting {
             dependencies {
                 implementation(libs.ktor.client.logging)
 
@@ -61,7 +61,6 @@ kotlin {
 //            }
 //        }
 
-        val desktopTest by getting
 
 
 //        val jsMain by getting {

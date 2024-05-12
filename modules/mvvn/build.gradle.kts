@@ -47,14 +47,13 @@ kotlin {
         }
 
 
-        val desktopMain by getting {
+        val jvmMain by getting {
             dependencies {
 
                 implementation(libs.kotlinx.coroutines.swing)
             }
         }
 
-        val desktopTest by getting
 
 //        val jsMain by getting {
 //            dependencies {

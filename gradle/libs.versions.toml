@@ -89,6 +89,7 @@ espressoCore = "3.5.1"
 jacoco = "0.8.12"
 truth = "1.4.2"
 dependencyGuard = "0.5.0"
+conveyor = "1.8"
 
 multiplatform_settings = "1.1.1"
 
@@ -292,4 +293,5 @@ kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref =
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 room = { id = "androidx.room", version.ref = "androidx-room" }
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+conveyor = { id = "dev.hydraulic.conveyor", version.ref = "conveyor" }
 

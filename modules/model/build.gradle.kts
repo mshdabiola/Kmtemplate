@@ -32,13 +32,12 @@ kotlin {
         }
 
 
-        val desktopMain by getting {
+        val jvmMain by getting {
             dependencies {
 
             }
         }
 
-        val desktopTest by getting
 
 //        val jsMain by getting {
 //            dependencies {

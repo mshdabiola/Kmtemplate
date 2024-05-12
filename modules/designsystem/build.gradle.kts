@@ -66,7 +66,7 @@ kotlin {
             }
         }
 
-        val desktopMain by getting {
+        val jvmMain by getting {
             dependencies {
                 api(compose.preview)
             }

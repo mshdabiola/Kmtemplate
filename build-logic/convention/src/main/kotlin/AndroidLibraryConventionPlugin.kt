@@ -59,7 +59,10 @@ class AndroidLibraryConventionPlugin : Plugin<Project> {
             }
             extensions.configure<KotlinMultiplatformExtension> {
                 androidTarget()
-                jvm("desktop")
+               // jvm("desktop")
+                jvm()
+                jvmToolchain(17)
+
                 val libs = extensions.getByType<VersionCatalogsExtension>().named("libs")
                 with(sourceSets) {
 
@@ -93,14 +96,14 @@ class AndroidLibraryConventionPlugin : Plugin<Project> {
                         }
 
                     }
-                    getByName("desktopMain") {
+                    getByName("jvmMain") {
                         this.dependencies {
                             // implementation(libs.findLibrary("koin.core").get())
 
                         }
 
                     }
-                    getByName("desktopTest") {
+                    getByName("jvmTest") {
                         this.dependencies {
                             // implementation(libs.findLibrary("koin.core").get())
                             implementation(project(":modules:testing"))

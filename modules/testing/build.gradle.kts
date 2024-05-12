@@ -65,19 +65,6 @@ kotlin {
                 api(libs.koin.android.test)
             }
         }
-        val androidInstrumentedTest by getting {
-
-
-        }
-
-
-        val desktopMain by getting {
-            dependencies {
-
-            }
-        }
-
-        val desktopTest by getting
 
 //        val jsMain by getting {
 //            dependencies {

@@ -22,7 +22,7 @@ dependencyResolutionManagement {
         maven(url = "https://maven.pkg.jetbrains.space/kotlin/p/wasm/experimental")
     }
 }
-rootProject.name = "SkeletonMultiplatform"
+rootProject.name = "Hydraulic"
 //include(":app")
 //include(":app:baselineprofile")
 include(":modules:database")
@@ -32,20 +32,21 @@ include(":modules:network")
 include(":modules:data")
 include(":modules:domain")
 include(":modules:testing")
+include(":modules:ui")
+include(":modules:mvvn")
+include(":modules:analytics")
+include(":modules:datastore")
+
 //include(":modules:app")
 //include(":desktop")
 //include(":modules:setting")
-include(":modules:datastore")
 
 include(":benchmarks")
-include(":modules:mvvn")
-include(":modules:analytics")
 
 
 include(":composeApp")
 //include(":shared")
 
-include(":modules:ui")
 
 include(":features:main")
 include(":features:detail")

@@ -30,11 +30,6 @@ kotlin {
 //        browser()
 //    }
     sourceSets {
-        val desktopMain by getting {
-            dependencies {
-
-            }
-        }
 
         val commonMain by getting {
             dependencies {

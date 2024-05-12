@@ -13,7 +13,13 @@ plugins {
     alias(libs.plugins.androidx.baselineprofile)
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.roborazzi)
+    alias(libs.plugins.conveyor)
+
 }
+
+group = "com.mshdabiola.skeletonapp"
+version = "1.0"
+
 dependencies {
 
 //    implementation(project(":modules:app"))
@@ -25,6 +31,10 @@ dependencies {
 //    implementation(project(":modules:designsystem"))
 //
 
+    linuxAmd64(compose.desktop.linux_x64)
+    macAmd64(compose.desktop.macos_x64)
+    macAarch64(compose.desktop.macos_arm64)
+    windowsAmd64(compose.desktop.windows_x64)
 
     implementation(libs.koin.android.compose)
     implementation(libs.koin.android)
@@ -70,15 +80,17 @@ kotlin {
     androidTarget {
         compilations.all {
             kotlinOptions {
-                jvmTarget = "1.8"
+                jvmTarget = "17"
             }
         }
     }
 
-    jvm("desktop")
+   // jvm("desktop")
+    jvm ()
+    jvmToolchain(17)
 
     sourceSets {
-        val desktopMain by getting
+        val jvmMain by getting
 
         androidMain.dependencies {
             implementation(libs.compose.ui.tooling.preview)
@@ -125,12 +137,19 @@ kotlin {
 
         }
 
-        desktopMain.dependencies {
+        jvmMain.dependencies {
             implementation(compose.desktop.currentOs)
             // implementation(project(":modules:app"))
 
             implementation(libs.kotlinx.coroutines.swing)
 
+        }
+        targets.all {
+            compilations.all {
+                compilerOptions.configure {
+                    freeCompilerArgs.add("-Xexpect-actual-classes")
+                }
+            }
         }
 
     }
@@ -207,59 +226,15 @@ android {
 compose.desktop {
     application {
         mainClass = "com.mshdabiola.desktop.MainAppKt"
-        /*
-        * Its unreliable. Don't run release tasks for now.
-        * Wait until fixed: https://github.com/JetBrains/compose-jb/issues/2393
-        */
-
-        buildTypes.release.proguard {
-            configurationFiles.from(project.file("compose-desktop.pro"))
-            obfuscate.set(true)
-            version.set("7.4.2")
-        }
-
-        val iconsRoot = project.file("src/desktopMain/resources/launcher")
-        nativeDistributions {
-            targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
-            packageVersion = "1.0.1"
-            packageName = "Skeleton"
-            description = "Template"
-            copyright = "© 2022 Mshdabiola. All rights reserved."
-            vendor = "Mshdabiola App"
-            version = "1.0.1"
-            licenseFile.set(rootProject.file("LICENSE"))
-
-            modules("java.net.http", "java.sql")
-
-            linux {
-                iconFile.set(iconsRoot.resolve("linux.png"))
-                debMaintainer = "mshdabiola@gmail.com"
-                menuGroup = packageName
-                appCategory = "Productivity"
-            }
-
-            windows {
-                iconFile.set(iconsRoot.resolve("windows.ico"))
-                shortcut = true
-                menuGroup = packageName
-//                https://www.guidgen.com/
-
-                //https://wixtoolset.org/documentation/manual/v3/howtos/general/generate_guids.html
-                upgradeUuid = "791AC64E-C9A7-4CBF-A1C4-AFE5CFFDDDFA"
-            }
-
-            macOS {
-                iconFile.set(iconsRoot.resolve("macos.icns"))
-                bundleID = "com.mshdabiola.skeleton"
-                appCategory = "public.app-category.productivity"
-                signing {
-                    sign.set(false)
-                }
-            }
-        }
     }
 }
 
+configurations.all {
+    attributes {
+        // https://github.com/JetBrains/compose-jb/issues/1404#issuecomment-1146894731
+        attribute(Attribute.of("ui", String::class.java), "awt")
+    }
+}
 
 //compose.experimental {
 //    web.application {}
