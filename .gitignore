@@ -1,4 +1,4 @@
-.output
+output
 .kotlin
 *.iml
 .gradle
@@ -258,3 +258,4 @@ local.properties
 /composeApp/build/
 /shared/build/
 /modules/build/
+/output/
