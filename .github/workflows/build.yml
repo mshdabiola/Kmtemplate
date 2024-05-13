@@ -1,0 +1,33 @@
+#name: Flutter Build
+
+#on: [push, workflow_dispatch, workflow_call]
+name: Release Windows and Linux Hydraulic Conveyor
+
+on: [workflow_dispatch]
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Java
+        uses: actions/setup-java@v2
+        with:
+          distribution: "temurin"
+          java-version: 17
+
+      - name: Setup Gradle
+        uses: gradle/gradle-build-action@v2
+
+      - name: Build jar
+        run: ./gradlew jvmJar
+
+      - name: Run Conveyor
+        uses: hydraulic-software/conveyor/actions/build@v14.1
+        env:
+          TOKEN: ${{ secrets.TOKEN }}
+        with:
+          command: make copied-site
+          signing_key: ${{ secrets.SIGNING_KEY }}
+          agree_to_license: 1
