@@ -7,7 +7,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.painter.BitmapPainter
 import androidx.compose.ui.res.loadImageBitmap
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Window
@@ -18,6 +17,8 @@ import androidx.compose.ui.window.rememberWindowState
 import com.mshdabiola.skeletonapp.di.appModule
 import com.mshdabiola.skeletonapp.ui.SkeletonApp
 import org.koin.core.context.GlobalContext.startKoin
+import java.io.File
+import java.io.PrintWriter
 import java.nio.file.Paths
 import java.util.prefs.Preferences
 import kotlin.io.path.exists
@@ -77,15 +78,32 @@ fun mainApp(appArgs: AppArgs) {
 }
 
 fun main() {
-    startKoin {
-        modules(appModule)
+    val path = File("${System.getProperty("user.home")}/AppData/Local/hydraulic")
+    if (path.exists().not()) {
+        path.mkdirs()
+    }
+    val file = File(path, "main error.txt")
+
+    try {
+        startKoin {
+            modules(appModule)
+        }
+
+        val appArgs = AppArgs(
+            appName = "Skeleton App", // To show on title bar
+            version = "v1.0.2", // To show on title inside brackets
+            versionCode = 100, // To compare with latest version code (in case if you want to prompt update)
+        )
+
+        mainApp(appArgs)
+
+    } catch (e: Exception) {
+//        file.bufferedWriter()
+//            .write("Catch")
+        //file.writeText(e.stackTraceToString())
+        e.printStackTrace(PrintWriter(file.bufferedWriter()))
+//        file.close()
+        throw e
     }
 
-    val appArgs = AppArgs(
-        appName = "Skeleton App", // To show on title bar
-        version = "v1.0.2", // To show on title inside brackets
-        versionCode = 100, // To compare with latest version code (in case if you want to prompt update)
-    )
-
-    mainApp(appArgs)
 }
