@@ -6,7 +6,7 @@ accompanist = "0.34.0"
 
 kotlin = "2.0.0-RC2"
 coreKtx = "1.13.1"
-leakcanaryAndroid = "3.0-alpha-1"
+leakcanaryAndroid = "3.0-alpha-4"
 lifecycleRuntimeKtx = "2.7.0"
 androidxSavedState = "1.2.1"
 androidxLifecycle = "2.7.0"
