@@ -105,6 +105,10 @@ room-plugin = "2.6.1"
 roomKtx = "2.6.1"
 sqlite = "2.5.0-alpha01"
 
+kermit = "2.0.3"
+slf4jSimple = "2.0.12"
+
+
 
 
 
@@ -248,6 +252,9 @@ sqldelight_primitive_adapter = { module = "app.cash.sqldelight:primitive-adapter
 turbine = { module = "app.cash.turbine:turbine", version.ref = "turbine" }
 timber = { module = "com.jakewharton.timber:timber", version.ref = "timber" }
 leakcanary-android = { module = "com.squareup.leakcanary:leakcanary-android", version.ref = "leakcanaryAndroid" }
+kermit = { module = "co.touchlab:kermit", version.ref = "kermit" }
+kermit-koin = { module = "co.touchlab:kermit-koin", version.ref = "kermit" }
+slf4j-simple = { module = "org.slf4j:slf4j-simple", version.ref = "slf4jSimple" }
 
 robolectric = { group = "org.robolectric", name = "robolectric", version.ref = "robolectric" }
 robolectric-shadows = { group = "org.robolectric", name = "shadows-framework", version.ref = "robolectric" }

@@ -18,7 +18,7 @@ plugins {
 }
 
 group = "com.mshdabiola.skeletonapp"
-version = "1.0.2"
+version = "1.0.3"
 
 dependencies {
 
@@ -226,7 +226,21 @@ android {
 compose.desktop {
     application {
         mainClass = "com.mshdabiola.desktop.MainAppKt"
+
+        nativeDistributions {
+//        targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
+//        packageVersion = "1.0.1"
+//        packageName = "Skeleton"
+//        description = "Template"
+//        copyright = "© 2022 Mshdabiola. All rights reserved."
+//        vendor = "Mshdabiola App"
+//        version = "1.0.1"
+//        licenseFile.set(rootProject.file("LICENSE"))
+
+            modules("java.net.http", "java.sql")
+        }
     }
+
 }
 
 configurations.all {
