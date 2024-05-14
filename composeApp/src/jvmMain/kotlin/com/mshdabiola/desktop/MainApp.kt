@@ -11,16 +11,20 @@ import androidx.compose.ui.window.WindowPlacement
 import androidx.compose.ui.window.WindowPosition
 import androidx.compose.ui.window.application
 import androidx.compose.ui.window.rememberWindowState
+import com.mshdabiola.designsystem.string.appName
 import com.mshdabiola.skeletonapp.di.appModule
 import com.mshdabiola.skeletonapp.ui.SkeletonApp
 import org.koin.core.context.GlobalContext.startKoin
 import java.io.File
+import java.io.IOException
 import java.io.PrintWriter
 import java.nio.file.Paths
+import java.util.Properties
 import kotlin.io.path.exists
 import kotlin.io.path.inputStream
 
-fun mainApp(appArgs: AppArgs) {
+fun mainApp() {
+
     application {
         val windowState = rememberWindowState(
             size = DpSize(width = 1100.dp, height = 600.dp),
@@ -37,9 +41,10 @@ fun mainApp(appArgs: AppArgs) {
                 ?.use { BitmapPainter(loadImageBitmap(it)) }
         }
 
+        val version ="1.0.7"
         Window(
             onCloseRequest = ::exitApplication,
-            title = "${appArgs.appName} (${appArgs.version})",
+            title = "$appName v$version",
             icon = appIcon,
             state = windowState,
         ) {
@@ -60,19 +65,10 @@ fun main() {
             modules(appModule)
         }
 
-        val appArgs = AppArgs(
-            appName = "Skeleton App", // To show on title bar
-            version = "v1.0.6", // To show on title inside brackets
-            versionCode = 100, // To compare with latest version code (in case if you want to prompt update)
-        )
 
-        mainApp(appArgs)
+        mainApp()
     } catch (e: Exception) {
-//        file.bufferedWriter()
-//            .write("Catch")
-        // file.writeText(e.stackTraceToString())
         e.printStackTrace(PrintWriter(file.bufferedWriter()))
-//        file.close()
         throw e
     }
 }
