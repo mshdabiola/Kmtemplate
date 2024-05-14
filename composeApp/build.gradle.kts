@@ -1,5 +1,4 @@
 import com.mshdabiola.app.BuildType
-import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 import org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalWasmDsl
 
 plugins {
@@ -85,8 +84,8 @@ kotlin {
         }
     }
 
-   // jvm("desktop")
-    jvm ()
+    // jvm("desktop")
+    jvm()
     jvmToolchain(17)
 
     sourceSets {
@@ -227,19 +226,54 @@ compose.desktop {
     application {
         mainClass = "com.mshdabiola.desktop.MainAppKt"
 
-        nativeDistributions {
-//        targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
-//        packageVersion = "1.0.1"
-//        packageName = "Skeleton"
-//        description = "Template"
-//        copyright = "© 2022 Mshdabiola. All rights reserved."
-//        vendor = "Mshdabiola App"
-//        version = "1.0.1"
-//        licenseFile.set(rootProject.file("LICENSE"))
 
-            modules("java.net.http", "java.sql")
+        buildTypes.release.proguard {
+            configurationFiles.from(project.file("compose-desktop.pro"))
+            obfuscate.set(true)
+            version.set("7.4.2")
         }
+
+//        val iconsRoot = project.file("src/desktopMain/resources/launcher")
+//        nativeDistributions {
+//            targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
+//            packageVersion = "1.0.1"
+//            packageName = "Skeleton"
+//            description = "Template"
+//            copyright = "© 2022 Mshdabiola. All rights reserved."
+//            vendor = "Mshdabiola App"
+//            version = "1.0.1"
+//            licenseFile.set(rootProject.file("LICENSE"))
+//
+//            modules("java.net.http", "java.sql")
+//
+//            linux {
+//                iconFile.set(iconsRoot.resolve("linux.png"))
+//                debMaintainer = "mshdabiola@gmail.com"
+//                menuGroup = packageName
+//                appCategory = "Productivity"
+//            }
+//
+//            windows {
+//                iconFile.set(iconsRoot.resolve("windows.ico"))
+//                shortcut = true
+//                menuGroup = packageName
+////                https://www.guidgen.com/
+//
+//                //https://wixtoolset.org/documentation/manual/v3/howtos/general/generate_guids.html
+//                upgradeUuid = "791AC64E-C9A7-4CBF-A1C4-AFE5CFFDDDFA"
+//            }
+//
+//            macOS {
+//                iconFile.set(iconsRoot.resolve("macos.icns"))
+//                bundleID = "com.mshdabiola.skeleton"
+//                appCategory = "public.app-category.productivity"
+//                signing {
+//                    sign.set(false)
+//                }
+//            }
+//        }
     }
+
 
 }
 

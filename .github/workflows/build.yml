@@ -3,7 +3,7 @@
 #on: [push, workflow_dispatch, workflow_call]
 name: Release Windows and Linux Hydraulic Conveyor
 
-on: [workflow_dispatch]
+on: [ workflow_dispatch ]
 
 jobs:
   build-and-release:
@@ -21,7 +21,7 @@ jobs:
         uses: gradle/gradle-build-action@v2
 
       - name: Build jar
-        run: ./gradlew jvmJar
+        run: ./gradlew createReleaseDistributable
 
       - name: Run Conveyor
         uses: hydraulic-software/conveyor/actions/build@v14.1

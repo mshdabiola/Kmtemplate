@@ -59,7 +59,7 @@ class AndroidLibraryConventionPlugin : Plugin<Project> {
             }
             extensions.configure<KotlinMultiplatformExtension> {
                 androidTarget()
-               // jvm("desktop")
+                // jvm("desktop")
                 jvm()
                 jvmToolchain(17)
 

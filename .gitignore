@@ -2,6 +2,7 @@ output
 .kotlin
 *.iml
 .gradle
+features/build
 /local.properties
 /.idea/caches
 /.idea/libraries

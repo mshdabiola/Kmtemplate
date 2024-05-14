@@ -38,11 +38,8 @@ fun Image.asExternalImage() = ImageEntity(
     id = id,
 )
 
-
-
 fun UserData.toSer() =
     UserDataSer(themeBrand, darkThemeConfig, useDynamicColor, shouldHideOnboarding, contrast)
 
 fun UserDataSer.toData() =
     UserData(themeBrand, darkThemeConfig, useDynamicColor, shouldHideOnboarding, contrast)
-

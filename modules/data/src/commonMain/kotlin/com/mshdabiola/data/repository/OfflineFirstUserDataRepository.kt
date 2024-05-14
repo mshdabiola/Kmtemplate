@@ -19,7 +19,6 @@ internal class OfflineFirstUserDataRepository(
     private val analyticsHelper: AnalyticsHelper,
 ) : UserDataRepository {
 
-
     override val userData: Flow<UserData> =
         settings
             .userData

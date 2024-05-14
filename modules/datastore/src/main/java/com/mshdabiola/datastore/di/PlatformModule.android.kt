@@ -15,5 +15,4 @@ actual val datastoreModule: Module
 
             createDataStoreUserData { context.filesDir.resolve("userdata").absolutePath }
         }
-
     }

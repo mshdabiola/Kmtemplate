@@ -28,9 +28,6 @@ fun createDataStoreUserData(
     ),
 )
 
-
-
-
 val json = Json
 
 internal object UserDataJsonSerializer : OkioSerializer<UserDataSer> {

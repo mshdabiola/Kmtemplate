@@ -20,3 +20,5 @@
 
     ./gradlew wasmJsBrowserRun -t
     ./gradlew wasmJsBrowserDistribution
+
+    export TOKEN=

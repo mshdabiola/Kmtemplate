@@ -1,9 +1,6 @@
 package com.mshdabiola.desktop
 
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.painter.BitmapPainter
 import androidx.compose.ui.res.loadImageBitmap
@@ -20,28 +17,20 @@ import org.koin.core.context.GlobalContext.startKoin
 import java.io.File
 import java.io.PrintWriter
 import java.nio.file.Paths
-import java.util.prefs.Preferences
 import kotlin.io.path.exists
 import kotlin.io.path.inputStream
 
-// import com.toxicbakery.logging.Arbor
-// import com.toxicbakery.logging.Seedling
-
 fun mainApp(appArgs: AppArgs) {
-    val preference = Preferences.userRoot() // .node("main")
-    val isLightKey = "isLight"
-
     application {
         val windowState = rememberWindowState(
             size = DpSize(width = 1100.dp, height = 600.dp),
             placement = WindowPlacement.Maximized,
             position = WindowPosition.Aligned(Alignment.Center),
         )
-        var isLight by remember { mutableStateOf(preference.getBoolean(isLightKey, false)) }
 
         val appIcon = remember {
             System.getProperty("app.dir")
-                ?.let { Paths.get(it, "icon-512.png") }
+                ?.let { Paths.get(it, "icon-square-512.png") }
                 ?.takeIf { it.exists() }
                 ?.inputStream()
                 ?.buffered()
@@ -54,24 +43,6 @@ fun mainApp(appArgs: AppArgs) {
             icon = appIcon,
             state = windowState,
         ) {
-//            MenuBar {
-//                Menu("Theme", 'T') {
-//                    if (!isLight) {
-//                        Item("Light Theme") {
-//                            isLight = true
-//                            preference.putBoolean(isLightKey, true)
-//                            preference.flush()
-//                        }
-//                    }
-//                    if (isLight) {
-//                        Item("Dark Theme") {
-//                            isLight = false
-//                            preference.putBoolean(isLightKey, false)
-//                            preference.flush()
-//                        }
-//                    }
-//                }
-//            }
             SkeletonApp()
         }
     }
@@ -96,14 +67,12 @@ fun main() {
         )
 
         mainApp(appArgs)
-
     } catch (e: Exception) {
 //        file.bufferedWriter()
 //            .write("Catch")
-        //file.writeText(e.stackTraceToString())
+        // file.writeText(e.stackTraceToString())
         e.printStackTrace(PrintWriter(file.bufferedWriter()))
 //        file.close()
         throw e
     }
-
 }
