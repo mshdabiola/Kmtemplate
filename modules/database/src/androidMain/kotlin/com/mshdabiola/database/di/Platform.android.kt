@@ -3,6 +3,7 @@ package com.mshdabiola.database.di
 import android.content.Context
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.sqlite.driver.AndroidSQLiteDriver
 import com.mshabiola.database.util.Constant
 import com.mshdabiola.database.SkeletonDatabase
 import org.koin.core.module.Module
@@ -23,4 +24,6 @@ fun getDatabaseBuilder(context: Context): RoomDatabase.Builder<SkeletonDatabase>
         context = appContext,
         name = dbFile.absolutePath,
     )
+        .setDriver(AndroidSQLiteDriver())
+
 }
