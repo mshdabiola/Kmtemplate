@@ -60,7 +60,7 @@ fun CommonNavigation(
     ) {
         Column(
             verticalArrangement = Arrangement.SpaceBetween,
-            modifier = modifier
+            modifier = Modifier
                 .padding(8.dp)
                 .verticalScroll(state = rememberScrollState()),
         ) {

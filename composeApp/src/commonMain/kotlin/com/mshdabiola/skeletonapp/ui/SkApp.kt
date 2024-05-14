@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.WindowInsetsSides
 import androidx.compose.foundation.layout.consumeWindowInsets
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
@@ -115,7 +116,9 @@ fun SkeletonApp() {
                         PermanentNavigationDrawer(
                             drawerContent = {
                                 CommonNavigation(
-                                    modifier = Modifier.width(300.dp),
+                                    modifier = Modifier
+                                        .width(300.dp)
+                                        .fillMaxHeight(),
                                     currentNavigation = appState.currentDestination?.route ?: "",
                                     onNavigate = navigator,
                                 )
@@ -185,11 +188,13 @@ fun SkeletonApp() {
                         Row {
                             if (appState.shouldShowNavRail) {
                                 CommonRail(
-                                    modifier = Modifier.width(100.dp),
+                                    modifier = Modifier
+                                        .width(100.dp)
+                                        .fillMaxHeight(),
                                     currentNavigation = appState.currentDestination?.route ?: "",
                                     onNavigate = navigator,
 
-                                )
+                                    )
                             }
                             Scaffold(
                                 modifier = Modifier.semanticsCommon {},
