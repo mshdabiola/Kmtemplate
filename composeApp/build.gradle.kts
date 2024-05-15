@@ -88,7 +88,7 @@ kotlin {
 
     // jvm("desktop")
     jvm()
-    jvmToolchain(17)
+   // jvmToolchain(17)
 
     sourceSets {
         val jvmMain by getting

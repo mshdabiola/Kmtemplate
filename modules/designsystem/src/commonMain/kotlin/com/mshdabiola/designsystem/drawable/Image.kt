@@ -2,15 +2,12 @@ package com.mshdabiola.designsystem.drawable
 
 import androidx.compose.runtime.Composable
 import hydraulic.modules.designsystem.generated.resources.Res
-import hydraulic.modules.designsystem.generated.resources.compose_multiplatform
-import hydraulic.modules.designsystem.generated.resources.logo
+import hydraulic.modules.designsystem.generated.resources.icon
 import org.jetbrains.compose.resources.imageResource
-import org.jetbrains.compose.resources.vectorResource
+import org.jetbrains.compose.resources.painterResource
 
 val defaultAppIcon
     @Composable
-    get() = imageResource(Res.drawable.logo)
+    get() = painterResource(Res.drawable.icon)
 
-val multiplatformIcon
-    @Composable
-    get() = vectorResource(Res.drawable.compose_multiplatform)
+//imageResource(Res.drawable.icon)

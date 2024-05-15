@@ -22,3 +22,5 @@
     ./gradlew wasmJsBrowserDistribution
 
     export TOKEN=
+    conveyor make rendered-icons
+    conveyor make site
