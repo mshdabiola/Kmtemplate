@@ -89,7 +89,7 @@ espressoCore = "3.5.1"
 jacoco = "0.8.12"
 truth = "1.4.2"
 dependencyGuard = "0.5.0"
-conveyor = "1.8"
+conveyor = "1.10"
 
 multiplatform_settings = "1.1.1"
 
