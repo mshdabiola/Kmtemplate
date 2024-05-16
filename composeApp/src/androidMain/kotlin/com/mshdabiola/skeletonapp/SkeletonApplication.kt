@@ -21,21 +21,19 @@ class SkeletonApplication : Application() {
     override fun onCreate() {
         super.onCreate()
 
-        val logger=    Logger(
-            loggerConfigInit(platformLogWriter(),  Writer(this.filesDir)),
+        val logger = Logger(
+            loggerConfigInit(platformLogWriter(), Writer(this.filesDir)),
             "AndroidLogger",
         )
         val logModule = module {
-
             single {
                 logger
             }
-
         }
 
         startKoin {
             logger(
-                KermitKoinLogger(Logger.withTag("koin"))
+                KermitKoinLogger(Logger.withTag("koin")),
             )
             androidContext(this@SkeletonApplication)
             modules(appModule, jankStatsModule)

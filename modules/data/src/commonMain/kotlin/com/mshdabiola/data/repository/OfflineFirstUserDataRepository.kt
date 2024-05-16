@@ -18,12 +18,13 @@ import kotlinx.coroutines.flow.map
 internal class OfflineFirstUserDataRepository(
     private val settings: Store,
     private val analyticsHelper: AnalyticsHelper,
-    private val logger: Logger
+    private val logger: Logger,
 ) : UserDataRepository {
 
     init {
         logger.d { "OfflineFirstUserDataRepository init" }
     }
+
     override val userData: Flow<UserData> =
         settings
             .userData

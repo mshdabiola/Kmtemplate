@@ -1,6 +1,5 @@
 package com.mshdabiola.model
 
-
 actual val currentPlatform: Platform
     get() {
         val operSys = System.getProperty("os.name").lowercase()
@@ -13,9 +12,9 @@ actual val currentPlatform: Platform
         } else if (operSys.contains("mac")) {
             Platform.MacOS
         } else {
-          //  Logger.e("PlatformUtil.jvm") { "Unknown platform: $operSys" }
+            //  Logger.e("PlatformUtil.jvm") { "Unknown platform: $operSys" }
             Platform.Linux
         }
     }
 
-//actual val currentPlatform: Platform = Platform.Android
+// actual val currentPlatform: Platform = Platform.Android

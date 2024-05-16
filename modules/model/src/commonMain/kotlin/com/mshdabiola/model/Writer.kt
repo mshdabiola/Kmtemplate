@@ -17,14 +17,15 @@ class Writer(private val path: File) : LogWriter() {
     private val filePath: File by lazy {
         val formatter = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
         val date = formatter.format(Date())
-        File(File(path,"log").apply {
-            if (this.exists().not()){
-                mkdirs()
-            }
-
-        }, "log-$date.txt")
+        File(
+            File(path, "log").apply {
+                if (this.exists().not()) {
+                    mkdirs()
+                }
+            },
+            "log-$date.txt",
+        )
     }
-
 
     override fun log(severity: Severity, message: String, tag: String, throwable: Throwable?) {
         val messageStr = DefaultFormatter.formatMessage(severity, Tag(tag), Message(message))
@@ -34,24 +35,18 @@ class Writer(private val path: File) : LogWriter() {
         }
     }
 
-
     private fun saveLogsToTxtFile(message: String) {
-
         val coroutineCallLogger = CoroutineScope(Dispatchers.IO)
         coroutineCallLogger.launch {
-
             runCatching {
                 if (filePath.exists().not()) {
                     filePath.createNewFile()
-
                 }
-                //Writing my logs to txt file.
+                // Writing my logs to txt file.
                 filePath.appendText(
                     message,
                 )
             }
-
         }
     }
-
 }

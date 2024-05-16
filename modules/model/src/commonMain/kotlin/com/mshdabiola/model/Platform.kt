@@ -5,5 +5,5 @@ enum class Platform {
     IOS,
     Linux,
     MacOS,
-    Windows
+    Windows,
 }

@@ -98,7 +98,7 @@ class AndroidLibraryConventionPlugin : Plugin<Project> {
                     }
                     getByName("jvmMain") {
                         this.dependencies {
-                             implementation(libs.findLibrary("slf4j.simple").get())
+                            implementation(libs.findLibrary("slf4j.simple").get())
 
 
                         }

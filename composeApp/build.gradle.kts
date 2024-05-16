@@ -1,6 +1,4 @@
 import com.mshdabiola.app.BuildType
-import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
-import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalWasmDsl
 
 plugins {
@@ -87,7 +85,7 @@ kotlin {
 
     // jvm("desktop")
     jvm()
-   // jvmToolchain(17)
+    // jvmToolchain(17)
 
     sourceSets {
         val jvmMain by getting
@@ -120,7 +118,6 @@ kotlin {
             implementation(libs.kermit)
 
             implementation(libs.kermit.koin)
-
 
 
         }

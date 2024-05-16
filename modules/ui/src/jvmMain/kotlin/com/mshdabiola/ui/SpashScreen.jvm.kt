@@ -20,8 +20,6 @@ import com.mshdabiola.designsystem.string.appName
 
 @Composable
 actual fun SplashScreen(modifier: Modifier) {
-
-
     Surface(
         modifier = modifier,
         color = MaterialTheme.colorScheme.primary,
@@ -32,21 +30,16 @@ actual fun SplashScreen(modifier: Modifier) {
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-
-                Image(
-                    modifier = Modifier.sizeIn(maxWidth = 200.dp, maxHeight = 200.dp),
-                    painter = defaultAppIcon, contentDescription = "app icon",
-                )
+            Image(
+                modifier = Modifier.sizeIn(maxWidth = 200.dp, maxHeight = 200.dp),
+                painter = defaultAppIcon,
+                contentDescription = "app icon",
+            )
 
             Spacer(Modifier.height(32.dp))
             Text(text = appName, style = MaterialTheme.typography.headlineSmall)
-
-
         }
-
     }
-
-
 }
 
 @Preview

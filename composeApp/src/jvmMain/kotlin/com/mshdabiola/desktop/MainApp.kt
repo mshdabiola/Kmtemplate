@@ -22,14 +22,12 @@ import org.koin.dsl.module
 import java.io.File
 
 fun mainApp() {
-
     application {
         val windowState = rememberWindowState(
             size = DpSize(width = 1100.dp, height = 600.dp),
             placement = WindowPlacement.Maximized,
             position = WindowPosition.Aligned(Alignment.Center),
         )
-
 
         val version = "1.0.7"
         Window(
@@ -48,16 +46,14 @@ fun main() {
     if (path.exists().not()) {
         path.mkdirs()
     }
-    val logger=    Logger(
-        loggerConfigInit(platformLogWriter(),  Writer(path)),
+    val logger = Logger(
+        loggerConfigInit(platformLogWriter(), Writer(path)),
         "DesktopLogger,",
     )
     val logModule = module {
-
         single {
-          logger
+            logger
         }
-
     }
 
     try {
@@ -66,13 +62,14 @@ fun main() {
                 KermitKoinLogger(Logger.withTag("koin")),
             )
             modules(
-                appModule, logModule,
+                appModule,
+                logModule,
             )
         }
 
         mainApp()
     } catch (e: Exception) {
-        logger.e("crash exceptions",e)
+        logger.e("crash exceptions", e)
         throw e
     }
 }

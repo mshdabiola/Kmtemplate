@@ -156,7 +156,7 @@ fun SkeletonApp() {
                                         }
                                     },
 
-                                    ) { padding ->
+                                ) { padding ->
 
                                     Column(
                                         Modifier
@@ -204,7 +204,7 @@ fun SkeletonApp() {
                                             ?: "",
                                         onNavigate = navigator,
 
-                                        )
+                                    )
                                 }
                                 Scaffold(
                                     modifier = Modifier.semanticsCommon {},
@@ -242,7 +242,7 @@ fun SkeletonApp() {
                                         }
                                     },
 
-                                    ) { padding ->
+                                ) { padding ->
 
                                     Column(
                                         Modifier
@@ -270,7 +270,6 @@ fun SkeletonApp() {
                             }
                         }
                     }
-
                 }
             }
         }
