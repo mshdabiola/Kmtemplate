@@ -5,9 +5,9 @@
             
     <linearGradient xlink:actuate="onLoad" xlink:type="simple" id="background-gradient" xlink:show="other">
                   
-      <stop offset="0" style="stop-color:rgb(255, 134, 160);stop-opacity:1;" id="stop1"/>
+      <stop offset="0" style="stop-color:rgb(0, 0, 255);stop-opacity:1;" id="stop1"/>
                   
-      <stop offset="1" style="stop-color:rgb(144, 0, 57);stop-opacity:1;" id="stop2"/>
+      <stop offset="1" style="stop-color:rgb(255, 192, 203);stop-opacity:1;" id="stop2"/>
               
     </linearGradient>
             
