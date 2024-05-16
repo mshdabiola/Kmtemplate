@@ -8,13 +8,18 @@ import androidx.compose.ui.window.WindowPlacement
 import androidx.compose.ui.window.WindowPosition
 import androidx.compose.ui.window.application
 import androidx.compose.ui.window.rememberWindowState
+import co.touchlab.kermit.Logger
+import co.touchlab.kermit.koin.KermitKoinLogger
+import co.touchlab.kermit.loggerConfigInit
+import co.touchlab.kermit.platformLogWriter
 import com.mshdabiola.designsystem.drawable.defaultAppIcon
 import com.mshdabiola.designsystem.string.appName
+import com.mshdabiola.model.Writer
 import com.mshdabiola.skeletonapp.di.appModule
 import com.mshdabiola.skeletonapp.ui.SkeletonApp
 import org.koin.core.context.GlobalContext.startKoin
+import org.koin.dsl.module
 import java.io.File
-import java.io.PrintWriter
 
 fun mainApp() {
 
@@ -26,8 +31,7 @@ fun mainApp() {
         )
 
 
-
-        val version ="1.0.7"
+        val version = "1.0.7"
         Window(
             onCloseRequest = ::exitApplication,
             title = "$appName v$version",
@@ -44,17 +48,31 @@ fun main() {
     if (path.exists().not()) {
         path.mkdirs()
     }
-    val file = File(path, "main error.txt")
+    val logger=    Logger(
+        loggerConfigInit(platformLogWriter(),  Writer(path)),
+        "DesktopLogger,",
+    )
+    val logModule = module {
+
+        single {
+          logger
+        }
+
+    }
 
     try {
         startKoin {
-            modules(appModule)
+            logger(
+                KermitKoinLogger(Logger.withTag("koin")),
+            )
+            modules(
+                appModule, logModule,
+            )
         }
-
 
         mainApp()
     } catch (e: Exception) {
-        e.printStackTrace(PrintWriter(file.bufferedWriter()))
+        logger.e("crash exceptions",e)
         throw e
     }
 }

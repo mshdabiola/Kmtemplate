@@ -42,7 +42,6 @@ dependencies {
 
     implementation(libs.androidx.metrics)
 
-    implementation(libs.timber)
     debugImplementation(libs.leakcanary.android)
 
     implementation(libs.androidx.activity.compose)
@@ -98,26 +97,8 @@ kotlin {
             implementation(libs.androidx.activity.compose)
         }
         commonMain.dependencies {
-//            implementation(compose.runtime)
-//            implementation(compose.foundation)
-//            implementation(compose.material)
-//            implementation(compose.ui)
-//            @OptIn(ExperimentalComposeLibrary::class)
-//            implementation(compose.components.resources)
-//            implementation(project(":shared"))
-//
-//            implementation(libs.androidx.compose.material3.windowSizeClass)
-//
-//            implementation(libs.decompose.core)
-//            implementation(libs.decompose.compose.jetbrains)
 //
             implementation(libs.koin.core)
-//
-//            implementation(project(":modules:designsystem"))
-//            implementation(project(":modules:analytics"))
-//            implementation(project(":modules:mvvn"))
-//            implementation(project(":modules:navigation"))
-//            implementation(project(":modules:network"))
             implementation(project(":modules:data"))
 
 
@@ -134,6 +115,12 @@ kotlin {
             implementation(project(":features:main"))
             implementation(project(":features:detail"))
             implementation(project(":features:setting"))
+
+            // Logger
+            implementation(libs.kermit)
+
+            implementation(libs.kermit.koin)
+
 
 
         }
