@@ -69,6 +69,7 @@ class AndroidLibraryConventionPlugin : Plugin<Project> {
                     getByName("commonMain") {
                         this.dependencies {
                             implementation(libs.findLibrary("koin.core").get())
+                            implementation(libs.findLibrary("kermit").get())
 
                         }
 
@@ -83,7 +84,6 @@ class AndroidLibraryConventionPlugin : Plugin<Project> {
                     }
                     getByName("androidMain") {
                         this.dependencies {
-                            implementation(libs.findLibrary("timber").get())
                             implementation(libs.findLibrary("koin.android").get())
                         }
 
@@ -98,7 +98,8 @@ class AndroidLibraryConventionPlugin : Plugin<Project> {
                     }
                     getByName("jvmMain") {
                         this.dependencies {
-                            // implementation(libs.findLibrary("koin.core").get())
+                            implementation(libs.findLibrary("slf4j.simple").get())
+
 
                         }
 

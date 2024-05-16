@@ -17,7 +17,6 @@ monitor = "1.6.1"
 navigationCompose = "2.7.0-alpha04"
 pagingComposeCommon = "3.3.0-alpha02-0.5.1"
 turbine = "1.0.0"
-timber = "5.0.1"
 
 androidxComposeCompiler = "1.5.8"
 activityCompose = "1.9.0"
@@ -89,7 +88,7 @@ espressoCore = "3.5.1"
 jacoco = "0.8.12"
 truth = "1.4.2"
 dependencyGuard = "0.5.0"
-conveyor = "1.8"
+conveyor = "1.10"
 
 multiplatform_settings = "1.1.1"
 
@@ -97,13 +96,11 @@ multiplatform_settings = "1.1.1"
 compose = "1.6.7"
 
 ksp = "2.0.0-RC2-1.0.20"
-room = "2.7.0.alpha01"
-androidx-paging = "3.3.0-rc01"
-androidx-room = "2.7.0-alpha01"
-pagingComposeAndroid = "3.3.0-rc01"
-room-plugin = "2.6.1"
+androidx-paging = "3.3.0"
+androidx-room = "2.7.0-alpha02"
+pagingComposeAndroid = "3.3.0"
 roomKtx = "2.6.1"
-sqlite = "2.5.0-alpha01"
+sqlite = "2.5.0-alpha02"
 
 kermit = "2.0.3"
 slf4jSimple = "2.0.12"
@@ -158,13 +155,13 @@ room-paging = { group = "androidx.room", name = "room-paging", version.ref = "an
 paging-common = { module = "androidx.paging:paging-common", version.ref = "androidx-paging" }
 
 sqlite-bundled = { module = "androidx.sqlite:sqlite-bundled", version.ref = "sqlite" }
-
-androidx-paging-common = { module = "androidx.paging:paging-common", version.ref = "androidx-paging" }
-androidx-paging-compose-android = { group = "androidx.paging", name = "paging-compose-android", version.ref = "pagingComposeAndroid" }
-androidx-room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "androidx-room" }
-androidx-room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "androidx-room" }
-androidx-room-paging = { group = "androidx.room", name = "room-paging", version.ref = "androidx-room" }
-androidx-room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "androidx-room" }
+#
+#androidx-paging-common = { module = "androidx.paging:paging-common", version.ref = "androidx-paging" }
+#androidx-paging-compose-android = { group = "androidx.paging", name = "paging-compose-android", version.ref = "pagingComposeAndroid" }
+#androidx-room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "androidx-room" }
+#androidx-room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "androidx-room" }
+#androidx-room-paging = { group = "androidx.room", name = "room-paging", version.ref = "androidx-room" }
+#androidx-room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "androidx-room" }
 
 
 ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor-wasm" }
@@ -250,7 +247,6 @@ sqldelight_paging = { module = "app.cash.sqldelight:androidx-paging3-extensions"
 sqldelight_primitive_adapter = { module = "app.cash.sqldelight:primitive-adapters", version.ref = "sqlDelight" }
 
 turbine = { module = "app.cash.turbine:turbine", version.ref = "turbine" }
-timber = { module = "com.jakewharton.timber:timber", version.ref = "timber" }
 leakcanary-android = { module = "com.squareup.leakcanary:leakcanary-android", version.ref = "leakcanaryAndroid" }
 kermit = { module = "co.touchlab:kermit", version.ref = "kermit" }
 kermit-koin = { module = "co.touchlab:kermit-koin", version.ref = "kermit" }

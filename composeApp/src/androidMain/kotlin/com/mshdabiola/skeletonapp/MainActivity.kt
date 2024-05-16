@@ -31,7 +31,6 @@ import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import timber.log.Timber
 
 class MainActivity : ComponentActivity() {
 
@@ -106,7 +105,7 @@ class MainActivity : ComponentActivity() {
         FirebaseMessaging.getInstance().token.addOnCompleteListener(
             OnCompleteListener { task ->
                 if (!task.isSuccessful) {
-                    Timber.e("Fetching FCM registration token failed", task.exception)
+                    //    Timber.e("Fetching FCM registration token failed", task.exception)
                     return@OnCompleteListener
                 }
 
@@ -114,7 +113,7 @@ class MainActivity : ComponentActivity() {
                 val token = task.result
 
                 // Log and toast
-                Timber.e(token)
+                //    Timber.e(token)
                 // Toast.makeText(baseContext, token, Toast.LENGTH_SHORT).show()
             },
         )

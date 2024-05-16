@@ -19,7 +19,6 @@ import androidx.core.app.NotificationCompat
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import com.google.firebase.messaging.RemoteMessage.Notification
-import timber.log.Timber
 import java.net.URL
 
 class MessageService : FirebaseMessagingService() {
@@ -28,7 +27,7 @@ class MessageService : FirebaseMessagingService() {
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
         // TODO(developer): Handle FCM messages here.
         // Not getting messages here? See why this may be: https://goo.gl/39bRNJ
-        Timber.tag(TAG).d("From: %s", remoteMessage.from)
+        //  Timber.tag(TAG).d("From: %s", remoteMessage.from)
 
         // Check if message contains a data payload.
 //        if (remoteMessage.data.isNotEmpty()) {
@@ -63,7 +62,7 @@ class MessageService : FirebaseMessagingService() {
      * FCM registration token is initially generated so this is where you would retrieve the token.
      */
     override fun onNewToken(token: String) {
-        Timber.tag(TAG).d("Refreshed token: $token")
+        // Timber.tag(TAG).d("Refreshed token: $token")
 
         // If you want to send messages to this application instance or
         // manage this apps subscriptions on the server side, send the
@@ -73,7 +72,7 @@ class MessageService : FirebaseMessagingService() {
 
     private fun sendRegistrationToServer(token: String?) {
         //  Implement this method to send token to your app server.
-        Timber.tag(TAG).d("sendRegistrationTokenToServer $token")
+        // Timber.tag(TAG).d("sendRegistrationTokenToServer $token")
     }
     // [END on_new_token]
 
@@ -97,7 +96,7 @@ class MessageService : FirebaseMessagingService() {
             intent,
             PendingIntent.FLAG_IMMUTABLE,
         )
-        Timber.e("notification image ${notification.imageUrl}")
+        //  Timber.e("notification image ${notification.imageUrl}")
 
         val channelId = "fcm_default_channel"
         val defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
@@ -145,7 +144,7 @@ class MessageService : FirebaseMessagingService() {
             val bitmap = BitmapFactory.decodeStream(input)
 
             input.close()
-            Timber.e("download")
+            // Timber.e("download")
             bitmap
         } catch (e: Exception) {
             e.printStackTrace()

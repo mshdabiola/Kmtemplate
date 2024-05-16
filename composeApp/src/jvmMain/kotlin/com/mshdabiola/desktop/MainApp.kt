@@ -1,9 +1,6 @@
 package com.mshdabiola.desktop
 
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.graphics.painter.BitmapPainter
-import androidx.compose.ui.res.loadImageBitmap
 import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Window
@@ -11,16 +8,20 @@ import androidx.compose.ui.window.WindowPlacement
 import androidx.compose.ui.window.WindowPosition
 import androidx.compose.ui.window.application
 import androidx.compose.ui.window.rememberWindowState
+import co.touchlab.kermit.Logger
+import co.touchlab.kermit.koin.KermitKoinLogger
+import co.touchlab.kermit.loggerConfigInit
+import co.touchlab.kermit.platformLogWriter
+import com.mshdabiola.designsystem.drawable.defaultAppIcon
+import com.mshdabiola.designsystem.string.appName
+import com.mshdabiola.model.Writer
 import com.mshdabiola.skeletonapp.di.appModule
 import com.mshdabiola.skeletonapp.ui.SkeletonApp
 import org.koin.core.context.GlobalContext.startKoin
+import org.koin.dsl.module
 import java.io.File
-import java.io.PrintWriter
-import java.nio.file.Paths
-import kotlin.io.path.exists
-import kotlin.io.path.inputStream
 
-fun mainApp(appArgs: AppArgs) {
+fun mainApp() {
     application {
         val windowState = rememberWindowState(
             size = DpSize(width = 1100.dp, height = 600.dp),
@@ -28,19 +29,11 @@ fun mainApp(appArgs: AppArgs) {
             position = WindowPosition.Aligned(Alignment.Center),
         )
 
-        val appIcon = remember {
-            System.getProperty("app.dir")
-                ?.let { Paths.get(it, "icon-square-512.png") }
-                ?.takeIf { it.exists() }
-                ?.inputStream()
-                ?.buffered()
-                ?.use { BitmapPainter(loadImageBitmap(it)) }
-        }
-
+        val version = "1.0.7"
         Window(
             onCloseRequest = ::exitApplication,
-            title = "${appArgs.appName} (${appArgs.version})",
-            icon = appIcon,
+            title = "$appName v$version",
+            icon = defaultAppIcon,
             state = windowState,
         ) {
             SkeletonApp()
@@ -53,26 +46,30 @@ fun main() {
     if (path.exists().not()) {
         path.mkdirs()
     }
-    val file = File(path, "main error.txt")
+    val logger = Logger(
+        loggerConfigInit(platformLogWriter(), Writer(path)),
+        "DesktopLogger,",
+    )
+    val logModule = module {
+        single {
+            logger
+        }
+    }
 
     try {
         startKoin {
-            modules(appModule)
+            logger(
+                KermitKoinLogger(Logger.withTag("koin")),
+            )
+            modules(
+                appModule,
+                logModule,
+            )
         }
 
-        val appArgs = AppArgs(
-            appName = "Skeleton App", // To show on title bar
-            version = "v1.0.6", // To show on title inside brackets
-            versionCode = 100, // To compare with latest version code (in case if you want to prompt update)
-        )
-
-        mainApp(appArgs)
+        mainApp()
     } catch (e: Exception) {
-//        file.bufferedWriter()
-//            .write("Catch")
-        // file.writeText(e.stackTraceToString())
-        e.printStackTrace(PrintWriter(file.bufferedWriter()))
-//        file.close()
+        logger.e("crash exceptions", e)
         throw e
     }
 }

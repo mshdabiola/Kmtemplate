@@ -31,6 +31,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
+import com.mshdabiola.designsystem.string.appName
 import com.mshdabiola.model.Image
 import com.mshdabiola.mvvn.KoinCommonViewModel
 import com.mshdabiola.mvvn.collectAsStateWithLifecycleCommon
@@ -92,7 +93,7 @@ internal fun MainScreen(
         topBar = {
             TopAppBar(
                 title = {
-                    Text(text = "Skeleton App")
+                    Text(text = appName)
                 },
                 actions = {
                     IconButton(onClick = navigateToSetting) {
