@@ -33,9 +33,9 @@ kotlin {
 
         val commonMain by getting {
             dependencies {
-                api(project(":modules:analytics"))
-                api(project(":modules:designsystem"))
-                api(project(":modules:model"))
+                implementation(project(":modules:analytics"))
+                implementation(project(":modules:designsystem"))
+                implementation(project(":modules:model"))
                 api(libs.coil.kt)
                 api(libs.coil.kt.compose)
                 api(libs.coil.kt.svg)

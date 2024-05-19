@@ -37,7 +37,6 @@ kotlin {
 
 
                 api(libs.androidx.core.ktx)
-                api(libs.koin.android.compose)
 
 
 

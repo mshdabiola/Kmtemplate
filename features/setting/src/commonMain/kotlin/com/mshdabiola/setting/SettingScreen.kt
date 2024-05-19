@@ -34,8 +34,8 @@ import androidx.compose.ui.unit.dp
 import com.mshdabiola.model.Contrast
 import com.mshdabiola.model.DarkThemeConfig
 import com.mshdabiola.model.ThemeBrand
-import com.mshdabiola.mvvn.collectAsStateWithLifecycleCommon
 import com.mshdabiola.ui.ScreenSize
+import com.mshdabiola.ui.collectAsStateWithLifecycleCommon
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.toImmutableList
 

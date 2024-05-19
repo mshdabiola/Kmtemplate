@@ -7,9 +7,10 @@ package com.mshdabiola.detail
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.snapshotFlow
+import androidx.lifecycle.ViewModel
 import com.mshdabiola.data.repository.IModelRepository
 import com.mshdabiola.model.Note
-import com.mshdabiola.mvvn.ViewModel
+import com.mshdabiola.ui.viewModelScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.first

@@ -35,7 +35,6 @@ dependencies {
     macAarch64(compose.desktop.macos_arm64)
     windowsAmd64(compose.desktop.windows_x64)
 
-    implementation(libs.koin.android.compose)
     implementation(libs.koin.android)
 
     implementation(libs.androidx.metrics)
@@ -100,7 +99,7 @@ kotlin {
             implementation(project(":modules:data"))
 
 
-            implementation(project(":modules:mvvn"))
+            implementation(project(":modules:model"))
             implementation(project(":modules:ui"))
 
 

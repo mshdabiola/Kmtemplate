@@ -1,10 +1,10 @@
 package com.mshdabiola.detail
 
-import com.mshdabiola.mvvn.commonViewModel
+import org.koin.compose.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val detailModule = module {
-    commonViewModel { param ->
+    viewModel { param ->
         DetailViewModel(param.get(), get())
     }
 }

@@ -4,12 +4,13 @@
 
 package com.mshdabiola.setting
 
+import androidx.lifecycle.ViewModel
 import com.mshdabiola.data.repository.UserDataRepository
 import com.mshdabiola.model.Contrast
 import com.mshdabiola.model.DarkThemeConfig
 import com.mshdabiola.model.ThemeBrand
 import com.mshdabiola.model.UserData
-import com.mshdabiola.mvvn.ViewModel
+import com.mshdabiola.ui.viewModelScope
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.map

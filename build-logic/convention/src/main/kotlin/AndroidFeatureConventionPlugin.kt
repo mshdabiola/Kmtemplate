@@ -59,7 +59,7 @@ class AndroidFeatureConventionPlugin : Plugin<Project> {
                         this.dependencies {
                             implementation(project(":modules:data"))
 
-                            implementation(project(":modules:mvvn"))
+                            implementation(project(":modules:model"))
                             implementation(project(":modules:ui"))
 
                             implementation(project(":modules:designsystem"))
