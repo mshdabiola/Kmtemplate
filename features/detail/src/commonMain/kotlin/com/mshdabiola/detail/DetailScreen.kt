@@ -5,20 +5,28 @@
 package com.mshdabiola.detail
 
 import androidx.annotation.VisibleForTesting
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.text2.input.TextFieldState
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardCapitalization
 import com.mshdabiola.designsystem.component.DetailTopAppBar
+import com.mshdabiola.designsystem.component.MyTextField
 import com.mshdabiola.designsystem.component.SkTextField
 import com.mshdabiola.ui.ScreenSize
 import com.mshdabiola.ui.TrackScreenViewEvent
 import kotlinx.coroutines.launch
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 internal fun DetailRoute(
     screenSize: ScreenSize,
@@ -32,10 +40,8 @@ internal fun DetailRoute(
         onShowSnackbar = onShowSnackbar,
         modifier = modifier,
         screenSize = screenSize,
-        title = viewModel.noteState.value.title,
-        content = viewModel.noteState.value.content,
-        onTitleChange = viewModel::onTitleChange,
-        onContentChange = viewModel::onContentChange,
+        title = viewModel.title,
+        content = viewModel.content,
         onDelete = {
             viewModel.onDelete()
             onBack()
@@ -44,17 +50,14 @@ internal fun DetailRoute(
     )
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
 @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
 @Composable
 internal fun DetailScreen(
     modifier: Modifier = Modifier,
-    title: String = "",
-    content: String = "",
+    title: TextFieldState = TextFieldState(),
+    content:TextFieldState = TextFieldState(),
     screenSize: ScreenSize = ScreenSize.COMPACT,
-
-    onTitleChange: (String) -> Unit = {},
-    onContentChange: (String) -> Unit = {},
     onShowSnackbar: suspend (String, String?) -> Boolean = { _, _ -> false },
     onBack: () -> Unit = {},
     onDelete: () -> Unit = {},
@@ -69,10 +72,9 @@ internal fun DetailScreen(
             modifier = Modifier
                 .fillMaxWidth()
                 .testTag("detail:title"),
-            value = title,
-            onValueChange = onTitleChange,
+            state = title,
             placeholder = "Title",
-            maxNum = 1,
+            maxNum = androidx.compose.foundation.text2.input.TextFieldLineLimits.SingleLine,
             imeAction = ImeAction.Next,
         )
         SkTextField(
@@ -80,8 +82,7 @@ internal fun DetailScreen(
                 .fillMaxWidth()
                 .testTag("detail:content")
                 .weight(1f),
-            value = content,
-            onValueChange = onContentChange,
+            state = content,
             placeholder = "content",
             imeAction = ImeAction.Done,
             keyboardAction = { coroutineScope.launch { onShowSnackbar("Note Update", null) } },
@@ -91,6 +92,7 @@ internal fun DetailScreen(
     TrackScreenViewEvent(screenName = "Detail")
 }
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 private fun DetailScreenPreview() {
     DetailScreen()
