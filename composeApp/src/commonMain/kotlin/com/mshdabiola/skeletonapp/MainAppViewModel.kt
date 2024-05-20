@@ -5,11 +5,11 @@
 package com.mshdabiola.skeletonapp
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.mshdabiola.data.repository.UserDataRepository
 import com.mshdabiola.model.UserData
 import com.mshdabiola.skeletonapp.MainActivityUiState.Loading
 import com.mshdabiola.skeletonapp.MainActivityUiState.Success
-import com.mshdabiola.ui.viewModelScope
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.map

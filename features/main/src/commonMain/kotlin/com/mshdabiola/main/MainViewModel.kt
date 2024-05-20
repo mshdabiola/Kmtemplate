@@ -10,7 +10,7 @@ import com.mshdabiola.data.repository.UserDataRepository
 import com.mshdabiola.model.Note
 import com.mshdabiola.ui.MainState
 import com.mshdabiola.ui.asNoteUiState
-import com.mshdabiola.ui.viewModelScope
+import androidx.lifecycle.viewModelScope
 import kotlinx.collections.immutable.toImmutableList
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay

@@ -7,17 +7,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.SemanticsPropertyReceiver
 import androidx.compose.ui.semantics.semantics
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.InternalCoroutinesApi
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.internal.SynchronizedObject
-import kotlinx.coroutines.swing.Swing
-import java.lang.AutoCloseable
 import kotlin.coroutines.CoroutineContext
 import kotlin.coroutines.EmptyCoroutineContext
 
@@ -45,8 +40,8 @@ internal fun createViewModelScope(): CloseableCoroutineScope {
         // In JVM Desktop environments where `Dispatchers.Main` might not exist (e.g., Swing):
         EmptyCoroutineContext
     }
-    val dis=Dispatchers.Swing
-    return CloseableCoroutineScope(coroutineContext = dis + SupervisorJob())
+   // val dis=Dispatchers.Swing
+    return CloseableCoroutineScope(coroutineContext = dispatcher + SupervisorJob())
 }
 
 internal class CloseableCoroutineScope(
@@ -58,8 +53,8 @@ internal class CloseableCoroutineScope(
     override fun close() = coroutineContext.cancel()
 }
 
-actual val ViewModel.viewModelScope: CoroutineScope
-    get() = createViewModelScope()
+// val ViewModel.viewModelScope: CoroutineScope
+//    get() = createViewModelScope()
 
 
 

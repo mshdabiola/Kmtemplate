@@ -24,8 +24,8 @@ actual fun <T> Flow<T>.collectAsStateWithLifecycleCommon(initialValue: T): State
     return this.collectAsStateWithLifecycle(initialValue = initialValue)
 }
 
-actual val ViewModel.viewModelScope: CoroutineScope
-    get() = viewModelScope
+// val ViewModel.viewModelScope: CoroutineScope
+//    get() = viewModelScope
 
 
 @OptIn(ExperimentalComposeUiApi::class)

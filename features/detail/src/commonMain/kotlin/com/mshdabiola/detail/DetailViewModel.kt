@@ -10,7 +10,7 @@ import androidx.compose.runtime.snapshotFlow
 import androidx.lifecycle.ViewModel
 import com.mshdabiola.data.repository.IModelRepository
 import com.mshdabiola.model.Note
-import com.mshdabiola.ui.viewModelScope
+import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.first
