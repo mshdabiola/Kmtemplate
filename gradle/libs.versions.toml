@@ -4,7 +4,7 @@ androidTools = "31.4.0"
 
 accompanist = "0.34.0"
 
-kotlin = "2.0.0-RC2"
+kotlin = "2.0.0-RC3"
 coreKtx = "1.13.1"
 leakcanaryAndroid = "3.0-alpha-1"
 lifecycleRuntimeKtx = "2.7.0"
@@ -95,7 +95,7 @@ multiplatform_settings = "1.1.1"
 
 compose = "1.6.7"
 
-ksp = "2.0.0-RC2-1.0.20"
+ksp = "2.0.0-RC3-1.0.20"
 androidx-paging = "3.3.0"
 androidx-room = "2.7.0-alpha02"
 pagingComposeAndroid = "3.3.0"
