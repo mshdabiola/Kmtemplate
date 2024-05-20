@@ -1,10 +1,10 @@
 package com.mshdabiola.setting
 
-import com.mshdabiola.mvvn.commonViewModel
+import org.koin.compose.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val settingModule = module {
-    commonViewModel {
+    viewModel {
         SettingViewModel(get())
     }
 }

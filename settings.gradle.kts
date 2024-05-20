@@ -33,7 +33,7 @@ include(":modules:data")
 include(":modules:domain")
 include(":modules:testing")
 include(":modules:ui")
-include(":modules:mvvn")
+//include(":modules:mvvn")
 include(":modules:analytics")
 include(":modules:datastore")
 

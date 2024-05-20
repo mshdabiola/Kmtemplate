@@ -54,10 +54,6 @@ import com.mshdabiola.main.navigation.navigateToMain
 import com.mshdabiola.model.Contrast
 import com.mshdabiola.model.DarkThemeConfig
 import com.mshdabiola.model.ThemeBrand
-import com.mshdabiola.mvvn.KoinCommonViewModel
-import com.mshdabiola.mvvn.collectAsStateWithLifecycleCommon
-import com.mshdabiola.mvvn.get
-import com.mshdabiola.mvvn.semanticsCommon
 import com.mshdabiola.setting.navigation.SETTING_ROUTE
 import com.mshdabiola.setting.navigation.navigateToSetting
 import com.mshdabiola.skeletonapp.MainActivityUiState
@@ -67,8 +63,13 @@ import com.mshdabiola.ui.CommonBar
 import com.mshdabiola.ui.CommonNavigation
 import com.mshdabiola.ui.CommonRail
 import com.mshdabiola.ui.SplashScreen
+import com.mshdabiola.ui.collectAsStateWithLifecycleCommon
+import com.mshdabiola.ui.semanticsCommon
+import org.koin.compose.koinInject
+import org.koin.compose.viewmodel.koinViewModel
+import org.koin.core.annotation.KoinExperimentalAPI
 
-@OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
+@OptIn(ExperimentalMaterial3WindowSizeClassApi::class, KoinExperimentalAPI::class)
 @Composable
 fun SkeletonApp() {
     val windowSizeClass = calculateWindowSizeClass()
@@ -90,8 +91,8 @@ fun SkeletonApp() {
         }
     }
 
-    val viewModel: MainAppViewModel = KoinCommonViewModel()
-    val analyticsHelper = get<AnalyticsHelper>()
+    val viewModel: MainAppViewModel = koinViewModel()
+    val analyticsHelper = koinInject<AnalyticsHelper>()
     val uiState by viewModel.uiState.collectAsStateWithLifecycleCommon()
     val darkTheme = shouldUseDarkTheme(uiState)
 

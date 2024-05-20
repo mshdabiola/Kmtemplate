@@ -15,8 +15,9 @@ import androidx.navigation.navArgument
 import com.mshdabiola.designsystem.icon.mainRoute
 import com.mshdabiola.detail.DetailRoute
 import com.mshdabiola.detail.DetailViewModel
-import com.mshdabiola.mvvn.KoinCommonViewModel
 import com.mshdabiola.ui.ScreenSize
+import org.koin.compose.viewmodel.koinViewModel
+import org.koin.core.annotation.KoinExperimentalAPI
 import org.koin.core.parameter.parameterSetOf
 
 val DETAIL_ROUTE = mainRoute[1]
@@ -38,6 +39,7 @@ fun NavController.navigateToDetail(topicId: Long) {
     }
 }
 
+@OptIn(KoinExperimentalAPI::class)
 fun NavGraphBuilder.detailScreen(
     screenSize: ScreenSize,
     onShowSnack: suspend (String, String?) -> Boolean,
@@ -59,7 +61,7 @@ fun NavGraphBuilder.detailScreen(
     ) { backStack ->
         val id = backStack.arguments?.getLong(DETAIL_ID_ARG)
 
-        val viewModel: DetailViewModel = KoinCommonViewModel(
+        val viewModel: DetailViewModel = koinViewModel(
             parameters = {
                 parameterSetOf(
                     id,

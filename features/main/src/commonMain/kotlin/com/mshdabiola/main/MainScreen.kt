@@ -33,17 +33,19 @@ import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import com.mshdabiola.designsystem.string.appName
 import com.mshdabiola.model.Image
-import com.mshdabiola.mvvn.KoinCommonViewModel
-import com.mshdabiola.mvvn.collectAsStateWithLifecycleCommon
 import com.mshdabiola.ui.MainState
 import com.mshdabiola.ui.NoteUiState
 import com.mshdabiola.ui.ScreenSize
+import com.mshdabiola.ui.collectAsStateWithLifecycleCommon
 import com.mshdabiola.ui.noteItem
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.toImmutableList
+import org.koin.compose.viewmodel.koinViewModel
+import org.koin.core.annotation.KoinExperimentalAPI
 
 // import org.koin.androidx.compose.koinViewModel
 
+@OptIn(KoinExperimentalAPI::class)
 @Composable
 internal fun MainRoute(
     screenSize: ScreenSize,
@@ -53,7 +55,7 @@ internal fun MainRoute(
     navigateToDetail: (Long) -> Unit,
 //    viewModel: MainViewModel,
 ) {
-    val viewModel: MainViewModel = KoinCommonViewModel()
+    val viewModel: MainViewModel = koinViewModel()
 
     val mainState = viewModel.mainState.collectAsStateWithLifecycleCommon()
 

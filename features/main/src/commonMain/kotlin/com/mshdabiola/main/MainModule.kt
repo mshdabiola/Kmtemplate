@@ -1,10 +1,10 @@
 package com.mshdabiola.main
 
-import com.mshdabiola.mvvn.commonViewModel
+import org.koin.compose.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val mainModule = module {
-    commonViewModel {
+    viewModel {
         MainViewModel(get(), get())
     }
 }
