@@ -5,15 +5,14 @@
 package com.mshdabiola.main
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.mshdabiola.data.repository.IModelRepository
 import com.mshdabiola.data.repository.UserDataRepository
 import com.mshdabiola.model.Note
 import com.mshdabiola.ui.MainState
 import com.mshdabiola.ui.asNoteUiState
-import androidx.lifecycle.viewModelScope
 import kotlinx.collections.immutable.toImmutableList
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.map
@@ -43,7 +42,7 @@ class MainViewModel constructor(
 
     init {
         viewModelScope.launch {
-            //delay(2000)
+            // delay(2000)
             addNotify("Add Model")
             addNotify("remove model")
         }

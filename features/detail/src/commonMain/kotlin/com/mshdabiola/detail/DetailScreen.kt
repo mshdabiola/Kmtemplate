@@ -8,19 +8,14 @@ import androidx.annotation.VisibleForTesting
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.text.KeyboardActions
-import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.text2.input.TextFieldState
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.input.ImeAction
-import androidx.compose.ui.text.input.KeyboardCapitalization
 import com.mshdabiola.designsystem.component.DetailTopAppBar
-import com.mshdabiola.designsystem.component.MyTextField
 import com.mshdabiola.designsystem.component.SkTextField
 import com.mshdabiola.ui.ScreenSize
 import com.mshdabiola.ui.TrackScreenViewEvent
@@ -56,7 +51,7 @@ internal fun DetailRoute(
 internal fun DetailScreen(
     modifier: Modifier = Modifier,
     title: TextFieldState = TextFieldState(),
-    content:TextFieldState = TextFieldState(),
+    content: TextFieldState = TextFieldState(),
     screenSize: ScreenSize = ScreenSize.COMPACT,
     onShowSnackbar: suspend (String, String?) -> Boolean = { _, _ -> false },
     onBack: () -> Unit = {},

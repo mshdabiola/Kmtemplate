@@ -13,7 +13,6 @@ expect fun <T> StateFlow<T>.collectAsStateWithLifecycleCommon(): State<T>
 @Composable
 expect fun <T> Flow<T>.collectAsStateWithLifecycleCommon(initialValue: T): State<T>
 
-
 expect fun Modifier.semanticsCommon(
     mergeDescendants: Boolean = false,
     properties: (SemanticsPropertyReceiver.() -> Unit),

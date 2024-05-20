@@ -17,7 +17,7 @@ plugins {
 }
 
 group = "com.mshdabiola.skeletonapp"
-version = "1.0.7"
+version = "1.0.9"
 
 dependencies {
 

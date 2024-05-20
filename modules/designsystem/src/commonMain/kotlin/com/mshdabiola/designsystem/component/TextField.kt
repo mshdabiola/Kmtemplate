@@ -10,7 +10,6 @@ import androidx.compose.foundation.interaction.InteractionSource
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsFocusedAsState
 import androidx.compose.foundation.layout.defaultMinSize
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
@@ -23,9 +22,7 @@ import androidx.compose.foundation.text2.input.TextFieldLineLimits
 import androidx.compose.foundation.text2.input.TextFieldState
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.LocalTextStyle
-import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldColors
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
@@ -89,7 +86,6 @@ fun SkTextField(
     )
 }
 
-
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
 @Composable
 fun MyTextField(
@@ -119,8 +115,7 @@ fun MyTextField(
     codepointTransformation: CodepointTransformation? = null,
     scrollState: ScrollState = rememberScrollState(),
 
-
-    ) {
+) {
     // If color is not provided via the text style, use content color as a default
     val textColor = textStyle.color.takeOrElse {
         colors.textColor(enabled, isError, interactionSource).value
@@ -170,13 +165,116 @@ fun MyTextField(
                 )
             },
 
-
             scrollState = scrollState,
 
-            )
+        )
     }
 }
 
+// @OptIn(ExperimentalFoundationApi::class, ExperimentalMaterial3Api::class)
+// @Composable
+// fun MyOutlinedTextField(
+//    state: TextFieldState,
+//    modifier: Modifier = Modifier,
+//    enabled: Boolean = true,
+//    readOnly: Boolean = false,
+//    textStyle: TextStyle = LocalTextStyle.current,
+//    label: @Composable() (() -> Unit)? = null,
+//    placeholder: @Composable() (() -> Unit)? = null,
+//    leadingIcon: @Composable() (() -> Unit)? = null,
+//    trailingIcon: @Composable() (() -> Unit)? = null,
+//    prefix: @Composable() (() -> Unit)? = null,
+//    suffix: @Composable() (() -> Unit)? = null,
+//    supportingText: @Composable() (() -> Unit)? = null,
+//    isError: Boolean = false,
+//    visualTransformation: VisualTransformation = VisualTransformation.None,
+//    keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
+//    keyboardActions: KeyboardActions = KeyboardActions.Default,
+//    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+//    shape: Shape = OutlinedTextFieldDefaults.shape,
+//    colors: TextFieldColors = OutlinedTextFieldDefaults.colors(),
+//    inputTransformation: InputTransformation? = null,
+//    lineLimits: TextFieldLineLimits = TextFieldLineLimits.Default,
+//    onTextLayout: (Density.(getResult: () -> TextLayoutResult?) -> Unit)? = null,
+//    codepointTransformation: CodepointTransformation? = null,
+//    scrollState: ScrollState = rememberScrollState(),
+// ) {
+//    // If color is not provided via the text style, use content color as a default
+//    val textColor = textStyle.color.takeOrElse {
+//        colors.textColor(enabled, isError, interactionSource).value
+//    }
+//    val mergedTextStyle = textStyle.merge(TextStyle(color = textColor))
+//
+//    CompositionLocalProvider(LocalTextSelectionColors provides colors.selectionColors) {
+//        BasicTextField2(
+//            state = state,
+//            modifier = if (label != null) {
+//                modifier
+//                    // Merge semantics at the beginning of the modifier chain to ensure padding is
+//                    // considered part of the text field.
+//                    .semantics(mergeDescendants = true) {}
+//                    .padding(top = OutlinedTextFieldTopPadding)
+//            } else {
+//                modifier
+//            }
+//                .defaultErrorSemantics(isError, "Error Occur")
+//                .defaultMinSize(
+//                    minWidth = OutlinedTextFieldDefaults.MinWidth,
+//                    minHeight = OutlinedTextFieldDefaults.MinHeight,
+//                ),
+//            enabled = enabled,
+//            readOnly = readOnly,
+//            textStyle = mergedTextStyle,
+//            cursorBrush = SolidColor(colors.cursorColor(isError).value),
+//            keyboardOptions = keyboardOptions,
+//            keyboardActions = keyboardActions,
+//            interactionSource = interactionSource,
+//
+//            inputTransformation = inputTransformation,
+//            lineLimits = lineLimits,
+//            onTextLayout = onTextLayout,
+//            codepointTransformation = codepointTransformation,
+//            decorator = @Composable { innerTextField ->
+//                // places leading icon, text field with label and placeholder, trailing icon
+//                TextFieldDefaults.DecorationBox(
+//                    value = state.text.toString(),
+//                    visualTransformation = visualTransformation,
+//                    innerTextField = innerTextField,
+//                    placeholder = placeholder,
+//                    label = label,
+//                    leadingIcon = leadingIcon,
+//                    trailingIcon = trailingIcon,
+//                    prefix = prefix,
+//                    suffix = suffix,
+//                    supportingText = supportingText,
+//                    shape = shape,
+//                    singleLine = lineLimits == TextFieldLineLimits.SingleLine,
+//                    enabled = enabled,
+//                    isError = isError,
+//                    interactionSource = interactionSource,
+//                    colors = colors,
+//                )
+//            },
+//
+//
+//            scrollState = scrollState,
+//
+//            )
+//    }
+// }
+
+internal val TextFieldColors.selectionColors: TextSelectionColors
+    @Composable get() = textSelectionColors
+
+internal fun Modifier.defaultErrorSemantics(
+    isError: Boolean,
+    defaultErrorMessage: String,
+): Modifier = if (isError) semantics { error(defaultErrorMessage) } else this
+
+@Composable
+internal fun TextFieldColors.cursorColor(isError: Boolean): State<Color> {
+    return rememberUpdatedState(if (isError) errorCursorColor else cursorColor)
+}
 
 @Composable
 internal fun TextFieldColors.textColor(
@@ -193,113 +291,6 @@ internal fun TextFieldColors.textColor(
         else -> unfocusedTextColor
     }
     return rememberUpdatedState(targetValue)
-}
-
-
-@OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
-@Composable
-fun MyOutlinedTextField(
-    state: TextFieldState,
-    modifier: Modifier = Modifier,
-    enabled: Boolean = true,
-    readOnly: Boolean = false,
-    textStyle: TextStyle = LocalTextStyle.current,
-    label: @Composable() (() -> Unit)? = null,
-    placeholder: @Composable() (() -> Unit)? = null,
-    leadingIcon: @Composable() (() -> Unit)? = null,
-    trailingIcon: @Composable() (() -> Unit)? = null,
-    prefix: @Composable() (() -> Unit)? = null,
-    suffix: @Composable() (() -> Unit)? = null,
-    supportingText: @Composable() (() -> Unit)? = null,
-    isError: Boolean = false,
-    visualTransformation: VisualTransformation = VisualTransformation.None,
-    keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
-    keyboardActions: KeyboardActions = KeyboardActions.Default,
-    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
-    shape: Shape = OutlinedTextFieldDefaults.shape,
-    colors: TextFieldColors = OutlinedTextFieldDefaults.colors(),
-
-    inputTransformation: InputTransformation? = null,
-    lineLimits: TextFieldLineLimits = TextFieldLineLimits.Default,
-    onTextLayout: (Density.(getResult: () -> TextLayoutResult?) -> Unit)? = null,
-    codepointTransformation: CodepointTransformation? = null,
-    scrollState: ScrollState = rememberScrollState(),
-) {
-    // If color is not provided via the text style, use content color as a default
-    val textColor = textStyle.color.takeOrElse {
-        colors.textColor(enabled, isError, interactionSource).value
-    }
-    val mergedTextStyle = textStyle.merge(TextStyle(color = textColor))
-
-    CompositionLocalProvider(LocalTextSelectionColors provides colors.selectionColors) {
-        BasicTextField2(
-            state = state,
-            modifier = if (label != null) {
-                modifier
-                    // Merge semantics at the beginning of the modifier chain to ensure padding is
-                    // considered part of the text field.
-                    .semantics(mergeDescendants = true) {}
-                    .padding(top = OutlinedTextFieldTopPadding)
-            } else {
-                modifier
-            }
-                .defaultErrorSemantics(isError, "Error Occur")
-                .defaultMinSize(
-                    minWidth = OutlinedTextFieldDefaults.MinWidth,
-                    minHeight = OutlinedTextFieldDefaults.MinHeight,
-                ),
-            enabled = enabled,
-            readOnly = readOnly,
-            textStyle = mergedTextStyle,
-            cursorBrush = SolidColor(colors.cursorColor(isError).value),
-            keyboardOptions = keyboardOptions,
-            keyboardActions = keyboardActions,
-            interactionSource = interactionSource,
-
-            inputTransformation = inputTransformation,
-            lineLimits = lineLimits,
-            onTextLayout = onTextLayout,
-            codepointTransformation = codepointTransformation,
-            decorator = @Composable { innerTextField ->
-                // places leading icon, text field with label and placeholder, trailing icon
-                TextFieldDefaults.DecorationBox(
-                    value = state.text.toString(),
-                    visualTransformation = visualTransformation,
-                    innerTextField = innerTextField,
-                    placeholder = placeholder,
-                    label = label,
-                    leadingIcon = leadingIcon,
-                    trailingIcon = trailingIcon,
-                    prefix = prefix,
-                    suffix = suffix,
-                    supportingText = supportingText,
-                    shape = shape,
-                    singleLine = lineLimits == TextFieldLineLimits.SingleLine,
-                    enabled = enabled,
-                    isError = isError,
-                    interactionSource = interactionSource,
-                    colors = colors,
-                )
-            },
-
-
-            scrollState = scrollState,
-
-            )
-    }
-}
-
-internal val TextFieldColors.selectionColors: TextSelectionColors
-    @Composable get() = textSelectionColors
-
-internal fun Modifier.defaultErrorSemantics(
-    isError: Boolean,
-    defaultErrorMessage: String,
-): Modifier = if (isError) semantics { error(defaultErrorMessage) } else this
-
-@Composable
-internal fun TextFieldColors.cursorColor(isError: Boolean): State<Color> {
-    return rememberUpdatedState(if (isError) errorCursorColor else cursorColor)
 }
 
 internal val OutlinedTextFieldTopPadding = 8.dp

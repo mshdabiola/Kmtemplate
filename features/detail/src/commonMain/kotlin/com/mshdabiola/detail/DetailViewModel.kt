@@ -20,7 +20,6 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalFoundationApi::class, FlowPreview::class)
-
 class DetailViewModel constructor(
     // savedStateHandle: SavedStateHandle,
     id: Long,
@@ -30,7 +29,6 @@ class DetailViewModel constructor(
     private val noteId = id
 
     private val note = MutableStateFlow<Note?>(Note())
-
 
     val title = TextFieldState()
     val content = TextFieldState()
@@ -74,16 +72,12 @@ class DetailViewModel constructor(
         }
     }
 
-
     private suspend fun onContentChange(note: Note?) {
         if (note?.title?.isNotBlank() == true || note?.content?.isNotBlank() == true) {
-
             val id = noteRepository.upsert(note)
             if (note.id == null) {
                 this@DetailViewModel.note.update { note.copy(id = id) }
-
             }
-
         }
     }
 
@@ -92,6 +86,4 @@ class DetailViewModel constructor(
             note.value?.id?.let { noteRepository.delete(it) }
         }
     }
-
-
 }
