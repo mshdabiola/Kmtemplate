@@ -7,10 +7,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.SemanticsPropertyReceiver
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.testTagsAsResourceId
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.StateFlow
 
@@ -26,7 +23,6 @@ actual fun <T> Flow<T>.collectAsStateWithLifecycleCommon(initialValue: T): State
 
 // val ViewModel.viewModelScope: CoroutineScope
 //    get() = viewModelScope
-
 
 @OptIn(ExperimentalComposeUiApi::class)
 actual fun Modifier.semanticsCommon(

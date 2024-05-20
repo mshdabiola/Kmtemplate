@@ -6,7 +6,6 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.SemanticsPropertyReceiver
 import androidx.compose.ui.semantics.semantics
-import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
@@ -40,7 +39,7 @@ internal fun createViewModelScope(): CloseableCoroutineScope {
         // In JVM Desktop environments where `Dispatchers.Main` might not exist (e.g., Swing):
         EmptyCoroutineContext
     }
-   // val dis=Dispatchers.Swing
+    // val dis=Dispatchers.Swing
     return CloseableCoroutineScope(coroutineContext = dispatcher + SupervisorJob())
 }
 
@@ -55,8 +54,6 @@ internal class CloseableCoroutineScope(
 
 // val ViewModel.viewModelScope: CoroutineScope
 //    get() = createViewModelScope()
-
-
 
 actual fun Modifier.semanticsCommon(
     mergeDescendants: Boolean,
