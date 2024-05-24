@@ -23,10 +23,7 @@ dependencies {
     implementation(libs.firebase.analytics)
 }
 kotlin {
-    @OptIn(ExperimentalWasmDsl::class)
-    wasmJs {
-        browser()
-    }
+
     sourceSets {
 
 
