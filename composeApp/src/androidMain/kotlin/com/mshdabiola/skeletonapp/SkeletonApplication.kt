@@ -22,7 +22,7 @@ class SkeletonApplication : Application() {
         super.onCreate()
 
         val logger = Logger(
-            loggerConfigInit(platformLogWriter(), Writer(this.filesDir)),
+            loggerConfigInit(platformLogWriter()),
             "AndroidLogger",
         )
         val logModule = module {
@@ -36,7 +36,7 @@ class SkeletonApplication : Application() {
                 KermitKoinLogger(Logger.withTag("koin")),
             )
             androidContext(this@SkeletonApplication)
-            modules(appModule, jankStatsModule)
+            modules(appModule, jankStatsModule,logModule)
         }
 
 //        if (packageName.contains("debug")) {

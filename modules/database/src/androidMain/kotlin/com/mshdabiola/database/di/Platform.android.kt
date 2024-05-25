@@ -24,5 +24,5 @@ fun getDatabaseBuilder(context: Context): RoomDatabase.Builder<SkeletonDatabase>
         context = appContext,
         name = dbFile.absolutePath,
     )
-        .setDriver(AndroidSQLiteDriver())
+      //  .setDriver(AndroidSQLiteDriver())
 }
