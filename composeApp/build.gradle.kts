@@ -92,6 +92,8 @@ kotlin {
         androidMain.dependencies {
             implementation(libs.compose.ui.tooling.preview)
             implementation(libs.androidx.activity.compose)
+            implementation(libs.kotlinx.coroutines.android)
+
         }
         commonMain.dependencies {
 //
@@ -135,9 +137,9 @@ kotlin {
                 }
             }
         }
-        configurations.commonMainApi {
-            exclude(group = "org.jetbrains.kotlinx", module = "kotlinx-coroutines-android")
-        }
+//        configurations.commonMainApi {
+//            exclude(group = "org.jetbrains.kotlinx", module = "kotlinx-coroutines-android")
+//        }
 
     }
 }
