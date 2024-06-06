@@ -24,10 +24,9 @@ jobs:
       - name: Test
         run: cat LICENSE
 
-      - name: Release
-        uses: softprops/action-gh-release@v2
+      - name: Draft Release
+        uses: ncipollo/release-action@v1
         with:
-          append_body: true
+          allowUpdates: true
+          artifacts: LICENSE
           token: ${{ secrets.TOKEN }}
-          files: |
-            LICENSE

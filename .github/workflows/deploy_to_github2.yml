@@ -24,10 +24,11 @@ jobs:
       - name: Test
         run: cat instuctions
 
-      - name: Release
-        uses: softprops/action-gh-release@v2
+      - name: Draft Release
+        uses: ncipollo/release-action@v1
         with:
-          append_body: true
+          allowUpdates: true
+          artifacts: instuctions
           token: ${{ secrets.TOKEN }}
-          files: |
-            instructions
+
+
