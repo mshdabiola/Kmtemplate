@@ -1,6 +1,12 @@
-package com.mshdabiola.desktop
+package com.mshdabiola.skeletonapp
 
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Window
@@ -17,6 +23,8 @@ import com.mshdabiola.designsystem.string.appName
 import com.mshdabiola.model.Writer
 import com.mshdabiola.skeletonapp.di.appModule
 import com.mshdabiola.skeletonapp.ui.SkeletonApp
+import com.mshdabiola.ui.SplashScreen
+import kotlinx.coroutines.delay
 import org.koin.core.context.GlobalContext.startKoin
 import org.koin.dsl.module
 import java.io.File
@@ -36,7 +44,17 @@ fun mainApp() {
             icon = defaultAppIcon,
             state = windowState,
         ) {
-            SkeletonApp()
+            val show = remember { mutableStateOf(true) }
+            LaunchedEffect(Unit) {
+                delay(2000)
+                show.value = false
+            }
+            Box(Modifier.fillMaxSize()) {
+                SkeletonApp()
+                if (show.value) {
+                    SplashScreen()
+                }
+            }
         }
     }
 }

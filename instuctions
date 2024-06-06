@@ -1,15 +1,9 @@
  ./gradlew :modules:designsystem:jacocoTestReport
 
-    ./gradlew lintDebug
-    ./gradlew updateDebugBadging
-    ./gradlew dependencyGuardBaseline
-    ./gradlew spotlessApply --init-script gradle/init.gradle.kts --no-configuration-cache
-    ./gradlew recordRoborazziDebug
+        ./gradlew lintDebug; ./gradlew updateReleaseBadging; ./gradlew dependencyGuardBaseline; ./gradlew spotlessApply --init-script gradle/init.gradle.kts --no-configuration-cache; ./gradlew recordRoborazziDebug
 
-    ./gradlew dependencyGuard
-    ./gradlew checkDebugBadging
-    ./gradlew spotlessCheck --init-script gradle/init.gradle.kts --no-configuration-cache
-    ./gradlew verifyRoborazziDebug
+        ./gradlew dependencyGuard; ./gradlew checkReleaseBadging; ./gradlew spotlessCheck --init-script gradle/init.gradle.kts --no-configuration-cache; ./gradlew verifyRoborazziDebug
+
 
     ./gradlew assembleDebug -PenableComposeCompilerMetrics=true -PenableComposeCompilerReports=true
     ./gradlew :composeApp:generateReleaseBaselineProfile

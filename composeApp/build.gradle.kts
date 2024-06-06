@@ -214,7 +214,7 @@ android {
 
 compose.desktop {
     application {
-        mainClass = "com.mshdabiola.desktop.MainAppKt"
+        mainClass = "com.mshdabiola.skeletonapp.MainAppKt"
 
 
         buildTypes.release.proguard {
