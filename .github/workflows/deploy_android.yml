@@ -1,9 +1,11 @@
 name: Deploy to Play Store
 
-on:
-  push:
-    tags:
-      - 'a[0-9]+.[0-9]+.[0-9]+'
+#on:
+#  push:
+#    tags:
+#      - 'a[0-9]+.[0-9]+.[0-9]+'
+on: workflow_dispatch
+
 
 jobs:
   build:
