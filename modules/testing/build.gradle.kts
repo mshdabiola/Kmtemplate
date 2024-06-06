@@ -41,7 +41,7 @@ kotlin {
 //                implementation(project(":modules:data"))
 //                implementation(project(":modules:model"))
                 api(libs.junit)
-               // api(libs.kotlinx.coroutines.test)
+               api(libs.kotlinx.coroutines.test)
                 api(libs.turbine)
                 api(libs.koin.test)
                 api(libs.koin.test.junit)
