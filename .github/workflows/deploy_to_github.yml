@@ -54,5 +54,5 @@ jobs:
         uses: ncipollo/release-action@v1
         with:
           allowUpdates: true
-          artifacts: "app/build/outputs/apk/**/*"
+          artifacts: "composeApp/build/outputs/apk/**/**/*"
           token: ${{ secrets.TOKEN }}
