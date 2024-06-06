@@ -22,7 +22,7 @@ jobs:
         run: echo ${{ github.sha }} > Release.txt
 
       - name: Test
-        run: cat Release3.txt
+        run: cat LICENSE
 
       - name: Release
         uses: softprops/action-gh-release@v2
@@ -30,4 +30,4 @@ jobs:
           append_body: true
           token: ${{ secrets.TOKEN }}
           files: |
-            Release3.txt
+            LICENSE
