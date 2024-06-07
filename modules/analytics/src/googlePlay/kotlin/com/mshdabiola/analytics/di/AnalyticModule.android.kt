@@ -2,7 +2,6 @@ package com.mshdabiola.analytics.di
 
 import com.google.firebase.Firebase
 import com.google.firebase.analytics.analytics
-import com.google.firebase.analytics.logEvent
 import com.mshdabiola.analytics.AnalyticsEvent
 import com.mshdabiola.analytics.AnalyticsHelper
 import org.koin.core.module.Module
@@ -16,7 +15,6 @@ actual val analyticsModule: Module
             object : AnalyticsHelper {
                 val firebaseAnalytics = Firebase.analytics
                 override fun logEvent(event: AnalyticsEvent) {
-
                 }
             }
         } bind AnalyticsHelper::class

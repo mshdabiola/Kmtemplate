@@ -87,7 +87,7 @@ jobs:
       - name: Run all local screenshot tests (Roborazzi)
         id: screenshotsverify
         continue-on-error: true
-        run: ./gradlew verifyRoborazziDebug
+        run: ./gradlew verifyRoborazziFossReliantDebug
 
       - name: Prevent pushing new screenshots if this is a fork
         id: checkfork_screenshots
@@ -101,7 +101,7 @@ jobs:
         id: screenshotsrecord
         if: steps.screenshotsverify.outcome == 'failure' && github.event_name == 'pull_request'
         run: |
-          ./gradlew recordRoborazziDebug
+          ./gradlew recordRoborazziFossReliantDebug
 
       - name: Push new screenshots if available
         uses: stefanzweifel/git-auto-commit-action@v5
@@ -114,13 +114,13 @@ jobs:
       # Run local tests after screenshot tests to avoid wrong UP-TO-DATE. TODO: Ignore screenshots.
       - name: Run local tests and create report
         if: always()
-        run: ./gradlew testDebug
+        run: ./gradlew testFossReliantDebug
       # Replace task exclusions with `-Pandroidx.baselineprofile.skipgeneration` when
       # https://android-review.googlesource.com/c/platform/frameworks/support/+/2602790 landed in a
       # release build
 
       - name: Build all build type and flavor permutations
-        run: ./gradlew :composeApp:assemble :benchmarks:assemble
+        run: ./gradlew :composeApp:assembleFossReliant :benchmarks:assembleFossReliant
           -x pixel6Api33NonMinifiedReleaseAndroidTest
           -x pixel6Api33NonMinifiedBenchmarkAndroidTest
           -x collectNonMinifiedReleaseBaselineProfile
@@ -140,7 +140,7 @@ jobs:
           path: '**/build/test-results/test*UnitTest/**.xml'
 
       - name: Check lint
-        run: ./gradlew :composeApp:lintRelease
+        run: ./gradlew :composeApp:lintFossReliantRelease
 
       - name: Upload lint reports (HTML)
         if: always()
@@ -150,7 +150,7 @@ jobs:
           path: '**/build/reports/lint-results-*.html'
 
       - name: Check badging
-        run: ./gradlew checkReleaseBadging
+        run: ./gradlew checkFossReliantReleaseBadging
 
   androidTest:
     runs-on: ubuntu-latest
@@ -201,17 +201,17 @@ jobs:
           disable-animations: true
           disk-size: 6000M
           heap-size: 600M
-          script: ./gradlew connectedDebugAndroidTest --daemon
+          script: ./gradlew connectedFossReliantDebugAndroidTest --daemon
 
       - name: Run local tests (including Roborazzi) for the combined coverage report (only API 30)
         if: matrix.api-level == 30
         # There is no need to verify Roborazzi tests to generate coverage.
-        run: ./gradlew testDebugUnitTest -Proborazzi.test.verify=false # Add Prod if we ever add JVM tests for prod
+        run: ./gradlew testFossReliantDebugUnitTest -Proborazzi.test.verify=false # Add Prod if we ever add JVM tests for prod
 
       # Add `createProdDebugUnitTestCoverageReport` if we ever add JVM tests for prod
       - name: Generate coverage reports for Debug variants (only API 30)
         if: matrix.api-level == 30
-        run: ./gradlew createDebugCombinedCoverageReport
+        run: ./gradlew createFossReliantDebugCombinedCoverageReport
 
       - name: Upload test reports
         if: always()

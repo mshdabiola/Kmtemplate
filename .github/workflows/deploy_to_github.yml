@@ -40,7 +40,7 @@ jobs:
           build-scan-terms-of-use-agree: "yes"
 
       - name: Generate Release APK
-        run: ./gradlew assembleRelease
+        run: ./gradlew assembleFossReliantRelease
 
       - name: Sign APK
         uses: r0adkll/sign-android-release@v1

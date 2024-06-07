@@ -53,7 +53,6 @@ class MainActivity : ComponentActivity() {
             }
         }
 
-
         setContent {
             val darkTheme = shouldUseDarkTheme(uiState)
 

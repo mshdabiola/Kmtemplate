@@ -67,7 +67,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:801461677522:android:63a1c6467747f0a2a3ac0b",
         "android_client_info": {
-          "package_name": "com.mshdabiola.skeletonapp"
+          "package_name": "com.mshdabiola.skeletonapp.play"
         }
       },
       "oauth_client": [
@@ -96,7 +96,65 @@
       "client_info": {
         "mobilesdk_app_id": "1:801461677522:android:63a1c6467747f0a2a3ac0b",
         "android_client_info": {
-          "package_name": "com.mshdabiola.skeletonapp.benchmark"
+          "package_name": "com.mshdabiola.skeletonapp.foss"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "801461677522-75h4mmgteqqsh8vjdrm94df2h5ftnmmi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBFkACfDU_wVm0yP1ariOVs-lCyePOyKYk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "801461677522-75h4mmgteqqsh8vjdrm94df2h5ftnmmi.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:801461677522:android:63a1c6467747f0a2a3ac0b",
+        "android_client_info": {
+          "package_name": "com.mshdabiola.skeletonapp.play.benchmark"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "801461677522-75h4mmgteqqsh8vjdrm94df2h5ftnmmi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBFkACfDU_wVm0yP1ariOVs-lCyePOyKYk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "801461677522-75h4mmgteqqsh8vjdrm94df2h5ftnmmi.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:801461677522:android:63a1c6467747f0a2a3ac0b",
+        "android_client_info": {
+          "package_name": "com.mshdabiola.skeletonapp.foss.benchmark"
         }
       },
       "oauth_client": [
