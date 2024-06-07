@@ -9,7 +9,36 @@
       "client_info": {
         "mobilesdk_app_id": "1:801461677522:android:63a1c6467747f0a2a3ac0b",
         "android_client_info": {
-          "package_name": "com.mshdabiola.skeletonapp.debug"
+          "package_name": "com.mshdabiola.skeletonapp.play.debug"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "801461677522-75h4mmgteqqsh8vjdrm94df2h5ftnmmi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBFkACfDU_wVm0yP1ariOVs-lCyePOyKYk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "801461677522-75h4mmgteqqsh8vjdrm94df2h5ftnmmi.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:801461677522:android:63a1c6467747f0a2a3ac0b",
+        "android_client_info": {
+          "package_name": "com.mshdabiola.skeletonapp.foss.debug"
         }
       },
       "oauth_client": [

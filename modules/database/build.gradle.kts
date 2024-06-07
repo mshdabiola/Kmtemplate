@@ -6,10 +6,6 @@ plugins {
 
 
 }
-@OptIn(ExperimentalKotlinGradlePluginApi::class)
-powerAssert {
-    functions = listOf("kotlin.assert", "kotlin.test.assertTrue", "kotlin.test.assertEquals", "kotlin.test.assertNull")
-}
 android {
     namespace = "com.mshdabiola.database"
 }

@@ -1,8 +1,6 @@
 package com.mshdabiola.analytics.di
 
-import com.google.firebase.Firebase
-import com.google.firebase.analytics.analytics
-import com.google.firebase.analytics.logEvent
+import co.touchlab.kermit.Logger
 import com.mshdabiola.analytics.AnalyticsEvent
 import com.mshdabiola.analytics.AnalyticsHelper
 import org.koin.core.module.Module

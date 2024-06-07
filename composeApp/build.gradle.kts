@@ -8,7 +8,7 @@ plugins {
     id("mshdabiola.android.application")
     id("mshdabiola.android.application.compose")
     id("mshdabiola.android.application.jacoco")
-    id("mshdabiola.android.application.firebase")
+    id("mshdabiola.android.application.flavor")
     alias(libs.plugins.androidx.baselineprofile)
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.roborazzi)
@@ -60,6 +60,23 @@ dependencies {
     androidTestImplementation(libs.accompanist.testharness)
     debugImplementation(libs.androidx.monitor)
     baselineProfile(project(":benchmarks"))
+
+
+ googlePlayImplementation(platform(libs.firebase.bom))
+ googlePlayImplementation(libs.firebase.analytics)
+ googlePlayImplementation(libs.firebase.performance)
+ googlePlayImplementation(libs.firebase.crashlytics)
+
+ googlePlayImplementation(libs.firebase.cloud.messaging)
+ googlePlayImplementation(libs.firebase.remoteconfig)
+ googlePlayImplementation(libs.firebase.message)
+ googlePlayImplementation(libs.firebase.auth)
+
+ googlePlayImplementation(libs.play.game)
+ googlePlayImplementation(libs.play.update)
+ googlePlayImplementation(libs.play.update.kts)
+ googlePlayImplementation(libs.play.review)
+ googlePlayImplementation(libs.play.review.kts)
 }
 
 kotlin {
@@ -286,5 +303,7 @@ baselineProfile {
 }
 
 dependencyGuard {
-    configuration("releaseRuntimeClasspath")
+    configuration("fossReliantReleaseRuntimeClasspath")
+    configuration("googlePlayDebugRuntimeClasspath")
+
 }

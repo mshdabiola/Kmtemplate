@@ -44,7 +44,7 @@ sqlDelight = "2.0.0-rc01"
 
 androidxDataStore = "1.1.1"
 secrets = "2.0.1"
-ktor-wasm = "3.0.0-wasm2"
+ktor = "2.3.11"
 ktorKotlinxSerializationJson = "1.0.1"
 
 
@@ -165,16 +165,16 @@ sqlite-bundled = { module = "androidx.sqlite:sqlite-bundled", version.ref = "sql
 #androidx-room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "androidx-room" }
 
 
-ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor-wasm" }
-ktor-client-android = { module = "io.ktor:ktor-client-android", version.ref = "ktor-wasm" }
-ktor-client-serialization = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor-wasm" }
-ktor-client-mock = { module = "io.ktor:ktor-client-mock", version.ref = "ktor-wasm" }
-ktor-client-content-negotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor-wasm" }
-ktor-client-resources = { module = "io.ktor:ktor-client-resources", version.ref = "ktor-wasm" }
-ktor-client-logging = { module = "io.ktor:ktor-client-logging-jvm", version.ref = "ktor-wasm" }
-ktor-client-auth = { module = "io.ktor:ktor-client-auth", version.ref = "ktor-wasm" }
-ktor-client-cio = { module = "io.ktor:ktor-client-cio", version.ref = "ktor-wasm" }
-ktor-client-js = { module = "io.ktor:ktor-client-js", version.ref = "ktor-wasm" }
+ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
+ktor-client-android = { module = "io.ktor:ktor-client-android", version.ref = "ktor" }
+ktor-client-serialization = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor" }
+ktor-client-mock = { module = "io.ktor:ktor-client-mock", version.ref = "ktor" }
+ktor-client-content-negotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor" }
+ktor-client-resources = { module = "io.ktor:ktor-client-resources", version.ref = "ktor" }
+ktor-client-logging = { module = "io.ktor:ktor-client-logging-jvm", version.ref = "ktor" }
+ktor-client-auth = { module = "io.ktor:ktor-client-auth", version.ref = "ktor" }
+ktor-client-cio = { module = "io.ktor:ktor-client-cio", version.ref = "ktor" }
+ktor-client-js = { module = "io.ktor:ktor-client-js", version.ref = "ktor" }
 
 
 androidx-profileinstaller = { module = "androidx.profileinstaller:profileinstaller", version.ref = "androidxProfileinstaller" }

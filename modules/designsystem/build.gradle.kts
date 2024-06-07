@@ -33,7 +33,7 @@ dependencies {
 
     androidTestImplementation(libs.androidx.compose.ui.test)
     androidTestImplementation(project(":modules:testing"))
-    implementation("com.google.guava:listenablefuture:9999.0-empty-to-avoid-conflict-with-guava")
+    //implementation("com.google.guava:listenablefuture:9999.0-empty-to-avoid-conflict-with-guava")
 
 }
 kotlin {
