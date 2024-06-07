@@ -6,7 +6,6 @@ import com.mshdabiola.database.SkeletonDatabase
 import com.mshdabiola.database.di.daoModules
 import com.mshdabiola.database.di.getRoomDatabase
 import org.junit.Rule
-import org.junit.Test
 import org.koin.dsl.module
 import org.koin.test.KoinTest
 import org.koin.test.KoinTestRule
