@@ -5,13 +5,13 @@ name: Build all and test
 #    branches:
 #      - main
 #  pull_request:
-#on: workflow_dispatch
-
-on:
-  push:
-    branches:
-      - develop
-  pull_request:
+on: workflow_dispatch
+#
+#on:
+#  push:
+#    branches:
+#      - develop
+#  pull_request:
 
 concurrency:
   group: build-${{ github.ref }}
