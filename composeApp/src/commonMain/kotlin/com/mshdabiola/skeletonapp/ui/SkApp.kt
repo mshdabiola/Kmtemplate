@@ -62,7 +62,6 @@ import com.mshdabiola.skeletonapp.navigation.SkNavHost
 import com.mshdabiola.ui.CommonBar
 import com.mshdabiola.ui.CommonNavigation
 import com.mshdabiola.ui.CommonRail
-import com.mshdabiola.ui.SplashScreen
 import com.mshdabiola.ui.collectAsStateWithLifecycleCommon
 import com.mshdabiola.ui.semanticsCommon
 import org.koin.compose.koinInject
@@ -112,7 +111,6 @@ fun SkeletonApp() {
                         GradientColors()
                     },
                 ) {
-
                     val snackbarHostState = remember { SnackbarHostState() }
 
                     if (appState.shouldShowDrawer) {
@@ -155,7 +153,7 @@ fun SkeletonApp() {
                                     }
                                 },
 
-                                ) { padding ->
+                            ) { padding ->
 
                                 Column(
                                     Modifier
@@ -203,7 +201,7 @@ fun SkeletonApp() {
                                         ?: "",
                                     onNavigate = navigator,
 
-                                    )
+                                )
                             }
                             Scaffold(
                                 modifier = Modifier.semanticsCommon {},
@@ -241,7 +239,7 @@ fun SkeletonApp() {
                                     }
                                 },
 
-                                ) { padding ->
+                            ) { padding ->
 
                                 Column(
                                     Modifier
@@ -267,7 +265,6 @@ fun SkeletonApp() {
                                 }
                             }
                         }
-
                     }
                 }
             }
