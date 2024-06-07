@@ -9,7 +9,6 @@ import co.touchlab.kermit.Logger
 import co.touchlab.kermit.koin.KermitKoinLogger
 import co.touchlab.kermit.loggerConfigInit
 import co.touchlab.kermit.platformLogWriter
-import com.mshdabiola.model.Writer
 import com.mshdabiola.skeletonapp.di.appModule
 import com.mshdabiola.skeletonapp.di.jankStatsModule
 import org.koin.android.ext.koin.androidContext
@@ -22,7 +21,7 @@ class SkeletonApplication : Application() {
         super.onCreate()
 
         val logger = Logger(
-            loggerConfigInit(platformLogWriter(), Writer(this.filesDir)),
+            loggerConfigInit(platformLogWriter()),
             "AndroidLogger",
         )
         val logModule = module {
@@ -36,7 +35,7 @@ class SkeletonApplication : Application() {
                 KermitKoinLogger(Logger.withTag("koin")),
             )
             androidContext(this@SkeletonApplication)
-            modules(appModule, jankStatsModule)
+            modules(appModule, jankStatsModule, logModule)
         }
 
 //        if (packageName.contains("debug")) {

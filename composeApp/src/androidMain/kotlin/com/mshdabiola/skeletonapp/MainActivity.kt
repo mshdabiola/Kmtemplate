@@ -132,8 +132,8 @@ class MainActivity : ComponentActivity() {
                         Color.TRANSPARENT,
                     ) { darkTheme },
                     navigationBarStyle = SystemBarStyle.auto(
-                        lightScrim,
-                        darkScrim,
+                        Color.TRANSPARENT,
+                        Color.TRANSPARENT,
                     ) { darkTheme },
                 )
                 onDispose {}

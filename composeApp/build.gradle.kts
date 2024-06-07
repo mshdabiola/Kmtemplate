@@ -17,7 +17,7 @@ plugins {
 }
 
 group = "com.mshdabiola.skeletonapp"
-version = "1.1.0"
+version = "1.1.1"
 
 dependencies {
 
@@ -92,6 +92,8 @@ kotlin {
         androidMain.dependencies {
             implementation(libs.compose.ui.tooling.preview)
             implementation(libs.androidx.activity.compose)
+            implementation(libs.kotlinx.coroutines.android)
+
         }
         commonMain.dependencies {
 //
@@ -135,9 +137,9 @@ kotlin {
                 }
             }
         }
-        configurations.commonMainApi {
-            exclude(group = "org.jetbrains.kotlinx", module = "kotlinx-coroutines-android")
-        }
+//        configurations.commonMainApi {
+//            exclude(group = "org.jetbrains.kotlinx", module = "kotlinx-coroutines-android")
+//        }
 
     }
 }
@@ -152,8 +154,8 @@ android {
 
     defaultConfig {
         applicationId = "com.mshdabiola.skeletonapp"
-        versionCode = 1
-        versionName = "0.0.1" // X.Y.Z; X = Major, Y = minor, Z = Patch level
+        versionCode = 2
+        versionName = "1.1.1" // X.Y.Z; X = Major, Y = minor, Z = Patch level
 
         // Custom test runner to set up Hilt dependency graph
         testInstrumentationRunner = "com.mshdabiola.testing.TestRunner"
@@ -212,7 +214,7 @@ android {
 
 compose.desktop {
     application {
-        mainClass = "com.mshdabiola.desktop.MainAppKt"
+        mainClass = "com.mshdabiola.skeletonapp.MainAppKt"
 
 
         buildTypes.release.proguard {

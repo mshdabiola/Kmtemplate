@@ -27,18 +27,27 @@ import org.gradle.kotlin.dsl.configure
 import org.gradle.kotlin.dsl.dependencies
 import org.gradle.kotlin.dsl.getByType
 import org.gradle.kotlin.dsl.kotlin
+import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
+import org.jetbrains.kotlin.powerassert.gradle.PowerAssertGradleExtension
 
 class AndroidLibraryConventionPlugin : Plugin<Project> {
+    @OptIn(ExperimentalKotlinGradlePluginApi::class)
     override fun apply(target: Project) {
         with(target) {
             with(pluginManager) {
                 apply("kotlin-multiplatform")
                 apply("com.android.library")
                 apply("mshdabiola.android.lint")
+                apply(  "org.jetbrains.kotlin.plugin.power-assert")
+
 
             }
 
+            extensions.configure<PowerAssertGradleExtension> {
+                functions.set(listOf("kotlin.assert", "kotlin.test.assertTrue", "kotlin.test.assertEquals", "kotlin.test.assertNull"))
+
+            }
             extensions.configure<LibraryExtension> {
                 configureKotlinAndroid(this)
                 defaultConfig.targetSdk = 34

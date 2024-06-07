@@ -3,14 +3,14 @@ package database
 import app.cash.turbine.test
 import com.mshdabiola.database.dao.NoteDao
 import com.mshdabiola.database.model.NoteEntity
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
 import org.koin.core.component.inject
+import kotlin.test.Test
 import kotlin.test.assertEquals
 
-@OptIn(ExperimentalCoroutinesApi::class)
 class ModelTest : AbstractTest() {
 
+    @Test
     override fun insert() = runTest {
         val modelDao by inject<NoteDao>()
 
@@ -30,12 +30,15 @@ class ModelTest : AbstractTest() {
             }
     }
 
+    @Test
     override fun delete() {
     }
 
+    @Test
     override fun getOne() {
     }
 
+    @Test
     override fun getAll() {
     }
 }
