@@ -121,10 +121,10 @@ jobs:
 
       - name: Build all build type and flavor permutations
         run: ./gradlew :composeApp:assembleFossReliant :benchmarks:assembleFossReliant
-          -x pixel6Api33NonMinifiedFossReliantReleaseAndroidTest
-          -x pixel6Api33NonMinifiedFossReliantBenchmarkAndroidTest
-          -x collectNonMinifiedFossReliantReleaseBaselineProfile
-          -x collectNonMinifiedFossReliantBenchmarkBaselineProfile
+          -x pixel6Api33FossReliantNonMinifiedReleaseAndroidTest
+          -x pixel6Api33FossReliantNonMinifiedBenchmarkAndroidTest
+          -x collectFossReliantNonMinifiedReleaseBaselineProfile
+          -x collectFossReliantNonMinifiedBenchmarkBaselineProfile
 
       - name: Upload build outputs (APKs)
         uses: actions/upload-artifact@v4
