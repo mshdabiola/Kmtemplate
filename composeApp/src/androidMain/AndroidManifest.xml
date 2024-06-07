@@ -14,7 +14,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Sk"
+        android:theme="@style/Theme.Sk.Splash"
         android:windowSoftInputMode="adjustResize"
         tools:targetApi="31">
         <profileable
