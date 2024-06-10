@@ -9,7 +9,7 @@ coreKtx = "1.13.1"
 leakcanaryAndroid = "3.0-alpha-1"
 lifecycleRuntimeKtx = "2.8.0"
 androidxSavedState = "1.2.1"
-androidxLifecycle = "2.8.0"
+androidxLifecycle = "2.8.1"
 
 
 composeLifecycle = "2.8.0-rc03"
