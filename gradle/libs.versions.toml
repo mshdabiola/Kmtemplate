@@ -59,7 +59,7 @@ androidxWork = "2.9.0"
 coil = "3.0.0-alpha06"
 
 kotlinxCollectionImmutable = "0.3.7"
-kotlinxCoroutines = "1.8.1-Beta"
+kotlinxCoroutines = "1.9.0-RC"
 kotlinxDatetime = "0.5.0"
 kotlinxSerializationJson = "1.6.3"
 
