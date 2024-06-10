@@ -96,7 +96,7 @@ multiplatform_settings = "1.1.1"
 
 compose = "1.6.7"
 
-ksp = "2.0.0-1.0.21"
+ksp = "2.0.0-1.0.22"
 androidx-paging = "3.3.0"
 androidx-room = "2.7.0-alpha03"
 pagingComposeAndroid = "3.3.0"
