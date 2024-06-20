@@ -9,7 +9,7 @@ import com.mshdabiola.model.Note
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
-class FakeNoteRepository  constructor() : NoteRepository {
+class FakeNoteRepository constructor() : NoteRepository {
 
     private val data = mutableListOf<Note>()
     override suspend fun upsert(note: Note): Long {

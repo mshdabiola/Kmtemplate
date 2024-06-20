@@ -11,7 +11,6 @@ import com.mshdabiola.designsystem.component.SkTab
 import com.mshdabiola.designsystem.component.SkTabRow
 import com.mshdabiola.designsystem.theme.SkTheme
 
-
 @ThemePreviews
 @Composable
 fun TabsPreview() {

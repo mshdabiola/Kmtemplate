@@ -10,7 +10,6 @@ import com.mshdabiola.designsystem.component.SkIconToggleButton
 import com.mshdabiola.designsystem.icon.SkIcons
 import com.mshdabiola.designsystem.theme.SkTheme
 
-
 @ThemePreviews
 @Composable
 fun IconButtonPreview() {

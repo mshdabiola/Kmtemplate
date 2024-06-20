@@ -53,4 +53,7 @@ include(":features:main")
 include(":features:detail")
 include(":features:setting")
 
+include(":ui-test-hilt-manifest")
+
+
 

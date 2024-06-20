@@ -13,7 +13,6 @@ import com.mshdabiola.designsystem.component.DetailTopAppBar
 import com.mshdabiola.designsystem.component.SkTopAppBar
 import com.mshdabiola.designsystem.icon.SkIcons
 
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Preview("Top App Bar")
 @Composable

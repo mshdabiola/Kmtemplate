@@ -8,12 +8,10 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ProvideTextStyle
-import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.contentColorFor
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.mshdabiola.designsystem.theme.SkTheme
 
 @Composable
 fun SkTopicTag(

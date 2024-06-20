@@ -4,20 +4,17 @@
 
 package com.mshdabiola.designsystem.component
 
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.FilterChip
 import androidx.compose.material3.FilterChipDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ProvideTextStyle
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.mshdabiola.designsystem.icon.SkIcons
-import com.mshdabiola.designsystem.theme.SkTheme
 
 /**
  * Now in Android filter chip with included leading checked icon as well as text content slot.

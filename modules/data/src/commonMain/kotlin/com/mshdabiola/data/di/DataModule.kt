@@ -1,8 +1,8 @@
 package com.mshdabiola.data.di
 
 import com.mshdabiola.analytics.di.analyticsModule
-import com.mshdabiola.data.repository.NoteRepository
 import com.mshdabiola.data.repository.INetworkRepository
+import com.mshdabiola.data.repository.NoteRepository
 import com.mshdabiola.data.repository.OfflineFirstUserDataRepository
 import com.mshdabiola.data.repository.RealINetworkRepository
 import com.mshdabiola.data.repository.RealModelRepository

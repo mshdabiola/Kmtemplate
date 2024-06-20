@@ -34,7 +34,7 @@ dependencies {
     macAarch64(compose.desktop.macos_arm64)
     windowsAmd64(compose.desktop.windows_x64)
 
-
+    implementation(libs.koin.android)
 
 
 
@@ -42,7 +42,7 @@ dependencies {
     implementation(libs.androidx.compose.material3.adaptive)
     implementation(libs.androidx.compose.material3.adaptive.layout)
     implementation(libs.androidx.compose.material3.adaptive.navigation)
-    implementation(libs.androidx.compose.material3.windowSizeClass)
+//    implementation(libs.androidx.compose.material3.windowSizeClass)
     implementation(libs.androidx.compose.runtime.tracing)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.core.splashscreen)
@@ -237,9 +237,6 @@ android {
         }
     }
 
-    dependencies {
-        debugImplementation(libs.compose.ui.tooling)
-    }
 }
 
 compose.desktop {

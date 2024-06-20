@@ -51,7 +51,6 @@ import com.mshdabiola.designsystem.theme.SkTheme
 import com.mshdabiola.detail.navigation.navigateToDetail
 import com.mshdabiola.main.navigation.MAIN_ROUTE
 import com.mshdabiola.main.navigation.navigateToMain
-import com.mshdabiola.model.Contrast
 import com.mshdabiola.model.DarkThemeConfig
 import com.mshdabiola.model.ThemeBrand
 import com.mshdabiola.setting.navigation.SETTING_ROUTE

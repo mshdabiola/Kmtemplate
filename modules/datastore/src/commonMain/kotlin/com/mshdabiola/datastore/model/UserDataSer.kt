@@ -4,7 +4,6 @@
 
 package com.mshdabiola.datastore.model
 
-import com.mshdabiola.model.Contrast
 import com.mshdabiola.model.DarkThemeConfig
 import com.mshdabiola.model.ThemeBrand
 import kotlinx.serialization.Serializable

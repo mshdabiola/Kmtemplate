@@ -32,7 +32,6 @@ fun SkTheme(
     disableDynamicTheming: Boolean = true,
     content: @Composable () -> Unit,
 ) {
-
     val colorScheme = when {
         androidTheme -> if (darkTheme) highContrastDarkColorScheme else highContrastLightColorScheme
         !disableDynamicTheming && supportsDynamicTheming() -> {

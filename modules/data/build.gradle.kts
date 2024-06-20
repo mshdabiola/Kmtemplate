@@ -7,6 +7,11 @@ android {
     namespace = "com.mshdabiola.data"
 }
 
+dependencies{
+    testImplementation(project(":modules:testing"))
+
+}
+
 kotlin {
     sourceSets {
         val commonMain by getting {

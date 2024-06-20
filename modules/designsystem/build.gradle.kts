@@ -19,8 +19,8 @@ android {
 
 dependencies {
 
-    api(libs.androidx.compose.material3.adaptive)
-    api(libs.androidx.compose.material3.navigationSuite)
+//    api(libs.androidx.compose.material3.adaptive)
+//    api(libs.androidx.compose.material3.navigationSuite)
 
 
     debugApi(libs.androidx.compose.ui.tooling)
@@ -30,11 +30,12 @@ dependencies {
     testImplementation(libs.androidx.compose.ui.test)
     testImplementation(libs.robolectric)
     testImplementation(libs.roborazzi)
-    testImplementation(project(":modules:testing"))
+    testImplementation(projects.modules.testing)
+    testImplementation(projects.modules.screenshotTesting)
+
 
     androidTestImplementation(libs.androidx.compose.ui.test)
-    androidTestImplementation(project(":modules:testing"))
-    //implementation("com.google.guava:listenablefuture:9999.0-empty-to-avoid-conflict-with-guava")
+    androidTestImplementation(projects.modules.testing)
 
 }
 kotlin {

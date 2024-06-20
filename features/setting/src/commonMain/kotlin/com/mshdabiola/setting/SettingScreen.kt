@@ -117,8 +117,6 @@ internal fun SettingScreen(
                 )
             }
 
-
-
             Row(
                 modifier = Modifier.fillMaxWidth(0.8f),
                 horizontalArrangement = Arrangement.SpaceBetween,

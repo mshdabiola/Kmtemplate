@@ -21,12 +21,13 @@ import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalInspectionMode
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImagePainter
 import coil3.compose.rememberAsyncImagePainter
 import com.mshdabiola.designsystem.theme.LocalTintTheme
 import hydraulic.modules.designsystem.generated.resources.Res
+import hydraulic.modules.designsystem.generated.resources.icon
+import org.jetbrains.compose.resources.painterResource
 
 /**
  * A wrapper around [AsyncImage] which determines the colorFilter based on the theme
@@ -36,7 +37,7 @@ fun DynamicAsyncImage(
     imageUrl: String,
     contentDescription: String?,
     modifier: Modifier = Modifier,
-    placeholder: Painter = painterResource("Res.drawable"),
+    placeholder: Painter = painterResource(Res.drawable.icon),
 ) {
     val iconTint = LocalTintTheme.current.iconTint
     var isLoading by remember { mutableStateOf(true) }

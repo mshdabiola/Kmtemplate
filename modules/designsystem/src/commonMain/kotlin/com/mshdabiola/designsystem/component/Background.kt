@@ -23,7 +23,6 @@ import androidx.compose.ui.unit.dp
 import com.mshdabiola.designsystem.theme.GradientColors
 import com.mshdabiola.designsystem.theme.LocalBackgroundTheme
 import com.mshdabiola.designsystem.theme.LocalGradientColors
-import com.mshdabiola.designsystem.theme.SkTheme
 import kotlin.math.tan
 
 /**

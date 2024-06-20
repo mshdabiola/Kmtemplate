@@ -11,7 +11,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.mshdabiola.designsystem.component.SkViewToggleButton
 import com.mshdabiola.designsystem.theme.SkTheme
 
-
 @ThemePreviews
 @Composable
 fun ViewTogglePreviewExpanded() {
@@ -41,4 +40,3 @@ fun ViewTogglePreviewCompact() {
         }
     }
 }
-
