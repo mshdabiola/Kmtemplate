@@ -50,7 +50,7 @@ class AndroidFeatureConventionPlugin : Plugin<Project> {
                 add("implementation", libs.findLibrary("androidx.tracing.ktx").get())
                 add("testImplementation", libs.findLibrary("robolectric").get())
                 add("testImplementation", project(":modules:testing"))
-//                add("testImplementation", project(":modules:screenshotTesting"))
+                add("testImplementation", project(":modules:screenshot-testing"))
 
 
                 add("androidTestImplementation", libs.findLibrary("androidx.lifecycle.runtimeTesting").get())

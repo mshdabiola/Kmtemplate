@@ -39,7 +39,7 @@ fun Image.asExternalImage() = ImageEntity(
 )
 
 fun UserData.toSer() =
-    UserDataSer(themeBrand, darkThemeConfig, useDynamicColor, shouldHideOnboarding, contrast)
+    UserDataSer(themeBrand, darkThemeConfig, useDynamicColor, shouldHideOnboarding)
 
 fun UserDataSer.toData() =
-    UserData(themeBrand, darkThemeConfig, useDynamicColor, shouldHideOnboarding, contrast)
+    UserData(themeBrand, darkThemeConfig, useDynamicColor, shouldHideOnboarding)

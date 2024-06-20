@@ -18,7 +18,9 @@ android {
 }
 
 dependencies {
-    // lintPublish(projects.lint)
+
+    api(libs.androidx.compose.material3.adaptive)
+    api(libs.androidx.compose.material3.navigationSuite)
 
 
     debugApi(libs.androidx.compose.ui.tooling)
@@ -54,6 +56,8 @@ kotlin {
                 api(libs.androidx.navigation.compose)
 //                api(libs.paging.compose.common)
 //
+                implementation(libs.coil.kt.compose)
+
                 api(libs.koin.compose)
                 api(libs.koin.composeVM)
                 api(libs.androidx.lifecycle.viewModelCompose)
@@ -69,6 +73,7 @@ kotlin {
                 api(compose.preview)
                 api(libs.androidx.lifecycle.runtimeCompose)
                 api(libs.androidx.lifecycle.viewModelCompose)
+                implementation(libs.androidx.ui.text.google.fonts)
 
             }
         }

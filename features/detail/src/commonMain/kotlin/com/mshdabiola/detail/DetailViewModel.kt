@@ -9,7 +9,7 @@ import androidx.compose.foundation.text2.input.TextFieldState
 import androidx.compose.foundation.text2.input.textAsFlow
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.mshdabiola.data.repository.IModelRepository
+import com.mshdabiola.data.repository.NoteRepository
 import com.mshdabiola.model.Note
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -23,7 +23,7 @@ import kotlinx.coroutines.launch
 class DetailViewModel constructor(
     // savedStateHandle: SavedStateHandle,
     id: Long,
-    private val noteRepository: IModelRepository,
+    private val noteRepository: NoteRepository,
 ) : ViewModel() {
 
     private val noteId = id

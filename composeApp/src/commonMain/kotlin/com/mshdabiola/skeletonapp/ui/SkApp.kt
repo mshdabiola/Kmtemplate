@@ -98,10 +98,7 @@ fun SkeletonApp() {
     CompositionLocalProvider(LocalAnalyticsHelper provides analyticsHelper) {
         SkTheme(
             darkTheme = darkTheme,
-            themeBrand = chooseTheme(uiState),
-            themeContrast = chooseContrast(uiState),
             disableDynamicTheming = shouldDisableDynamicTheming(uiState),
-            useAndroidTheme = shouldUseAndroidTheme(uiState),
         ) {
             SkBackground {
                 SkGradientBackground(
@@ -289,14 +286,6 @@ private fun shouldUseAndroidTheme(
         ThemeBrand.DEFAULT -> false
         ThemeBrand.GREEN -> true
     }
-}
-
-@Composable
-private fun chooseContrast(
-    uiState: MainActivityUiState,
-): Contrast = when (uiState) {
-    MainActivityUiState.Loading -> Contrast.Normal
-    is MainActivityUiState.Success -> uiState.userData.contrast
 }
 
 @Composable

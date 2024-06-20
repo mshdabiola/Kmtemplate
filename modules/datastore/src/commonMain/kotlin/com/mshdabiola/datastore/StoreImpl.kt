@@ -6,7 +6,7 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
 
-internal class StoreImpl(
+class StoreImpl(
     private val userdata: DataStore<UserDataSer>,
     private val coroutineDispatcher: CoroutineDispatcher,
 ) : Store {

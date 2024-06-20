@@ -6,7 +6,7 @@ package com.mshdabiola.main
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.mshdabiola.data.repository.IModelRepository
+import com.mshdabiola.data.repository.NoteRepository
 import com.mshdabiola.data.repository.UserDataRepository
 import com.mshdabiola.model.Note
 import com.mshdabiola.ui.MainState
@@ -21,9 +21,9 @@ import kotlin.random.Random
 
 class MainViewModel constructor(
     private val userDataRepository: UserDataRepository,
-    private val modelRepository: IModelRepository,
+    private val modelRepository: NoteRepository,
 
-) : ViewModel() {
+    ) : ViewModel() {
 
 //    val timeLine = modelRepository
 //        .imagePagingData()

@@ -17,7 +17,7 @@ internal class RealModelRepository constructor(
     private val iNetworkDataSource: INetworkDataSource,
     private val imageDao: ImageDao,
     private val ioDispatcher: CoroutineDispatcher,
-) : IModelRepository {
+) : NoteRepository {
     override suspend fun upsert(note: Note): Long {
         return withContext(ioDispatcher) {
             noteDao.upsert(note.asNoteEntity())

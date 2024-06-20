@@ -9,10 +9,11 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.platform.LocalInspectionMode
+import androidx.compose.ui.test.DeviceConfigurationOverride
+import androidx.compose.ui.test.FontScale
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.compose.ui.test.onRoot
 import com.github.takahirom.roborazzi.captureRoboImage
-import com.google.accompanist.testharness.TestHarness
 import com.mshdabiola.designsystem.component.SkTopAppBar
 import com.mshdabiola.designsystem.icon.SkIcons
 import com.mshdabiola.designsystem.theme.SkTheme
@@ -49,7 +50,9 @@ class TopAppBarScreenshotTests() {
             CompositionLocalProvider(
                 LocalInspectionMode provides true,
             ) {
-                TestHarness(fontScale = 2f) {
+                DeviceConfigurationOverride(
+                    DeviceConfigurationOverride.FontScale(2f),
+                ) {
                     SkTheme {
                         NiaTopAppBarExample()
                     }
@@ -66,7 +69,7 @@ class TopAppBarScreenshotTests() {
     @Composable
     private fun NiaTopAppBarExample() {
         SkTopAppBar(
-            titleRes = "Testing",
+            titleRes = "untitled",
             navigationIcon = SkIcons.Search,
             navigationIconContentDescription = "Navigation icon",
             actionIcon = SkIcons.MoreVert,

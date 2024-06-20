@@ -30,7 +30,7 @@ fun createDataStoreUserData(
 
 val json = Json
 
-internal object UserDataJsonSerializer : OkioSerializer<UserDataSer> {
+ object UserDataJsonSerializer : OkioSerializer<UserDataSer> {
 
     override val defaultValue: UserDataSer
         get() = UserDataSer(
@@ -38,7 +38,6 @@ internal object UserDataJsonSerializer : OkioSerializer<UserDataSer> {
             darkThemeConfig = DarkThemeConfig.LIGHT,
             useDynamicColor = false,
             shouldHideOnboarding = false,
-            contrast = Contrast.Normal,
         )
 
     override suspend fun readFrom(source: BufferedSource): UserDataSer {

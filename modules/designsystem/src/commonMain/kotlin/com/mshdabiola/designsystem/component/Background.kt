@@ -6,6 +6,7 @@ package com.mshdabiola.designsystem.component
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.LocalAbsoluteTonalElevation
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
@@ -22,7 +23,7 @@ import androidx.compose.ui.unit.dp
 import com.mshdabiola.designsystem.theme.GradientColors
 import com.mshdabiola.designsystem.theme.LocalBackgroundTheme
 import com.mshdabiola.designsystem.theme.LocalGradientColors
-import kotlin.math.PI
+import com.mshdabiola.designsystem.theme.SkTheme
 import kotlin.math.tan
 
 /**
@@ -81,8 +82,8 @@ fun SkGradientBackground(
                     // Compute the start and end coordinates such that the gradients are angled 11.06
                     // degrees off the vertical axis
                     val offset = size.height * tan(
-
-                        toRadians(11.06)
+                        Math
+                            .toRadians(11.06)
                             .toFloat(),
                     )
 
@@ -123,5 +124,3 @@ fun SkGradientBackground(
         }
     }
 }
-
-fun toRadians(deg: Double): Double = deg / 180.0 * PI

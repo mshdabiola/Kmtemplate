@@ -17,11 +17,19 @@ android {
 
 dependencies {
     api(libs.androidx.metrics)
+    implementation(libs.androidx.ui.text.google.fonts)
+
+    testImplementation(libs.androidx.compose.ui.test)
+    testImplementation(libs.androidx.compose.ui.testManifest)
+
+    testImplementation(libs.robolectric)
+    testImplementation(libs.roborazzi)
+    testImplementation(projects.modules.testing)
+    testImplementation(projects.modules.screenshotTesting)
 
 
-
-
-    androidTestImplementation(project(":modules:testing"))
+    androidTestImplementation(libs.androidx.compose.ui.test)
+    androidTestImplementation(projects.modules.testing)
 }
 
 kotlin {

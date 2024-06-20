@@ -36,6 +36,7 @@ include(":modules:ui")
 //include(":modules:mvvn")
 include(":modules:analytics")
 include(":modules:datastore")
+include(":modules:screenshot-testing")
 
 //include(":modules:app")
 //include(":desktop")

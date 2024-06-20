@@ -18,5 +18,4 @@ data class UserDataSer(
     val darkThemeConfig: DarkThemeConfig,
     val useDynamicColor: Boolean,
     val shouldHideOnboarding: Boolean,
-    val contrast: Contrast,
 )
