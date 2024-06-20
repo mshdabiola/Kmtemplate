@@ -19,4 +19,5 @@ class AndroidApplicationJacocoConventionPlugin : Plugin<Project> {
             configureJacoco(extensions.getByType<ApplicationAndroidComponentsExtension>())
         }
     }
+
 }

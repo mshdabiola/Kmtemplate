@@ -9,7 +9,7 @@ import org.gradle.api.Project
 
 @Suppress("EnumEntryName")
 enum class FlavorDimension {
-//    contentType,
+    //    contentType,
     store
 }
 
@@ -22,9 +22,9 @@ enum class Flavor(
     val applicationIdSuffix: String? = null,
     val versionNameSuffix: String? = null,
 ) {
-//    demo(FlavorDimension.contentType, applicationIdSuffix = ".demo", "-demo"),
+    //    demo(FlavorDimension.contentType, applicationIdSuffix = ".demo", "-demo"),
 //    prod(FlavorDimension.contentType),
-    fossReliant(FlavorDimension.store,applicationIdSuffix=".foss","-foss"),
+    fossReliant(FlavorDimension.store,applicationIdSuffix=".foss"),
     googlePlay(FlavorDimension.store, applicationIdSuffix = ".play", versionNameSuffix = "-play")
 }
 

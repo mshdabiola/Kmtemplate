@@ -9,10 +9,9 @@ plugins {
     id("mshdabiola.android.application.compose")
     id("mshdabiola.android.application.jacoco")
     id("mshdabiola.android.application.flavor")
-    alias(libs.plugins.androidx.baselineprofile)
-    alias(libs.plugins.androidApplication)
-    alias(libs.plugins.roborazzi)
     alias(libs.plugins.conveyor)
+    alias(libs.plugins.baselineprofile)
+    alias(libs.plugins.roborazzi)
 
 }
 
@@ -35,48 +34,62 @@ dependencies {
     macAarch64(compose.desktop.macos_arm64)
     windowsAmd64(compose.desktop.windows_x64)
 
-    implementation(libs.koin.android)
 
-    implementation(libs.androidx.metrics)
 
-    debugImplementation(libs.leakcanary.android)
+
 
     implementation(libs.androidx.activity.compose)
+    implementation(libs.androidx.compose.material3.adaptive)
+    implementation(libs.androidx.compose.material3.adaptive.layout)
+    implementation(libs.androidx.compose.material3.adaptive.navigation)
+    implementation(libs.androidx.compose.material3.windowSizeClass)
+    implementation(libs.androidx.compose.runtime.tracing)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.core.splashscreen)
-    implementation(libs.androidx.tracing.ktx)
+    implementation(libs.androidx.lifecycle.runtimeCompose)
+    implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.profileinstaller)
+    implementation(libs.androidx.tracing.ktx)
+    implementation(libs.androidx.window.core)
+    implementation(libs.kotlinx.coroutines.guava)
+    implementation(libs.coil.kt)
+
 
     debugImplementation(libs.androidx.compose.ui.testManifest)
 
 
-    testImplementation(project(":modules:testing"))
-    testImplementation(libs.accompanist.testharness)
+    testImplementation(projects.modules.testing)
+    testImplementation(libs.androidx.compose.ui.test)
+    testImplementation(libs.androidx.work.testing)
 
-    testImplementation(libs.robolectric)
-    testImplementation(libs.roborazzi)
-
-    androidTestImplementation(project(":modules:testing"))
-    androidTestImplementation(libs.accompanist.testharness)
-    debugImplementation(libs.androidx.monitor)
-    baselineProfile(project(":benchmarks"))
+    testFossReliantImplementation(libs.robolectric)
+    testFossReliantImplementation(libs.roborazzi)
+    //testFossReliantImplementation(projects.modules.screenshotTesting)
 
 
- googlePlayImplementation(platform(libs.firebase.bom))
- googlePlayImplementation(libs.firebase.analytics)
- googlePlayImplementation(libs.firebase.performance)
- googlePlayImplementation(libs.firebase.crashlytics)
+    androidTestImplementation(projects.modules.testing)
+    androidTestImplementation(libs.androidx.test.espresso.core)
+    androidTestImplementation(libs.androidx.navigation.testing)
+    androidTestImplementation(libs.androidx.compose.ui.test)
 
- googlePlayImplementation(libs.firebase.cloud.messaging)
- googlePlayImplementation(libs.firebase.remoteconfig)
- googlePlayImplementation(libs.firebase.message)
- googlePlayImplementation(libs.firebase.auth)
+    baselineProfile(projects.benchmarks)
 
- googlePlayImplementation(libs.play.game)
- googlePlayImplementation(libs.play.update)
- googlePlayImplementation(libs.play.update.kts)
- googlePlayImplementation(libs.play.review)
- googlePlayImplementation(libs.play.review.kts)
+
+    googlePlayImplementation(platform(libs.firebase.bom))
+    googlePlayImplementation(libs.firebase.analytics)
+    googlePlayImplementation(libs.firebase.performance)
+    googlePlayImplementation(libs.firebase.crashlytics)
+
+    googlePlayImplementation(libs.firebase.cloud.messaging)
+    googlePlayImplementation(libs.firebase.remoteconfig)
+    googlePlayImplementation(libs.firebase.message)
+    googlePlayImplementation(libs.firebase.auth)
+
+    googlePlayImplementation(libs.play.game)
+    googlePlayImplementation(libs.play.update)
+    googlePlayImplementation(libs.play.update.kts)
+    googlePlayImplementation(libs.play.review)
+    googlePlayImplementation(libs.play.review.kts)
 }
 
 kotlin {
@@ -107,7 +120,7 @@ kotlin {
         val jvmMain by getting
 
         androidMain.dependencies {
-            implementation(libs.compose.ui.tooling.preview)
+            //implementation(libs.compose.ui.tooling.preview)
             implementation(libs.androidx.activity.compose)
             implementation(libs.kotlinx.coroutines.android)
 
@@ -115,22 +128,22 @@ kotlin {
         commonMain.dependencies {
 //
             implementation(libs.koin.core)
-            implementation(project(":modules:data"))
+
+            implementation(projects.modules.designsystem)
+            implementation(projects.modules.data)
+            implementation(projects.modules.ui)
+            implementation(projects.modules.model)
+            implementation(projects.modules.analytics)
+            implementation(libs.androidx.compose.material3.adaptive)
 
 
-            implementation(project(":modules:model"))
-            implementation(project(":modules:ui"))
-
-
-            implementation(project(":modules:designsystem"))
-            implementation(project(":modules:analytics"))
+            implementation(projects.features.main)
+            implementation(projects.features.detail)
+            implementation(projects.features.setting)
 
 
 
 
-            implementation(project(":features:main"))
-            implementation(project(":features:detail"))
-            implementation(project(":features:setting"))
 
             // Logger
             implementation(libs.kermit)

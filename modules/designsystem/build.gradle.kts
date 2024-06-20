@@ -26,7 +26,6 @@ dependencies {
     implementation(libs.coil.kt.compose)
 
     testImplementation(libs.androidx.compose.ui.test)
-    testImplementation(libs.accompanist.testharness)
     testImplementation(libs.robolectric)
     testImplementation(libs.roborazzi)
     testImplementation(project(":modules:testing"))
@@ -51,13 +50,13 @@ kotlin {
                 api(compose.components.resources)
                 api(libs.kotlinx.collection.immutable)
                implementation(project(":modules:model"))
-                api(libs.androidx.compose.material3.windowSizeClass)
-                api(libs.navigation.compose)
-                api(libs.paging.compose.common)
-
+                api(libs.androidx.compose.material3.windowSizeClass2)
+                api(libs.androidx.navigation.compose)
+//                api(libs.paging.compose.common)
+//
                 api(libs.koin.compose)
                 api(libs.koin.composeVM)
-                api(libs.lifecycle.viewmodel.compose)
+                api(libs.androidx.lifecycle.viewModelCompose)
 
 
 

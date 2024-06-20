@@ -39,14 +39,23 @@ class AndroidFeatureConventionPlugin : Plugin<Project> {
                     testInstrumentationRunner =
                         "com.mshdabiola.testing.TestRunner"
                 }
+                testOptions.animationsDisabled = true
                 configureGradleManagedDevices(this)
             }
 
             dependencies {
+
+
+                add("implementation", libs.findLibrary("androidx.lifecycle.runtimeCompose").get())
+                add("implementation", libs.findLibrary("androidx.tracing.ktx").get())
+                add("testImplementation", libs.findLibrary("robolectric").get())
                 add("testImplementation", project(":modules:testing"))
+//                add("testImplementation", project(":modules:screenshotTesting"))
+
+
+                add("androidTestImplementation", libs.findLibrary("androidx.lifecycle.runtimeTesting").get())
                 add("androidTestImplementation", project(":modules:testing"))
 
-                add("testImplementation", libs.findLibrary("robolectric").get())
 
             }
 
