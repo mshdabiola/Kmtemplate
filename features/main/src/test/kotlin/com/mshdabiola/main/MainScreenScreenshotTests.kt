@@ -7,6 +7,7 @@ package com.mshdabiola.main
 import androidx.activity.ComponentActivity
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
+import com.mshdabiola.data.model.Result
 import com.mshdabiola.designsystem.theme.SkTheme
 import com.mshdabiola.testing.util.DefaultTestDevices
 import com.mshdabiola.testing.util.captureForDevice
@@ -45,7 +46,7 @@ class MainScreenScreenshotTests {
         composeTestRule.captureMultiDevice("ForYouScreenPopulatedFeed") {
             SkTheme {
                 MainScreen(
-                    items = listOf(NoteUiState(3, "", "")).toImmutableList(),
+                    mainState = Result.Success(listOf(NoteUiState(3, "", "")).toImmutableList()),
                 )
             }
         }
@@ -56,7 +57,7 @@ class MainScreenScreenshotTests {
         composeTestRule.captureMultiDevice("DetailWithText") {
             SkTheme {
                 MainScreen(
-                    items = listOf(NoteUiState(3, "", "")).toImmutableList(),
+                    mainState = Result.Success(listOf(NoteUiState(3, "", "")).toImmutableList()),
 
                 )
             }
@@ -105,7 +106,7 @@ class MainScreenScreenshotTests {
     private fun DetailScreen1() {
         SkTheme {
             MainScreen(
-                items = listOf(NoteUiState(3, "", "")).toImmutableList(),
+                mainState = Result.Success(listOf(NoteUiState(3, "", "")).toImmutableList()),
 
             )
         }
@@ -115,7 +116,7 @@ class MainScreenScreenshotTests {
     private fun DetailScreenWithText1() {
         SkTheme {
             MainScreen(
-                items = listOf(NoteUiState(3, "", "")).toImmutableList(),
+                mainState = Result.Success(listOf(NoteUiState(3, "", "")).toImmutableList()),
 
             )
         }
