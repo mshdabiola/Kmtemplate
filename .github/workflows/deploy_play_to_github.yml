@@ -48,7 +48,7 @@ jobs:
           -Pandroid.experimental.testOptions.managedDevices.maxConcurrentDevices=1
 
       - name: Build release variant apk
-        run: ./gradlew :app:assembleGooglePlayRelease
+        run: ./gradlew assembleGooglePlayRelease
 
       - name: Sign APK
         uses: r0adkll/sign-android-release@v1.0.4
