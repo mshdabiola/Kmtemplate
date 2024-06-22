@@ -16,6 +16,7 @@ import org.junit.rules.TemporaryFolder
 import org.koin.core.qualifier.qualifier
 import org.koin.dsl.bind
 import org.koin.dsl.module
+import java.io.File
 
 val dataStoreModule = module {
     single {
@@ -41,10 +42,25 @@ fun TemporaryFolder.testUserPreferencesDataStore(
         fileSystem = FileSystem.SYSTEM,
         serializer = UserDataJsonSerializer,
         producePath = {
-            val path = newFile("user_preferences_test.pb")
+            val path = File(newFolder(), "data")
+            if (!path.parentFile.exists()) {
+                path.mkdirs()
+            }
             path.toOkioPath()
         },
-
     ),
-    scope = coroutineScope,
 )
+
+//
+//    DataStoreFactory.create(
+//    storage = OkioStorage(
+//        fileSystem = FileSystem.SYSTEM,
+//        serializer = UserDataJsonSerializer,
+//        producePath = {
+//            val path = newFile("user_preferences_test.pb")
+//            path.toOkioPath()
+//        },
+//
+//    ),
+//    scope = coroutineScope,
+// )

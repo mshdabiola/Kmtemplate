@@ -6,9 +6,7 @@ package com.mshdabiola.main
 
 import androidx.activity.ComponentActivity
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
-import com.mshdabiola.ui.MainState
-import com.mshdabiola.ui.NoteUiState
-import kotlinx.collections.immutable.toImmutableList
+import com.mshdabiola.data.model.Result
 import org.junit.Rule
 import org.junit.Test
 
@@ -24,8 +22,7 @@ class MainScreenTest {
     fun enterText_showsShowText() {
         composeTestRule.setContent {
             MainScreen(
-                mainState = MainState(),
-                items = listOf<NoteUiState>().toImmutableList(),
+                mainState = Result.Loading,
             )
         }
 

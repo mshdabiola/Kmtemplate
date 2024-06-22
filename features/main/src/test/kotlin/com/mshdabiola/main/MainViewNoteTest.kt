@@ -4,7 +4,7 @@
 
 package com.mshdabiola.main
 
-import com.mshdabiola.data.fake.FakeNoteRepository
+import com.mshdabiola.testing.fake.repository.FakeNoteRepository
 import com.mshdabiola.testing.repository.TestUserDataRepository
 import com.mshdabiola.testing.util.MainDispatcherRule
 import kotlinx.coroutines.test.runTest

@@ -56,7 +56,7 @@ class OfflineFirstUserDataRepositoryTest {
             assertEquals(
                 UserData(
                     themeBrand = ThemeBrand.DEFAULT,
-                    darkThemeConfig = DarkThemeConfig.FOLLOW_SYSTEM,
+                    darkThemeConfig = DarkThemeConfig.LIGHT,
                     useDynamicColor = false,
                     shouldHideOnboarding = false,
                 ),

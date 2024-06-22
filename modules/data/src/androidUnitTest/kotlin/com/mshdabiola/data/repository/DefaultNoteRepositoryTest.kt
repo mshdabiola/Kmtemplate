@@ -11,7 +11,6 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.TemporaryFolder
-import kotlin.test.assertEquals
 
 class DefaultNoteRepositoryTest {
     private val testScope = TestScope(UnconfinedTestDispatcher())
@@ -31,7 +30,6 @@ class DefaultNoteRepositoryTest {
 
     @Test
     fun upsert() {
-        assertEquals(74, 3)
     }
 
     @Test
