@@ -17,10 +17,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.windowInsetsPadding
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.Add
-import androidx.compose.material3.ExtendedFloatingActionButton
-import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.PermanentNavigationDrawer
 import androidx.compose.material3.Scaffold
@@ -28,7 +24,6 @@ import androidx.compose.material3.SnackbarDuration
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.SnackbarResult
-import androidx.compose.material3.Text
 import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
 import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
@@ -38,7 +33,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 import androidx.navigation.navOptions
 import com.mshdabiola.analytics.AnalyticsHelper
@@ -48,7 +42,6 @@ import com.mshdabiola.designsystem.component.SkGradientBackground
 import com.mshdabiola.designsystem.theme.GradientColors
 import com.mshdabiola.designsystem.theme.LocalGradientColors
 import com.mshdabiola.designsystem.theme.SkTheme
-import com.mshdabiola.detail.navigation.navigateToDetail
 import com.mshdabiola.main.navigation.MAIN_ROUTE
 import com.mshdabiola.main.navigation.navigateToMain
 import com.mshdabiola.model.DarkThemeConfig
@@ -127,27 +120,6 @@ fun SkeletonApp() {
                                 containerColor = Color.Transparent,
                                 contentWindowInsets = WindowInsets(0, 0, 0, 0),
                                 snackbarHost = { SnackbarHost(snackbarHostState) },
-                                floatingActionButton = {
-                                    if (appState.currentDestination?.route == MAIN_ROUTE) {
-                                        ExtendedFloatingActionButton(
-                                            modifier = Modifier
-                                                .windowInsetsPadding(WindowInsets.safeDrawing)
-                                                .testTag("add"),
-                                            onClick = {
-                                                appState.navController.navigateToDetail(
-                                                    0,
-                                                )
-                                            },
-                                        ) {
-                                            Icon(
-                                                imageVector = Icons.Rounded.Add,
-                                                contentDescription = "add note",
-                                            )
-//                            Spacer(modifier = )
-                                            Text(text = "Add note")
-                                        }
-                                    }
-                                },
 
                             ) { padding ->
 
@@ -205,27 +177,6 @@ fun SkeletonApp() {
                                 contentColor = MaterialTheme.colorScheme.onBackground,
                                 contentWindowInsets = WindowInsets(0, 0, 0, 0),
                                 snackbarHost = { SnackbarHost(snackbarHostState) },
-                                floatingActionButton = {
-                                    if (appState.currentDestination?.route == MAIN_ROUTE) {
-                                        ExtendedFloatingActionButton(
-                                            modifier = Modifier
-                                                .windowInsetsPadding(WindowInsets.safeDrawing)
-                                                .testTag("add"),
-                                            onClick = {
-                                                appState.navController.navigateToDetail(
-                                                    0,
-                                                )
-                                            },
-                                        ) {
-                                            Icon(
-                                                imageVector = Icons.Rounded.Add,
-                                                contentDescription = "add note",
-                                            )
-//                            Spacer(modifier = )
-                                            Text(text = "Add note")
-                                        }
-                                    }
-                                },
                                 bottomBar = {
                                     if (appState.shouldShowBottomBar) {
                                         CommonBar(
