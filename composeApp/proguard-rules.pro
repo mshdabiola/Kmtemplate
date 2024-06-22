@@ -25,6 +25,7 @@
 -keep,allowshrinking class * extends androidx.compose.ui.node.ModifierNodeElement {
 
 }
+-dontwarn com.google.firebase.perf.network.FirebasePerfUrlConnection
 
 -keepattributes Signature,RuntimeVisibleAnnotations,AnnotationDefault
 -keepclassmembers class * {

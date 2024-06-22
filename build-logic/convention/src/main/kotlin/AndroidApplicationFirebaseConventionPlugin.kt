@@ -16,11 +16,9 @@
 
 import com.android.build.api.variant.ApplicationAndroidComponentsExtension
 import com.google.firebase.crashlytics.buildtools.gradle.CrashlyticsExtension
-import com.mshdabiola.app.libs
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure
-import org.gradle.kotlin.dsl.dependencies
 
 class AndroidApplicationFirebaseConventionPlugin : Plugin<Project> {
     override fun apply(target: Project) {
@@ -31,27 +29,6 @@ class AndroidApplicationFirebaseConventionPlugin : Plugin<Project> {
                 apply("com.google.firebase.crashlytics")
             }
 
-            dependencies {
-                val bom = libs.findLibrary("firebase-bom").get()
-                add("implementation", platform(bom))
-                "implementation"(libs.findLibrary("firebase.analytics").get())
-                "implementation"(libs.findLibrary("firebase.performance").get())
-                "implementation"(libs.findLibrary("firebase.crashlytics").get())
-
-                "implementation"(libs.findLibrary("firebase.cloud.messaging").get())
-                "implementation"(libs.findLibrary("firebase.remoteconfig").get())
-                "implementation"(libs.findLibrary("firebase.message").get())
-                "implementation"(libs.findLibrary("firebase.auth").get())
-
-                "implementation"(libs.findLibrary("play.game").get())
-                "implementation"(libs.findLibrary("play.update").get())
-                "implementation"(libs.findLibrary("play.update.kts").get())
-                //    "implementation"(libs.findLibrary("admob.service").get())
-                "implementation"(libs.findLibrary("play.review").get())
-                "implementation"(libs.findLibrary("play.review.kts").get())
-                //"implementation"(libs.findLibrary("play.billing.kts").get())
-                // "implementation"(libs.findLibrary("play.coroutine").get())
-            }
 
             extensions.configure<ApplicationAndroidComponentsExtension> {
                 finalizeDsl {

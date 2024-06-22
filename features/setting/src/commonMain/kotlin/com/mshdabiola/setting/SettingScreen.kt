@@ -122,29 +122,6 @@ internal fun SettingScreen(
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically,
             ) {
-                Text("Contrast")
-                DropdownMenu(
-                    currentIndex = Contrast.entries.indexOf(settingState.userData.contrast),
-                    data = Contrast.entries.map { themeBrand ->
-                        themeBrand
-                            .name
-                            .lowercase()
-                            .replaceFirstChar {
-                                it.uppercaseChar()
-                            }
-                    }
-                        .toImmutableList(),
-                    onDataChange = {
-                        setContrast(Contrast.entries[it])
-                    },
-                )
-            }
-
-            Row(
-                modifier = Modifier.fillMaxWidth(0.8f),
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically,
-            ) {
                 Text("Dark")
                 DropdownMenu(
                     currentIndex = DarkThemeConfig.entries.indexOf(settingState.userData.darkThemeConfig),

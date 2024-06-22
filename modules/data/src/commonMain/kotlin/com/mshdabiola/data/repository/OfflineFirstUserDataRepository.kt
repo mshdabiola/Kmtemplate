@@ -38,10 +38,10 @@ internal class OfflineFirstUserDataRepository(
     }
 
     override suspend fun setThemeContrast(contrast: Contrast) {
-        settings.updateUserData {
-            it.copy(contrast = contrast)
-        }
-        analyticsHelper.logContrastChanged(contrast.name)
+//        settings.updateUserData {
+//            it.copy(contrast = contrast)
+//        }
+//        analyticsHelper.logContrastChanged(contrast.name)
     }
 
     override suspend fun setDarkThemeConfig(darkThemeConfig: DarkThemeConfig) {

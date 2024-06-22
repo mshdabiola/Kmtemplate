@@ -23,7 +23,6 @@ class SettingViewModel constructor(
     private val default = UserData(
         useDynamicColor = false,
         themeBrand = ThemeBrand.DEFAULT,
-        contrast = Contrast.Normal,
         darkThemeConfig = DarkThemeConfig.LIGHT,
         shouldHideOnboarding = true,
     )

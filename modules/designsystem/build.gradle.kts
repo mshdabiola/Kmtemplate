@@ -18,7 +18,9 @@ android {
 }
 
 dependencies {
-    // lintPublish(projects.lint)
+
+//    api(libs.androidx.compose.material3.adaptive)
+//    api(libs.androidx.compose.material3.navigationSuite)
 
 
     debugApi(libs.androidx.compose.ui.tooling)
@@ -26,14 +28,14 @@ dependencies {
     implementation(libs.coil.kt.compose)
 
     testImplementation(libs.androidx.compose.ui.test)
-    testImplementation(libs.accompanist.testharness)
     testImplementation(libs.robolectric)
     testImplementation(libs.roborazzi)
-    testImplementation(project(":modules:testing"))
+    testImplementation(projects.modules.testing)
+    testImplementation(projects.modules.screenshotTesting)
+
 
     androidTestImplementation(libs.androidx.compose.ui.test)
-    androidTestImplementation(project(":modules:testing"))
-    implementation("com.google.guava:listenablefuture:9999.0-empty-to-avoid-conflict-with-guava")
+    androidTestImplementation(projects.modules.testing)
 
 }
 kotlin {
@@ -51,13 +53,15 @@ kotlin {
                 api(compose.components.resources)
                 api(libs.kotlinx.collection.immutable)
                implementation(project(":modules:model"))
-                api(libs.androidx.compose.material3.windowSizeClass)
-                api(libs.navigation.compose)
-                api(libs.paging.compose.common)
+                api(libs.androidx.compose.material3.windowSizeClass2)
+                api(libs.androidx.navigation.compose)
+//                api(libs.paging.compose.common)
+//
+                implementation(libs.coil.kt.compose)
 
                 api(libs.koin.compose)
                 api(libs.koin.composeVM)
-                api(libs.lifecycle.viewmodel.compose)
+                api(libs.androidx.lifecycle.viewModelCompose)
 
 
 
@@ -70,6 +74,7 @@ kotlin {
                 api(compose.preview)
                 api(libs.androidx.lifecycle.runtimeCompose)
                 api(libs.androidx.lifecycle.viewModelCompose)
+                implementation(libs.androidx.ui.text.google.fonts)
 
             }
         }

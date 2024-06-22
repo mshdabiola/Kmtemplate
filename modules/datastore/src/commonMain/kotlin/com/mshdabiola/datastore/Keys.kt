@@ -5,7 +5,6 @@ import androidx.datastore.core.DataStoreFactory
 import androidx.datastore.core.okio.OkioSerializer
 import androidx.datastore.core.okio.OkioStorage
 import com.mshdabiola.datastore.model.UserDataSer
-import com.mshdabiola.model.Contrast
 import com.mshdabiola.model.DarkThemeConfig
 import com.mshdabiola.model.ThemeBrand
 import kotlinx.serialization.json.Json
@@ -30,7 +29,7 @@ fun createDataStoreUserData(
 
 val json = Json
 
-internal object UserDataJsonSerializer : OkioSerializer<UserDataSer> {
+object UserDataJsonSerializer : OkioSerializer<UserDataSer> {
 
     override val defaultValue: UserDataSer
         get() = UserDataSer(
@@ -38,7 +37,6 @@ internal object UserDataJsonSerializer : OkioSerializer<UserDataSer> {
             darkThemeConfig = DarkThemeConfig.LIGHT,
             useDynamicColor = false,
             shouldHideOnboarding = false,
-            contrast = Contrast.Normal,
         )
 
     override suspend fun readFrom(source: BufferedSource): UserDataSer {
