@@ -61,7 +61,7 @@ jobs:
         uses: r0adkll/sign-android-release@v1.0.4
         with:
           releaseDirectory: app/build/outputs/apk/fossReliant/release
-          signingKeyBase64: ${{ secrets.SIGNING_KEY }}
+          signingKeyBase64: ${{ secrets.SIGNING_KEY2 }}
           alias: ${{ secrets.ALIAS }}
           keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
           keyPassword: ${{ secrets.KEY_PASSWORD }}
