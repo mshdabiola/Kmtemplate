@@ -17,3 +17,5 @@
     conveyor make rendered-icons
     conveyor make site
     ./gradlew run
+
+add testing
