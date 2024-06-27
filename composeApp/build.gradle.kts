@@ -16,7 +16,7 @@ plugins {
 }
 
 group = "com.mshdabiola.skeletonapp"
-version = "1.1.5"
+version = libs.versions.versionCode.get().toIntOrNull()
 
 dependencies {
 
@@ -184,8 +184,8 @@ android {
 
     defaultConfig {
         applicationId = "com.mshdabiola.skeletonapp"
-        versionCode = 3
-        versionName = "1.1.5" // X.Y.Z; X = Major, Y = minor, Z = Patch level
+        versionCode = libs.versions.versionCode.get().toIntOrNull()
+        versionName = System.getenv("VERSION_NAME") ?: libs.versions.versionName.get()
 
         // Custom test runner to set up Hilt dependency graph
         testInstrumentationRunner = "com.mshdabiola.testing.TestRunner"
