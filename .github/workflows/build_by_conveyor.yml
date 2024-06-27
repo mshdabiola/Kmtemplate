@@ -28,7 +28,7 @@ jobs:
         run: ./gradlew createReleaseDistributable
 
       - name: Run Conveyor
-        uses: hydraulic-software/conveyor/actions/build@v14.2
+        uses: hydraulic-software/conveyor/actions/build@v14.3
         env:
           TOKEN: ${{ secrets.TOKEN }}
         with:
