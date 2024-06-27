@@ -1,4 +1,4 @@
-package: name='com.mshdabiola.skeletonapp.foss' versionCode='3' versionName='1.1.3' platformBuildVersionName='14' platformBuildVersionCode='34' compileSdkVersion='34' compileSdkVersionCodename='14'
+package: name='com.mshdabiola.skeletonapp.foss' versionCode='115' versionName='1.1.5' platformBuildVersionName='14' platformBuildVersionCode='34' compileSdkVersion='34' compileSdkVersionCodename='14'
 sdkVersion:'24'
 targetSdkVersion:'34'
 uses-permission: name='com.mshdabiola.skeletonapp.foss.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION'
