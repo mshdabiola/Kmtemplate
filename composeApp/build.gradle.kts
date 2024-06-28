@@ -16,7 +16,7 @@ plugins {
 }
 
 group = "com.mshdabiola.skeletonapp"
-version = libs.versions.versionCode.get().toIntOrNull()
+version = libs.versions.versionName.get()
 
 dependencies {
 
