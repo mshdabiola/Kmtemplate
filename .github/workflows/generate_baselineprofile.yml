@@ -48,11 +48,20 @@ jobs:
           -Pandroid.experimental.androidTest.numManagedDeviceShards=1
           -Pandroid.experimental.testOptions.managedDevices.maxConcurrentDevices=1
 
-      - name: Create pull request
-        uses: peter-evans/create-pull-request@v5.0.2
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v6.1.0
         with:
-          commit-message: Updated baseline profiles
-          title: Updated baseline profiles
-          body: ""
-          branch: update-baseline-profiles
-          base: develop
+          commit-message: Update baseline
+          committer: github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>
+          author: ${{ github.actor }} <${{ github.actor_id }}+${{ github.actor }}@users.noreply.github.com>
+          signoff: false
+          branch: generate-baseline
+          delete-branch: true
+          title: 'Generate Baseline'
+          body: |
+            Generate of all build flavor
+            - Foss Reliant
+            - Play Store
+          labels: |
+            report
+            baseline
