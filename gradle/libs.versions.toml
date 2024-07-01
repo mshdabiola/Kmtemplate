@@ -66,7 +66,7 @@ firebaseAnalytics = "21.2.2"
 firebaseCrashlyticsKts = "18.3.6"
 firebaseCrashylyticsPlugins = "2.9.9"
 
-ktor = "2.3.11"
+ktor = "3.0.0-wasm2"
 uiTextGoogleFonts = "1.6.8"
 
 koin = "3.6.0-alpha3"
