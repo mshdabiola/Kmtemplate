@@ -351,11 +351,11 @@ org.jetbrains.kotlinx:kotlinx-coroutines-guava:1.8.1
 org.jetbrains.kotlinx:kotlinx-coroutines-jdk8:1.8.1
 org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.8.1
 org.jetbrains.kotlinx:kotlinx-coroutines-slf4j:1.8.1
-org.jetbrains.kotlinx:kotlinx-serialization-bom:1.7.0
-org.jetbrains.kotlinx:kotlinx-serialization-core-jvm:1.7.0
-org.jetbrains.kotlinx:kotlinx-serialization-core:1.7.0
-org.jetbrains.kotlinx:kotlinx-serialization-json-jvm:1.7.0
-org.jetbrains.kotlinx:kotlinx-serialization-json:1.7.0
+org.jetbrains.kotlinx:kotlinx-serialization-bom:1.7.1
+org.jetbrains.kotlinx:kotlinx-serialization-core-jvm:1.7.1
+org.jetbrains.kotlinx:kotlinx-serialization-core:1.7.1
+org.jetbrains.kotlinx:kotlinx-serialization-json-jvm:1.7.1
+org.jetbrains.kotlinx:kotlinx-serialization-json:1.7.1
 org.jetbrains.skiko:skiko-awt-runtime-linux-x64:0.8.4
 org.jetbrains.skiko:skiko-awt:0.8.4
 org.jetbrains:annotations:23.0.0
