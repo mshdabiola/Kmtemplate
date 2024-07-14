@@ -25,9 +25,9 @@ dependencies {
 
     debugApi(libs.androidx.compose.ui.tooling)
 
-    implementation(libs.coil.kt.compose)
+//    implementation(libs.coil.kt.compose)
 
-    testImplementation(libs.androidx.compose.ui.test)
+//    testImplementation(libs.androidx.compose.ui.test)
     testImplementation(libs.robolectric)
     testImplementation(libs.roborazzi)
     testImplementation(projects.modules.testing)
@@ -57,7 +57,7 @@ kotlin {
                 api(libs.androidx.navigation.compose)
 //                api(libs.paging.compose.common)
 //
-                implementation(libs.coil.kt.compose)
+               // implementation(libs.coil.kt.compose)
 
                 api(libs.koin.compose)
                 api(libs.koin.composeVM)

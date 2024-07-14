@@ -22,8 +22,6 @@ import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalInspectionMode
 import androidx.compose.ui.unit.dp
-import coil3.compose.AsyncImagePainter
-import coil3.compose.rememberAsyncImagePainter
 import com.mshdabiola.designsystem.theme.LocalTintTheme
 import hydraulic.modules.designsystem.generated.resources.Res
 import hydraulic.modules.designsystem.generated.resources.icon
@@ -42,13 +40,13 @@ fun DynamicAsyncImage(
     val iconTint = LocalTintTheme.current.iconTint
     var isLoading by remember { mutableStateOf(true) }
     var isError by remember { mutableStateOf(false) }
-    val imageLoader = rememberAsyncImagePainter(
-        model = imageUrl,
-        onState = { state ->
-            isLoading = state is AsyncImagePainter.State.Loading
-            isError = state is Error
-        },
-    )
+//    val imageLoader = rememberAsyncImagePainter(
+//        model = imageUrl,
+//        onState = { state ->
+//            isLoading = state is AsyncImagePainter.State.Loading
+//            isError = state is Error
+//        },
+//    )
     val isLocalInspection = LocalInspectionMode.current
     Box(
         modifier = modifier,
@@ -63,11 +61,11 @@ fun DynamicAsyncImage(
                 color = MaterialTheme.colorScheme.tertiary,
             )
         }
-        Image(
-            contentScale = ContentScale.Crop,
-            painter = if (isError.not() && !isLocalInspection) imageLoader else placeholder,
-            contentDescription = contentDescription,
-            colorFilter = if (iconTint != Unspecified) ColorFilter.tint(iconTint) else null,
-        )
+//        Image(
+//            contentScale = ContentScale.Crop,
+//            painter = if (isError.not() && !isLocalInspection) imageLoader else placeholder,
+//            contentDescription = contentDescription,
+//            colorFilter = if (iconTint != Unspecified) ColorFilter.tint(iconTint) else null,
+//        )
     }
 }

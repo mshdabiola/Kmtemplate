@@ -43,6 +43,7 @@ kotlin {
 
         val commonTest by getting {
             dependencies {
+                api(compose.desktop.uiTestJUnit4)
 
             }
         }
