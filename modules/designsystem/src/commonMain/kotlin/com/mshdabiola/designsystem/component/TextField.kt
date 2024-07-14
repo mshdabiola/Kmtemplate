@@ -111,10 +111,10 @@ fun MyTextField(
     inputTransformation: InputTransformation? = null,
     lineLimits: TextFieldLineLimits = TextFieldLineLimits.Default,
     onTextLayout: (Density.(getResult: () -> TextLayoutResult?) -> Unit)? = null,
-   // codepointTransformation: CodepointTransformation? = null,
+    // codepointTransformation: CodepointTransformation? = null,
     scrollState: ScrollState = rememberScrollState(),
 
-    ) {
+) {
     // If color is not provided via the text style, use content color as a default
     val textColor = textStyle.color.takeOrElse {
         colors.textColor(enabled, isError, interactionSource).value
@@ -135,13 +135,13 @@ fun MyTextField(
             textStyle = mergedTextStyle,
             cursorBrush = SolidColor(colors.cursorColor(isError).value),
             keyboardOptions = keyboardOptions,
-           // keyboardActions = keyboardActions,
+            // keyboardActions = keyboardActions,
             interactionSource = interactionSource,
 
             inputTransformation = inputTransformation,
             lineLimits = lineLimits,
             onTextLayout = onTextLayout,
-           // codepointTransformation = codepointTransformation,
+            // codepointTransformation = codepointTransformation,
             decorator = @Composable { innerTextField ->
                 // places leading icon, text field with label and placeholder, trailing icon
                 TextFieldDefaults.DecorationBox(
