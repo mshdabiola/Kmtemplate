@@ -45,7 +45,6 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import coil3.compose.AsyncImage
 import com.mshdabiola.data.model.Result
 import com.mshdabiola.designsystem.component.SkLoadingWheel
 import com.mshdabiola.designsystem.component.SkTopAppBar
@@ -262,11 +261,11 @@ fun ItemImage(imageModel: Image) {
     ListItem(
         headlineContent = { Text(imageModel.user ?: "name") },
         leadingContent = {
-            AsyncImage(
-                modifier = Modifier.size(150.dp),
-                model = imageModel.url,
-                contentDescription = null,
-            )
+//            AsyncImage(
+//                modifier = Modifier.size(150.dp),
+//                model = imageModel.url,
+//                contentDescription = null,
+//            )
         },
     )
 }

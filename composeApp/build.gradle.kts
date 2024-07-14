@@ -52,14 +52,14 @@ dependencies {
     implementation(libs.androidx.tracing.ktx)
     implementation(libs.androidx.window.core)
     implementation(libs.kotlinx.coroutines.guava)
-    implementation(libs.coil.kt)
+//    implementation(libs.coil.kt)
 
 
     debugImplementation(libs.androidx.compose.ui.testManifest)
 
 
     testImplementation(projects.modules.testing)
-    testImplementation(libs.androidx.compose.ui.test)
+//    testImplementation(libs.androidx.compose.ui.test)
     testImplementation(libs.androidx.work.testing)
 
     testFossReliantImplementation(libs.robolectric)
@@ -104,13 +104,7 @@ kotlin {
 //        binaries.executable()
 //    }
 
-    androidTarget {
-        compilations.all {
-            kotlinOptions {
-                jvmTarget = "17"
-            }
-        }
-    }
+    androidTarget()
 
     // jvm("desktop")
     jvm()
@@ -134,7 +128,7 @@ kotlin {
             implementation(projects.modules.ui)
             implementation(projects.modules.model)
             implementation(projects.modules.analytics)
-            implementation(libs.androidx.compose.material3.adaptive)
+//            implementation(libs.androidx.compose.material3.adaptive)
 
 
             implementation(projects.features.main)
@@ -199,7 +193,7 @@ android {
             applicationIdSuffix = BuildType.DEBUG.applicationIdSuffix
         }
         val release = getByName("release") {
-            isMinifyEnabled = true
+//            isMinifyEnabled = true
             applicationIdSuffix = BuildType.RELEASE.applicationIdSuffix
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
@@ -209,7 +203,7 @@ android {
             // To publish on the Play store a private signing key is required, but to allow anyone
             // who clones the code to sign and run the release variant, use the debug signing key.
             // TODO: Abstract the signing configuration to a separate file to avoid hardcoding this.
-             signingConfig = signingConfigs.getByName("debug")
+//             signingConfig = signingConfigs.getByName("debug")
             // Ensure Baseline Profile is fresh for release builds.
             baselineProfile.automaticGenerationDuringBuild = true
         }
@@ -221,7 +215,7 @@ android {
             signingConfig = signingConfigs.getByName("debug")
             // Only use benchmark proguard rules
             proguardFiles("benchmark-rules.pro")
-            isMinifyEnabled = true
+//            isMinifyEnabled = true
             applicationIdSuffix = BuildType.BENCHMARK.applicationIdSuffix
         }
     }

@@ -5,8 +5,8 @@
 package com.mshdabiola.detail
 
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.text2.input.TextFieldState
-import androidx.compose.foundation.text2.input.textAsFlow
+import androidx.compose.foundation.text.input.TextFieldState
+import androidx.compose.runtime.snapshotFlow
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mshdabiola.data.repository.NoteRepository
@@ -57,14 +57,14 @@ class DetailViewModel constructor(
         }
 
         viewModelScope.launch() {
-            title.textAsFlow()
+            snapshotFlow { title.text }
                 .debounce(500)
                 .collectLatest { text ->
                     note.update { it?.copy(title = text.toString()) }
                 }
         }
         viewModelScope.launch() {
-            content.textAsFlow()
+            snapshotFlow { content.text }
                 .debounce(500)
                 .collectLatest { text ->
                     note.update { it?.copy(content = text.toString()) }

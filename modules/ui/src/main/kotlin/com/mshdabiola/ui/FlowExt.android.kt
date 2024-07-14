@@ -13,18 +13,12 @@ import kotlinx.coroutines.flow.StateFlow
 
 @Composable
 actual fun <T> StateFlow<T>.collectAsStateWithLifecycleCommon(): State<T> {
-    return this.collectAsStateWithLifecycle(
-        lifecycleOwner = androidx.compose.ui.platform.LocalLifecycleOwner.current,
-    )
+    return this.collectAsStateWithLifecycle()
 }
 
 @Composable
 actual fun <T> Flow<T>.collectAsStateWithLifecycleCommon(initialValue: T): State<T> {
-    return this.collectAsStateWithLifecycle(
-        lifecycleOwner = androidx.compose.ui.platform.LocalLifecycleOwner.current,
-
-        initialValue = initialValue,
-    )
+    return this.collectAsStateWithLifecycle(initialValue = initialValue)
 }
 
 // val ViewModel.viewModelScope: CoroutineScope
