@@ -2,7 +2,7 @@
  *abiola 2024
  */
 
-package com.mshdabiola.ui
+package com.mshdabiola.designsystem
 
 import android.content.res.Configuration.UI_MODE_NIGHT_NO
 import android.content.res.Configuration.UI_MODE_NIGHT_YES

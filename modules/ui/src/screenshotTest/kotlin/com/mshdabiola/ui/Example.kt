@@ -1,17 +1,19 @@
-package com.google.yourapp.com.mshdabiola.ui
+package com.mshdabiola.ui
 
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.tooling.preview.Preview
-import com.mshdabiola.ui.ProfileCard
+import com.mshdabiola.designsystem.theme.SkTheme
 
 class ExamplePreviewsScreenshots {
 
-    @Preview(showBackground = true)
+    @DevicePreviews
+    @ThemePreviews
     @Composable
-    fun GreetingPreview() {
-
-        ProfileCard()
-//            Text("Android!")
-
+     fun ProfileCardPreview() {
+        SkTheme {
+            Surface {
+                ProfileCard()
+            }
+        }
     }
 }

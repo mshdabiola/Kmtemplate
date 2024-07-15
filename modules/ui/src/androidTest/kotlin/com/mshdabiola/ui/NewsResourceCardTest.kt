@@ -15,8 +15,9 @@ class NewsResourceCardTest {
 
     @Test
     fun testMetaDataDisplay_withCodelabResource() {
-//        composeTestRule.setContent {
-//        }
+
+        composeTestRule.setContent {
+        }
 //
 //        composeTestRule
 //            .onNodeWithText(

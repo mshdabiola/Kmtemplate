@@ -23,7 +23,9 @@ dependencies {
 //    api(libs.androidx.compose.material3.navigationSuite)
 
 
-    debugApi(libs.androidx.compose.ui.tooling)
+//    debugApi(libs.androidx.compose.ui.tooling)
+    debugApi(compose.uiTooling)
+    api(compose.preview)
 
 //    implementation(libs.coil.kt.compose)
 
