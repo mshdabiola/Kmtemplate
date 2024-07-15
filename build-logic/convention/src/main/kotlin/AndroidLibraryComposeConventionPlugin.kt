@@ -42,7 +42,6 @@ class AndroidLibraryComposeConventionPlugin : Plugin<Project> {
             }
 
            dependencies {
-               add("screenshotTestImplementation",  project(":modules:ui"))
                add("screenshotTestImplementation",  project(":modules:designsystem"))
                add("screenshotTestImplementation", libs.findLibrary("androidx.compose.ui.tooling").get())
 

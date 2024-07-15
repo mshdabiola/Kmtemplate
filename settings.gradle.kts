@@ -45,7 +45,7 @@ include(":modules:screenshot-testing")
 include(":benchmarks")
 
 
-include(":composeApp")
+include(":app")
 //include(":shared")
 
 
