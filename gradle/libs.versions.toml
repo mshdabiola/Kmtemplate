@@ -211,6 +211,7 @@ room-paging = { group = "androidx.room", name = "room-paging", version.ref = "ro
 paging-common = { module = "androidx.paging:paging-common", version.ref = "androidx-paging" }
 
 sqlite-bundled = { module = "androidx.sqlite:sqlite-bundled", version.ref = "sqlite" }
+
 #
 
 # Dependencies of the included build-logic
