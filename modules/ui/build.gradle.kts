@@ -5,6 +5,8 @@
 plugins {
     id("mshdabiola.android.library")
     id("mshdabiola.android.library.compose")
+    alias(libs.plugins.screenshot)
+
 //    id("mshdabiola.android.library.jacoco")
 }
 
@@ -13,6 +15,8 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
     namespace = "com.mshdabiola.ui"
+    experimentalProperties["android.experimental.enableScreenshotTest"] = true
+
 }
 
 dependencies {
@@ -30,6 +34,9 @@ dependencies {
 
     androidTestImplementation(libs.androidx.compose.ui.test)
     androidTestImplementation(projects.modules.testing)
+
+    screenshotTestImplementation(libs.androidx.compose.ui.tooling)
+
 }
 
 kotlin {

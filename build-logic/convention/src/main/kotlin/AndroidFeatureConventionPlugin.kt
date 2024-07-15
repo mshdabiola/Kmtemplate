@@ -61,7 +61,6 @@ class AndroidFeatureConventionPlugin : Plugin<Project> {
 
             extensions.configure<KotlinMultiplatformExtension> {
 
-                val libs = extensions.getByType<VersionCatalogsExtension>().named("libs")
                 with(sourceSets) {
 
                     getByName("commonMain") {

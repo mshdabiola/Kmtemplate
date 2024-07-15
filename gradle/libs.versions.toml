@@ -82,6 +82,9 @@ sqlite = "2.5.0-alpha05"
 kotlinxCollectionImmutable = "0.3.7"
 windowSizeClass = "0.5.0"
 
+screenshot = "0.0.1-alpha02"
+
+
 
 versionCode = "118"
 versionName = "1.1.8"
@@ -104,7 +107,7 @@ androidx-compose-material3-navigationSuite = { group = "androidx.compose.materia
 androidx-compose-material3-adaptive = { group = "androidx.compose.material3.adaptive", name = "adaptive", version.ref = "androidxComposeMaterial3Adaptive" }
 androidx-compose-material3-adaptive-layout = { group = "androidx.compose.material3.adaptive", name = "adaptive-layout", version.ref = "androidxComposeMaterial3Adaptive" }
 androidx-compose-material3-adaptive-navigation = { group = "androidx.compose.material3.adaptive", name = "adaptive-navigation", version.ref = "androidxComposeMaterial3Adaptive" }
-androidx-compose-material3-windowSizeClass = { group = "androidx.compose.material3", name = "material3-window-size-class",version.ref = "androidxComposeMaterial3AdaptiveNavigationSuite" }
+androidx-compose-material3-windowSizeClass = { group = "androidx.compose.material3", name = "material3-window-size-class", version.ref = "androidxComposeMaterial3AdaptiveNavigationSuite" }
 androidx-compose-material3-windowSizeClass2 = { module = "dev.chrisbanes.material3:material3-window-size-class-multiplatform", version.ref = "windowSizeClass" }
 
 androidx-compose-ui-test = { group = "androidx.compose.ui", name = "ui-test-junit4", version.ref = "compose" }
@@ -224,13 +227,16 @@ kotlin-gradlePlugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-pl
 ksp-gradlePlugin = { group = "com.google.devtools.ksp", name = "com.google.devtools.ksp.gradle.plugin", version.ref = "ksp" }
 room-gradlePlugin = { group = "androidx.room", name = "room-gradle-plugin", version.ref = "room" }
 kotlin-powerAssert = { module = "org.jetbrains.kotlin:kotlin-power-assert", version.ref = "kotlin" }
+screenShot-gradlePlugin = { module = "com.android.compose.screenshot:screenshot-test-gradle-plugin", version.ref = "screenshot" }
+
+
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "androidGradlePlugin" }
 android-library = { id = "com.android.library", version.ref = "androidGradlePlugin" }
 kotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 android-test = { id = "com.android.test", version.ref = "androidGradlePlugin" }
-baselineprofile = { id = "androidx.baselineprofile", version.ref = "androidxMacroBenchmark"}
+baselineprofile = { id = "androidx.baselineprofile", version.ref = "androidxMacroBenchmark" }
 compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 dependencyGuard = { id = "com.dropbox.dependency-guard", version.ref = "dependencyGuard" }
 firebase-crashlytics = { id = "com.google.firebase.crashlytics", version.ref = "firebaseCrashlyticsPlugin" }
@@ -248,3 +254,4 @@ conveyor = { id = "dev.hydraulic.conveyor", version.ref = "conveyor" }
 kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 jetbrainsCompose = { id = "org.jetbrains.compose", version.ref = "compose-plugin" }
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+screenshot = { id = "com.android.compose.screenshot", version.ref = "screenshot" }
