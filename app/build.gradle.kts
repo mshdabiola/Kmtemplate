@@ -11,7 +11,6 @@ plugins {
     id("mshdabiola.android.application.flavor")
     alias(libs.plugins.conveyor)
     alias(libs.plugins.baselineprofile)
-    alias(libs.plugins.roborazzi)
 
 }
 
@@ -62,8 +61,6 @@ dependencies {
 //    testImplementation(libs.androidx.compose.ui.test)
     testImplementation(libs.androidx.work.testing)
 
-    testFossReliantImplementation(libs.robolectric)
-    testFossReliantImplementation(libs.roborazzi)
     //testFossReliantImplementation(projects.modules.screenshotTesting)
 
 

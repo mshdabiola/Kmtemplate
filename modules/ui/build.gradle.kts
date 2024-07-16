@@ -24,10 +24,8 @@ dependencies {
     testImplementation(libs.androidx.compose.ui.test)
     testImplementation(libs.androidx.compose.ui.testManifest)
 
-    testImplementation(libs.robolectric)
-    testImplementation(libs.roborazzi)
+
     testImplementation(projects.modules.testing)
-    testImplementation(projects.modules.screenshotTesting)
 
 
     androidTestImplementation(libs.androidx.compose.ui.test)

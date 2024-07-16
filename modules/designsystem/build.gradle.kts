@@ -7,7 +7,6 @@ plugins {
     id("mshdabiola.android.library.compose")
     id("mshdabiola.android.library.jacoco")
 
-    alias(libs.plugins.roborazzi)
 }
 
 android {
@@ -30,10 +29,7 @@ dependencies {
 //    implementation(libs.coil.kt.compose)
 
 //    testImplementation(libs.androidx.compose.ui.test)
-    testImplementation(libs.robolectric)
-    testImplementation(libs.roborazzi)
     testImplementation(projects.modules.testing)
-    testImplementation(projects.modules.screenshotTesting)
 
 
     androidTestImplementation(libs.androidx.compose.ui.test)
@@ -57,17 +53,10 @@ kotlin {
                implementation(project(":modules:model"))
                 api(libs.androidx.compose.material3.windowSizeClass2)
                 api(libs.androidx.navigation.compose)
-//                api(libs.paging.compose.common)
-//
-               // implementation(libs.coil.kt.compose)
 
                 api(libs.koin.compose)
                 api(libs.koin.composeVM)
                 api(libs.androidx.lifecycle.viewModelCompose)
-
-
-
-
 
             }
         }

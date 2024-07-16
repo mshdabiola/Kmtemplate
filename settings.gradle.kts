@@ -36,7 +36,6 @@ include(":modules:ui")
 //include(":modules:mvvn")
 include(":modules:analytics")
 include(":modules:datastore")
-include(":modules:screenshot-testing")
 
 //include(":modules:app")
 //include(":desktop")
@@ -53,7 +52,6 @@ include(":features:main")
 include(":features:detail")
 include(":features:setting")
 
-include(":ui-test-hilt-manifest")
 
 
 
