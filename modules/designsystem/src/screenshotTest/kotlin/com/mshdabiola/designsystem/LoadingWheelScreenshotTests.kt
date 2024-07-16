@@ -11,17 +11,13 @@ import com.mshdabiola.designsystem.component.SkOverlayLoadingWheel
 
 class LoadingWheelScreenshotTests {
 
-
     @ThemePreviews
     @Composable
     fun LoadingWheel() {
-
         Surface {
             SkLoadingWheel(contentDesc = "test")
         }
-
     }
-
 
     @ThemePreviews
     @Composable
@@ -29,7 +25,5 @@ class LoadingWheelScreenshotTests {
         Surface {
             SkOverlayLoadingWheel(contentDesc = "test")
         }
-
     }
-
 }

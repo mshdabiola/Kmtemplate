@@ -4,7 +4,6 @@
 
 package com.mshdabiola.designsystem
 
-import android.widget.ToggleButton
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import com.mshdabiola.designsystem.component.SkIconToggleButton
@@ -31,7 +30,6 @@ class IconButtonScreenshotTests {
                 )
             },
         )
-
     }
 
     @ThemePreviews
@@ -53,9 +51,5 @@ class IconButtonScreenshotTests {
                 )
             },
         )
-
     }
-
-
-
 }

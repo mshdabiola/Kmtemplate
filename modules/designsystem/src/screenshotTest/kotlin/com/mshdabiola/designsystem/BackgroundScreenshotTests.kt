@@ -4,7 +4,6 @@
 
 package com.mshdabiola.designsystem
 
-import androidx.activity.ComponentActivity
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -21,16 +20,13 @@ class BackgroundScreenshotTests {
         SkBackground(Modifier.size(100.dp)) {
             Text("background")
         }
-
     }
 
     @ThemePreviews
     @Composable
     fun GradientBackground() {
-
         SkGradientBackground(Modifier.size(100.dp)) {
             Text("Gradient background")
         }
-
     }
 }

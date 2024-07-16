@@ -14,25 +14,19 @@ import com.mshdabiola.designsystem.theme.SkTheme
 
 class TabsScreenshotTests {
 
-
     @ThemePreviews
     @Composable
     fun Tabs() {
         NiaTabsExample()
-
     }
-
 
     @ThemePreviews
     @Preview(fontScale = 2.0f)
     @Composable
     fun TabsHumFontScale2() {
-
         SkTheme {
             NiaTabsExample("Looooong item")
         }
-
-
     }
 
     @Composable

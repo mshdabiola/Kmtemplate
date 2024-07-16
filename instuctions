@@ -1,8 +1,8 @@
  ./gradlew :modules:designsystem:jacocoTestReport
 
-        ./gradlew lintFossReliantDebug; ./gradlew updateFossReliantReleaseBadging; ./gradlew dependencyGuardBaseline; ./gradlew spotlessApply --init-script gradle/init.gradle.kts --no-configuration-cache; ./gradlew recordRoborazziFossReliantDebug
+        ./gradlew lintFossReliantDebug; ./gradlew updateFossReliantReleaseBadging; ./gradlew dependencyGuardBaseline;  ./gradlew updateFossReliantDebugScreenshotTest;./gradlew spotlessApply --init-script gradle/init.gradle.kts --no-configuration-cache
 
-        ./gradlew lintGooglePlayDebug; ./gradlew updateGooglePlayReleaseBadging; ./gradlew dependencyGuardBaseline; ./gradlew spotlessApply --init-script gradle/init.gradle.kts --no-configuration-cache; ./gradlew recordRoborazziGooglePlayDebug
+        ./gradlew lintGooglePlayDebug; ./gradlew updateGooglePlayReleaseBadging; ./gradlew dependencyGuardBaseline; ./gradlew spotlessApply --init-script gradle/init.gradle.kts --no-configuration-cache; ./gradlew updateFossReliantDebugScreenshotTest
 
         ./gradlew dependencyGuard; ./gradlew checkReleaseBadging; ./gradlew spotlessCheck --init-script gradle/init.gradle.kts --no-configuration-cache; ./gradlew verifyRoborazziDebug
 

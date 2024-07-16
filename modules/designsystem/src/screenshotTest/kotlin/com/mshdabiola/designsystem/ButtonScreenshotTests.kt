@@ -19,20 +19,17 @@ class ButtonScreenshotTests {
         Surface {
             SkButton(onClick = {}, text = { Text(" Button") })
         }
-
     }
 
     @ThemePreviews
     @Composable
     fun ButtonWithLeadIcon() {
-
         Surface {
             SkButton(
                 onClick = {},
                 text = { Text("Icon Button") },
                 leadingIcon = { Icon(imageVector = SkIcons.Add, contentDescription = null) },
             )
-
         }
     }
 }

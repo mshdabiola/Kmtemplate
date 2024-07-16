@@ -87,7 +87,7 @@ jobs:
       - name: Run all local screenshot tests (Roborazzi)
         id: screenshotsverify
         continue-on-error: true
-        run: ./gradlew verifyRoborazziFossReliantDebug
+        run: ./gradlew validateFossReliantDebugScreenshotTest
 
       - name: Prevent pushing new screenshots if this is a fork
         id: checkfork_screenshots
@@ -101,7 +101,7 @@ jobs:
         id: screenshotsrecord
         if: steps.screenshotsverify.outcome == 'failure' && github.event_name == 'pull_request'
         run: |
-          ./gradlew recordRoborazziFossReliantDebug
+          ./gradlew updateFossReliantDebugScreenshotTest
 
       - name: Push new screenshots if available
         uses: stefanzweifel/git-auto-commit-action@v5

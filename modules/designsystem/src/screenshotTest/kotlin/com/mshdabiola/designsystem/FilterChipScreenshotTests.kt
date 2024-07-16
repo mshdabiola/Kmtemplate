@@ -21,7 +21,6 @@ class FilterChipScreenshotTests {
             SkFilterChip(selected = false, onSelectedChange = {}) {
                 Text("Unselected chip")
             }
-
         }
     }
 
@@ -33,14 +32,12 @@ class FilterChipScreenshotTests {
                 Text("Selected Chip")
             }
         }
-
     }
 
     @ThemePreviews
     @Preview(fontScale = 2.0f)
     @Composable
     fun HugeFontFilterChip() {
-
         SkTheme {
             SkBackground {
                 SkFilterChip(selected = true, onSelectedChange = {}) {
@@ -48,7 +45,5 @@ class FilterChipScreenshotTests {
                 }
             }
         }
-
     }
-
 }

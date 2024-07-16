@@ -10,26 +10,20 @@ import com.mshdabiola.designsystem.component.SkTopAppBar
 import com.mshdabiola.designsystem.icon.SkIcons
 import com.mshdabiola.designsystem.theme.SkTheme
 
-
 class TopAppBarScreenshotTests() {
-
 
     @ThemePreviews
     @Composable
     fun TopAppBar() {
         NiaTopAppBarExample()
-
     }
-
 
     @ThemePreviews
     @Composable
     fun TopAppBarHumFontScale2() {
-
         SkTheme {
             NiaTopAppBarExample()
         }
-
     }
 
     @OptIn(ExperimentalMaterial3Api::class)

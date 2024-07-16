@@ -35,7 +35,6 @@ import androidx.compose.ui.tooling.preview.Preview
 )
 annotation class DevicePreviews
 
-
 @Preview(name = "Dark Mode", group = "dark", showBackground = true, uiMode = UI_MODE_NIGHT_YES)
 @Preview(name = "Light Mode", group = "dark", showBackground = true, uiMode = UI_MODE_NIGHT_NO)
 annotation class ThemePreviews
