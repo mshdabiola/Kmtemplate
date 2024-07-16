@@ -18,4 +18,6 @@
     conveyor make site
     ./gradlew run
 
-add testing
+
+//./gradlew assembleDebug -PenableComposeCompilerReports=true
+// ./gradlew assembleDebug -PenableComposeCompilerMetrics=true

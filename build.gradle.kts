@@ -22,5 +22,3 @@ plugins {
 
 
 }
-//./gradlew assembleDebug -PenableComposeCompilerReports=true
-// ./gradlew assembleDebug -PenableComposeCompilerMetrics=true

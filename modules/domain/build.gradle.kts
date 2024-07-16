@@ -36,17 +36,5 @@ kotlin {
 
         val jvmTest by getting
 
-//        val jsMain by getting {
-//            dependencies {
-//
-//            }
-//        }
     }
 }
-//
-//dependencies {
-//
-//    testImplementation(project(":core:testing"))
-//    implementation(libs.paging.runtime)
-//    implementation(libs.paging.common)
-//}

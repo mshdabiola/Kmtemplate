@@ -10,7 +10,6 @@ pluginManagement {
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 dependencyResolutionManagement {
-//    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
         google()
         mavenCentral()
@@ -23,8 +22,6 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "Hydraulic"
-//include(":app")
-//include(":app:baselineprofile")
 include(":modules:database")
 include(":modules:designsystem")
 include(":modules:model")
@@ -33,20 +30,11 @@ include(":modules:data")
 include(":modules:domain")
 include(":modules:testing")
 include(":modules:ui")
-//include(":modules:mvvn")
 include(":modules:analytics")
 include(":modules:datastore")
 
-//include(":modules:app")
-//include(":desktop")
-//include(":modules:setting")
-
 include(":benchmarks")
-
-
 include(":app")
-//include(":shared")
-
 
 include(":features:main")
 include(":features:detail")

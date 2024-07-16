@@ -1,5 +1,3 @@
-import org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalWasmDsl
-
 /*
  *abiola 2024
  */
@@ -16,10 +14,7 @@ android {
 
 dependencies {
     implementation(compose.runtime)
-
-    //  prodImplementation(platform(libs.firebase.bom))
     googlePlayImplementation(platform(libs.firebase.bom))
-
     googlePlayImplementation(libs.firebase.analytics)
 }
 kotlin {

@@ -17,15 +17,9 @@ android {
 }
 
 kotlin {
-//    @OptIn(ExperimentalWasmDsl::class)
-//    wasmJs {
-//        browser()
-//    }
     sourceSets {
         val commonMain by getting {
             dependencies {
-                // implementation("ch.qos.logback:logback-classic:1.4.7")
-
                 implementation(libs.ktor.client.content.negotiation)
                 implementation(libs.ktor.client.core)
                 implementation(libs.ktor.client.serialization)
@@ -54,30 +48,6 @@ kotlin {
                 implementation(libs.ktor.client.cio)
             }
         }
-
-//        val wasmJsMain by getting {
-//            dependencies {
-//                implementation(libs.ktor.client.js)
-//            }
-//        }
-
-
-//        val jsMain by getting {
-//            dependencies {
-//
-//            }
-//        }
-
-//        val test by getting{
-//
-//        }
     }
 }
-//
-//dependencies {
-//
-//    testImplementation(project(":core:testing"))
-//    implementation(libs.paging.runtime)
-//    implementation(libs.paging.common)
-//}
-//task("testClasses")
+

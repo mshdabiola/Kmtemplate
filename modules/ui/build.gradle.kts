@@ -31,17 +31,9 @@ dependencies {
     androidTestImplementation(libs.androidx.compose.ui.test)
     androidTestImplementation(projects.modules.testing)
 
-//
-//    screenshotTestImplementation(projects.modules.testing)
-  //  "screenshotTestImplementation"(project(":modules:testing"))
-
 }
 
 kotlin {
-//    @OptIn(ExperimentalWasmDsl::class)
-//    wasmJs {
-//        browser()
-//    }
     sourceSets {
 
         val commonMain by getting {

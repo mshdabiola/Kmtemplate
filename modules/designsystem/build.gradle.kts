@@ -17,18 +17,8 @@ android {
 }
 
 dependencies {
-
-//    api(libs.androidx.compose.material3.adaptive)
-//    api(libs.androidx.compose.material3.navigationSuite)
-
-
-//    debugApi(libs.androidx.compose.ui.tooling)
     debugApi(compose.uiTooling)
     api(compose.preview)
-
-//    implementation(libs.coil.kt.compose)
-
-//    testImplementation(libs.androidx.compose.ui.test)
     testImplementation(projects.modules.testing)
 
 
@@ -37,10 +27,6 @@ dependencies {
 
 }
 kotlin {
-//    @OptIn(ExperimentalWasmDsl::class)
-//    wasmJs {
-//        browser()
-//    }
     sourceSets {
         val commonMain by getting {
             dependencies {

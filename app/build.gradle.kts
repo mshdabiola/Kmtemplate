@@ -18,16 +18,6 @@ group = "com.mshdabiola.skeletonapp"
 version = libs.versions.versionName.get()
 
 dependencies {
-
-//    implementation(project(":modules:app"))
-//    implementation(project(":modules:model"))
-//    implementation(project(":modules:data"))
-//    implementation(project(":modules:navigation"))
-//    implementation(project(":modules:analytics"))
-//    implementation(project(":modules:mvvn"))
-//    implementation(project(":modules:designsystem"))
-//
-
     linuxAmd64(compose.desktop.linux_x64)
     macAmd64(compose.desktop.macos_x64)
     macAarch64(compose.desktop.macos_arm64)
@@ -41,8 +31,6 @@ dependencies {
     implementation(libs.androidx.compose.material3.adaptive)
     implementation(libs.androidx.compose.material3.adaptive.layout)
     implementation(libs.androidx.compose.material3.adaptive.navigation)
-//    implementation(libs.androidx.compose.material3.windowSizeClass)
-//    implementation(libs.androidx.compose.runtime.tracing)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.core.splashscreen)
     implementation(libs.androidx.lifecycle.runtimeCompose)
@@ -51,19 +39,12 @@ dependencies {
     implementation(libs.androidx.tracing.ktx)
     implementation(libs.androidx.window.core)
     implementation(libs.kotlinx.coroutines.guava)
-//    implementation(libs.coil.kt)
-
 
     debugImplementation(libs.androidx.compose.ui.testManifest)
 
 
     testImplementation(projects.modules.testing)
-//    testImplementation(libs.androidx.compose.ui.test)
     testImplementation(libs.androidx.work.testing)
-
-    //testFossReliantImplementation(projects.modules.screenshotTesting)
-
-
     androidTestImplementation(projects.modules.testing)
     androidTestImplementation(libs.androidx.test.espresso.core)
     androidTestImplementation(libs.androidx.navigation.testing)
@@ -90,34 +71,18 @@ dependencies {
 }
 
 kotlin {
-    @OptIn(ExperimentalWasmDsl::class)
-//    wasmJs {
-//        moduleName = "composeApp"
-//        browser {
-//            commonWebpackConfig {
-//                outputFileName = "composeApp.js"
-//            }
-//        }
-//        binaries.executable()
-//    }
-
     androidTarget()
-
-    // jvm("desktop")
     jvm()
-    // jvmToolchain(17)
 
     sourceSets {
         val jvmMain by getting
 
         androidMain.dependencies {
-            //implementation(libs.compose.ui.tooling.preview)
             implementation(libs.androidx.activity.compose)
             implementation(libs.kotlinx.coroutines.android)
 
         }
         commonMain.dependencies {
-//
             implementation(libs.koin.core)
 
             implementation(projects.modules.designsystem)
@@ -125,16 +90,10 @@ kotlin {
             implementation(projects.modules.ui)
             implementation(projects.modules.model)
             implementation(projects.modules.analytics)
-//            implementation(libs.androidx.compose.material3.adaptive)
-
 
             implementation(projects.features.main)
             implementation(projects.features.detail)
             implementation(projects.features.setting)
-
-
-
-
 
             // Logger
             implementation(libs.kermit)
@@ -146,20 +105,15 @@ kotlin {
 
         jvmMain.dependencies {
             implementation(compose.desktop.currentOs)
-            // implementation(project(":modules:app"))
-
             implementation(libs.kotlinx.coroutines.swing)
 
         }
-        targets.all {
-            compilations.all {
-                compilerOptions.configure {
-                    freeCompilerArgs.add("-Xexpect-actual-classes")
-                }
-            }
-        }
-//        configurations.commonMainApi {
-//            exclude(group = "org.jetbrains.kotlinx", module = "kotlinx-coroutines-android")
+//        targets.all {
+//            compilations.all {
+//                compilerOptions.configure {
+//                    freeCompilerArgs.add("-Xexpect-actual-classes")
+//                }
+//            }
 //        }
 
     }
@@ -240,46 +194,6 @@ compose.desktop {
             obfuscate.set(true)
             version.set("7.4.2")
         }
-
-//        val iconsRoot = project.file("src/desktopMain/resources/launcher")
-//        nativeDistributions {
-//            targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
-//            packageVersion = "1.0.1"
-//            packageName = "Skeleton"
-//            description = "Template"
-//            copyright = "© 2022 Mshdabiola. All rights reserved."
-//            vendor = "Mshdabiola App"
-//            version = "1.0.1"
-//            licenseFile.set(rootProject.file("LICENSE"))
-//
-//            modules("java.net.http", "java.sql")
-//
-//            linux {
-//                iconFile.set(iconsRoot.resolve("linux.png"))
-//                debMaintainer = "mshdabiola@gmail.com"
-//                menuGroup = packageName
-//                appCategory = "Productivity"
-//            }
-//
-//            windows {
-//                iconFile.set(iconsRoot.resolve("windows.ico"))
-//                shortcut = true
-//                menuGroup = packageName
-////                https://www.guidgen.com/
-//
-//                //https://wixtoolset.org/documentation/manual/v3/howtos/general/generate_guids.html
-//                upgradeUuid = "791AC64E-C9A7-4CBF-A1C4-AFE5CFFDDDFA"
-//            }
-//
-//            macOS {
-//                iconFile.set(iconsRoot.resolve("macos.icns"))
-//                bundleID = "com.mshdabiola.skeleton"
-//                appCategory = "public.app-category.productivity"
-//                signing {
-//                    sign.set(false)
-//                }
-//            }
-//        }
     }
 
 
@@ -291,11 +205,6 @@ configurations.all {
         attribute(Attribute.of("ui", String::class.java), "awt")
     }
 }
-
-//compose.experimental {
-//    web.application {}
-//}
-
 
 baselineProfile {
     // Don't build on every iteration of a full assemble.
