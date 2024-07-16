@@ -59,7 +59,7 @@ kotlin {
         val jvmMain by getting {
             dependencies {
                 api(compose.preview)
-                api(libs.kotlinx.coroutines.swing)
+//                api(libs.kotlinx.coroutines.swing)
             }
         }
 

@@ -41,15 +41,21 @@ kotlin {
                 implementation(project(":modules:analytics"))
                 implementation(project(":modules:designsystem"))
                 implementation(project(":modules:model"))
-                api(libs.coil.kt)
-                api(libs.coil.kt.compose)
-                api(libs.coil.kt.svg)
-                api(libs.coil.kt.network)
+//                api(libs.coil.kt)
+//                api(libs.coil.kt.compose)
+//                api(libs.coil.kt.svg)
+//                api(libs.coil.kt.network)
 
                 api(compose.components.resources)
 
 
             }
+        }
+
+        jvmTest.dependencies {
+//            implementation(libs.kotlinx.coroutines.swing)
+            implementation(compose.desktop.currentOs)
+            implementation(compose.desktop.uiTestJUnit4)
         }
     }
 }
