@@ -44,7 +44,7 @@ jobs:
       - name: Sign APK
         uses: r0adkll/sign-android-release@v1.0.4
         with:
-          releaseDirectory: composeApp/build/outputs/apk/fossReliant/release
+          releaseDirectory: app/build/outputs/apk/fossReliant/release
           signingKeyBase64: ${{ secrets.SIGNING_KEY2 }}
           alias: ${{ secrets.ALIAS }}
           keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
@@ -57,7 +57,7 @@ jobs:
         uses: ncipollo/release-action@v1.14.0
         with:
           allowUpdates: true
-          artifacts: "composeApp/build/outputs/apk/**/**/**/*.apk,composeApp/build/outputs/mapping/**/**/*.txt"
+          artifacts: "app/build/outputs/apk/**/**/**/*.apk,app/build/outputs/mapping/**/**/*.txt"
           token: ${{ secrets.TOKEN }}
           generateReleaseNotes: true
           bodyFile: distribution/whatsnew/whatsnew-en-US

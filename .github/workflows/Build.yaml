@@ -114,13 +114,13 @@ jobs:
       # Run local tests after screenshot tests to avoid wrong UP-TO-DATE. TODO: Ignore screenshots.
       - name: Run local tests and create report
         if: always()
-        run: ./gradlew testFossReliantDebug
+        run: ./gradlew testFossReliantDebugUnitTest
       # Replace task exclusions with `-Pandroidx.baselineprofile.skipgeneration` when
       # https://android-review.googlesource.com/c/platform/frameworks/support/+/2602790 landed in a
       # release build
 
       - name: Build all build type and flavor permutations
-        run: ./gradlew :composeApp:assembleFossReliant :benchmarks:assembleFossReliant
+        run: ./gradlew assembleFossReliant :benchmarks:assembleFossReliant
           -x pixel6Api33FossReliantNonMinifiedReleaseAndroidTest
           -x pixel6Api33FossReliantNonMinifiedBenchmarkAndroidTest
           -x collectFossReliantNonMinifiedReleaseBaselineProfile
@@ -140,7 +140,7 @@ jobs:
           path: '**/build/test-results/test*UnitTest/**.xml'
 
       - name: Check lint
-        run: ./gradlew :composeApp:lintFossReliantRelease
+        run: ./gradlew lintFossReliantRelease
 
       - name: Upload lint reports (HTML)
         if: always()
