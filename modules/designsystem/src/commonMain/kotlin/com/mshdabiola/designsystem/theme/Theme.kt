@@ -712,4 +712,3 @@ val LightAndroidBackgroundTheme = BackgroundTheme(color = primaryContainerDark)
  * Dark Android background theme
  */
 val DarkAndroidBackgroundTheme = BackgroundTheme(color = Color.Black)
-
