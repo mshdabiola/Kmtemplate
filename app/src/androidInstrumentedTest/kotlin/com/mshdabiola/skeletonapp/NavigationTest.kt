@@ -4,19 +4,15 @@ import androidx.annotation.StringRes
 import androidx.compose.ui.test.junit4.AndroidComposeTestRule
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.compose.ui.test.onNodeWithText
-import androidx.test.platform.app.InstrumentationRegistry
 import co.touchlab.kermit.Logger
 import co.touchlab.kermit.loggerConfigInit
 import co.touchlab.kermit.platformLogWriter
-import com.mshdabiola.skeletonapp.di.appModule
-import com.mshdabiola.skeletonapp.di.jankStatsModule
 import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.TemporaryFolder
 import org.junit.rules.TestWatcher
 import org.junit.runner.Description
-import org.koin.android.ext.koin.androidContext
-import org.koin.core.context.startKoin
+import org.koin.core.context.loadKoinModules
 import org.koin.core.context.stopKoin
 import org.koin.core.module.Module
 import org.koin.dsl.module
@@ -36,13 +32,14 @@ class NavigationTest {
         }
     }
     private val instrumentedTestModule = module {
+        logModule
 
     }
 
-//    @get:Rule(order = 0)
-//    val koinTestRule = KoinTestRule(
-//        modules = listOf()
-//    )
+    @get:Rule(order = 0)
+    val koinTestRule = KoinTestRule(
+        modules = listOf(instrumentedTestModule)
+    )
 
     @get:Rule(order = 1)
     val tmpFolder: TemporaryFolder = TemporaryFolder.builder().assureDeletion().build()
@@ -73,10 +70,11 @@ class KoinTestRule(
     private val modules: List<Module>
 ) : TestWatcher() {
     override fun starting(description: Description) {
-        startKoin {
-            androidContext(InstrumentationRegistry.getInstrumentation().targetContext.applicationContext)
-            modules(modules)
-        }
+        loadKoinModules(modules)
+//        startKoin {
+//            androidContext(InstrumentationRegistry.getInstrumentation().targetContext.applicationContext)
+//            modules(modules)
+//        }
     }
 
     override fun finished(description: Description) {

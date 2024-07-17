@@ -46,10 +46,10 @@ dependencies {
     testImplementation(projects.modules.testing)
 //    testImplementation(libs.androidx.work.testing)
     androidTestImplementation(projects.modules.testing)
-    androidTestImplementation("androidx.startup:startup-runtime:1.1.1")
-    androidTestImplementation(libs.androidx.test.espresso.core)
+//    androidTestImplementation("androidx.startup:startup-runtime:1.1.1")
+//    androidTestImplementation(libs.androidx.test.espresso.core)
     androidTestImplementation(libs.androidx.navigation.testing)
-    androidTestImplementation(libs.androidx.compose.ui.test)
+//    androidTestImplementation(libs.androidx.compose.ui.test)
 
     baselineProfile(projects.benchmarks)
 

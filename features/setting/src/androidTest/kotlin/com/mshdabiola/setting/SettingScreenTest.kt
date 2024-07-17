@@ -4,19 +4,21 @@
 
 package com.mshdabiola.setting
 
+import androidx.compose.ui.test.junit4.createComposeRule
+import org.junit.Rule
 import org.junit.Test
 
 /**
  * UI tests for [SettingScreen] composable.
  */
-class MainScreenTest {
+class SettingScreenTest {
 
-//    @get:Rule
-//    val composeTestRule = createAndroidComposeRule<ComponentActivity>()
+    @get:Rule
+    val composeTestRule = createComposeRule()
 
     @Test
     fun enterText_showsShowText() {
-//        composeTestRule.setContent {
+        composeTestRule.setContent {
 //            SettingScreen(
 //                settingState = SettingState(
 //                    UserData(
@@ -28,9 +30,10 @@ class MainScreenTest {
 //                    ),
 //                ),
 //            )
-    }
+        }
 
 //        composeTestRule
 //            .onNodeWithTag("main:list")
 //            .assertExists()
+    }
 }
