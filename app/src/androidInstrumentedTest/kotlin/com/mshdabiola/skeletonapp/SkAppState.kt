@@ -32,16 +32,16 @@ class SkAppState {
         var currentDestination: String? = null
 
         composeTestRule.setContent {
-            val density =LocalDensity.current
+            val density = LocalDensity.current
             val navController = rememberTestNavController()
             state = remember(navController) {
                 SkAppState(
                     navController = navController,
                     coroutineScope = backgroundScope,
                     windowSizeClass = WindowSizeClass.calculateFromSize(
-                        size = Size(456f,3f),
-                        density = density
-                    )
+                        size = Size(456f, 3f),
+                        density = density,
+                    ),
 
                 )
             }
@@ -57,10 +57,7 @@ class SkAppState {
 
         assertEquals("b", currentDestination)
     }
-
 }
-
-
 
 @Composable
 private fun rememberTestNavController(): TestNavHostController {

@@ -33,12 +33,11 @@ class NavigationTest {
     }
     private val instrumentedTestModule = module {
         logModule
-
     }
 
     @get:Rule(order = 0)
     val koinTestRule = KoinTestRule(
-        modules = listOf(instrumentedTestModule)
+        modules = listOf(instrumentedTestModule),
     )
 
     @get:Rule(order = 1)
@@ -51,8 +50,7 @@ class NavigationTest {
         ReadOnlyProperty<Any, String> { _, _ -> activity.getString(resId) }
 
     // The strings used for matching in these tests
-    //private val navigateUp by composeTestRule.stringResource(FeatureForyouR.string.feature_foryou_navigate_up)
-
+    // private val navigateUp by composeTestRule.stringResource(FeatureForyouR.string.feature_foryou_navigate_up)
 
     @Test
     fun firstScreen_isForYou() {
@@ -61,13 +59,10 @@ class NavigationTest {
             onNodeWithText("Add Note").assertExists()
         }
     }
-
-
 }
 
-
 class KoinTestRule(
-    private val modules: List<Module>
+    private val modules: List<Module>,
 ) : TestWatcher() {
     override fun starting(description: Description) {
         loadKoinModules(modules)
