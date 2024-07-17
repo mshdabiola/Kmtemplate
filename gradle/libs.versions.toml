@@ -46,7 +46,7 @@ secrets = "2.0.1"
 truth = "1.4.3"
 turbine = "1.1.0"
 
-compose-plugin = "1.7.0-dev1727"
+compose-plugin = "1.7.0-dev1731"
 androidxNavigation = "2.8.0-beta03" #for nav test
 navigationCompose = "2.8.0-alpha08"
 compose = "1.7.0-beta03"

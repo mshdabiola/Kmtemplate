@@ -21,3 +21,5 @@
 
 //./gradlew assembleDebug -PenableComposeCompilerReports=true
 // ./gradlew assembleDebug -PenableComposeCompilerMetrics=true
+
+./gradlew cleanBuildCache
