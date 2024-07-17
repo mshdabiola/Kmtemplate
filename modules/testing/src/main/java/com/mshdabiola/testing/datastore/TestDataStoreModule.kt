@@ -43,7 +43,7 @@ fun TemporaryFolder.testUserPreferencesDataStore(
         serializer = UserDataJsonSerializer,
         producePath = {
             val path = File(newFolder(), "data")
-            if (!path.parentFile.exists()) {
+            if (path.parentFile?.exists() == false) {
                 path.mkdirs()
             }
             path.toOkioPath()
