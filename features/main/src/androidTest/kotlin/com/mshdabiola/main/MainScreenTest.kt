@@ -4,6 +4,8 @@
 
 package com.mshdabiola.main
 
+import androidx.compose.ui.test.junit4.createComposeRule
+import org.junit.Rule
 import org.junit.Test
 
 /**
@@ -11,16 +13,16 @@ import org.junit.Test
  */
 class MainScreenTest {
 
-//    @get:Rule
-//    val composeTestRule = createAndroidComposeRule<ComponentActivity>()
+    @get:Rule
+    val composeTestRule = createComposeRule()
 
     @Test
     fun enterText_showsShowText() {
-//        composeTestRule.setContent {
+        composeTestRule.setContent {
 //            MainScreen(
 //                mainState = Result.Loading,
 //            )
-//        }
+        }
 
 //        composeTestRule
 //            .onNodeWithTag("main:list")

@@ -21,4 +21,3 @@ kotlin {
 
     }
 }
-task("testClasses")
