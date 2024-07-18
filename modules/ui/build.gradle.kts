@@ -42,10 +42,5 @@ kotlin {
 
             }
         }
-        jvmTest.dependencies {
-            implementation(compose.desktop.currentOs)
-
-            implementation(compose.desktop.uiTestJUnit4)
-        }
     }
 }

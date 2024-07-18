@@ -36,11 +36,14 @@ kotlin {
             }
         }
 
-        val commonTest by getting {
+        val jvmMain by getting {
             dependencies {
+                api(compose.desktop.currentOs)
 
+                api(compose.desktop.uiTestJUnit4)
             }
         }
+
 
         val androidMain by getting {
             dependencies {

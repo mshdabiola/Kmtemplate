@@ -10,6 +10,7 @@ import androidx.compose.ui.test.assertTextEquals
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.performClick
+import com.mshdabiola.testing.fake.repository.FakeNoteRepository
 import org.junit.Rule
 import org.junit.Test
 
@@ -19,6 +20,7 @@ class Example {
 
     @Test
     fun myTest() {
+        val fakeRepo=FakeNoteRepository()
         // Declares a mock UI to demonstrate API calls
         //
         // Replace with your own declarations to test the code in your project
