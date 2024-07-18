@@ -18,13 +18,6 @@ android {
 
 dependencies {
     debugApi(compose.uiTooling)
-    api(compose.preview)
-    testImplementation(projects.modules.testing)
-
-
-    androidTestImplementation(libs.androidx.compose.ui.test)
-    androidTestImplementation(projects.modules.testing)
-
 }
 kotlin {
     sourceSets {
@@ -42,7 +35,6 @@ kotlin {
 
                 api(libs.koin.compose)
                 api(libs.koin.composeVM)
-                api(libs.androidx.lifecycle.viewModelCompose)
 
             }
         }
