@@ -30,9 +30,9 @@ class AndroidFeatureConventionPlugin : Plugin<Project> {
             dependencies {
 
 
-                add("implementation", libs.findLibrary("androidx.lifecycle.runtimeCompose").get())
-                add("implementation", libs.findLibrary("androidx.tracing.ktx").get())
-                add("testImplementation", project(":modules:testing"))
+//                add("implementation", libs.findLibrary("androidx.lifecycle.runtimeCompose").get())
+//                add("implementation", libs.findLibrary("androidx.tracing.ktx").get())
+             //   add("testImplementation", project(":modules:testing"))
 
 
                 add("androidTestImplementation", project(":modules:testing"))
@@ -70,6 +70,7 @@ class AndroidFeatureConventionPlugin : Plugin<Project> {
                     }
                     getByName("androidInstrumentedTest") {
                         this.dependencies {
+                            implementation( project(":modules:testing"))
 //
                         }
 

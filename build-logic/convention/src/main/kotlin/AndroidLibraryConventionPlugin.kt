@@ -54,10 +54,7 @@ class AndroidLibraryConventionPlugin : Plugin<Project> {
                 configurePrintApksTask(this)
                 disableUnnecessaryAndroidTests(target)
             }
-            dependencies {
-                add("testImplementation", kotlin("test"))
-                add("implementation", libs.findLibrary("androidx.tracing.ktx").get())
-            }
+
             extensions.configure<KotlinMultiplatformExtension> {
                 androidTarget()
                 // jvm("desktop")
@@ -93,7 +90,7 @@ class AndroidLibraryConventionPlugin : Plugin<Project> {
                         this.dependencies {
 //                            implementation(kotlin("test"))
                             //  implementation(project(":core:testing"))
-                            implementation(project(":modules:testing"))
+                          //  implementation(project(":modules:testing"))
                         }
 
                     }
@@ -108,7 +105,7 @@ class AndroidLibraryConventionPlugin : Plugin<Project> {
                     getByName("jvmTest") {
                         this.dependencies {
                             // implementation(libs.findLibrary("koin.core").get())
-                            implementation(project(":modules:testing"))
+                           /// implementation(project(":modules:testing"))
                         }
 
                     }
