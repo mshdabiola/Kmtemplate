@@ -43,7 +43,7 @@ dependencies {
     debugImplementation(libs.androidx.compose.ui.testManifest)
 
 
-    testImplementation(projects.modules.testing)
+//    testImplementation(projects.modules.testing)
 //    testImplementation(libs.androidx.work.testing)
     androidTestImplementation(projects.modules.testing)
 //    androidTestImplementation("androidx.startup:startup-runtime:1.1.1")
@@ -107,6 +107,9 @@ kotlin {
         jvmMain.dependencies {
             implementation(compose.desktop.currentOs)
             implementation(libs.kotlinx.coroutines.swing)
+
+        }
+        commonTest.dependencies {
 
         }
 //        targets.all {
