@@ -18,18 +18,7 @@ android {
 }
 
 dependencies {
-    api(libs.androidx.metrics)
-    implementation(libs.androidx.ui.text.google.fonts)
-
-    testImplementation(libs.androidx.compose.ui.test)
-    testImplementation(libs.androidx.compose.ui.testManifest)
-
-
-    testImplementation(projects.modules.testing)
-
-
-    androidTestImplementation(libs.androidx.compose.ui.test)
-    androidTestImplementation(projects.modules.testing)
+  androidTestImplementation(projects.modules.testing)
 
 }
 
