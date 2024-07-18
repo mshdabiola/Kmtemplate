@@ -1,3 +1,5 @@
+import org.jetbrains.compose.ExperimentalComposeLibrary
+
 /*
  *abiola 2024
  */
@@ -39,6 +41,11 @@ kotlin {
 
 
             }
+        }
+        jvmTest.dependencies {
+            implementation(compose.desktop.currentOs)
+
+            implementation(compose.desktop.uiTestJUnit4)
         }
     }
 }
