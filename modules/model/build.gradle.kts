@@ -16,24 +16,5 @@ kotlin {
             }
         }
 
-        val commonTest by getting {
-            dependencies {
-
-            }
-        }
-
-        val androidMain by getting {
-            dependencies {
-
-            }
-        }
-
-
-        val jvmMain by getting {
-            dependencies {
-
-            }
-        }
-
     }
 }
