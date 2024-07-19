@@ -8,13 +8,12 @@ import org.junit.Test
 class MainScreenTest {
 
     @get:Rule
-    val composeRule= createComposeRule()
+    val composeRule = createComposeRule()
 
     @Test
-    fun main(){
+    fun main() {
         composeRule.setContent {
             MainScreen(mainState = Result.Loading)
         }
-
     }
 }

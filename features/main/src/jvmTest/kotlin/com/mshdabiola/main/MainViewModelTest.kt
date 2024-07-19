@@ -21,7 +21,7 @@ class MainViewModelTest {
     private val userDataRepository = TestUserDataRepository()
     private val noteRepository = TestNoteRepository()
 
-    //private val savedStateHandle = SavedStateHandle(mapOf(DETAIL_ID_ARG to 4))
+    // private val savedStateHandle = SavedStateHandle(mapOf(DETAIL_ID_ARG to 4))
     private lateinit var viewModel: MainViewModel
 
     @Before

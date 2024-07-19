@@ -31,7 +31,7 @@ class SettingViewModelTest {
     @Before
     fun setup() {
         viewModel = SettingViewModel(
-            userDataRepository = userDataRepository
+            userDataRepository = userDataRepository,
         )
     }
 

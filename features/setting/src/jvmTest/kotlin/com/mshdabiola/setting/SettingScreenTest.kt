@@ -1,20 +1,18 @@
 package com.mshdabiola.setting
 
 import androidx.compose.ui.test.junit4.createComposeRule
-import com.mshdabiola.model.UserData
 import org.junit.Rule
 import org.junit.Test
 
 class SettingScreenTest {
 
     @get:Rule
-    val composeRule= createComposeRule()
+    val composeRule = createComposeRule()
 
     @Test
-    fun main(){
+    fun main() {
         composeRule.setContent {
-          //  SettingScreen(settingState = SettingState(UserData()))
+            //  SettingScreen(settingState = SettingState(UserData()))
         }
-
     }
 }
