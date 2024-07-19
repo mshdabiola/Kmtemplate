@@ -56,38 +56,7 @@ class AndroidFeatureConventionPlugin : Plugin<Project> {
                         }
 
                     }
-                    getByName("commonTest") {
-                        this.dependencies {
 
-                        }
-
-                    }
-                    getByName("androidMain") {
-                        this.dependencies {
-
-                        }
-
-                    }
-                    getByName("androidInstrumentedTest") {
-                        this.dependencies {
-                            implementation( project(":modules:testing"))
-//
-                        }
-
-                    }
-                    getByName("jvmMain") {
-                        this.dependencies {
-                            // implementation(libs.findLibrary("koin.core").get())
-
-                        }
-
-                    }
-                    getByName("jvmTest") {
-                        this.dependencies {
-
-                        }
-
-                    }
                 }
 
             }

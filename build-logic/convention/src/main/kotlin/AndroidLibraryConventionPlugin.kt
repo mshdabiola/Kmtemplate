@@ -1,5 +1,3 @@
-
-
 import com.android.build.api.variant.LibraryAndroidComponentsExtension
 import com.android.build.gradle.LibraryExtension
 import com.mshdabiola.app.configureFlavors
@@ -7,14 +5,11 @@ import com.mshdabiola.app.configureGradleManagedDevices
 import com.mshdabiola.app.configureKotlinAndroid
 import com.mshdabiola.app.configurePrintApksTask
 import com.mshdabiola.app.disableUnnecessaryAndroidTests
-import com.mshdabiola.app.libs
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.artifacts.VersionCatalogsExtension
 import org.gradle.kotlin.dsl.configure
-import org.gradle.kotlin.dsl.dependencies
 import org.gradle.kotlin.dsl.getByType
-import org.gradle.kotlin.dsl.kotlin
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 import org.jetbrains.kotlin.powerassert.gradle.PowerAssertGradleExtension
@@ -27,14 +22,21 @@ class AndroidLibraryConventionPlugin : Plugin<Project> {
                 apply("kotlin-multiplatform")
                 apply("com.android.library")
                 apply("mshdabiola.android.lint")
-                apply( "org.jetbrains.kotlin.plugin.power-assert")
+                apply("org.jetbrains.kotlin.plugin.power-assert")
 //                apply("screenshot-test-gradle-plugin")
 
 
             }
 
             extensions.configure<PowerAssertGradleExtension> {
-                functions.set(listOf("kotlin.assert", "kotlin.test.assertTrue", "kotlin.test.assertEquals", "kotlin.test.assertNull"))
+                functions.set(
+                    listOf(
+                        "kotlin.assert",
+                        "kotlin.test.assertTrue",
+                        "kotlin.test.assertEquals",
+                        "kotlin.test.assertNull",
+                    ),
+                )
 
             }
             extensions.configure<LibraryExtension> {
@@ -64,50 +66,23 @@ class AndroidLibraryConventionPlugin : Plugin<Project> {
                 val libs = extensions.getByType<VersionCatalogsExtension>().named("libs")
                 with(sourceSets) {
 
-                    getByName("commonMain") {
-                        this.dependencies {
+                   commonMain.dependencies {
                             implementation(libs.findLibrary("koin.core").get())
                             implementation(libs.findLibrary("kermit").get())
+                    }
 
-                        }
+                    androidMain.dependencies {
+                        implementation(libs.findLibrary("koin.android").get())
+
 
                     }
-                    getByName("commonTest") {
-                        this.dependencies {
-                            // implementation(libs.findLibrary("koin.core").get())
-                            implementation(kotlin("test"))
-
-                        }
-
+                    jvmMain.dependencies {
+                        implementation(libs.findLibrary("slf4j.simple").get())
                     }
-                    getByName("androidMain") {
-                        this.dependencies {
-                            implementation(libs.findLibrary("koin.android").get())
-                        }
 
-                    }
-                    getByName("androidInstrumentedTest") {
-                        this.dependencies {
-//                            implementation(kotlin("test"))
-                            //  implementation(project(":core:testing"))
-                          //  implementation(project(":modules:testing"))
-                        }
-
-                    }
-                    getByName("jvmMain") {
-                        this.dependencies {
-                            implementation(libs.findLibrary("slf4j.simple").get())
-
-
-                        }
-
-                    }
-                    getByName("jvmTest") {
-                        this.dependencies {
-                            // implementation(libs.findLibrary("koin.core").get())
-                           /// implementation(project(":modules:testing"))
-                        }
-
+                    jvmTest.dependencies {
+                        implementation(kotlin("test"))
+                        implementation(project(":modules:testing"))
                     }
                 }
 
