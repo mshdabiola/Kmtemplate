@@ -27,7 +27,7 @@ kotlin {
                 api(projects.modules.analytics)
                 api(projects.modules.data)
                 api(projects.modules.model)
-                implementation(projects.modules.designsystem)
+                api(projects.modules.designsystem)
 
                 api(libs.kotlinx.coroutines.test)
                 api(libs.turbine)
