@@ -11,9 +11,9 @@ import com.mshdabiola.testing.repository.TestUserDataRepository
 import com.mshdabiola.testing.util.MainDispatcherRule
 import com.mshdabiola.testing.util.TestAnalyticsHelper
 import kotlinx.coroutines.test.runTest
-import org.junit.Before
 import org.junit.Rule
-import org.junit.Test
+import kotlin.test.BeforeTest
+import kotlin.test.Test
 
 /**
  * To learn more about how this test handles Flows created with stateIn, see
@@ -30,7 +30,7 @@ class DetailViewModelTest {
     private val savedStateHandle = SavedStateHandle(mapOf(DETAIL_ID_ARG to 4))
     private lateinit var viewModel: DetailViewModel
 
-    @Before
+    @BeforeTest
     fun setup() {
         viewModel = DetailViewModel(
             id = 0,
