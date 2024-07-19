@@ -13,10 +13,6 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 
-/**
- * To learn more about how this test handles Flows created with stateIn, see
- * https://developer.android.com/kotlin/flow/test#statein
- */
 class MainViewModelTest {
     @get:Rule
     val mainDispatcherRule = MainDispatcherRule()
@@ -25,6 +21,7 @@ class MainViewModelTest {
     private val userDataRepository = TestUserDataRepository()
     private val noteRepository = TestNoteRepository()
 
+    //private val savedStateHandle = SavedStateHandle(mapOf(DETAIL_ID_ARG to 4))
     private lateinit var viewModel: MainViewModel
 
     @Before
