@@ -84,7 +84,7 @@ jobs:
           disable_globbing: true
           commit_message: "🤖 Updates baselines for Dependency Guard"
 
-      - name: Run all local screenshot tests (Roborazzi)
+      - name: Run all local screenshot tests
         id: screenshotsverify
         continue-on-error: true
         run: ./gradlew validateFossReliantDebugScreenshotTest
@@ -111,13 +111,9 @@ jobs:
           disable_globbing: true
           commit_message: "🤖 Updates screenshots"
 
-      # Run local tests after screenshot tests to avoid wrong UP-TO-DATE. TODO: Ignore screenshots.
       - name: Run local tests and create report
         if: always()
-        run: ./gradlew testFossReliantDebugUnitTest
-      # Replace task exclusions with `-Pandroidx.baselineprofile.skipgeneration` when
-      # https://android-review.googlesource.com/c/platform/frameworks/support/+/2602790 landed in a
-      # release build
+        run: ./gradlew jvmTest
 
       - name: Build all build type and flavor permutations
         run: ./gradlew assembleFossReliant :benchmarks:assembleFossReliant
@@ -132,12 +128,12 @@ jobs:
           name: APKs
           path: '**/build/outputs/apk/**/*.apk'
 
-      - name: Upload JVM local results (XML)
+      - name: Upload JVM local results (HTML)
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: local-test-results
-          path: '**/build/test-results/test*UnitTest/**.xml'
+          path: '**/build/reports/tests/jvmTest'
 
       - name: Check lint
         run: ./gradlew lintFossReliantRelease
