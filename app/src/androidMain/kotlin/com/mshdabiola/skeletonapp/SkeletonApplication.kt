@@ -10,7 +10,6 @@ import co.touchlab.kermit.koin.KermitKoinLogger
 import co.touchlab.kermit.loggerConfigInit
 import co.touchlab.kermit.platformLogWriter
 import com.mshdabiola.skeletonapp.di.appModule
-import com.mshdabiola.skeletonapp.di.jankStatsModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 import org.koin.dsl.module
@@ -35,7 +34,7 @@ class SkeletonApplication : Application() {
                 KermitKoinLogger(Logger.withTag("koin")),
             )
             androidContext(this@SkeletonApplication)
-            modules(appModule, jankStatsModule, logModule)
+            modules(appModule, logModule)
         }
 
 //        if (packageName.contains("debug")) {

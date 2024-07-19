@@ -57,22 +57,20 @@ class AndroidRoomConventionPlugin : Plugin<Project> {
                 // val libs = extensions.getByType<VersionCatalogsExtension>().named("libs")
                 with(sourceSets) {
 
-                    getByName("commonMain") {
-                        this.dependencies {
-                            implementation(project(":modules:model"))
-                            implementation(libs.findLibrary("room.runtime").get())
-                            implementation(libs.findLibrary("room.ktx").get())
-                            implementation(libs.findLibrary("room.paging").get())
+                    commonMain.dependencies {
+                        implementation(project(":modules:model"))
+                        implementation(libs.findLibrary("room.runtime").get())
+                        implementation(libs.findLibrary("room.ktx").get())
+                        implementation(libs.findLibrary("room.paging").get())
 //                            implementation(libs.findLibrary("paging.common").get())
 
-                            api(libs.findLibrary("sqlite.bundled").get())//sqlite-bundled
-
-                            //ksp(libs.findLibrary("room.compiler").get())
-
-
-                        }
+                        api(libs.findLibrary("sqlite.bundled").get())//sqlite-bundled
 
                     }
+                    jvmTest.dependencies {
+                        implementation(project(":modules:testing"))
+                    }
+
                 }
 
             }

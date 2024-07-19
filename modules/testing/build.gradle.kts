@@ -1,3 +1,5 @@
+import org.jetbrains.compose.ExperimentalComposeLibrary
+
 /*
  *abiola 2024
  */
@@ -10,38 +12,38 @@ android {
     namespace = "com.mshdabiola.testing"
 }
 dependencies {
-
-    api(kotlin("test"))
-    api(libs.androidx.compose.ui.test)
-    api(projects.modules.analytics)
-    api(projects.modules.data)
-    api(projects.modules.model)
-
+//
+//
     debugApi(libs.androidx.compose.ui.testManifest)
-
-    implementation(libs.androidx.test.rules)
-    implementation(libs.kotlinx.coroutines.test)
-    implementation(libs.kotlinx.datetime)
-    implementation(projects.modules.designsystem)
+//
 }
 kotlin {
 
     sourceSets {
-        val commonMain by getting {
+        @OptIn(ExperimentalComposeLibrary::class) val commonMain by getting {
             dependencies {
-                kotlin("test")
-               api(libs.kotlinx.coroutines.test)
+                api(kotlin("test"))
+//                api(compose.uiTest)
+                api(projects.modules.analytics)
+                api(projects.modules.data)
+                api(projects.modules.model)
+                api(projects.modules.designsystem)
+
+                api(libs.kotlinx.coroutines.test)
                 api(libs.turbine)
                 api(libs.koin.test)
                 api(libs.koin.test.junit)
             }
         }
 
-        val commonTest by getting {
+        val jvmMain by getting {
             dependencies {
+                api(compose.desktop.currentOs)
 
+                api(compose.desktop.uiTestJUnit4)
             }
         }
+
 
         val androidMain by getting {
             dependencies {

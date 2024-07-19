@@ -30,9 +30,9 @@ class AndroidFeatureConventionPlugin : Plugin<Project> {
             dependencies {
 
 
-                add("implementation", libs.findLibrary("androidx.lifecycle.runtimeCompose").get())
-                add("implementation", libs.findLibrary("androidx.tracing.ktx").get())
-                add("testImplementation", project(":modules:testing"))
+//                add("implementation", libs.findLibrary("androidx.lifecycle.runtimeCompose").get())
+//                add("implementation", libs.findLibrary("androidx.tracing.ktx").get())
+             //   add("testImplementation", project(":modules:testing"))
 
 
                 add("androidTestImplementation", project(":modules:testing"))
@@ -56,37 +56,7 @@ class AndroidFeatureConventionPlugin : Plugin<Project> {
                         }
 
                     }
-                    getByName("commonTest") {
-                        this.dependencies {
 
-                        }
-
-                    }
-                    getByName("androidMain") {
-                        this.dependencies {
-
-                        }
-
-                    }
-                    getByName("androidInstrumentedTest") {
-                        this.dependencies {
-//
-                        }
-
-                    }
-                    getByName("jvmMain") {
-                        this.dependencies {
-                            // implementation(libs.findLibrary("koin.core").get())
-
-                        }
-
-                    }
-                    getByName("jvmTest") {
-                        this.dependencies {
-
-                        }
-
-                    }
                 }
 
             }

@@ -5,9 +5,12 @@ import com.mshdabiola.app.configureAndroidCompose
 import com.mshdabiola.app.libs
 import org.gradle.api.Plugin
 import org.gradle.api.Project
+import org.gradle.api.artifacts.VersionCatalogsExtension
 import org.gradle.kotlin.dsl.configure
 import org.gradle.kotlin.dsl.dependencies
+import org.gradle.kotlin.dsl.getByType
 import org.gradle.kotlin.dsl.project
+import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 
 class AndroidLibraryComposeConventionPlugin : Plugin<Project> {
     override fun apply(target: Project) {
@@ -30,6 +33,8 @@ class AndroidLibraryComposeConventionPlugin : Plugin<Project> {
            dependencies {
                add("screenshotTestImplementation",  project(":modules:designsystem"))
                add("screenshotTestImplementation", libs.findLibrary("androidx.compose.ui.tooling").get())
+//               add("jvmTestImplementation",  project(":modules:testing"))
+//               add("commonTestImplementation",  project(":modules:testing"))
 
 
 

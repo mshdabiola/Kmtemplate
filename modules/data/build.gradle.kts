@@ -7,10 +7,7 @@ android {
     namespace = "com.mshdabiola.data"
 }
 
-dependencies{
-    testImplementation(project(":modules:testing"))
 
-}
 
 kotlin {
     sourceSets {

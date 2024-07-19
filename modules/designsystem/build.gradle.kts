@@ -18,13 +18,6 @@ android {
 
 dependencies {
     debugApi(compose.uiTooling)
-    api(compose.preview)
-    testImplementation(projects.modules.testing)
-
-
-    androidTestImplementation(libs.androidx.compose.ui.test)
-    androidTestImplementation(projects.modules.testing)
-
 }
 kotlin {
     sourceSets {
@@ -42,7 +35,6 @@ kotlin {
 
                 api(libs.koin.compose)
                 api(libs.koin.composeVM)
-                api(libs.androidx.lifecycle.viewModelCompose)
 
             }
         }
@@ -66,4 +58,17 @@ kotlin {
 
     }
 }
-task("testClasses")
+
+//configurations.all {
+//    resolutionStrategy.eachDependency {
+//        if (
+//            requested.group.startsWith("org.jetbrains.compose.runtime") ||
+//            requested.group.startsWith("org.jetbrains.compose.ui") ||
+//            requested.group.startsWith("org.jetbrains.compose.foundation") ||
+//            requested.group.startsWith("org.jetbrains.compose.material") ||
+//            requested.group.startsWith("org.jetbrains.compose.material3")
+//        ) {
+//            useVersion(libs.versions.compose.plugin.get())
+//        }
+//    }
+//}

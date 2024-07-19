@@ -14,10 +14,10 @@ import androidx.navigation.compose.composable
 import androidx.navigation.createGraph
 import androidx.navigation.testing.TestNavHostController
 import com.mshdabiola.skeletonapp.ui.SkAppState
-import junit.framework.TestCase.assertEquals
 import kotlinx.coroutines.test.runTest
 import org.junit.Rule
 import org.junit.Test
+import kotlin.test.assertEquals
 
 class SkAppState {
 
