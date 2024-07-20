@@ -8,7 +8,6 @@ import androidx.annotation.VisibleForTesting
 import androidx.compose.animation.AnimatedContentScope
 import androidx.compose.animation.ExperimentalSharedTransitionApi
 import androidx.compose.animation.SharedTransitionScope
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.text.input.TextFieldLineLimits
@@ -51,7 +50,8 @@ internal fun DetailRoute(
 }
 
 @OptIn(
-    ExperimentalSharedTransitionApi::class, ExperimentalMaterial3Api::class,
+    ExperimentalSharedTransitionApi::class,
+    ExperimentalMaterial3Api::class,
 )
 @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
 @Composable
@@ -80,7 +80,7 @@ internal fun DetailScreen(
                 actionIcon = SkIcons.Delete,
                 actionIconContentDescription = "delete",
                 onActionClick = { onDelete() },
-                onNavigationClick = {onBack()}
+                onNavigationClick = { onBack() },
             )
             SkTextField(
                 modifier = Modifier
