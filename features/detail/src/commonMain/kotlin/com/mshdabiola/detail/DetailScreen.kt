@@ -26,15 +26,12 @@ import androidx.compose.ui.text.input.ImeAction
 import com.mshdabiola.designsystem.component.SkTextField
 import com.mshdabiola.designsystem.component.SkTopAppBar
 import com.mshdabiola.designsystem.icon.SkIcons
-import com.mshdabiola.ui.ScreenSize
 import com.mshdabiola.ui.TrackScreenViewEvent
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 internal fun DetailRoute(
-    screenSize: ScreenSize,
-
     onShowSnackbar: suspend (String, String?) -> Boolean,
     onBack: () -> Unit,
     modifier: Modifier = Modifier,
@@ -43,7 +40,6 @@ internal fun DetailRoute(
     DetailScreen(
         onShowSnackbar = onShowSnackbar,
         modifier = modifier,
-        screenSize = screenSize,
         title = viewModel.title,
         content = viewModel.content,
         onDelete = {
@@ -61,7 +57,6 @@ internal fun DetailScreen(
     modifier: Modifier = Modifier,
     title: TextFieldState = TextFieldState(),
     content: TextFieldState = TextFieldState(),
-    screenSize: ScreenSize = ScreenSize.COMPACT,
     onShowSnackbar: suspend (String, String?) -> Boolean = { _, _ -> false },
     onBack: () -> Unit = {},
     onDelete: () -> Unit = {},
