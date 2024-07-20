@@ -48,7 +48,7 @@ turbine = "1.1.0"
 
 compose-plugin = "1.7.0-dev1731"
 composeNavigation="2.8.0-dev1707"
-androidxNavigationTest = "2.8.0-beta03" #for nav test
+androidxNavigationTest = "2.8.0-beta05" #for nav test
 compose = "1.7.0-beta03"
 
 
