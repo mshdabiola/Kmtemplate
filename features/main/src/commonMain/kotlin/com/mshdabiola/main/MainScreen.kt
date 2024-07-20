@@ -4,6 +4,9 @@
 
 package com.mshdabiola.main
 
+import androidx.compose.animation.AnimatedContentScope
+import androidx.compose.animation.ExperimentalSharedTransitionApi
+import androidx.compose.animation.SharedTransitionScope
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.gestures.Orientation
 import androidx.compose.foundation.layout.Arrangement
@@ -71,11 +74,13 @@ import org.koin.core.annotation.KoinExperimentalAPI
 
 // import org.koin.androidx.compose.koinViewModel
 
-@OptIn(KoinExperimentalAPI::class)
+@OptIn(KoinExperimentalAPI::class, ExperimentalSharedTransitionApi::class)
 @Composable
 internal fun MainRoute(
+    modifier: Modifier = Modifier,
+    sharedTransitionScope: SharedTransitionScope,
+    animatedContentScope: AnimatedContentScope,
     onShowSnackbar: suspend (String, String?) -> Boolean,
-    navigateToSetting: () -> Unit,
     navigateToDetail: (Detail) -> Unit,
 //    viewModel: MainViewModel,
 ) {
@@ -84,117 +89,94 @@ internal fun MainRoute(
     val feedNote = viewModel.feedUiMainState.collectAsStateWithLifecycleCommon()
 
     MainScreen(
+        sharedTransitionScope = sharedTransitionScope,
+        animatedContentScope = animatedContentScope,
+        modifier = modifier,
         mainState = feedNote.value,
         navigateToDetail = navigateToDetail,
-        navigateToSetting = navigateToSetting,
         //   items = timeline,
 
     )
 }
 
-@OptIn(ExperimentalMaterial3Api::class, ExperimentalComposeUiApi::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalComposeUiApi::class,
+    ExperimentalSharedTransitionApi::class
+)
 @Composable
 internal fun MainScreen(
     modifier: Modifier = Modifier,
+    sharedTransitionScope: SharedTransitionScope,
+    animatedContentScope: AnimatedContentScope,
     mainState: Result<List<NoteUiState>>,
-    screenSize: ScreenSize = ScreenSize.COMPACT,
     navigateToDetail: (Detail) -> Unit = {},
-    navigateToSetting: () -> Unit = {},
 ) {
     val state = rememberLazyListState()
-
-    Scaffold(
-        modifier = modifier,
-        containerColor = Color.Transparent,
-        contentColor = MaterialTheme.colorScheme.onBackground,
-        // contentWindowInsets = WindowInsets(0, 0, 0, 0),
-        topBar = {
-            SkTopAppBar(
-                titleRes = "Note",
-                navigationIcon = SkIcons.Search,
-                navigationIconContentDescription = "search",
-                actionIcon = SkIcons.Settings,
-                actionIconContentDescription = "setting",
-                colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
-                    containerColor = Color.Transparent,
-                ),
-                onActionClick = navigateToSetting,
-                onNavigationClick = { },
-            )
-        },
-        floatingActionButton = {
-            ExtendedFloatingActionButton(
-                modifier = Modifier
-                    .windowInsetsPadding(WindowInsets.safeDrawing)
-                    .testTag("main:add"),
-                onClick = {
-                    navigateToDetail(Detail(-1))
-                },
-            ) {
-                Icon(
-                    imageVector = Icons.Rounded.Add,
-                    contentDescription = "add note",
-                )
-//                            Spacer(modifier = )
-                Text("Add Note")
-            }
-        },
-    ) { padding ->
-        Box(
-            modifier = Modifier.padding(padding),
+with(sharedTransitionScope){
+    Box(
+        modifier = modifier.sharedBounds(
+            sharedContentState = rememberSharedContentState("container"),
+            animatedVisibilityScope = animatedContentScope,
+        ),
+    ) {
+        LazyColumn(
+            state = state,
+            contentPadding = PaddingValues(16.dp),
+            verticalArrangement = Arrangement.spacedBy(16.dp),
+            modifier = Modifier
+                .testTag("main:list"),
         ) {
-            LazyColumn(
-                state = state,
-                contentPadding = PaddingValues(16.dp),
-                verticalArrangement = Arrangement.spacedBy(16.dp),
-                modifier = Modifier
-                    .testTag("main:list"),
-            ) {
-                item {
-                    // Spacer(Modifier.windowInsetsTopHeight(WindowInsets.safeDrawing))
+            item {
+                // Spacer(Modifier.windowInsetsTopHeight(WindowInsets.safeDrawing))
+            }
+            when (mainState) {
+                is Result.Loading -> item {
+                    LoadingState()
                 }
-                when (mainState) {
-                    is Result.Loading -> item {
-                        LoadingState()
-                    }
 
-                    is Result.Error -> TODO()
-                    is Result.Success -> {
-                        if (mainState.data.isEmpty()) {
-                            item {
-                                EmptyState()
-                            }
-                        } else {
-                            noteItems(
-                                items = mainState.data,
-                                onNoteClick = { navigateToDetail(Detail(it)) },
-                                itemModifier = Modifier,
-                            )
+                is Result.Error -> TODO()
+                is Result.Success -> {
+                    if (mainState.data.isEmpty()) {
+                        item {
+                            EmptyState()
                         }
+                    } else {
+
+
+                        noteItems(
+                            modifier = Modifier,
+                              sharedTransitionScope = sharedTransitionScope,
+                            animatedContentScope = animatedContentScope,
+                            items = mainState.data,
+                            onNoteClick = { navigateToDetail(Detail(it)) },
+                        )
+
                     }
-                }
-                item {
-                    Spacer(Modifier.windowInsetsBottomHeight(WindowInsets.safeDrawing))
                 }
             }
-            val itemsAvailable = noteUiStateItemsSize(mainState)
-            val scrollbarState = state.scrollbarState(
-                itemsAvailable = itemsAvailable,
-            )
-            state.DraggableScrollbar(
-                modifier = Modifier
-                    .fillMaxHeight()
-                    .windowInsetsPadding(WindowInsets.systemBars)
-                    .padding(horizontal = 2.dp)
-                    .align(Alignment.CenterEnd),
-                state = scrollbarState,
-                orientation = Orientation.Vertical,
-                onThumbMoved = state.rememberDraggableScroller(
-                    itemsAvailable = itemsAvailable,
-                ),
-            )
+            item {
+                Spacer(Modifier.windowInsetsBottomHeight(WindowInsets.safeDrawing))
+            }
         }
+        val itemsAvailable = noteUiStateItemsSize(mainState)
+        val scrollbarState = state.scrollbarState(
+            itemsAvailable = itemsAvailable,
+        )
+        state.DraggableScrollbar(
+            modifier = Modifier
+                .fillMaxHeight()
+                .windowInsetsPadding(WindowInsets.systemBars)
+                .padding(horizontal = 2.dp)
+                .align(Alignment.CenterEnd),
+            state = scrollbarState,
+            orientation = Orientation.Vertical,
+            onThumbMoved = state.rememberDraggableScroller(
+                itemsAvailable = itemsAvailable,
+            ),
+        )
     }
+}
+
+
 }
 
 @Composable
