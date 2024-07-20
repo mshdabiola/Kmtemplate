@@ -21,6 +21,7 @@ import androidx.compose.material3.NavigationDrawerItem
 import androidx.compose.material3.NavigationDrawerItemDefaults
 import androidx.compose.material3.NavigationRail
 import androidx.compose.material3.NavigationRailItem
+import androidx.compose.material3.PermanentDrawerSheet
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -42,7 +43,7 @@ import org.jetbrains.compose.resources.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun CommonNavigation(
+fun Drawer(
     modifier: Modifier = Modifier,
     currentNavigation: String = mainRoute[0],
     onCreate: () -> Unit = {},
@@ -50,20 +51,9 @@ fun CommonNavigation(
     onNavigate: (String) -> Unit = {},
 
 ) {
-    val color = NavigationDrawerItemDefaults.colors(unselectedContainerColor = Color.Transparent)
-
-    Surface(
-        modifier = modifier,
-        color = MaterialTheme.colorScheme.surface, // LocalBackgroundTheme.current.color,
-        shape = RoundedCornerShape(0.dp),
-
-    ) {
-        Column(
-            verticalArrangement = Arrangement.SpaceBetween,
-            modifier = Modifier
-                .padding(8.dp)
-                .verticalScroll(state = rememberScrollState()),
-        ) {
+        PermanentDrawerSheet (
+            modifier = modifier.verticalScroll(state = rememberScrollState())
+        ){
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Icon(Icons.Default.LocalLibrary, "Logo")
                 Text(
@@ -96,7 +86,6 @@ fun CommonNavigation(
                                 selected = currentNavigation.contains(mainRoute[index]),
                                 label = { Text(navigator) },
                                 onClick = { onNavigate(mainRoute[index]) },
-                                colors = color,
                                 icon = { Icon(mainIcons[index], navigator) },
                             )
                         }
@@ -114,7 +103,6 @@ fun CommonNavigation(
                             selected = currentNavigation.contains(settingRoute[index]),
                             label = { Text(navigator) },
                             onClick = { onNavigate(settingRoute[index]) },
-                            colors = color,
                             icon = { Icon(settingIcons[index], navigator) },
                         )
                     }
@@ -126,7 +114,15 @@ fun CommonNavigation(
 
             ProfileCard()
         }
-    }
+//        Column(
+//            verticalArrangement = Arrangement.SpaceBetween,
+//            modifier = Modifier
+//                .padding(8.dp)
+//                .verticalScroll(state = rememberScrollState()),
+//        ) {
+//
+//        }
+
 }
 
 @Composable
