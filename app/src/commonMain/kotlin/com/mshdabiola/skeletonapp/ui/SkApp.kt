@@ -65,7 +65,8 @@ import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.annotation.KoinExperimentalAPI
 
 @OptIn(
-    ExperimentalMaterial3WindowSizeClassApi::class, KoinExperimentalAPI::class,
+    ExperimentalMaterial3WindowSizeClassApi::class,
+    KoinExperimentalAPI::class,
     ExperimentalMaterial3Api::class,
 )
 @Composable
@@ -76,7 +77,6 @@ fun SkeletonApp() {
     )
     val shouldShowGradientBackground = false
 
-
     val viewModel: MainAppViewModel = koinViewModel()
     val analyticsHelper = koinInject<AnalyticsHelper>()
     val uiState by viewModel.uiState.collectAsStateWithLifecycleCommon()
@@ -84,6 +84,7 @@ fun SkeletonApp() {
 
     CompositionLocalProvider(LocalAnalyticsHelper provides analyticsHelper) {
         SkTheme(
+            androidTheme = shouldUseAndroidTheme(uiState),
             darkTheme = darkTheme,
             disableDynamicTheming = shouldDisableDynamicTheming(uiState),
         ) {
@@ -127,17 +128,14 @@ fun SkeletonApp() {
                                             TopAppBar(
                                                 title = { Text("Setting") },
                                                 navigationIcon = {
-                                                    IconButton(onClick = { appState.navController.popBackStack() })
-                                                    {
+                                                    IconButton(onClick = { appState.navController.popBackStack() }) {
                                                         Icon(
                                                             SkIcons.ArrowBack,
                                                             contentDescription = "back",
                                                         )
-
                                                     }
                                                 },
                                             )
-
                                         }
                                     }
                                 },
@@ -158,17 +156,15 @@ fun SkeletonApp() {
                                             },
                                         )
                                     }
-
                                 },
                                 bottomBar = {
                                     if (appState.shouldShowBottomBar) {
                                         CommonBar {
-
                                         }
                                     }
                                 },
 
-                                ) { padding ->
+                            ) { padding ->
 
                                 Column(
                                     Modifier
@@ -179,7 +175,6 @@ fun SkeletonApp() {
                                             WindowInsets.safeDrawing.only(WindowInsetsSides.Horizontal),
                                         ),
                                 ) {
-
                                     SkNavHost(
                                         appState = appState,
                                         onShowSnackbar = { message, action ->
@@ -191,22 +186,15 @@ fun SkeletonApp() {
                                         },
                                     )
 //                                            }
-
                                 }
                             }
                         }
-
                     }
-
-
                 }
-
-
             }
         }
     }
 }
-
 
 @Composable
 private fun chooseTheme(

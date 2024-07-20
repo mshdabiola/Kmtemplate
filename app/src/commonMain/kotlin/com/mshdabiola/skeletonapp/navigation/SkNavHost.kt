@@ -4,7 +4,6 @@
 
 package com.mshdabiola.skeletonapp.navigation
 
-import androidx.navigation.toRoute
 import androidx.compose.animation.ExperimentalSharedTransitionApi
 import androidx.compose.animation.SharedTransitionLayout
 import androidx.compose.runtime.Composable
@@ -44,10 +43,8 @@ fun SkNavHost(
             )
             settingScreen(
                 modifier = Modifier,
-                sharedTransitionScope = this@SharedTransitionLayout,
                 onShowSnack = onShowSnackbar,
             )
         }
     }
-
 }

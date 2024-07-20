@@ -51,7 +51,6 @@ class SkAppState(
     val isMain: Boolean
         @Composable get() = currentRoute.contains(Main::class.name)
 
-
     val shouldShowTopBar: Boolean
         @Composable get() = currentRoute.contains(Detail::class.name).not()
     val shouldShowBottomBar: Boolean
