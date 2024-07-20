@@ -34,7 +34,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import androidx.navigation.navOptions
 import com.mshdabiola.analytics.AnalyticsHelper
 import com.mshdabiola.analytics.LocalAnalyticsHelper
 import com.mshdabiola.designsystem.component.SkBackground
@@ -42,12 +41,8 @@ import com.mshdabiola.designsystem.component.SkGradientBackground
 import com.mshdabiola.designsystem.theme.GradientColors
 import com.mshdabiola.designsystem.theme.LocalGradientColors
 import com.mshdabiola.designsystem.theme.SkTheme
-import com.mshdabiola.main.navigation.MAIN_ROUTE
-import com.mshdabiola.main.navigation.navigateToMain
 import com.mshdabiola.model.DarkThemeConfig
 import com.mshdabiola.model.ThemeBrand
-import com.mshdabiola.setting.navigation.SETTING_ROUTE
-import com.mshdabiola.setting.navigation.navigateToSetting
 import com.mshdabiola.skeletonapp.MainActivityUiState
 import com.mshdabiola.skeletonapp.MainAppViewModel
 import com.mshdabiola.skeletonapp.navigation.SkNavHost
@@ -69,17 +64,15 @@ fun SkeletonApp() {
     )
     val shouldShowGradientBackground = false
     val navigator: (String) -> Unit = {
-        println("navigation $it seting is $SETTING_ROUTE")
-
-        when (it) {
-            MAIN_ROUTE -> {
-                appState.navController.navigateToMain(navOptions = navOptions { })
-            }
-
-            SETTING_ROUTE -> {
-                appState.navController.navigateToSetting()
-            }
-        }
+//        when (it) {
+//            MAIN_ROUTE -> {
+//                appState.navController.navigateToMain(navOptions = navOptions { })
+//            }
+//
+//            SETTING_ROUTE -> {
+//                appState.navController.navigateToSetting()
+//            }
+//        }
     }
 
     val viewModel: MainAppViewModel = koinViewModel()

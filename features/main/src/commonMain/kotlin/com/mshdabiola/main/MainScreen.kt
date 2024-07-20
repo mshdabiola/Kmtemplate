@@ -54,6 +54,7 @@ import com.mshdabiola.designsystem.component.scrollbar.scrollbarState
 import com.mshdabiola.designsystem.icon.SkIcons
 import com.mshdabiola.designsystem.theme.LocalTintTheme
 import com.mshdabiola.model.Image
+import com.mshdabiola.model.naviagation.Detail
 import com.mshdabiola.ui.NoteUiState
 import com.mshdabiola.ui.ScreenSize
 import com.mshdabiola.ui.collectAsStateWithLifecycleCommon
@@ -73,11 +74,9 @@ import org.koin.core.annotation.KoinExperimentalAPI
 @OptIn(KoinExperimentalAPI::class)
 @Composable
 internal fun MainRoute(
-    screenSize: ScreenSize,
     onShowSnackbar: suspend (String, String?) -> Boolean,
-    onClicked: (Long) -> Unit,
     navigateToSetting: () -> Unit,
-    navigateToDetail: (Long) -> Unit,
+    navigateToDetail: (Detail) -> Unit,
 //    viewModel: MainViewModel,
 ) {
     val viewModel: MainViewModel = koinViewModel()
@@ -86,7 +85,6 @@ internal fun MainRoute(
 
     MainScreen(
         mainState = feedNote.value,
-        screenSize = screenSize,
         navigateToDetail = navigateToDetail,
         navigateToSetting = navigateToSetting,
         //   items = timeline,
@@ -100,7 +98,7 @@ internal fun MainScreen(
     modifier: Modifier = Modifier,
     mainState: Result<List<NoteUiState>>,
     screenSize: ScreenSize = ScreenSize.COMPACT,
-    navigateToDetail: (Long) -> Unit = {},
+    navigateToDetail: (Detail) -> Unit = {},
     navigateToSetting: () -> Unit = {},
 ) {
     val state = rememberLazyListState()
@@ -130,7 +128,7 @@ internal fun MainScreen(
                     .windowInsetsPadding(WindowInsets.safeDrawing)
                     .testTag("main:add"),
                 onClick = {
-                    navigateToDetail(-1)
+                    navigateToDetail(Detail(-1))
                 },
             ) {
                 Icon(
@@ -169,7 +167,7 @@ internal fun MainScreen(
                         } else {
                             noteItems(
                                 items = mainState.data,
-                                onNoteClick = navigateToDetail,
+                                onNoteClick = { navigateToDetail(Detail(it)) },
                                 itemModifier = Modifier,
                             )
                         }
