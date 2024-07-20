@@ -4,14 +4,12 @@
 
 package com.mshdabiola.setting.navigation
 
-import androidx.compose.animation.AnimatedContentScope
 import androidx.compose.animation.ExperimentalSharedTransitionApi
-import androidx.compose.animation.SharedTransitionScope
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavOptions
-import androidx.navigation.compose.composable
+import androidx.navigation.compose.dialog
 import com.mshdabiola.model.naviagation.Setting
 import com.mshdabiola.setting.SettingRoute
 import com.mshdabiola.setting.SettingViewModel
@@ -22,17 +20,14 @@ fun NavController.navigateToSetting(navOptions: NavOptions = androidx.navigation
 
 @OptIn(KoinExperimentalAPI::class, ExperimentalSharedTransitionApi::class)
 fun NavGraphBuilder.settingScreen(
-    modifier: Modifier ,
-    sharedTransitionScope: SharedTransitionScope,
+    modifier: Modifier,
     onShowSnack: suspend (String, String?) -> Boolean,
 ) {
-    composable<Setting> {
+    dialog<Setting> {
         val viewModel: SettingViewModel = koinViewModel()
 
         SettingRoute(
             modifier = modifier,
-            sharedTransitionScope = sharedTransitionScope,
-            animatedContentScope = this,
             onShowSnack = onShowSnack,
             viewModel = viewModel,
         )
