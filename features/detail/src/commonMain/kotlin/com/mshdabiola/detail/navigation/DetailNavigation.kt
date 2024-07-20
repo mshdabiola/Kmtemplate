@@ -4,7 +4,11 @@
 
 package com.mshdabiola.detail.navigation
 
+import androidx.compose.animation.AnimatedContentScope
 import androidx.compose.animation.AnimatedContentTransitionScope
+import androidx.compose.animation.ExperimentalSharedTransitionApi
+import androidx.compose.animation.SharedTransitionScope
+import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
@@ -23,19 +27,15 @@ fun NavController.navigateToDetail(detail: Detail) {
     }
 }
 
-@OptIn(KoinExperimentalAPI::class)
+@OptIn(KoinExperimentalAPI::class, ExperimentalSharedTransitionApi::class)
 fun NavGraphBuilder.detailScreen(
+    modifier: Modifier = Modifier,
+    sharedTransitionScope: SharedTransitionScope,
     onShowSnack: suspend (String, String?) -> Boolean,
     onBack: () -> Unit,
 ) {
-    composable<Detail>(
-        enterTransition = {
-            slideIntoContainer(towards = AnimatedContentTransitionScope.SlideDirection.Left)
-        },
-        exitTransition = {
-            slideOutOfContainer(towards = AnimatedContentTransitionScope.SlideDirection.Right)
-        },
-    ) { backStack ->
+    composable<Detail> { backStack ->
+
         val detail: Detail = backStack.toRoute()
 
         val viewModel: DetailViewModel = koinViewModel(
@@ -47,6 +47,9 @@ fun NavGraphBuilder.detailScreen(
         )
 
         DetailRoute(
+            modifier = modifier,
+            sharedTransitionScope = sharedTransitionScope,
+            animatedContentScope = this,
             onShowSnackbar = onShowSnack,
             onBack = onBack,
             viewModel = viewModel,
