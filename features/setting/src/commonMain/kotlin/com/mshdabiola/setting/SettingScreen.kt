@@ -4,23 +4,19 @@
 
 package com.mshdabiola.setting
 
+import androidx.compose.animation.AnimatedContentScope
+import androidx.compose.animation.ExperimentalSharedTransitionApi
+import androidx.compose.animation.SharedTransitionScope
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExposedDropdownMenuBox
 import androidx.compose.material3.ExposedDropdownMenuDefaults
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
-import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -29,7 +25,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.mshdabiola.model.Contrast
 import com.mshdabiola.model.DarkThemeConfig
@@ -40,54 +35,49 @@ import kotlinx.collections.immutable.toImmutableList
 
 // import org.koin.androidx.compose.koinViewModel
 
+@OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
 internal fun SettingRoute(
-    onBack: () -> Unit,
+    modifier: Modifier = Modifier,
+    sharedTransitionScope: SharedTransitionScope,
+    animatedContentScope: AnimatedContentScope,
     onShowSnack: suspend (String, String?) -> Boolean,
     viewModel: SettingViewModel,
 ) {
     val settingState = viewModel.uiState.collectAsStateWithLifecycleCommon()
 
     SettingScreen(
+        modifier = modifier,
+        sharedTransitionScope = sharedTransitionScope,
+        animatedContentScope = animatedContentScope,
         settingState = settingState.value,
-        onBack = onBack,
         setThemeBrand = viewModel::setThemeBrand,
         setContrast = viewModel::setThemeContrast,
         setDarkThemeConfig = viewModel::setDarkThemeConfig,
     )
 }
 
-@OptIn(ExperimentalMaterial3Api::class, ExperimentalComposeUiApi::class)
+@OptIn(
+    ExperimentalMaterial3Api::class, ExperimentalComposeUiApi::class,
+    ExperimentalSharedTransitionApi::class,
+)
 @Composable
 internal fun SettingScreen(
     settingState: SettingState,
-    onBack: () -> Unit = {},
+    modifier: Modifier = Modifier,
+    sharedTransitionScope: SharedTransitionScope,
+    animatedContentScope: AnimatedContentScope,
     setThemeBrand: (ThemeBrand) -> Unit = {},
     setDarkThemeConfig: (DarkThemeConfig) -> Unit = {},
     setContrast: (Contrast) -> Unit = {},
 
-) {
-    Scaffold(
-        modifier = Modifier, // .semantics { this.testTagsAsResourceId = true },
-        topBar = {
-            TopAppBar(
-                navigationIcon = {
-                    IconButton(onClick = onBack) {
-                        Icon(
-                            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = "back",
-                        )
-                    }
-                },
-                title = {
-                    Text(text = "Setting")
-                },
-            )
-        },
-        containerColor = Color.Transparent,
-    ) { paddingValues ->
+    ) {
+    with(sharedTransitionScope) {
         Column(
-            Modifier.padding(paddingValues).padding(horizontal = 16.dp),
+            modifier.sharedBounds(
+                sharedContentState = rememberSharedContentState("container"),
+                animatedVisibilityScope =animatedContentScope,
+            ),
             verticalArrangement = Arrangement.spacedBy(8.dp),
         ) {
             Row(
@@ -137,6 +127,8 @@ internal fun SettingScreen(
             }
         }
     }
+
+
 }
 //
 // @Preview
