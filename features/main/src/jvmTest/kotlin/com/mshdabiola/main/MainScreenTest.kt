@@ -20,10 +20,9 @@ class MainScreenTest {
                 MainScreen(
                     mainState = Result.Loading,
                     sharedTransitionScope = sharedTransitionScope,
-                    animatedContentScope = animatedContentScope
+                    animatedContentScope = animatedContentScope,
                 )
             }
-
         }
     }
 }

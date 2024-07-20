@@ -16,12 +16,11 @@ class DetailScreenTest {
     fun main() {
         composeRule.setContent {
             SharedContentPreview { sharedTransitionScope, animatedContentScope ->
-               DetailScreen(
-                   sharedTransitionScope = sharedTransitionScope,
-                   animatedContentScope = animatedContentScope
-               )
+                DetailScreen(
+                    sharedTransitionScope = sharedTransitionScope,
+                    animatedContentScope = animatedContentScope,
+                )
             }
-
         }
     }
 }
