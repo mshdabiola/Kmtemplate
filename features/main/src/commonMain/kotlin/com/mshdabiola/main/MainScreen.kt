@@ -28,16 +28,10 @@ import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.Add
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.ExtendedFloatingActionButton
-import androidx.compose.material3.Icon
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
@@ -50,16 +44,13 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.mshdabiola.data.model.Result
 import com.mshdabiola.designsystem.component.SkLoadingWheel
-import com.mshdabiola.designsystem.component.SkTopAppBar
 import com.mshdabiola.designsystem.component.scrollbar.DraggableScrollbar
 import com.mshdabiola.designsystem.component.scrollbar.rememberDraggableScroller
 import com.mshdabiola.designsystem.component.scrollbar.scrollbarState
-import com.mshdabiola.designsystem.icon.SkIcons
 import com.mshdabiola.designsystem.theme.LocalTintTheme
 import com.mshdabiola.model.Image
 import com.mshdabiola.model.naviagation.Detail
 import com.mshdabiola.ui.NoteUiState
-import com.mshdabiola.ui.ScreenSize
 import com.mshdabiola.ui.collectAsStateWithLifecycleCommon
 import com.mshdabiola.ui.noteItems
 import hydraulic.features.main.generated.resources.Res
@@ -99,8 +90,10 @@ internal fun MainRoute(
     )
 }
 
-@OptIn(ExperimentalMaterial3Api::class, ExperimentalComposeUiApi::class,
-    ExperimentalSharedTransitionApi::class
+@OptIn(
+    ExperimentalMaterial3Api::class,
+    ExperimentalComposeUiApi::class,
+    ExperimentalSharedTransitionApi::class,
 )
 @Composable
 internal fun MainScreen(
@@ -111,72 +104,67 @@ internal fun MainScreen(
     navigateToDetail: (Detail) -> Unit = {},
 ) {
     val state = rememberLazyListState()
-with(sharedTransitionScope){
-    Box(
-        modifier = modifier.sharedBounds(
-            sharedContentState = rememberSharedContentState("container"),
-            animatedVisibilityScope = animatedContentScope,
-        ),
-    ) {
-        LazyColumn(
-            state = state,
-            contentPadding = PaddingValues(16.dp),
-            verticalArrangement = Arrangement.spacedBy(16.dp),
-            modifier = Modifier
-                .testTag("main:list"),
+    with(sharedTransitionScope) {
+        Box(
+            modifier = modifier.sharedBounds(
+                sharedContentState = rememberSharedContentState("container"),
+                animatedVisibilityScope = animatedContentScope,
+            ),
         ) {
-            item {
-                // Spacer(Modifier.windowInsetsTopHeight(WindowInsets.safeDrawing))
-            }
-            when (mainState) {
-                is Result.Loading -> item {
-                    LoadingState()
+            LazyColumn(
+                state = state,
+                contentPadding = PaddingValues(16.dp),
+                verticalArrangement = Arrangement.spacedBy(16.dp),
+                modifier = Modifier
+                    .testTag("main:list"),
+            ) {
+                item {
+                    // Spacer(Modifier.windowInsetsTopHeight(WindowInsets.safeDrawing))
                 }
+                when (mainState) {
+                    is Result.Loading -> item {
+                        LoadingState()
+                    }
 
-                is Result.Error -> TODO()
-                is Result.Success -> {
-                    if (mainState.data.isEmpty()) {
-                        item {
-                            EmptyState()
+                    is Result.Error -> TODO()
+                    is Result.Success -> {
+                        if (mainState.data.isEmpty()) {
+                            item {
+                                EmptyState()
+                            }
+                        } else {
+                            noteItems(
+                                modifier = Modifier,
+                                sharedTransitionScope = sharedTransitionScope,
+                                animatedContentScope = animatedContentScope,
+                                items = mainState.data,
+                                onNoteClick = { navigateToDetail(Detail(it)) },
+                            )
                         }
-                    } else {
-
-
-                        noteItems(
-                            modifier = Modifier,
-                              sharedTransitionScope = sharedTransitionScope,
-                            animatedContentScope = animatedContentScope,
-                            items = mainState.data,
-                            onNoteClick = { navigateToDetail(Detail(it)) },
-                        )
-
                     }
                 }
+                item {
+                    Spacer(Modifier.windowInsetsBottomHeight(WindowInsets.safeDrawing))
+                }
             }
-            item {
-                Spacer(Modifier.windowInsetsBottomHeight(WindowInsets.safeDrawing))
-            }
-        }
-        val itemsAvailable = noteUiStateItemsSize(mainState)
-        val scrollbarState = state.scrollbarState(
-            itemsAvailable = itemsAvailable,
-        )
-        state.DraggableScrollbar(
-            modifier = Modifier
-                .fillMaxHeight()
-                .windowInsetsPadding(WindowInsets.systemBars)
-                .padding(horizontal = 2.dp)
-                .align(Alignment.CenterEnd),
-            state = scrollbarState,
-            orientation = Orientation.Vertical,
-            onThumbMoved = state.rememberDraggableScroller(
+            val itemsAvailable = noteUiStateItemsSize(mainState)
+            val scrollbarState = state.scrollbarState(
                 itemsAvailable = itemsAvailable,
-            ),
-        )
+            )
+            state.DraggableScrollbar(
+                modifier = Modifier
+                    .fillMaxHeight()
+                    .windowInsetsPadding(WindowInsets.systemBars)
+                    .padding(horizontal = 2.dp)
+                    .align(Alignment.CenterEnd),
+                state = scrollbarState,
+                orientation = Orientation.Vertical,
+                onThumbMoved = state.rememberDraggableScroller(
+                    itemsAvailable = itemsAvailable,
+                ),
+            )
+        }
     }
-}
-
-
 }
 
 @Composable
