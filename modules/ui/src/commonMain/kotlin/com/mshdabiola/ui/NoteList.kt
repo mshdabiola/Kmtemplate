@@ -12,7 +12,6 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.ui.Modifier
 import com.mshdabiola.analytics.LocalAnalyticsHelper
 
-
 @OptIn(ExperimentalSharedTransitionApi::class)
 fun LazyListScope.noteItems(
     modifier: Modifier = Modifier,

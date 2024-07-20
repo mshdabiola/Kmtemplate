@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.LocalLibrary
@@ -18,16 +17,13 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.NavigationDrawerItem
-import androidx.compose.material3.NavigationDrawerItemDefaults
 import androidx.compose.material3.NavigationRail
 import androidx.compose.material3.NavigationRailItem
 import androidx.compose.material3.PermanentDrawerSheet
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.mshdabiola.designsystem.icon.mainIcons
 import com.mshdabiola.designsystem.icon.mainRoute
@@ -51,17 +47,17 @@ fun Drawer(
     onNavigate: (String) -> Unit = {},
 
 ) {
-        PermanentDrawerSheet (
-            modifier = modifier.verticalScroll(state = rememberScrollState())
-        ){
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                Icon(Icons.Default.LocalLibrary, "Logo")
-                Text(
-                    stringResource(Res.string.app_name),
-                    style = MaterialTheme.typography.headlineSmall,
-                )
-            }
-            Spacer(Modifier.height(32.dp))
+    PermanentDrawerSheet(
+        modifier = modifier.verticalScroll(state = rememberScrollState()),
+    ) {
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            Icon(Icons.Default.LocalLibrary, "Logo")
+            Text(
+                stringResource(Res.string.app_name),
+                style = MaterialTheme.typography.headlineSmall,
+            )
+        }
+        Spacer(Modifier.height(32.dp))
 //        FloatingActionButton(
 //            containerColor = MaterialTheme.colorScheme.secondaryContainer,
 //            onClick = onCreate){
@@ -75,45 +71,45 @@ fun Drawer(
 //            }
 //        }
 
-            if (showLong) {
-                Column(
-                    verticalArrangement = Arrangement.spacedBy(8.dp),
-                ) {
-                    Text(stringResource(Res.string.main))
-                    stringArrayResource(Res.array.main_navigator)
-                        .forEachIndexed { index, navigator ->
-                            NavigationDrawerItem(
-                                selected = currentNavigation.contains(mainRoute[index]),
-                                label = { Text(navigator) },
-                                onClick = { onNavigate(mainRoute[index]) },
-                                icon = { Icon(mainIcons[index], navigator) },
-                            )
-                        }
-                }
-            }
-
-            Spacer(Modifier.height(64.dp))
-
+        if (showLong) {
             Column(
                 verticalArrangement = Arrangement.spacedBy(8.dp),
             ) {
-                stringArrayResource(Res.array.setting_navigator)
+                Text(stringResource(Res.string.main))
+                stringArrayResource(Res.array.main_navigator)
                     .forEachIndexed { index, navigator ->
                         NavigationDrawerItem(
-                            selected = currentNavigation.contains(settingRoute[index]),
+                            selected = currentNavigation.contains(mainRoute[index]),
                             label = { Text(navigator) },
-                            onClick = { onNavigate(settingRoute[index]) },
-                            icon = { Icon(settingIcons[index], navigator) },
+                            onClick = { onNavigate(mainRoute[index]) },
+                            icon = { Icon(mainIcons[index], navigator) },
                         )
                     }
             }
-            Spacer(Modifier.height(8.dp))
-
-            HorizontalDivider()
-            Spacer(Modifier.height(8.dp))
-
-            ProfileCard()
         }
+
+        Spacer(Modifier.height(64.dp))
+
+        Column(
+            verticalArrangement = Arrangement.spacedBy(8.dp),
+        ) {
+            stringArrayResource(Res.array.setting_navigator)
+                .forEachIndexed { index, navigator ->
+                    NavigationDrawerItem(
+                        selected = currentNavigation.contains(settingRoute[index]),
+                        label = { Text(navigator) },
+                        onClick = { onNavigate(settingRoute[index]) },
+                        icon = { Icon(settingIcons[index], navigator) },
+                    )
+                }
+        }
+        Spacer(Modifier.height(8.dp))
+
+        HorizontalDivider()
+        Spacer(Modifier.height(8.dp))
+
+        ProfileCard()
+    }
 //        Column(
 //            verticalArrangement = Arrangement.SpaceBetween,
 //            modifier = Modifier
@@ -122,7 +118,6 @@ fun Drawer(
 //        ) {
 //
 //        }
-
 }
 
 @Composable
