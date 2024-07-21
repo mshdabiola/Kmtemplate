@@ -1,4 +1,4 @@
-package com.mshdabiola.model.naviagation
+package com.mshdabiola.detail.navigation
 
 import kotlinx.serialization.Serializable
 

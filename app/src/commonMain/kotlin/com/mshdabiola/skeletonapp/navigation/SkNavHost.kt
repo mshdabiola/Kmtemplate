@@ -9,10 +9,11 @@ import androidx.compose.animation.SharedTransitionLayout
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
+import com.mshdabiola.detail.navigation.Detail
 import com.mshdabiola.detail.navigation.detailScreen
 import com.mshdabiola.detail.navigation.navigateToDetail
+import com.mshdabiola.main.navigation.Main
 import com.mshdabiola.main.navigation.mainScreen
-import com.mshdabiola.model.naviagation.Main
 import com.mshdabiola.setting.navigation.settingScreen
 import com.mshdabiola.skeletonapp.ui.SkAppState
 
@@ -33,7 +34,7 @@ fun SkNavHost(
                 modifier = Modifier,
                 sharedTransitionScope = this@SharedTransitionLayout,
                 onShowSnack = onShowSnackbar,
-                navigateToDetail = navController::navigateToDetail,
+                navigateToDetail = { navController.navigateToDetail(Detail(it)) },
             )
             detailScreen(
                 modifier = Modifier,

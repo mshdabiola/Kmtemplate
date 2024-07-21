@@ -21,7 +21,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawing
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.systemBars
 import androidx.compose.foundation.layout.windowInsetsBottomHeight
 import androidx.compose.foundation.layout.windowInsetsPadding
@@ -49,7 +48,6 @@ import com.mshdabiola.designsystem.component.scrollbar.rememberDraggableScroller
 import com.mshdabiola.designsystem.component.scrollbar.scrollbarState
 import com.mshdabiola.designsystem.theme.LocalTintTheme
 import com.mshdabiola.model.Image
-import com.mshdabiola.model.naviagation.Detail
 import com.mshdabiola.ui.NoteUiState
 import com.mshdabiola.ui.collectAsStateWithLifecycleCommon
 import com.mshdabiola.ui.noteItems
@@ -72,7 +70,7 @@ internal fun MainRoute(
     sharedTransitionScope: SharedTransitionScope,
     animatedContentScope: AnimatedContentScope,
     onShowSnackbar: suspend (String, String?) -> Boolean,
-    navigateToDetail: (Detail) -> Unit,
+    navigateToDetail: (Long) -> Unit,
 //    viewModel: MainViewModel,
 ) {
     val viewModel: MainViewModel = koinViewModel()
@@ -101,7 +99,7 @@ internal fun MainScreen(
     sharedTransitionScope: SharedTransitionScope,
     animatedContentScope: AnimatedContentScope,
     mainState: Result<List<NoteUiState>>,
-    navigateToDetail: (Detail) -> Unit = {},
+    navigateToDetail: (Long) -> Unit = {},
 ) {
     val state = rememberLazyListState()
     with(sharedTransitionScope) {
@@ -138,7 +136,7 @@ internal fun MainScreen(
                                 sharedTransitionScope = sharedTransitionScope,
                                 animatedContentScope = animatedContentScope,
                                 items = mainState.data,
-                                onNoteClick = { navigateToDetail(Detail(it)) },
+                                onNoteClick = { navigateToDetail(it) },
                             )
                         }
                     }
