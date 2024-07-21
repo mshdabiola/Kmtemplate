@@ -4,31 +4,32 @@
 
 package com.mshdabiola.main.navigation
 
+import androidx.compose.animation.ExperimentalSharedTransitionApi
+import androidx.compose.animation.SharedTransitionScope
+import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavOptions
 import androidx.navigation.compose.composable
-import com.mshdabiola.designsystem.icon.mainRoute
 import com.mshdabiola.main.MainRoute
-import com.mshdabiola.ui.ScreenSize
+import com.mshdabiola.model.naviagation.Detail
+import com.mshdabiola.model.naviagation.Main
 
-val MAIN_ROUTE = mainRoute[0]
+fun NavController.navigateToMain(main: Main, navOptions: NavOptions) = navigate(main, navOptions)
 
-fun NavController.navigateToMain(navOptions: NavOptions) = navigate(MAIN_ROUTE, navOptions)
-
+@OptIn(ExperimentalSharedTransitionApi::class)
 fun NavGraphBuilder.mainScreen(
+    modifier: Modifier = Modifier,
+    sharedTransitionScope: SharedTransitionScope,
     onShowSnack: suspend (String, String?) -> Boolean,
-    onClicked: (Long) -> Unit,
-    navigateToSetting: () -> Unit,
-    navigateToDetail: (Long) -> Unit,
-    screenSize: ScreenSize,
+    navigateToDetail: (Detail) -> Unit,
 ) {
-    composable(route = MAIN_ROUTE) {
+    composable<Main> {
         MainRoute(
-            screenSize = screenSize,
-            onClicked = onClicked,
+            modifier = modifier,
+            sharedTransitionScope = sharedTransitionScope,
+            animatedContentScope = this,
             onShowSnackbar = onShowSnack,
-            navigateToSetting = navigateToSetting,
             navigateToDetail = navigateToDetail,
         )
     }

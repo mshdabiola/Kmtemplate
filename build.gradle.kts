@@ -11,7 +11,6 @@ plugins {
     alias(libs.plugins.firebase.perf) apply false
     alias(libs.plugins.gms) apply false
     alias(libs.plugins.baselineprofile) apply false
-    alias(libs.plugins.roborazzi) apply false
     alias(libs.plugins.ksp) apply false
     alias(libs.plugins.room) apply false
     alias(libs.plugins.kotlinMultiplatform) apply false
@@ -19,8 +18,7 @@ plugins {
     alias(libs.plugins.jetbrainsCompose) apply false
     alias(libs.plugins.compose.compiler) apply false
     alias(libs.plugins.conveyor) apply false
+    alias(libs.plugins.screenshot) apply false
 
 
 }
-//./gradlew assembleDebug -PenableComposeCompilerReports=true
-// ./gradlew assembleDebug -PenableComposeCompilerMetrics=true

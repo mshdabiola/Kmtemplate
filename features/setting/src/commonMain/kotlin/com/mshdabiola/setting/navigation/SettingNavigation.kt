@@ -4,32 +4,30 @@
 
 package com.mshdabiola.setting.navigation
 
+import androidx.compose.animation.ExperimentalSharedTransitionApi
+import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
-import androidx.navigation.compose.composable
-import com.mshdabiola.designsystem.icon.settingRoute
+import androidx.navigation.NavOptions
+import androidx.navigation.compose.dialog
+import com.mshdabiola.model.naviagation.Setting
 import com.mshdabiola.setting.SettingRoute
 import com.mshdabiola.setting.SettingViewModel
-import com.mshdabiola.ui.ScreenSize
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.annotation.KoinExperimentalAPI
 
-val SETTING_ROUTE = settingRoute[0]
+fun NavController.navigateToSetting(navOptions: NavOptions = androidx.navigation.navOptions { }) = navigate(Setting, navOptions)
 
-fun NavController.navigateToSetting() = navigate(SETTING_ROUTE)
-
-@OptIn(KoinExperimentalAPI::class)
+@OptIn(KoinExperimentalAPI::class, ExperimentalSharedTransitionApi::class)
 fun NavGraphBuilder.settingScreen(
-    screenSize: ScreenSize,
+    modifier: Modifier,
     onShowSnack: suspend (String, String?) -> Boolean,
-    onBack: () -> Unit,
 ) {
-    composable(route = SETTING_ROUTE) {
+    dialog<Setting> {
         val viewModel: SettingViewModel = koinViewModel()
 
         SettingRoute(
-            screenSize = screenSize,
-            onBack = onBack,
+            modifier = modifier,
             onShowSnack = onShowSnack,
             viewModel = viewModel,
         )

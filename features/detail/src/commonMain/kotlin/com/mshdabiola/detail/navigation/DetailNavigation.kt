@@ -4,73 +4,50 @@
 
 package com.mshdabiola.detail.navigation
 
-import androidx.annotation.VisibleForTesting
-import androidx.compose.animation.AnimatedContentTransitionScope
-import androidx.lifecycle.SavedStateHandle
+import androidx.compose.animation.ExperimentalSharedTransitionApi
+import androidx.compose.animation.SharedTransitionScope
+import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
-import androidx.navigation.NavType
 import androidx.navigation.compose.composable
-import androidx.navigation.navArgument
-import com.mshdabiola.designsystem.icon.mainRoute
+import androidx.navigation.toRoute
 import com.mshdabiola.detail.DetailRoute
 import com.mshdabiola.detail.DetailViewModel
-import com.mshdabiola.ui.ScreenSize
+import com.mshdabiola.model.naviagation.Detail
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.annotation.KoinExperimentalAPI
 import org.koin.core.parameter.parameterSetOf
 
-val DETAIL_ROUTE = mainRoute[1]
-
-private val URL_CHARACTER_ENCODING = Charsets.UTF_8.name()
-
-@VisibleForTesting
-internal const val DETAIL_ID_ARG = "topicId"
-
-internal class DetailArgs(val id: Long) {
-    constructor(savedStateHandle: SavedStateHandle) : this(checkNotNull<Long>(savedStateHandle[DETAIL_ID_ARG]))
-    // this(URLDecoder.decode(checkNotNull(savedStateHandle[DETAIL_ID_ARG]), URL_CHARACTER_ENCODING))
-}
-
-fun NavController.navigateToDetail(topicId: Long) {
+fun NavController.navigateToDetail(detail: Detail) {
     // val encodedId = URLEncoder.encode(topicId, URL_CHARACTER_ENCODING)
-    navigate("$DETAIL_ROUTE/$topicId") {
+    navigate(detail) {
         launchSingleTop = true
     }
 }
 
-@OptIn(KoinExperimentalAPI::class)
+@OptIn(KoinExperimentalAPI::class, ExperimentalSharedTransitionApi::class)
 fun NavGraphBuilder.detailScreen(
-    screenSize: ScreenSize,
+    modifier: Modifier = Modifier,
+    sharedTransitionScope: SharedTransitionScope,
     onShowSnack: suspend (String, String?) -> Boolean,
     onBack: () -> Unit,
 ) {
-    composable(
-        route = "$DETAIL_ROUTE/{$DETAIL_ID_ARG}",
-        arguments = listOf(
-            navArgument(DETAIL_ID_ARG) {
-                type = NavType.LongType
-            },
-        ),
-        enterTransition = {
-            slideIntoContainer(towards = AnimatedContentTransitionScope.SlideDirection.Left)
-        },
-        exitTransition = {
-            slideOutOfContainer(towards = AnimatedContentTransitionScope.SlideDirection.Right)
-        },
-    ) { backStack ->
-        val id = backStack.arguments?.getLong(DETAIL_ID_ARG)
+    composable<Detail> { backStack ->
+
+        val detail: Detail = backStack.toRoute()
 
         val viewModel: DetailViewModel = koinViewModel(
             parameters = {
                 parameterSetOf(
-                    id,
+                    detail.id,
                 )
             },
         )
 
         DetailRoute(
-            screenSize = screenSize,
+            modifier = modifier,
+            sharedTransitionScope = sharedTransitionScope,
+            animatedContentScope = this,
             onShowSnackbar = onShowSnack,
             onBack = onBack,
             viewModel = viewModel,

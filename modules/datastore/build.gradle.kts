@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "com.mshdabiola.setting"
+    namespace = "com.mshdabiola.datastore"
     //proguard here
 }
 
@@ -24,38 +24,5 @@ kotlin {
 
             }
         }
-//
-//        val commonTest by getting {
-//            dependencies {
-//            }
-//        }
-//
-//        val androidMain by getting {
-//            dependencies {
-//            }
-//        }
-//
-//
-//
-//        val desktopMain by getting {
-//            dependencies {
-//
-//            }
-//        }
-//
-//        val desktopTest by getting
-
-//        val jsMain by getting {
-//            dependencies {
-//
-//            }
-//        }
     }
 }
-//
-//dependencies {
-//
-//    testImplementation(project(":core:testing"))
-//    implementation(libs.paging.runtime)
-//    implementation(libs.paging.common)
-//}

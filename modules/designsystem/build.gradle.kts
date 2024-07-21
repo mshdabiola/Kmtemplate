@@ -7,7 +7,6 @@ plugins {
     id("mshdabiola.android.library.compose")
     id("mshdabiola.android.library.jacoco")
 
-    alias(libs.plugins.roborazzi)
 }
 
 android {
@@ -18,31 +17,9 @@ android {
 }
 
 dependencies {
-
-//    api(libs.androidx.compose.material3.adaptive)
-//    api(libs.androidx.compose.material3.navigationSuite)
-
-
-    debugApi(libs.androidx.compose.ui.tooling)
-
-    implementation(libs.coil.kt.compose)
-
-    testImplementation(libs.androidx.compose.ui.test)
-    testImplementation(libs.robolectric)
-    testImplementation(libs.roborazzi)
-    testImplementation(projects.modules.testing)
-    testImplementation(projects.modules.screenshotTesting)
-
-
-    androidTestImplementation(libs.androidx.compose.ui.test)
-    androidTestImplementation(projects.modules.testing)
-
+    debugApi(compose.uiTooling)
 }
 kotlin {
-//    @OptIn(ExperimentalWasmDsl::class)
-//    wasmJs {
-//        browser()
-//    }
     sourceSets {
         val commonMain by getting {
             dependencies {
@@ -54,18 +31,10 @@ kotlin {
                 api(libs.kotlinx.collection.immutable)
                implementation(project(":modules:model"))
                 api(libs.androidx.compose.material3.windowSizeClass2)
-                api(libs.androidx.navigation.compose)
-//                api(libs.paging.compose.common)
-//
-                implementation(libs.coil.kt.compose)
+                api(libs.androidx.navigation.compose.get())
 
                 api(libs.koin.compose)
                 api(libs.koin.composeVM)
-                api(libs.androidx.lifecycle.viewModelCompose)
-
-
-
-
 
             }
         }
@@ -89,4 +58,17 @@ kotlin {
 
     }
 }
-task("testClasses")
+
+//configurations.all {
+//    resolutionStrategy.eachDependency {
+//        if (
+//            requested.group.startsWith("org.jetbrains.compose.runtime") ||
+//            requested.group.startsWith("org.jetbrains.compose.ui") ||
+//            requested.group.startsWith("org.jetbrains.compose.foundation") ||
+//            requested.group.startsWith("org.jetbrains.compose.material") ||
+//            requested.group.startsWith("org.jetbrains.compose.material3")
+//        ) {
+//            useVersion(libs.versions.compose.plugin.get())
+//        }
+//    }
+//}

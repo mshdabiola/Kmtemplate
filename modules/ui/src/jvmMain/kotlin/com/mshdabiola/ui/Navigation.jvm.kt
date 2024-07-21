@@ -21,5 +21,5 @@ fun NavigationBarPreview() {
 @Composable
 actual fun NavigationPreview() {
     // CommonNavigation()
-    CommonNavigation { }
+    Drawer { }
 }

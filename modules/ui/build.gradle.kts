@@ -1,3 +1,5 @@
+import org.jetbrains.compose.ExperimentalComposeLibrary
+
 /*
  *abiola 2024
  */
@@ -5,6 +7,7 @@
 plugins {
     id("mshdabiola.android.library")
     id("mshdabiola.android.library.compose")
+
 //    id("mshdabiola.android.library.jacoco")
 }
 
@@ -13,30 +16,15 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
     namespace = "com.mshdabiola.ui"
+
 }
 
 dependencies {
-    api(libs.androidx.metrics)
-    implementation(libs.androidx.ui.text.google.fonts)
+  androidTestImplementation(projects.modules.testing)
 
-    testImplementation(libs.androidx.compose.ui.test)
-    testImplementation(libs.androidx.compose.ui.testManifest)
-
-    testImplementation(libs.robolectric)
-    testImplementation(libs.roborazzi)
-    testImplementation(projects.modules.testing)
-    testImplementation(projects.modules.screenshotTesting)
-
-
-    androidTestImplementation(libs.androidx.compose.ui.test)
-    androidTestImplementation(projects.modules.testing)
 }
 
 kotlin {
-//    @OptIn(ExperimentalWasmDsl::class)
-//    wasmJs {
-//        browser()
-//    }
     sourceSets {
 
         val commonMain by getting {
