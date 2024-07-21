@@ -13,7 +13,6 @@ import androidx.navigation.compose.composable
 import androidx.navigation.toRoute
 import com.mshdabiola.detail.DetailRoute
 import com.mshdabiola.detail.DetailViewModel
-import com.mshdabiola.model.naviagation.Detail
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.annotation.KoinExperimentalAPI
 import org.koin.core.parameter.parameterSetOf
