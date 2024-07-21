@@ -13,8 +13,8 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.mshdabiola.model.naviagation.Detail
-import com.mshdabiola.model.naviagation.Main
+import com.mshdabiola.detail.navigation.Detail
+import com.mshdabiola.main.navigation.Main
 import kotlinx.coroutines.CoroutineScope
 import kotlin.reflect.KClass
 

@@ -46,11 +46,11 @@ import com.mshdabiola.designsystem.icon.SkIcons
 import com.mshdabiola.designsystem.theme.GradientColors
 import com.mshdabiola.designsystem.theme.LocalGradientColors
 import com.mshdabiola.designsystem.theme.SkTheme
+import com.mshdabiola.detail.navigation.Detail
 import com.mshdabiola.detail.navigation.navigateToDetail
+import com.mshdabiola.main.navigation.Main
 import com.mshdabiola.model.DarkThemeConfig
 import com.mshdabiola.model.ThemeBrand
-import com.mshdabiola.model.naviagation.Detail
-import com.mshdabiola.model.naviagation.Main
 import com.mshdabiola.setting.navigation.navigateToSetting
 import com.mshdabiola.skeletonapp.MainActivityUiState
 import com.mshdabiola.skeletonapp.MainAppViewModel
