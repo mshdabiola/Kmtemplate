@@ -17,6 +17,7 @@ class AndroidFeatureConventionPlugin : Plugin<Project> {
                 apply("mshdabiola.android.library")
                 apply("mshdabiola.android.library.compose")
                 apply("mshdabiola.android.library.jacoco")
+                apply("org.jetbrains.kotlin.plugin.serialization")
             }
             extensions.configure<LibraryExtension> {
                 defaultConfig {
@@ -53,6 +54,7 @@ class AndroidFeatureConventionPlugin : Plugin<Project> {
 
                             implementation(project(":modules:designsystem"))
                             implementation(project(":modules:analytics"))
+                            implementation(libs.findLibrary("kotlinx.serialization.json").get())
                         }
 
                     }
