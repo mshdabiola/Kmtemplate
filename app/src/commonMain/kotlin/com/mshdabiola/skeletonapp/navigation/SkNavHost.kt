@@ -4,6 +4,8 @@
 
 package com.mshdabiola.skeletonapp.navigation
 
+import androidx.compose.animation.ExperimentalSharedTransitionApi
+import androidx.compose.animation.SharedTransitionLayout
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
@@ -11,10 +13,10 @@ import com.mshdabiola.detail.navigation.detailScreen
 import com.mshdabiola.detail.navigation.navigateToDetail
 import com.mshdabiola.main.navigation.mainScreen
 import com.mshdabiola.model.naviagation.Main
-import com.mshdabiola.setting.navigation.navigateToSetting
 import com.mshdabiola.setting.navigation.settingScreen
 import com.mshdabiola.skeletonapp.ui.SkAppState
 
+@OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
 fun SkNavHost(
     appState: SkAppState,
@@ -22,23 +24,27 @@ fun SkNavHost(
     modifier: Modifier = Modifier,
 ) {
     val navController = appState.navController
-    NavHost(
-        navController = navController,
-        startDestination = Main,
-        modifier = modifier,
-    ) {
-        mainScreen(
-            onShowSnack = onShowSnackbar,
-            navigateToSetting = navController::navigateToSetting,
-            navigateToDetail = navController::navigateToDetail,
-        )
-        detailScreen(
-            onShowSnack = onShowSnackbar,
-            onBack = navController::popBackStack,
-        )
-        settingScreen(
-            onShowSnack = onShowSnackbar,
-            onBack = navController::popBackStack,
-        )
+    SharedTransitionLayout(modifier = modifier) {
+        NavHost(
+            navController = navController,
+            startDestination = Main,
+        ) {
+            mainScreen(
+                modifier = Modifier,
+                sharedTransitionScope = this@SharedTransitionLayout,
+                onShowSnack = onShowSnackbar,
+                navigateToDetail = navController::navigateToDetail,
+            )
+            detailScreen(
+                modifier = Modifier,
+                sharedTransitionScope = this@SharedTransitionLayout,
+                onShowSnack = onShowSnackbar,
+                onBack = navController::popBackStack,
+            )
+            settingScreen(
+                modifier = Modifier,
+                onShowSnack = onShowSnackbar,
+            )
+        }
     }
 }

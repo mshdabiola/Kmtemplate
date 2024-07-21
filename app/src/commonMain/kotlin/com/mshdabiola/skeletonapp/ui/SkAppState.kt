@@ -10,13 +10,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.navigation.NavDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.mshdabiola.designsystem.icon.mainRoute
-import com.mshdabiola.ui.ScreenSize
+import com.mshdabiola.model.naviagation.Detail
+import com.mshdabiola.model.naviagation.Main
 import kotlinx.coroutines.CoroutineScope
+import kotlin.reflect.KClass
 
 @Composable
 fun rememberSkAppState(
@@ -44,26 +44,23 @@ class SkAppState(
     val coroutineScope: CoroutineScope,
     val windowSizeClass: WindowSizeClass,
 ) {
-    val currentDestination: NavDestination?
+    val currentRoute: String
         @Composable get() = navController
-            .currentBackStackEntryAsState().value?.destination
-    val screenSize
-        get() = when (windowSizeClass.widthSizeClass) {
-            WindowWidthSizeClass.Compact -> ScreenSize.COMPACT
-            WindowWidthSizeClass.Medium -> ScreenSize.MEDIUM
-            else -> ScreenSize.EXPANDED
-        }
+            .currentBackStackEntryAsState().value?.destination?.route ?: ""
 
+    val isMain: Boolean
+        @Composable get() = currentRoute.contains(Main::class.name)
+
+    val shouldShowTopBar: Boolean
+        @Composable get() = currentRoute.contains(Detail::class.name).not()
     val shouldShowBottomBar: Boolean
-        @Composable get() = windowSizeClass.widthSizeClass == WindowWidthSizeClass.Compact &&
-            mainRoute.contains(currentDestination?.route)
+        @Composable get() = windowSizeClass.widthSizeClass == WindowWidthSizeClass.Compact && isMain
+
     val shouldShowNavRail: Boolean
-        @Composable get() = windowSizeClass.widthSizeClass == WindowWidthSizeClass.Medium &&
-            mainRoute.contains(currentDestination?.route)
+        @Composable get() = windowSizeClass.widthSizeClass == WindowWidthSizeClass.Medium && isMain
 
     val shouldShowDrawer: Boolean
-        @Composable get() = windowSizeClass.widthSizeClass == WindowWidthSizeClass.Expanded &&
-            mainRoute.contains(currentDestination?.route)
+        @Composable get() = windowSizeClass.widthSizeClass == WindowWidthSizeClass.Expanded && isMain
 
 //    val isOffline = networkMonitor.isOnline
 //        .map(Boolean::not)
@@ -73,6 +70,7 @@ class SkAppState(
 //            initialValue = false,
 //        )
 }
+
 //
 // @Composable
 // private fun NavigationTrackingSideEffect(navController: NavHostController) {
@@ -88,3 +86,7 @@ class SkAppState(
 //        }
 //    }
 // }
+val <T : Any> KClass<T>.name: String
+    get() {
+        return this.qualifiedName.toString()
+    }

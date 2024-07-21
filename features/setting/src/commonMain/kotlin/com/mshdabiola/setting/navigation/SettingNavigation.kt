@@ -4,10 +4,12 @@
 
 package com.mshdabiola.setting.navigation
 
+import androidx.compose.animation.ExperimentalSharedTransitionApi
+import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavOptions
-import androidx.navigation.compose.composable
+import androidx.navigation.compose.dialog
 import com.mshdabiola.model.naviagation.Setting
 import com.mshdabiola.setting.SettingRoute
 import com.mshdabiola.setting.SettingViewModel
@@ -16,16 +18,16 @@ import org.koin.core.annotation.KoinExperimentalAPI
 
 fun NavController.navigateToSetting(navOptions: NavOptions = androidx.navigation.navOptions { }) = navigate(Setting, navOptions)
 
-@OptIn(KoinExperimentalAPI::class)
+@OptIn(KoinExperimentalAPI::class, ExperimentalSharedTransitionApi::class)
 fun NavGraphBuilder.settingScreen(
+    modifier: Modifier,
     onShowSnack: suspend (String, String?) -> Boolean,
-    onBack: () -> Unit,
 ) {
-    composable<Setting> {
+    dialog<Setting> {
         val viewModel: SettingViewModel = koinViewModel()
 
         SettingRoute(
-            onBack = onBack,
+            modifier = modifier,
             onShowSnack = onShowSnack,
             viewModel = viewModel,
         )

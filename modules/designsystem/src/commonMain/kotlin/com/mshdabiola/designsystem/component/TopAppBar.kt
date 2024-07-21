@@ -42,7 +42,7 @@ fun SkTopAppBar(
                 Icon(
                     imageVector = navigationIcon,
                     contentDescription = navigationIconContentDescription,
-                    tint = MaterialTheme.colorScheme.onSurface,
+                    //  tint = MaterialTheme.colorScheme.onSurface,
                 )
             }
         },
@@ -51,7 +51,7 @@ fun SkTopAppBar(
                 Icon(
                     imageVector = actionIcon,
                     contentDescription = actionIconContentDescription,
-                    tint = MaterialTheme.colorScheme.onSurface,
+                    //  tint = MaterialTheme.colorScheme.onSurface,
                 )
             }
         },

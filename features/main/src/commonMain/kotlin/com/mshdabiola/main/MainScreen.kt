@@ -4,6 +4,9 @@
 
 package com.mshdabiola.main
 
+import androidx.compose.animation.AnimatedContentScope
+import androidx.compose.animation.ExperimentalSharedTransitionApi
+import androidx.compose.animation.SharedTransitionScope
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.gestures.Orientation
 import androidx.compose.foundation.layout.Arrangement
@@ -25,16 +28,10 @@ import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.Add
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.ExtendedFloatingActionButton
-import androidx.compose.material3.Icon
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
@@ -47,16 +44,13 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.mshdabiola.data.model.Result
 import com.mshdabiola.designsystem.component.SkLoadingWheel
-import com.mshdabiola.designsystem.component.SkTopAppBar
 import com.mshdabiola.designsystem.component.scrollbar.DraggableScrollbar
 import com.mshdabiola.designsystem.component.scrollbar.rememberDraggableScroller
 import com.mshdabiola.designsystem.component.scrollbar.scrollbarState
-import com.mshdabiola.designsystem.icon.SkIcons
 import com.mshdabiola.designsystem.theme.LocalTintTheme
 import com.mshdabiola.model.Image
 import com.mshdabiola.model.naviagation.Detail
 import com.mshdabiola.ui.NoteUiState
-import com.mshdabiola.ui.ScreenSize
 import com.mshdabiola.ui.collectAsStateWithLifecycleCommon
 import com.mshdabiola.ui.noteItems
 import hydraulic.features.main.generated.resources.Res
@@ -71,11 +65,13 @@ import org.koin.core.annotation.KoinExperimentalAPI
 
 // import org.koin.androidx.compose.koinViewModel
 
-@OptIn(KoinExperimentalAPI::class)
+@OptIn(KoinExperimentalAPI::class, ExperimentalSharedTransitionApi::class)
 @Composable
 internal fun MainRoute(
+    modifier: Modifier = Modifier,
+    sharedTransitionScope: SharedTransitionScope,
+    animatedContentScope: AnimatedContentScope,
     onShowSnackbar: suspend (String, String?) -> Boolean,
-    navigateToSetting: () -> Unit,
     navigateToDetail: (Detail) -> Unit,
 //    viewModel: MainViewModel,
 ) {
@@ -84,64 +80,36 @@ internal fun MainRoute(
     val feedNote = viewModel.feedUiMainState.collectAsStateWithLifecycleCommon()
 
     MainScreen(
+        sharedTransitionScope = sharedTransitionScope,
+        animatedContentScope = animatedContentScope,
+        modifier = modifier,
         mainState = feedNote.value,
         navigateToDetail = navigateToDetail,
-        navigateToSetting = navigateToSetting,
         //   items = timeline,
 
     )
 }
 
-@OptIn(ExperimentalMaterial3Api::class, ExperimentalComposeUiApi::class)
+@OptIn(
+    ExperimentalMaterial3Api::class,
+    ExperimentalComposeUiApi::class,
+    ExperimentalSharedTransitionApi::class,
+)
 @Composable
 internal fun MainScreen(
     modifier: Modifier = Modifier,
+    sharedTransitionScope: SharedTransitionScope,
+    animatedContentScope: AnimatedContentScope,
     mainState: Result<List<NoteUiState>>,
-    screenSize: ScreenSize = ScreenSize.COMPACT,
     navigateToDetail: (Detail) -> Unit = {},
-    navigateToSetting: () -> Unit = {},
 ) {
     val state = rememberLazyListState()
-
-    Scaffold(
-        modifier = modifier,
-        containerColor = Color.Transparent,
-        contentColor = MaterialTheme.colorScheme.onBackground,
-        // contentWindowInsets = WindowInsets(0, 0, 0, 0),
-        topBar = {
-            SkTopAppBar(
-                titleRes = "Note",
-                navigationIcon = SkIcons.Search,
-                navigationIconContentDescription = "search",
-                actionIcon = SkIcons.Settings,
-                actionIconContentDescription = "setting",
-                colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
-                    containerColor = Color.Transparent,
-                ),
-                onActionClick = navigateToSetting,
-                onNavigationClick = { },
-            )
-        },
-        floatingActionButton = {
-            ExtendedFloatingActionButton(
-                modifier = Modifier
-                    .windowInsetsPadding(WindowInsets.safeDrawing)
-                    .testTag("main:add"),
-                onClick = {
-                    navigateToDetail(Detail(-1))
-                },
-            ) {
-                Icon(
-                    imageVector = Icons.Rounded.Add,
-                    contentDescription = "add note",
-                )
-//                            Spacer(modifier = )
-                Text("Add Note")
-            }
-        },
-    ) { padding ->
+    with(sharedTransitionScope) {
         Box(
-            modifier = Modifier.padding(padding),
+            modifier = modifier.sharedBounds(
+                sharedContentState = rememberSharedContentState("container"),
+                animatedVisibilityScope = animatedContentScope,
+            ),
         ) {
             LazyColumn(
                 state = state,
@@ -166,9 +134,11 @@ internal fun MainScreen(
                             }
                         } else {
                             noteItems(
+                                modifier = Modifier,
+                                sharedTransitionScope = sharedTransitionScope,
+                                animatedContentScope = animatedContentScope,
                                 items = mainState.data,
                                 onNoteClick = { navigateToDetail(Detail(it)) },
-                                itemModifier = Modifier,
                             )
                         }
                     }

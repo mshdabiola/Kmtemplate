@@ -56,7 +56,7 @@ class NavigationTest {
     fun firstScreen_isForYou() {
         composeTestRule.apply {
             // VERIFY for you is selected
-            onNodeWithText("Add Note").assertExists()
+            onNodeWithText("Add Note", useUnmergedTree = true).assertExists()
         }
     }
 }
