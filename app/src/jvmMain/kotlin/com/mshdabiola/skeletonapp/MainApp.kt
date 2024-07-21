@@ -20,7 +20,6 @@ import co.touchlab.kermit.loggerConfigInit
 import co.touchlab.kermit.platformLogWriter
 import com.mshdabiola.designsystem.drawable.defaultAppIcon
 import com.mshdabiola.designsystem.string.appName
-import com.mshdabiola.model.Writer
 import com.mshdabiola.skeletonapp.di.appModule
 import com.mshdabiola.skeletonapp.ui.SkeletonApp
 import com.mshdabiola.ui.SplashScreen
