@@ -34,7 +34,7 @@ fun SkNavHost(
                 modifier = Modifier,
                 sharedTransitionScope = this@SharedTransitionLayout,
                 onShowSnack = onShowSnackbar,
-                navigateToDetail = {navController.navigateToDetail(Detail(it))},
+                navigateToDetail = { navController.navigateToDetail(Detail(it)) },
             )
             detailScreen(
                 modifier = Modifier,
