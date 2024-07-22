@@ -63,7 +63,7 @@ firebaseCrashylyticsPlugins = "2.9.9"
 ktor = "2.3.11"
 uiTextGoogleFonts = "1.6.8"
 
-koin = "3.6.0-Beta4"
+koin = "3.6.0-wasm-alpha2"
 koinCompose = "1.2.0-Beta4"
 
 conveyor = "1.10"
