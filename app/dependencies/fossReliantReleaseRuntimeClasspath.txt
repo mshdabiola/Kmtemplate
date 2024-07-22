@@ -170,12 +170,12 @@ io.coil-kt.coil3:coil-svg-android:3.0.0-alpha07
 io.coil-kt.coil3:coil-svg:3.0.0-alpha07
 io.coil-kt.coil3:coil:3.0.0-alpha07
 io.insert-koin:koin-android:3.6.0-Beta4
-io.insert-koin:koin-compose-jvm:1.2.0-Beta4
-io.insert-koin:koin-compose-viewmodel-jvm:1.2.0-Beta4
-io.insert-koin:koin-compose-viewmodel:1.2.0-Beta4
-io.insert-koin:koin-compose:1.2.0-Beta4
-io.insert-koin:koin-core-jvm:3.6.0-Beta4
-io.insert-koin:koin-core:3.6.0-Beta4
+io.insert-koin:koin-compose-jvm:1.2.0-Beta5
+io.insert-koin:koin-compose-viewmodel-jvm:1.2.0-Beta5
+io.insert-koin:koin-compose-viewmodel:1.2.0-Beta5
+io.insert-koin:koin-compose:1.2.0-Beta5
+io.insert-koin:koin-core-jvm:3.6.0-Beta5
+io.insert-koin:koin-core:3.6.0-Beta5
 io.ktor:ktor-client-android-jvm:2.3.11
 io.ktor:ktor-client-android:2.3.11
 io.ktor:ktor-client-content-negotiation-jvm:2.3.11
@@ -211,7 +211,7 @@ org.jetbrains.androidx.core:core-bundle:1.0.0-dev1707
 org.jetbrains.androidx.lifecycle:lifecycle-common:2.8.0-dev1731
 org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose:2.8.0-dev1731
 org.jetbrains.androidx.lifecycle:lifecycle-runtime:2.8.0-dev1731
-org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-compose:2.8.0-rc03
+org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-compose:2.8.0
 org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-savedstate:2.8.0-dev1707
 org.jetbrains.androidx.lifecycle:lifecycle-viewmodel:2.8.0-dev1731
 org.jetbrains.androidx.navigation:navigation-common:2.8.0-dev1707
