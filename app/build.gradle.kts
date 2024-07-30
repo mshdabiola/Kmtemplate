@@ -109,6 +109,9 @@ kotlin {
             implementation(libs.kotlinx.coroutines.swing)
 
         }
+        jvmTest.dependencies {
+            implementation(projects.modules.testing)
+        }
         commonTest.dependencies {
 
         }

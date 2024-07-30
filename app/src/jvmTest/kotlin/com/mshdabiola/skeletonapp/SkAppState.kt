@@ -2,17 +2,15 @@ package com.mshdabiola.skeletonapp
 
 import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
 import androidx.compose.material3.windowsizeclass.WindowSizeClass
-import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.geometry.Size
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.navigation.compose.ComposeNavigator
 import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import androidx.navigation.createGraph
-import androidx.navigation.testing.TestNavHostController
 import com.mshdabiola.skeletonapp.ui.SkAppState
 import kotlinx.coroutines.test.runTest
 import org.junit.Rule
@@ -33,7 +31,13 @@ class SkAppState {
 
         composeTestRule.setContent {
             val density = LocalDensity.current
-            val navController = rememberTestNavController()
+            val navController = rememberNavController().apply {
+                graph = createGraph(startDestination = "a") {
+                    composable("a") { }
+                    composable("b") { }
+                    composable("c") { }
+                }
+            }
             state = remember(navController) {
                 SkAppState(
                     navController = navController,
@@ -43,7 +47,7 @@ class SkAppState {
                         density = density,
                     ),
 
-                )
+                    )
             }
 
             // Update currentDestination whenever it changes
@@ -51,7 +55,7 @@ class SkAppState {
 
             // Navigate to destination b once
             LaunchedEffect(Unit) {
-                navController.setCurrentDestination("b")
+                navController.navigate("b")
             }
         }
 
@@ -59,17 +63,3 @@ class SkAppState {
     }
 }
 
-@Composable
-private fun rememberTestNavController(): TestNavHostController {
-    val context = LocalContext.current
-    return remember {
-        TestNavHostController(context).apply {
-            navigatorProvider.addNavigator(ComposeNavigator())
-            graph = createGraph(startDestination = "a") {
-                composable("a") { }
-                composable("b") { }
-                composable("c") { }
-            }
-        }
-    }
-}
