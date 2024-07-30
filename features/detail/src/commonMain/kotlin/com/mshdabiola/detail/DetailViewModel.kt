@@ -75,7 +75,7 @@ class DetailViewModel constructor(
     private suspend fun onContentChange(note: Note?) {
         if (note?.title?.isNotBlank() == true || note?.content?.isNotBlank() == true) {
             val id = noteRepository.upsert(note)
-            if (note.id == null) {
+            if (note.id == -1L) {
                 this@DetailViewModel.note.update { note.copy(id = id) }
             }
         }
