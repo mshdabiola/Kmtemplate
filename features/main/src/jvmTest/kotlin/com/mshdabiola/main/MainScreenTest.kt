@@ -2,7 +2,6 @@ package com.mshdabiola.main
 
 import androidx.compose.animation.ExperimentalSharedTransitionApi
 import androidx.compose.ui.test.junit4.createComposeRule
-import androidx.compose.ui.test.onNodeWithTag
 import com.mshdabiola.data.model.Result
 import com.mshdabiola.testing.fake.notes
 import com.mshdabiola.ui.SharedContentPreview
@@ -21,7 +20,7 @@ class MainScreenTest {
             SharedContentPreview { sharedTransitionScope, animatedContentScope ->
                 MainScreen(
                     mainState = Result.Success(
-                        notes
+                        notes,
                     ),
                     sharedTransitionScope = sharedTransitionScope,
                     animatedContentScope = animatedContentScope,

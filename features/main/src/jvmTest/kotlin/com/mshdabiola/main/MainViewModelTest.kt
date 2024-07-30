@@ -24,7 +24,6 @@ class MainViewModelTest : KoinTest {
     @get:Rule(order = 1)
     val tmpFolder: TemporaryFolder = TemporaryFolder.builder().assureDeletion().build()
 
-
     @get:Rule(order = 2)
     val mainDispatcherRule = MainDispatcherRule()
 
@@ -37,7 +36,7 @@ class MainViewModelTest : KoinTest {
     @Test
     fun init() = runTest(mainDispatcherRule.testDispatcher) {
         val viewModel = MainViewModel(
-            noteRepository
+            noteRepository,
         )
 
         viewModel
@@ -60,5 +59,4 @@ class MainViewModelTest : KoinTest {
                 cancelAndIgnoreRemainingEvents()
             }
     }
-
 }

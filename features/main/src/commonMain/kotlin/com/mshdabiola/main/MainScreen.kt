@@ -4,7 +4,6 @@
 
 package com.mshdabiola.main
 
-import androidx.compose.animation.AnimatedContentScope
 import androidx.compose.animation.AnimatedVisibilityScope
 import androidx.compose.animation.ExperimentalSharedTransitionApi
 import androidx.compose.animation.SharedTransitionScope
@@ -106,9 +105,9 @@ internal fun MainScreen(
             modifier = modifier
                 .testTag("main:screen")
                 .sharedBounds(
-                sharedContentState = rememberSharedContentState("container"),
-                animatedVisibilityScope = animatedContentScope,
-            ),
+                    sharedContentState = rememberSharedContentState("container"),
+                    animatedVisibilityScope = animatedContentScope,
+                ),
         ) {
             LazyColumn(
                 state = state,

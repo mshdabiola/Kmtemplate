@@ -63,7 +63,7 @@ class ScreenScreenshotTests {
                     MainScreen(
                         modifier = Modifier.fillMaxSize(),
                         mainState = Result.Success(
-                            notes
+                            notes,
                         ),
                         sharedTransitionScope = sharedTransitionScope,
                         animatedContentScope = animatedContentScope,
@@ -82,7 +82,7 @@ class ScreenScreenshotTests {
                 SharedContentPreview { sharedTransitionScope, animatedContentScope ->
                     MainScreen(
                         mainState = Result.Success(
-                            notes
+                            notes,
                         ),
                         sharedTransitionScope = sharedTransitionScope,
                         animatedContentScope = animatedContentScope,
