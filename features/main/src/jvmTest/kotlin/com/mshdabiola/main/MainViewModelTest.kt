@@ -4,35 +4,61 @@
 
 package com.mshdabiola.main
 
-import com.mshdabiola.testing.repository.TestNoteRepository
-import com.mshdabiola.testing.repository.TestUserDataRepository
+import app.cash.turbine.test
+import com.mshdabiola.data.model.Result
+import com.mshdabiola.data.repository.NoteRepository
+import com.mshdabiola.testing.fake.testDataModule
 import com.mshdabiola.testing.util.MainDispatcherRule
-import com.mshdabiola.testing.util.TestAnalyticsHelper
 import kotlinx.coroutines.test.runTest
-import org.junit.Before
 import org.junit.Rule
-import org.junit.Test
+import org.junit.rules.TemporaryFolder
+import org.koin.test.KoinTest
+import org.koin.test.KoinTestRule
+import org.koin.test.inject
+import kotlin.test.Test
+import kotlin.test.assertEquals
+import kotlin.test.assertTrue
 
-class MainViewModelTest {
-    @get:Rule
+class MainViewModelTest : KoinTest {
+
+    @get:Rule(order = 1)
+    val tmpFolder: TemporaryFolder = TemporaryFolder.builder().assureDeletion().build()
+
+
+    @get:Rule(order = 2)
     val mainDispatcherRule = MainDispatcherRule()
 
-    private val analyticsHelper = TestAnalyticsHelper()
-    private val userDataRepository = TestUserDataRepository()
-    private val noteRepository = TestNoteRepository()
-
-    // private val savedStateHandle = SavedStateHandle(mapOf(DETAIL_ID_ARG to 4))
-    private lateinit var viewModel: MainViewModel
-
-    @Before
-    fun setup() {
-        viewModel = MainViewModel(
-            userDataRepository = userDataRepository,
-            modelRepository = noteRepository,
-        )
+    @get:Rule(order = 3)
+    val koinTestRule = KoinTestRule.create {
+        this.modules(testDataModule)
     }
+    private val noteRepository by inject<NoteRepository>()
 
     @Test
-    fun stateIsInitiallyLoading() = runTest {
+    fun init() = runTest(mainDispatcherRule.testDispatcher) {
+        val viewModel = MainViewModel(
+            noteRepository
+        )
+
+        viewModel
+            .notes
+            .test {
+                var state = awaitItem()
+
+                assertTrue(state is Result.Loading)
+
+                state = awaitItem()
+
+                assertTrue(state is Result.Success)
+
+                assertEquals(
+                    10,
+                    state.data.size,
+
+                )
+
+                cancelAndIgnoreRemainingEvents()
+            }
     }
+
 }
