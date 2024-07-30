@@ -7,7 +7,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.test.junit4.createComposeRule
-import androidx.navigation.compose.ComposeNavigator
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.createGraph
@@ -47,7 +46,7 @@ class SkAppState {
                         density = density,
                     ),
 
-                    )
+                )
             }
 
             // Update currentDestination whenever it changes
@@ -62,4 +61,3 @@ class SkAppState {
         assertEquals("b", currentDestination)
     }
 }
-
