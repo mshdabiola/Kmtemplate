@@ -4,9 +4,9 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.core.DataStoreFactory
 import androidx.datastore.core.okio.OkioSerializer
 import androidx.datastore.core.okio.OkioStorage
-import com.mshdabiola.datastore.model.UserDataSer
 import com.mshdabiola.model.DarkThemeConfig
 import com.mshdabiola.model.ThemeBrand
+import com.mshdabiola.model.UserData
 import kotlinx.serialization.json.Json
 import okio.BufferedSink
 import okio.BufferedSource
@@ -17,7 +17,7 @@ internal const val dataStoreFileName = "meetings.preferences_pb"
 
 fun createDataStoreUserData(
     producePath: () -> String,
-): DataStore<UserDataSer> = DataStoreFactory.create(
+): DataStore<UserData> = DataStoreFactory.create(
     storage = OkioStorage(
         fileSystem = FileSystem.SYSTEM,
         serializer = UserDataJsonSerializer,
@@ -29,23 +29,23 @@ fun createDataStoreUserData(
 
 val json = Json
 
-object UserDataJsonSerializer : OkioSerializer<UserDataSer> {
+object UserDataJsonSerializer : OkioSerializer<UserData> {
 
-    override val defaultValue: UserDataSer
-        get() = UserDataSer(
+    override val defaultValue: UserData
+        get() = UserData(
             themeBrand = ThemeBrand.DEFAULT,
             darkThemeConfig = DarkThemeConfig.LIGHT,
             useDynamicColor = false,
             shouldHideOnboarding = false,
         )
 
-    override suspend fun readFrom(source: BufferedSource): UserDataSer {
-        return json.decodeFromString<UserDataSer>(source.readUtf8())
+    override suspend fun readFrom(source: BufferedSource): UserData {
+        return json.decodeFromString<UserData>(source.readUtf8())
     }
 
-    override suspend fun writeTo(userDataSer: UserDataSer, sink: BufferedSink) {
+    override suspend fun writeTo(userData: UserData, sink: BufferedSink) {
         sink.use {
-            it.writeUtf8(json.encodeToString(UserDataSer.serializer(), userDataSer))
+            it.writeUtf8(json.encodeToString(UserData.serializer(), userData))
         }
     }
 }
