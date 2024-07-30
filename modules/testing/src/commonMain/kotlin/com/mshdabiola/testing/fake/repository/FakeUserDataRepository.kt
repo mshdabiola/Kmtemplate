@@ -21,7 +21,7 @@ import kotlinx.coroutines.flow.update
  */
 class FakeUserDataRepository : UserDataRepository {
 
-    private val  _userData = MutableStateFlow(UserData())
+    private val _userData = MutableStateFlow(UserData())
 
     override val userData: Flow<UserData> =
         _userData.asStateFlow()
@@ -30,9 +30,7 @@ class FakeUserDataRepository : UserDataRepository {
         _userData.update {
             it.copy(themeBrand = themeBrand)
         }
-
     }
-
 
     override suspend fun setDarkThemeConfig(darkThemeConfig: DarkThemeConfig) {
         _userData.update {
@@ -47,8 +45,8 @@ class FakeUserDataRepository : UserDataRepository {
     }
 
     override suspend fun setShouldHideOnboarding(shouldHideOnboarding: Boolean) {
-       _userData.update{
-           it.copy(shouldHideOnboarding = shouldHideOnboarding)
-       }
+        _userData.update {
+            it.copy(shouldHideOnboarding = shouldHideOnboarding)
+        }
     }
 }

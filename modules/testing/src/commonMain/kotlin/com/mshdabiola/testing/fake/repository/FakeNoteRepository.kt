@@ -17,23 +17,19 @@ class FakeNoteRepository : NoteRepository {
     private val data = MutableStateFlow(notes)
     override suspend fun upsert(note: Note): Long {
         data.update {
-            if (note.id == null) {
+            if (note.id == -1L) {
                 it.toMutableList().apply {
                     add(note)
                 }
             } else {
                 val idx = it.indexOfFirst { it.id == note.id }
                 it.toMutableList().apply {
-
                     add(idx, note)
                 }
-
             }
         }
 
         return 1
-
-
     }
 
     override fun getAll(): Flow<List<Note>> {

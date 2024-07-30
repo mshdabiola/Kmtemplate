@@ -12,5 +12,5 @@ val notes = listOf(
     Note(7, "Password Reminders", "**Important: Do not store actual passwords here!** - Email: Hint for password - Bank: Hint for password"),
     Note(8, "Recipe: Chocolate Chip Cookies", "Ingredients: - 2 1/4 cups all-purpose flour - 1 tsp baking soda - ... (rest of the recipe)"),
     Note(9, "Project Ideas", "- Build a personal website - Learn a new programming language - Start a blog"),
-    Note(10, "Quotes to Remember", "\"The only way to do great work is to love what you do.\" - Steve Jobs")
+    Note(10, "Quotes to Remember", "\"The only way to do great work is to love what you do.\" - Steve Jobs"),
 )
