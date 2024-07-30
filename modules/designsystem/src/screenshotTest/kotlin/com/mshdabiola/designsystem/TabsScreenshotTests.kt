@@ -10,21 +10,23 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import com.mshdabiola.designsystem.component.SkTab
 import com.mshdabiola.designsystem.component.SkTabRow
-import com.mshdabiola.designsystem.theme.SkTheme
+import com.mshdabiola.testing.util.CaptureMultiTheme
 
 class TabsScreenshotTests {
 
-    @ThemePreviews
+    @Preview
     @Composable
     fun Tabs() {
-        NiaTabsExample()
+        CaptureMultiTheme {
+            NiaTabsExample()
+        }
     }
 
-    @ThemePreviews
+    @Preview
     @Preview(fontScale = 2.0f)
     @Composable
     fun TabsHumFontScale2() {
-        SkTheme {
+        CaptureMultiTheme {
             NiaTabsExample("Looooong item")
         }
     }
