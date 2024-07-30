@@ -4,7 +4,6 @@
 
 package com.mshdabiola.ui
 
-import androidx.compose.animation.AnimatedContentScope
 import androidx.compose.animation.AnimatedVisibilityScope
 import androidx.compose.animation.ExperimentalSharedTransitionApi
 import androidx.compose.animation.SharedTransitionScope
@@ -31,23 +30,22 @@ fun LazyListScope.noteItems(
     itemContent = { note ->
         val analyticsHelper = LocalAnalyticsHelper.current
 
-        with(sharedTransitionScope) {
-            NoteCard(
-                modifier = modifier
-                    .sharedBounds(
-                        sharedContentState = rememberSharedContentState("item"),
-                        animatedVisibilityScope = animatedContentScope,
-                    ),
-                noteUiState = note,
-                onClick = {
-                    analyticsHelper.logNoteOpened(note.id.toString())
-                    onNoteClick(note.id)
-                },
-            )
-        }
+        // with(sharedTransitionScope) {
+        NoteCard(
+            modifier = modifier,
+//                    .sharedBounds(
+//                        sharedContentState = rememberSharedContentState("item"),
+//                        animatedVisibilityScope = animatedContentScope,
+//                    ),
+            noteUiState = note,
+            onClick = {
+                analyticsHelper.logNoteOpened(note.id.toString())
+                onNoteClick(note.id)
+            },
+        )
+        // }
     },
 )
-
 
 @Composable
 fun NoteCard(

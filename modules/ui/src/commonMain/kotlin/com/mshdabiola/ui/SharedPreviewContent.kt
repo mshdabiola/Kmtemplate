@@ -1,7 +1,5 @@
 package com.mshdabiola.ui
 
-import androidx.compose.animation.AnimatedContent
-import androidx.compose.animation.AnimatedContentScope
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.AnimatedVisibilityScope
 import androidx.compose.animation.ExperimentalSharedTransitionApi
@@ -21,9 +19,7 @@ fun SharedContentPreview(
 ) {
     SharedTransitionLayout {
         AnimatedVisibility(true) {
-
-                content(this@SharedTransitionLayout, this)
-
+            content(this@SharedTransitionLayout, this)
         }
     }
 }
