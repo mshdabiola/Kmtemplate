@@ -22,13 +22,13 @@ import androidx.compose.ui.tooling.preview.Preview
     name = "landscape",
     device = "spec:width=411dp,height=891dp,orientation=landscape",
 
-    )
+)
 @Preview(
     group = "screen",
     name = "foldable",
     device = "spec:width=673dp,height=841dp",
 
-    )
+)
 @Preview(
     group = "screen",
     name = "tablet",
