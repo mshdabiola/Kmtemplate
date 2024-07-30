@@ -33,8 +33,6 @@ internal class OfflineFirstUserDataRepository(
         analyticsHelper.logThemeChanged(themeBrand.name)
     }
 
-
-
     override suspend fun setDarkThemeConfig(darkThemeConfig: DarkThemeConfig) {
         settings.updateUserData {
             it.copy(darkThemeConfig = darkThemeConfig)

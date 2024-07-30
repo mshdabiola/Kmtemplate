@@ -18,7 +18,6 @@ interface UserDataRepository {
 
     suspend fun setThemeBrand(themeBrand: ThemeBrand)
 
-
     /**
      * Sets the desired dark theme config.
      */
