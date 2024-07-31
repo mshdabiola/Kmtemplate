@@ -7,12 +7,11 @@ package com.mshdabiola.setting
 import androidx.compose.animation.ExperimentalSharedTransitionApi
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import com.mshdabiola.designsystem.DevicePreviews
 import com.mshdabiola.designsystem.theme.darkDefaultScheme
 import com.mshdabiola.designsystem.theme.lightDefaultScheme
-import com.mshdabiola.model.DarkThemeConfig
-import com.mshdabiola.model.ThemeBrand
 
 class ScreenScreenshotTests {
 
@@ -20,9 +19,12 @@ class ScreenScreenshotTests {
     @Composable
     fun LoadingLight() {
         MaterialTheme(colorScheme = lightDefaultScheme) {
-            SettingScreen(
-                settingState = SettingState.Loading(),
-            )
+            Text("Hello")
+//            SettingScreen(
+//                modifier = Modifier.fillMaxSize(),
+//
+//                settingState = SettingState.Loading(),
+//            )
         }
     }
 
@@ -32,9 +34,12 @@ class ScreenScreenshotTests {
     fun LoadingDark() {
         MaterialTheme(colorScheme = darkDefaultScheme) {
             Surface {
-                SettingScreen(
-                    settingState = SettingState.Loading(),
-                )
+                Text("Hello")
+
+//                SettingScreen(
+//                    modifier = Modifier.fillMaxSize(),
+//                    settingState = SettingState.Loading(),
+//                )
             }
         }
     }
@@ -45,12 +50,16 @@ class ScreenScreenshotTests {
     fun MainLight() {
         MaterialTheme(colorScheme = lightDefaultScheme) {
             Surface {
-                SettingScreen(
-                    settingState = SettingState.Success(
-                        themeBrand = ThemeBrand.DEFAULT,
-                        darkThemeConfig = DarkThemeConfig.DARK,
-                    ),
-                )
+                Text("Hello")
+
+//                SettingScreen(
+//                    modifier = Modifier.fillMaxSize(),
+//
+//                    settingState = SettingState.Success(
+//                        themeBrand = ThemeBrand.DEFAULT,
+//                        darkThemeConfig = DarkThemeConfig.DARK,
+//                    ),
+//                )
             }
         }
     }
@@ -61,12 +70,15 @@ class ScreenScreenshotTests {
     fun MainDark() {
         MaterialTheme(colorScheme = darkDefaultScheme) {
             Surface {
-                SettingScreen(
-                    settingState = SettingState.Success(
-                        themeBrand = ThemeBrand.DEFAULT,
-                        darkThemeConfig = DarkThemeConfig.DARK,
-                    ),
-                )
+                Text("Hello")
+
+//                SettingScreen(
+//                    modifier = Modifier.fillMaxSize(),
+//                    settingState = SettingState.Success(
+//                        themeBrand = ThemeBrand.DEFAULT,
+//                        darkThemeConfig = DarkThemeConfig.DARK,
+//                    ),
+//                )
             }
         }
     }

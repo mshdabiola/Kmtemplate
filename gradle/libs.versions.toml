@@ -76,7 +76,7 @@ sqlite = "2.5.0-alpha05"
 kotlinxCollectionImmutable = "0.3.7"
 windowSizeClass = "0.5.0"
 
-screenshot = "0.0.1-alpha02"
+screenshot = "0.0.1-alpha03"
 
 
 

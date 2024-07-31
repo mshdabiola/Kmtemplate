@@ -24,7 +24,6 @@ import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.systemBars
 import androidx.compose.foundation.layout.windowInsetsBottomHeight
 import androidx.compose.foundation.layout.windowInsetsPadding
-import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -167,13 +166,14 @@ internal fun MainScreen(
 
 @Composable
 private fun LoadingState(modifier: Modifier = Modifier) {
-    SkLoadingWheel(
-        modifier = modifier
-            .fillMaxWidth()
-            .wrapContentSize()
-            .testTag("main:loading"),
-        contentDesc = stringResource(Res.string.features_main_loading),
-    )
+    Box(
+        modifier = modifier.fillMaxSize().testTag("main:loading"),
+        contentAlignment = Alignment.Center,
+    ) {
+        SkLoadingWheel(
+            contentDesc = stringResource(Res.string.features_main_loading),
+        )
+    }
 }
 
 @Composable
@@ -214,6 +214,7 @@ private fun EmptyState(modifier: Modifier = Modifier) {
         )
     }
 }
+
 private fun noteUiStateItemsSize(
     topicUiState: Result<List<Note>>,
 ) = when (topicUiState) {
