@@ -5,26 +5,27 @@
 package com.mshdabiola.designsystem
 
 import androidx.compose.material3.Icon
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.tooling.preview.Preview
 import com.mshdabiola.designsystem.component.SkButton
 import com.mshdabiola.designsystem.icon.SkIcons
+import com.mshdabiola.testing.util.CaptureMultiTheme
 
 class ButtonScreenshotTests {
 
-    @ThemePreviews
+    @Preview
     @Composable
     fun Button() {
-        Surface {
+        CaptureMultiTheme {
             SkButton(onClick = {}, text = { Text(" Button") })
         }
     }
 
-    @ThemePreviews
+    @Preview
     @Composable
     fun ButtonWithLeadIcon() {
-        Surface {
+        CaptureMultiTheme {
             SkButton(
                 onClick = {},
                 text = { Text("Icon Button") },

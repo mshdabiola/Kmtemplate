@@ -5,7 +5,9 @@
 package com.mshdabiola.detail
 
 import androidx.annotation.VisibleForTesting
+import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.AnimatedContentScope
+import androidx.compose.animation.AnimatedVisibilityScope
 import androidx.compose.animation.ExperimentalSharedTransitionApi
 import androidx.compose.animation.SharedTransitionScope
 import androidx.compose.foundation.layout.Column
@@ -18,10 +20,12 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.input.ImeAction
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.mshdabiola.designsystem.component.SkTextField
 import com.mshdabiola.designsystem.component.SkTopAppBar
 import com.mshdabiola.designsystem.icon.SkIcons
 import com.mshdabiola.ui.TrackScreenViewEvent
+import com.mshdabiola.ui.Waiting
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalSharedTransitionApi::class)
@@ -34,8 +38,10 @@ internal fun DetailRoute(
     onBack: () -> Unit,
     viewModel: DetailViewModel,
 ) {
+    val state = viewModel.state.collectAsStateWithLifecycle()
     DetailScreen(
         modifier = modifier,
+        state = state.value,
         sharedTransitionScope = sharedTransitionScope,
         animatedContentScope = animatedContentScope,
         onShowSnackbar = onShowSnackbar,
@@ -57,13 +63,47 @@ internal fun DetailRoute(
 @Composable
 internal fun DetailScreen(
     modifier: Modifier = Modifier,
+    state: DetailState,
     sharedTransitionScope: SharedTransitionScope,
-    animatedContentScope: AnimatedContentScope,
+    animatedContentScope: AnimatedVisibilityScope,
     title: TextFieldState = TextFieldState(),
     content: TextFieldState = TextFieldState(),
     onShowSnackbar: suspend (String, String?) -> Boolean = { _, _ -> false },
     onBack: () -> Unit = {},
     onDelete: () -> Unit = {},
+) {
+    AnimatedContent(state) {
+        when (it) {
+            is DetailState.Loading -> Waiting(modifier)
+            is DetailState.Success -> MainContent(
+                modifier = modifier,
+                state = it,
+                sharedTransitionScope = sharedTransitionScope,
+                animatedContentScope = animatedContentScope,
+                title = title,
+                content = content,
+                onShowSnackbar = onShowSnackbar,
+                onBack = onBack,
+                onDelete = onDelete,
+            )
+            else -> {}
+        }
+    }
+}
+
+@OptIn(ExperimentalSharedTransitionApi::class, ExperimentalMaterial3Api::class)
+@Composable
+internal fun MainContent(
+    modifier: Modifier = Modifier,
+    state: DetailState,
+    sharedTransitionScope: SharedTransitionScope,
+    animatedContentScope: AnimatedVisibilityScope,
+    title: TextFieldState = TextFieldState(),
+    content: TextFieldState = TextFieldState(),
+    onShowSnackbar: suspend (String, String?) -> Boolean = { _, _ -> false },
+    onBack: () -> Unit = {},
+    onDelete: () -> Unit = {},
+
 ) {
     val coroutineScope = rememberCoroutineScope()
     with(sharedTransitionScope) {

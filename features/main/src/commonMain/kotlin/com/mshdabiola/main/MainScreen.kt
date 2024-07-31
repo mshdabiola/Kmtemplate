@@ -4,7 +4,7 @@
 
 package com.mshdabiola.main
 
-import androidx.compose.animation.AnimatedContentScope
+import androidx.compose.animation.AnimatedVisibilityScope
 import androidx.compose.animation.ExperimentalSharedTransitionApi
 import androidx.compose.animation.SharedTransitionScope
 import androidx.compose.foundation.Image
@@ -24,11 +24,9 @@ import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.systemBars
 import androidx.compose.foundation.layout.windowInsetsBottomHeight
 import androidx.compose.foundation.layout.windowInsetsPadding
-import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.ListItem
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -47,8 +45,7 @@ import com.mshdabiola.designsystem.component.scrollbar.DraggableScrollbar
 import com.mshdabiola.designsystem.component.scrollbar.rememberDraggableScroller
 import com.mshdabiola.designsystem.component.scrollbar.scrollbarState
 import com.mshdabiola.designsystem.theme.LocalTintTheme
-import com.mshdabiola.model.Image
-import com.mshdabiola.ui.NoteUiState
+import com.mshdabiola.model.Note
 import com.mshdabiola.ui.collectAsStateWithLifecycleCommon
 import com.mshdabiola.ui.noteItems
 import hydraulic.features.main.generated.resources.Res
@@ -68,14 +65,14 @@ import org.koin.core.annotation.KoinExperimentalAPI
 internal fun MainRoute(
     modifier: Modifier = Modifier,
     sharedTransitionScope: SharedTransitionScope,
-    animatedContentScope: AnimatedContentScope,
+    animatedContentScope: AnimatedVisibilityScope,
     onShowSnackbar: suspend (String, String?) -> Boolean,
     navigateToDetail: (Long) -> Unit,
 //    viewModel: MainViewModel,
 ) {
     val viewModel: MainViewModel = koinViewModel()
 
-    val feedNote = viewModel.feedUiMainState.collectAsStateWithLifecycleCommon()
+    val feedNote = viewModel.notes.collectAsStateWithLifecycleCommon()
 
     MainScreen(
         sharedTransitionScope = sharedTransitionScope,
@@ -97,17 +94,19 @@ internal fun MainRoute(
 internal fun MainScreen(
     modifier: Modifier = Modifier,
     sharedTransitionScope: SharedTransitionScope,
-    animatedContentScope: AnimatedContentScope,
-    mainState: Result<List<NoteUiState>>,
+    animatedContentScope: AnimatedVisibilityScope,
+    mainState: Result<List<Note>>,
     navigateToDetail: (Long) -> Unit = {},
 ) {
     val state = rememberLazyListState()
     with(sharedTransitionScope) {
         Box(
-            modifier = modifier.sharedBounds(
-                sharedContentState = rememberSharedContentState("container"),
-                animatedVisibilityScope = animatedContentScope,
-            ),
+            modifier = modifier
+                .testTag("main:screen")
+                .sharedBounds(
+                    sharedContentState = rememberSharedContentState("container"),
+                    animatedVisibilityScope = animatedContentScope,
+                ),
         ) {
             LazyColumn(
                 state = state,
@@ -167,13 +166,14 @@ internal fun MainScreen(
 
 @Composable
 private fun LoadingState(modifier: Modifier = Modifier) {
-    SkLoadingWheel(
-        modifier = modifier
-            .fillMaxWidth()
-            .wrapContentSize()
-            .testTag("main:loading"),
-        contentDesc = stringResource(Res.string.features_main_loading),
-    )
+    Box(
+        modifier = modifier.fillMaxSize().testTag("main:loading"),
+        contentAlignment = Alignment.Center,
+    ) {
+        SkLoadingWheel(
+            contentDesc = stringResource(Res.string.features_main_loading),
+        )
+    }
 }
 
 @Composable
@@ -214,24 +214,11 @@ private fun EmptyState(modifier: Modifier = Modifier) {
         )
     }
 }
+
 private fun noteUiStateItemsSize(
-    topicUiState: Result<List<NoteUiState>>,
+    topicUiState: Result<List<Note>>,
 ) = when (topicUiState) {
     is Result.Error -> 0 // Nothing
     is Result.Loading -> 1 // Loading bar
     is Result.Success -> topicUiState.data.size + 2
-}
-
-@Composable
-fun ItemImage(imageModel: Image) {
-    ListItem(
-        headlineContent = { Text(imageModel.user ?: "name") },
-        leadingContent = {
-//            AsyncImage(
-//                modifier = Modifier.size(150.dp),
-//                model = imageModel.url,
-//                contentDescription = null,
-//            )
-        },
-    )
 }

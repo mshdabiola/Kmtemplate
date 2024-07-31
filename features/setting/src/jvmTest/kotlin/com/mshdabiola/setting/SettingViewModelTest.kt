@@ -4,38 +4,127 @@
 
 package com.mshdabiola.setting
 
-import com.mshdabiola.testing.repository.TestNoteRepository
-import com.mshdabiola.testing.repository.TestUserDataRepository
+import app.cash.turbine.test
+import com.mshdabiola.data.repository.UserDataRepository
+import com.mshdabiola.model.DarkThemeConfig
+import com.mshdabiola.testing.fake.testDataModule
 import com.mshdabiola.testing.util.MainDispatcherRule
-import com.mshdabiola.testing.util.TestAnalyticsHelper
 import kotlinx.coroutines.test.runTest
-import org.junit.Before
 import org.junit.Rule
-import org.junit.Test
+import org.junit.rules.TemporaryFolder
+import org.koin.test.KoinTest
+import org.koin.test.KoinTestRule
+import org.koin.test.inject
+import kotlin.test.Test
+import kotlin.test.assertEquals
+import kotlin.test.assertTrue
 
-/**
- * To learn more about how this test handles Flows created with stateIn, see
- * https://developer.android.com/kotlin/flow/test#statein
- */
-class SettingViewModelTest {
-    @get:Rule
+class SettingViewModelTest : KoinTest {
+
+    @get:Rule(order = 1)
+    val tmpFolder: TemporaryFolder = TemporaryFolder.builder().assureDeletion().build()
+
+    @get:Rule(order = 2)
     val mainDispatcherRule = MainDispatcherRule()
 
-    private val analyticsHelper = TestAnalyticsHelper()
-    private val userDataRepository = TestUserDataRepository()
-    private val noteRepository = TestNoteRepository()
+    @get:Rule(order = 3)
+    val koinTestRule = KoinTestRule.create {
+        this.modules(testDataModule)
+    }
+    private val userRepository by inject<UserDataRepository>()
 
-//    private val savedStateHandle = SavedStateHandle(mapOf(DETAIL_ID_ARG to 4))
-    private lateinit var viewModel: SettingViewModel
-
-    @Before
-    fun setup() {
-        viewModel = SettingViewModel(
-            userDataRepository = userDataRepository,
+    @Test
+    fun init() = runTest(mainDispatcherRule.testDispatcher) {
+        val viewModel = SettingViewModel(
+            userDataRepository = userRepository,
         )
+
+        viewModel
+            .settingState
+            .test {
+                var state = awaitItem()
+
+                assertTrue(state is SettingState.Loading)
+
+                state = awaitItem()
+
+                assertTrue(state is SettingState.Success)
+
+                assertEquals(
+                    SettingState.Success(
+                        themeBrand = com.mshdabiola.model.ThemeBrand.DEFAULT,
+                        darkThemeConfig = com.mshdabiola.model.DarkThemeConfig.DARK,
+                    ),
+                    state,
+                )
+
+                cancelAndIgnoreRemainingEvents()
+            }
     }
 
     @Test
-    fun stateIsInitiallyLoading() = runTest {
+    fun setThemeTest() = runTest(mainDispatcherRule.testDispatcher) {
+        val viewModel = SettingViewModel(
+            userDataRepository = userRepository,
+        )
+
+        viewModel
+            .settingState
+            .test {
+                var state = awaitItem()
+
+                assertTrue(state is SettingState.Loading)
+
+                state = awaitItem()
+
+                assertTrue(state is SettingState.Success)
+
+                viewModel.setThemeBrand(com.mshdabiola.model.ThemeBrand.GREEN)
+
+                state = awaitItem()
+
+                assertTrue(state is SettingState.Loading)
+
+                state = awaitItem()
+
+                assertTrue(state is SettingState.Success)
+
+                assertEquals(state.themeBrand, com.mshdabiola.model.ThemeBrand.GREEN)
+
+                cancelAndIgnoreRemainingEvents()
+            }
+    }
+
+    @Test
+    fun setDarkTest() = runTest(mainDispatcherRule.testDispatcher) {
+        val viewModel = SettingViewModel(
+            userDataRepository = userRepository,
+        )
+
+        viewModel
+            .settingState
+            .test {
+                var state = awaitItem()
+
+                assertTrue(state is SettingState.Loading)
+
+                state = awaitItem()
+
+                assertTrue(state is SettingState.Success)
+
+                viewModel.setDarkThemeConfig(com.mshdabiola.model.DarkThemeConfig.LIGHT)
+
+                state = awaitItem()
+
+                assertTrue(state is SettingState.Loading)
+
+                state = awaitItem()
+
+                assertTrue(state is SettingState.Success)
+
+                assertEquals(DarkThemeConfig.LIGHT, state.darkThemeConfig)
+
+                cancelAndIgnoreRemainingEvents()
+            }
     }
 }

@@ -46,8 +46,8 @@ secrets = "2.0.1"
 truth = "1.4.3"
 turbine = "1.1.0"
 
-compose-plugin = "1.7.0-dev1731"
-composeNavigation="2.8.0-dev1707"
+compose-plugin = "1.7.0-alpha02"
+composeNavigation="2.8.0-alpha08"
 androidxNavigationTest = "2.8.0-beta03" #for nav test
 compose = "1.7.0-beta03"
 
@@ -76,12 +76,13 @@ sqlite = "2.5.0-alpha05"
 kotlinxCollectionImmutable = "0.3.7"
 windowSizeClass = "0.5.0"
 
-screenshot = "0.0.1-alpha02"
+screenshot = "0.0.1-alpha03"
 
 
 
-versionCode = "119"
-versionName = "1.1.9"
+versionCode = "121"
+versionName = "1.2.1"
+remobe="1.1.1"
 
 
 
