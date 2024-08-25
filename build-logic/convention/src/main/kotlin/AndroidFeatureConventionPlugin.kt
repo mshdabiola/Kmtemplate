@@ -16,7 +16,7 @@ class AndroidFeatureConventionPlugin : Plugin<Project> {
             pluginManager.apply {
                 apply("mshdabiola.android.library")
                 apply("mshdabiola.android.library.compose")
-                apply("mshdabiola.android.library.jacoco")
+               // apply("mshdabiola.android.library.jacoco")
                 apply("org.jetbrains.kotlin.plugin.serialization")
             }
             extensions.configure<LibraryExtension> {

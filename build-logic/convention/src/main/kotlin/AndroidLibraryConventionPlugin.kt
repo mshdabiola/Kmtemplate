@@ -23,6 +23,8 @@ class AndroidLibraryConventionPlugin : Plugin<Project> {
                 apply("com.android.library")
                 apply("mshdabiola.android.lint")
                 apply("org.jetbrains.kotlin.plugin.power-assert")
+                apply("org.jetbrains.kotlinx.kover")
+
 //                apply("screenshot-test-gradle-plugin")
 
 
@@ -61,7 +63,7 @@ class AndroidLibraryConventionPlugin : Plugin<Project> {
                 androidTarget()
                 // jvm("desktop")
                 jvm()
-                jvmToolchain(17)
+                jvmToolchain(21)
 
                 val libs = extensions.getByType<VersionCatalogsExtension>().named("libs")
                 with(sourceSets) {
