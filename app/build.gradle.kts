@@ -7,7 +7,7 @@ plugins {
 
     id("mshdabiola.android.application")
     id("mshdabiola.android.application.compose")
-    id("mshdabiola.android.application.jacoco")
+    //id("mshdabiola.android.application.jacoco")
     id("mshdabiola.android.application.flavor")
     alias(libs.plugins.conveyor)
     alias(libs.plugins.baselineprofile)
@@ -84,6 +84,7 @@ kotlin {
 
         }
         commonMain.dependencies {
+//
             implementation(libs.koin.core)
 
             implementation(projects.modules.designsystem)
@@ -91,6 +92,8 @@ kotlin {
             implementation(projects.modules.ui)
             implementation(projects.modules.model)
             implementation(projects.modules.analytics)
+//            implementation(libs.androidx.compose.material3.adaptive)
+
 
             implementation(projects.features.main)
             implementation(projects.features.detail)
@@ -112,9 +115,6 @@ kotlin {
         jvmTest.dependencies {
             implementation(projects.modules.testing)
         }
-        commonTest.dependencies {
-
-        }
 //        targets.all {
 //            compilations.all {
 //                compilerOptions.configure {
@@ -125,6 +125,7 @@ kotlin {
 
     }
 }
+
 
 android {
 
@@ -161,7 +162,7 @@ android {
             // To publish on the Play store a private signing key is required, but to allow anyone
             // who clones the code to sign and run the release variant, use the debug signing key.
             // TODO: Abstract the signing configuration to a separate file to avoid hardcoding this.
-//             signingConfig = signingConfigs.getByName("debug")
+            // signingConfig = signingConfigs.getByName("debug")
             // Ensure Baseline Profile is fresh for release builds.
             baselineProfile.automaticGenerationDuringBuild = true
         }
@@ -201,6 +202,46 @@ compose.desktop {
             obfuscate.set(true)
             version.set("7.4.2")
         }
+
+//        val iconsRoot = project.file("src/desktopMain/resources/launcher")
+//        nativeDistributions {
+//            targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
+//            packageVersion = "1.0.1"
+//            packageName = "Skeleton"
+//            description = "Template"
+//            copyright = "© 2022 Mshdabiola. All rights reserved."
+//            vendor = "Mshdabiola App"
+//            version = "1.0.1"
+//            licenseFile.set(rootProject.file("LICENSE"))
+//
+//            modules("java.net.http", "java.sql")
+//
+//            linux {
+//                iconFile.set(iconsRoot.resolve("linux.png"))
+//                debMaintainer = "mshdabiola@gmail.com"
+//                menuGroup = packageName
+//                appCategory = "Productivity"
+//            }
+//
+//            windows {
+//                iconFile.set(iconsRoot.resolve("windows.ico"))
+//                shortcut = true
+//                menuGroup = packageName
+////                https://www.guidgen.com/
+//
+//                //https://wixtoolset.org/documentation/manual/v3/howtos/general/generate_guids.html
+//                upgradeUuid = "791AC64E-C9A7-4CBF-A1C4-AFE5CFFDDDFA"
+//            }
+//
+//            macOS {
+//                iconFile.set(iconsRoot.resolve("macos.icns"))
+//                bundleID = "com.mshdabiola.skeleton"
+//                appCategory = "public.app-category.productivity"
+//                signing {
+//                    sign.set(false)
+//                }
+//            }
+//        }
     }
 
 
@@ -212,6 +253,11 @@ configurations.all {
         attribute(Attribute.of("ui", String::class.java), "awt")
     }
 }
+
+//compose.experimental {
+//    web.application {}
+//}
+
 
 baselineProfile {
     // Don't build on every iteration of a full assemble.

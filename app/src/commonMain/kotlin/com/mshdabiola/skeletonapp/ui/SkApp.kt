@@ -28,8 +28,7 @@ import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.SnackbarResult
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
-import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
-import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
+import androidx.compose.material3.windowsizeclass.WindowSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
@@ -62,16 +61,12 @@ import com.mshdabiola.ui.collectAsStateWithLifecycleCommon
 import com.mshdabiola.ui.semanticsCommon
 import org.koin.compose.koinInject
 import org.koin.compose.viewmodel.koinViewModel
-import org.koin.core.annotation.KoinExperimentalAPI
 
 @OptIn(
-    ExperimentalMaterial3WindowSizeClassApi::class,
-    KoinExperimentalAPI::class,
     ExperimentalMaterial3Api::class,
 )
 @Composable
-fun SkeletonApp() {
-    val windowSizeClass = calculateWindowSizeClass()
+fun SkeletonApp(windowSizeClass: WindowSizeClass) {
     val appState = rememberSkAppState(
         windowSizeClass = windowSizeClass,
     )
