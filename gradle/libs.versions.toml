@@ -6,8 +6,8 @@ androidTools = "31.5.2"
 androidxActivity = "1.9.1"
 androidxAppCompat = "1.7.0"
 
-androidxComposeMaterial3Adaptive = "1.0.0-beta04"
-androidxComposeMaterial3AdaptiveNavigationSuite = "1.3.0-rc01"
+androidxComposeMaterial3Adaptive = "1.0.0-alpha01"
+androidxComposeMaterial3AdaptiveNavigationSuite = "1.3.0-beta05"
 androidxCore = "1.13.1"
 androidxCoreSplashscreen = "1.0.1"
 androidxDataStore = "1.1.1"
@@ -70,10 +70,9 @@ conveyor = "1.10"
 kermit = "2.0.4"
 slf4jSimple = "2.0.16"
 
-androidx-paging = "3.3.0"
+androidx-paging = "3.3.2"
 sqlite = "2.5.0-alpha07"
 kotlinxCollectionImmutable = "0.3.7"
-windowSizeClass = "0.5.0"
 
 screenshot = "0.0.1-alpha04"
 kover = "0.8.3"
@@ -98,11 +97,9 @@ androidx-benchmark-macro = { group = "androidx.benchmark", name = "benchmark-mac
 
 
 androidx-compose-material3-navigationSuite = { group = "androidx.compose.material3", name = "material3-adaptive-navigation-suite", version.ref = "androidxComposeMaterial3AdaptiveNavigationSuite" }
-androidx-compose-material3-adaptive = { group = "androidx.compose.material3.adaptive", name = "adaptive", version.ref = "androidxComposeMaterial3Adaptive" }
-androidx-compose-material3-adaptive-layout = { group = "androidx.compose.material3.adaptive", name = "adaptive-layout", version.ref = "androidxComposeMaterial3Adaptive" }
-androidx-compose-material3-adaptive-navigation = { group = "androidx.compose.material3.adaptive", name = "adaptive-navigation", version.ref = "androidxComposeMaterial3Adaptive" }
-androidx-compose-material3-windowSizeClass = { group = "androidx.compose.material3", name = "material3-window-size-class", version.ref = "androidxComposeMaterial3AdaptiveNavigationSuite" }
-androidx-compose-material3-windowSizeClass2 = { module = "org.jetbrains.compose.material3:material3-window-size-class", version.ref = "compose-plugin" }
+androidx-compose-material3-adaptive = { group = "org.jetbrains.compose.material3.adaptive", name = "adaptive", version.ref = "androidxComposeMaterial3Adaptive" }
+androidx-compose-material3-adaptive-layout = { group = "org.jetbrains.compose.material3.adaptive", name = "adaptive-layout", version.ref = "androidxComposeMaterial3Adaptive" }
+androidx-compose-material3-adaptive-navigation = { group = "org.jetbrains.compose.material3.adaptive", name = "adaptive-navigation", version.ref = "androidxComposeMaterial3Adaptive" }
 
 androidx-compose-ui-test = { group = "androidx.compose.ui", name = "ui-test-junit4", version.ref = "compose" }
 androidx-compose-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview", version.ref = "compose" }
