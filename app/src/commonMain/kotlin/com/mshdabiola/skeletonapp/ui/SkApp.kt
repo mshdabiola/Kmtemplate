@@ -28,7 +28,7 @@ import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.SnackbarResult
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
-import androidx.compose.material3.windowsizeclass.WindowSizeClass
+import androidx.compose.material3.adaptive.currentWindowAdaptiveInfo
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
@@ -36,6 +36,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.mshdabiola.analytics.AnalyticsHelper
 import com.mshdabiola.analytics.LocalAnalyticsHelper
 import com.mshdabiola.designsystem.component.SkBackground
@@ -57,7 +58,6 @@ import com.mshdabiola.skeletonapp.navigation.SkNavHost
 import com.mshdabiola.ui.CommonBar
 import com.mshdabiola.ui.CommonRail
 import com.mshdabiola.ui.Drawer
-import com.mshdabiola.ui.collectAsStateWithLifecycleCommon
 import com.mshdabiola.ui.semanticsCommon
 import org.koin.compose.koinInject
 import org.koin.compose.viewmodel.koinViewModel
@@ -66,15 +66,17 @@ import org.koin.compose.viewmodel.koinViewModel
     ExperimentalMaterial3Api::class,
 )
 @Composable
-fun SkeletonApp(windowSizeClass: WindowSizeClass) {
+fun SkeletonApp() {
+    val windowAdaptiveInfo = currentWindowAdaptiveInfo()
+
     val appState = rememberSkAppState(
-        windowSizeClass = windowSizeClass,
+        windowSizeClass = windowAdaptiveInfo.windowSizeClass,
     )
     val shouldShowGradientBackground = false
 
     val viewModel: MainAppViewModel = koinViewModel()
     val analyticsHelper = koinInject<AnalyticsHelper>()
-    val uiState by viewModel.uiState.collectAsStateWithLifecycleCommon()
+    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     val darkTheme = shouldUseDarkTheme(uiState)
 
     CompositionLocalProvider(LocalAnalyticsHelper provides analyticsHelper) {

@@ -6,8 +6,6 @@ import androidx.activity.ComponentActivity
 import androidx.activity.SystemBarStyle
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
-import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -27,7 +25,6 @@ class MainActivity : ComponentActivity() {
 
     private val viewModel: MainAppViewModel by viewModel()
 
-    @OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val splashScreen = installSplashScreen()
@@ -69,9 +66,8 @@ class MainActivity : ComponentActivity() {
                 )
                 onDispose {}
             }
-            val windowSizeClass = calculateWindowSizeClass(this)
 
-            SkeletonApp(windowSizeClass)
+            SkeletonApp()
         }
     }
 }
