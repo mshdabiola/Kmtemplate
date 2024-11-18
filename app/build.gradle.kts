@@ -7,7 +7,6 @@ plugins {
 
     id("mshdabiola.android.application")
     id("mshdabiola.android.application.compose")
-    //id("mshdabiola.android.application.jacoco")
     id("mshdabiola.android.application.flavor")
     alias(libs.plugins.conveyor)
     alias(libs.plugins.baselineprofile)
@@ -43,13 +42,8 @@ dependencies {
     debugImplementation(libs.androidx.compose.ui.testManifest)
 
 
-//    testImplementation(projects.modules.testing)
-//    testImplementation(libs.androidx.work.testing)
     androidTestImplementation(projects.modules.testing)
-//    androidTestImplementation("androidx.startup:startup-runtime:1.1.1")
-//    androidTestImplementation(libs.androidx.test.espresso.core)
     androidTestImplementation(libs.androidx.navigation.testing)
-//    androidTestImplementation(libs.androidx.compose.ui.test)
 
     baselineProfile(projects.benchmarks)
 
@@ -92,7 +86,6 @@ kotlin {
             implementation(projects.modules.ui)
             implementation(projects.modules.model)
             implementation(projects.modules.analytics)
-//            implementation(libs.androidx.compose.material3.adaptive)
 
 
             implementation(projects.features.main)
@@ -101,8 +94,11 @@ kotlin {
 
             // Logger
             implementation(libs.kermit)
-
             implementation(libs.kermit.koin)
+
+            implementation(libs.androidx.compose.material3.adaptive)
+            implementation(libs.androidx.compose.material3.adaptive.layout)
+            implementation(libs.androidx.compose.material3.adaptive.navigation)
 
 
         }
@@ -115,13 +111,6 @@ kotlin {
         jvmTest.dependencies {
             implementation(projects.modules.testing)
         }
-//        targets.all {
-//            compilations.all {
-//                compilerOptions.configure {
-//                    freeCompilerArgs.add("-Xexpect-actual-classes")
-//                }
-//            }
-//        }
 
     }
 }
@@ -203,45 +192,6 @@ compose.desktop {
             version.set("7.4.2")
         }
 
-//        val iconsRoot = project.file("src/desktopMain/resources/launcher")
-//        nativeDistributions {
-//            targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
-//            packageVersion = "1.0.1"
-//            packageName = "Skeleton"
-//            description = "Template"
-//            copyright = "© 2022 Mshdabiola. All rights reserved."
-//            vendor = "Mshdabiola App"
-//            version = "1.0.1"
-//            licenseFile.set(rootProject.file("LICENSE"))
-//
-//            modules("java.net.http", "java.sql")
-//
-//            linux {
-//                iconFile.set(iconsRoot.resolve("linux.png"))
-//                debMaintainer = "mshdabiola@gmail.com"
-//                menuGroup = packageName
-//                appCategory = "Productivity"
-//            }
-//
-//            windows {
-//                iconFile.set(iconsRoot.resolve("windows.ico"))
-//                shortcut = true
-//                menuGroup = packageName
-////                https://www.guidgen.com/
-//
-//                //https://wixtoolset.org/documentation/manual/v3/howtos/general/generate_guids.html
-//                upgradeUuid = "791AC64E-C9A7-4CBF-A1C4-AFE5CFFDDDFA"
-//            }
-//
-//            macOS {
-//                iconFile.set(iconsRoot.resolve("macos.icns"))
-//                bundleID = "com.mshdabiola.skeleton"
-//                appCategory = "public.app-category.productivity"
-//                signing {
-//                    sign.set(false)
-//                }
-//            }
-//        }
     }
 
 
@@ -254,9 +204,10 @@ configurations.all {
     }
 }
 
-//compose.experimental {
-//    web.application {}
-//}
+
+configurations.configureEach {
+    exclude("androidx.window.core", "window-core")
+}
 
 
 baselineProfile {

@@ -2,6 +2,7 @@ package com.mshdabiola.database.di
 
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.mshabiola.database.util.Constant.databaseName
 import com.mshdabiola.database.SkeletonDatabase
 import com.mshdabiola.model.generalPath
 import org.koin.core.module.Module
@@ -17,7 +18,7 @@ actual val databaseModule: Module
     }
 
 fun getDatabaseBuilder(): RoomDatabase.Builder<SkeletonDatabase> {
-    val path = File(generalPath)
+    val path = File(generalPath,databaseName)
 //    if (path.exists().not()) {
 //        path.mkdirs()
 //    }

@@ -1,16 +1,12 @@
 package com.mshdabiola.skeletonapp
 
-import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
-import androidx.compose.material3.windowsizeclass.WindowSizeClass
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
-import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.test.junit4.createComposeRule
-import androidx.compose.ui.unit.DpSize
-import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.createGraph
+import androidx.window.core.layout.WindowSizeClass
 import com.mshdabiola.skeletonapp.ui.SkAppState
 import kotlinx.coroutines.test.runTest
 import org.junit.Rule
@@ -24,13 +20,11 @@ class SkAppState {
 
     private lateinit var state: SkAppState
 
-    @OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
     @Test
     fun currentDestination() = runTest {
         var currentDestination: String? = null
 
         composeTestRule.setContent {
-            val density = LocalDensity.current
             val navController = rememberNavController().apply {
                 graph = createGraph(startDestination = "a") {
                     composable("a") { }
@@ -42,9 +36,7 @@ class SkAppState {
                 SkAppState(
                     navController = navController,
                     coroutineScope = backgroundScope,
-                    windowSizeClass = WindowSizeClass.calculateFromSize(
-                        size = DpSize(456.dp, 789.dp),
-                    ),
+                    WindowSizeClass.compute(456f, 456f),
 
                 )
             }

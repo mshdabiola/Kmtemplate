@@ -1,21 +1,27 @@
 [versions]
 accompanist = "0.34.0"
-androidDesugarJdkLibs = "2.0.4"
-androidGradlePlugin = "8.5.2"
-androidTools = "31.5.2"
-androidxActivity = "1.9.1"
+androidDesugarJdkLibs = "2.1.2"
+androidGradlePlugin = "8.7.2"
+androidTools = "31.7.2"
+androidxActivity = "1.9.3"
 androidxAppCompat = "1.7.0"
-
-androidxComposeMaterial3Adaptive = "1.0.0-beta04"
-androidxComposeMaterial3AdaptiveNavigationSuite = "1.3.0-rc01"
+androidxBrowser = "1.8.0"
+androidxComposeAlpha = "1.7.0-beta03"
+androidxComposeBom = "2024.10.01"
+androidxComposeBomLatest = "2024.08.00-alpha02"
+androidxComposeCompiler = "1.5.12"
+androidxComposeRuntimeTracing = "1.7.5"
+androidxComposeMaterial3Adaptive = "1.0.0"
+androidxComposeMaterial3AdaptiveNavigationSuite = "1.3.1"
 androidxCore = "1.13.1"
 androidxCoreSplashscreen = "1.0.1"
 androidxDataStore = "1.1.1"
 androidxEspresso = "3.6.1"
-androidxLifecycle = "2.8.4"
-androidxMacroBenchmark = "1.3.0"
+androidxHiltNavigationCompose = "1.2.0"
+androidxLifecycle = "2.8.7"
+androidxMacroBenchmark = "1.3.3"
 androidxMetrics = "1.0.0-beta01"
-androidxProfileinstaller = "1.3.1"
+androidxProfileinstaller = "1.4.1"
 androidxTestCore = "1.6.1"
 androidxTestExt = "1.2.1"
 androidxTestRules = "1.6.1"
@@ -23,8 +29,8 @@ androidxTestRunner = "1.6.2"
 androidxTracing = "1.3.0-alpha02"
 androidxUiAutomator = "2.3.0"
 androidxWindowManager = "1.3.0"
-androidxWork = "2.9.1"
-coil = "3.0.0-alpha07"
+androidxWork = "2.10.0"
+coil = "3.0.3"
 dependencyGuard = "0.5.0"
 firebaseBom = "33.1.0"
 firebaseCrashlyticsPlugin = "2.9.9"
@@ -36,19 +42,21 @@ junit4 = "4.13.2"
 kotlin = "2.0.20"
 kotlinxCoroutines = "1.8.1"
 kotlinxDatetime = "0.6.0"
-kotlinxSerializationJson = "1.7.0"
+kotlinxSerializationJson = "1.7.2"
+protobuf = "4.26.0"
+protobufPlugin = "0.9.4"
 ksp = "2.0.20-1.0.24"
-moduleGraph = "2.5.0"
+moduleGraph = "2.6.0"
 poi = "5.3.0"
 room = "2.7.0-alpha07"
 secrets = "2.0.1"
 truth = "1.4.3"
 turbine = "1.1.0"
 
-compose-plugin = "1.7.0-alpha03"
-composeNavigation="2.8.0-alpha09"
+compose-plugin = "1.7.1"
+composeNavigation="2.8.0-alpha10"
 androidxNavigationTest = "2.8.0-rc01" #for nav test
-compose = "1.7.0-beta06"
+compose = "1.7.1"
 
 
 playGame = "20.1.2"
@@ -58,14 +66,15 @@ playCoroutine = "1.8.1"
 firebaseAnalytics = "21.2.2"
 firebaseCrashlyticsKts = "18.3.6"
 firebaseCrashylyticsPlugins = "2.9.9"
+playServicesMlkitTextRecognition = "19.0.0"
 
-ktor = "2.3.11"
-uiTextGoogleFonts = "1.6.8"
+ktor = "2.3.12"
+uiTextGoogleFonts = "1.7.5"
 
-koin = "4.0.0-RC1"
-koinCompose = "4.0.0-RC1"
+koin = "4.0.0"
+koinCompose = "4.0.0"
 
-conveyor = "1.10"
+conveyor = "1.12"
 
 kermit = "2.0.4"
 slf4jSimple = "2.0.16"
@@ -75,7 +84,7 @@ sqlite = "2.5.0-alpha07"
 kotlinxCollectionImmutable = "0.3.7"
 windowSizeClass = "0.5.0"
 
-screenshot = "0.0.1-alpha04"
+screenshot = "0.0.1-alpha07"
 kover = "0.8.3"
 
 
@@ -98,11 +107,9 @@ androidx-benchmark-macro = { group = "androidx.benchmark", name = "benchmark-mac
 
 
 androidx-compose-material3-navigationSuite = { group = "androidx.compose.material3", name = "material3-adaptive-navigation-suite", version.ref = "androidxComposeMaterial3AdaptiveNavigationSuite" }
-androidx-compose-material3-adaptive = { group = "androidx.compose.material3.adaptive", name = "adaptive", version.ref = "androidxComposeMaterial3Adaptive" }
-androidx-compose-material3-adaptive-layout = { group = "androidx.compose.material3.adaptive", name = "adaptive-layout", version.ref = "androidxComposeMaterial3Adaptive" }
-androidx-compose-material3-adaptive-navigation = { group = "androidx.compose.material3.adaptive", name = "adaptive-navigation", version.ref = "androidxComposeMaterial3Adaptive" }
-androidx-compose-material3-windowSizeClass = { group = "androidx.compose.material3", name = "material3-window-size-class", version.ref = "androidxComposeMaterial3AdaptiveNavigationSuite" }
-androidx-compose-material3-windowSizeClass2 = { module = "org.jetbrains.compose.material3:material3-window-size-class", version.ref = "compose-plugin" }
+androidx-compose-material3-adaptive = { group = "org.jetbrains.compose.material3.adaptive", name = "adaptive", version.ref = "androidxComposeMaterial3Adaptive" }
+androidx-compose-material3-adaptive-layout = { group = "org.jetbrains.compose.material3.adaptive", name = "adaptive-layout", version.ref = "androidxComposeMaterial3Adaptive" }
+androidx-compose-material3-adaptive-navigation = { group = "org.jetbrains.compose.material3.adaptive", name = "adaptive-navigation", version.ref = "androidxComposeMaterial3Adaptive" }
 
 androidx-compose-ui-test = { group = "androidx.compose.ui", name = "ui-test-junit4", version.ref = "compose" }
 androidx-compose-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview", version.ref = "compose" }
@@ -133,7 +140,7 @@ androidx-work-testing = { group = "androidx.work", name = "work-testing", versio
 coil-kt = { module = "io.coil-kt.coil3:coil", version.ref = "coil" }
 coil-kt-compose = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coil" }
 coil-kt-svg = { module = "io.coil-kt.coil3:coil-svg", version.ref = "coil" }
-coil-kt-network = { module = "io.coil-kt.coil3:coil-network-ktor", version.ref = "coil" }
+coil-kt-network = { module = "io.coil-kt.coil3:coil-network-okhttp", version.ref = "coil" }
 firebase-analytics = { group = "com.google.firebase", name = "firebase-analytics-ktx" }
 firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.ref = "firebaseBom" }
 firebase-cloud-messaging = { group = "com.google.firebase", name = "firebase-messaging-ktx" }
