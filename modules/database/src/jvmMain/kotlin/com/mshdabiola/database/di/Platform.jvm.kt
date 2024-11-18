@@ -18,7 +18,7 @@ actual val databaseModule: Module
     }
 
 fun getDatabaseBuilder(): RoomDatabase.Builder<SkeletonDatabase> {
-    val path = File(generalPath,databaseName)
+    val path = File(generalPath, databaseName)
 //    if (path.exists().not()) {
 //        path.mkdirs()
 //    }
