@@ -38,7 +38,10 @@ fun SkTopAppBar(
     CenterAlignedTopAppBar(
         title = { Text(text = titleRes) },
         navigationIcon = {
-            IconButton(onClick = onNavigationClick) {
+            IconButton(
+                modifier = Modifier.testTag("back"),
+                onClick = onNavigationClick,
+            ) {
                 Icon(
                     imageVector = navigationIcon,
                     contentDescription = navigationIconContentDescription,

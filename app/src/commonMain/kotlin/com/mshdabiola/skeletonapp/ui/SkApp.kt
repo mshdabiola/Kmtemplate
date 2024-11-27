@@ -35,6 +35,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.mshdabiola.analytics.AnalyticsHelper
@@ -139,6 +140,7 @@ fun SkeletonApp() {
                                 floatingActionButton = {
                                     if (appState.currentRoute.contains(Main::class.name)) {
                                         ExtendedFloatingActionButton(
+                                            modifier = Modifier.testTag("main:add"),
                                             text = { Text("Add Note") },
                                             icon = {
                                                 Icon(
