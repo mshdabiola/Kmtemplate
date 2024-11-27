@@ -9,7 +9,7 @@ import androidx.test.uiautomator.By
 import androidx.test.uiautomator.Until
 
 fun MacrobenchmarkScope.goBack() {
-    val selector = By.desc("back")
+    val selector = By.res("back")
 
     device.wait(Until.hasObject(selector), 5000)
 
