@@ -27,6 +27,7 @@ kotlin {
                 api(compose.material3)
                 api(compose.materialIconsExtended)
                 api(compose.components.resources)
+                api(compose.material3AdaptiveNavigationSuite)
                 api(libs.kotlinx.collection.immutable)
                implementation(project(":modules:model"))
                 api(libs.androidx.navigation.compose.get())
