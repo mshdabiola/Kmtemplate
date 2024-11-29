@@ -6,7 +6,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.mshdabiola.model.DarkThemeConfig
 import com.mshdabiola.model.ThemeBrand
-import com.mshdabiola.model.UserData
 import hydraulic.features.setting.generated.resources.Res
 import hydraulic.features.setting.generated.resources.theme
 import org.jetbrains.compose.resources.stringArrayResource
@@ -27,13 +26,9 @@ fun DialogPreview() {
 fun ScreenPreview() {
     SettingScreen(
         modifier = Modifier,
-        settingState = SettingState(
-            UserData(
-                useDynamicColor = true,
-                themeBrand = ThemeBrand.DEFAULT,
-                darkThemeConfig = DarkThemeConfig.LIGHT,
-                shouldHideOnboarding = false,
-            ),
+        settingState = SettingState.Success(
+            themeBrand = ThemeBrand.DEFAULT,
+            darkThemeConfig = DarkThemeConfig.DARK,
         ),
     )
 }

@@ -14,7 +14,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.unit.dp
 
-lateinit var extendedColorScheme: ExtendedColorScheme
+var extendedColorScheme: ExtendedColorScheme = extendedLight
 
 @Composable
 fun SkTheme(

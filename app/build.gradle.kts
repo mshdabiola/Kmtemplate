@@ -7,7 +7,6 @@ plugins {
 
     id("mshdabiola.android.application")
     id("mshdabiola.android.application.compose")
-    id("mshdabiola.android.application.jacoco")
     id("mshdabiola.android.application.flavor")
     alias(libs.plugins.conveyor)
     alias(libs.plugins.baselineprofile)
@@ -43,13 +42,8 @@ dependencies {
     debugImplementation(libs.androidx.compose.ui.testManifest)
 
 
-//    testImplementation(projects.modules.testing)
-//    testImplementation(libs.androidx.work.testing)
     androidTestImplementation(projects.modules.testing)
-//    androidTestImplementation("androidx.startup:startup-runtime:1.1.1")
-//    androidTestImplementation(libs.androidx.test.espresso.core)
     androidTestImplementation(libs.androidx.navigation.testing)
-//    androidTestImplementation(libs.androidx.compose.ui.test)
 
     baselineProfile(projects.benchmarks)
 
@@ -84,6 +78,7 @@ kotlin {
 
         }
         commonMain.dependencies {
+//
             implementation(libs.koin.core)
 
             implementation(projects.modules.designsystem)
@@ -92,14 +87,18 @@ kotlin {
             implementation(projects.modules.model)
             implementation(projects.modules.analytics)
 
+
             implementation(projects.features.main)
             implementation(projects.features.detail)
             implementation(projects.features.setting)
 
             // Logger
             implementation(libs.kermit)
-
             implementation(libs.kermit.koin)
+
+            implementation(libs.androidx.compose.material3.adaptive)
+            implementation(libs.androidx.compose.material3.adaptive.layout)
+            implementation(libs.androidx.compose.material3.adaptive.navigation)
 
 
         }
@@ -109,19 +108,13 @@ kotlin {
             implementation(libs.kotlinx.coroutines.swing)
 
         }
-        commonTest.dependencies {
-
+        jvmTest.dependencies {
+            implementation(projects.modules.testing)
         }
-//        targets.all {
-//            compilations.all {
-//                compilerOptions.configure {
-//                    freeCompilerArgs.add("-Xexpect-actual-classes")
-//                }
-//            }
-//        }
 
     }
 }
+
 
 android {
 
@@ -158,7 +151,7 @@ android {
             // To publish on the Play store a private signing key is required, but to allow anyone
             // who clones the code to sign and run the release variant, use the debug signing key.
             // TODO: Abstract the signing configuration to a separate file to avoid hardcoding this.
-//             signingConfig = signingConfigs.getByName("debug")
+            // signingConfig = signingConfigs.getByName("debug")
             // Ensure Baseline Profile is fresh for release builds.
             baselineProfile.automaticGenerationDuringBuild = true
         }
@@ -198,6 +191,7 @@ compose.desktop {
             obfuscate.set(true)
             version.set("7.4.2")
         }
+
     }
 
 
@@ -209,6 +203,12 @@ configurations.all {
         attribute(Attribute.of("ui", String::class.java), "awt")
     }
 }
+
+
+configurations.configureEach {
+    exclude("androidx.window.core", "window-core")
+}
+
 
 baselineProfile {
     // Don't build on every iteration of a full assemble.

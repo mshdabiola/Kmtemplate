@@ -23,6 +23,7 @@ fun NavController.navigateToSetting(navOptions: NavOptions = androidx.navigation
 fun NavGraphBuilder.settingScreen(
     modifier: Modifier,
     onShowSnack: suspend (String, String?) -> Boolean,
+    onBack: () -> Unit,
 ) {
     dialog<Setting> {
         val viewModel: SettingViewModel = koinViewModel()
@@ -31,6 +32,7 @@ fun NavGraphBuilder.settingScreen(
             modifier = modifier,
             onShowSnack = onShowSnack,
             viewModel = viewModel,
+            onBack = onBack,
         )
     }
 }

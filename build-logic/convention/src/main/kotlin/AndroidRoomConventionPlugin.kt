@@ -26,12 +26,12 @@ class AndroidRoomConventionPlugin : Plugin<Project> {
                 arg("room.generateKotlin", "true")
 
             }
-            extensions.configure<RoomExtension> {
-                // The schemas directory contains a schema file for each version of the Room database.
-                // This is required to enable Room auto migrations.
-                // See https://developer.android.com/reference/kotlin/androidx/room/AutoMigration.
-                schemaDirectory("$projectDir/schemas")
-            }
+//            extensions.configure<RoomExtension> {
+//                // The schemas directory contains a schema file for each version of the Room database.
+//                // This is required to enable Room auto migrations.
+//                // See https://developer.android.com/reference/kotlin/androidx/room/AutoMigration.
+//                schemaDirectory("$projectDir/schemas")
+//            }
 
 
             dependencies {
@@ -53,7 +53,7 @@ class AndroidRoomConventionPlugin : Plugin<Project> {
             extensions.configure<KotlinMultiplatformExtension> {
                 androidTarget()
                 jvm()
-                jvmToolchain(17)
+                jvmToolchain(21)
                 // val libs = extensions.getByType<VersionCatalogsExtension>().named("libs")
                 with(sourceSets) {
 

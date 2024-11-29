@@ -4,7 +4,6 @@
 
 package com.mshdabiola.data.repository
 
-import com.mshdabiola.model.Contrast
 import com.mshdabiola.model.DarkThemeConfig
 import com.mshdabiola.model.ThemeBrand
 import com.mshdabiola.model.UserData
@@ -18,8 +17,6 @@ interface UserDataRepository {
     val userData: Flow<UserData>
 
     suspend fun setThemeBrand(themeBrand: ThemeBrand)
-
-    suspend fun setThemeContrast(contrast: Contrast)
 
     /**
      * Sets the desired dark theme config.

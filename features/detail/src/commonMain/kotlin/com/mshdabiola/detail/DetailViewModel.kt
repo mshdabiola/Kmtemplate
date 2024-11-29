@@ -4,7 +4,6 @@
 
 package com.mshdabiola.detail
 
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.text.input.TextFieldState
 import androidx.compose.runtime.snapshotFlow
 import androidx.lifecycle.ViewModel
@@ -13,30 +12,32 @@ import com.mshdabiola.data.repository.NoteRepository
 import com.mshdabiola.model.Note
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-@OptIn(ExperimentalFoundationApi::class, FlowPreview::class)
-class DetailViewModel constructor(
+@OptIn(FlowPreview::class)
+class DetailViewModel(
     // savedStateHandle: SavedStateHandle,
     id: Long,
     private val noteRepository: NoteRepository,
 ) : ViewModel() {
-
-    private val noteId = id
 
     private val note = MutableStateFlow<Note?>(Note())
 
     val title = TextFieldState()
     val content = TextFieldState()
 
+    private val _state = MutableStateFlow<DetailState>(DetailState.Loading())
+    val state = _state.asStateFlow()
+
     init {
         viewModelScope.launch {
-            if (noteId > 0) {
-                val initNOte = noteRepository.getOne(noteId)
+            if (id > 0) {
+                val initNOte = noteRepository.getOne(id)
                     .first()
                 note.update { initNOte }
 
@@ -49,6 +50,7 @@ class DetailViewModel constructor(
                     }
                 }
             }
+            _state.update { DetailState.Success(id) }
 
             note
                 .collectLatest {
@@ -75,7 +77,7 @@ class DetailViewModel constructor(
     private suspend fun onContentChange(note: Note?) {
         if (note?.title?.isNotBlank() == true || note?.content?.isNotBlank() == true) {
             val id = noteRepository.upsert(note)
-            if (note.id == null) {
+            if (note.id == -1L) {
                 this@DetailViewModel.note.update { note.copy(id = id) }
             }
         }

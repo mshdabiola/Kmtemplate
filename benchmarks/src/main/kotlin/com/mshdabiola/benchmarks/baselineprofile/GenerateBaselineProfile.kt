@@ -22,7 +22,7 @@ class GenerateBaselineProfile {
         baselineProfileRule.collect(PACKAGE_NAME) {
             startActivity()
 
-            repeat(10) {
+            repeat(2) {
                 goToDetailScreen()
                 addNote()
                 goBack()

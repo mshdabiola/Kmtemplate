@@ -4,8 +4,6 @@
 
 package com.mshdabiola.skeletonapp.ui
 
-import androidx.compose.material3.windowsizeclass.WindowSizeClass
-import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.remember
@@ -13,6 +11,8 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import androidx.window.core.layout.WindowSizeClass
+import androidx.window.core.layout.WindowWidthSizeClass
 import com.mshdabiola.detail.navigation.Detail
 import com.mshdabiola.main.navigation.Main
 import kotlinx.coroutines.CoroutineScope
@@ -24,7 +24,6 @@ fun rememberSkAppState(
     coroutineScope: CoroutineScope = rememberCoroutineScope(),
     navController: NavHostController = rememberNavController(),
 ): SkAppState {
-    // NavigationTrackingSideEffect(navController)
     return remember(
         navController,
         coroutineScope,
@@ -54,38 +53,15 @@ class SkAppState(
     val shouldShowTopBar: Boolean
         @Composable get() = currentRoute.contains(Detail::class.name).not()
     val shouldShowBottomBar: Boolean
-        @Composable get() = windowSizeClass.widthSizeClass == WindowWidthSizeClass.Compact && isMain
+        @Composable get() = windowSizeClass.windowWidthSizeClass == WindowWidthSizeClass.COMPACT && isMain
 
     val shouldShowNavRail: Boolean
-        @Composable get() = windowSizeClass.widthSizeClass == WindowWidthSizeClass.Medium && isMain
+        @Composable get() = windowSizeClass.windowWidthSizeClass == WindowWidthSizeClass.MEDIUM && isMain
 
     val shouldShowDrawer: Boolean
-        @Composable get() = windowSizeClass.widthSizeClass == WindowWidthSizeClass.Expanded && isMain
-
-//    val isOffline = networkMonitor.isOnline
-//        .map(Boolean::not)
-//        .stateIn(
-//            scope = coroutineScope,
-//            started = SharingStarted.WhileSubscribed(5_000),
-//            initialValue = false,
-//        )
+        @Composable get() = windowSizeClass.windowWidthSizeClass == WindowWidthSizeClass.EXPANDED && isMain
 }
 
-//
-// @Composable
-// private fun NavigationTrackingSideEffect(navController: NavHostController) {
-//    TrackDisposableJank(navController) { metricsHolder ->
-//        val listener = NavController.OnDestinationChangedListener { _, destination, _ ->
-//            metricsHolder.state?.putState("Navigation", destination.route.toString())
-//        }
-//
-//        navController.addOnDestinationChangedListener(listener)
-//
-//        onDispose {
-//            navController.removeOnDestinationChangedListener(listener)
-//        }
-//    }
-// }
 val <T : Any> KClass<T>.name: String
     get() {
         return this.qualifiedName.toString()

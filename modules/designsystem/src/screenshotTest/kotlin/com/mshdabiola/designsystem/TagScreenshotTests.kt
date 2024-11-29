@@ -6,23 +6,26 @@ package com.mshdabiola.designsystem
 
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.tooling.preview.Preview
 import com.mshdabiola.designsystem.component.SkTopicTag
-import com.mshdabiola.designsystem.theme.SkTheme
+import com.mshdabiola.testing.util.CaptureMultiTheme
 
 class TagScreenshotTests {
 
-    @ThemePreviews
+    @Preview
     @Composable
     fun Tag() {
-        SkTopicTag(followed = true, onClick = {}) {
-            Text("TOPIC")
+        CaptureMultiTheme {
+            SkTopicTag(followed = true, onClick = {}) {
+                Text("TOPIC")
+            }
         }
     }
 
-    @ThemePreviews
+    @Preview
     @Composable
     fun TagHumFontScale2() {
-        SkTheme {
+        CaptureMultiTheme {
             SkTopicTag(followed = true, onClick = {}) {
                 Text("LOOOOONG TOPIC")
             }

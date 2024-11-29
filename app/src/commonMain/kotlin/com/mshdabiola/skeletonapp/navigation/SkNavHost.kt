@@ -45,6 +45,7 @@ fun SkNavHost(
             settingScreen(
                 modifier = Modifier,
                 onShowSnack = onShowSnackbar,
+                onBack = navController::popBackStack,
             )
         }
     }

@@ -5,7 +5,6 @@
 plugins {
     id("mshdabiola.android.library")
     id("mshdabiola.android.library.compose")
-    id("mshdabiola.android.library.jacoco")
 
 }
 
@@ -28,9 +27,9 @@ kotlin {
                 api(compose.material3)
                 api(compose.materialIconsExtended)
                 api(compose.components.resources)
+                api(compose.material3AdaptiveNavigationSuite)
                 api(libs.kotlinx.collection.immutable)
                implementation(project(":modules:model"))
-                api(libs.androidx.compose.material3.windowSizeClass2)
                 api(libs.androidx.navigation.compose.get())
 
                 api(libs.koin.compose)
@@ -58,17 +57,3 @@ kotlin {
 
     }
 }
-
-//configurations.all {
-//    resolutionStrategy.eachDependency {
-//        if (
-//            requested.group.startsWith("org.jetbrains.compose.runtime") ||
-//            requested.group.startsWith("org.jetbrains.compose.ui") ||
-//            requested.group.startsWith("org.jetbrains.compose.foundation") ||
-//            requested.group.startsWith("org.jetbrains.compose.material") ||
-//            requested.group.startsWith("org.jetbrains.compose.material3")
-//        ) {
-//            useVersion(libs.versions.compose.plugin.get())
-//        }
-//    }
-//}

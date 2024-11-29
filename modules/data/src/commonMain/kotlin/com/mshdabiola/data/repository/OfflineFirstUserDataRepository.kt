@@ -6,14 +6,11 @@ package com.mshdabiola.data.repository
 
 import co.touchlab.kermit.Logger
 import com.mshdabiola.analytics.AnalyticsHelper
-import com.mshdabiola.data.model.toData
 import com.mshdabiola.datastore.Store
-import com.mshdabiola.model.Contrast
 import com.mshdabiola.model.DarkThemeConfig
 import com.mshdabiola.model.ThemeBrand
 import com.mshdabiola.model.UserData
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.map
 
 internal class OfflineFirstUserDataRepository(
     private val settings: Store,
@@ -28,20 +25,12 @@ internal class OfflineFirstUserDataRepository(
     override val userData: Flow<UserData> =
         settings
             .userData
-            .map { it.toData() }
 
     override suspend fun setThemeBrand(themeBrand: ThemeBrand) {
         settings.updateUserData {
             it.copy(themeBrand)
         }
         analyticsHelper.logThemeChanged(themeBrand.name)
-    }
-
-    override suspend fun setThemeContrast(contrast: Contrast) {
-//        settings.updateUserData {
-//            it.copy(contrast = contrast)
-//        }
-//        analyticsHelper.logContrastChanged(contrast.name)
     }
 
     override suspend fun setDarkThemeConfig(darkThemeConfig: DarkThemeConfig) {

@@ -9,13 +9,14 @@ import androidx.test.uiautomator.By
 import androidx.test.uiautomator.Until
 
 fun MacrobenchmarkScope.goBack() {
-    val selector = By.desc("back")
+    val selector = By.res("back")
 
     device.wait(Until.hasObject(selector), 5000)
 
     val backButton = device.findObject(selector)
     backButton.click()
-    device.waitForIdle()
+//    device.waitForIdle()
+    device.waitForIdle(1000)
     // Wait until saved title are shown on screen
 }
 

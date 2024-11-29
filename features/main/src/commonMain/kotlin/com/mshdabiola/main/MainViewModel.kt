@@ -9,22 +9,17 @@ import androidx.lifecycle.viewModelScope
 import com.mshdabiola.data.model.Result
 import com.mshdabiola.data.model.asResult
 import com.mshdabiola.data.repository.NoteRepository
-import com.mshdabiola.data.repository.UserDataRepository
-import com.mshdabiola.ui.NoteUiState
+import com.mshdabiola.model.Note
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 
-class MainViewModel constructor(
-    private val userDataRepository: UserDataRepository,
-    private val modelRepository: NoteRepository,
-
+class MainViewModel(
+    modelRepository: NoteRepository,
 ) : ViewModel() {
 
-    val feedUiMainState: StateFlow<Result<List<NoteUiState>>> =
+    val notes: StateFlow<Result<List<Note>>> =
         modelRepository.getAll()
-            .map { notes -> notes.map { NoteUiState(it.id!!, it.title, it.content) } }
             .asResult()
             .stateIn(
                 scope = viewModelScope,
