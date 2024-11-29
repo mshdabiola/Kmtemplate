@@ -23,9 +23,9 @@ class GenerateBaselineProfile {
             startActivity()
 
             repeat(2) {
-            goToDetailScreen()
-            addNote()
-            goBack()
+                goToDetailScreen()
+                addNote()
+                goBack()
             }
 
             mainScrollNoteDownUp()
