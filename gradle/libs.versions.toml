@@ -60,7 +60,7 @@ compose = "1.7.5"
 
 
 playGame = "20.1.2"
-playReview = "2.0.1"
+playReview = "2.0.2"
 playUpdate = "2.1.0"
 playCoroutine = "1.9.0"
 firebaseAnalytics = "21.2.2"
