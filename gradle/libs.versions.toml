@@ -54,7 +54,7 @@ truth = "1.4.3"
 turbine = "1.2.0"
 
 compose-plugin = "1.7.1"
-composeNavigation="2.8.0-alpha10"
+composeNavigation="2.8.0-dev1920"
 androidxNavigationTest = "2.8.4" #for nav test
 compose = "1.7.5"
 
