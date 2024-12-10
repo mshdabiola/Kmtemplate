@@ -8,6 +8,7 @@ import org.gradle.kotlin.dsl.dependencies
 import org.gradle.kotlin.dsl.withType
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.jetbrains.kotlin.compose.compiler.gradle.ComposeCompilerGradlePluginExtension
+import org.jetbrains.kotlin.compose.compiler.gradle.ComposeFeatureFlag
 
 /**
  * Configure Compose-specific options
@@ -59,6 +60,6 @@ internal fun Project.configureAndroidCompose(
 
         stabilityConfigurationFile.set(rootProject.layout.projectDirectory.file("compose_compiler_config.conf"))
 
-        enableStrongSkippingMode.set(true)
+        featureFlags.set(listOf(ComposeFeatureFlag.StrongSkipping))
     }
 }
