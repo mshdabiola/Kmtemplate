@@ -7,6 +7,7 @@ import com.mshdabiola.app.configurePrintApksTask
 import com.mshdabiola.app.disableUnnecessaryAndroidTests
 import org.gradle.api.Plugin
 import org.gradle.api.Project
+import com.mshdabiola.app.libs
 import org.gradle.api.artifacts.VersionCatalogsExtension
 import org.gradle.kotlin.dsl.configure
 import org.gradle.kotlin.dsl.getByType
@@ -65,7 +66,6 @@ class AndroidLibraryConventionPlugin : Plugin<Project> {
                 jvm()
                 jvmToolchain(21)
 
-                val libs = extensions.getByType<VersionCatalogsExtension>().named("libs")
                 with(sourceSets) {
 
                    commonMain.dependencies {
