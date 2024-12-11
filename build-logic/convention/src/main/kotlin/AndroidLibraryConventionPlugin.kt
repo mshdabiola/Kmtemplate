@@ -5,12 +5,12 @@ import com.mshdabiola.app.configureGradleManagedDevices
 import com.mshdabiola.app.configureKotlinAndroid
 import com.mshdabiola.app.configurePrintApksTask
 import com.mshdabiola.app.disableUnnecessaryAndroidTests
+import com.mshdabiola.app.libs
 import org.gradle.api.Plugin
 import org.gradle.api.Project
-import com.mshdabiola.app.libs
-import org.gradle.api.artifacts.VersionCatalogsExtension
 import org.gradle.kotlin.dsl.configure
-import org.gradle.kotlin.dsl.getByType
+import org.gradle.kotlin.dsl.getting
+import org.gradle.kotlin.dsl.provideDelegate
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 import org.jetbrains.kotlin.powerassert.gradle.PowerAssertGradleExtension
@@ -65,6 +65,15 @@ class AndroidLibraryConventionPlugin : Plugin<Project> {
                 // jvm("desktop")
                 jvm()
                 jvmToolchain(21)
+                applyDefaultHierarchyTemplate {
+                    common {
+                        group("nonJs") {
+                            withAndroidTarget()
+                            // withIos()
+                            withJvm()
+                        }
+                    }
+                }
 
                 with(sourceSets) {
 
