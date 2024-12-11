@@ -77,6 +77,12 @@ class AndroidLibraryConventionPlugin : Plugin<Project> {
 
                 with(sourceSets) {
 
+                    getByName("nonJsMain") {
+                        this.dependencies {
+
+                        }
+
+                    }
                    commonMain.dependencies {
                             implementation(libs.findLibrary("koin.core").get())
                             implementation(libs.findLibrary("kermit").get())

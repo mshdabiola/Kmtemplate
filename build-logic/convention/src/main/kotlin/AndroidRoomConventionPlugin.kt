@@ -8,10 +8,12 @@ import com.mshdabiola.app.libs
 import org.gradle.kotlin.dsl.configure
 import org.gradle.kotlin.dsl.dependencies
 import org.gradle.kotlin.dsl.getByType
+import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 
 class AndroidRoomConventionPlugin : Plugin<Project> {
 
+    @OptIn(ExperimentalKotlinGradlePluginApi::class)
     override fun apply(target: Project) {
         with(target) {
             with(pluginManager) {
@@ -53,7 +55,16 @@ class AndroidRoomConventionPlugin : Plugin<Project> {
                 androidTarget()
                 jvm()
                 jvmToolchain(21)
-                // val libs = extensions.getByType<VersionCatalogsExtension>().named("libs")
+                applyDefaultHierarchyTemplate {
+                    common {
+                        group("nonJs") {
+                            withAndroidTarget()
+                            // withIos()
+                            withJvm()
+                        }
+                    }
+                }
+
                 with(sourceSets) {
 
                     commonMain.dependencies {
@@ -64,6 +75,12 @@ class AndroidRoomConventionPlugin : Plugin<Project> {
 //                            implementation(libs.findLibrary("paging.common").get())
 
                         api(libs.findLibrary("sqlite.bundled").get())//sqlite-bundled
+
+                    }
+                    getByName("nonJsMain") {
+                        this.dependencies {
+
+                        }
 
                     }
                     jvmTest.dependencies {
