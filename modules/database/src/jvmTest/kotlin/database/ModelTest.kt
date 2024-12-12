@@ -1,8 +1,8 @@
 package database
 
 import app.cash.turbine.test
-import com.mshdabiola.database.dao.NoteDao
-import com.mshdabiola.database.model.NoteEntity
+import com.mshdabiola.database.dao.NoteDaoN
+import com.mshdabiola.database.model.NoteEntityN
 import kotlinx.coroutines.test.runTest
 import org.koin.core.component.inject
 import kotlin.test.Test
@@ -12,10 +12,10 @@ class ModelTest : AbstractTest() {
 
     @Test
     override fun insert() = runTest {
-        val modelDao by inject<NoteDao>()
+        val modelDao by inject<NoteDaoN>()
 
         modelDao.upsert(
-            NoteEntity(
+            NoteEntityN(
                 id = null,
                 title = "abiola",
                 content = "Adisl",
