@@ -32,6 +32,10 @@ kotlin {
                 api(libs.kotlinx.coroutines.test)
                 api(libs.turbine)
                 api(libs.koin.test)
+            }
+        }
+        val nonJsMain by getting {
+            dependencies {
                 api(libs.koin.test.junit)
             }
         }

@@ -68,7 +68,7 @@ firebaseCrashlyticsKts = "18.3.6"
 firebaseCrashylyticsPlugins = "2.9.9"
 playServicesMlkitTextRecognition = "19.0.0"
 
-ktor = "2.3.12"
+ktor = "3.0.2"
 uiTextGoogleFonts = "1.7.5"
 
 koin = "4.0.0"
@@ -140,7 +140,7 @@ androidx-work-testing = { group = "androidx.work", name = "work-testing", versio
 coil-kt = { module = "io.coil-kt.coil3:coil", version.ref = "coil" }
 coil-kt-compose = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coil" }
 coil-kt-svg = { module = "io.coil-kt.coil3:coil-svg", version.ref = "coil" }
-coil-kt-network = { module = "io.coil-kt.coil3:coil-network-okhttp", version.ref = "coil" }
+coil-kt-network = { module = "io.coil-kt.coil3:coil-network-ktor3", version.ref = "coil" }
 firebase-analytics = { group = "com.google.firebase", name = "firebase-analytics-ktx" }
 firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.ref = "firebaseBom" }
 firebase-cloud-messaging = { group = "com.google.firebase", name = "firebase-messaging-ktx" }

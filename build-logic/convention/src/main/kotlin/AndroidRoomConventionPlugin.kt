@@ -68,18 +68,18 @@ class AndroidRoomConventionPlugin : Plugin<Project> {
                 with(sourceSets) {
 
                     commonMain.dependencies {
-                        implementation(project(":modules:model"))
-                        implementation(libs.findLibrary("room.runtime").get())
-                        implementation(libs.findLibrary("room.ktx").get())
-                        implementation(libs.findLibrary("room.paging").get())
-//                            implementation(libs.findLibrary("paging.common").get())
 
-                        api(libs.findLibrary("sqlite.bundled").get())//sqlite-bundled
 
                     }
                     getByName("nonJsMain") {
                         this.dependencies {
+                            implementation(project(":modules:model"))
+                            implementation(libs.findLibrary("room.runtime").get())
+                            implementation(libs.findLibrary("room.ktx").get())
+                            implementation(libs.findLibrary("room.paging").get())
+//                            implementation(libs.findLibrary("paging.common").get())
 
+                            api(libs.findLibrary("sqlite.bundled").get())//sqlite-bundled
                         }
 
                     }

@@ -26,6 +26,11 @@ kotlin {
                 implementation(libs.ktor.client.resources)
             }
         }
+        val nonJsMain by getting {
+            dependencies {
+
+            }
+            }
 
         val commonTest by getting {
             dependencies {

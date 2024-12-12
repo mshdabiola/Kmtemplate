@@ -19,9 +19,14 @@ kotlin {
 
                 implementation(libs.kotlinx.serialization.json)
                 implementation(libs.kotlinx.coroutines.core)
+
+
+            }
+        }
+        val nonJsMain by getting {
+            dependencies {
                 api(libs.androidx.dataStore.core)
                 api(libs.androidx.datastore.core.okio)
-
             }
         }
     }
