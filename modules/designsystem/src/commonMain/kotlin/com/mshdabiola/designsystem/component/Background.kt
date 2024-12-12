@@ -81,8 +81,7 @@ fun SkGradientBackground(
                     // Compute the start and end coordinates such that the gradients are angled 11.06
                     // degrees off the vertical axis
                     val offset = size.height * tan(
-                        Math
-                            .toRadians(11.06)
+                        radiansToDegrees(11.06)
                             .toFloat(),
                     )
 
@@ -123,3 +122,5 @@ fun SkGradientBackground(
         }
     }
 }
+
+expect fun radiansToDegrees(radians: Double): Double
