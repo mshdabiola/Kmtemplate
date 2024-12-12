@@ -5,7 +5,7 @@ import androidx.compose.ui.tooling.preview.Preview
 
 @Preview
 @Composable
-actual fun NavigationPreview() {
+fun NavigationPreview() {
     Drawer()
     // Text("aboiola")
 }

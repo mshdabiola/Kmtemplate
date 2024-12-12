@@ -19,7 +19,7 @@ fun NavigationBarPreview() {
 
 @Preview
 @Composable
-actual fun NavigationPreview() {
+fun NavigationPreview() {
     // CommonNavigation()
     Drawer { }
 }
