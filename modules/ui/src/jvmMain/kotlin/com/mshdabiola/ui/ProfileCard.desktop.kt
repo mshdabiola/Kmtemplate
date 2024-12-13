@@ -5,6 +5,6 @@ import androidx.compose.runtime.Composable
 
 @Preview
 @Composable
-actual fun ProfileCardPreview() {
+ fun ProfileCardPreview() {
     ProfileCard()
 }
