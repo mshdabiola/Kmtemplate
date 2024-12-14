@@ -52,6 +52,7 @@ room = "2.7.0-alpha11"
 secrets = "2.0.1"
 truth = "1.4.4"
 turbine = "1.2.0"
+kstore ="0.9.1"
 
 compose-plugin = "1.7.1"
 composeNavigation="2.8.0-alpha10"
@@ -153,6 +154,8 @@ kotlinx-coroutines-guava = { group = "org.jetbrains.kotlinx", name = "kotlinx-co
 kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "kotlinxCoroutines" }
 kotlinx-datetime = { group = "org.jetbrains.kotlinx", name = "kotlinx-datetime", version.ref = "kotlinxDatetime" }
 kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }
+kstore-storage = { module = "io.github.xxfast:kstore-storage", version.ref = "kstore" }
+kstore = { module = "io.github.xxfast:kstore", version.ref = "kstore" }
 lint-api = { group = "com.android.tools.lint", name = "lint-api", version.ref = "androidTools" }
 lint-checks = { group = "com.android.tools.lint", name = "lint-checks", version.ref = "androidTools" }
 lint-tests = { group = "com.android.tools.lint", name = "lint-tests", version.ref = "androidTools" }
