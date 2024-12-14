@@ -7,7 +7,7 @@ import com.mshdabiola.designsystem.theme.SkTheme
 @DevicePreviews
 @ThemePreviews
 @Composable
-actual fun ProfileCardPreview() {
+fun ProfileCardPreview() {
     SkTheme {
         Surface {
             ProfileCard()

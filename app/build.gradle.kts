@@ -1,5 +1,6 @@
 import com.mshdabiola.app.BuildType
-import org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalWasmDsl
+import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
+import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
@@ -69,6 +70,36 @@ kotlin {
     androidTarget()
     jvm()
 
+    @OptIn(org.jetbrains.kotlin.gradle.ExperimentalWasmDsl::class)
+    wasmJs {
+        moduleName = "composeApp"
+        browser {
+            val rootDirPath = project.rootDir.path
+            val projectDirPath = project.projectDir.path
+            commonWebpackConfig {
+                outputFileName = "composeApp.js"
+                devServer = (devServer ?: KotlinWebpackConfig.DevServer()).apply {
+                    static = (static ?: mutableListOf()).apply {
+                        // Serve sources to debug inside browser
+                        add(rootDirPath)
+                        add(projectDirPath)
+                    }
+                }
+            }
+        }
+        binaries.executable()
+    }
+    @OptIn(ExperimentalKotlinGradlePluginApi::class)
+    applyDefaultHierarchyTemplate {
+        common {
+            group("nonJs") {
+                withAndroidTarget()
+                // withIos()
+                withJvm()
+            }
+        }
+    }
+
     sourceSets {
         val jvmMain by getting
 
@@ -94,13 +125,19 @@ kotlin {
 
             // Logger
             implementation(libs.kermit)
-            implementation(libs.kermit.koin)
+//            implementation(libs.kermit.koin)
 
             implementation(libs.androidx.compose.material3.adaptive)
             implementation(libs.androidx.compose.material3.adaptive.layout)
             implementation(libs.androidx.compose.material3.adaptive.navigation)
 
 
+        }
+        val nonJsMain by getting{
+            dependencies {
+                implementation(libs.kermit.koin)
+
+            }
         }
 
         jvmMain.dependencies {

@@ -25,6 +25,3 @@ fun ProfileCard(
         trailingContent = { Icon(Icons.AutoMirrored.Filled.Logout, "out", tint = Color.Red) },
     )
 }
-
-@Composable
-expect fun ProfileCardPreview()

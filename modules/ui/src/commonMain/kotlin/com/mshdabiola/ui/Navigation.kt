@@ -201,6 +201,3 @@ fun CommonBar(
             }
     }
 }
-
-@Composable
-expect fun NavigationPreview()

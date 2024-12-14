@@ -8,10 +8,12 @@ import com.mshdabiola.app.libs
 import org.gradle.kotlin.dsl.configure
 import org.gradle.kotlin.dsl.dependencies
 import org.gradle.kotlin.dsl.getByType
+import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 
 class AndroidRoomConventionPlugin : Plugin<Project> {
 
+    @OptIn(ExperimentalKotlinGradlePluginApi::class)
     override fun apply(target: Project) {
         with(target) {
             with(pluginManager) {
@@ -53,17 +55,34 @@ class AndroidRoomConventionPlugin : Plugin<Project> {
                 androidTarget()
                 jvm()
                 jvmToolchain(21)
-                // val libs = extensions.getByType<VersionCatalogsExtension>().named("libs")
+                applyDefaultHierarchyTemplate {
+                    common {
+                        group("nonJs") {
+                            withAndroidTarget()
+                            // withIos()
+                            withJvm()
+                        }
+                    }
+                }
+
                 with(sourceSets) {
 
                     commonMain.dependencies {
                         implementation(project(":modules:model"))
-                        implementation(libs.findLibrary("room.runtime").get())
-                        implementation(libs.findLibrary("room.ktx").get())
-                        implementation(libs.findLibrary("room.paging").get())
+//                        implementation(libs.findLibrary("kotlinx.coroutines.core").get())
+
+
+                    }
+                    getByName("nonJsMain") {
+                        this.dependencies {
+                            implementation(libs.findLibrary("room.runtime").get())
+                            implementation(libs.findLibrary("room.ktx").get())
+                            implementation(libs.findLibrary("room.paging").get())
 //                            implementation(libs.findLibrary("paging.common").get())
 
-                        api(libs.findLibrary("sqlite.bundled").get())//sqlite-bundled
+
+                            api(libs.findLibrary("sqlite.bundled").get())//sqlite-bundled
+                        }
 
                     }
                     jvmTest.dependencies {

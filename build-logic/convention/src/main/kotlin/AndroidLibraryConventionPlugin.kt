@@ -5,14 +5,16 @@ import com.mshdabiola.app.configureGradleManagedDevices
 import com.mshdabiola.app.configureKotlinAndroid
 import com.mshdabiola.app.configurePrintApksTask
 import com.mshdabiola.app.disableUnnecessaryAndroidTests
+import com.mshdabiola.app.libs
 import org.gradle.api.Plugin
 import org.gradle.api.Project
-import com.mshdabiola.app.libs
-import org.gradle.api.artifacts.VersionCatalogsExtension
 import org.gradle.kotlin.dsl.configure
-import org.gradle.kotlin.dsl.getByType
+import org.gradle.kotlin.dsl.getting
+import org.gradle.kotlin.dsl.provideDelegate
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
+import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
+import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig
 import org.jetbrains.kotlin.powerassert.gradle.PowerAssertGradleExtension
 
 class AndroidLibraryConventionPlugin : Plugin<Project> {
@@ -64,10 +66,43 @@ class AndroidLibraryConventionPlugin : Plugin<Project> {
                 androidTarget()
                 // jvm("desktop")
                 jvm()
+
+                @OptIn(ExperimentalWasmDsl::class)
+                wasmJs {
+                    browser {
+                        val rootDirPath = project.rootDir.path
+                        val projectDirPath = project.projectDir.path
+                        commonWebpackConfig {
+                            devServer = (devServer ?: KotlinWebpackConfig.DevServer()).apply {
+                                static = (static ?: mutableListOf()).apply {
+                                    // Serve sources to debug inside browser
+                                    add(rootDirPath)
+                                    add(projectDirPath)
+                                }
+                            }
+                        }
+                    }
+                }
+
                 jvmToolchain(21)
+                applyDefaultHierarchyTemplate {
+                    common {
+                        group("nonJs") {
+                            withAndroidTarget()
+                            // withIos()
+                            withJvm()
+                        }
+                    }
+                }
 
                 with(sourceSets) {
 
+                    getByName("nonJsMain") {
+                        this.dependencies {
+
+                        }
+
+                    }
                    commonMain.dependencies {
                             implementation(libs.findLibrary("koin.core").get())
                             implementation(libs.findLibrary("kermit").get())

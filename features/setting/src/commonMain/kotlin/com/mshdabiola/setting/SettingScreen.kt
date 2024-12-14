@@ -97,6 +97,8 @@ internal fun MainContent(
 ) {
     var dark by remember { mutableStateOf(false) }
     var theme by remember { mutableStateOf(false) }
+    val themeArray = stringArrayResource(Res.array.theme)
+    val dayLightArray = stringArrayResource(Res.array.daynight)
 
     Column(
         modifier.padding(16.dp),
@@ -122,7 +124,7 @@ internal fun MainContent(
             modifier = Modifier.testTag("setting:theme").clickable { theme = true },
             headlineContent = { Text("Theme") },
             supportingContent = {
-                Text(stringArrayResource(Res.array.theme)[settingState.themeBrand.ordinal])
+                Text(themeArray.getOrNull(settingState.themeBrand.ordinal) ?: "")
             },
         )
 
@@ -130,7 +132,7 @@ internal fun MainContent(
             modifier = Modifier.testTag("setting:mode").clickable { dark = true },
             headlineContent = { Text("DayNight mode") },
             supportingContent = {
-                Text(stringArrayResource(Res.array.daynight)[settingState.darkThemeConfig.ordinal])
+                Text(dayLightArray.getOrNull(settingState.darkThemeConfig.ordinal) ?: "")
             },
         )
     }
@@ -138,7 +140,7 @@ internal fun MainContent(
     AnimatedVisibility(theme) {
         OptionsDialog(
             modifier = Modifier,
-            options = stringArrayResource(Res.array.theme),
+            options = themeArray,
             current = settingState.themeBrand.ordinal,
             onDismiss = { theme = false },
             onSelect = { setTheme(ThemeBrand.entries[it]) },
@@ -147,7 +149,7 @@ internal fun MainContent(
     AnimatedVisibility(dark) {
         OptionsDialog(
             modifier = Modifier,
-            options = stringArrayResource(Res.array.daynight),
+            options = dayLightArray,
             current = settingState.darkThemeConfig.ordinal,
             onDismiss = { dark = false },
             onSelect = { setDarkMode(DarkThemeConfig.entries[it]) },
