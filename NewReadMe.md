@@ -21,28 +21,28 @@
   </br>
  <a href=""><img src="https://tokei.rs/b1/github/mshdabiola/hydraulic?category=code&color=orange&style=for-the-badge"/></a>
   <a href="https://github.com/mshdabiola/hydraulic/actions">
-  <img alt="GitHub commits since tagged version (branch)" src="https://img.shields.io/github/commits-since/mshdabiola/ImageResizer/v1.0?color=palegreen&label=Commits&style=for-the-badge">
-  <img alt="GitHub code size in bytes" src="https://img.shields.io/github/languages/code-size/mshdabiola/imageresizer?style=for-the-badge&color=37ABB5">
+  <img alt="GitHub commits since tagged version (branch)" src="https://img.shields.io/github/commits-since/mshdabiola/hydraulic/v1.0?color=palegreen&label=Commits&style=for-the-badge">
+  <img alt="GitHub code size in bytes" src="https://img.shields.io/github/languages/code-size/mshdabiola/hydraulic?style=for-the-badge&color=37ABB5">
   <img src="https://wakatime.com/badge/user/7fa5ec35-3afd-4c14-984e-6ea7daf545c7.svg?style=for-the-badge"/>
   </br>
   </br>
-  <a href="https://hits.sh/github.com/mshdabiola/ImageResizer/">
-      <img alt="Hits" src="https://hits.sh/github.com/mshdabiola/ImageResizer.svg?style=for-the-badge&label=Views&extraCount=7500&color=ff3f6f"/></a>
-  <a href="https://github.com/mshdabiola/ImageResizer/releases">
-      <img src="https://img.shields.io/github/downloads/mshdabiola/ImageResizer/total?color=orange&style=for-the-badge"/>
+  <a href="https://hits.sh/github.com/mshdabiola/hydraulic/">
+      <img alt="Hits" src="https://hits.sh/github.com/mshdabiola/hydraulic.svg?style=for-the-badge&label=Views&extraCount=7500&color=ff3f6f"/></a>
+  <a href="https://github.com/mshdabiola/hydraulic/releases">
+      <img src="https://img.shields.io/github/downloads/mshdabiola/hydraulic/total?color=orange&style=for-the-badge"/>
   </a>
-  <a href="https://github.com/mshdabiola/ImageResizer/stargazers">
-      <img src="https://img.shields.io/github/stars/mshdabiola/imageresizer?color=ffff00&style=for-the-badge"/>
+  <a href="https://github.com/mshdabiola/hydraulic/stargazers">
+      <img src="https://img.shields.io/github/stars/mshdabiola/hydraulic?color=ffff00&style=for-the-badge"/>
   </a>
   </br>
-  <a href="https://github.com/mshdabiola/imageresizer/releases/latest">
-      <img src="https://img.shields.io/github/v/release/mshdabiola/imageresizer?color=purple&include_prereleases&logo=github&style=for-the-badge"/>
+  <a href="https://github.com/mshdabiola/hydraulic/releases/latest">
+      <img src="https://img.shields.io/github/v/release/mshdabiola/hydraulic?color=purple&include_prereleases&logo=github&style=for-the-badge"/>
   </a>
-   <a href="https://play.google.com/store/apps/details?id=ru.tech.imageresizershrinker">
-      <img src="https://img.shields.io/endpoint?color=purple&logo=google-play&style=for-the-badge&label=Play%20store&url=https%3A%2F%2Fplay.cuzi.workers.dev%2Fplay%3Fi%3Dru.tech.imageresizershrinker%26l%3DAndroid%26m%3D%24version"/>
+   <a href="https://play.google.com/store/apps/details?id=ru.tech.hydraulicshrinker">
+      <img src="https://img.shields.io/endpoint?color=purple&logo=google-play&style=for-the-badge&label=Play%20store&url=https%3A%2F%2Fplay.cuzi.workers.dev%2Fplay%3Fi%3Dru.tech.hydraulicshrinker%26l%3DAndroid%26m%3D%24version"/>
   </a>
-  <a href="https://f-droid.org/packages/ru.tech.imageresizershrinker">
-      <img src="https://img.shields.io/f-droid/v/ru.tech.imageresizershrinker?color=purple&include_prereleases&logo=FDROID&style=for-the-badge"/>
+  <a href="https://f-droid.org/packages/ru.tech.hydraulicshrinker">
+      <img src="https://img.shields.io/f-droid/v/ru.tech.hydraulicshrinker?color=purple&include_prereleases&logo=FDROID&style=for-the-badge"/>
   </a>
 </br>
     </br>
@@ -100,16 +100,16 @@ send a donation to the crypto wallets below
 
 # 📲 Download
 
-Go to the [Releases](https://github.com/mshdabiola/imageresizer/releases/latest) and the download latest
+Go to the [Releases](https://github.com/mshdabiola/hydraulic/releases/latest) and the download latest
 apk
 or click one of the badges below.
 
 </br>
 
 <p align="middle">
-    <a href="https://play.google.com/store/apps/details?id=ru.tech.imageresizershrinker"><img alt="Google Play" src="./fastlane/metadata/android/en-US/images/buttons/gplay.svg" height="60"></a>
-    <a href="https://f-droid.org/packages/ru.tech.imageresizershrinker"><img alt="F-Droid" src="./fastlane/metadata/android/en-US/images/buttons/fdroid.svg" height="60"/></a>
-    <a href="https://github.com/mshdabiola/imageresizer/releases/latest"><img alt="GitHub" src="./fastlane/metadata/android/en-US/images/buttons/github.svg" height="60"/></a>
+    <a href="https://play.google.com/store/apps/details?id=ru.tech.hydraulicshrinker"><img alt="Google Play" src="./fastlane/metadata/android/en-US/images/buttons/gplay.svg" height="60"></a>
+    <a href="https://f-droid.org/packages/ru.tech.hydraulicshrinker"><img alt="F-Droid" src="./fastlane/metadata/android/en-US/images/buttons/fdroid.svg" height="60"/></a>
+    <a href="https://github.com/mshdabiola/hydraulic/releases/latest"><img alt="GitHub" src="./fastlane/metadata/android/en-US/images/buttons/github.svg" height="60"/></a>
 </p>
 </div>
 
@@ -215,7 +215,7 @@ or click one of the badges below.
 
 # 🌐 Translation
 
-You can help translate ImageResizer into your language
+You can help translate hydraulic into your language
 on [Hosted Weblate](https://hosted.weblate.org/engage/image-resizer/)
 
 [![Состояние перевода](https://hosted.weblate.org/widgets/image-resizer/-/horizontal-auto.svg)](https://hosted.weblate.org/engage/image-resizer/)
@@ -224,7 +224,7 @@ on [Hosted Weblate](https://hosted.weblate.org/engage/image-resizer/)
 
 # ❤️ Find this repository useful?
 
-Support it by joining **[stargazers](https://github.com/mshdabiola/ImageResizer/stargazers)** for this
+Support it by joining **[stargazers](https://github.com/mshdabiola/hydraulic/stargazers)** for this
 repository. :star: <br>
 And **[follow](https://github.com/mshdabiola)** me for my next creations! 🤩
 
@@ -242,8 +242,8 @@ And **[follow](https://github.com/mshdabiola)** me for my next creations! 🤩
 
 # 📢 Contributors
 
-<a href="https://github.com/mshdabiola/imageresizer/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=mshdabiola/Imageresizer" />
+<a href="https://github.com/mshdabiola/hydraulic/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=mshdabiola/hydraulic" />
 </a>
 
 
