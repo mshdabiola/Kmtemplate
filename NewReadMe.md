@@ -216,11 +216,11 @@ or click one of the badges below.
 # 🌐 Translation
 
 You can help translate hydraulic into your language
-on [Hosted Weblate](https://hosted.weblate.org/engage/image-resizer/)
+on [Hosted Weblate](https://hosted.weblate.org/engage/hydraulic/)
 
-[![Состояние перевода](https://hosted.weblate.org/widgets/image-resizer/-/horizontal-auto.svg)](https://hosted.weblate.org/engage/image-resizer/)
+[![Состояние перевода](https://hosted.weblate.org/widgets/hydraulic/-/horizontal-auto.svg)](https://hosted.weblate.org/engage/hydraulic/)
 </br>
-[![Translation status](https://hosted.weblate.org/widgets/image-resizer/-/image-resizer/287x66-black.png)](https://hosted.weblate.org/engage/image-resizer/)
+[![Translation status](https://hosted.weblate.org/widgets/hydraulic/-/hydraulic/287x66-black.png)](https://hosted.weblate.org/engage/hydraulic/)
 
 # ❤️ Find this repository useful?
 
@@ -238,7 +238,7 @@ And **[follow](https://github.com/mshdabiola)** me for my next creations! 🤩
   </picture>
 </a>
 
-![](https://repobeats.axiom.co/api/embed/c62092c6ec0d00e67496223d50e39f48a582c532.svg)
+![Alt](https://repobeats.axiom.co/api/embed/a0893eb63066333a921a4197172ab150fe896a37.svg "Repobeats analytics image")
 
 # 📢 Contributors
 
