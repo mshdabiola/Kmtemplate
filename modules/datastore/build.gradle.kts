@@ -23,6 +23,14 @@ kotlin {
 
             }
         }
+        wasmJsMain.dependencies{
+            api(libs.kstore.storage)
+            api(libs.kstore)
+            api("org.jetbrains.kotlinx:kotlinx-browser:0.3")
+
+
+
+        }
         val nonJsMain by getting {
             dependencies {
                 api(libs.androidx.dataStore.core)
