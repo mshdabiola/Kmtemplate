@@ -1,5 +1,4 @@
 <div align="center">
-</br>
 <img src="./fastlane/metadata/android/en-US/images/icon.png"  />
 
 </div>
@@ -10,10 +9,9 @@
 
 </div>
 
-</br>
 
 <p align="center">
- 
+ <a>
   <img alt="Kotlin" src="https://img.shields.io/badge/Kotlin-Multiplatform-%237f52ff?logo=kotlin&style=for-the-badge"/>
 </a>
   <img alt="Jetpack Compose" src="https://img.shields.io/static/v1?style=for-the-badge&message=Jetpack+Compose&color=4285F4&logo=Jetpack+Compose&logoColor=FFFFFF&label="/></a> 
@@ -25,7 +23,7 @@
   <img alt="GitHub commits since tagged version (branch)" src="https://img.shields.io/github/commits-since/mshdabiola/hydraulic/1.0.0?color=palegreen&label=Commits&style=for-the-badge">
   <img alt="GitHub code size in bytes" src="https://img.shields.io/github/languages/code-size/mshdabiola/hydraulic?style=for-the-badge&color=37ABB5">
   <img src="https://wakatime.com/badge/user/8e707c95-01e6-41d3-a760-223960f0cdf7.svg?style=for-the-badge"/>
-</br>
+</a>
   </br>
   <a href="https://hits.sh/github.com/mshdabiola/hydraulic/">
       <img alt="Hits" src="https://hits.sh/github.com/mshdabiola/hydraulic.svg?style=for-the-badge&label=Views&extraCount=7500&color=ff3f6f"/></a>
@@ -49,38 +47,10 @@
 [//]: # (  <a href="https://f-droid.org/packages/ru.tech.hydraulicshrinker">)
 
 [//]: # (      <img src="https://img.shields.io/f-droid/v/ru.tech.hydraulicshrinker?color=purple&include_prereleases&logo=FDROID&style=for-the-badge"/>)
-
-
 </p>
 
-<div align="center">
-
-# 🗺️ Project Overview
-
-hydraulic is a versatile image editing tool designed for efficient photo manipulation. It allows
-users to crop, apply filters, edit EXIF data, erase backgrounds, and even convert images to PDFs.
-Ideal for both photographers and developers, the tool offers a simple interface with powerful
-capabilities.
-
-</div>
-
-<p align="middle">
-    <img src="./fastlane/metadata/android/en-US/images/phoneScreenshots/1.png" width="13%" />
-    <img src="./fastlane/metadata/android/en-US/images/phoneScreenshots/2.png" width="13%" />
-    <img src="./fastlane/metadata/android/en-US/images/phoneScreenshots/3.png" width="13%" />
-</p>
 
 <div align="center">
-
-# 📲 Download
-
-Go to the [Releases](https://github.com/mshdabiola/hydraulic/releases/latest) and the download
-latest
-apk
-or click one of the badges below.
-
-</br>
-
 <p align="middle">
     <a href="https://play.google.com/store/apps/details?id=ru.tech.hydraulicshrinker"><img alt="Google Play" src="./fastlane/metadata/android/en-US/images/buttons/gplay.svg" height="60"></a>
     <a href="https://f-droid.org/packages/ru.tech.hydraulicshrinker"><img alt="F-Droid" src="./fastlane/metadata/android/en-US/images/buttons/fdroid.svg" height="60"/></a>
@@ -88,28 +58,30 @@ or click one of the badges below.
 </p>
 </div>
 
-# 💻 Installation Instructions
+<div align="center">
+hydraulic is a versatile image editing tool designed for efficient photo manipulation. It allows
+users to crop, apply filters, edit EXIF data, erase backgrounds, and even convert images to PDFs.
+Ideal for both photographers and developers, the tool offers a simple interface with powerful
+capabilities.
+</div>
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/yourusername/hydraulic.git
-   ```
-2. Install dependencies using your preferred package manager (e.g., Gradle).
-3. Build the project:
-   bash ./gradlew build
-4. Run the application:
-   bash ./gradlew run
+## Screenshot
 
-# ✨ Features
+<p align="middle">
+    <img src="./fastlane/metadata/android/en-US/images/phoneScreenshots/1.png" width="30%" />
+    <img src="./fastlane/metadata/android/en-US/images/phoneScreenshots/2.png" width="30%" />
+    <img src="./fastlane/metadata/android/en-US/images/phoneScreenshots/3.png" width="30%" />
+</p>
+
+# Features
 
 - Batch processing
 - Applying filter chains (More than 230 various filters)
 
-  <details>
   <summary>Available filters</summary>
   <br>
 
-# 📚 Tech stack & Open-source libraries
+# Tech stack & Open-source libraries
 
 - Minimum SDK level 21
 
@@ -171,7 +143,6 @@ or click one of the badges below.
   using native cpp code.
 
 <div align="center">
-
 
 # ❤️ Find this repository useful?
 
