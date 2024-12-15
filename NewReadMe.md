@@ -66,10 +66,25 @@ capabilities.
 
 ## Screenshot
 
+### Phone
 <p style="text-align: center;">
     <img src="./fastlane/metadata/android/en-US/images/phoneScreenshots/1.png" width="30%"  alt=""/>
     <img src="./fastlane/metadata/android/en-US/images/phoneScreenshots/2.png" width="30%"  alt=""/>
     <img src="./fastlane/metadata/android/en-US/images/phoneScreenshots/3.png" width="30%"  alt=""/>
+</p>
+
+### Desktop
+<p style="text-align: center;">
+    <img src="./fastlane/metadata/android/en-US/images/desktopScreenshots/1.png" width="30%"  alt=""/>
+    <img src="./fastlane/metadata/android/en-US/images/desktopScreenshots/2.png" width="30%"  alt=""/>
+    <img src="./fastlane/metadata/android/en-US/images/desktopScreenshots/3.png" width="30%"  alt=""/>
+</p>
+
+### Web
+<p style="text-align: center;">
+    <img src="./fastlane/metadata/android/en-US/images/webScreenshots/1.png" width="30%"  alt=""/>
+    <img src="./fastlane/metadata/android/en-US/images/webScreenshots/2.png" width="30%"  alt=""/>
+    <img src="./fastlane/metadata/android/en-US/images/webScreenshots/3.png" width="30%"  alt=""/>
 </p>
 
 ## Features
