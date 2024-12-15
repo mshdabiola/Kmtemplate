@@ -6,7 +6,7 @@
 
 <div align="center">
 
-# Image Toolbox
+# Hydraulic Compose Multiplatform Template
 
 </div>
 
