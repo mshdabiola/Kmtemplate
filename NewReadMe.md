@@ -24,7 +24,7 @@
   <img alt="GitHub commits since tagged version (branch)" src="https://img.shields.io/github/commits-since/mshdabiola/hydraulic/1.0.0?color=palegreen&label=Commits&style=for-the-badge">
   <img alt="GitHub code size in bytes" src="https://img.shields.io/github/languages/code-size/mshdabiola/hydraulic?style=for-the-badge&color=37ABB5">
   <img src="https://wakatime.com/badge/user/8e707c95-01e6-41d3-a760-223960f0cdf7.svg?style=for-the-badge"/>
-  </br>
+</br>
   </br>
   <a href="https://hits.sh/github.com/mshdabiola/hydraulic/">
       <img alt="Hits" src="https://hits.sh/github.com/mshdabiola/hydraulic.svg?style=for-the-badge&label=Views&extraCount=7500&color=ff3f6f"/></a>
@@ -82,7 +82,8 @@ capabilities.
 
 # 📲 Download
 
-Go to the [Releases](https://github.com/mshdabiola/hydraulic/releases/latest) and the download latest
+Go to the [Releases](https://github.com/mshdabiola/hydraulic/releases/latest) and the download
+latest
 apk
 or click one of the badges below.
 
@@ -179,9 +180,6 @@ or click one of the badges below.
 
 <div align="center">
 
-#
-
-<img src="./fastlane/metadata/android/en-US/images/banner/banner3.png" width="99%" />
 
 # ❤️ Find this repository useful?
 
