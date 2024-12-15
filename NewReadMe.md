@@ -49,6 +49,7 @@
     <a href="https://github.com/mshdabiola/hydraulic/releases/latest"><img alt="GitHub" src="./fastlane/metadata/android/en-US/images/buttons/github.svg" height="60"/></a>
 </div>
 
+<br>
 <img src="./fastlane/metadata/android/en-US/images/icon.png" width="40%"  alt=""/>
 </div>
 
