@@ -74,30 +74,6 @@ capabilities.
 
 <div align="center">
 
-# ✈️ Telegram Links
-
-</br>
-<a href="https://t.me/mshdabiola_hydraulic">
-    <img src="https://img.shields.io/endpoint?&style=for-the-badge&colorA=17270b&colorB=617626&logo=telegram&logoColor=b3ffdd&label=hydraulic ✨ Chat&url=https://mogyo.ro/quart-apis/tgmembercount?chat_id=mshdabiola_hydraulic" alt="Telegram">
-  </a>
-
-  <a href="https://t.me/mshdabiola_hydraulic_ci">
-    <img src="https://img.shields.io/endpoint?&style=for-the-badge&colorA=17270b&colorB=617626&logo=telegram&logoColor=b3ffdd&url=https://tg.sumanjay.workers.dev/mshdabiola_hydraulic_ci" alt="Telegram">
-  </a>
-
-  </br>
-  </br>
-  Join our chat where you can discuss anything you want and also look into the CI channel where I post betas and announcements
-  </br>
-
-# ☕ Buy me a coffee
-
-This application is completely free, but if you want to support the project development, you can
-send a donation to the crypto wallets below
-
-| </br> ![Bitcoin](https://img.shields.io/badge/Bitcoin-EAB300?style=for-the-badge&logo=Bitcoin%20SV&logoColor=white) <br/> <br/> -> `17Pk1RurnkJxLV9V7mc6Y7dLyHFb9rvQDq` <- <br/> <br/> | </br> ![Tether](https://img.shields.io/badge/USDT-168363?style=for-the-badge&logo=tether&logoColor=white) <br/> <br/> -> `TMPAu7a54NvQNEKnNWh3naXu3oYijqP3U7` <- <br/> <br/> |
-|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
-
 # 📲 Download
 
 Go to the [Releases](https://github.com/mshdabiola/hydraulic/releases/latest) and the download latest
@@ -124,18 +100,6 @@ or click one of the badges below.
    bash ./gradlew build
 4. Run the application:
    bash ./gradlew run
-
-# ⚔️ FOSS vs MARKET
-
-|    **Feature**     |      **FOSS**      |     **Market**     |
-|:------------------:|:------------------:|:------------------:|
-|     QR Scanner     |       Zxing        |       MlKit        |
-|   Auto erase BG    |        :x:         |       MlKit        |
-|  Document Scanner  |       OpenCV       |       MlKit        |
-|     Analytics      |        :x:         | :white_check_mark: |
-|    Crashlytics     |        :x:         | :white_check_mark: |
-| Other Google deps  |        :x:         | :white_check_mark: |
-| All Other Features | :white_check_mark: | :white_check_mark: |
 
 # ✨ Features
 
@@ -213,15 +177,6 @@ or click one of the badges below.
 
 <img src="./fastlane/metadata/android/en-US/images/banner/banner3.png" width="99%" />
 
-# 🌐 Translation
-
-You can help translate hydraulic into your language
-on [Hosted Weblate](https://hosted.weblate.org/engage/hydraulic/)
-
-[![Состояние перевода](https://hosted.weblate.org/widgets/hydraulic/-/horizontal-auto.svg)](https://hosted.weblate.org/engage/hydraulic/)
-</br>
-[![Translation status](https://hosted.weblate.org/widgets/hydraulic/-/hydraulic/287x66-black.png)](https://hosted.weblate.org/engage/hydraulic/)
-
 # ❤️ Find this repository useful?
 
 Support it by joining **[stargazers](https://github.com/mshdabiola/hydraulic/stargazers)** for this
@@ -245,24 +200,5 @@ And **[follow](https://github.com/mshdabiola)** me for my next creations! 🤩
 <a href="https://github.com/mshdabiola/hydraulic/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=mshdabiola/hydraulic" />
 </a>
-
-
-# ⚖️ License
-
-```xml
-Designed and developed by 2023 mshdabiola
-
-    Licensed under the Apache License, Version 2.0 (the "License");you may not use this file except in compliance with the License.You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-    Unless required by applicable law or agreed to in writing, softwaredistributed under the License is distributed on an "AS IS" BASIS,WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.See the License for the specific language governing permissions andlimitations under the License.
-```
-
-Photos
-by <a href="https://unsplash.com/@pawel_czerwinski?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">
-Pawel Czerwinski</a>
-on <a href="https://unsplash.com/photos/an-abstract-photo-of-a-green-and-black-background-pSNM2lEOnTo?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">
-Unsplash</a>
 
 </div>
