@@ -1,30 +1,31 @@
-<div align="center">
-<img src="./fastlane/metadata/android/en-US/images/icon.png"  />
+<div style="text-align: center;">
+<img src="./fastlane/metadata/android/en-US/images/icon.png"   alt=""/>
 
 </div>
 
-<div align="center">
-
+<div style="text-align: center;"> 
 # Hydraulic Compose Multiplatform Template
 
 </div>
 
 
-<p align="center">
+<p style="text-align: center;">
  <a>
   <img alt="Kotlin" src="https://img.shields.io/badge/Kotlin-Multiplatform-%237f52ff?logo=kotlin&style=for-the-badge"/>
 </a>
-  <img alt="Jetpack Compose" src="https://img.shields.io/static/v1?style=for-the-badge&message=Jetpack+Compose&color=4285F4&logo=Jetpack+Compose&logoColor=FFFFFF&label="/></a> 
-    <img alt="material" src="https://custom-icon-badges.demolab.com/badge/material%20you-lightblue?style=for-the-badge&logoColor=333&logo=material-you"/></a>
-  </br>
-  </br>
- <a href=""><img src="https://tokei.rs/b1/github/mshdabiola/hydraulic?category=code&color=orange&style=for-the-badge"/></a>
-  <a href="https://github.com/mshdabiola/hydraulic/actions">
+  <img alt="Jetpack Compose" src="https://img.shields.io/static/v1?style=for-the-badge&message=Jetpack+Compose&color=4285F4&logo=Jetpack+Compose&logoColor=FFFFFF&label="/> 
+    <img alt="material" src="https://custom-icon-badges.demolab.com/badge/material%20you-lightblue?style=for-the-badge&logoColor=333&logo=material-you"/>
+  <br>
+  <br>
+ <a href="">
+<img src="https://tokei.rs/b1/github/mshdabiola/hydraulic?category=code&color=orange&style=for-the-badge" alt=""/>
+</a>
+    <a href="https://github.com/mshdabiola/hydraulic/actions">
   <img alt="GitHub commits since tagged version (branch)" src="https://img.shields.io/github/commits-since/mshdabiola/hydraulic/1.0.0?color=palegreen&label=Commits&style=for-the-badge">
   <img alt="GitHub code size in bytes" src="https://img.shields.io/github/languages/code-size/mshdabiola/hydraulic?style=for-the-badge&color=37ABB5">
-  <img src="https://wakatime.com/badge/user/8e707c95-01e6-41d3-a760-223960f0cdf7.svg?style=for-the-badge"/>
+  <img src="https://wakatime.com/badge/user/8e707c95-01e6-41d3-a760-223960f0cdf7.svg?style=for-the-badge" alt=""/>
 </a>
-  </br>
+  <br>
   <a href="https://hits.sh/github.com/mshdabiola/hydraulic/">
       <img alt="Hits" src="https://hits.sh/github.com/mshdabiola/hydraulic.svg?style=for-the-badge&label=Views&extraCount=7500&color=ff3f6f"/></a>
   <a href="https://github.com/mshdabiola/hydraulic/releases">
@@ -33,7 +34,7 @@
   <a href="https://github.com/mshdabiola/hydraulic/stargazers">
       <img src="https://img.shields.io/github/stars/mshdabiola/hydraulic?color=ffff00&style=for-the-badge"/>
   </a>
-  </br>
+  <br>
   <a href="https://github.com/mshdabiola/hydraulic/releases/latest">
       <img src="https://img.shields.io/github/v/release/mshdabiola/hydraulic?color=purple&include_prereleases&logo=github&style=for-the-badge"/>
   </a>
@@ -50,27 +51,26 @@
 </p>
 
 
-<div align="center">
-<p align="middle">
+<div style="text-align: center;">
     <a href="https://play.google.com/store/apps/details?id=ru.tech.hydraulicshrinker"><img alt="Google Play" src="./fastlane/metadata/android/en-US/images/buttons/gplay.svg" height="60"></a>
     <a href="https://f-droid.org/packages/ru.tech.hydraulicshrinker"><img alt="F-Droid" src="./fastlane/metadata/android/en-US/images/buttons/fdroid.svg" height="60"/></a>
     <a href="https://github.com/mshdabiola/hydraulic/releases/latest"><img alt="GitHub" src="./fastlane/metadata/android/en-US/images/buttons/github.svg" height="60"/></a>
-</p>
 </div>
 
-<div align="center">
+<div style="text-align: center;">
 hydraulic is a versatile image editing tool designed for efficient photo manipulation. It allows
 users to crop, apply filters, edit EXIF data, erase backgrounds, and even convert images to PDFs.
 Ideal for both photographers and developers, the tool offers a simple interface with powerful
 capabilities.
 </div>
 
+
 ## Screenshot
 
-<p align="middle">
-    <img src="./fastlane/metadata/android/en-US/images/phoneScreenshots/1.png" width="30%" />
-    <img src="./fastlane/metadata/android/en-US/images/phoneScreenshots/2.png" width="30%" />
-    <img src="./fastlane/metadata/android/en-US/images/phoneScreenshots/3.png" width="30%" />
+<p style="text-align: center;">
+    <img src="./fastlane/metadata/android/en-US/images/phoneScreenshots/1.png" width="30%"  alt=""/>
+    <img src="./fastlane/metadata/android/en-US/images/phoneScreenshots/2.png" width="30%"  alt=""/>
+    <img src="./fastlane/metadata/android/en-US/images/phoneScreenshots/3.png" width="30%"  alt=""/>
 </p>
 
 # Features
@@ -142,7 +142,7 @@ capabilities.
   creating and applying filters to the images on CPU
   using native cpp code.
 
-<div align="center">
+<div style="text-align: center;">
 
 # ❤️ Find this repository useful?
 
