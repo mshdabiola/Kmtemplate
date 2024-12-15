@@ -13,8 +13,9 @@
 </br>
 
 <p align="center">
-  <img alt="API" src="https://img.shields.io/badge/Api%2021+-50f270?logo=android&logoColor=black&style=for-the-badge"/></a>
-  <img alt="Kotlin" src="https://img.shields.io/badge/Kotlin-a503fc?logo=kotlin&logoColor=white&style=for-the-badge"/></a>
+ 
+  <img alt="Kotlin" src="https://img.shields.io/badge/Kotlin-Multiplatform-%237f52ff?logo=kotlin&style=for-the-badge"/>
+</a>
   <img alt="Jetpack Compose" src="https://img.shields.io/static/v1?style=for-the-badge&message=Jetpack+Compose&color=4285F4&logo=Jetpack+Compose&logoColor=FFFFFF&label="/></a> 
     <img alt="material" src="https://custom-icon-badges.demolab.com/badge/material%20you-lightblue?style=for-the-badge&logoColor=333&logo=material-you"/></a>
   </br>
@@ -49,10 +50,6 @@
 
 [//]: # (      <img src="https://img.shields.io/f-droid/v/ru.tech.hydraulicshrinker?color=purple&include_prereleases&logo=FDROID&style=for-the-badge"/>)
 
-[//]: # (  </a>)
-</br>
-    </br>
-   <a href="https://hellogithub.com/repository/4c5f2fae4eb545ab87cad9ffd19870ca" target="_blank"><img src="https://abroad.hellogithub.com/v1/widgets/recommend.svg?rid=4c5f2fae4eb545ab87cad9ffd19870ca&claim_uid=ubtZe5aXVz0n2QA&theme=dark" alt="Featured｜HelloGitHub" style="width: 250px; height: 54px;" width="250" height="54" /></a>
 
 </p>
 
