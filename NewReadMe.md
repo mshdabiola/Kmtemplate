@@ -21,9 +21,9 @@
   </br>
  <a href=""><img src="https://tokei.rs/b1/github/mshdabiola/hydraulic?category=code&color=orange&style=for-the-badge"/></a>
   <a href="https://github.com/mshdabiola/hydraulic/actions">
-  <img alt="GitHub commits since tagged version (branch)" src="https://img.shields.io/github/commits-since/mshdabiola/hydraulic/v1.0?color=palegreen&label=Commits&style=for-the-badge">
+  <img alt="GitHub commits since tagged version (branch)" src="https://img.shields.io/github/commits-since/mshdabiola/hydraulic/1.0.0?color=palegreen&label=Commits&style=for-the-badge">
   <img alt="GitHub code size in bytes" src="https://img.shields.io/github/languages/code-size/mshdabiola/hydraulic?style=for-the-badge&color=37ABB5">
-  <img src="https://wakatime.com/badge/user/7fa5ec35-3afd-4c14-984e-6ea7daf545c7.svg?style=for-the-badge"/>
+  <img src="https://wakatime.com/badge/user/8e707c95-01e6-41d3-a760-223960f0cdf7.svg?style=for-the-badge"/>
   </br>
   </br>
   <a href="https://hits.sh/github.com/mshdabiola/hydraulic/">
@@ -38,12 +38,18 @@
   <a href="https://github.com/mshdabiola/hydraulic/releases/latest">
       <img src="https://img.shields.io/github/v/release/mshdabiola/hydraulic?color=purple&include_prereleases&logo=github&style=for-the-badge"/>
   </a>
-   <a href="https://play.google.com/store/apps/details?id=ru.tech.hydraulicshrinker">
-      <img src="https://img.shields.io/endpoint?color=purple&logo=google-play&style=for-the-badge&label=Play%20store&url=https%3A%2F%2Fplay.cuzi.workers.dev%2Fplay%3Fi%3Dru.tech.hydraulicshrinker%26l%3DAndroid%26m%3D%24version"/>
-  </a>
-  <a href="https://f-droid.org/packages/ru.tech.hydraulicshrinker">
-      <img src="https://img.shields.io/f-droid/v/ru.tech.hydraulicshrinker?color=purple&include_prereleases&logo=FDROID&style=for-the-badge"/>
-  </a>
+
+[//]: # (   <a href="https://play.google.com/store/apps/details?id=ru.tech.hydraulicshrinker">)
+
+[//]: # (      <img src="https://img.shields.io/endpoint?color=purple&logo=google-play&style=for-the-badge&label=Play%20store&url=https%3A%2F%2Fplay.cuzi.workers.dev%2Fplay%3Fi%3Dru.tech.hydraulicshrinker%26l%3DAndroid%26m%3D%24version"/>)
+
+[//]: # (  </a>)
+
+[//]: # (  <a href="https://f-droid.org/packages/ru.tech.hydraulicshrinker">)
+
+[//]: # (      <img src="https://img.shields.io/f-droid/v/ru.tech.hydraulicshrinker?color=purple&include_prereleases&logo=FDROID&style=for-the-badge"/>)
+
+[//]: # (  </a>)
 </br>
     </br>
    <a href="https://hellogithub.com/repository/4c5f2fae4eb545ab87cad9ffd19870ca" target="_blank"><img src="https://abroad.hellogithub.com/v1/widgets/recommend.svg?rid=4c5f2fae4eb545ab87cad9ffd19870ca&claim_uid=ubtZe5aXVz0n2QA&theme=dark" alt="Featured｜HelloGitHub" style="width: 250px; height: 54px;" width="250" height="54" /></a>
