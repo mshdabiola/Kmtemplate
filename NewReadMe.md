@@ -50,7 +50,7 @@
 </p>
 
 
-<div style="text-align: center;">
+<div align="center">
     <a href="https://play.google.com/store/apps/details?id=ru.tech.hydraulicshrinker"><img alt="Google Play" src="./fastlane/metadata/android/en-US/images/buttons/gplay.svg" height="60"></a>
     <a href="https://f-droid.org/packages/ru.tech.hydraulicshrinker"><img alt="F-Droid" src="./fastlane/metadata/android/en-US/images/buttons/fdroid.svg" height="60"/></a>
     <a href="https://github.com/mshdabiola/hydraulic/releases/latest"><img alt="GitHub" src="./fastlane/metadata/android/en-US/images/buttons/github.svg" height="60"/></a>
@@ -72,7 +72,7 @@ capabilities.
     <img src="./fastlane/metadata/android/en-US/images/phoneScreenshots/3.png" width="30%"  alt=""/>
 </p>
 
-# Features
+## Features
 
 - Batch processing
 - Applying filter chains (More than 230 various filters)
@@ -143,13 +143,13 @@ capabilities.
 
 <div style="text-align: center;">
 
-# ❤️ Find this repository useful?
+## Find this repository useful?
 
 Support it by joining **[stargazers](https://github.com/mshdabiola/hydraulic/stargazers)** for this
 repository. :star: <br>
 And **[follow](https://github.com/mshdabiola)** me for my next creations! 🤩
 
-# ⭐ Star History
+## Star History
 
 <a href="https://star-history.com/#mshdabiola/hydraulic&Date">
   <picture>
@@ -161,7 +161,7 @@ And **[follow](https://github.com/mshdabiola)** me for my next creations! 🤩
 
 ![Alt](https://repobeats.axiom.co/api/embed/a0893eb63066333a921a4197172ab150fe896a37.svg "Repobeats analytics image")
 
-# 📢 Contributors
+## Contributors
 
 <a href="https://github.com/mshdabiola/hydraulic/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=mshdabiola/hydraulic" />
