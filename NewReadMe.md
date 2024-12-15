@@ -1,15 +1,14 @@
-<div style="text-align: center;">
+<div style="display: flex; justify-content: center;">
 <img src="./fastlane/metadata/android/en-US/images/icon.png"   alt=""/>
 
 </div>
 
-<div style="text-align: center;"> 
-# Hydraulic Compose Multiplatform Template
-
+<div style="display: flex; justify-content: center;"> 
+     <h1>Hydraulic Compose Multiplatform Template</h1>
 </div>
 
 
-<p style="text-align: center;">
+<p style="display: flex; justify-content: center;">
  <a>
   <img alt="Kotlin" src="https://img.shields.io/badge/Kotlin-Multiplatform-%237f52ff?logo=kotlin&style=for-the-badge"/>
 </a>
