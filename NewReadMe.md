@@ -1,6 +1,6 @@
 <div align="center">
 </br>
-<img src="./fastlane/metadata/android/en-US/images/logo/logo.png" width="200" />
+<img src="./fastlane/metadata/android/en-US/images/icon.png"  />
 
 </div>
 
@@ -65,14 +65,9 @@ capabilities.
 </div>
 
 <p align="middle">
-    <img src="./fastlane/metadata/android/en-US/images/banner/banner1.png" width="99%" />
-    <img src="./fastlane/metadata/android/en-US/images/phoneScreenshots/01.png" width="13%" />
-    <img src="./fastlane/metadata/android/en-US/images/phoneScreenshots/02.png" width="13%" />
-    <img src="./fastlane/metadata/android/en-US/images/phoneScreenshots/03.png" width="13%" />
-    <img src="./fastlane/metadata/android/en-US/images/phoneScreenshots/04.png" width="13%" />
-    <img src="./fastlane/metadata/android/en-US/images/phoneScreenshots/05.png" width="13%" />
-    <img src="./fastlane/metadata/android/en-US/images/phoneScreenshots/06.png" width="13%" />
-    <img src="./fastlane/metadata/android/en-US/images/phoneScreenshots/07.png" width="13%" />
+    <img src="./fastlane/metadata/android/en-US/images/phoneScreenshots/1.png" width="13%" />
+    <img src="./fastlane/metadata/android/en-US/images/phoneScreenshots/2.png" width="13%" />
+    <img src="./fastlane/metadata/android/en-US/images/phoneScreenshots/3.png" width="13%" />
 </p>
 
 <div align="center">
