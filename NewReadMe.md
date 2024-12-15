@@ -1,11 +1,4 @@
 <div align="center">
-<img src="./fastlane/metadata/android/en-US/images/icon.png" width="40%"  alt=""/>
-
-</div>
-
-<div align="center"> 
-     <h1>Hydraulic Compose Multiplatform Template</h1>
-</div>
 
 
 <p align="center">
@@ -54,6 +47,13 @@
     <a href="https://play.google.com/store/apps/details?id=ru.tech.hydraulicshrinker"><img alt="Google Play" src="./fastlane/metadata/android/en-US/images/buttons/gplay.svg" height="60"></a>
     <a href="https://f-droid.org/packages/ru.tech.hydraulicshrinker"><img alt="F-Droid" src="./fastlane/metadata/android/en-US/images/buttons/fdroid.svg" height="60"/></a>
     <a href="https://github.com/mshdabiola/hydraulic/releases/latest"><img alt="GitHub" src="./fastlane/metadata/android/en-US/images/buttons/github.svg" height="60"/></a>
+</div>
+
+<img src="./fastlane/metadata/android/en-US/images/icon.png" width="40%"  alt=""/>
+</div>
+
+<div align="center"> 
+     <h1>Hydraulic Compose Multiplatform Template</h1>
 </div>
 
 <div style="text-align: center;">
