@@ -141,7 +141,6 @@ capabilities.
   creating and applying filters to the images on CPU
   using native cpp code.
 
-<div style="text-align: center;">
 
 ## Find this repository useful?
 
@@ -151,6 +150,7 @@ And **[follow](https://github.com/mshdabiola)** me for my next creations! 🤩
 
 ## Star History
 
+<p align="center">
 <a href="https://star-history.com/#mshdabiola/hydraulic&Date">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=mshdabiola/hydraulic&type=Date&theme=dark" />
@@ -160,6 +160,7 @@ And **[follow](https://github.com/mshdabiola)** me for my next creations! 🤩
 </a>
 
 ![Alt](https://repobeats.axiom.co/api/embed/a0893eb63066333a921a4197172ab150fe896a37.svg "Repobeats analytics image")
+</p>
 
 ## Contributors
 
@@ -167,4 +168,3 @@ And **[follow](https://github.com/mshdabiola)** me for my next creations! 🤩
   <img src="https://contrib.rocks/image?repo=mshdabiola/hydraulic" />
 </a>
 
-</div>
