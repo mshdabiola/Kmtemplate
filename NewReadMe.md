@@ -150,7 +150,7 @@ And **[follow](https://github.com/mshdabiola)** me for my next creations! 🤩
 
 ## Star History
 
-<p align="center">
+<div align="center">
 <a href="https://star-history.com/#mshdabiola/hydraulic&Date">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=mshdabiola/hydraulic&type=Date&theme=dark" />
@@ -160,7 +160,7 @@ And **[follow](https://github.com/mshdabiola)** me for my next creations! 🤩
 </a>
 
 ![Alt](https://repobeats.axiom.co/api/embed/a0893eb63066333a921a4197172ab150fe896a37.svg "Repobeats analytics image")
-</p>
+</div>
 
 ## Contributors
 
