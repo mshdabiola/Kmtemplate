@@ -80,7 +80,7 @@ conveyor = "1.12"
 kermit = "2.0.5"
 slf4jSimple = "2.0.16"
 
-androidx-paging = "3.3.4"
+androidx-paging = "3.3.5"
 sqlite = "2.5.0-alpha11"
 kotlinxCollectionImmutable = "0.3.7"
 windowSizeClass = "0.5.0"
