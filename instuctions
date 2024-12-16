@@ -13,8 +13,8 @@
     ./gradlew wasmJsBrowserRun -t
     ./gradlew wasmJsBrowserDistribution
 
-    export TOKEN=
-    conveyor make rendered-icons
+export TOKEN="your_actual_token"
+ conveyor make rendered-icons
     conveyor make site
     ./gradlew run
 
