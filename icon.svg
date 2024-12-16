@@ -5,9 +5,9 @@
             
     <linearGradient xlink:actuate="onLoad" xlink:type="simple" id="background-gradient" xlink:show="other">
                   
-      <stop offset="0" style="stop-color:rgb(0, 0, 255);stop-opacity:1;" id="stop1"/>
+      <stop offset="0" style="stop-color:rgb(235, 150, 119);stop-opacity:1;" id="stop1"/>
                   
-      <stop offset="1" style="stop-color:rgb(255, 192, 203);stop-opacity:1;" id="stop2"/>
+      <stop offset="1" style="stop-color:rgb(108, 57, 35);stop-opacity:1;" id="stop2"/>
               
     </linearGradient>
             
@@ -57,7 +57,7 @@
             
         <style xml:space="preserve"> @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700'); </style>
             
-        <text lengthAdjust="spacingAndGlyphs" x="50%" y="720" style="font: bold 580px 'Poppins', sans-serif" textLength="64%" text-anchor="middle">SA</text>
+        <text lengthAdjust="spacing" x="50%" y="720" style="font: bold 580px 'Poppins', sans-serif" textLength="50%" text-anchor="middle">H</text>
         
       </svg>
     </g>
