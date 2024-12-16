@@ -1,3 +1,4 @@
+import com.mshdabiola.app.libs
 
 plugins {
     id("mshdabiola.android.library")
@@ -11,7 +12,6 @@ android {
 room {
     schemaDirectory("$projectDir/schemas")
 }
-
 configurations.commonMainApi {
             exclude(group = "org.jetbrains.kotlinx", module = "kotlinx-coroutines-android")
         }
