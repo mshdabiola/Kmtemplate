@@ -47,6 +47,9 @@
     <a href="https://play.google.com/store/apps/details?id=ru.tech.hydraulicshrinker"><img alt="Google Play" src="./fastlane/metadata/android/en-US/images/buttons/gplay.svg" height="60"></a>
     <a href="https://f-droid.org/packages/ru.tech.hydraulicshrinker"><img alt="F-Droid" src="./fastlane/metadata/android/en-US/images/buttons/fdroid.svg" height="60"/></a>
     <a href="https://github.com/mshdabiola/hydraulic/releases/latest"><img alt="GitHub" src="./fastlane/metadata/android/en-US/images/buttons/github.svg" height="60"/></a>
+    <a href="https://hydraulic.onrender.com"><img alt="Hydraulic Online" src="./fastlane/metadata/android/en-US/images/buttons/github.svg" height="60"/></a>
+    <a href="https://hydraulic-desktop.onrender.com"><img alt="Desktop Download" src="./fastlane/metadata/android/en-US/images/buttons/github.svg" height="60"/></a>
+
 </div>
 
 <br>
@@ -89,8 +92,8 @@ hydraulic is a compose multiplatform template. that use note app as an example. 
 
 ## Features
 
-- Batch processing
-- Applying filter chains (More than 230 various filters)
+- Dark mode theme
+- Change theme
 
   <summary>Available filters</summary>
   <br>
@@ -101,30 +104,18 @@ hydraulic is a compose multiplatform template. that use note app as an example. 
 
 - [Kotlin](https://kotlinlang.org/) based
 
-- [Image Toolbox Libs](https://github.com/mshdabiola/hydraulicLibs) - set of essential libraries for
-  Image Toolbox.
 
 - [Dynamic Theme](https://github.com/mshdabiola/DynamicTheme) - library, which allows you to easily
   implement custom color theming.
-
-- [Modal Sheet](https://github.com/mshdabiola/ModalSheet) - modal bottom sheet that follows M3
-  guidelines.
 
 - [Coroutines](https://github.com/Kotlin/kotlinx.coroutines) for asynchronous work.
 
 - [Flow](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/)
   to emit values from data layer reactively.
 
-- [Accompanist](https://github.com/google/accompanist) to expand jetpack compose opportunities.
-
-- [Decompose](https://github.com/arkivanov/Decompose) - KMP lifecycle-aware business logic
-  components (aka BLoCs) with routing (navigation) and pluggable UI
-
-- [Hilt](https://dagger.dev/hilt/) for dependency injection.
+- [Koin](https://github.com/InsertKoinIO/koin) for dependency injection.
 
 - [Coil](https://github.com/coil-kt/coil) for loading images.
-
-- [Konfetti](https://github.com/DanielMartinus/Konfetti) to establish beautiful particle system.
 
 - Jetpack
 
@@ -139,23 +130,6 @@ hydraulic is a compose multiplatform template. that use note app as an example. 
 
     - [Lifecycle](https://developer.android.com/jetpack/androidx/releases/lifecycle) - Observe
       Android lifecycles and handle UI states upon the lifecycle changes.
-
-    - [Exif Interface](https://developer.android.com/jetpack/androidx/releases/exifinterface) - Read
-      and write image file EXIF tags.
-
-- [GPU Image](https://github.com/cats-oss/android-gpuimage) for creating and applying filters to the
-  images.
-
-- [SmartToolFactory](https://github.com/SmartToolFactory) provides a bunch of helpful libraries.
-
-- [AVIF Coder](https://github.com/awxkee/avif-coder)
-  and [JXL Coder](https://github.com/awxkee/jxl-coder) libraries which provide avif, heic, heif and
-  jxl support.
-
-- [Aire](https://github.com/awxkee/aire) and [Trickle](https://github.com/mshdabiola/Trickle) for
-  creating and applying filters to the images on CPU
-  using native cpp code.
-  md
 
 ## Build
 
@@ -369,3 +343,8 @@ And **[follow](https://github.com/mshdabiola)** me for my next creations! 🤩
   <img src="https://contrib.rocks/image?repo=mshdabiola/hydraulic" />
 </a>
 
+
+# License
+
+**Hydraulic** is distributed under the terms of the GNU License (Version 2.0). See the
+[license](LICENSE) for more information.
