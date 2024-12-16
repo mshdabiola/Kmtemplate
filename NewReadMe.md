@@ -165,36 +165,38 @@ This project utilizes Kotlin Multiplatform to target Android, Desktop, and WebAs
 1. Open the project in Android Studio.
 2. Select the **GooglePlay** build variant.
 3. Connect an Android device or start an emulator.
-4. Run the `androidApp` module. This will build an APK with Google Play dependencies and install it on your device or emulator.
+4. Run the `app` module. This will build an APK with Google Play dependencies and install it on your device or emulator.
 
 #### FossReliant Variant
 
 1. Open the project in Android Studio.
 2. Select the **FossReliant** build variant.
 3. Connect an Android device or start an emulator.
-4. Run the `androidApp` module. This will build an APK without Google Play dependencies, relying on FOSS alternatives, and install it on your device or emulator.
+4. Run the `app` module. This will build an APK without Google Play dependencies, relying on FOSS alternatives, and install it on your device or emulator.
 
 
 ### Desktop
 
-1. Run the following command to build the desktop application:
-   bash ./gradlew desktopApp:run
+ Run the following command to build the desktop application:
+    
+```bash
+./gradlew app:run
+```
 
-This will create an executable file for your operating system (Windows, macOS, or Linux) in the `desktopApp/build/libs` directory.
+This will run an executable file on your operating system (Windows, macOS, or Linux).
 
 ### Web
 
-1. Run the following command to build the web application: bash ./gradlew jsApp:browserDevelopmentRun
+Run the following command to build the web application:
+
+
+```bash
+./gradlew wasmJsBrowserRun -t
+```
    This will start a development server that serves the web application. Open the provided URL in your browser to access the application.
 
 **Note:** You may need to install Node.js and Yarn for the web build to work correctly.
 
-**Advanced Build Options**
-
-For more advanced build options, such as building release versions of the application, refer to the Kotlin Multiplatform and Compose Multiplatform documentation.
-
-md
-md
 ## Release
 
 This project offers releases for Android, Desktop, and Web. Below are instructions for releasing the application on each platform.
@@ -205,27 +207,30 @@ This project offers releases for Android, Desktop, and Web. Below are instructio
 
 To release the GooglePlay variant, follow these steps:
 
-1.  Build the release APK using the following Gradle command:
-    bash ./gradlew assembleGooglePlayRelease
-2.  Sign the APK with your release keystore.
-3.  Upload the signed APK to the Google Play Console.
+Build the release APK using the following Gradle command:
+     
+```bash
+./gradlew assembleGooglePlayRelease
+```
+
+Upload the signed APK to the Google Play Console.
 
 
 #### FossReliant Variant
 
 To release the FossReliant variant, follow these steps:
 
-1.  Build the release APK using the following Gradle command:
-    bash ./gradlew assembleFossReliantRelease
-2.  Sign the APK with your release keystore.
-3.  Distribute the APK through your preferred channels (e.g., GitHub Releases, F-Droid).
+Build the release APK using the following Gradle command:
 
+```bash
+./gradlew assembleFossReliantRelease
+```
 
-
+Distribute the APK through your preferred channels (e.g., GitHub Releases, F-Droid).
 
 ### Desktop
 
-To release the Desktop application, follow these steps:
+This project leverages Hydraulic Conveyor for packaging and distributing the Desktop application. Hydraulic Conveyor simplifies the creation of installers and distributable packages across various operating systems (Windows, macOS, Linux).
 
 1. Build the release executable using the following Gradle command:
    bash ./gradlew desktopApp:createDistributable
@@ -238,21 +243,19 @@ To release the Desktop application, follow these steps:
 
 To release the Web application, follow these steps:
 
-1. Build the release version of the web application using the following Gradle command:
-   bash ./gradlew jsApp:assemble
-2. Deploy the built files to your web server or hosting provider.
+Build the release version of the web application using the following Gradle command:
 
+```bash
+./gradlew wasmJsBrowserDistribution
+```
+Deploy the built files to your web server or hosting provider.
 
-
-**Release Notes**
-
-View the full release notes and changelog on [GitHub Releases/Your Release Notes Page].
 
 ## Testing
 
 ### JVM Tests
 
-This project includes a comprehensive suite of JVM tests to ensure the correctness and reliability of the core logic and functionality. These tests are written using [JUnit/Kotest] (choose the framework you're using) and cover various aspects of the application, including:
+This project includes a comprehensive suite of JVM tests to ensure the correctness and reliability of the core logic and functionality. These tests are written using JvmTest and cover various aspects of the application, including:
 
 * **Unit tests:** Verify the behavior of individual components and functions in isolation.
 * **Integration tests:** Test the interaction between different modules or components of the system.
@@ -262,23 +265,22 @@ This project includes a comprehensive suite of JVM tests to ensure the correctne
 **Running Tests**
 
 To run the JVM tests, you can use the following Gradle command:
-bash ./gradlew jvmTest
+
+```bash
+./gradlew jvmTest
+```
 
 ### Screenshot Test
 
 Compose Screenshot Testing is an essential part of ensuring UI quality. A screenshot test captures an image of a Composable function or a section of your app's UI and compares it to a previously saved reference image, known as a "golden" or "baseline" image. This ensures that UI changes don't unintentionally introduce visual regressions.
 
-**Example**
-
-Consider the Now in Android app, which utilizes screenshot tests to confirm that navigation elements render correctly across various screen sizes. These tests rely on stored baseline images representing the expected UI appearance.
-
-**Paparazzi and Gradle Tasks**
+**Compose ScreenshotTest and Gradle Tasks**
 
 Compose screenshot testing can be seamlessly integrated with the Paparazzi library, providing automated image comparisons. Paparazzi offers the following useful Gradle tasks:
 
-- `verifyPaparazziDebug`: Executes all screenshot tests, comparing captured images with the baseline images. This process helps detect any visual discrepancies introduced by code changes.
-- `recordPaparazziDebug`: Generates new baseline images. Use this command after intentionally modifying the UI and manually verifying the correctness of the new visuals. The newly captured screenshots then become the new baseline for future comparisons.
-- `comparePaparazziDebug`: Creates comparison images highlighting the differences between failed tests and the baseline images. These images aid in pinpointing visual discrepancies, simplifying debugging efforts. Baseline images are stored in `modulename/src/test/snapshots`.
+- `validateFossReliantDebugScreenshotTest`: Executes all screenshot tests, comparing captured images with the baseline images. This process helps detect any visual discrepancies introduced by code changes.
+- `updateFossReliantDebugScreenshotTest`: Generates new baseline images. Use this command after intentionally modifying the UI and manually verifying the correctness of the new visuals. The newly captured screenshots then become the new baseline for future comparisons.
+- `testFossReliantDebugScreenshotTest`: Creates comparison images highlighting the differences between failed tests and the baseline images. These images aid in pinpointing visual discrepancies, simplifying debugging efforts. Baseline images are stored in `modulename/src/test/snapshots`.
   
 ## Performance
 
