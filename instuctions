@@ -21,3 +21,5 @@ export TOKEN="your_actual_token"
 
 //./gradlew assembleDebug -PenableComposeCompilerReports=true
 // ./gradlew assembleDebug -PenableComposeCompilerMetrics=true
+
+https://randombits.dev/articles/android/fdroid

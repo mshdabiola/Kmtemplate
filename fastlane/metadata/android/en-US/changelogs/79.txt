@@ -1,2 +1,0 @@
-FIXED: App crashes at start
-IMPROVED: Updated translations

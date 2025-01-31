@@ -1,3 +1,0 @@
-NEW: Toggle TrustZone from the home navigation drawer
-IMPROVED: Layout for text list
-MISC: Updated translations
