@@ -1,3 +1,0 @@
-NEW: Support for Italian and Portuguese languages
-FIXED: Crashes on certain language configurations
-MISC: Updated translations

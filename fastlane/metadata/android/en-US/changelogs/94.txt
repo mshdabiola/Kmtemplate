@@ -1,3 +1,0 @@
-NEW: Black theme
-NEW: Hold & swipe to select anything
-FIXED: External drives were not mountable below Android 7 #79
