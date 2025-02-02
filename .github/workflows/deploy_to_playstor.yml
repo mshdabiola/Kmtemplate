@@ -1,11 +1,10 @@
-name: Deploy to Play Store
+name: Deploy to Play Store and Firebase
 
 #on:
 #  push:
 #    tags:
 #      - 'a[0-9]+.[0-9]+.[0-9]+'
 on: workflow_dispatch
-
 
 jobs:
   build:
@@ -19,23 +18,23 @@ jobs:
       - name: Generate Release Bundle
         run: ./gradlew bundleRelease
 
-      - name: Sign Physics Bundle
+      - name: Sign Free Bundle
         uses: r0adkll/sign-android-release@v1
         # ID used to access action output
-        id: sign_physics_app
+        id: sign_free_app
         with:
-          releaseDirectory: app/build/outputs/bundle/physicsRelease
+          releaseDirectory: app/build/outputs/bundle/freeRelease
           signingKeyBase64: ${{ secrets.SIGNING_KEY }}
           alias: ${{ secrets.ALIAS }}
           keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
           keyPassword: ${{ secrets.KEY_PASSWORD }}
 
-      - name: Sign Math Bundle
+      - name: Sign Paid Bundle
         uses: r0adkll/sign-android-release@v1
         # ID used to access action output
-        id: sign_math_app
+        id: sign_paid_app
         with:
-          releaseDirectory: app/build/outputs/bundle/mathRelease
+          releaseDirectory: app/build/outputs/bundle/paidRelease
           signingKeyBase64: ${{ secrets.SIGNING_KEY }}
           alias: ${{ secrets.ALIAS }}
           keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
@@ -43,23 +42,23 @@ jobs:
 
       - uses: actions/upload-artifact@v4
         with:
-          name: physics_release_bundle
-          path: ${{steps.sign_physics_app.outputs.signedReleaseFile}}
+          name: free_release_bundle
+          path: ${{steps.sign_free_app.outputs.signedReleaseFile}}
 
       - uses: actions/upload-artifact@v4
         with:
           name: free_mapping
-          path: app/build/outputs/mapping/physicsRelease/mapping.txt
+          path: app/build/outputs/mapping/freeRelease/mapping.txt
 
       - uses: actions/upload-artifact@v4
         with:
-          name: math_release_bundle
-          path: ${{steps.sign_math_app.outputs.signedReleaseFile}}
+          name: paid_release_bundle
+          path: ${{steps.sign_paid_app.outputs.signedReleaseFile}}
 
       - uses: actions/upload-artifact@v4
         with:
-          name: math_mapping
-          path: app/build/outputs/mapping/mathRelease/mapping.txt
+          name: paid_mapping
+          path: app/build/outputs/mapping/paidRelease/mapping.txt
 
       - uses: actions/upload-artifact@v4
         with:
@@ -73,13 +72,13 @@ jobs:
       # 1
       - uses: actions/download-artifact@v4
         with:
-          name: physics_release_bundle
+          name: free_release_bundle
       - name: 'Echo download path'
         run: echo ${{steps.download.outputs.download-path}}
 
       - uses: actions/download-artifact@v4
         with:
-          name: physics_mapping
+          name: free_mapping
       - name: 'Echo download path'
         run: echo ${{steps.download.outputs.download-path}}
 
@@ -97,7 +96,7 @@ jobs:
           serviceAccountJsonPlainText: ${{ secrets.SERVICE_ACCOUNT_JSON }}
           # 3
           packageName: com.mshdabiola.ludo
-          releaseFiles: app-physics-release.aab
+          releaseFiles: app-free-release.aab
           track: internal
           status: completed
           inAppUpdatePriority: 2
@@ -111,13 +110,13 @@ jobs:
       # 1
       - uses: actions/download-artifact@v4
         with:
-          name: math_release_bundle
+          name: paid_release_bundle
       - name: 'Echo download path'
         run: echo ${{steps.download.outputs.download-path}}
 
       - uses: actions/download-artifact@v4
         with:
-          name: math_mapping
+          name: paid_mapping
       - name: 'Echo download path'
         run: echo ${{steps.download.outputs.download-path}}
 
@@ -135,7 +134,7 @@ jobs:
           serviceAccountJsonPlainText: ${{ secrets.SERVICE_ACCOUNT_JSON }}
           # 3
           packageName: com.mshdabiola.ludo.paid
-          releaseFiles: app-math-release.aab
+          releaseFiles: app-paid-release.aab
           track: internal
           status: completed
           inAppUpdatePriority: 2

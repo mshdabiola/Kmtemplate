@@ -1,2 +1,0 @@
-FIXED: Crashes on certain locales
-MISC: Localizations

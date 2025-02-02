@@ -1,5 +1,5 @@
-package: name='com.mshdabiola.skeletonapp.foss' versionCode='124' versionName='1.2.4' platformBuildVersionName='15' platformBuildVersionCode='35' compileSdkVersion='35' compileSdkVersionCodename='15'
-sdkVersion:'24'
+package: name='com.mshdabiola.skeletonapp.foss' versionCode='125' versionName='1.2.5' platformBuildVersionName='15' platformBuildVersionCode='35' compileSdkVersion='35' compileSdkVersionCodename='15'
+minSdkVersion:'24'
 targetSdkVersion:'35'
 uses-permission: name='com.mshdabiola.skeletonapp.foss.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION'
 application-label:'Hydraulic App'
