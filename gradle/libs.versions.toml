@@ -73,7 +73,7 @@ ktor = "3.0.2"
 uiTextGoogleFonts = "1.7.7"
 
 koin = "4.0.2"
-koinCompose = "4.0.1"
+koinCompose = "4.0.2"
 
 conveyor = "1.12"
 
