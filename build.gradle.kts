@@ -34,7 +34,7 @@ plugins {
 moduleGraphConfig {
     heading = "###  Hydraulic Module Graph"
     readmePath = "${rootDir}/FULLGRAPH.md"
-    showFullPath = true
+    showFullPath = false
     setStyleByModuleType.set(true)
     theme.set(
         Theme.BASE(
