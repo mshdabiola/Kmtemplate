@@ -33,16 +33,16 @@ plugins {
 }
 
 moduleGraphConfig {
+    heading = "###  Hydraulic Module Graph"
+    readmePath = "${rootDir}/FULLGRAPH.md"
+    showFullPath = true
     graph(
-        readmePath = "${rootDir}/README1.md",
-        heading = "### Module Graph1",
+        readmePath = "${rootDir}/features/main/README.md",
+        heading = "### Main Module Graph",
     ) {
+
         showFullPath = false
+        this.focusedModulesRegex=".*(features:main).*"
     }
-    graph(
-        readmePath = "${rootDir}/README2.md",
-        heading = "### Another Module Graph2",
-    ) {
-        showFullPath = true
-    }
+
 }
