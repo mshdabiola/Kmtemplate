@@ -294,5 +294,23 @@ moduleGraphConfig {
         )
     }
 
+    graph(
+        readmePath = "${rootDir}/benchmarks/README.md",
+        heading = "### Benchmarks Module Graph",
+    ) {
+        this.focusedModulesRegex = ".*(benchmarks).*"
+        showFullPath = false
+        this.theme = Theme.BASE(
+            mapOf(
+                "primaryTextColor" to "#fff",
+                "primaryColor" to "#5a4f7c",
+                "primaryBorderColor" to "#5a4f7c",
+                "lineColor" to "#f5a623",
+                "tertiaryColor" to "#40375c",
+                "fontSize" to "12px",
+            ),
+            focusColor = "#FA8140",
+        )
+    }
 
 }
