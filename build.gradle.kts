@@ -33,15 +33,16 @@ plugins {
 }
 
 moduleGraphConfig {
-
-    theme.set(
-        Theme.BASE(
-            moduleTypes = listOf(
-                Custom(id = "app.compose", color = "#0E0E0E"),
-                AndroidApp("#3CD483"),
-                AndroidLibrary("#292B2B"),
-            ),
-        ),
-    )
-    nestingEnabled.set(true)
+    graph(
+        readmePath = "${rootDir}/README1.md",
+        heading = "### Module Graph1",
+    ) {
+        showFullPath = false
+    }
+    graph(
+        readmePath = "${rootDir}/README2.md",
+        heading = "### Another Module Graph2",
+    ) {
+        showFullPath = true
+    }
 }
