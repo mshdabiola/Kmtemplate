@@ -1,3 +1,8 @@
+import dev.iurysouza.modulegraph.ModuleType.AndroidApp
+import dev.iurysouza.modulegraph.ModuleType.AndroidLibrary
+import dev.iurysouza.modulegraph.ModuleType.Custom
+import dev.iurysouza.modulegraph.Theme
+
 @Suppress("DSL_SCOPE_VIOLATION")
 plugins {
         id("dev.iurysouza.modulegraph") version "0.12.0"
@@ -25,4 +30,18 @@ plugins {
 
 
 
+}
+
+moduleGraphConfig {
+
+    theme.set(
+        Theme.BASE(
+            moduleTypes = listOf(
+                Custom(id = "app.compose", color = "#0E0E0E"),
+                AndroidApp("#3CD483"),
+                AndroidLibrary("#292B2B"),
+            ),
+        ),
+    )
+    nestingEnabled.set(true)
 }

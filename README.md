@@ -1,4 +1,4 @@
-# Module Graph
+### Module Graph
 
 ```mermaid
 %%{
@@ -51,6 +51,118 @@ graph LR
   :modules:data --> :modules:model
   :modules:data --> :modules:analytics
   :modules:data --> :modules:testing
+  :modules:ui --> :modules:analytics
+  :modules:ui --> :modules:designsystem
+  :modules:ui --> :modules:model
+  :modules:ui --> :modules:testing
+  :modules:domain --> :modules:testing
+  :modules:datastore --> :modules:model
+  :modules:datastore --> :modules:testing
+  :modules:analytics --> :modules:testing
+  :modules:analytics --> :modules:designsystem
+  :modules:analytics --> :modules:ui
+  :modules:analytics --> :modules:model
+  :features:detail --> :modules:data
+  :features:detail --> :modules:model
+  :features:detail --> :modules:ui
+  :features:detail --> :modules:designsystem
+  :features:detail --> :modules:analytics
+  :features:detail --> :modules:testing
+  :features:setting --> :modules:data
+  :features:setting --> :modules:model
+  :features:setting --> :modules:ui
+  :features:setting --> :modules:designsystem
+  :features:setting --> :modules:analytics
+  :features:setting --> :modules:testing
+  :modules:designsystem --> :modules:model
+  :modules:designsystem --> :modules:testing
+  :modules:designsystem --> :modules:ui
+  :modules:testing --> :modules:analytics
+  :modules:testing --> :modules:data
+  :modules:testing --> :modules:model
+  :modules:testing --> :modules:designsystem
+  :modules:testing --> :modules:ui
+  :modules:network --> :modules:testing
+```
+# Module Graph
+
+```mermaid
+%%{
+  init: {
+    'theme': 'base'
+  }
+}%%
+
+graph LR
+  :benchmarks["benchmarks"]
+  :app["app"]
+  :app["app"]
+  :benchmarks["benchmarks"]
+  subgraph :modules
+    :modules:model["model"]
+    :modules:testing["testing"]
+    :modules:database["database"]
+    :modules:model["model"]
+    :modules:data["data"]
+    :modules:ui["ui"]
+    :modules:designsystem["designsystem"]
+    :modules:analytics["analytics"]
+    :modules:testing["testing"]
+    :modules:data["data"]
+    :modules:database["database"]
+    :modules:datastore["datastore"]
+    :modules:network["network"]
+    :modules:designsystem["designsystem"]
+    :modules:data["data"]
+    :modules:ui["ui"]
+    :modules:model["model"]
+    :modules:analytics["analytics"]
+    :modules:ui["ui"]
+    :modules:domain["domain"]
+    :modules:datastore["datastore"]
+    :modules:analytics["analytics"]
+    :modules:designsystem["designsystem"]
+    :modules:ui["ui"]
+    :modules:model["model"]
+    :modules:designsystem["designsystem"]
+    :modules:testing["testing"]
+    :modules:network["network"]
+  end
+  subgraph :features
+    :features:main["main"]
+    :features:main["main"]
+    :features:detail["detail"]
+    :features:setting["setting"]
+    :features:detail["detail"]
+    :features:setting["setting"]
+  end
+
+  :modules:model --> :modules:testing
+  :benchmarks --> :app
+  :modules:database --> :modules:model
+  :modules:database --> :modules:testing
+  :features:main --> :modules:data
+  :features:main --> :modules:model
+  :features:main --> :modules:ui
+  :features:main --> :modules:designsystem
+  :features:main --> :modules:analytics
+  :features:main --> :modules:testing
+  :modules:data --> :modules:database
+  :modules:data --> :modules:datastore
+  :modules:data --> :modules:network
+  :modules:data --> :modules:model
+  :modules:data --> :modules:analytics
+  :modules:data --> :modules:testing
+  :app --> :modules:testing
+  :app --> :benchmarks
+  :app --> :modules:designsystem
+  :app --> :modules:data
+  :app --> :modules:ui
+  :app --> :modules:model
+  :app --> :modules:analytics
+  :app --> :features:main
+  :app --> :features:detail
+  :app --> :features:setting
   :modules:ui --> :modules:analytics
   :modules:ui --> :modules:designsystem
   :modules:ui --> :modules:model
