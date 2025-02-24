@@ -76,9 +76,8 @@
 - Architecture
     - MVVM Architecture (Compose - ViewModel - Model)
     - Repository Pattern
-    - <p>
-         This project use android modularization. You can find full graph <a href="FULLGRAPH.md">FULLGRAPH</a>
-      </p>
+    - This project use android modularization. You can find full graph [FULLGRAPH](FULLGRAPH.MD)
+      
 
 ## Build
 
