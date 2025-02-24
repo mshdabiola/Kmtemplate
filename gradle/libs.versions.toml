@@ -39,10 +39,10 @@ gmsPlugin = "4.4.2"
 googleOss = "17.1.0"
 googleOssPlugin = "0.10.6"
 junit4 = "4.13.2"
-kotlin = "2.1.10"
+kotlin = "2.1.0"
 kotlinxCoroutines = "1.10.1"
 kotlinxDatetime = "0.6.1"
-kotlinxSerializationJson = "1.8.0"
+kotlinxSerializationJson = "1.7.3"
 protobuf = "4.26.0"
 protobufPlugin = "0.9.4"
 ksp = "2.1.10-1.0.30"
@@ -73,7 +73,7 @@ ktor = "3.0.2"
 uiTextGoogleFonts = "1.7.7"
 
 koin = "4.0.2"
-koinCompose = "4.0.2"
+koinCompose = "4.0.1"
 
 conveyor = "1.12"
 
@@ -86,7 +86,7 @@ kotlinxCollectionImmutable = "0.3.7"
 windowSizeClass = "0.5.0"
 
 screenshot = "0.0.1-alpha08"
-kover = "0.9.1"
+kover = "0.9.0"
 
 
 series = "0.0.19"
