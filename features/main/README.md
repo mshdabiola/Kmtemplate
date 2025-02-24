@@ -3,7 +3,8 @@
 ```mermaid
 %%{
   init: {
-    'theme': 'neutral'
+    'theme': 'base',
+    'themeVariables': {"primaryTextColor":"#fff","primaryColor":"#5a4f7c","primaryBorderColor":"#5a4f7c","lineColor":"#f5a623","tertiaryColor":"#40375c","fontSize":"12px"}
   }
 }%%
 
@@ -27,6 +28,6 @@ graph LR
   :features:main --> :modules:testing
   :app --> :features:main
 
-classDef focus fill:#769566,stroke:#fff,stroke-width:2px,color:#fff;
+classDef focus fill:#FA8140,stroke:#fff,stroke-width:2px,color:#fff;
 class :features:main focus
 ```
