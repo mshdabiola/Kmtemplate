@@ -66,4 +66,24 @@ graph LR
   :modules:testing --> :modules:designsystem
   :modules:testing --> :modules:ui
   :modules:network --> :modules:testing
+
+classDef kotlin-multiplatform fill:#C792EA,stroke:#fff,stroke-width:2px,color:#fff;
+classDef unknown fill:#676767,stroke:#fff,stroke-width:2px,color:#fff;
+classDef android-application fill:#2C4162,stroke:#fff,stroke-width:2px,color:#fff;
+class :modules:model kotlin-multiplatform
+class :modules:testing kotlin-multiplatform
+class :benchmarks unknown
+class :app android-application
+class :modules:database kotlin-multiplatform
+class :features:main kotlin-multiplatform
+class :modules:data kotlin-multiplatform
+class :modules:ui kotlin-multiplatform
+class :modules:designsystem kotlin-multiplatform
+class :modules:analytics kotlin-multiplatform
+class :features:detail kotlin-multiplatform
+class :features:setting kotlin-multiplatform
+class :modules:datastore kotlin-multiplatform
+class :modules:network kotlin-multiplatform
+class :modules:domain kotlin-multiplatform
+
 ```
