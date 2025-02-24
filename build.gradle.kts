@@ -5,8 +5,6 @@ import dev.iurysouza.modulegraph.Theme
 
 @Suppress("DSL_SCOPE_VIOLATION")
 plugins {
-    id("dev.iurysouza.modulegraph") version "0.12.0"
-
     alias(libs.plugins.android.application) apply false
     alias(libs.plugins.kotlinAndroid) apply false
     alias(libs.plugins.android.library) apply false
@@ -27,7 +25,7 @@ plugins {
     alias(libs.plugins.conveyor) apply false
     alias(libs.plugins.screenshot) apply false
     alias(libs.plugins.kover) apply false
-
+    alias(libs.plugins.module.graph)
 
 }
 
