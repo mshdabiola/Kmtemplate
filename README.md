@@ -1,69 +1,89 @@
-<div align="center">
+# Module Graph
 
+```mermaid
+%%{
+  init: {
+    'theme': 'neutral'
+  }
+}%%
 
-<p align="center">
- <a>
-  <img alt="Kotlin" src="https://img.shields.io/badge/Kotlin-Multiplatform-%237f52ff?logo=kotlin&style=for-the-badge"/>
-</a>
-  <img alt="Jetpack Compose" src="https://img.shields.io/static/v1?style=for-the-badge&message=Jetpack+Compose&color=4285F4&logo=Jetpack+Compose&logoColor=FFFFFF&label="/> 
-    <img alt="material" src="https://custom-icon-badges.demolab.com/badge/material%20you-lightblue?style=for-the-badge&logoColor=333&logo=material-you"/>
-  <br>
-  <br>
- <a href="">
-<img src="https://tokei.rs/b1/github/mshdabiola/hydraulic?category=code&color=orange&style=for-the-badge" alt=""/>
-</a>
-    <a href="https://github.com/mshdabiola/hydraulic/actions">
-  <img alt="GitHub commits since tagged version (branch)" src="https://img.shields.io/github/commits-since/mshdabiola/hydraulic/1.0.0?color=palegreen&label=Commits&style=for-the-badge">
-  <img alt="GitHub code size in bytes" src="https://img.shields.io/github/languages/code-size/mshdabiola/hydraulic?style=for-the-badge&color=37ABB5">
-  <img src="https://wakatime.com/badge/user/8e707c95-01e6-41d3-a760-223960f0cdf7.svg?style=for-the-badge" alt=""/>
-</a>
-  <br>
-  <a href="https://hits.sh/github.com/mshdabiola/hydraulic/">
-      <img alt="Hits" src="https://hits.sh/github.com/mshdabiola/hydraulic.svg?style=for-the-badge&label=Views&extraCount=7500&color=ff3f6f"/></a>
-  <a href="https://github.com/mshdabiola/hydraulic/releases">
-      <img src="https://img.shields.io/github/downloads/mshdabiola/hydraulic/total?color=orange&style=for-the-badge"/>
-  </a>
-  <a href="https://github.com/mshdabiola/hydraulic/stargazers">
-      <img src="https://img.shields.io/github/stars/mshdabiola/hydraulic?color=ffff00&style=for-the-badge"/>
-  </a>
-  <br>
-  <a href="https://github.com/mshdabiola/hydraulic/releases/latest">
-      <img src="https://img.shields.io/github/v/release/mshdabiola/hydraulic?color=purple&include_prereleases&logo=github&style=for-the-badge"/>
-  </a>
-
-[//]: # (   <a href="https://play.google.com/store/apps/details?id=ru.tech.hydraulicshrinker">)
-
-[//]: # (      <img src="https://img.shields.io/endpoint?color=purple&logo=google-play&style=for-the-badge&label=Play%20store&url=https%3A%2F%2Fplay.cuzi.workers.dev%2Fplay%3Fi%3Dru.tech.hydraulicshrinker%26l%3DAndroid%26m%3D%24version"/>)
-
-[//]: # (  </a>)
-
-[//]: # (  <a href="https://f-droid.org/packages/ru.tech.hydraulicshrinker">)
-
-[//]: # (      <img src="https://img.shields.io/f-droid/v/ru.tech.hydraulicshrinker?color=purple&include_prereleases&logo=FDROID&style=for-the-badge"/>)
-</p>
-
-
-<div align="center">
-    <a href="https://play.google.com/store/apps/details?id=ru.tech.hydraulicshrinker"><img alt="Google Play" src="./fastlane/metadata/android/en-US/images/buttons/gplay.svg" height="60"></a>
-    <a href="https://f-droid.org/packages/ru.tech.hydraulicshrinker"><img alt="F-Droid" src="./fastlane/metadata/android/en-US/images/buttons/fdroid.svg" height="60"/></a>
-    <a href="https://github.com/mshdabiola/hydraulic/releases/latest"><img alt="GitHub" src="./fastlane/metadata/android/en-US/images/buttons/github.svg" height="60"/></a>
-    <a href="https://hydraulic.onrender.com"><img alt="Hydraulic Online" src="./fastlane/metadata/android/en-US/images/buttons/github.svg" height="60"/></a>
-    <a href="https://hydraulic-desktop.onrender.com"><img alt="Desktop Download" src="./fastlane/metadata/android/en-US/images/buttons/github.svg" height="60"/></a>
-
-</div>
-
-<br>
-<img src="./fastlane/metadata/android/en-US/images/icon.png" width="40%"  alt=""/>
-</div>
-
-<div align="center"> 
-     <h1>Hydraulic Compose Multiplatform Template</h1>
-</div>
-
-<div style="text-align: center;">
-hydraulic is a compose multiplatform template. that use note app as an example. it is multi-module architecture. 
-</div>
-
+graph LR
+  subgraph :features
+    :features:main["main"]
+    :features:detail["detail"]
+    :features:setting["setting"]
+  end
+  subgraph :modules
+    :modules:model["model"]
+    :modules:testing["testing"]
+    :modules:database["database"]
+    :modules:data["data"]
+    :modules:ui["ui"]
+    :modules:designsystem["designsystem"]
+    :modules:analytics["analytics"]
+    :modules:datastore["datastore"]
+    :modules:network["network"]
+    :modules:domain["domain"]
+  end
+  :modules:model --> :modules:testing
+  :benchmarks --> :app
+  :modules:database --> :modules:model
+  :modules:database --> :modules:testing
+  :features:main --> :modules:data
+  :features:main --> :modules:model
+  :features:main --> :modules:ui
+  :features:main --> :modules:designsystem
+  :features:main --> :modules:analytics
+  :features:main --> :modules:testing
+  :app --> :modules:testing
+  :app --> :benchmarks
+  :app --> :modules:designsystem
+  :app --> :modules:data
+  :app --> :modules:ui
+  :app --> :modules:model
+  :app --> :modules:analytics
+  :app --> :features:main
+  :app --> :features:detail
+  :app --> :features:setting
+  :modules:data --> :modules:database
+  :modules:data --> :modules:datastore
+  :modules:data --> :modules:network
+  :modules:data --> :modules:model
+  :modules:data --> :modules:analytics
+  :modules:data --> :modules:testing
+  :modules:ui --> :modules:analytics
+  :modules:ui --> :modules:designsystem
+  :modules:ui --> :modules:model
+  :modules:ui --> :modules:testing
+  :modules:domain --> :modules:testing
+  :modules:datastore --> :modules:model
+  :modules:datastore --> :modules:testing
+  :modules:analytics --> :modules:testing
+  :modules:analytics --> :modules:designsystem
+  :modules:analytics --> :modules:ui
+  :modules:analytics --> :modules:model
+  :features:detail --> :modules:data
+  :features:detail --> :modules:model
+  :features:detail --> :modules:ui
+  :features:detail --> :modules:designsystem
+  :features:detail --> :modules:analytics
+  :features:detail --> :modules:testing
+  :features:setting --> :modules:data
+  :features:setting --> :modules:model
+  :features:setting --> :modules:ui
+  :features:setting --> :modules:designsystem
+  :features:setting --> :modules:analytics
+  :features:setting --> :modules:testing
+  :modules:designsystem --> :modules:model
+  :modules:designsystem --> :modules:testing
+  :modules:designsystem --> :modules:ui
+  :modules:testing --> :modules:analytics
+  :modules:testing --> :modules:data
+  :modules:testing --> :modules:model
+  :modules:testing --> :modules:designsystem
+  :modules:testing --> :modules:ui
+  :modules:network --> :modules:testing
+```
 ## Screenshot
 
 ### Phone
