@@ -37,13 +37,38 @@ moduleGraphConfig {
     readmePath = "${rootDir}/FULLGRAPH.md"
     showFullPath = true
     setStyleByModuleType.set(true)
+    theme.set(
+        Theme.BASE(
+            mapOf(
+                "primaryTextColor" to "#fff",
+                "primaryColor" to "#5a4f7c",
+                "primaryBorderColor" to "#5a4f7c",
+                "lineColor" to "#f5a623",
+                "tertiaryColor" to "#40375c",
+                "fontSize" to "12px",
+            ),
+            focusColor = "#FA8140"
+        ),
+    )
     graph(
         readmePath = "${rootDir}/features/main/README.md",
         heading = "### Main Module Graph",
     ) {
 
+
         showFullPath = false
         this.focusedModulesRegex=".*(features:main).*"
+        this.theme = Theme.BASE(
+            mapOf(
+                "primaryTextColor" to "#fff",
+                "primaryColor" to "#5a4f7c",
+                "primaryBorderColor" to "#5a4f7c",
+                "lineColor" to "#f5a623",
+                "tertiaryColor" to "#40375c",
+                "fontSize" to "12px",
+            ),
+            focusColor = "#FA8140"
+        )
     }
 
 }
