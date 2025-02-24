@@ -10,12 +10,15 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.WindowInsetsSides
 import androidx.compose.foundation.layout.consumeWindowInsets
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.windowInsetsPadding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBackIosNew
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExtendedFloatingActionButton
 import androidx.compose.material3.Icon
@@ -49,21 +52,19 @@ import com.mshdabiola.designsystem.theme.LocalGradientColors
 import com.mshdabiola.designsystem.theme.SkTheme
 import com.mshdabiola.detail.navigation.Detail
 import com.mshdabiola.detail.navigation.navigateToDetail
-import com.mshdabiola.main.navigation.Main
 import com.mshdabiola.model.DarkThemeConfig
 import com.mshdabiola.model.ThemeBrand
 import com.mshdabiola.setting.navigation.navigateToSetting
 import com.mshdabiola.skeletonapp.MainActivityUiState
 import com.mshdabiola.skeletonapp.MainAppViewModel
 import com.mshdabiola.skeletonapp.navigation.SkNavHost
-import com.mshdabiola.ui.CommonBar
-import com.mshdabiola.ui.CommonRail
-import com.mshdabiola.ui.Drawer
 import com.mshdabiola.ui.semanticsCommon
 import org.koin.compose.koinInject
 import org.koin.compose.viewmodel.koinViewModel
+import org.koin.core.annotation.KoinExperimentalAPI
 
 @OptIn(
+    KoinExperimentalAPI::class,
     ExperimentalMaterial3Api::class,
 )
 @Composable
@@ -98,13 +99,21 @@ fun SkeletonApp() {
                     PermanentNavigationDrawer(
                         drawerContent = {
                             if (appState.shouldShowDrawer) {
-                                Drawer()
+                                CommonNavigation(
+                                    modifier = Modifier.width(300.dp).fillMaxHeight(),
+                                    navController = appState.navController,
+
+                                )
                             }
                         },
+
                     ) {
                         Row {
                             if (appState.shouldShowNavRail) {
-                                CommonRail(modifier = Modifier.width(120.dp)) { }
+                                CommonRail(
+                                    modifier = Modifier.width(120.dp),
+                                    navController = appState.navController,
+                                )
                             }
                             Scaffold(
                                 modifier = Modifier.semanticsCommon {},
@@ -113,7 +122,7 @@ fun SkeletonApp() {
                                 snackbarHost = { SnackbarHost(snackbarHostState) },
                                 topBar = {
                                     if (appState.shouldShowTopBar) {
-                                        if (appState.currentRoute.contains(Main::class.name)) {
+                                        if (appState.isMain) {
                                             SkTopAppBar(
                                                 titleRes = "Note",
                                                 navigationIcon = SkIcons.Person,
@@ -127,10 +136,7 @@ fun SkeletonApp() {
                                                 title = { Text("Setting") },
                                                 navigationIcon = {
                                                     IconButton(onClick = { appState.navController.popBackStack() }) {
-                                                        Icon(
-                                                            SkIcons.ArrowBack,
-                                                            contentDescription = "back",
-                                                        )
+                                                        Icon(Icons.Default.ArrowBackIosNew, "back")
                                                     }
                                                 },
                                             )
@@ -138,7 +144,7 @@ fun SkeletonApp() {
                                     }
                                 },
                                 floatingActionButton = {
-                                    if (appState.currentRoute.contains(Main::class.name)) {
+                                    if (appState.isMain) {
                                         ExtendedFloatingActionButton(
                                             modifier = Modifier.testTag("main:add"),
                                             text = { Text("Add Note") },
@@ -158,8 +164,7 @@ fun SkeletonApp() {
                                 },
                                 bottomBar = {
                                     if (appState.shouldShowBottomBar) {
-                                        CommonBar {
-                                        }
+                                        CommonBar(navController = appState.navController)
                                     }
                                 },
 

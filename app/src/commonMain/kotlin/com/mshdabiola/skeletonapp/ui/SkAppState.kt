@@ -8,6 +8,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.navigation.NavDestination
+import androidx.navigation.NavDestination.Companion.hasRoute
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
@@ -16,7 +18,6 @@ import androidx.window.core.layout.WindowWidthSizeClass
 import com.mshdabiola.detail.navigation.Detail
 import com.mshdabiola.main.navigation.Main
 import kotlinx.coroutines.CoroutineScope
-import kotlin.reflect.KClass
 
 @Composable
 fun rememberSkAppState(
@@ -43,15 +44,20 @@ class SkAppState(
     val coroutineScope: CoroutineScope,
     val windowSizeClass: WindowSizeClass,
 ) {
-    val currentRoute: String
+
+    val currentDestination: NavDestination?
         @Composable get() = navController
-            .currentBackStackEntryAsState().value?.destination?.route ?: ""
+            .currentBackStackEntryAsState().value?.destination
+//    val currentRoute: String
+//        @Composable get() = navController
+//            .currentBackStackEntryAsState().value?.destination?.route ?: ""
 
     val isMain: Boolean
-        @Composable get() = currentRoute.contains(Main::class.name)
+        @Composable get() =
+            currentDestination?.hasRoute(Main::class) == true
 
     val shouldShowTopBar: Boolean
-        @Composable get() = currentRoute.contains(Detail::class.name).not()
+        @Composable get() = currentDestination?.hasRoute(Detail::class) != true
     val shouldShowBottomBar: Boolean
         @Composable get() = windowSizeClass.windowWidthSizeClass == WindowWidthSizeClass.COMPACT && isMain
 
@@ -61,8 +67,3 @@ class SkAppState(
     val shouldShowDrawer: Boolean
         @Composable get() = windowSizeClass.windowWidthSizeClass == WindowWidthSizeClass.EXPANDED && isMain
 }
-
-val <T : Any> KClass<T>.name: String
-    get() {
-        return this.qualifiedName.toString()
-    }
