@@ -36,6 +36,7 @@ moduleGraphConfig {
     heading = "###  Hydraulic Module Graph"
     readmePath = "${rootDir}/FULLGRAPH.md"
     showFullPath = true
+    setStyleByModuleType.set(true)
     graph(
         readmePath = "${rootDir}/features/main/README.md",
         heading = "### Main Module Graph",
