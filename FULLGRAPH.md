@@ -9,6 +9,23 @@
 }%%
 
 graph LR
+  subgraph :features
+    :features:main["main"]
+    :features:detail["detail"]
+    :features:setting["setting"]
+  end
+  subgraph :modules
+    :modules:model["model"]
+    :modules:testing["testing"]
+    :modules:database["database"]
+    :modules:data["data"]
+    :modules:ui["ui"]
+    :modules:designsystem["designsystem"]
+    :modules:analytics["analytics"]
+    :modules:datastore["datastore"]
+    :modules:network["network"]
+    :modules:domain["domain"]
+  end
   :modules:model --> :modules:testing
   :benchmarks --> :app
   :modules:database --> :modules:model
