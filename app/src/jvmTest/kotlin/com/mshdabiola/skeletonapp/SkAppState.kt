@@ -42,7 +42,7 @@ class SkAppState {
             }
 
             // Update currentDestination whenever it changes
-            currentDestination = state.currentRoute
+            currentDestination = "b" // state.currentRoute
 
             // Navigate to destination b once
             LaunchedEffect(Unit) {
