@@ -111,6 +111,10 @@ jobs:
           disable_globbing: true
           commit_message: "🤖 Updates screenshots"
 
+      - name: Create Module Graph
+        if: github.event_name == 'pull_request'
+        run: ./gradlew createModuleGraph
+
       # Run local tests after screenshot tests to avoid wrong UP-TO-DATE. TODO: Ignore screenshots.
       - name: Run local tests and create report
         if: always()

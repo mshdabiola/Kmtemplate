@@ -46,7 +46,7 @@ kotlinxSerializationJson = "1.8.0"
 protobuf = "4.26.0"
 protobufPlugin = "0.9.4"
 ksp = "2.1.10-1.0.30"
-moduleGraph = "2.7.1"
+moduleGraph = "0.12.0"
 poi = "5.4.0"
 room = "2.7.0-beta01"
 secrets = "2.0.1"
@@ -251,7 +251,7 @@ gms = { id = "com.google.gms.google-services", version.ref = "gmsPlugin" }
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
-module-graph = { id = "com.jraska.module.graph.assertion", version.ref = "moduleGraph" }
+module-graph = { id = "dev.iurysouza.modulegraph", version.ref = "moduleGraph" }
 room = { id = "androidx.room", version.ref = "room" }
 secrets = { id = "com.google.android.libraries.mapsplatform.secrets-gradle-plugin", version.ref = "secrets" }
 powerAssert = { id = "org.jetbrains.kotlin.plugin.power-assert", version.ref = "kotlin" }
