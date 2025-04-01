@@ -44,11 +44,12 @@
 
 
 <div align="center">
-    <a href="https://play.google.com/store/apps/details?id=ru.tech.hydraulicshrinker"><img alt="Google Play" src="./fastlane/metadata/android/en-US/images/buttons/gplay.svg" height="60"></a>
+    <a href="https://example.com"><img alt="Google Play" src="./fastlane/metadata/android/en-US/images/buttons/gplay.svg" height="60"></a>
     <a href="https://f-droid.org/packages/ru.tech.hydraulicshrinker"><img alt="F-Droid" src="./fastlane/metadata/android/en-US/images/buttons/fdroid.svg" height="60"/></a>
     <a href="https://github.com/mshdabiola/hydraulic/releases/latest"><img alt="GitHub" src="./fastlane/metadata/android/en-US/images/buttons/github.svg" height="60"/></a>
-    <a href="https://hydraulic.onrender.com"><img alt="Hydraulic Online" src="./fastlane/metadata/android/en-US/images/buttons/github.svg" height="60"/></a>
-    <a href="https://hydraulic-desktop.onrender.com"><img alt="Desktop Download" src="./fastlane/metadata/android/en-US/images/buttons/github.svg" height="60"/></a>
+  <a href="https://hydraulic-desktop.onrender.com"><img alt="Desktop Download" src="./fastlane/metadata/android/en-US/images/buttons/desktop.svg" height="60"/></a>
+    <a href="https://hydraulic.onrender.com"><img alt="Hydraulic Online" src="./fastlane/metadata/android/en-US/images/buttons/online.svg" height="60"/></a>
+   
 
 </div>
 
