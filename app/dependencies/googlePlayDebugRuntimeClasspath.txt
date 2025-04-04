@@ -354,6 +354,8 @@ org.jetbrains.compose.annotation-internal:annotation:1.8.0-alpha03
 org.jetbrains.compose.collection-internal:collection:1.8.0-alpha03
 org.jetbrains.compose.components:components-resources-android:1.8.0-alpha03
 org.jetbrains.compose.components:components-resources:1.8.0-alpha03
+org.jetbrains.compose.components:components-ui-tooling-preview-android:1.8.0-alpha03
+org.jetbrains.compose.components:components-ui-tooling-preview:1.8.0-alpha03
 org.jetbrains.compose.desktop:desktop-jvm-linux-x64:1.8.0-alpha03
 org.jetbrains.compose.desktop:desktop-jvm:1.8.0-alpha03
 org.jetbrains.compose.desktop:desktop:1.8.0-alpha03
