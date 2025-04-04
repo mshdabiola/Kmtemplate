@@ -27,6 +27,7 @@ import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -44,7 +45,9 @@ import com.mshdabiola.designsystem.component.scrollbar.DraggableScrollbar
 import com.mshdabiola.designsystem.component.scrollbar.rememberDraggableScroller
 import com.mshdabiola.designsystem.component.scrollbar.scrollbarState
 import com.mshdabiola.designsystem.theme.LocalTintTheme
+import com.mshdabiola.designsystem.theme.lightDefaultScheme
 import com.mshdabiola.model.Note
+import com.mshdabiola.ui.SharedContentPreview
 import com.mshdabiola.ui.noteItems
 import hydraulic.features.main.generated.resources.Res
 import hydraulic.features.main.generated.resources.features_main_empty_description
@@ -53,6 +56,7 @@ import hydraulic.features.main.generated.resources.features_main_img_empty_bookm
 import hydraulic.features.main.generated.resources.features_main_loading
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
+import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.annotation.KoinExperimentalAPI
 
@@ -217,4 +221,24 @@ private fun noteUiStateItemsSize(
     is Result.Error -> 0 // Nothing
     is Result.Loading -> 1 // Loading bar
     is Result.Success -> topicUiState.data.size + 2
+}
+
+@OptIn(ExperimentalSharedTransitionApi::class)
+@Preview
+@Composable
+fun MainLight() {
+    MaterialTheme(colorScheme = lightDefaultScheme) {
+        Surface {
+            SharedContentPreview { sharedTransitionScope, animatedContentScope ->
+                MainScreen(
+                    modifier = Modifier.fillMaxSize(),
+                    mainState = Result.Success(
+                        listOf(Note(title = "abiola", content = "what is your name")),
+                    ),
+                    sharedTransitionScope = sharedTransitionScope,
+                    animatedContentScope = animatedContentScope,
+                )
+            }
+        }
+    }
 }
