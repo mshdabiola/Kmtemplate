@@ -40,8 +40,8 @@ class AndroidRoomConventionPlugin : Plugin<Project> {
                 //add("implementation", libs.findLibrary("room.ktx").get())
                 //add("implementation", libs.findLibrary("room.paging").get())
                 //add("ksp", libs.findLibrary("room.compiler").get())
-                // add("kspAndroid", libs.findLibrary("room.compiler").get())
-                add("ksp", libs.findLibrary("room.compiler").get())
+                 add("kspAndroid", libs.findLibrary("room.compiler").get())
+                add("kspJvm", libs.findLibrary("room.compiler").get())
 
 
             }
@@ -54,7 +54,7 @@ class AndroidRoomConventionPlugin : Plugin<Project> {
             extensions.configure<KotlinMultiplatformExtension> {
                 androidTarget()
                 jvm()
-                jvmToolchain(17)
+                jvmToolchain(21)
                 applyDefaultHierarchyTemplate {
                     common {
                         group("nonJs") {
