@@ -56,7 +56,7 @@ kstore ="0.9.1"
 
 compose-plugin = "1.8.0-alpha03"
 composeNavigation="2.8.0-alpha13"
-androidxNavigationTest = "2.8.7" #for nav test
+androidxNavigationTest = "2.8.9" #for nav test
 compose = "1.7.8"
 
 
