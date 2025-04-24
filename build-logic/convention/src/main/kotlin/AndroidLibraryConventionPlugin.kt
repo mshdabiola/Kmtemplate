@@ -84,7 +84,7 @@ class AndroidLibraryConventionPlugin : Plugin<Project> {
                     }
                 }
 
-                jvmToolchain(17)
+                jvmToolchain(21)
                 applyDefaultHierarchyTemplate {
                     common {
                         group("nonJs") {
