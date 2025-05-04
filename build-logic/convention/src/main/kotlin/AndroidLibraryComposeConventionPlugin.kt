@@ -14,6 +14,7 @@ class AndroidLibraryComposeConventionPlugin : Plugin<Project> {
             pluginManager.apply("org.jetbrains.compose")
             pluginManager.apply("org.jetbrains.kotlin.plugin.compose")
             pluginManager.apply("com.android.compose.screenshot")
+            pluginManager.apply("org.jetbrains.compose.hot-reload")
 
             //  val extension = extensions.getByType<LibraryExtension>()
             extensions.configure<LibraryExtension> {
