@@ -39,13 +39,13 @@ gmsPlugin = "4.4.2"
 googleOss = "17.1.0"
 googleOssPlugin = "0.10.6"
 junit4 = "4.13.2"
-kotlin = "2.1.10"
+kotlin = "2.1.20"
+ksp = "2.1.20-2.0.0"
 kotlinxCoroutines = "1.10.1"
 kotlinxDatetime = "0.6.2"
 kotlinxSerializationJson = "1.8.0"
 protobuf = "4.26.0"
 protobufPlugin = "0.9.4"
-ksp = "2.1.10-1.0.30"
 moduleGraph = "0.12.0"
 poi = "5.4.0"
 room = "2.7.0"
@@ -58,6 +58,7 @@ compose-plugin = "1.8.0-alpha03"
 composeNavigation="2.8.0-alpha13"
 androidxNavigationTest = "2.8.7" #for nav test
 compose = "1.7.8"
+composehot="1.0.0-alpha09"
 
 
 playGame = "20.1.2"
@@ -235,6 +236,7 @@ room-gradlePlugin = { group = "androidx.room", name = "room-gradle-plugin", vers
 kotlin-powerAssert = { module = "org.jetbrains.kotlin:kotlin-power-assert", version.ref = "kotlin" }
 screenShot-gradlePlugin = { module = "com.android.compose.screenshot:screenshot-test-gradle-plugin", version.ref = "screenshot" }
 kover-gradlePlugin = { module = "org.jetbrains.kotlinx:kover-gradle-plugin", version.ref = "kover" }
+compose-hot-gradlePlugin = { module = "org.jetbrains.compose.hot-reload:gradle-plugin", version.ref = "composehot" }
 
 
 
