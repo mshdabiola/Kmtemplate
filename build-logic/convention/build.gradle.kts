@@ -22,6 +22,7 @@ dependencies {
     compileOnly(libs.kotlin.powerAssert)
     compileOnly(libs.compose.gradlePlugin)
     compileOnly(libs.kover.gradlePlugin)
+    compileOnly(libs.compose.hot.gradlePlugin)
 
 
 
