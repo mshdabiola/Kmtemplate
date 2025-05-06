@@ -59,7 +59,7 @@ composeNavigation="2.8.0-alpha13"
 androidxNavigationTest = "2.8.9" #for nav test
 compose = "1.7.8"
 composehot="1.0.0-alpha09"
-
+foojay="0.10.0"
 
 playGame = "20.1.2"
 playReview = "2.0.2"
@@ -264,4 +264,4 @@ compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "
 screenshot = { id = "com.android.compose.screenshot", version.ref = "screenshot" }
 kover = { id = "org.jetbrains.kotlinx.kover", version.ref = "kover" }
 composehot = { id = "org.jetbrains.compose.hot-reload", version.ref = "composehot" }
-
+foojay = { id = "org.gradle.toolchains.foojay-resolver-convention", version.ref = "foojay" }
