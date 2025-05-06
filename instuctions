@@ -18,6 +18,7 @@ export TOKEN="your_actual_token"
     conveyor make site
     ./gradlew run
 
+./gradlew jvmRunHot -PmainClass=com.mshdabiola.skeletonapp.MainAppKt
 
 //./gradlew assembleDebug -PenableComposeCompilerReports=true
 // ./gradlew assembleDebug -PenableComposeCompilerMetrics=true
