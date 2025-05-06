@@ -16,6 +16,8 @@ android {
 }
 
 dependencies {
+    lintPublish(projects.lint)
+
     debugApi(compose.uiTooling)
 }
 kotlin {
