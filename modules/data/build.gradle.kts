@@ -17,7 +17,7 @@ kotlin {
                 implementation(project(":modules:analytics"))
                 implementation(libs.koin.core)
                 implementation(project(":modules:model"))
-                api(project(":modules:database"))
+//                api(project(":modules:database"))
                 api(project(":modules:datastore"))
                 api(project(":modules:network"))
                 implementation(libs.kotlinx.coroutines.core)

@@ -1,46 +1,31 @@
 package com.mshdabiola.data.repository
 
-import com.mshdabiola.data.model.asNote
-import com.mshdabiola.data.model.asNoteEntity
-import com.mshdabiola.database.dao.NoteDao
+
 import com.mshdabiola.model.Note
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flowOn
-import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.withContext
 
 internal class RealModelRepository(
-    private val noteDao: NoteDao,
     private val ioDispatcher: CoroutineDispatcher,
 ) : NoteRepository {
     override suspend fun upsert(note: Note): Long {
         return withContext(ioDispatcher) {
-            noteDao.upsert(note.asNoteEntity())
+       return@withContext 1L
         }
     }
 
     override fun getAll(): Flow<List<Note>> {
-        return noteDao
-            .getAll()
-            .map { noteEntities ->
-                noteEntities.map {
-                    it.asNote()
-                }
-            }
-            .flowOn(ioDispatcher)
+        return flow { emptyList<Note>() }
     }
 
     override fun getOne(id: Long): Flow<Note?> {
-        return noteDao
-            .getOne(id)
-            .map { it?.asNote() }
-            .flowOn(ioDispatcher)
+        return flow { null }
     }
 
     override suspend fun delete(id: Long) {
         withContext(ioDispatcher) {
-            noteDao.delete(id)
         }
     }
 

@@ -22,7 +22,7 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "Hydraulic"
-include(":modules:database")
+//include(":modules:database")
 include(":modules:designsystem")
 include(":modules:model")
 include(":modules:network")
