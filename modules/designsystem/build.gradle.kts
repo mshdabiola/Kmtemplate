@@ -30,7 +30,9 @@ kotlin {
                 api(compose.material3AdaptiveNavigationSuite)
                 api(compose.components.uiToolingPreview)
                 api(libs.kotlinx.collection.immutable)
-               implementation(project(":modules:model"))
+                api(libs.lifecycle.runtime.compose)
+//                implementation("org.jetbrains.compose.material:material-icons-core:1.7.3")
+                implementation(project(":modules:model"))
                 api(libs.androidx.navigation.compose.get())
 
                 api(libs.koin.compose)
