@@ -9,6 +9,7 @@ class AndroidApplicationComposeConventionPlugin : Plugin<Project> {
         with(target) {
             pluginManager.apply("com.android.application")
             pluginManager.apply("org.jetbrains.kotlin.plugin.compose")
+//            pluginManager.apply("org.jetbrains.compose.hot-reload")
 
             val extension = extensions.getByType<ApplicationExtension>()
             configureAndroidCompose(extension)

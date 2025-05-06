@@ -12,10 +12,10 @@ androidxComposeBomLatest = "2024.08.00-alpha02"
 androidxComposeCompiler = "1.5.12"
 androidxComposeRuntimeTracing = "1.7.5"
 androidxComposeMaterial3Adaptive = "1.0.1"
-androidxComposeMaterial3AdaptiveNavigationSuite = "1.3.2"
-androidxCore = "1.16.0"
+androidxComposeMaterial3AdaptiveNavigationSuite = "1.3.1"
+androidxCore = "1.15.0"
 androidxCoreSplashscreen = "1.0.1"
-androidxDataStore = "1.1.5"
+androidxDataStore = "1.1.4"
 androidxEspresso = "3.6.1"
 androidxHiltNavigationCompose = "1.2.0"
 androidxLifecycle = "2.8.7"
@@ -26,10 +26,10 @@ androidxTestCore = "1.6.1"
 androidxTestExt = "1.2.1"
 androidxTestRules = "1.6.1"
 androidxTestRunner = "1.6.2"
-androidxTracing = "1.3.0"
+androidxTracing = "1.3.0-beta01"
 androidxUiAutomator = "2.3.0"
 androidxWindowManager = "1.3.0"
-androidxWork = "2.10.1"
+androidxWork = "2.10.0"
 coil = "3.1.0"
 dependencyGuard = "0.5.0"
 firebaseBom = "33.7.0"
@@ -39,15 +39,17 @@ gmsPlugin = "4.4.2"
 googleOss = "17.1.0"
 googleOssPlugin = "0.10.6"
 junit4 = "4.13.2"
+#kotlin = "2.1.20"
+#ksp = "2.1.20-2.0.0"
 kotlin = "2.1.10"
 ksp = "2.1.10-1.0.30"
-kotlinxCoroutines = "1.10.2"
+kotlinxCoroutines = "1.10.1"
 kotlinxDatetime = "0.6.2"
-kotlinxSerializationJson = "1.8.1"
+kotlinxSerializationJson = "1.8.0"
 protobuf = "4.26.0"
 protobufPlugin = "0.9.4"
 moduleGraph = "0.12.0"
-poi = "5.4.1"
+poi = "5.4.0"
 room = "2.7.1"
 secrets = "2.0.1"
 truth = "1.4.4"
@@ -57,8 +59,9 @@ kstore ="0.9.1"
 compose-plugin = "1.8.0-alpha03"
 composeNavigation="2.8.0-alpha13"
 androidxNavigationTest = "2.8.9" #for nav test
-compose = "1.8.0"
-
+compose = "1.7.8"
+composehot="1.0.0-alpha09"
+foojay="0.10.0"
 
 playGame = "20.1.2"
 playReview = "2.0.2"
@@ -70,7 +73,7 @@ firebaseCrashylyticsPlugins = "2.9.9"
 playServicesMlkitTextRecognition = "19.0.0"
 
 ktor = "3.1.2"
-uiTextGoogleFonts = "1.8.0"
+uiTextGoogleFonts = "1.7.8"
 
 koin = "4.0.4"
 koinCompose = "4.0.4"
@@ -235,6 +238,7 @@ room-gradlePlugin = { group = "androidx.room", name = "room-gradle-plugin", vers
 kotlin-powerAssert = { module = "org.jetbrains.kotlin:kotlin-power-assert", version.ref = "kotlin" }
 screenShot-gradlePlugin = { module = "com.android.compose.screenshot:screenshot-test-gradle-plugin", version.ref = "screenshot" }
 kover-gradlePlugin = { module = "org.jetbrains.kotlinx:kover-gradle-plugin", version.ref = "kover" }
+compose-hot-gradlePlugin = { module = "org.jetbrains.compose.hot-reload:gradle-plugin", version.ref = "composehot" }
 
 
 
@@ -261,4 +265,5 @@ jetbrainsCompose = { id = "org.jetbrains.compose", version.ref = "compose-plugin
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 screenshot = { id = "com.android.compose.screenshot", version.ref = "screenshot" }
 kover = { id = "org.jetbrains.kotlinx.kover", version.ref = "kover" }
-
+composehot = { id = "org.jetbrains.compose.hot-reload", version.ref = "composehot" }
+foojay = { id = "org.gradle.toolchains.foojay-resolver-convention", version.ref = "foojay" }

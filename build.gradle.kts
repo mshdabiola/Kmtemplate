@@ -25,6 +25,8 @@ plugins {
     alias(libs.plugins.conveyor) apply false
     alias(libs.plugins.screenshot) apply false
     alias(libs.plugins.kover) apply false
+    alias(libs.plugins.composehot) apply false
+    alias(libs.plugins.foojay) apply false
     alias(libs.plugins.module.graph)
 
 }
