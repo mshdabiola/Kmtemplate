@@ -2,6 +2,7 @@ import dev.iurysouza.modulegraph.ModuleType.AndroidApp
 import dev.iurysouza.modulegraph.ModuleType.AndroidLibrary
 import dev.iurysouza.modulegraph.ModuleType.Custom
 import dev.iurysouza.modulegraph.Theme
+import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 
 @Suppress("DSL_SCOPE_VIOLATION")
 plugins {
@@ -347,6 +348,21 @@ subprojects {
             config.setFrom(rootProject.file("detekt.yml"))
             buildUponDefaultConfig = true
             ignoreFailures = false
+        }
+    }
+}
+
+val installGitHook = tasks.register("installGitHook", Copy::class) {
+    from("$rootDir/pre-commit")
+    into("$rootDir/.git/hooks")
+    fileMode = "755".toInt(8)
+}
+
+project.pluginManager.withPlugin("org.jetbrains.kotlin.multiplatform") {
+    val kmpExtension = project.extensions.getByType<KotlinMultiplatformExtension>()
+    kmpExtension.targets.configureEach {
+        compilations.configureEach {
+            compileKotlinTask.dependsOn(installGitHook)
         }
     }
 }
