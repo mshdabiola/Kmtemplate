@@ -96,7 +96,7 @@ internal fun DetailScreen(
 @Composable
 internal fun MainContent(
     modifier: Modifier = Modifier,
-    state: DetailState,
+//    state: DetailState,
     sharedTransitionScope: SharedTransitionScope,
     animatedContentScope: AnimatedVisibilityScope,
     title: TextFieldState = TextFieldState(),
