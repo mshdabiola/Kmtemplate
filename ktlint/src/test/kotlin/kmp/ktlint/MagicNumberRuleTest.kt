@@ -1,10 +1,10 @@
 import com.kmp.ktlint.rules.Constants
-import com.kmp.ktlint.rules.MagicNumberRule
+import com.kmp.ktlint.rules.PreferReceiverNameRule
 import com.pinterest.ktlint.test.KtLintAssertThat.Companion.assertThatRule
 import kotlin.test.Test
 
 class MagicNumberRuleTest {
-    private val magicNumberRuleAssertThat = assertThatRule { MagicNumberRule() }
+    private val magicNumberRuleAssertThat = assertThatRule {PreferReceiverNameRule()}
 
     @Test
     fun `should report error when magic number is used`() {

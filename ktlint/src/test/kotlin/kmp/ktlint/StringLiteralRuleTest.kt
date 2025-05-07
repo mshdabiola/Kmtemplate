@@ -1,12 +1,12 @@
 package kmp.ktlint
 
 import com.kmp.ktlint.rules.Constants
-import com.kmp.ktlint.rules.StringLiteralRule
+import com.kmp.ktlint.rules.PreferReceiverNameRule
 import com.pinterest.ktlint.test.KtLintAssertThat.Companion.assertThatRule
 import kotlin.test.Test
 
 class StringLiteralRuleTest {
-    private val stringRuleAssertThat = assertThatRule { StringLiteralRule() }
+    private val stringRuleAssertThat = assertThatRule { PreferReceiverNameRule() }
 
     @Test
     fun `should report error on raw string literal in function`() {
