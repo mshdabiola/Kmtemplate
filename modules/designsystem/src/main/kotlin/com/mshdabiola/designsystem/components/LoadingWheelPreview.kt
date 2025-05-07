@@ -12,7 +12,7 @@ import com.mshdabiola.designsystem.theme.HyaTheme
 
 @ThemePreviews
 @Composable
-fun NiaLoadingWheelPreview() {
+fun HyaLoadingWheelPreview() {
     HyaTheme {
         Surface {
             HyaLoadingWheel(contentDesc = "LoadingWheel")
@@ -22,7 +22,7 @@ fun NiaLoadingWheelPreview() {
 
 @ThemePreviews
 @Composable
-fun NiaOverlayLoadingWheelPreview() {
+fun HyaOverlayLoadingWheelPreview() {
     HyaTheme {
         Surface {
             HyaOverlayLoadingWheel(contentDesc = "LoadingWheel")

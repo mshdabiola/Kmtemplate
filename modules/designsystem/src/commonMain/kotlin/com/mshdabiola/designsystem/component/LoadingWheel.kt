@@ -140,7 +140,7 @@ fun HyaOverlayLoadingWheel(
 
 @Preview
 @Composable
-fun NiaLoadingWheelPreview() {
+fun HyaLoadingWheelPreview() {
     HyaTheme {
         Surface {
             HyaLoadingWheel(contentDesc = "LoadingWheel")
@@ -150,7 +150,7 @@ fun NiaLoadingWheelPreview() {
 
 @Preview
 @Composable
-fun NiaOverlayLoadingWheelPreview() {
+fun HyaOverlayLoadingWheelPreview() {
     HyaTheme {
         Surface {
             HyaOverlayLoadingWheel(contentDesc = "LoadingWheel")

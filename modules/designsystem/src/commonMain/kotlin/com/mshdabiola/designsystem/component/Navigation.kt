@@ -64,11 +64,11 @@ fun RowScope.HyaNavigationBarItem(
         label = label,
         alwaysShowLabel = alwaysShowLabel,
         colors = NavigationBarItemDefaults.colors(
-            selectedIconColor = NiaNavigationDefaults.navigationSelectedItemColor(),
-            unselectedIconColor = NiaNavigationDefaults.navigationContentColor(),
-            selectedTextColor = NiaNavigationDefaults.navigationSelectedItemColor(),
-            unselectedTextColor = NiaNavigationDefaults.navigationContentColor(),
-            indicatorColor = NiaNavigationDefaults.navigationIndicatorColor(),
+            selectedIconColor = HyaNavigationDefaults.navigationSelectedItemColor(),
+            unselectedIconColor = HyaNavigationDefaults.navigationContentColor(),
+            selectedTextColor = HyaNavigationDefaults.navigationSelectedItemColor(),
+            unselectedTextColor = HyaNavigationDefaults.navigationContentColor(),
+            indicatorColor = HyaNavigationDefaults.navigationIndicatorColor(),
         ),
     )
 }
@@ -87,7 +87,7 @@ fun HyaNavigationBar(
 ) {
     NavigationBar(
         modifier = modifier,
-        contentColor = NiaNavigationDefaults.navigationContentColor(),
+        contentColor = HyaNavigationDefaults.navigationContentColor(),
         tonalElevation = 0.dp,
         content = content,
     )
@@ -128,11 +128,11 @@ fun HyaNavigationRailItem(
         label = label,
         alwaysShowLabel = alwaysShowLabel,
         colors = NavigationRailItemDefaults.colors(
-            selectedIconColor = NiaNavigationDefaults.navigationSelectedItemColor(),
-            unselectedIconColor = NiaNavigationDefaults.navigationContentColor(),
-            selectedTextColor = NiaNavigationDefaults.navigationSelectedItemColor(),
-            unselectedTextColor = NiaNavigationDefaults.navigationContentColor(),
-            indicatorColor = NiaNavigationDefaults.navigationIndicatorColor(),
+            selectedIconColor = HyaNavigationDefaults.navigationSelectedItemColor(),
+            unselectedIconColor = HyaNavigationDefaults.navigationContentColor(),
+            selectedTextColor = HyaNavigationDefaults.navigationSelectedItemColor(),
+            unselectedTextColor = HyaNavigationDefaults.navigationContentColor(),
+            indicatorColor = HyaNavigationDefaults.navigationIndicatorColor(),
         ),
     )
 }
@@ -154,7 +154,7 @@ fun HyaNavigationRail(
     NavigationRail(
         modifier = modifier,
         containerColor = Color.Transparent,
-        contentColor = NiaNavigationDefaults.navigationContentColor(),
+        contentColor = HyaNavigationDefaults.navigationContentColor(),
         header = header,
         content = content,
     )
@@ -170,7 +170,7 @@ fun HyaNavigationRail(
  * @param content The app content inside the scaffold.
  */
 @Composable
-fun NiaNavigationSuiteScaffold(
+fun HyaNavigationSuiteScaffold(
     navigationSuiteItems: HyaNavigationSuiteScope.() -> Unit,
     modifier: Modifier = Modifier,
     windowAdaptiveInfo: WindowAdaptiveInfo = currentWindowAdaptiveInfo(),
@@ -180,24 +180,24 @@ fun NiaNavigationSuiteScaffold(
         .calculateFromAdaptiveInfo(windowAdaptiveInfo)
     val navigationSuiteItemColors = NavigationSuiteItemColors(
         navigationBarItemColors = NavigationBarItemDefaults.colors(
-            selectedIconColor = NiaNavigationDefaults.navigationSelectedItemColor(),
-            unselectedIconColor = NiaNavigationDefaults.navigationContentColor(),
-            selectedTextColor = NiaNavigationDefaults.navigationSelectedItemColor(),
-            unselectedTextColor = NiaNavigationDefaults.navigationContentColor(),
-            indicatorColor = NiaNavigationDefaults.navigationIndicatorColor(),
+            selectedIconColor = HyaNavigationDefaults.navigationSelectedItemColor(),
+            unselectedIconColor = HyaNavigationDefaults.navigationContentColor(),
+            selectedTextColor = HyaNavigationDefaults.navigationSelectedItemColor(),
+            unselectedTextColor = HyaNavigationDefaults.navigationContentColor(),
+            indicatorColor = HyaNavigationDefaults.navigationIndicatorColor(),
         ),
         navigationRailItemColors = NavigationRailItemDefaults.colors(
-            selectedIconColor = NiaNavigationDefaults.navigationSelectedItemColor(),
-            unselectedIconColor = NiaNavigationDefaults.navigationContentColor(),
-            selectedTextColor = NiaNavigationDefaults.navigationSelectedItemColor(),
-            unselectedTextColor = NiaNavigationDefaults.navigationContentColor(),
-            indicatorColor = NiaNavigationDefaults.navigationIndicatorColor(),
+            selectedIconColor = HyaNavigationDefaults.navigationSelectedItemColor(),
+            unselectedIconColor = HyaNavigationDefaults.navigationContentColor(),
+            selectedTextColor = HyaNavigationDefaults.navigationSelectedItemColor(),
+            unselectedTextColor = HyaNavigationDefaults.navigationContentColor(),
+            indicatorColor = HyaNavigationDefaults.navigationIndicatorColor(),
         ),
         navigationDrawerItemColors = NavigationDrawerItemDefaults.colors(
-            selectedIconColor = NiaNavigationDefaults.navigationSelectedItemColor(),
-            unselectedIconColor = NiaNavigationDefaults.navigationContentColor(),
-            selectedTextColor = NiaNavigationDefaults.navigationSelectedItemColor(),
-            unselectedTextColor = NiaNavigationDefaults.navigationContentColor(),
+            selectedIconColor = HyaNavigationDefaults.navigationSelectedItemColor(),
+            unselectedIconColor = HyaNavigationDefaults.navigationContentColor(),
+            selectedTextColor = HyaNavigationDefaults.navigationSelectedItemColor(),
+            unselectedTextColor = HyaNavigationDefaults.navigationContentColor(),
         ),
     )
 
@@ -211,7 +211,7 @@ fun NiaNavigationSuiteScaffold(
         layoutType = layoutType,
         containerColor = Color.Transparent,
         navigationSuiteColors = NavigationSuiteDefaults.colors(
-            navigationBarContentColor = NiaNavigationDefaults.navigationContentColor(),
+            navigationBarContentColor = HyaNavigationDefaults.navigationContentColor(),
             navigationRailContainerColor = Color.Transparent,
         ),
         modifier = modifier,
@@ -252,7 +252,7 @@ class HyaNavigationSuiteScope internal constructor(
 
 @Preview
 @Composable
-fun NiaNavigationBarPreview() {
+fun HyaNavigationBarPreview() {
     val items = listOf("For you", "Saved", "Interests")
     val icons = listOf(
         HyaIcons.UpcomingBorder,
@@ -292,7 +292,7 @@ fun NiaNavigationBarPreview() {
 
 @Preview
 @Composable
-fun NiaNavigationRailPreview() {
+fun HyaNavigationRailPreview() {
     val items = listOf("For you", "Saved", "Interests")
     val icons = listOf(
         HyaIcons.UpcomingBorder,
@@ -333,7 +333,7 @@ fun NiaNavigationRailPreview() {
 /**
  * Now in Android navigation default values.
  */
-object NiaNavigationDefaults {
+object HyaNavigationDefaults {
     @Composable
     fun navigationContentColor() = MaterialTheme.colorScheme.onSurfaceVariant
 

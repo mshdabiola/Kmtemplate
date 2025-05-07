@@ -17,7 +17,7 @@ class TopAppBarScreenshotTests() {
     @Composable
     fun TopAppBar() {
         CaptureMultiTheme {
-            NiaTopAppBarExample()
+            HyaTopAppBarExample()
         }
     }
 
@@ -25,13 +25,13 @@ class TopAppBarScreenshotTests() {
     @Composable
     fun TopAppBarHumFontScale2() {
         CaptureMultiTheme {
-            NiaTopAppBarExample()
+            HyaTopAppBarExample()
         }
     }
 
     @OptIn(ExperimentalMaterial3Api::class)
     @Composable
-    private fun NiaTopAppBarExample() {
+    private fun HyaTopAppBarExample() {
         SkTopAppBar(
             titleRes = "untitled",
             navigationIcon = HyaIcons.Search,

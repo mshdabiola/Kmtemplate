@@ -18,7 +18,7 @@ class TabsScreenshotTests {
     @Composable
     fun Tabs() {
         CaptureMultiTheme {
-            NiaTabsExample()
+            HyaTabsExample()
         }
     }
 
@@ -27,12 +27,12 @@ class TabsScreenshotTests {
     @Composable
     fun TabsHumFontScale2() {
         CaptureMultiTheme {
-            NiaTabsExample("Looooong item")
+            HyaTabsExample("Looooong item")
         }
     }
 
     @Composable
-    private fun NiaTabsExample(label: String = "Topics") {
+    private fun HyaTabsExample(label: String = "Topics") {
         Surface {
             val titles = listOf(label, "People")
             HyaTabRow(selectedTabIndex = 0) {

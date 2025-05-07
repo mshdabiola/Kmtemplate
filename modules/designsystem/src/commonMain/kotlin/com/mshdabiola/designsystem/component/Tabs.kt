@@ -49,7 +49,7 @@ fun HyaTab(
             ProvideTextStyle(
                 value = style,
                 content = {
-                    Box(modifier = Modifier.padding(top = NiaTabDefaults.TabTopPadding)) {
+                    Box(modifier = Modifier.padding(top = HyaTabDefaults.TabTopPadding)) {
                         text()
                     }
                 },
@@ -105,6 +105,6 @@ fun TabsPreview() {
     }
 }
 
-object NiaTabDefaults {
+object HyaTabDefaults {
     val TabTopPadding = 7.dp
 }

@@ -28,7 +28,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun NiaTopAppBar(
+fun HyaTopAppBar(
      titleRes: StringResource,
     navigationIcon: ImageVector,
     navigationIconContentDescription: String,
@@ -60,16 +60,16 @@ fun NiaTopAppBar(
             }
         },
         colors = colors,
-        modifier = modifier.testTag("niaTopAppBar"),
+        modifier = modifier.testTag("HyaTopAppBar"),
     )
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Preview
 @Composable
-private fun NiaTopAppBarPreview() {
+private fun HyaTopAppBarPreview() {
     HyaTheme {
-        NiaTopAppBar(
+        HyaTopAppBar(
             titleRes = Res.string.app_name,
             navigationIcon = HyaIcons.Search,
             navigationIconContentDescription = "Navigation icon",

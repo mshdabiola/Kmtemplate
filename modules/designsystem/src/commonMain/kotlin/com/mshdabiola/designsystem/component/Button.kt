@@ -73,7 +73,7 @@ fun HyaButton(
             ButtonDefaults.ContentPadding
         },
     ) {
-        NiaButtonContent(
+        HyaButtonContent(
             text = text,
             leadingIcon = leadingIcon,
         )
@@ -107,12 +107,12 @@ fun HyaOutlinedButton(
             contentColor = MaterialTheme.colorScheme.onBackground,
         ),
         border = BorderStroke(
-            width = NiaButtonDefaults.OutlinedButtonBorderWidth,
+            width = HyaButtonDefaults.OutlinedButtonBorderWidth,
             color = if (enabled) {
                 MaterialTheme.colorScheme.outline
             } else {
                 MaterialTheme.colorScheme.onSurface.copy(
-                    alpha = NiaButtonDefaults.DISABLED_OUTLINED_BUTTON_BORDER_ALPHA,
+                    alpha = HyaButtonDefaults.DISABLED_OUTLINED_BUTTON_BORDER_ALPHA,
                 )
             },
         ),
@@ -149,7 +149,7 @@ fun HyaOutlinedButton(
             ButtonDefaults.ContentPadding
         },
     ) {
-        NiaButtonContent(
+        HyaButtonContent(
             text = text,
             leadingIcon = leadingIcon,
         )
@@ -206,7 +206,7 @@ fun HyaTextButton(
         modifier = modifier,
         enabled = enabled,
     ) {
-        NiaButtonContent(
+        HyaButtonContent(
             text = text,
             leadingIcon = leadingIcon,
         )
@@ -220,7 +220,7 @@ fun HyaTextButton(
  * @param leadingIcon The button leading icon content. Default is `null` for no leading icon.Ï
  */
 @Composable
-private fun NiaButtonContent(
+private fun HyaButtonContent(
     text: @Composable () -> Unit,
     leadingIcon: @Composable (() -> Unit)? = null,
 ) {
@@ -245,7 +245,7 @@ private fun NiaButtonContent(
 
 @Preview
 @Composable
-fun NiaButtonPreview() {
+fun HyaButtonPreview() {
     HyaTheme {
         HyaBackground (modifier = Modifier.size(150.dp, 50.dp)) {
             HyaButton(onClick = {}, text = { Text("Test button") })
@@ -255,7 +255,7 @@ fun NiaButtonPreview() {
 
 @Preview
 @Composable
-fun NiaOutlinedButtonPreview() {
+fun HyaOutlinedButtonPreview() {
     HyaTheme {
         HyaBackground(modifier = Modifier.size(150.dp, 50.dp)) {
             HyaOutlinedButton(onClick = {}, text = { Text("Test button") })
@@ -265,7 +265,7 @@ fun NiaOutlinedButtonPreview() {
 
 @Preview
 @Composable
-fun NiaButtonLeadingIconPreview() {
+fun HyaButtonLeadingIconPreview() {
     HyaTheme {
         HyaBackground(modifier = Modifier.size(150.dp, 50.dp)) {
             HyaButton(
@@ -280,7 +280,7 @@ fun NiaButtonLeadingIconPreview() {
 /**
  * Now in Android button default values.
  */
-object NiaButtonDefaults {
+object HyaButtonDefaults {
     // TODO: File bug
     // OutlinedButton border color doesn't respect disabled state by default
     const val DISABLED_OUTLINED_BUTTON_BORDER_ALPHA = 0.12f
