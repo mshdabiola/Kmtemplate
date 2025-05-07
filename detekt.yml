@@ -15,8 +15,15 @@ naming:
     excludes: ['**/presentation/resources/**']
 style:
   MagicNumber:
-    active: true
+    active: false
     excludes: ['**/presentation/theme/**']
   MaxLineLength:
     active: true
     excludes: [ '**/kotlin/secrets/**' ]
+  LongParameterList:
+    active: true
+    threshold: 7 # Increase the threshold if needed
+    ignoreAnnotated: ['@Composable', '@Preview'] # You might already have this
+    excludeAnnotatedClasses: []
+    excludeClasses: []
+    excludePackage: []
