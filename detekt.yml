@@ -1,0 +1,22 @@
+complexity:
+  LongMethod:
+    active: true
+    threshold: 60
+    ignoreAnnotated: ['Composable']
+  LongParameterList:
+    active: true
+    excludes: ['**/presentation/resources/**']
+naming:
+  FunctionNaming:
+    active: true
+    ignoreAnnotated: ['Composable']
+  ConstructorParameterNaming:
+    active: true
+    excludes: ['**/presentation/resources/**']
+style:
+  MagicNumber:
+    active: true
+    excludes: ['**/presentation/theme/**']
+  MaxLineLength:
+    active: true
+    excludes: [ '**/kotlin/secrets/**' ]
