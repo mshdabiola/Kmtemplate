@@ -42,8 +42,6 @@ import androidx.compose.ui.node.ModifierNodeElement
 import androidx.compose.ui.node.invalidateDraw
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
-import com.google.samples.apps.nowinandroid.core.designsystem.component.scrollbar.Scrollbar
-import com.google.samples.apps.nowinandroid.core.designsystem.component.scrollbar.ScrollbarState
 import com.mshdabiola.designsystem.component.scrollbar.ThumbState.Active
 import com.mshdabiola.designsystem.component.scrollbar.ThumbState.Dormant
 import com.mshdabiola.designsystem.component.scrollbar.ThumbState.Inactive
