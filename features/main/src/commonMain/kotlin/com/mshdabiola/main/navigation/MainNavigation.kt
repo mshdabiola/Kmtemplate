@@ -30,7 +30,7 @@ fun NavGraphBuilder.mainScreen(
             modifier = modifier,
             sharedTransitionScope = sharedTransitionScope,
             animatedContentScope = this,
-            onShowSnackbar = onShowSnack,
+            showSnackbar = onShowSnack,
             navigateToDetail = navigateToDetail,
         )
     }

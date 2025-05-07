@@ -21,8 +21,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.input.ImeAction
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.mshdabiola.designsystem.component.SkTextField
-import com.mshdabiola.designsystem.component.SkTopAppBar
+import com.mshdabiola.designsystem.component.HyaTopAppBar
+import com.mshdabiola.designsystem.component.HyaTextField
 import com.mshdabiola.designsystem.icon.HyaIcons
 import com.mshdabiola.ui.TrackScreenViewEvent
 import com.mshdabiola.ui.Waiting
@@ -96,7 +96,7 @@ internal fun DetailScreen(
 @Composable
 internal fun MainContent(
     modifier: Modifier = Modifier,
-//    state: DetailState,
+    state: DetailState,
     sharedTransitionScope: SharedTransitionScope,
     animatedContentScope: AnimatedVisibilityScope,
     title: TextFieldState = TextFieldState(),
@@ -113,8 +113,7 @@ internal fun MainContent(
                 animatedVisibilityScope = animatedContentScope,
             ),
         ) {
-            SkTopAppBar(
-                titleRes = "Note",
+            HyaTopAppBar(
                 navigationIcon = HyaIcons.ArrowBack,
                 navigationIconContentDescription = "",
                 actionIcon = HyaIcons.Delete,
@@ -122,7 +121,7 @@ internal fun MainContent(
                 onActionClick = { onDelete() },
                 onNavigationClick = { onBack() },
             )
-            SkTextField(
+            HyaTextField(
                 modifier =
                     Modifier
                         .fillMaxWidth()
@@ -132,7 +131,7 @@ internal fun MainContent(
                 maxNum = TextFieldLineLimits.SingleLine,
                 imeAction = ImeAction.Next,
             )
-            SkTextField(
+            HyaTextField(
                 modifier =
                     Modifier
                         .fillMaxWidth()

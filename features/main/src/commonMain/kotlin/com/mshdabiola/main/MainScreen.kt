@@ -69,6 +69,7 @@ internal fun MainRoute(
     sharedTransitionScope: SharedTransitionScope,
     animatedContentScope: AnimatedVisibilityScope,
     navigateToDetail: (Long) -> Unit,
+    showSnackbar: suspend (String, String?) -> Boolean,
 //    viewModel: MainViewModel,
 ) {
     val viewModel: MainViewModel = koinViewModel()
