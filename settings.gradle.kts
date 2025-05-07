@@ -39,7 +39,7 @@ include(":app")
 include(":features:main")
 include(":features:detail")
 include(":features:setting")
-include(":lint")
+//include(":lint")
 include(":ktlint")
 
 
