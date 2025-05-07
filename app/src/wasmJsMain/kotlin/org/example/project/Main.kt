@@ -12,7 +12,7 @@ import co.touchlab.kermit.Logger
 import co.touchlab.kermit.loggerConfigInit
 import co.touchlab.kermit.platformLogWriter
 import com.mshdabiola.hydraulicapp.di.appModule
-import com.mshdabiola.hydraulicapp.ui.SkeletonApp
+import com.mshdabiola.hydraulicapp.ui.HydraulicApp
 import com.mshdabiola.ui.SplashScreen
 import kotlinx.browser.document
 import kotlinx.coroutines.delay
@@ -30,7 +30,7 @@ fun mainApp() {
             show.value = false
         }
         Box(Modifier.fillMaxSize()) {
-            SkeletonApp()
+            HydraulicApp()
             if (show.value) {
                 SplashScreen()
             }

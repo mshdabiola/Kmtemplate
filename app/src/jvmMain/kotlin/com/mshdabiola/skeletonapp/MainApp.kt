@@ -21,7 +21,7 @@ import co.touchlab.kermit.platformLogWriter
 import com.mshdabiola.designsystem.drawable.defaultAppIcon
 import com.mshdabiola.designsystem.string.appName
 import com.mshdabiola.hydraulicapp.di.appModule
-import com.mshdabiola.hydraulicapp.ui.SkeletonApp
+import com.mshdabiola.hydraulicapp.ui.HydraulicApp
 import com.mshdabiola.ui.SplashScreen
 import kotlinx.coroutines.delay
 import org.koin.core.context.GlobalContext.startKoin
@@ -50,7 +50,7 @@ fun mainApp() {
                 show.value = false
             }
             Box(Modifier.fillMaxSize()) {
-                SkeletonApp()
+                HydraulicApp()
                 if (show.value) {
                     SplashScreen()
                 }

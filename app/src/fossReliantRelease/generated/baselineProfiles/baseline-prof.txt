@@ -18659,7 +18659,7 @@ Lcom/mshdabiola/hydraulicapp/navigation/SkNavHostKt$SkNavHost$2$1$5;
 HSPLcom/mshdabiola/hydraulicapp/navigation/SkNavHostKt$SkNavHost$2$1$5;-><init>(Ljava/lang/Object;)V
 Lcom/mshdabiola/hydraulicapp/ui/SkAppKt;
 HSPLcom/mshdabiola/hydraulicapp/ui/SkAppKt;->SkeletonApp$lambda$3(Landroidx/compose/runtime/State;)Lcom/mshdabiola/hydraulicapp/MainActivityUiState;
-HSPLcom/mshdabiola/hydraulicapp/ui/SkAppKt;->SkeletonApp(Landroidx/compose/runtime/Composer;I)V
+HSPLcom/mshdabiola/hydraulicapp/ui/SkAppKt;->HydraulicApp(Landroidx/compose/runtime/Composer;I)V
 HSPLcom/mshdabiola/hydraulicapp/ui/SkAppKt;->access$SkeletonApp$lambda$3(Landroidx/compose/runtime/State;)Lcom/mshdabiola/hydraulicapp/MainActivityUiState;
 HSPLcom/mshdabiola/hydraulicapp/ui/SkAppKt;->access$shouldDisableDynamicTheming(Lcom/mshdabiola/hydraulicapp/MainActivityUiState;Landroidx/compose/runtime/Composer;I)Z
 HSPLcom/mshdabiola/hydraulicapp/ui/SkAppKt;->shouldDisableDynamicTheming(Lcom/mshdabiola/hydraulicapp/MainActivityUiState;Landroidx/compose/runtime/Composer;I)Z

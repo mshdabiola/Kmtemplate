@@ -19839,7 +19839,7 @@ HSPLcom/mshdabiola/hydraulicapp/ui/ComposableSingletons$SkAppKt$lambda-4$1;->inv
 HSPLcom/mshdabiola/hydraulicapp/ui/ComposableSingletons$SkAppKt$lambda-4$1;->invoke(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
 Lcom/mshdabiola/hydraulicapp/ui/SkAppKt;
 HSPLcom/mshdabiola/hydraulicapp/ui/SkAppKt;->SkeletonApp$lambda$0(Landroidx/compose/runtime/State;)Lcom/mshdabiola/hydraulicapp/MainActivityUiState;
-HSPLcom/mshdabiola/hydraulicapp/ui/SkAppKt;->SkeletonApp(Landroidx/compose/runtime/Composer;I)V
+HSPLcom/mshdabiola/hydraulicapp/ui/SkAppKt;->HydraulicApp(Landroidx/compose/runtime/Composer;I)V
 HSPLcom/mshdabiola/hydraulicapp/ui/SkAppKt;->access$SkeletonApp$lambda$0(Landroidx/compose/runtime/State;)Lcom/mshdabiola/hydraulicapp/MainActivityUiState;
 HSPLcom/mshdabiola/hydraulicapp/ui/SkAppKt;->access$shouldDisableDynamicTheming(Lcom/mshdabiola/hydraulicapp/MainActivityUiState;Landroidx/compose/runtime/Composer;I)Z
 HSPLcom/mshdabiola/hydraulicapp/ui/SkAppKt;->access$shouldUseAndroidTheme(Lcom/mshdabiola/hydraulicapp/MainActivityUiState;Landroidx/compose/runtime/Composer;I)Z

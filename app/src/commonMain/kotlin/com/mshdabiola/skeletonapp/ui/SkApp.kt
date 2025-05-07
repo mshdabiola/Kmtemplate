@@ -68,7 +68,7 @@ import org.koin.core.annotation.KoinExperimentalAPI
     ExperimentalMaterial3Api::class,
 )
 @Composable
-fun SkeletonApp() {
+fun HydraulicApp() {
     val windowAdaptiveInfo = currentWindowAdaptiveInfo()
 
     val appState =

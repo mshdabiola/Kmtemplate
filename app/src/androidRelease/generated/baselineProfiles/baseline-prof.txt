@@ -24847,7 +24847,7 @@ HSPLcom/mshdabiola/hydraulicapp/navigation/ComposableSingletons$SkAppKt$lambda-1
 HSPLcom/mshdabiola/hydraulicapp/navigation/ComposableSingletons$SkAppKt$lambda-1$1;->invoke(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
 Lcom/mshdabiola/hydraulicapp/navigation/SkAppKt;
 HSPLcom/mshdabiola/hydraulicapp/navigation/SkAppKt;->SkeletonApp$lambda$1(Landroidx/compose/runtime/State;)Lcom/mshdabiola/hydraulicapp/MainActivityUiState;
-HSPLcom/mshdabiola/hydraulicapp/navigation/SkAppKt;->SkeletonApp(Lcom/arkivanov/decompose/DefaultComponentContext;Landroidx/compose/runtime/Composer;I)V
+HSPLcom/mshdabiola/hydraulicapp/navigation/SkAppKt;->HydraulicApp(Lcom/arkivanov/decompose/DefaultComponentContext;Landroidx/compose/runtime/Composer;I)V
 HSPLcom/mshdabiola/hydraulicapp/navigation/SkAppKt;->access$SkeletonApp$lambda$1(Landroidx/compose/runtime/State;)Lcom/mshdabiola/hydraulicapp/MainActivityUiState;
 HSPLcom/mshdabiola/hydraulicapp/navigation/SkAppKt;->access$chooseContrast(Lcom/mshdabiola/hydraulicapp/MainActivityUiState;Landroidx/compose/runtime/Composer;I)Lcom/mshdabiola/model/Contrast;
 HSPLcom/mshdabiola/hydraulicapp/navigation/SkAppKt;->access$chooseTheme(Lcom/mshdabiola/hydraulicapp/MainActivityUiState;Landroidx/compose/runtime/Composer;I)Lcom/mshdabiola/model/ThemeBrand;

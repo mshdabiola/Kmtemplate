@@ -23,7 +23,7 @@ import com.google.firebase.Firebase
 import com.google.firebase.messaging.FirebaseMessaging
 import com.google.firebase.remoteconfig.remoteConfig
 import com.google.firebase.remoteconfig.remoteConfigSettings
-import com.mshdabiola.hydraulicapp.ui.SkeletonApp
+import com.mshdabiola.hydraulicapp.ui.HydraulicApp
 import com.mshdabiola.hydraulicapp.ui.shouldUseDarkTheme
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.onEach
@@ -136,7 +136,7 @@ class MainActivity : ComponentActivity() {
                 onDispose {}
             }
 
-            SkeletonApp()
+            HydraulicApp()
         }
     }
 }
