@@ -9,7 +9,6 @@ import org.junit.Rule
 import kotlin.test.Test
 
 class SettingScreenTest {
-
     @get:Rule
     val composeRule = createComposeRule()
 
@@ -18,10 +17,11 @@ class SettingScreenTest {
     fun main() {
         composeRule.setContent {
             SettingScreen(
-                settingState = SettingState.Success(
-                    themeBrand = ThemeBrand.DEFAULT,
-                    darkThemeConfig = DarkThemeConfig.DARK,
-                ),
+                settingState =
+                    SettingState.Success(
+                        themeBrand = ThemeBrand.DEFAULT,
+                        darkThemeConfig = DarkThemeConfig.DARK,
+                    ),
             )
         }
         composeRule.onNodeWithTag("setting:screen").assertExists()

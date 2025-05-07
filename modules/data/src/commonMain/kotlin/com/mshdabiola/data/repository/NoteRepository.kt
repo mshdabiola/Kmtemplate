@@ -4,8 +4,8 @@ import com.mshdabiola.model.Note
 import kotlinx.coroutines.flow.Flow
 
 interface NoteRepository {
-
     suspend fun upsert(note: Note): Long
+
     fun getAll(): Flow<List<Note>>
 
     fun getOne(id: Long): Flow<Note?>

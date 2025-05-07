@@ -16,9 +16,10 @@ import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.bind
 import org.koin.dsl.module
 
-val testDataModule = module {
-    includes(testDispatcherModule, analyticsModule)
-    singleOf(::FakeNetworkRepository) bind INetworkRepository::class
-    singleOf(::FakeNoteRepository) bind NoteRepository::class
-    singleOf(::FakeUserDataRepository) bind UserDataRepository::class
-}
+val testDataModule =
+    module {
+        includes(testDispatcherModule, analyticsModule)
+        singleOf(::FakeNetworkRepository) bind INetworkRepository::class
+        singleOf(::FakeNoteRepository) bind NoteRepository::class
+        singleOf(::FakeUserDataRepository) bind UserDataRepository::class
+    }

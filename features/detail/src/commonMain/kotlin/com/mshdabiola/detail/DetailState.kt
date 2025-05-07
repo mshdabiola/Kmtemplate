@@ -1,8 +1,8 @@
 package com.mshdabiola.detail
 
 sealed class DetailState {
-
     data class Loading(val isLoading: Boolean = false) : DetailState()
+
     data class Success(
         val id: Long,
     ) : DetailState()

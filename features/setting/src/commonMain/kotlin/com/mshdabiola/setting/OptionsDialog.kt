@@ -32,7 +32,14 @@ fun OptionsDialog(
         text = {
             Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
                 options.fastForEachIndexed { i, s ->
-                    Row(modifier = Modifier.clickable { onSelect(i) }, verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(4.dp)) {
+                    Row(
+                        modifier =
+                            Modifier.clickable {
+                                onSelect(i)
+                            },
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.spacedBy(4.dp),
+                    ) {
                         RadioButton(selected = i == current, onClick = { onSelect(i) })
                         Text(modifier = Modifier.weight(1f), text = s)
                     }

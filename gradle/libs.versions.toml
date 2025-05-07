@@ -91,7 +91,8 @@ windowSizeClass = "0.5.0"
 
 screenshot = "0.0.1-alpha09"
 kover = "0.9.1"
-
+ktlint = "12.2.0"
+detekt = "1.23.8"
 
 series = "0.0.19"
 calf = "0.7.1"
@@ -270,3 +271,5 @@ screenshot = { id = "com.android.compose.screenshot", version.ref = "screenshot"
 kover = { id = "org.jetbrains.kotlinx.kover", version.ref = "kover" }
 composehot = { id = "org.jetbrains.compose.hot-reload", version.ref = "composehot" }
 foojay = { id = "org.gradle.toolchains.foojay-resolver-convention", version.ref = "foojay" }
+ktlint = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "ktlint" }
+detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }

@@ -21,8 +21,9 @@ expect val dataModule: Module
 //    singleOf(::OfflineFirstUserDataRepository) bind UserDataRepository::class
 // }
 
-val commonModule = module {
-    includes(datastoreModule, networkModule, analyticsModule)
-    singleOf(::RealINetworkRepository) bind INetworkRepository::class
-    singleOf(::OfflineFirstUserDataRepository) bind UserDataRepository::class
-}
+val commonModule =
+    module {
+        includes(datastoreModule, networkModule, analyticsModule)
+        singleOf(::RealINetworkRepository) bind INetworkRepository::class
+        singleOf(::OfflineFirstUserDataRepository) bind UserDataRepository::class
+    }

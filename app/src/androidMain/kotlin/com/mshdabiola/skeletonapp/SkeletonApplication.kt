@@ -15,19 +15,20 @@ import org.koin.core.context.startKoin
 import org.koin.dsl.module
 
 class SkeletonApplication : Application() {
-
     override fun onCreate() {
         super.onCreate()
 
-        val logger = Logger(
-            loggerConfigInit(platformLogWriter()),
-            "AndroidLogger",
-        )
-        val logModule = module {
-            single {
-                logger
+        val logger =
+            Logger(
+                loggerConfigInit(platformLogWriter()),
+                "AndroidLogger",
+            )
+        val logModule =
+            module {
+                single {
+                    logger
+                }
             }
-        }
 
         startKoin {
             logger(

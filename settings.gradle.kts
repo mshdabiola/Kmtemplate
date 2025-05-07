@@ -40,6 +40,7 @@ include(":features:main")
 include(":features:detail")
 include(":features:setting")
 include(":lint")
+include(":custom-ktlint-rules")
 include(":klint")
 
 

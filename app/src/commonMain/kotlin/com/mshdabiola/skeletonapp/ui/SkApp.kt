@@ -71,9 +71,10 @@ import org.koin.core.annotation.KoinExperimentalAPI
 fun SkeletonApp() {
     val windowAdaptiveInfo = currentWindowAdaptiveInfo()
 
-    val appState = rememberSkAppState(
-        windowSizeClass = windowAdaptiveInfo.windowSizeClass,
-    )
+    val appState =
+        rememberSkAppState(
+            windowSizeClass = windowAdaptiveInfo.windowSizeClass,
+        )
     val shouldShowGradientBackground = false
 
     val viewModel: MainAppViewModel = koinViewModel()
@@ -89,11 +90,12 @@ fun SkeletonApp() {
         ) {
             SkBackground {
                 SkGradientBackground(
-                    gradientColors = if (shouldShowGradientBackground) {
-                        LocalGradientColors.current
-                    } else {
-                        GradientColors()
-                    },
+                    gradientColors =
+                        if (shouldShowGradientBackground) {
+                            LocalGradientColors.current
+                        } else {
+                            GradientColors()
+                        },
                 ) {
                     val snackbarHostState = remember { SnackbarHostState() }
                     PermanentNavigationDrawer(
@@ -102,11 +104,9 @@ fun SkeletonApp() {
                                 CommonNavigation(
                                     modifier = Modifier.width(300.dp).fillMaxHeight(),
                                     navController = appState.navController,
-
                                 )
                             }
                         },
-
                     ) {
                         Row {
                             if (appState.shouldShowNavRail) {
@@ -167,7 +167,6 @@ fun SkeletonApp() {
                                         CommonBar(navController = appState.navController)
                                     }
                                 },
-
                             ) { padding ->
 
                                 Column(
@@ -201,41 +200,38 @@ fun SkeletonApp() {
 }
 
 @Composable
-private fun chooseTheme(
-    uiState: MainActivityUiState,
-): ThemeBrand = when (uiState) {
-    MainActivityUiState.Loading -> ThemeBrand.DEFAULT
-    is MainActivityUiState.Success -> uiState.userData.themeBrand
-}
-
-@Composable
-private fun shouldUseAndroidTheme(
-    uiState: MainActivityUiState,
-): Boolean = when (uiState) {
-    MainActivityUiState.Loading -> false
-    is MainActivityUiState.Success -> when (uiState.userData.themeBrand) {
-        ThemeBrand.DEFAULT -> false
-        ThemeBrand.GREEN -> true
+private fun chooseTheme(uiState: MainActivityUiState): ThemeBrand =
+    when (uiState) {
+        MainActivityUiState.Loading -> ThemeBrand.DEFAULT
+        is MainActivityUiState.Success -> uiState.userData.themeBrand
     }
-}
 
 @Composable
-private fun shouldDisableDynamicTheming(
-    uiState: MainActivityUiState,
-): Boolean = when (uiState) {
-    MainActivityUiState.Loading -> false
-    is MainActivityUiState.Success -> !uiState.userData.useDynamicColor
-}
+private fun shouldUseAndroidTheme(uiState: MainActivityUiState): Boolean =
+    when (uiState) {
+        MainActivityUiState.Loading -> false
+        is MainActivityUiState.Success ->
+            when (uiState.userData.themeBrand) {
+                ThemeBrand.DEFAULT -> false
+                ThemeBrand.GREEN -> true
+            }
+    }
 
 @Composable
-fun shouldUseDarkTheme(
-    uiState: MainActivityUiState,
-): Boolean =
+private fun shouldDisableDynamicTheming(uiState: MainActivityUiState): Boolean =
+    when (uiState) {
+        MainActivityUiState.Loading -> false
+        is MainActivityUiState.Success -> !uiState.userData.useDynamicColor
+    }
+
+@Composable
+fun shouldUseDarkTheme(uiState: MainActivityUiState): Boolean =
     when (uiState) {
         MainActivityUiState.Loading -> isSystemInDarkTheme()
-        is MainActivityUiState.Success -> when (uiState.userData.darkThemeConfig) {
-            DarkThemeConfig.FOLLOW_SYSTEM -> isSystemInDarkTheme()
-            DarkThemeConfig.LIGHT -> false
-            DarkThemeConfig.DARK -> true
-        }
+        is MainActivityUiState.Success ->
+            when (uiState.userData.darkThemeConfig) {
+                DarkThemeConfig.FOLLOW_SYSTEM -> isSystemInDarkTheme()
+                DarkThemeConfig.LIGHT -> false
+                DarkThemeConfig.DARK -> true
+            }
     }

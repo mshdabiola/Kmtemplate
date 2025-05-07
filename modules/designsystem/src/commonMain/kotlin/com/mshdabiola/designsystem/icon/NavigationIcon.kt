@@ -36,7 +36,6 @@ val mainRoute =
 
 val settingIcons =
     arrayOf(
-
         Icons.Default.Settings,
         Icons.Default.Info,
         Icons.Default.Feedback,

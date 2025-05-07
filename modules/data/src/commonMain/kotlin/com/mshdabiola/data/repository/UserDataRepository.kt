@@ -10,7 +10,6 @@ import com.mshdabiola.model.UserData
 import kotlinx.coroutines.flow.Flow
 
 interface UserDataRepository {
-
     /**
      * Stream of [UserData]
      */

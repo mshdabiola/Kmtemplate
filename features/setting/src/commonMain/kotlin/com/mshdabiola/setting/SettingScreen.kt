@@ -73,13 +73,14 @@ internal fun SettingScreen(
         AnimatedContent(settingState) {
             when (it) {
                 is SettingState.Loading -> Waiting(modifier)
-                is SettingState.Success -> MainContent(
-                    modifier = modifier,
-                    settingState = it,
-                    setTheme = setTheme,
-                    setDarkMode = setDarkMode,
-                    onBack = onBack,
-                )
+                is SettingState.Success ->
+                    MainContent(
+                        modifier = modifier,
+                        settingState = it,
+                        setTheme = setTheme,
+                        setDarkMode = setDarkMode,
+                        onBack = onBack,
+                    )
 
                 else -> {}
             }
@@ -112,7 +113,6 @@ internal fun MainContent(
             Text(text = "Settings", style = MaterialTheme.typography.titleLarge)
             IconButton(
                 onClick = onBack,
-
             ) {
                 Icon(imageVector = Icons.Outlined.Cancel, "cancel")
             }

@@ -17,7 +17,6 @@ internal class OfflineFirstUserDataRepository(
     private val analyticsHelper: AnalyticsHelper,
     private val logger: Logger,
 ) : UserDataRepository {
-
     init {
         logger.d { "OfflineFirstUserDataRepository init" }
     }

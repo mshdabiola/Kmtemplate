@@ -43,9 +43,10 @@ fun SkViewToggleButton(
         onClick = { onExpandedChange(!expanded) },
         modifier = modifier,
         enabled = enabled,
-        colors = ButtonDefaults.textButtonColors(
-            contentColor = MaterialTheme.colorScheme.onBackground,
-        ),
+        colors =
+            ButtonDefaults.textButtonColors(
+                contentColor = MaterialTheme.colorScheme.onBackground,
+            ),
         contentPadding = SkViewToggleDefaults.ViewToggleButtonContentPadding,
     ) {
         SkViewToggleButtonContent(
@@ -75,11 +76,12 @@ private fun SkViewToggleButtonContent(
     Box(
         Modifier
             .padding(
-                end = if (trailingIcon != null) {
-                    ButtonDefaults.IconSpacing
-                } else {
-                    0.dp
-                },
+                end =
+                    if (trailingIcon != null) {
+                        ButtonDefaults.IconSpacing
+                    } else {
+                        0.dp
+                    },
             ),
     ) {
         ProvideTextStyle(value = MaterialTheme.typography.labelSmall) {

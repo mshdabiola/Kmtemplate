@@ -7,7 +7,11 @@ interface INetworkDataSource {
 
     suspend fun goToGoogle(): Response
 
-    suspend fun searchCategory(search: String, limit: Int, offset: Int): Response
+    suspend fun searchCategory(
+        search: String,
+        limit: Int,
+        offset: Int,
+    ): Response
 
     suspend fun searchCategoriesForPrefix(
         prefix: String,
@@ -61,5 +65,8 @@ interface INetworkDataSource {
 //        @QueryMap(encoded = true) continuation: Map<String, String>
 //    ): Single<MwQueryResponse>
 
-    suspend fun getTimeline(limit: Int, continuation: String): Response
+    suspend fun getTimeline(
+        limit: Int,
+        continuation: String,
+    ): Response
 }

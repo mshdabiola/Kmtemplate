@@ -11,7 +11,6 @@ import com.mshdabiola.database.model.ImageEntity
 
 @Dao
 interface ImageDao {
-
     @Upsert
     suspend fun insertAll(users: List<ImageEntity>)
 

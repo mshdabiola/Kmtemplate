@@ -21,8 +21,7 @@ class MainScreenRecompositionBenchmark {
     val benchmarkRule = MacrobenchmarkRule()
 
     @Test
-    fun benchmarkStateChangeCompilationBaselineProfile() =
-        benchmarkStateChange(CompilationMode.Partial())
+    fun benchmarkStateChangeCompilationBaselineProfile() = benchmarkStateChange(CompilationMode.Partial())
 
     private fun benchmarkStateChange(compilationMode: CompilationMode) =
         benchmarkRule.measureRepeated(

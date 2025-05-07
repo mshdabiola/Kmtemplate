@@ -30,11 +30,12 @@ import java.io.File
 
 fun mainApp() {
     application {
-        val windowState = rememberWindowState(
-            size = DpSize(width = 1100.dp, height = 600.dp),
-            placement = WindowPlacement.Maximized,
-            position = WindowPosition.Aligned(Alignment.Center),
-        )
+        val windowState =
+            rememberWindowState(
+                size = DpSize(width = 1100.dp, height = 600.dp),
+                placement = WindowPlacement.Maximized,
+                position = WindowPosition.Aligned(Alignment.Center),
+            )
 
         val version = "1.2.4"
         Window(
@@ -63,15 +64,17 @@ fun main() {
     if (path.exists().not()) {
         path.mkdirs()
     }
-    val logger = Logger(
-        loggerConfigInit(platformLogWriter(), Writer(path)),
-        "DesktopLogger,",
-    )
-    val logModule = module {
-        single {
-            logger
+    val logger =
+        Logger(
+            loggerConfigInit(platformLogWriter(), Writer(path)),
+            "DesktopLogger,",
+        )
+    val logModule =
+        module {
+            single {
+                logger
+            }
         }
-    }
 
     try {
         startKoin {

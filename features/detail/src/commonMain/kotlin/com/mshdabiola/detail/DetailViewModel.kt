@@ -25,7 +25,6 @@ class DetailViewModel(
     id: Long,
     private val noteRepository: NoteRepository,
 ) : ViewModel() {
-
     private val note = MutableStateFlow<Note?>(Note())
 
     val title = TextFieldState()
@@ -37,8 +36,9 @@ class DetailViewModel(
     init {
         viewModelScope.launch {
             if (id > 0) {
-                val initNOte = noteRepository.getOne(id)
-                    .first()
+                val initNOte =
+                    noteRepository.getOne(id)
+                        .first()
                 note.update { initNOte }
 
                 if (initNOte != null) {
@@ -58,14 +58,14 @@ class DetailViewModel(
                 }
         }
 
-        viewModelScope.launch() {
+        viewModelScope.launch {
             snapshotFlow { title.text }
                 .debounce(500)
                 .collectLatest { text ->
                     note.update { it?.copy(title = text.toString()) }
                 }
         }
-        viewModelScope.launch() {
+        viewModelScope.launch {
             snapshotFlow { content.text }
                 .debounce(500)
                 .collectLatest { text ->

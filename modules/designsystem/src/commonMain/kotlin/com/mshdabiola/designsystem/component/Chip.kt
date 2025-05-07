@@ -44,50 +44,58 @@ fun SkFilterChip(
         },
         modifier = modifier,
         enabled = enabled,
-        leadingIcon = if (selected) {
-            {
-                Icon(
-                    imageVector = SkIcons.Check,
-                    contentDescription = null,
-                )
-            }
-        } else {
-            null
-        },
-        shape = CircleShape,
-        border = FilterChipDefaults.filterChipBorder(
-            enabled = enabled,
-            selected = selected,
-            borderColor = MaterialTheme.colorScheme.onBackground,
-            selectedBorderColor = MaterialTheme.colorScheme.onBackground,
-            disabledBorderColor = MaterialTheme.colorScheme.onBackground.copy(
-                alpha = SkChipDefaults.DISABLED_CHIP_CONTENT_ALPHA,
-            ),
-            disabledSelectedBorderColor = MaterialTheme.colorScheme.onBackground.copy(
-                alpha = SkChipDefaults.DISABLED_CHIP_CONTENT_ALPHA,
-            ),
-            selectedBorderWidth = SkChipDefaults.ChipBorderWidth,
-        ),
-        colors = FilterChipDefaults.filterChipColors(
-            labelColor = MaterialTheme.colorScheme.onBackground,
-            iconColor = MaterialTheme.colorScheme.onBackground,
-            disabledContainerColor = if (selected) {
-                MaterialTheme.colorScheme.onBackground.copy(
-                    alpha = SkChipDefaults.DISABLED_CHIP_CONTAINER_ALPHA,
-                )
+        leadingIcon =
+            if (selected) {
+                {
+                    Icon(
+                        imageVector = SkIcons.Check,
+                        contentDescription = null,
+                    )
+                }
             } else {
-                Color.Transparent
+                null
             },
-            disabledLabelColor = MaterialTheme.colorScheme.onBackground.copy(
-                alpha = SkChipDefaults.DISABLED_CHIP_CONTENT_ALPHA,
+        shape = CircleShape,
+        border =
+            FilterChipDefaults.filterChipBorder(
+                enabled = enabled,
+                selected = selected,
+                borderColor = MaterialTheme.colorScheme.onBackground,
+                selectedBorderColor = MaterialTheme.colorScheme.onBackground,
+                disabledBorderColor =
+                    MaterialTheme.colorScheme.onBackground.copy(
+                        alpha = SkChipDefaults.DISABLED_CHIP_CONTENT_ALPHA,
+                    ),
+                disabledSelectedBorderColor =
+                    MaterialTheme.colorScheme.onBackground.copy(
+                        alpha = SkChipDefaults.DISABLED_CHIP_CONTENT_ALPHA,
+                    ),
+                selectedBorderWidth = SkChipDefaults.ChipBorderWidth,
             ),
-            disabledLeadingIconColor = MaterialTheme.colorScheme.onBackground.copy(
-                alpha = SkChipDefaults.DISABLED_CHIP_CONTENT_ALPHA,
+        colors =
+            FilterChipDefaults.filterChipColors(
+                labelColor = MaterialTheme.colorScheme.onBackground,
+                iconColor = MaterialTheme.colorScheme.onBackground,
+                disabledContainerColor =
+                    if (selected) {
+                        MaterialTheme.colorScheme.onBackground.copy(
+                            alpha = SkChipDefaults.DISABLED_CHIP_CONTAINER_ALPHA,
+                        )
+                    } else {
+                        Color.Transparent
+                    },
+                disabledLabelColor =
+                    MaterialTheme.colorScheme.onBackground.copy(
+                        alpha = SkChipDefaults.DISABLED_CHIP_CONTENT_ALPHA,
+                    ),
+                disabledLeadingIconColor =
+                    MaterialTheme.colorScheme.onBackground.copy(
+                        alpha = SkChipDefaults.DISABLED_CHIP_CONTENT_ALPHA,
+                    ),
+                selectedContainerColor = MaterialTheme.colorScheme.primaryContainer,
+                selectedLabelColor = MaterialTheme.colorScheme.onBackground,
+                selectedLeadingIconColor = MaterialTheme.colorScheme.onBackground,
             ),
-            selectedContainerColor = MaterialTheme.colorScheme.primaryContainer,
-            selectedLabelColor = MaterialTheme.colorScheme.onBackground,
-            selectedLeadingIconColor = MaterialTheme.colorScheme.onBackground,
-        ),
     )
 }
 

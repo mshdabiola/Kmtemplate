@@ -46,15 +46,15 @@ fun CommonNavigation(
 
     Surface(
         modifier = modifier,
-        color = MaterialTheme.colorScheme.surface, // LocalBackgroundTheme.current.color,
+        color = MaterialTheme.colorScheme.surface,
         shape = RoundedCornerShape(0.dp),
-
     ) {
         Column(
             verticalArrangement = Arrangement.SpaceBetween,
-            modifier = modifier
-                .padding(8.dp)
-                .verticalScroll(state = rememberScrollState()),
+            modifier =
+                modifier
+                    .padding(8.dp)
+                    .verticalScroll(state = rememberScrollState()),
         ) {
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Icon(Icons.Default.LocalLibrary, "Logo")
@@ -72,20 +72,21 @@ fun CommonNavigation(
                     TOP_LEVEL_ROUTES
                         .forEachIndexed { index, navigator ->
                             NavigationDrawerItem(
-                                selected = navController
-                                    .currentBackStackEntryAsState().value?.destination?.hasRoute(
-                                    route = navigator.route::class,
-                                )
-                                    == true,
+                                selected =
+                                    navController
+                                        .currentBackStackEntryAsState().value?.destination?.hasRoute(
+                                            route = navigator.route::class,
+                                        )
+                                        == true,
                                 label = { Text(cbtNavigator[index]) },
                                 onClick = {
                                     navController.navigate(
                                         navigator.route,
                                         navOptions =
-                                        navOptions {
-                                            launchSingleTop
-                                            restoreState
-                                        },
+                                            navOptions {
+                                                launchSingleTop
+                                                restoreState
+                                            },
                                     )
                                 },
                                 colors = color,
@@ -103,9 +104,10 @@ fun CommonNavigation(
                 SETTING_LEVEL_ROUTES
                     .forEachIndexed { index, navigator ->
                         NavigationDrawerItem(
-                            selected = navController
-                                .currentBackStackEntryAsState().value?.destination?.hasRoute(route = navigator.route::class)
-                                == true,
+                            selected =
+                                navController
+                                    .currentBackStackEntryAsState().value?.destination?.hasRoute(route = navigator.route::class)
+                                    == true,
                             label = { Text(settingNavigator[index]) },
                             onClick = {
                                 navController.navigate(navigator.route)
@@ -134,9 +136,10 @@ fun CommonRail(
         Column(
             verticalArrangement = Arrangement.SpaceBetween,
             horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = Modifier
-                .padding(8.dp)
-                .verticalScroll(state = rememberScrollState()),
+            modifier =
+                Modifier
+                    .padding(8.dp)
+                    .verticalScroll(state = rememberScrollState()),
         ) {
             Icon(Icons.Default.LocalLibrary, "Logo")
 
@@ -145,15 +148,15 @@ fun CommonRail(
             Column(
                 verticalArrangement = Arrangement.spacedBy(8.dp),
                 horizontalAlignment = Alignment.CenterHorizontally,
-
             ) {
                 Text("Main")
                 TOP_LEVEL_ROUTES
                     .forEachIndexed { index, navigator ->
                         NavigationRailItem(
-                            selected = navController
-                                .currentBackStackEntryAsState().value?.destination?.hasRoute(route = navigator.route::class)
-                                == true,
+                            selected =
+                                navController
+                                    .currentBackStackEntryAsState().value?.destination?.hasRoute(route = navigator.route::class)
+                                    == true,
                             label = { Text(settingNavigator[index]) },
                             onClick = {
                                 navController.navigate(navigator.route)
@@ -171,18 +174,19 @@ fun CommonRail(
                 SETTING_LEVEL_ROUTES
                     .forEachIndexed { index, navigator ->
                         NavigationRailItem(
-                            selected = navController
-                                .currentBackStackEntryAsState().value?.destination?.hasRoute(route = navigator.route::class)
-                                == true,
+                            selected =
+                                navController
+                                    .currentBackStackEntryAsState().value?.destination?.hasRoute(route = navigator.route::class)
+                                    == true,
                             label = { Text(settingNavigator[index]) },
                             onClick = {
                                 navController.navigate(
                                     navigator.route,
                                     navOptions =
-                                    navOptions {
-                                        launchSingleTop
-                                        restoreState
-                                    },
+                                        navOptions {
+                                            launchSingleTop
+                                            restoreState
+                                        },
                                 )
                             },
                             icon = { Icon(navigator.icon, settingNavigator[index]) },
@@ -206,18 +210,19 @@ fun CommonBar(
         TOP_LEVEL_ROUTES
             .forEachIndexed { index, navigator ->
                 NavigationBarItem(
-                    selected = navController
-                        .currentBackStackEntryAsState().value?.destination?.hasRoute(route = navigator.route::class)
-                        == true,
+                    selected =
+                        navController
+                            .currentBackStackEntryAsState().value?.destination?.hasRoute(route = navigator.route::class)
+                            == true,
                     label = { Text(cbtNavigator[index]) },
                     onClick = {
                         navController.navigate(
                             navigator.route,
                             navOptions =
-                            navOptions {
-                                launchSingleTop
-                                restoreState
-                            },
+                                navOptions {
+                                    launchSingleTop
+                                    restoreState
+                                },
                         )
                     },
                     alwaysShowLabel = false,

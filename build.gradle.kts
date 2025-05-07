@@ -28,7 +28,8 @@ plugins {
     alias(libs.plugins.composehot) apply false
     alias(libs.plugins.foojay) apply false
     alias(libs.plugins.module.graph)
-
+    alias(libs.plugins.ktlint) apply false
+    alias(libs.plugins.detekt) apply false
 }
 
 moduleGraphConfig {
@@ -313,4 +314,34 @@ moduleGraphConfig {
         )
     }
 
+}
+
+subprojects {
+    apply(plugin = "org.jlleitschuh.gradle.ktlint")
+    configure<org.jlleitschuh.gradle.ktlint.KtlintExtension> {
+        debug.set(true)
+        //ignoreFailures.set(true)
+    }
+    dependencies {
+       // add("ktlint", project(":custom-ktlint-rules"))
+    }
+
+    apply(plugin = "io.gitlab.arturbosch.detekt")
+    plugins.withId("io.gitlab.arturbosch.detekt") {
+        configure<io.gitlab.arturbosch.detekt.extensions.DetektExtension> {
+            source = files(
+                "src/main/kotlin",
+                "src/commonMain/kotlin",
+                "src/jvmMain/kotlin",
+                "src/androidMain/kotlin",
+                "src/iosMain/kotlin",
+                "src/nativeMain/kotlin",
+                "src/desktop/kotlin",
+                "src/js/kotlin",
+            )
+            config.setFrom(rootProject.file("detekt.yml"))
+            buildUponDefaultConfig = true
+            ignoreFailures = false
+        }
+    }
 }

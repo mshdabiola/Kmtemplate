@@ -22,23 +22,27 @@ import kotlin.properties.ReadOnlyProperty
  * Tests all the navigation flows that are handled by the navigation library.
  */
 class NavigationTest {
-    private val logger2 = Logger(
-        loggerConfigInit(platformLogWriter()),
-        "AndroidLogger",
-    )
-    private val logModule = module {
-        single {
-            logger2
+    private val logger2 =
+        Logger(
+            loggerConfigInit(platformLogWriter()),
+            "AndroidLogger",
+        )
+    private val logModule =
+        module {
+            single {
+                logger2
+            }
         }
-    }
-    private val instrumentedTestModule = module {
-        logModule
-    }
+    private val instrumentedTestModule =
+        module {
+            logModule
+        }
 
     @get:Rule(order = 0)
-    val koinTestRule = KoinTestRule(
-        modules = listOf(instrumentedTestModule),
-    )
+    val koinTestRule =
+        KoinTestRule(
+            modules = listOf(instrumentedTestModule),
+        )
 
     @get:Rule(order = 1)
     val tmpFolder: TemporaryFolder = TemporaryFolder.builder().assureDeletion().build()
@@ -46,8 +50,9 @@ class NavigationTest {
     @get:Rule(order = 3)
     val composeTestRule = createAndroidComposeRule<MainActivity>()
 
-    private fun AndroidComposeTestRule<*, *>.stringResource(@StringRes resId: Int) =
-        ReadOnlyProperty<Any, String> { _, _ -> activity.getString(resId) }
+    private fun AndroidComposeTestRule<*, *>.stringResource(
+        @StringRes resId: Int,
+    ) = ReadOnlyProperty<Any, String> { _, _ -> activity.getString(resId) }
 
     // The strings used for matching in these tests
     // private val navigateUp by composeTestRule.stringResource(FeatureForyouR.string.feature_foryou_navigate_up)
