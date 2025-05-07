@@ -8,7 +8,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import com.mshdabiola.designsystem.component.SkTopAppBar
-import com.mshdabiola.designsystem.icon.SkIcons
+import com.mshdabiola.designsystem.icon.HyaIcons
 import com.mshdabiola.testing.util.CaptureMultiTheme
 
 class TopAppBarScreenshotTests() {
@@ -34,9 +34,9 @@ class TopAppBarScreenshotTests() {
     private fun NiaTopAppBarExample() {
         SkTopAppBar(
             titleRes = "untitled",
-            navigationIcon = SkIcons.Search,
+            navigationIcon = HyaIcons.Search,
             navigationIconContentDescription = "Navigation icon",
-            actionIcon = SkIcons.MoreVert,
+            actionIcon = HyaIcons.MoreVert,
             actionIconContentDescription = "Action icon",
         )
     }

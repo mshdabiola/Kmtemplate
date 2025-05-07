@@ -7,7 +7,7 @@ package com.mshdabiola.designsystem
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
-import com.mshdabiola.designsystem.component.SkFilterChip
+import com.mshdabiola.designsystem.component.HyaFilterChip
 import com.mshdabiola.testing.util.CaptureMultiTheme
 
 class FilterChipScreenshotTests {
@@ -16,7 +16,7 @@ class FilterChipScreenshotTests {
     @Composable
     fun UnSelectedFilterChip() {
         CaptureMultiTheme {
-            SkFilterChip(selected = false, onSelectedChange = {}) {
+            HyaFilterChip(selected = false, onSelectedChange = {}) {
                 Text("Unselected chip")
             }
         }
@@ -26,7 +26,7 @@ class FilterChipScreenshotTests {
     @Composable
     fun SelectedFilterChip() {
         CaptureMultiTheme {
-            SkFilterChip(selected = true, onSelectedChange = {}) {
+            HyaFilterChip(selected = true, onSelectedChange = {}) {
                 Text("Selected Chip")
             }
         }
@@ -37,7 +37,7 @@ class FilterChipScreenshotTests {
     @Composable
     fun HugeFontFilterChip() {
         CaptureMultiTheme {
-            SkFilterChip(selected = true, onSelectedChange = {}) {
+            HyaFilterChip(selected = true, onSelectedChange = {}) {
                 Text("Chip")
             }
         }
