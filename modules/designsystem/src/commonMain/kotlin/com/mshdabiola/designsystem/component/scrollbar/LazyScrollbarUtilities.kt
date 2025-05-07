@@ -63,16 +63,14 @@ internal fun itemVisibilityPercentage(
 ): Float {
     if (itemSize == 0) return 0f
     val itemEnd = itemStartOffset + itemSize
-    val startOffset =
-        when {
-            itemStartOffset > viewportStartOffset -> 0
-            else -> abs(abs(viewportStartOffset) - abs(itemStartOffset))
-        }
-    val endOffset =
-        when {
-            itemEnd < viewportEndOffset -> 0
-            else -> abs(abs(itemEnd) - abs(viewportEndOffset))
-        }
+    val startOffset = when {
+        itemStartOffset > viewportStartOffset -> 0
+        else -> abs(abs(viewportStartOffset) - abs(itemStartOffset))
+    }
+    val endOffset = when {
+        itemEnd < viewportEndOffset -> 0
+        else -> abs(abs(itemEnd) - abs(viewportEndOffset))
+    }
     val size = itemSize.toFloat()
     return (size - startOffset - endOffset) / size
 }

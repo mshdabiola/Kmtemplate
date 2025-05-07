@@ -17,7 +17,7 @@ import androidx.compose.ui.unit.dp
 var extendedColorScheme: ExtendedColorScheme = extendedLight
 
 @Composable
-fun SkTheme(
+fun HyaTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     androidTheme: Boolean = false,
     disableDynamicTheming: Boolean = true,
