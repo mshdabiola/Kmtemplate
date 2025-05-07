@@ -76,20 +76,15 @@ fun main() {
             }
         }
 
-    try {
-        startKoin {
-            logger(
-                KermitKoinLogger(Logger.withTag("koin")),
-            )
-            modules(
-                appModule,
-                logModule,
-            )
-        }
-
-        mainApp()
-    } catch (e: Exception) {
-        logger.e("crash exceptions", e)
-        throw e
+    startKoin {
+        logger(
+            KermitKoinLogger(Logger.withTag("koin")),
+        )
+        modules(
+            appModule,
+            logModule,
+        )
     }
+
+    mainApp()
 }
