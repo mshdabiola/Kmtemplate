@@ -75,17 +75,18 @@ internal fun DetailScreen(
     AnimatedContent(state) {
         when (it) {
             is DetailState.Loading -> Waiting(modifier)
-            is DetailState.Success -> MainContent(
-                modifier = modifier,
-                state = it,
-                sharedTransitionScope = sharedTransitionScope,
-                animatedContentScope = animatedContentScope,
-                title = title,
-                content = content,
-                onShowSnackbar = onShowSnackbar,
-                onBack = onBack,
-                onDelete = onDelete,
-            )
+            is DetailState.Success ->
+                MainContent(
+                    modifier = modifier,
+                    state = it,
+                    sharedTransitionScope = sharedTransitionScope,
+                    animatedContentScope = animatedContentScope,
+                    title = title,
+                    content = content,
+                    onShowSnackbar = onShowSnackbar,
+                    onBack = onBack,
+                    onDelete = onDelete,
+                )
             else -> {}
         }
     }
@@ -103,7 +104,6 @@ internal fun MainContent(
     onShowSnackbar: suspend (String, String?) -> Boolean = { _, _ -> false },
     onBack: () -> Unit = {},
     onDelete: () -> Unit = {},
-
 ) {
     val coroutineScope = rememberCoroutineScope()
     with(sharedTransitionScope) {
@@ -123,19 +123,21 @@ internal fun MainContent(
                 onNavigationClick = { onBack() },
             )
             SkTextField(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .testTag("detail:title"),
+                modifier =
+                    Modifier
+                        .fillMaxWidth()
+                        .testTag("detail:title"),
                 state = title,
                 placeholder = "Title",
                 maxNum = TextFieldLineLimits.SingleLine,
                 imeAction = ImeAction.Next,
             )
             SkTextField(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .testTag("detail:content")
-                    .weight(1f),
+                modifier =
+                    Modifier
+                        .fillMaxWidth()
+                        .testTag("detail:content")
+                        .weight(1f),
                 state = content,
                 placeholder = "content",
                 imeAction = ImeAction.Done,

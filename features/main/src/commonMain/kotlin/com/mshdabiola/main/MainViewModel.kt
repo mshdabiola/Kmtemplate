@@ -17,7 +17,6 @@ import kotlinx.coroutines.flow.stateIn
 class MainViewModel(
     modelRepository: NoteRepository,
 ) : ViewModel() {
-
     val notes: StateFlow<Result<List<Note>>> =
         modelRepository.getAll()
             .asResult()
