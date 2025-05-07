@@ -329,7 +329,7 @@ subprojects {
 //        }
     }
     dependencies {
-//        add("ktlint", project(":ktlint"))
+        add("ktlint", project(":ktlint"))
     }
 
     apply(plugin = "io.gitlab.arturbosch.detekt")
