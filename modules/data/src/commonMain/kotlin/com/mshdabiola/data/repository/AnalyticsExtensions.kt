@@ -16,22 +16,27 @@ internal fun AnalyticsHelper.logNewsResourceBookmarkToggled(
     logEvent(
         AnalyticsEvent(
             type = eventType,
-            extras = listOf(
-                AnalyticsEvent.Param(key = paramKey, value = newsResourceId),
-            ),
+            extras =
+                listOf(
+                    AnalyticsEvent.Param(key = paramKey, value = newsResourceId),
+                ),
         ),
     )
 }
 
-internal fun AnalyticsHelper.logTopicFollowToggled(followedTopicId: String, isFollowed: Boolean) {
+internal fun AnalyticsHelper.logTopicFollowToggled(
+    followedTopicId: String,
+    isFollowed: Boolean,
+) {
     val eventType = if (isFollowed) "topic_followed" else "topic_unfollowed"
     val paramKey = if (isFollowed) "followed_topic_id" else "unfollowed_topic_id"
     logEvent(
         AnalyticsEvent(
             type = eventType,
-            extras = listOf(
-                AnalyticsEvent.Param(key = paramKey, value = followedTopicId),
-            ),
+            extras =
+                listOf(
+                    AnalyticsEvent.Param(key = paramKey, value = followedTopicId),
+                ),
         ),
     )
 }
@@ -40,9 +45,10 @@ internal fun AnalyticsHelper.logThemeChanged(themeName: String) =
     logEvent(
         AnalyticsEvent(
             type = "theme_changed",
-            extras = listOf(
-                AnalyticsEvent.Param(key = "theme_name", value = themeName),
-            ),
+            extras =
+                listOf(
+                    AnalyticsEvent.Param(key = "theme_name", value = themeName),
+                ),
         ),
     )
 
@@ -50,9 +56,10 @@ internal fun AnalyticsHelper.logContrastChanged(contrastName: String) =
     logEvent(
         AnalyticsEvent(
             type = "Contrast_changed",
-            extras = listOf(
-                AnalyticsEvent.Param(key = "theme_name", value = contrastName),
-            ),
+            extras =
+                listOf(
+                    AnalyticsEvent.Param(key = "theme_name", value = contrastName),
+                ),
         ),
     )
 
@@ -60,9 +67,10 @@ internal fun AnalyticsHelper.logDarkThemeConfigChanged(darkThemeConfigName: Stri
     logEvent(
         AnalyticsEvent(
             type = "dark_theme_config_changed",
-            extras = listOf(
-                AnalyticsEvent.Param(key = "dark_theme_config", value = darkThemeConfigName),
-            ),
+            extras =
+                listOf(
+                    AnalyticsEvent.Param(key = "dark_theme_config", value = darkThemeConfigName),
+                ),
         ),
     )
 
@@ -70,12 +78,13 @@ internal fun AnalyticsHelper.logDynamicColorPreferenceChanged(useDynamicColor: B
     logEvent(
         AnalyticsEvent(
             type = "dynamic_color_preference_changed",
-            extras = listOf(
-                AnalyticsEvent.Param(
-                    key = "dynamic_color_preference",
-                    value = useDynamicColor.toString(),
+            extras =
+                listOf(
+                    AnalyticsEvent.Param(
+                        key = "dynamic_color_preference",
+                        value = useDynamicColor.toString(),
+                    ),
                 ),
-            ),
         ),
     )
 

@@ -10,8 +10,9 @@ import org.koin.dsl.bind
 import org.koin.dsl.module
 
 actual val dataModule: Module
-    get() = module {
-        includes(commonModule)
-        single { Dispatchers.Default } bind CoroutineDispatcher::class
-        singleOf(::RealModelRepository) bind NoteRepository::class
-    }
+    get() =
+        module {
+            includes(commonModule)
+            single { Dispatchers.Default } bind CoroutineDispatcher::class
+            singleOf(::RealModelRepository) bind NoteRepository::class
+        }

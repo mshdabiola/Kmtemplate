@@ -16,46 +16,49 @@ import kotlinx.coroutines.flow.conflate
 class ConnectivityManagerNetworkMonitor constructor(
     private val context: Context,
 ) : NetworkMonitor {
-    override val isOnline: Flow<Boolean> = callbackFlow {
-        val connectivityManager =
-            context.getSystemService(Context.CONNECTIVITY_SERVICE) as? ConnectivityManager
+    override val isOnline: Flow<Boolean> =
+        callbackFlow {
+            val connectivityManager =
+                context.getSystemService(Context.CONNECTIVITY_SERVICE) as? ConnectivityManager
 
-        val callback = object : NetworkCallback() {
-            override fun onAvailable(network: Network) {
-                channel.trySend(connectivityManager.isCurrentlyConnected())
-            }
+            val callback =
+                object : NetworkCallback() {
+                    override fun onAvailable(network: Network) {
+                        channel.trySend(connectivityManager.isCurrentlyConnected())
+                    }
 
-            override fun onLost(network: Network) {
-                channel.trySend(connectivityManager.isCurrentlyConnected())
-            }
+                    override fun onLost(network: Network) {
+                        channel.trySend(connectivityManager.isCurrentlyConnected())
+                    }
 
-            override fun onCapabilitiesChanged(
-                network: Network,
-                networkCapabilities: NetworkCapabilities,
-            ) {
-                channel.trySend(connectivityManager.isCurrentlyConnected())
+                    override fun onCapabilitiesChanged(
+                        network: Network,
+                        networkCapabilities: NetworkCapabilities,
+                    ) {
+                        channel.trySend(connectivityManager.isCurrentlyConnected())
+                    }
+                }
+
+            connectivityManager?.registerNetworkCallback(
+                Builder()
+                    .addCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
+                    .build(),
+                callback,
+            )
+
+            channel.trySend(connectivityManager.isCurrentlyConnected())
+
+            awaitClose {
+                connectivityManager?.unregisterNetworkCallback(callback)
             }
         }
-
-        connectivityManager?.registerNetworkCallback(
-            Builder()
-                .addCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
-                .build(),
-            callback,
-        )
-
-        channel.trySend(connectivityManager.isCurrentlyConnected())
-
-        awaitClose {
-            connectivityManager?.unregisterNetworkCallback(callback)
-        }
-    }
-        .conflate()
+            .conflate()
 
     @Suppress("DEPRECATION")
-    private fun ConnectivityManager?.isCurrentlyConnected() = when (this) {
-        null -> false
+    private fun ConnectivityManager?.isCurrentlyConnected() =
+        when (this) {
+            null -> false
 
-        else -> activeNetworkInfo?.isConnected ?: false
-    }
+            else -> activeNetworkInfo?.isConnected ?: false
+        }
 }
