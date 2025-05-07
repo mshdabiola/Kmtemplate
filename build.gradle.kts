@@ -328,7 +328,7 @@ subprojects {
 //        }
     }
     dependencies {
-       // add("ktlint", project(":custom-ktlint-rules"))
+        add("ktlint", project(":ktlint"))
     }
 
     apply(plugin = "io.gitlab.arturbosch.detekt")
