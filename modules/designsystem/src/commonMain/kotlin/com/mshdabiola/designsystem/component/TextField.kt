@@ -59,28 +59,27 @@ fun SkTextField(
         modifier = modifier,
 //                    .bringIntoViewRequester(focusRequester2)
 //            .focusRequester(focusRequester)
-
         state = state,
         placeholder = {
             if (placeholder != null) {
                 Text(text = placeholder)
             }
         },
-        colors = TextFieldDefaults.colors(
-            focusedContainerColor = Color.Transparent,
-            unfocusedContainerColor = Color.Transparent,
-            disabledContainerColor = Color.Transparent,
-            focusedIndicatorColor = Color.Transparent,
-            unfocusedIndicatorColor = Color.Transparent,
-        ),
-
-        keyboardOptions = KeyboardOptions.Default.copy(
-            capitalization = KeyboardCapitalization.Sentences,
-            autoCorrectEnabled = true,
-            imeAction = imeAction,
-        ),
+        colors =
+            TextFieldDefaults.colors(
+                focusedContainerColor = Color.Transparent,
+                unfocusedContainerColor = Color.Transparent,
+                disabledContainerColor = Color.Transparent,
+                focusedIndicatorColor = Color.Transparent,
+                unfocusedIndicatorColor = Color.Transparent,
+            ),
+        keyboardOptions =
+            KeyboardOptions.Default.copy(
+                capitalization = KeyboardCapitalization.Sentences,
+                autoCorrectEnabled = true,
+                imeAction = imeAction,
+            ),
         keyboardActions = KeyboardActions { keyboardAction() },
-
         lineLimits = maxNum,
     )
 }
@@ -107,29 +106,29 @@ fun MyTextField(
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     shape: Shape = TextFieldDefaults.shape,
     colors: TextFieldColors = TextFieldDefaults.colors(),
-
     inputTransformation: InputTransformation? = null,
     lineLimits: TextFieldLineLimits = TextFieldLineLimits.Default,
     onTextLayout: (Density.(getResult: () -> TextLayoutResult?) -> Unit)? = null,
     // codepointTransformation: CodepointTransformation? = null,
     scrollState: ScrollState = rememberScrollState(),
-
 ) {
     // If color is not provided via the text style, use content color as a default
-    val textColor = textStyle.color.takeOrElse {
-        colors.textColor(enabled, isError, interactionSource).value
-    }
+    val textColor =
+        textStyle.color.takeOrElse {
+            colors.textColor(enabled, isError, interactionSource).value
+        }
     val mergedTextStyle = textStyle.merge(TextStyle(color = textColor))
 
     CompositionLocalProvider(LocalTextSelectionColors provides colors.selectionColors) {
         BasicTextField(
             state = state,
-            modifier = modifier
-                .defaultErrorSemantics(isError, "Error occur")
-                .defaultMinSize(
-                    minWidth = TextFieldDefaults.MinWidth,
-                    minHeight = TextFieldDefaults.MinHeight,
-                ),
+            modifier =
+                modifier
+                    .defaultErrorSemantics(isError, "Error occur")
+                    .defaultMinSize(
+                        minWidth = TextFieldDefaults.MinWidth,
+                        minHeight = TextFieldDefaults.MinHeight,
+                    ),
             enabled = enabled,
             readOnly = readOnly,
             textStyle = mergedTextStyle,
@@ -137,7 +136,6 @@ fun MyTextField(
             keyboardOptions = keyboardOptions,
             // keyboardActions = keyboardActions,
             interactionSource = interactionSource,
-
             inputTransformation = inputTransformation,
             lineLimits = lineLimits,
             onTextLayout = onTextLayout,
@@ -163,9 +161,7 @@ fun MyTextField(
                     colors = colors,
                 )
             },
-
             scrollState = scrollState,
-
         )
     }
 }
@@ -283,12 +279,13 @@ internal fun TextFieldColors.textColor(
 ): State<Color> {
     val focused by interactionSource.collectIsFocusedAsState()
 
-    val targetValue = when {
-        !enabled -> disabledTextColor
-        isError -> errorTextColor
-        focused -> focusedTextColor
-        else -> unfocusedTextColor
-    }
+    val targetValue =
+        when {
+            !enabled -> disabledTextColor
+            isError -> errorTextColor
+            focused -> focusedTextColor
+            else -> unfocusedTextColor
+        }
     return rememberUpdatedState(targetValue)
 }
 

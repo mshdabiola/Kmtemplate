@@ -28,9 +28,10 @@ fun SkButton(
         onClick = onClick,
         modifier = modifier,
         enabled = enabled,
-        colors = ButtonDefaults.buttonColors(
-            containerColor = MaterialTheme.colorScheme.onBackground,
-        ),
+        colors =
+            ButtonDefaults.buttonColors(
+                containerColor = MaterialTheme.colorScheme.onBackground,
+            ),
         contentPadding = contentPadding,
         content = content,
     )
@@ -48,11 +49,12 @@ fun SkButton(
         onClick = onClick,
         modifier = modifier,
         enabled = enabled,
-        contentPadding = if (leadingIcon != null) {
-            ButtonDefaults.ButtonWithIconContentPadding
-        } else {
-            ButtonDefaults.ContentPadding
-        },
+        contentPadding =
+            if (leadingIcon != null) {
+                ButtonDefaults.ButtonWithIconContentPadding
+            } else {
+                ButtonDefaults.ContentPadding
+            },
     ) {
         SkButtonContent(
             text = text,
@@ -74,11 +76,12 @@ private fun SkButtonContent(
     Box(
         Modifier
             .padding(
-                start = if (leadingIcon != null) {
-                    ButtonDefaults.IconSpacing
-                } else {
-                    0.dp
-                },
+                start =
+                    if (leadingIcon != null) {
+                        ButtonDefaults.IconSpacing
+                    } else {
+                        0.dp
+                    },
             ),
     ) {
         text()

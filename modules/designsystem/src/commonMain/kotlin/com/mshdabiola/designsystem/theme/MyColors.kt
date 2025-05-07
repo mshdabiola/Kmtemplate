@@ -4,7 +4,6 @@ import androidx.compose.runtime.Immutable
 import androidx.compose.ui.graphics.Color
 
 sealed class MyColors {
-
     abstract val primaryLight: Color
     abstract val onPrimaryLight: Color
     abstract val primaryContainerLight: Color
@@ -78,7 +77,6 @@ sealed class MyColors {
     abstract val surfaceContainerHighestDark: Color
 
     data object Brown : MyColors() {
-
         override val primaryLight = Color(0xFF8E4D31)
         override val onPrimaryLight = Color(0xFFFFFFFF)
         override val primaryContainerLight = Color(0xFFFFDBCE)
@@ -153,7 +151,6 @@ sealed class MyColors {
     }
 
     data object Default : MyColors() {
-
         override val primaryLight = Color(0xFF8D4A5C)
         override val onPrimaryLight = Color(0xFFFFFFFF)
         override val primaryContainerLight = Color(0xFFFFD9E0)
@@ -246,35 +243,41 @@ val onPauseDark = Color(0xFF003350)
 val pauseContainerDark = Color(0xFF044B71)
 val onPauseContainerDark = Color(0xFFCCE5FF)
 
-val extendedLight = ExtendedColorScheme(
-    play = ColorFamily(
-        playLight,
-        onPlayLight,
-        playContainerLight,
-        onPlayContainerLight,
-    ),
-    pause = ColorFamily(
-        pauseLight,
-        onPauseLight,
-        pauseContainerLight,
-        onPauseContainerLight,
-    ),
-)
+val extendedLight =
+    ExtendedColorScheme(
+        play =
+            ColorFamily(
+                playLight,
+                onPlayLight,
+                playContainerLight,
+                onPlayContainerLight,
+            ),
+        pause =
+            ColorFamily(
+                pauseLight,
+                onPauseLight,
+                pauseContainerLight,
+                onPauseContainerLight,
+            ),
+    )
 
-val extendedDark = ExtendedColorScheme(
-    play = ColorFamily(
-        playDark,
-        onPlayDark,
-        playContainerDark,
-        onPlayContainerDark,
-    ),
-    pause = ColorFamily(
-        pauseDark,
-        onPauseDark,
-        pauseContainerDark,
-        onPauseContainerDark,
-    ),
-)
+val extendedDark =
+    ExtendedColorScheme(
+        play =
+            ColorFamily(
+                playDark,
+                onPlayDark,
+                playContainerDark,
+                onPlayContainerDark,
+            ),
+        pause =
+            ColorFamily(
+                pauseDark,
+                onPauseDark,
+                pauseContainerDark,
+                onPauseContainerDark,
+            ),
+    )
 
 @Immutable
 data class ColorFamily(
@@ -284,12 +287,13 @@ data class ColorFamily(
     val onColorContainer: Color,
 )
 
-val unspecified_scheme = ColorFamily(
-    Color.Unspecified,
-    Color.Unspecified,
-    Color.Unspecified,
-    Color.Unspecified,
-)
+val unspecified_scheme =
+    ColorFamily(
+        Color.Unspecified,
+        Color.Unspecified,
+        Color.Unspecified,
+        Color.Unspecified,
+    )
 
 @Immutable
 data class ExtendedColorScheme(

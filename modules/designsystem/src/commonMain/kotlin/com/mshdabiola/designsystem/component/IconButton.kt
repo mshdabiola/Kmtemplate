@@ -40,17 +40,19 @@ fun SkIconToggleButton(
         onCheckedChange = onCheckedChange,
         modifier = modifier,
         enabled = enabled,
-        colors = IconButtonDefaults.iconToggleButtonColors(
-            checkedContainerColor = MaterialTheme.colorScheme.primaryContainer,
-            checkedContentColor = MaterialTheme.colorScheme.onPrimaryContainer,
-            disabledContainerColor = if (checked) {
-                MaterialTheme.colorScheme.onBackground.copy(
-                    alpha = SkIconButtonDefaults.DISABLED_ICON_BUTTON_CONTAINER_ALPHA,
-                )
-            } else {
-                Color.Transparent
-            },
-        ),
+        colors =
+            IconButtonDefaults.iconToggleButtonColors(
+                checkedContainerColor = MaterialTheme.colorScheme.primaryContainer,
+                checkedContentColor = MaterialTheme.colorScheme.onPrimaryContainer,
+                disabledContainerColor =
+                    if (checked) {
+                        MaterialTheme.colorScheme.onBackground.copy(
+                            alpha = SkIconButtonDefaults.DISABLED_ICON_BUTTON_CONTAINER_ALPHA,
+                        )
+                    } else {
+                        Color.Transparent
+                    },
+            ),
     ) {
         if (checked) checkedIcon() else icon()
     }
