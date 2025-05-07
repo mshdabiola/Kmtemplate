@@ -27,30 +27,31 @@ class ScrollNotePowerMetricsBenchmark {
     @get:Rule
     val benchmarkRule = MacrobenchmarkRule()
 
-    private val categories = PowerCategory.entries
-        .associateWith { PowerCategoryDisplayLevel.TOTAL }
+    private val categories =
+        PowerCategory.entries
+            .associateWith { PowerCategoryDisplayLevel.TOTAL }
 
     @Test
-    fun benchmarkStateChangeCompilationLight() =
-        benchmarkStateChangeWithTheme(CompilationMode.Partial(), false)
+    fun benchmarkStateChangeCompilationLight() = benchmarkStateChangeWithTheme(CompilationMode.Partial(), false)
 
     @Test
-    fun benchmarkStateChangeCompilationDark() =
-        benchmarkStateChangeWithTheme(CompilationMode.Partial(), true)
+    fun benchmarkStateChangeCompilationDark() = benchmarkStateChangeWithTheme(CompilationMode.Partial(), true)
 
-    private fun benchmarkStateChangeWithTheme(compilationMode: CompilationMode, isDark: Boolean) =
-        benchmarkRule.measureRepeated(
-            packageName = PACKAGE_NAME,
-            metrics = listOf(FrameTimingMetric(), PowerMetric(PowerMetric.Energy(categories))),
-            compilationMode = compilationMode,
-            iterations = 2,
-            startupMode = StartupMode.WARM,
-            setupBlock = {
-                // Start the app
-                pressHome()
-                startActivityAndWait()
-            },
-        ) {
-            mainScrollNoteDownUp()
-        }
+    private fun benchmarkStateChangeWithTheme(
+        compilationMode: CompilationMode,
+        isDark: Boolean,
+    ) = benchmarkRule.measureRepeated(
+        packageName = PACKAGE_NAME,
+        metrics = listOf(FrameTimingMetric(), PowerMetric(PowerMetric.Energy(categories))),
+        compilationMode = compilationMode,
+        iterations = 2,
+        startupMode = StartupMode.WARM,
+        setupBlock = {
+            // Start the app
+            pressHome()
+            startActivityAndWait()
+        },
+    ) {
+        mainScrollNoteDownUp()
+    }
 }
