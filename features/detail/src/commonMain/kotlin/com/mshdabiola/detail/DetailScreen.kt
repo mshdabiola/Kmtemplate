@@ -23,7 +23,7 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.mshdabiola.designsystem.component.SkTextField
 import com.mshdabiola.designsystem.component.SkTopAppBar
-import com.mshdabiola.designsystem.icon.SkIcons
+import com.mshdabiola.designsystem.icon.HyaIcons
 import com.mshdabiola.ui.TrackScreenViewEvent
 import com.mshdabiola.ui.Waiting
 import kotlinx.coroutines.launch
@@ -115,9 +115,9 @@ internal fun MainContent(
         ) {
             SkTopAppBar(
                 titleRes = "Note",
-                navigationIcon = SkIcons.ArrowBack,
+                navigationIcon = HyaIcons.ArrowBack,
                 navigationIconContentDescription = "",
-                actionIcon = SkIcons.Delete,
+                actionIcon = HyaIcons.Delete,
                 actionIconContentDescription = "delete",
                 onActionClick = { onDelete() },
                 onNavigationClick = { onBack() },

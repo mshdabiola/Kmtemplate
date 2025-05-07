@@ -40,7 +40,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.mshdabiola.data.model.Result
-import com.mshdabiola.designsystem.component.SkLoadingWheel
+import com.mshdabiola.designsystem.component.HyaLoadingWheel
 import com.mshdabiola.designsystem.component.scrollbar.DraggableScrollbar
 import com.mshdabiola.designsystem.component.scrollbar.rememberDraggableScroller
 import com.mshdabiola.designsystem.component.scrollbar.scrollbarState
@@ -174,7 +174,7 @@ private fun LoadingState(modifier: Modifier = Modifier) {
         modifier = modifier.fillMaxSize().testTag("main:loading"),
         contentAlignment = Alignment.Center,
     ) {
-        SkLoadingWheel(
+        HyaLoadingWheel(
             contentDesc = stringResource(Res.string.features_main_loading),
         )
     }
