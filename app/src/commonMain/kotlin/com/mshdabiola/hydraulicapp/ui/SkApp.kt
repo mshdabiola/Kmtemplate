@@ -45,7 +45,7 @@ import com.mshdabiola.analytics.AnalyticsHelper
 import com.mshdabiola.analytics.LocalAnalyticsHelper
 import com.mshdabiola.designsystem.component.HyaBackground
 import com.mshdabiola.designsystem.component.HyaGradientBackground
-import com.mshdabiola.designsystem.component.SkTopAppBar
+import com.mshdabiola.designsystem.component.HyaTopAppBar
 import com.mshdabiola.designsystem.icon.HyaIcons
 import com.mshdabiola.designsystem.theme.GradientColors
 import com.mshdabiola.designsystem.theme.LocalGradientColors
@@ -123,8 +123,8 @@ fun HydraulicApp() {
                                 topBar = {
                                     if (appState.shouldShowTopBar) {
                                         if (appState.isMain) {
-                                            SkTopAppBar(
-                                                titleRes = "Note",
+                                            HyaTopAppBar(
+                                               // titleRes = "Note",
                                                 navigationIcon = HyaIcons.Person,
                                                 navigationIconContentDescription = "",
                                                 actionIcon = HyaIcons.Settings,
