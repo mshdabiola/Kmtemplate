@@ -68,7 +68,6 @@ internal fun MainRoute(
     modifier: Modifier = Modifier,
     sharedTransitionScope: SharedTransitionScope,
     animatedContentScope: AnimatedVisibilityScope,
-    onShowSnackbar: suspend (String, String?) -> Boolean,
     navigateToDetail: (Long) -> Unit,
 //    viewModel: MainViewModel,
 ) {
