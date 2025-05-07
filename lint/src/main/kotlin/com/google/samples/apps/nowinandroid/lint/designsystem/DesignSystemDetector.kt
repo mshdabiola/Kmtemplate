@@ -79,30 +79,30 @@ class DesignSystemDetector : Detector(), Detector.UastScanner {
         // instead of hardcoded names.
         val METHOD_NAMES =
             mapOf(
-                "MaterialTheme" to "NiaTheme",
-                "Button" to "NiaButton",
-                "OutlinedButton" to "NiaOutlinedButton",
-                "TextButton" to "NiaTextButton",
-                "FilterChip" to "NiaFilterChip",
-                "ElevatedFilterChip" to "NiaFilterChip",
-                "NavigationBar" to "NiaNavigationBar",
-                "NavigationBarItem" to "NiaNavigationBarItem",
-                "NavigationRail" to "NiaNavigationRail",
-                "NavigationRailItem" to "NiaNavigationRailItem",
-                "TabRow" to "NiaTabRow",
-                "Tab" to "NiaTab",
-                "IconToggleButton" to "NiaIconToggleButton",
-                "FilledIconToggleButton" to "NiaIconToggleButton",
-                "FilledTonalIconToggleButton" to "NiaIconToggleButton",
-                "OutlinedIconToggleButton" to "NiaIconToggleButton",
-                "CenterAlignedTopAppBar" to "NiaTopAppBar",
-                "SmallTopAppBar" to "NiaTopAppBar",
-                "MediumTopAppBar" to "NiaTopAppBar",
-                "LargeTopAppBar" to "NiaTopAppBar",
+                "MaterialTheme" to "HyaTheme",
+                "Button" to "HyaButton",
+                "OutlinedButton" to "HyaOutlinedButton",
+                "TextButton" to "HyaTextButton",
+                "FilterChip" to "HyaFilterChip",
+                "ElevatedFilterChip" to "HyaFilterChip",
+                "NavigationBar" to "HyaNavigationBar",
+                "NavigationBarItem" to "HyaNavigationBarItem",
+                "NavigationRail" to "HyaNavigationRail",
+                "NavigationRailItem" to "HyaNavigationRailItem",
+                "TabRow" to "HyaTabRow",
+                "Tab" to "HyaTab",
+                "IconToggleButton" to "HyaIconToggleButton",
+                "FilledIconToggleButton" to "HyaIconToggleButton",
+                "FilledTonalIconToggleButton" to "HyaIconToggleButton",
+                "OutlinedIconToggleButton" to "HyaIconToggleButton",
+                "CenterAlignedTopAppBar" to "HyaTopAppBar",
+                "SmallTopAppBar" to "HyaTopAppBar",
+                "MediumTopAppBar" to "HyaTopAppBar",
+                "LargeTopAppBar" to "HyaTopAppBar",
             )
         val RECEIVER_NAMES =
             mapOf(
-                "Icons" to "NiaIcons",
+                "Icons" to "HyaIcons",
             )
 
         fun reportIssue(
