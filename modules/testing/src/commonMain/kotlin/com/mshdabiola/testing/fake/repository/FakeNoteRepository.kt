@@ -13,8 +13,8 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.update
 
 class FakeNoteRepository : NoteRepository {
-
     private val data = MutableStateFlow(notes)
+
     override suspend fun upsert(note: Note): Long {
         data.update {
             if (note.id == -1L) {
