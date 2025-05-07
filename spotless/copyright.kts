@@ -1,3 +1,0 @@
-/*
- *abiola $YEAR
- */
