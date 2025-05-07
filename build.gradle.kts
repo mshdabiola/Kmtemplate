@@ -321,6 +321,11 @@ subprojects {
     configure<org.jlleitschuh.gradle.ktlint.KtlintExtension> {
         debug.set(true)
         //ignoreFailures.set(true)
+//        reporters {
+//            reporter(org.jlleitschuh.gradle.ktlint.reporter.ReporterType.HTML)
+//            reporter(org.jlleitschuh.gradle.ktlint.reporter.ReporterType.CHECKSTYLE)
+//            reporter(org.jlleitschuh.gradle.ktlint.reporter.ReporterType.PLAIN)
+//        }
     }
     dependencies {
        // add("ktlint", project(":custom-ktlint-rules"))
