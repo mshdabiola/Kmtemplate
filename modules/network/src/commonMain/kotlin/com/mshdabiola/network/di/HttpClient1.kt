@@ -11,6 +11,7 @@ import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
 
 expect val httpClient: HttpClient
+
 expect fun <T : HttpClientEngineConfig> HttpClientConfig<T>.initPlatform()
 
 fun <T : HttpClientEngineConfig> HttpClientConfig<T>.init() {
