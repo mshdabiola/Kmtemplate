@@ -106,14 +106,21 @@ fun CommonNavigation(
                         NavigationDrawerItem(
                             selected =
                                 navController
-                                    .currentBackStackEntryAsState().value?.destination?.hasRoute(route = navigator.route::class)
+                                    .currentBackStackEntryAsState()
+                                    .value?.destination
+                                    ?.hasRoute(route = navigator.route::class)
                                     == true,
                             label = { Text(settingNavigator[index]) },
                             onClick = {
                                 navController.navigate(navigator.route)
                             },
                             colors = color,
-                            icon = { Icon(navigator.icon, settingNavigator[index]) },
+                            icon = {
+                                Icon(
+                                    navigator.icon,
+                                    settingNavigator[index],
+                                )
+                            },
                         )
                     }
             }
@@ -155,13 +162,20 @@ fun CommonRail(
                         NavigationRailItem(
                             selected =
                                 navController
-                                    .currentBackStackEntryAsState().value?.destination?.hasRoute(route = navigator.route::class)
+                                    .currentBackStackEntryAsState()
+                                    .value?.destination
+                                    ?.hasRoute(route = navigator.route::class)
                                     == true,
                             label = { Text(settingNavigator[index]) },
                             onClick = {
                                 navController.navigate(navigator.route)
                             },
-                            icon = { Icon(navigator.icon, settingNavigator[index]) },
+                            icon = {
+                                Icon(
+                                    navigator.icon,
+                                    settingNavigator[index],
+                                )
+                            },
                         )
                     }
             }
@@ -176,7 +190,9 @@ fun CommonRail(
                         NavigationRailItem(
                             selected =
                                 navController
-                                    .currentBackStackEntryAsState().value?.destination?.hasRoute(route = navigator.route::class)
+                                    .currentBackStackEntryAsState()
+                                    .value
+                                    ?.destination?.hasRoute(route = navigator.route::class)
                                     == true,
                             label = { Text(settingNavigator[index]) },
                             onClick = {
@@ -189,7 +205,12 @@ fun CommonRail(
                                         },
                                 )
                             },
-                            icon = { Icon(navigator.icon, settingNavigator[index]) },
+                            icon = {
+                                Icon(
+                                    navigator.icon,
+                                    settingNavigator[index],
+                                )
+                            },
                         )
                     }
             }
@@ -212,7 +233,9 @@ fun CommonBar(
                 NavigationBarItem(
                     selected =
                         navController
-                            .currentBackStackEntryAsState().value?.destination?.hasRoute(route = navigator.route::class)
+                            .currentBackStackEntryAsState()
+                            .value?.destination
+                            ?.hasRoute(route = navigator.route::class)
                             == true,
                     label = { Text(cbtNavigator[index]) },
                     onClick = {
@@ -226,7 +249,12 @@ fun CommonBar(
                         )
                     },
                     alwaysShowLabel = false,
-                    icon = { Icon(navigator.icon, cbtNavigator[index]) },
+                    icon = {
+                        Icon(
+                            navigator.icon,
+                            cbtNavigator[index],
+                        )
+                    },
                 )
             }
     }
