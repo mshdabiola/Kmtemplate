@@ -44,10 +44,10 @@ class SkAppState(
     val coroutineScope: CoroutineScope,
     val windowSizeClass: WindowSizeClass,
 ) {
-
     val currentDestination: NavDestination?
-        @Composable get() = navController
-            .currentBackStackEntryAsState().value?.destination
+        @Composable get() =
+            navController
+                .currentBackStackEntryAsState().value?.destination
 //    val currentRoute: String
 //        @Composable get() = navController
 //            .currentBackStackEntryAsState().value?.destination?.route ?: ""

@@ -8,7 +8,8 @@ import com.mshdabiola.skeletonapp.MainAppViewModel
 import org.koin.core.module.dsl.viewModel
 import org.koin.dsl.module
 
-val appModule = module {
-    includes(dataModule, detailModule, mainModule, settingModule)
-    viewModel { MainAppViewModel(get()) }
-}
+val appModule =
+    module {
+        includes(dataModule, detailModule, mainModule, settingModule)
+        viewModel { MainAppViewModel(get()) }
+    }

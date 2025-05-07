@@ -22,7 +22,6 @@ import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : ComponentActivity() {
-
     private val viewModel: MainAppViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -55,14 +54,16 @@ class MainActivity : ComponentActivity() {
             // than the configuration's dark theme value based on the user preference.
             DisposableEffect(darkTheme) {
                 enableEdgeToEdge(
-                    statusBarStyle = SystemBarStyle.auto(
-                        Color.TRANSPARENT,
-                        Color.TRANSPARENT,
-                    ) { darkTheme },
-                    navigationBarStyle = SystemBarStyle.auto(
-                        Color.TRANSPARENT,
-                        Color.TRANSPARENT,
-                    ) { darkTheme },
+                    statusBarStyle =
+                        SystemBarStyle.auto(
+                            Color.TRANSPARENT,
+                            Color.TRANSPARENT,
+                        ) { darkTheme },
+                    navigationBarStyle =
+                        SystemBarStyle.auto(
+                            Color.TRANSPARENT,
+                            Color.TRANSPARENT,
+                        ) { darkTheme },
                 )
                 onDispose {}
             }

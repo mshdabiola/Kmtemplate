@@ -40,15 +40,17 @@ fun mainApp() {
 
 @OptIn(ExperimentalComposeUiApi::class)
 fun main() {
-    val logger = Logger(
-        loggerConfigInit(platformLogWriter(), Writer()),
-        "DesktopLogger,",
-    )
-    val logModule = module {
-        single {
-            logger
+    val logger =
+        Logger(
+            loggerConfigInit(platformLogWriter(), Writer()),
+            "DesktopLogger,",
+        )
+    val logModule =
+        module {
+            single {
+                logger
+            }
         }
-    }
     try {
         startKoin {
 //            logger(

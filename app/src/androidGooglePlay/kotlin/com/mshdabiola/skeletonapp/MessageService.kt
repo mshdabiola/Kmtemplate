@@ -22,7 +22,6 @@ import com.google.firebase.messaging.RemoteMessage.Notification
 import java.net.URL
 
 class MessageService : FirebaseMessagingService() {
-
     // [START receive_message]
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
         // TODO(developer): Handle FCM messages here.
@@ -56,6 +55,7 @@ class MessageService : FirebaseMessagingService() {
     private fun needsToBeScheduled() = false
 
     // [START on_new_token]
+
     /**
      * Called if the FCM registration token is updated. This may occur if the security of
      * the previous token had been compromised. Note that this is called when the
@@ -86,28 +86,33 @@ class MessageService : FirebaseMessagingService() {
         // [END dispatch_job]
     }
 
-    private fun sendNotification(notification: Notification, context: Context) {
+    private fun sendNotification(
+        notification: Notification,
+        context: Context,
+    ) {
         val intent = Intent(this, MainActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         val requestCode = 0
-        val pendingIntent = PendingIntent.getActivity(
-            this,
-            requestCode,
-            intent,
-            PendingIntent.FLAG_IMMUTABLE,
-        )
+        val pendingIntent =
+            PendingIntent.getActivity(
+                this,
+                requestCode,
+                intent,
+                PendingIntent.FLAG_IMMUTABLE,
+            )
         //  Timber.e("notification image ${notification.imageUrl}")
 
         val channelId = "fcm_default_channel"
         val defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
-        val notificationBuilder = NotificationCompat.Builder(this, channelId)
-            .setColor(context.getColor(R.color.primary))
-            .setSmallIcon(R.drawable.ic_stat_name)
-            .setContentTitle(notification.title)
-            .setContentText(notification.body)
-            .setAutoCancel(true)
-            .setSound(defaultSoundUri)
-            .setContentIntent(pendingIntent)
+        val notificationBuilder =
+            NotificationCompat.Builder(this, channelId)
+                .setColor(context.getColor(R.color.primary))
+                .setSmallIcon(R.drawable.ic_stat_name)
+                .setContentTitle(notification.title)
+                .setContentText(notification.body)
+                .setAutoCancel(true)
+                .setSound(defaultSoundUri)
+                .setContentIntent(pendingIntent)
         notification.imageUrl?.let {
             val bitmap = getBitmap(it.toString())
             notificationBuilder
@@ -125,11 +130,12 @@ class MessageService : FirebaseMessagingService() {
 
         // Since android Oreo notification channel is needed.
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val channel = NotificationChannel(
-                channelId,
-                context.getString(R.string.default_notification_channel_id),
-                NotificationManager.IMPORTANCE_DEFAULT,
-            )
+            val channel =
+                NotificationChannel(
+                    channelId,
+                    context.getString(R.string.default_notification_channel_id),
+                    NotificationManager.IMPORTANCE_DEFAULT,
+                )
             notificationManager.createNotificationChannel(channel)
         }
 

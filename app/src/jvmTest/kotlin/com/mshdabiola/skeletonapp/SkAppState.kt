@@ -14,42 +14,44 @@ import org.junit.Test
 import kotlin.test.assertEquals
 
 class SkAppState {
-
     @get:Rule
     val composeTestRule = createComposeRule()
 
     private lateinit var state: SkAppState
 
     @Test
-    fun currentDestination() = runTest {
-        var currentDestination: String? = null
+    fun currentDestination() =
+        runTest {
+            var currentDestination: String? = null
 
-        composeTestRule.setContent {
-            val navController = rememberNavController().apply {
-                graph = createGraph(startDestination = "a") {
-                    composable("a") { }
-                    composable("b") { }
-                    composable("c") { }
+            composeTestRule.setContent {
+                val navController =
+                    rememberNavController().apply {
+                        graph =
+                            createGraph(startDestination = "a") {
+                                composable("a") { }
+                                composable("b") { }
+                                composable("c") { }
+                            }
+                    }
+                state =
+                    remember(navController) {
+                        SkAppState(
+                            navController = navController,
+                            coroutineScope = backgroundScope,
+                            WindowSizeClass.compute(456f, 456f),
+                        )
+                    }
+
+                // Update currentDestination whenever it changes
+                currentDestination = "b" // state.currentRoute
+
+                // Navigate to destination b once
+                LaunchedEffect(Unit) {
+                    navController.navigate("b")
                 }
             }
-            state = remember(navController) {
-                SkAppState(
-                    navController = navController,
-                    coroutineScope = backgroundScope,
-                    WindowSizeClass.compute(456f, 456f),
 
-                )
-            }
-
-            // Update currentDestination whenever it changes
-            currentDestination = "b" // state.currentRoute
-
-            // Navigate to destination b once
-            LaunchedEffect(Unit) {
-                navController.navigate("b")
-            }
+            assertEquals("b", currentDestination)
         }
-
-        assertEquals("b", currentDestination)
-    }
 }
