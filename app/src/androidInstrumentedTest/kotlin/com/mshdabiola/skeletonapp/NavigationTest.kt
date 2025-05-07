@@ -1,4 +1,4 @@
-package com.mshdabiola.skeletonapp
+package com.mshdabiola.hydraulicapp
 
 import androidx.annotation.StringRes
 import androidx.compose.ui.test.junit4.AndroidComposeTestRule

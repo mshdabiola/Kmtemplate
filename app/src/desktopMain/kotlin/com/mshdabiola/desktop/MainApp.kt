@@ -13,8 +13,8 @@ import androidx.compose.ui.window.WindowPlacement
 import androidx.compose.ui.window.WindowPosition
 import androidx.compose.ui.window.application
 import androidx.compose.ui.window.rememberWindowState
-import com.mshdabiola.skeletonapp.di.appModule
-import com.mshdabiola.skeletonapp.ui.SkeletonApp
+import com.mshdabiola.hydraulicapp.di.appModule
+import com.mshdabiola.hydraulicapp.ui.SkeletonApp
 import org.koin.core.context.GlobalContext.startKoin
 import java.util.prefs.Preferences
 

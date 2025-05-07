@@ -1,4 +1,4 @@
-package com.mshdabiola.skeletonapp.ui
+package com.mshdabiola.hydraulicapp.ui
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column

@@ -1,4 +1,4 @@
-package com.mshdabiola.skeletonapp.ui
+package com.mshdabiola.hydraulicapp.ui
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Domain

@@ -2,7 +2,7 @@
  *abiola 2022
  */
 
-package com.mshdabiola.skeletonapp.ui
+package com.mshdabiola.hydraulicapp.ui
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable

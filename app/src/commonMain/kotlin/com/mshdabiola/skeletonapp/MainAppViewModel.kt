@@ -2,14 +2,14 @@
  *abiola 2022
  */
 
-package com.mshdabiola.skeletonapp
+package com.mshdabiola.hydraulicapp
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mshdabiola.data.repository.UserDataRepository
 import com.mshdabiola.model.UserData
-import com.mshdabiola.skeletonapp.MainActivityUiState.Loading
-import com.mshdabiola.skeletonapp.MainActivityUiState.Success
+import com.mshdabiola.hydraulicapp.MainActivityUiState.Loading
+import com.mshdabiola.hydraulicapp.MainActivityUiState.Success
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.map

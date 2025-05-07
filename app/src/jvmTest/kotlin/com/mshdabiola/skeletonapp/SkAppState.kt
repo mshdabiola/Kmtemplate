@@ -1,4 +1,4 @@
-package com.mshdabiola.skeletonapp
+package com.mshdabiola.hydraulicapp
 
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
@@ -7,7 +7,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.createGraph
 import androidx.window.core.layout.WindowSizeClass
-import com.mshdabiola.skeletonapp.ui.SkAppState
+import com.mshdabiola.hydraulicapp.ui.SkAppState
 import kotlinx.coroutines.test.runTest
 import org.junit.Rule
 import org.junit.Test

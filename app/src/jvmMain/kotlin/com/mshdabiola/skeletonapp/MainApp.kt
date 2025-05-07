@@ -1,4 +1,4 @@
-package com.mshdabiola.skeletonapp
+package com.mshdabiola.hydraulicapp
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -20,8 +20,8 @@ import co.touchlab.kermit.loggerConfigInit
 import co.touchlab.kermit.platformLogWriter
 import com.mshdabiola.designsystem.drawable.defaultAppIcon
 import com.mshdabiola.designsystem.string.appName
-import com.mshdabiola.skeletonapp.di.appModule
-import com.mshdabiola.skeletonapp.ui.SkeletonApp
+import com.mshdabiola.hydraulicapp.di.appModule
+import com.mshdabiola.hydraulicapp.ui.SkeletonApp
 import com.mshdabiola.ui.SplashScreen
 import kotlinx.coroutines.delay
 import org.koin.core.context.GlobalContext.startKoin

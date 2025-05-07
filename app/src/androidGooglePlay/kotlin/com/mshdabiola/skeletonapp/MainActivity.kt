@@ -2,7 +2,7 @@
  *abiola 2024
  */
 
-package com.mshdabiola.skeletonapp
+package com.mshdabiola.hydraulicapp
 
 import android.graphics.Color
 import android.os.Bundle
@@ -23,8 +23,8 @@ import com.google.firebase.Firebase
 import com.google.firebase.messaging.FirebaseMessaging
 import com.google.firebase.remoteconfig.remoteConfig
 import com.google.firebase.remoteconfig.remoteConfigSettings
-import com.mshdabiola.skeletonapp.ui.SkeletonApp
-import com.mshdabiola.skeletonapp.ui.shouldUseDarkTheme
+import com.mshdabiola.hydraulicapp.ui.SkeletonApp
+import com.mshdabiola.hydraulicapp.ui.shouldUseDarkTheme
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch

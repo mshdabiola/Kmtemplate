@@ -1,4 +1,4 @@
-package com.mshdabiola.skeletonapp
+package com.mshdabiola.hydraulicapp
 
 import android.graphics.Color
 import android.os.Bundle
@@ -14,8 +14,8 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import com.mshdabiola.skeletonapp.ui.SkeletonApp
-import com.mshdabiola.skeletonapp.ui.shouldUseDarkTheme
+import com.mshdabiola.hydraulicapp.ui.SkeletonApp
+import com.mshdabiola.hydraulicapp.ui.shouldUseDarkTheme
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
