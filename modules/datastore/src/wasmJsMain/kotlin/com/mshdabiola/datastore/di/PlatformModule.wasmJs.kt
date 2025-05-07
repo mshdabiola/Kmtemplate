@@ -7,8 +7,9 @@ import org.koin.dsl.bind
 import org.koin.dsl.module
 
 actual val datastoreModule: Module
-    get() = module {
-        single {
-            StoreImple()
-        } bind Store::class
-    }
+    get() =
+        module {
+            single {
+                StoreImple()
+            } bind Store::class
+        }
