@@ -43,13 +43,13 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.mshdabiola.analytics.AnalyticsHelper
 import com.mshdabiola.analytics.LocalAnalyticsHelper
-import com.mshdabiola.designsystem.component.SkBackground
-import com.mshdabiola.designsystem.component.SkGradientBackground
+import com.mshdabiola.designsystem.component.HyaBackground
+import com.mshdabiola.designsystem.component.HyaGradientBackground
 import com.mshdabiola.designsystem.component.SkTopAppBar
-import com.mshdabiola.designsystem.icon.SkIcons
+import com.mshdabiola.designsystem.icon.HyaIcons
 import com.mshdabiola.designsystem.theme.GradientColors
 import com.mshdabiola.designsystem.theme.LocalGradientColors
-import com.mshdabiola.designsystem.theme.SkTheme
+import com.mshdabiola.designsystem.theme.HyaTheme
 import com.mshdabiola.detail.navigation.Detail
 import com.mshdabiola.detail.navigation.navigateToDetail
 import com.mshdabiola.model.DarkThemeConfig
@@ -83,13 +83,13 @@ fun SkeletonApp() {
     val darkTheme = shouldUseDarkTheme(uiState)
 
     CompositionLocalProvider(LocalAnalyticsHelper provides analyticsHelper) {
-        SkTheme(
+        HyaTheme(
             androidTheme = shouldUseAndroidTheme(uiState),
             darkTheme = darkTheme,
             disableDynamicTheming = shouldDisableDynamicTheming(uiState),
         ) {
-            SkBackground {
-                SkGradientBackground(
+            HyaBackground {
+                HyaGradientBackground(
                     gradientColors =
                         if (shouldShowGradientBackground) {
                             LocalGradientColors.current
@@ -125,9 +125,9 @@ fun SkeletonApp() {
                                         if (appState.isMain) {
                                             SkTopAppBar(
                                                 titleRes = "Note",
-                                                navigationIcon = SkIcons.Person,
+                                                navigationIcon = HyaIcons.Person,
                                                 navigationIconContentDescription = "",
-                                                actionIcon = SkIcons.Settings,
+                                                actionIcon = HyaIcons.Settings,
                                                 actionIconContentDescription = "se",
                                                 onActionClick = { appState.navController.navigateToSetting() },
                                             )
@@ -150,7 +150,7 @@ fun SkeletonApp() {
                                             text = { Text("Add Note") },
                                             icon = {
                                                 Icon(
-                                                    SkIcons.Add,
+                                                    HyaIcons.Add,
                                                     contentDescription = "add",
                                                 )
                                             },
