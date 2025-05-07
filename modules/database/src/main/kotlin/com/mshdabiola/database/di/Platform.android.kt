@@ -9,16 +9,17 @@ import org.koin.core.module.Module
 import org.koin.dsl.module
 
 actual val databaseModule: Module
-    get() = module {
-        single {
-            getRoomDatabase(getDatabaseBuilder(get()))
+    get() =
+        module {
+            single {
+                getRoomDatabase(getDatabaseBuilder(get()))
+            }
+            includes(daoModules)
         }
-        includes(daoModules)
-    }
 
 fun getDatabaseBuilder(context: Context): RoomDatabase.Builder<SkeletonDatabase> {
     val appContext = context.applicationContext
-    val dbFile = appContext.getDatabasePath(Constant.databaseName)
+    val dbFile = appContext.getDatabasePath(Constant.DATABASE_NAME)
     return Room.databaseBuilder<SkeletonDatabase>(
         context = appContext,
         name = dbFile.absolutePath,

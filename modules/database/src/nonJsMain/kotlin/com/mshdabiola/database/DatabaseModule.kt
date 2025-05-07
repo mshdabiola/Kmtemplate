@@ -5,8 +5,7 @@
 package com.mshdabiola.database
 
 object DatabaseModule {
-
-//    fun databaseProvider(
+    //    fun databaseProvider(
 //        @ApplicationContext context: Context,
 //    ): SkeletonDatabase {
 //        return Room.databaseBuilder(context, SkeletonDatabase::class.java, "skeletonDb.db")

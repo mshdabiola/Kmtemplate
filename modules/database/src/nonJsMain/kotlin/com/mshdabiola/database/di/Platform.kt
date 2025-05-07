@@ -9,19 +9,18 @@ import org.koin.dsl.module
 
 expect val databaseModule: Module
 
-val daoModules = module {
-    single {
-        get<SkeletonDatabase>().getNoteDao()
+val daoModules =
+    module {
+        single {
+            get<SkeletonDatabase>().getNoteDao()
+        }
+
+        single {
+            get<SkeletonDatabase>().getImageDao()
+        }
     }
 
-    single {
-        get<SkeletonDatabase>().getImageDao()
-    }
-}
-
-fun getRoomDatabase(
-    builder: RoomDatabase.Builder<SkeletonDatabase>,
-): SkeletonDatabase {
+fun getRoomDatabase(builder: RoomDatabase.Builder<SkeletonDatabase>): SkeletonDatabase {
     return builder
         .setDriver(BundledSQLiteDriver())
         .setQueryCoroutineContext(Dispatchers.IO)
