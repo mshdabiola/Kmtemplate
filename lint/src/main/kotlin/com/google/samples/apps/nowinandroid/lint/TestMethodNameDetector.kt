@@ -40,7 +40,6 @@ import kotlin.io.path.Path
  * - [detectFormat] Checks the `given_when_then` format of Android instrumented tests (backticks are not supported).
  */
 class TestMethodNameDetector : Detector(), SourceCodeScanner {
-
     override fun applicableAnnotations() = listOf("org.junit.Test")
 
     override fun visitAnnotationUsage(
@@ -67,12 +66,13 @@ class TestMethodNameDetector : Detector(), SourceCodeScanner {
             scope = usageInfo.usage,
             location = context.getNameLocation(this),
             message = PREFIX.getBriefDescription(RAW),
-            quickfixData = LintFix.create()
-                .name("Remove prefix")
-                .replace().pattern("""test[\s_]*""")
-                .with("")
-                .autoFix()
-                .build(),
+            quickfixData =
+                LintFix.create()
+                    .name("Remove prefix")
+                    .replace().pattern("""test[\s_]*""")
+                    .with("")
+                    .autoFix()
+                    .build(),
         )
     }
 
@@ -91,36 +91,39 @@ class TestMethodNameDetector : Detector(), SourceCodeScanner {
     }
 
     companion object {
-
         private fun issue(
             id: String,
             briefDescription: String,
             explanation: String,
-        ): Issue = Issue.create(
-            id = id,
-            briefDescription = briefDescription,
-            explanation = explanation,
-            category = TESTING,
-            priority = 5,
-            severity = WARNING,
-            implementation = Implementation(
-                TestMethodNameDetector::class.java,
-                EnumSet.of(JAVA_FILE, TEST_SOURCES),
-            ),
-        )
+        ): Issue =
+            Issue.create(
+                id = id,
+                briefDescription = briefDescription,
+                explanation = explanation,
+                category = TESTING,
+                priority = 5,
+                severity = WARNING,
+                implementation =
+                    Implementation(
+                        TestMethodNameDetector::class.java,
+                        EnumSet.of(JAVA_FILE, TEST_SOURCES),
+                    ),
+            )
 
         @JvmField
-        val PREFIX: Issue = issue(
-            id = "TestMethodPrefix",
-            briefDescription = "Test method starts with `test`",
-            explanation = "Test method should not start with `test`.",
-        )
+        val PREFIX: Issue =
+            issue(
+                id = "TestMethodPrefix",
+                briefDescription = "Test method starts with `test`",
+                explanation = "Test method should not start with `test`.",
+            )
 
         @JvmField
-        val FORMAT: Issue = issue(
-            id = "TestMethodFormat",
-            briefDescription = "Test method does not follow the `given_when_then` or `when_then` format",
-            explanation = "Test method should follow the `given_when_then` or `when_then` format.",
-        )
+        val FORMAT: Issue =
+            issue(
+                id = "TestMethodFormat",
+                briefDescription = "Test method does not follow the `given_when_then` or `when_then` format",
+                explanation = "Test method should follow the `given_when_then` or `when_then` format.",
+            )
     }
 }

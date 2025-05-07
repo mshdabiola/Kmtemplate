@@ -33,11 +33,11 @@ import org.jetbrains.uast.UQualifiedReferenceExpression
  * the Now in Android design system module.
  */
 class DesignSystemDetector : Detector(), Detector.UastScanner {
-
-    override fun getApplicableUastTypes(): List<Class<out UElement>> = listOf(
-        UCallExpression::class.java,
-        UQualifiedReferenceExpression::class.java,
-    )
+    override fun getApplicableUastTypes(): List<Class<out UElement>> =
+        listOf(
+            UCallExpression::class.java,
+            UQualifiedReferenceExpression::class.java,
+        )
 
     override fun createUastHandler(context: JavaContext): UElementHandler =
         object : UElementHandler() {
@@ -56,49 +56,54 @@ class DesignSystemDetector : Detector(), Detector.UastScanner {
 
     companion object {
         @JvmField
-        val ISSUE: Issue = Issue.create(
-            id = "DesignSystem",
-            briefDescription = "Design system",
-            explanation = "This check highlights calls in code that use Compose Material " +
-                "composables instead of equivalents from the Now in Android design system " +
-                "module.",
-            category = Category.CUSTOM_LINT_CHECKS,
-            priority = 7,
-            severity = Severity.ERROR,
-            implementation = Implementation(
-                DesignSystemDetector::class.java,
-                Scope.JAVA_FILE_SCOPE,
-            ),
-        )
+        val ISSUE: Issue =
+            Issue.create(
+                id = "DesignSystem",
+                briefDescription = "Design system",
+                explanation =
+                    "This check highlights calls in code that use Compose Material " +
+                        "composables instead of equivalents from the Now in Android design system " +
+                        "module.",
+                category = Category.CUSTOM_LINT_CHECKS,
+                priority = 7,
+                severity = Severity.ERROR,
+                implementation =
+                    Implementation(
+                        DesignSystemDetector::class.java,
+                        Scope.JAVA_FILE_SCOPE,
+                    ),
+            )
 
         // Unfortunately :lint is a Java module and thus can't depend on the :core-designsystem
         // Android module, so we can't use composable function references (eg. ::Button.name)
         // instead of hardcoded names.
-        val METHOD_NAMES = mapOf(
-            "MaterialTheme" to "NiaTheme",
-            "Button" to "NiaButton",
-            "OutlinedButton" to "NiaOutlinedButton",
-            "TextButton" to "NiaTextButton",
-            "FilterChip" to "NiaFilterChip",
-            "ElevatedFilterChip" to "NiaFilterChip",
-            "NavigationBar" to "NiaNavigationBar",
-            "NavigationBarItem" to "NiaNavigationBarItem",
-            "NavigationRail" to "NiaNavigationRail",
-            "NavigationRailItem" to "NiaNavigationRailItem",
-            "TabRow" to "NiaTabRow",
-            "Tab" to "NiaTab",
-            "IconToggleButton" to "NiaIconToggleButton",
-            "FilledIconToggleButton" to "NiaIconToggleButton",
-            "FilledTonalIconToggleButton" to "NiaIconToggleButton",
-            "OutlinedIconToggleButton" to "NiaIconToggleButton",
-            "CenterAlignedTopAppBar" to "NiaTopAppBar",
-            "SmallTopAppBar" to "NiaTopAppBar",
-            "MediumTopAppBar" to "NiaTopAppBar",
-            "LargeTopAppBar" to "NiaTopAppBar",
-        )
-        val RECEIVER_NAMES = mapOf(
-            "Icons" to "NiaIcons",
-        )
+        val METHOD_NAMES =
+            mapOf(
+                "MaterialTheme" to "NiaTheme",
+                "Button" to "NiaButton",
+                "OutlinedButton" to "NiaOutlinedButton",
+                "TextButton" to "NiaTextButton",
+                "FilterChip" to "NiaFilterChip",
+                "ElevatedFilterChip" to "NiaFilterChip",
+                "NavigationBar" to "NiaNavigationBar",
+                "NavigationBarItem" to "NiaNavigationBarItem",
+                "NavigationRail" to "NiaNavigationRail",
+                "NavigationRailItem" to "NiaNavigationRailItem",
+                "TabRow" to "NiaTabRow",
+                "Tab" to "NiaTab",
+                "IconToggleButton" to "NiaIconToggleButton",
+                "FilledIconToggleButton" to "NiaIconToggleButton",
+                "FilledTonalIconToggleButton" to "NiaIconToggleButton",
+                "OutlinedIconToggleButton" to "NiaIconToggleButton",
+                "CenterAlignedTopAppBar" to "NiaTopAppBar",
+                "SmallTopAppBar" to "NiaTopAppBar",
+                "MediumTopAppBar" to "NiaTopAppBar",
+                "LargeTopAppBar" to "NiaTopAppBar",
+            )
+        val RECEIVER_NAMES =
+            mapOf(
+                "Icons" to "NiaIcons",
+            )
 
         fun reportIssue(
             context: JavaContext,
