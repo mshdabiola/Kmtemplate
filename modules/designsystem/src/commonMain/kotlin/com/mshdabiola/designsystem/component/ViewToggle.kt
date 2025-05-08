@@ -47,9 +47,10 @@ fun HyaViewToggleButton(
         onClick = { onExpandedChange(!expanded) },
         modifier = modifier,
         enabled = enabled,
-        colors = ButtonDefaults.textButtonColors(
-            contentColor = MaterialTheme.colorScheme.onBackground,
-        ),
+        colors =
+            ButtonDefaults.textButtonColors(
+                contentColor = MaterialTheme.colorScheme.onBackground,
+            ),
         contentPadding = HyaViewToggleDefaults.ViewToggleButtonContentPadding,
     ) {
         HyaViewToggleButtonContent(
@@ -79,11 +80,12 @@ private fun HyaViewToggleButtonContent(
     Box(
         Modifier
             .padding(
-                end = if (trailingIcon != null) {
-                    ButtonDefaults.IconSpacing
-                } else {
-                    0.dp
-                },
+                end =
+                    if (trailingIcon != null) {
+                        ButtonDefaults.IconSpacing
+                    } else {
+                        0.dp
+                    },
             ),
     ) {
         ProvideTextStyle(value = MaterialTheme.typography.labelSmall) {
