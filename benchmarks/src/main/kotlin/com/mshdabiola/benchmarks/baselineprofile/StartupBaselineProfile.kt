@@ -19,9 +19,10 @@ class StartupBaselineProfile {
     @get:Rule val baselineProfileRule = BaselineProfileRule()
 
     @Test
-    fun generate() = baselineProfileRule.collect(
-        PACKAGE_NAME,
-        includeInStartupProfile = true,
-        profileBlock = MacrobenchmarkScope::startActivity,
-    )
+    fun generate() =
+        baselineProfileRule.collect(
+            PACKAGE_NAME,
+            includeInStartupProfile = true,
+            profileBlock = MacrobenchmarkScope::startActivity,
+        )
 }

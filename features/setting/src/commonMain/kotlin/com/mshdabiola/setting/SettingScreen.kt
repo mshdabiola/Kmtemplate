@@ -15,7 +15,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Cancel
 import androidx.compose.material3.Card
 import androidx.compose.material3.Icon
@@ -33,6 +32,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.mshdabiola.designsystem.icon.HyaIcons
 import com.mshdabiola.model.DarkThemeConfig
 import com.mshdabiola.model.ThemeBrand
 import com.mshdabiola.ui.Waiting
@@ -73,13 +73,14 @@ internal fun SettingScreen(
         AnimatedContent(settingState) {
             when (it) {
                 is SettingState.Loading -> Waiting(modifier)
-                is SettingState.Success -> MainContent(
-                    modifier = modifier,
-                    settingState = it,
-                    setTheme = setTheme,
-                    setDarkMode = setDarkMode,
-                    onBack = onBack,
-                )
+                is SettingState.Success ->
+                    MainContent(
+                        modifier = modifier,
+                        settingState = it,
+                        setTheme = setTheme,
+                        setDarkMode = setDarkMode,
+                        onBack = onBack,
+                    )
 
                 else -> {}
             }
@@ -112,9 +113,8 @@ internal fun MainContent(
             Text(text = "Settings", style = MaterialTheme.typography.titleLarge)
             IconButton(
                 onClick = onBack,
-
             ) {
-                Icon(imageVector = Icons.Outlined.Cancel, "cancel")
+                Icon(imageVector = HyaIcons.Cancel, "cancel")
             }
         }
 

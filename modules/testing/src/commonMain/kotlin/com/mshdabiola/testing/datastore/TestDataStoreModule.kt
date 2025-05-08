@@ -18,38 +18,39 @@ import org.koin.dsl.bind
 import org.koin.dsl.module
 import java.io.File
 
-val dataStoreModule = module {
-    single {
+val dataStoreModule =
+    module {
+        single {
 
-        val tmpFolder: TemporaryFolder = get()
-        tmpFolder.testUserPreferencesDataStore(
-            coroutineScope = get(),
-        )
+            val tmpFolder: TemporaryFolder = get()
+            tmpFolder.testUserPreferencesDataStore(
+                coroutineScope = get(),
+            )
+        }
+
+        single {
+            StoreImpl(
+                userdata = get(qualifier = qualifier("userdata")),
+                coroutineDispatcher = get(),
+            )
+        } bind Store::class
     }
 
-    single {
-        StoreImpl(
-            userdata = get(qualifier = qualifier("userdata")),
-            coroutineDispatcher = get(),
-        )
-    } bind Store::class
-}
-
-fun TemporaryFolder.testUserPreferencesDataStore(
-    coroutineScope: CoroutineScope,
-) = DataStoreFactory.create(
-    storage = OkioStorage(
-        fileSystem = FileSystem.SYSTEM,
-        serializer = UserDataJsonSerializer,
-        producePath = {
-            val path = File(newFolder(), "data")
-            if (path.parentFile?.exists() == false) {
-                path.mkdirs()
-            }
-            path.toOkioPath()
-        },
-    ),
-)
+fun TemporaryFolder.testUserPreferencesDataStore(coroutineScope: CoroutineScope) =
+    DataStoreFactory.create(
+        storage =
+            OkioStorage(
+                fileSystem = FileSystem.SYSTEM,
+                serializer = UserDataJsonSerializer,
+                producePath = {
+                    val path = File(newFolder(), "data")
+                    if (path.parentFile?.exists() == false) {
+                        path.mkdirs()
+                    }
+                    path.toOkioPath()
+                },
+            ),
+    )
 
 //
 //    DataStoreFactory.create(

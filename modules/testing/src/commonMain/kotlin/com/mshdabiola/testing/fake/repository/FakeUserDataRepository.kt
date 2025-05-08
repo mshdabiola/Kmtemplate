@@ -20,7 +20,6 @@ import kotlinx.coroutines.flow.update
  * backend.
  */
 class FakeUserDataRepository : UserDataRepository {
-
     private val _userData = MutableStateFlow(UserData())
 
     override val userData: Flow<UserData> =

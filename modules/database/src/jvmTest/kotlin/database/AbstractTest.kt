@@ -11,20 +11,22 @@ import org.koin.test.KoinTest
 import org.koin.test.KoinTestRule
 
 abstract class AbstractTest : KoinTest {
-
     @get:Rule
-    val koinTestRule = KoinTestRule.create {
-        val module = module {
-            single {
-                val db = Room
-                    .inMemoryDatabaseBuilder<SkeletonDatabase>()
-                    .setDriver(BundledSQLiteDriver())
-                getRoomDatabase(db)
-            }
+    val koinTestRule =
+        KoinTestRule.create {
+            val module =
+                module {
+                    single {
+                        val db =
+                            Room
+                                .inMemoryDatabaseBuilder<SkeletonDatabase>()
+                                .setDriver(BundledSQLiteDriver())
+                        getRoomDatabase(db)
+                    }
+                }
+            // Your KoinApplication instance here
+            modules(module, daoModules)
         }
-        // Your KoinApplication instance here
-        modules(module, daoModules)
-    }
 
     abstract fun insert()
 

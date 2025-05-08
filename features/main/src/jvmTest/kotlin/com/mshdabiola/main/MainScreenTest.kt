@@ -9,7 +9,6 @@ import org.junit.Rule
 import kotlin.test.Test
 
 class MainScreenTest {
-
     @get:Rule
     val composeRule = createComposeRule()
 
@@ -19,9 +18,10 @@ class MainScreenTest {
         composeRule.setContent {
             SharedContentPreview { sharedTransitionScope, animatedContentScope ->
                 MainScreen(
-                    mainState = Result.Success(
-                        notes,
-                    ),
+                    mainState =
+                        Result.Success(
+                            notes,
+                        ),
                     sharedTransitionScope = sharedTransitionScope,
                     animatedContentScope = animatedContentScope,
                 )

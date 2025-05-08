@@ -9,7 +9,6 @@ import org.junit.Rule
 import kotlin.test.Test
 
 class DetailScreenTest {
-
     @get:Rule
     val composeRule = createComposeRule()
 

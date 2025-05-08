@@ -9,13 +9,15 @@ import org.koin.dsl.bind
 import org.koin.dsl.module
 
 actual val analyticsModule: Module
-    get() = module {
+    get() =
+        module {
 
-        single {
-            object : AnalyticsHelper {
-                val firebaseAnalytics = Firebase.analytics
-                override fun logEvent(event: AnalyticsEvent) {
+            single {
+                object : AnalyticsHelper {
+                    val firebaseAnalytics = Firebase.analytics
+
+                    override fun logEvent(event: AnalyticsEvent) {
+                    }
                 }
-            }
-        } bind AnalyticsHelper::class
-    }
+            } bind AnalyticsHelper::class
+        }

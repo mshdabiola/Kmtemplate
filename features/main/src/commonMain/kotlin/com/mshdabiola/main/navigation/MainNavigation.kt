@@ -13,7 +13,10 @@ import androidx.navigation.NavOptions
 import androidx.navigation.compose.composable
 import com.mshdabiola.main.MainRoute
 
-fun NavController.navigateToMain(main: Main, navOptions: NavOptions) = navigate(main, navOptions)
+fun NavController.navigateToMain(
+    main: Main,
+    navOptions: NavOptions,
+) = navigate(main, navOptions)
 
 @OptIn(ExperimentalSharedTransitionApi::class)
 fun NavGraphBuilder.mainScreen(
@@ -27,7 +30,7 @@ fun NavGraphBuilder.mainScreen(
             modifier = modifier,
             sharedTransitionScope = sharedTransitionScope,
             animatedContentScope = this,
-            onShowSnackbar = onShowSnack,
+            showSnackbar = onShowSnack,
             navigateToDetail = navigateToDetail,
         )
     }

@@ -14,10 +14,11 @@ import com.mshdabiola.setting.SettingViewModel
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.annotation.KoinExperimentalAPI
 
-fun NavController.navigateToSetting(navOptions: NavOptions = androidx.navigation.navOptions { }) = navigate(
-    Setting,
-    navOptions,
-)
+fun NavController.navigateToSetting(navOptions: NavOptions = androidx.navigation.navOptions { }) =
+    navigate(
+        Setting,
+        navOptions,
+    )
 
 @OptIn(KoinExperimentalAPI::class)
 fun NavGraphBuilder.settingScreen(

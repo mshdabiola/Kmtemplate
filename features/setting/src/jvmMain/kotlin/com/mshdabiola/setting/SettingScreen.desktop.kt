@@ -26,9 +26,10 @@ fun DialogPreview() {
 fun ScreenPreview() {
     SettingScreen(
         modifier = Modifier,
-        settingState = SettingState.Success(
-            themeBrand = ThemeBrand.DEFAULT,
-            darkThemeConfig = DarkThemeConfig.DARK,
-        ),
+        settingState =
+            SettingState.Success(
+                themeBrand = ThemeBrand.DEFAULT,
+                darkThemeConfig = DarkThemeConfig.DARK,
+            ),
     )
 }

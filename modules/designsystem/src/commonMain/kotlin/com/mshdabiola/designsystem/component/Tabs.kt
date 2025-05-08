@@ -12,11 +12,14 @@ import androidx.compose.material3.Tab
 import androidx.compose.material3.TabRow
 import androidx.compose.material3.TabRowDefaults
 import androidx.compose.material3.TabRowDefaults.tabIndicatorOffset
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.mshdabiola.designsystem.theme.HyaTheme
+import org.jetbrains.compose.ui.tooling.preview.Preview
 
 /**
  * Now in Android tab. Wraps Material 3 [Tab] and shifts text label down.
@@ -29,7 +32,7 @@ import androidx.compose.ui.unit.dp
  * @param text The text label content.
  */
 @Composable
-fun SkTab(
+fun HyaTab(
     selected: Boolean,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
@@ -46,7 +49,7 @@ fun SkTab(
             ProvideTextStyle(
                 value = style,
                 content = {
-                    Box(modifier = Modifier.padding(top = SkTabDefaults.TabTopPadding)) {
+                    Box(modifier = Modifier.padding(top = HyaTabDefaults.TabTopPadding)) {
                         text()
                     }
                 },
@@ -60,11 +63,11 @@ fun SkTab(
  *
  * @param selectedTabIndex The index of the currently selected tab.
  * @param modifier Modifier to be applied to the tab row.
- * @param tabs The tabs inside this tab row. Typically this will be multiple [SkTab]s. Each element
+ * @param tabs The tabs inside this tab row. Typically this will be multiple [HyaTab]s. Each element
  * inside this lambda will be measured and placed evenly across the row, each taking up equal space.
  */
 @Composable
-fun SkTabRow(
+fun HyaTabRow(
     selectedTabIndex: Int,
     modifier: Modifier = Modifier,
     tabs: @Composable () -> Unit,
@@ -85,6 +88,23 @@ fun SkTabRow(
     )
 }
 
-object SkTabDefaults {
+@Preview
+@Composable
+fun TabsPreview() {
+    HyaTheme {
+        val titles = listOf("Topics", "People")
+        HyaTabRow(selectedTabIndex = 0) {
+            titles.forEachIndexed { index, title ->
+                HyaTab(
+                    selected = index == 0,
+                    onClick = { },
+                    text = { Text(text = title) },
+                )
+            }
+        }
+    }
+}
+
+object HyaTabDefaults {
     val TabTopPadding = 7.dp
 }

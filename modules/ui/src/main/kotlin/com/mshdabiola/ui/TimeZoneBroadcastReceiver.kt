@@ -14,7 +14,10 @@ class TimeZoneBroadcastReceiver(
 ) : BroadcastReceiver() {
     private var registered = false
 
-    override fun onReceive(context: Context, intent: Intent) {
+    override fun onReceive(
+        context: Context,
+        intent: Intent,
+    ) {
         if (intent.action == Intent.ACTION_TIMEZONE_CHANGED) {
             onTimeZoneChanged()
         }

@@ -29,7 +29,6 @@ expect object SkeletonsDatabaseCtor : RoomDatabaseConstructor<SkeletonDatabase>
 )
 @ConstructedBy(SkeletonsDatabaseCtor::class) // NEW
 abstract class SkeletonDatabase : RoomDatabase() {
-
     abstract fun getNoteDao(): NoteDao
 
     abstract fun getImageDao(): ImageDao

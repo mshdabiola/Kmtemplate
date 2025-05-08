@@ -35,13 +35,14 @@ fun NavGraphBuilder.detailScreen(
 
         val detail: Detail = backStack.toRoute()
 
-        val viewModel: DetailViewModel = koinViewModel(
-            parameters = {
-                parameterSetOf(
-                    detail.id,
-                )
-            },
-        )
+        val viewModel: DetailViewModel =
+            koinViewModel(
+                parameters = {
+                    parameterSetOf(
+                        detail.id,
+                    )
+                },
+            )
 
         DetailRoute(
             modifier = modifier,

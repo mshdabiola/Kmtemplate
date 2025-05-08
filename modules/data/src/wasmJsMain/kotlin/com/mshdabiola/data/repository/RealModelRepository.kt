@@ -14,6 +14,7 @@ internal class RealModelRepository(
     private val ioDispatcher: CoroutineDispatcher,
 ) : NoteRepository {
     private val notes = MutableStateFlow(listOf<Note>())
+
     override suspend fun upsert(note: Note): Long {
         return withContext(ioDispatcher) {
             var id = note.id

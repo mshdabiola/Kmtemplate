@@ -5,12 +5,16 @@
 package com.mshdabiola.designsystem.component
 
 import androidx.compose.material3.FilledIconToggleButton
+import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import com.mshdabiola.designsystem.icon.HyaIcons
+import com.mshdabiola.designsystem.theme.HyaTheme
+import org.jetbrains.compose.ui.tooling.preview.Preview
 
 /**
  * Now in Android toggle button with icon and checked icon content slots. Wraps Material 3
@@ -25,7 +29,7 @@ import androidx.compose.ui.graphics.Color
  * @param checkedIcon The icon content to show when checked.
  */
 @Composable
-fun SkIconToggleButton(
+fun HyaIconToggleButton(
     checked: Boolean,
     onCheckedChange: (Boolean) -> Unit,
     modifier: Modifier = Modifier,
@@ -40,23 +44,74 @@ fun SkIconToggleButton(
         onCheckedChange = onCheckedChange,
         modifier = modifier,
         enabled = enabled,
-        colors = IconButtonDefaults.iconToggleButtonColors(
-            checkedContainerColor = MaterialTheme.colorScheme.primaryContainer,
-            checkedContentColor = MaterialTheme.colorScheme.onPrimaryContainer,
-            disabledContainerColor = if (checked) {
-                MaterialTheme.colorScheme.onBackground.copy(
-                    alpha = SkIconButtonDefaults.DISABLED_ICON_BUTTON_CONTAINER_ALPHA,
-                )
-            } else {
-                Color.Transparent
-            },
-        ),
+        colors =
+            IconButtonDefaults.iconToggleButtonColors(
+                checkedContainerColor = MaterialTheme.colorScheme.primaryContainer,
+                checkedContentColor = MaterialTheme.colorScheme.onPrimaryContainer,
+                disabledContainerColor =
+                    if (checked) {
+                        MaterialTheme.colorScheme.onBackground.copy(
+                            alpha = HyaIconButtonDefaults.DISABLED_ICON_BUTTON_CONTAINER_ALPHA,
+                        )
+                    } else {
+                        Color.Transparent
+                    },
+            ),
     ) {
         if (checked) checkedIcon() else icon()
     }
 }
 
-object SkIconButtonDefaults {
+@Preview
+@Composable
+fun IconButtonPreview() {
+    HyaTheme {
+        HyaIconToggleButton(
+            checked = true,
+            onCheckedChange = { },
+            icon = {
+                Icon(
+                    imageVector = HyaIcons.BookmarkBorder,
+                    contentDescription = null,
+                )
+            },
+            checkedIcon = {
+                Icon(
+                    imageVector = HyaIcons.Bookmark,
+                    contentDescription = null,
+                )
+            },
+        )
+    }
+}
+
+@Preview
+@Composable
+fun IconButtonPreviewUnchecked() {
+    HyaTheme {
+        HyaIconToggleButton(
+            checked = false,
+            onCheckedChange = { },
+            icon = {
+                Icon(
+                    imageVector = HyaIcons.BookmarkBorder,
+                    contentDescription = null,
+                )
+            },
+            checkedIcon = {
+                Icon(
+                    imageVector = HyaIcons.Bookmark,
+                    contentDescription = null,
+                )
+            },
+        )
+    }
+}
+
+/**
+ * Now in Android icon button default values.
+ */
+object HyaIconButtonDefaults {
     // TODO: File bug
     // IconToggleButton disabled container alpha not exposed by IconButtonDefaults
     const val DISABLED_ICON_BUTTON_CONTAINER_ALPHA = 0.12f

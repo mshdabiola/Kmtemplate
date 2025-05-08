@@ -8,8 +8,8 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
-import com.mshdabiola.designsystem.component.SkTab
-import com.mshdabiola.designsystem.component.SkTabRow
+import com.mshdabiola.designsystem.component.HyaTab
+import com.mshdabiola.designsystem.component.HyaTabRow
 import com.mshdabiola.testing.util.CaptureMultiTheme
 
 class TabsScreenshotTests {
@@ -18,7 +18,7 @@ class TabsScreenshotTests {
     @Composable
     fun Tabs() {
         CaptureMultiTheme {
-            NiaTabsExample()
+            HyaTabsExample()
         }
     }
 
@@ -27,17 +27,17 @@ class TabsScreenshotTests {
     @Composable
     fun TabsHumFontScale2() {
         CaptureMultiTheme {
-            NiaTabsExample("Looooong item")
+            HyaTabsExample("Looooong item")
         }
     }
 
     @Composable
-    private fun NiaTabsExample(label: String = "Topics") {
+    private fun HyaTabsExample(label: String = "Topics") {
         Surface {
             val titles = listOf(label, "People")
-            SkTabRow(selectedTabIndex = 0) {
+            HyaTabRow(selectedTabIndex = 0) {
                 titles.forEachIndexed { index, title ->
-                    SkTab(
+                    HyaTab(
                         selected = index == 0,
                         onClick = { },
                         text = { Text(text = title) },
