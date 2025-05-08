@@ -97,8 +97,8 @@ detekt = "1.23.8"
 series = "0.0.19"
 calf = "0.7.1"
 
-versionCode = "126"
-versionName = "1.2.6"
+versionCode = "127"
+versionName = "1.2.7"
 
 
 
