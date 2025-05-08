@@ -9,6 +9,7 @@ import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import org.koin.dsl.bind
 import org.koin.dsl.module
 
-val testDispatcherModule = module {
-    single { UnconfinedTestDispatcher() } bind CoroutineDispatcher::class
-}
+val testDispatcherModule =
+    module {
+        single { UnconfinedTestDispatcher() } bind CoroutineDispatcher::class
+    }

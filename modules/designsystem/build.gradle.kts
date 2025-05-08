@@ -1,3 +1,5 @@
+import org.gradle.kotlin.dsl.implementation
+
 /*
  *abiola 2024
  */
@@ -16,6 +18,8 @@ android {
 }
 
 dependencies {
+//    lintPublish(projects.lint)
+
     debugApi(compose.uiTooling)
 }
 kotlin {
@@ -31,6 +35,9 @@ kotlin {
                 api(compose.components.uiToolingPreview)
                 api(libs.kotlinx.collection.immutable)
                 api(libs.lifecycle.runtime.compose)
+                api(libs.androidx.compose.material3.adaptive)
+                api(libs.androidx.compose.material3.adaptive.layout)
+                api(libs.androidx.compose.material3.adaptive.navigation)
 //                implementation("org.jetbrains.compose.material:material-icons-core:1.7.3")
                 implementation(project(":modules:model"))
                 api(libs.androidx.navigation.compose.get())

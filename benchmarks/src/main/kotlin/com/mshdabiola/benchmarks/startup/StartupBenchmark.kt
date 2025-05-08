@@ -32,31 +32,32 @@ class StartupBenchmark {
     fun startupWithoutPreCompilation() = startup(CompilationMode.None())
 
     @Test
-    fun startupWithPartialCompilationAndDisabledBaselineProfile() = startup(
-        CompilationMode.Partial(baselineProfileMode = Disable, warmupIterations = 1),
-    )
+    fun startupWithPartialCompilationAndDisabledBaselineProfile() =
+        startup(
+            CompilationMode.Partial(baselineProfileMode = Disable, warmupIterations = 1),
+        )
 
     @Test
-    fun startupPrecompiledWithBaselineProfile() =
-        startup(CompilationMode.Partial(baselineProfileMode = Require))
+    fun startupPrecompiledWithBaselineProfile() = startup(CompilationMode.Partial(baselineProfileMode = Require))
 
     @Test
     fun startupFullyPrecompiled() = startup(CompilationMode.Full())
 
-    private fun startup(compilationMode: CompilationMode) = benchmarkRule.measureRepeated(
-        packageName = PACKAGE_NAME,
-        metrics = listOf(StartupTimingMetric()),
-        compilationMode = compilationMode,
-        // More iterations result in higher statistical significance.
-        iterations = 20,
-        startupMode = COLD,
-        setupBlock = {
-            pressHome()
-            //  allowNotifications()
-        },
-    ) {
-        startActivity()
-        // Waits until the content is ready to capture Time To Full Display
-        mainWaitForContent()
-    }
+    private fun startup(compilationMode: CompilationMode) =
+        benchmarkRule.measureRepeated(
+            packageName = PACKAGE_NAME,
+            metrics = listOf(StartupTimingMetric()),
+            compilationMode = compilationMode,
+            // More iterations result in higher statistical significance.
+            iterations = 20,
+            startupMode = COLD,
+            setupBlock = {
+                pressHome()
+                //  allowNotifications()
+            },
+        ) {
+            startActivity()
+            // Waits until the content is ready to capture Time To Full Display
+            mainWaitForContent()
+        }
 }

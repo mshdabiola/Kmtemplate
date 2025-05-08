@@ -6,9 +6,10 @@ import io.ktor.client.engine.HttpClientEngineConfig
 import io.ktor.client.engine.js.Js
 
 actual val httpClient: HttpClient
-    get() = HttpClient(Js) {
-        init()
-    }
+    get() =
+        HttpClient(Js) {
+            init()
+        }
 
 actual fun <T : HttpClientEngineConfig> HttpClientConfig<T>.initPlatform() {
 }

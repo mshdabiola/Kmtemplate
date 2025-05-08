@@ -2,6 +2,7 @@ import dev.iurysouza.modulegraph.ModuleType.AndroidApp
 import dev.iurysouza.modulegraph.ModuleType.AndroidLibrary
 import dev.iurysouza.modulegraph.ModuleType.Custom
 import dev.iurysouza.modulegraph.Theme
+import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 
 @Suppress("DSL_SCOPE_VIOLATION")
 plugins {
@@ -28,7 +29,8 @@ plugins {
     alias(libs.plugins.composehot) apply false
     alias(libs.plugins.foojay) apply false
     alias(libs.plugins.module.graph)
-
+    alias(libs.plugins.ktlint) apply false
+    alias(libs.plugins.detekt) apply false
 }
 
 moduleGraphConfig {
@@ -313,4 +315,54 @@ moduleGraphConfig {
         )
     }
 
+}
+
+subprojects {
+    apply(plugin = "org.jlleitschuh.gradle.ktlint")
+    configure<org.jlleitschuh.gradle.ktlint.KtlintExtension> {
+        debug.set(true)
+        //ignoreFailures.set(true)
+//        reporters {
+//            reporter(org.jlleitschuh.gradle.ktlint.reporter.ReporterType.HTML)
+//            reporter(org.jlleitschuh.gradle.ktlint.reporter.ReporterType.CHECKSTYLE)
+//            reporter(org.jlleitschuh.gradle.ktlint.reporter.ReporterType.PLAIN)
+//        }
+    }
+    dependencies {
+        add("ktlint", project(":ktlint"))
+    }
+
+    apply(plugin = "io.gitlab.arturbosch.detekt")
+    plugins.withId("io.gitlab.arturbosch.detekt") {
+        configure<io.gitlab.arturbosch.detekt.extensions.DetektExtension> {
+            source = files(
+                "src/main/kotlin",
+                "src/commonMain/kotlin",
+                "src/jvmMain/kotlin",
+                "src/androidMain/kotlin",
+                "src/iosMain/kotlin",
+                "src/nativeMain/kotlin",
+                "src/desktop/kotlin",
+                "src/js/kotlin",
+            )
+            config.setFrom(rootProject.file("detekt.yml"))
+            buildUponDefaultConfig = true
+            ignoreFailures = false
+        }
+    }
+}
+
+val installGitHook = tasks.register("installGitHook", Copy::class) {
+    from("$rootDir/pre-commit")
+    into("$rootDir/.git/hooks")
+    fileMode = "755".toInt(8)
+}
+
+project.pluginManager.withPlugin("org.jetbrains.kotlin.multiplatform") {
+    val kmpExtension = project.extensions.getByType<KotlinMultiplatformExtension>()
+    kmpExtension.targets.configureEach {
+        compilations.configureEach {
+            compileKotlinTask.dependsOn(installGitHook)
+        }
+    }
 }

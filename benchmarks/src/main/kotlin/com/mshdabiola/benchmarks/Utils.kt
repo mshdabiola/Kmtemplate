@@ -14,11 +14,12 @@ import java.io.ByteArrayOutputStream
 /**
  * Convenience parameter to use proper package name with regards to build type and build flavor.
  */
-val PACKAGE_NAME = buildString {
-    append("com.mshdabiola.skeletonapp")
-    append(BuildConfig.APP_FLAVOR_SUFFIX)
-    append(BuildConfig.APP_BUILD_TYPE_SUFFIX)
-}
+val PACKAGE_NAME =
+    buildString {
+        append("com.mshdabiola.hydraulicapp")
+        append(BuildConfig.APP_FLAVOR_SUFFIX)
+        append(BuildConfig.APP_BUILD_TYPE_SUFFIX)
+    }
 
 fun UiDevice.flingElementDownUp(element: UiObject2) {
     // Set some margin from the sides to prevent triggering system navigation
@@ -33,7 +34,10 @@ fun UiDevice.flingElementDownUp(element: UiObject2) {
  * Waits until an object with [selector] if visible on screen and returns the object.
  * If the element is not available in [timeout], throws [AssertionError]
  */
-fun UiDevice.waitAndFindObject(selector: BySelector, timeout: Long): UiObject2 {
+fun UiDevice.waitAndFindObject(
+    selector: BySelector,
+    timeout: Long,
+): UiObject2 {
     if (!wait(Until.hasObject(selector), timeout)) {
         throw AssertionError("Element not found on screen in ${timeout}ms (selector=$selector)")
     }

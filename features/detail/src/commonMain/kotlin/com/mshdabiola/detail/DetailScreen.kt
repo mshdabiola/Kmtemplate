@@ -21,9 +21,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.input.ImeAction
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.mshdabiola.designsystem.component.SkTextField
-import com.mshdabiola.designsystem.component.SkTopAppBar
-import com.mshdabiola.designsystem.icon.SkIcons
+import com.mshdabiola.designsystem.component.HyaTextField
+import com.mshdabiola.designsystem.component.HyaTopAppBar
+import com.mshdabiola.designsystem.icon.HyaIcons
 import com.mshdabiola.ui.TrackScreenViewEvent
 import com.mshdabiola.ui.Waiting
 import kotlinx.coroutines.launch
@@ -75,17 +75,18 @@ internal fun DetailScreen(
     AnimatedContent(state) {
         when (it) {
             is DetailState.Loading -> Waiting(modifier)
-            is DetailState.Success -> MainContent(
-                modifier = modifier,
-                state = it,
-                sharedTransitionScope = sharedTransitionScope,
-                animatedContentScope = animatedContentScope,
-                title = title,
-                content = content,
-                onShowSnackbar = onShowSnackbar,
-                onBack = onBack,
-                onDelete = onDelete,
-            )
+            is DetailState.Success ->
+                MainContent(
+                    modifier = modifier,
+                    state = it,
+                    sharedTransitionScope = sharedTransitionScope,
+                    animatedContentScope = animatedContentScope,
+                    title = title,
+                    content = content,
+                    onShowSnackbar = onShowSnackbar,
+                    onBack = onBack,
+                    onDelete = onDelete,
+                )
             else -> {}
         }
     }
@@ -103,7 +104,6 @@ internal fun MainContent(
     onShowSnackbar: suspend (String, String?) -> Boolean = { _, _ -> false },
     onBack: () -> Unit = {},
     onDelete: () -> Unit = {},
-
 ) {
     val coroutineScope = rememberCoroutineScope()
     with(sharedTransitionScope) {
@@ -113,29 +113,31 @@ internal fun MainContent(
                 animatedVisibilityScope = animatedContentScope,
             ),
         ) {
-            SkTopAppBar(
+            HyaTopAppBar(
                 titleRes = "Note",
-                navigationIcon = SkIcons.ArrowBack,
+                navigationIcon = HyaIcons.ArrowBack,
                 navigationIconContentDescription = "",
-                actionIcon = SkIcons.Delete,
+                actionIcon = HyaIcons.Delete,
                 actionIconContentDescription = "delete",
                 onActionClick = { onDelete() },
                 onNavigationClick = { onBack() },
             )
-            SkTextField(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .testTag("detail:title"),
+            HyaTextField(
+                modifier =
+                    Modifier
+                        .fillMaxWidth()
+                        .testTag("detail:title"),
                 state = title,
                 placeholder = "Title",
                 maxNum = TextFieldLineLimits.SingleLine,
                 imeAction = ImeAction.Next,
             )
-            SkTextField(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .testTag("detail:content")
-                    .weight(1f),
+            HyaTextField(
+                modifier =
+                    Modifier
+                        .fillMaxWidth()
+                        .testTag("detail:content")
+                        .weight(1f),
                 state = content,
                 placeholder = "content",
                 imeAction = ImeAction.Done,

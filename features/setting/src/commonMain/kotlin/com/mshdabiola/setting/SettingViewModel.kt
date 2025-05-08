@@ -18,7 +18,6 @@ import kotlinx.coroutines.launch
 class SettingViewModel constructor(
     private val userDataRepository: UserDataRepository,
 ) : ViewModel() {
-
     private val _settingState = MutableStateFlow<SettingState>(SettingState.Loading())
     val settingState = _settingState.asStateFlow()
 
@@ -51,12 +50,13 @@ class SettingViewModel constructor(
 
     private fun update() {
         viewModelScope.launch {
-            _settingState.value = userDataRepository.userData.map {
-                SettingState.Success(
-                    themeBrand = it.themeBrand,
-                    darkThemeConfig = it.darkThemeConfig,
-                )
-            }.first()
+            _settingState.value =
+                userDataRepository.userData.map {
+                    SettingState.Success(
+                        themeBrand = it.themeBrand,
+                        darkThemeConfig = it.darkThemeConfig,
+                    )
+                }.first()
         }
     }
 }

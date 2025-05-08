@@ -11,9 +11,10 @@ import com.mshdabiola.model.ThemeBrand
 @Composable
 fun ScreenPreview() {
     SettingScreen(
-        settingState = SettingState.Success(
-            themeBrand = ThemeBrand.DEFAULT,
-            darkThemeConfig = DarkThemeConfig.DARK,
-        ),
+        settingState =
+            SettingState.Success(
+                themeBrand = ThemeBrand.DEFAULT,
+                darkThemeConfig = DarkThemeConfig.DARK,
+            ),
     )
 }

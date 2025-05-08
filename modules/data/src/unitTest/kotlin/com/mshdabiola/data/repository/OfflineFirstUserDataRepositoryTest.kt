@@ -29,7 +29,7 @@ class OfflineFirstUserDataRepositoryTest {
 
     private lateinit var subject: OfflineFirstUserDataRepository
 
-    private lateinit var niaPreferencesDataSource: Store
+    private lateinit var HyaPreferencesDataSource: Store
 
     private val analyticsHelper = NoOpAnalyticsHelper()
 
@@ -38,13 +38,13 @@ class OfflineFirstUserDataRepositoryTest {
 
     @Before
     fun setup() {
-        niaPreferencesDataSource = StoreImpl(
+        HyaPreferencesDataSource = StoreImpl(
             tmpFolder.testUserPreferencesDataStore(testScope),
             coroutineDispatcher = UnconfinedTestDispatcher(),
         )
 
         subject = OfflineFirstUserDataRepository(
-            settings = niaPreferencesDataSource,
+            settings = HyaPreferencesDataSource,
             analyticsHelper,
             logger = Logger,
         )
@@ -65,7 +65,7 @@ class OfflineFirstUserDataRepositoryTest {
         }
 
     @Test
-    fun offlineFirstUserDataRepository_set_theme_brand_delegates_to_nia_preferences() =
+    fun offlineFirstUserDataRepository_set_theme_brand_delegates_to_Hya_preferences() =
         testScope.runTest {
             subject.setThemeBrand(ThemeBrand.GREEN)
 
@@ -77,7 +77,7 @@ class OfflineFirstUserDataRepositoryTest {
             )
             assertEquals(
                 ThemeBrand.GREEN,
-                niaPreferencesDataSource
+                HyaPreferencesDataSource
                     .userData
                     .map { it.themeBrand }
                     .first(),
@@ -85,7 +85,7 @@ class OfflineFirstUserDataRepositoryTest {
         }
 
     @Test
-    fun offlineFirstUserDataRepository_set_dynamic_color_delegates_to_nia_preferences() =
+    fun offlineFirstUserDataRepository_set_dynamic_color_delegates_to_Hya_preferences() =
         testScope.runTest {
             subject.setDynamicColorPreference(true)
 
@@ -97,7 +97,7 @@ class OfflineFirstUserDataRepositoryTest {
             )
             assertEquals(
                 true,
-                niaPreferencesDataSource
+                HyaPreferencesDataSource
                     .userData
                     .map { it.useDynamicColor }
                     .first(),
@@ -105,7 +105,7 @@ class OfflineFirstUserDataRepositoryTest {
         }
 
     @Test
-    fun offlineFirstUserDataRepository_set_dark_theme_config_delegates_to_nia_preferences() =
+    fun offlineFirstUserDataRepository_set_dark_theme_config_delegates_to_Hya_preferences() =
         testScope.runTest {
             subject.setDarkThemeConfig(DarkThemeConfig.DARK)
 
@@ -117,7 +117,7 @@ class OfflineFirstUserDataRepositoryTest {
             )
             assertEquals(
                 DarkThemeConfig.DARK,
-                niaPreferencesDataSource
+                HyaPreferencesDataSource
                     .userData
                     .map { it.darkThemeConfig }
                     .first(),

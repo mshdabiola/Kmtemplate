@@ -40,12 +40,12 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.mshdabiola.data.model.Result
-import com.mshdabiola.designsystem.component.SkLoadingWheel
+import com.mshdabiola.designsystem.component.HyaLoadingWheel
 import com.mshdabiola.designsystem.component.scrollbar.DraggableScrollbar
 import com.mshdabiola.designsystem.component.scrollbar.rememberDraggableScroller
 import com.mshdabiola.designsystem.component.scrollbar.scrollbarState
+import com.mshdabiola.designsystem.theme.HyaTheme
 import com.mshdabiola.designsystem.theme.LocalTintTheme
-import com.mshdabiola.designsystem.theme.lightDefaultScheme
 import com.mshdabiola.model.Note
 import com.mshdabiola.ui.SharedContentPreview
 import com.mshdabiola.ui.noteItems
@@ -68,8 +68,8 @@ internal fun MainRoute(
     modifier: Modifier = Modifier,
     sharedTransitionScope: SharedTransitionScope,
     animatedContentScope: AnimatedVisibilityScope,
-    onShowSnackbar: suspend (String, String?) -> Boolean,
     navigateToDetail: (Long) -> Unit,
+    showSnackbar: suspend (String, String?) -> Boolean,
 //    viewModel: MainViewModel,
 ) {
     val viewModel: MainViewModel = koinViewModel()
@@ -83,7 +83,6 @@ internal fun MainRoute(
         mainState = feedNote.value,
         navigateToDetail = navigateToDetail,
         //   items = timeline,
-
     )
 }
 
@@ -101,27 +100,30 @@ internal fun MainScreen(
     val state = rememberLazyListState()
     with(sharedTransitionScope) {
         Box(
-            modifier = modifier
-                .testTag("main:screen")
-                .sharedBounds(
-                    sharedContentState = rememberSharedContentState("container"),
-                    animatedVisibilityScope = animatedContentScope,
-                ),
+            modifier =
+                modifier
+                    .testTag("main:screen")
+                    .sharedBounds(
+                        sharedContentState = rememberSharedContentState("container"),
+                        animatedVisibilityScope = animatedContentScope,
+                    ),
         ) {
             LazyColumn(
                 state = state,
                 contentPadding = PaddingValues(16.dp),
                 verticalArrangement = Arrangement.spacedBy(16.dp),
-                modifier = Modifier
-                    .testTag("main:list"),
+                modifier =
+                    Modifier
+                        .testTag("main:list"),
             ) {
                 item {
                     // Spacer(Modifier.windowInsetsTopHeight(WindowInsets.safeDrawing))
                 }
                 when (mainState) {
-                    is Result.Loading -> item {
-                        LoadingState()
-                    }
+                    is Result.Loading ->
+                        item {
+                            LoadingState()
+                        }
 
                     is Result.Error -> TODO()
                     is Result.Success -> {
@@ -145,20 +147,23 @@ internal fun MainScreen(
                 }
             }
             val itemsAvailable = noteUiStateItemsSize(mainState)
-            val scrollbarState = state.scrollbarState(
-                itemsAvailable = itemsAvailable,
-            )
+            val scrollbarState =
+                state.scrollbarState(
+                    itemsAvailable = itemsAvailable,
+                )
             state.DraggableScrollbar(
-                modifier = Modifier
-                    .fillMaxHeight()
-                    .windowInsetsPadding(WindowInsets.systemBars)
-                    .padding(horizontal = 2.dp)
-                    .align(Alignment.CenterEnd),
+                modifier =
+                    Modifier
+                        .fillMaxHeight()
+                        .windowInsetsPadding(WindowInsets.systemBars)
+                        .padding(horizontal = 2.dp)
+                        .align(Alignment.CenterEnd),
                 state = scrollbarState,
                 orientation = Orientation.Vertical,
-                onThumbMoved = state.rememberDraggableScroller(
-                    itemsAvailable = itemsAvailable,
-                ),
+                onThumbMoved =
+                    state.rememberDraggableScroller(
+                        itemsAvailable = itemsAvailable,
+                    ),
             )
         }
     }
@@ -170,7 +175,7 @@ private fun LoadingState(modifier: Modifier = Modifier) {
         modifier = modifier.fillMaxSize().testTag("main:loading"),
         contentAlignment = Alignment.Center,
     ) {
-        SkLoadingWheel(
+        HyaLoadingWheel(
             contentDesc = stringResource(Res.string.features_main_loading),
         )
     }
@@ -179,10 +184,11 @@ private fun LoadingState(modifier: Modifier = Modifier) {
 @Composable
 private fun EmptyState(modifier: Modifier = Modifier) {
     Column(
-        modifier = modifier
-            .padding(16.dp)
-            .fillMaxSize()
-            .testTag("main:empty"),
+        modifier =
+            modifier
+                .padding(16.dp)
+                .fillMaxSize()
+                .testTag("main:empty"),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
@@ -215,26 +221,26 @@ private fun EmptyState(modifier: Modifier = Modifier) {
     }
 }
 
-private fun noteUiStateItemsSize(
-    topicUiState: Result<List<Note>>,
-) = when (topicUiState) {
-    is Result.Error -> 0 // Nothing
-    is Result.Loading -> 1 // Loading bar
-    is Result.Success -> topicUiState.data.size + 2
-}
+private fun noteUiStateItemsSize(topicUiState: Result<List<Note>>) =
+    when (topicUiState) {
+        is Result.Error -> 0 // Nothing
+        is Result.Loading -> 1 // Loading bar
+        is Result.Success -> topicUiState.data.size + 2
+    }
 
 @OptIn(ExperimentalSharedTransitionApi::class)
 @Preview
 @Composable
 fun MainLight() {
-    MaterialTheme(colorScheme = lightDefaultScheme) {
+    HyaTheme(darkTheme = false) {
         Surface {
             SharedContentPreview { sharedTransitionScope, animatedContentScope ->
                 MainScreen(
                     modifier = Modifier.fillMaxSize(),
-                    mainState = Result.Success(
-                        listOf(Note(title = "abiola", content = "what is your name")),
-                    ),
+                    mainState =
+                        Result.Success(
+                            listOf(Note(title = "abiola", content = "what is your name")),
+                        ),
                     sharedTransitionScope = sharedTransitionScope,
                     animatedContentScope = animatedContentScope,
                 )

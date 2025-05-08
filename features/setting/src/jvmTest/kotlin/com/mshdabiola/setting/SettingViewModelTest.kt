@@ -20,7 +20,6 @@ import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 
 class SettingViewModelTest : KoinTest {
-
     @get:Rule(order = 1)
     val tmpFolder: TemporaryFolder = TemporaryFolder.builder().assureDeletion().build()
 
@@ -28,103 +27,110 @@ class SettingViewModelTest : KoinTest {
     val mainDispatcherRule = MainDispatcherRule()
 
     @get:Rule(order = 3)
-    val koinTestRule = KoinTestRule.create {
-        this.modules(testDataModule)
-    }
+    val koinTestRule =
+        KoinTestRule.create {
+            this.modules(testDataModule)
+        }
     private val userRepository by inject<UserDataRepository>()
 
     @Test
-    fun init() = runTest(mainDispatcherRule.testDispatcher) {
-        val viewModel = SettingViewModel(
-            userDataRepository = userRepository,
-        )
-
-        viewModel
-            .settingState
-            .test {
-                var state = awaitItem()
-
-                assertTrue(state is SettingState.Loading)
-
-                state = awaitItem()
-
-                assertTrue(state is SettingState.Success)
-
-                assertEquals(
-                    SettingState.Success(
-                        themeBrand = com.mshdabiola.model.ThemeBrand.DEFAULT,
-                        darkThemeConfig = com.mshdabiola.model.DarkThemeConfig.DARK,
-                    ),
-                    state,
+    fun init() =
+        runTest(mainDispatcherRule.testDispatcher) {
+            val viewModel =
+                SettingViewModel(
+                    userDataRepository = userRepository,
                 )
 
-                cancelAndIgnoreRemainingEvents()
-            }
-    }
+            viewModel
+                .settingState
+                .test {
+                    var state = awaitItem()
+
+                    assertTrue(state is SettingState.Loading)
+
+                    state = awaitItem()
+
+                    assertTrue(state is SettingState.Success)
+
+                    assertEquals(
+                        SettingState.Success(
+                            themeBrand = com.mshdabiola.model.ThemeBrand.DEFAULT,
+                            darkThemeConfig = com.mshdabiola.model.DarkThemeConfig.DARK,
+                        ),
+                        state,
+                    )
+
+                    cancelAndIgnoreRemainingEvents()
+                }
+        }
 
     @Test
-    fun setThemeTest() = runTest(mainDispatcherRule.testDispatcher) {
-        val viewModel = SettingViewModel(
-            userDataRepository = userRepository,
-        )
+    fun setThemeTest() =
+        runTest(mainDispatcherRule.testDispatcher) {
+            val viewModel =
+                SettingViewModel(
+                    userDataRepository = userRepository,
+                )
 
-        viewModel
-            .settingState
-            .test {
-                var state = awaitItem()
+            viewModel
+                .settingState
+                .test {
+                    var state = awaitItem()
 
-                assertTrue(state is SettingState.Loading)
+                    assertTrue(state is SettingState.Loading)
 
-                state = awaitItem()
+                    state = awaitItem()
 
-                assertTrue(state is SettingState.Success)
+                    assertTrue(state is SettingState.Success)
 
-                viewModel.setThemeBrand(com.mshdabiola.model.ThemeBrand.GREEN)
+                    viewModel.setThemeBrand(com.mshdabiola.model.ThemeBrand.GREEN)
 
-                state = awaitItem()
+                    state = awaitItem()
 
-                assertTrue(state is SettingState.Loading)
+                    assertTrue(state is SettingState.Loading)
 
-                state = awaitItem()
+                    state = awaitItem()
 
-                assertTrue(state is SettingState.Success)
+                    assertTrue(state is SettingState.Success)
 
-                assertEquals(state.themeBrand, com.mshdabiola.model.ThemeBrand.GREEN)
+                    assertEquals(state.themeBrand, com.mshdabiola.model.ThemeBrand.GREEN)
 
-                cancelAndIgnoreRemainingEvents()
-            }
-    }
+                    cancelAndIgnoreRemainingEvents()
+                }
+        }
 
     @Test
-    fun setDarkTest() = runTest(mainDispatcherRule.testDispatcher) {
-        val viewModel = SettingViewModel(
-            userDataRepository = userRepository,
-        )
+    fun setDarkTest() =
+        runTest(mainDispatcherRule.testDispatcher) {
+            val viewModel =
+                SettingViewModel(
+                    userDataRepository = userRepository,
+                )
 
-        viewModel
-            .settingState
-            .test {
-                var state = awaitItem()
+            viewModel
+                .settingState
+                .test {
+                    var state = awaitItem()
 
-                assertTrue(state is SettingState.Loading)
+                    assertTrue(state is SettingState.Loading)
 
-                state = awaitItem()
+                    state = awaitItem()
 
-                assertTrue(state is SettingState.Success)
+                    assertTrue(state is SettingState.Success)
 
-                viewModel.setDarkThemeConfig(com.mshdabiola.model.DarkThemeConfig.LIGHT)
+                    viewModel.setDarkThemeConfig(com.mshdabiola.model.DarkThemeConfig.LIGHT)
 
-                state = awaitItem()
+                    state = awaitItem()
 
-                assertTrue(state is SettingState.Loading)
+                    assertTrue(state is SettingState.Loading)
 
-                state = awaitItem()
+                    state = awaitItem()
 
-                assertTrue(state is SettingState.Success)
+                    assertTrue(state is SettingState.Success)
 
-                assertEquals(DarkThemeConfig.LIGHT, state.darkThemeConfig)
+                    assertEquals(DarkThemeConfig.LIGHT, state.darkThemeConfig)
 
-                cancelAndIgnoreRemainingEvents()
-            }
-    }
+                    cancelAndIgnoreRemainingEvents()
+                }
+        }
 }

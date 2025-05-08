@@ -17,7 +17,6 @@ import androidx.room.migration.AutoMigrationSpec
  * `AutoMigrationSpec`.
  */
 object DatabaseMigrations {
-
     @RenameColumn(
         tableName = "topics",
         fromColumnName = "description",
