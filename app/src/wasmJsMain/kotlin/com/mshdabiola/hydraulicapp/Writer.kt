@@ -1,4 +1,4 @@
-package org.example.project
+package com.mshdabiola.hydraulicapp
 
 import co.touchlab.kermit.DefaultFormatter
 import co.touchlab.kermit.LogWriter
