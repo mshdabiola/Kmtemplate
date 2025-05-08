@@ -7,17 +7,17 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.createGraph
 import androidx.window.core.layout.WindowSizeClass
-import com.mshdabiola.hydraulicapp.ui.SkAppState
+import com.mshdabiola.hydraulicapp.ui.HydraulicAppState
 import kotlinx.coroutines.test.runTest
 import org.junit.Rule
 import org.junit.Test
 import kotlin.test.assertEquals
 
-class SkAppState {
+class HydraulicAppStateTest {
     @get:Rule
     val composeTestRule = createComposeRule()
 
-    private lateinit var state: SkAppState
+    private lateinit var state: HydraulicAppState
 
     @Test
     fun currentDestination() =
@@ -36,7 +36,7 @@ class SkAppState {
                     }
                 state =
                     remember(navController) {
-                        SkAppState(
+                        HydraulicAppState(
                             navController = navController,
                             coroutineScope = backgroundScope,
                             WindowSizeClass.compute(456f, 456f),

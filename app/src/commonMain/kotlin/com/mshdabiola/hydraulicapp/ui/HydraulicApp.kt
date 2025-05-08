@@ -52,7 +52,7 @@ import com.mshdabiola.detail.navigation.Detail
 import com.mshdabiola.detail.navigation.navigateToDetail
 import com.mshdabiola.hydraulicapp.MainActivityUiState
 import com.mshdabiola.hydraulicapp.MainAppViewModel
-import com.mshdabiola.hydraulicapp.navigation.SkNavHost
+import com.mshdabiola.hydraulicapp.navigation.HydraulicAppNavHost
 import com.mshdabiola.model.DarkThemeConfig
 import com.mshdabiola.model.ThemeBrand
 import com.mshdabiola.setting.navigation.navigateToSetting
@@ -70,7 +70,7 @@ fun HydraulicApp() {
     val windowAdaptiveInfo = currentWindowAdaptiveInfo()
 
     val appState =
-        rememberSkAppState(
+        rememberHydraulicAppState(
             windowSizeClass = windowAdaptiveInfo.windowSizeClass,
         )
     val shouldShowGradientBackground = false
@@ -176,7 +176,7 @@ fun HydraulicApp() {
                                             WindowInsets.safeDrawing.only(WindowInsetsSides.Horizontal),
                                         ),
                                 ) {
-                                    SkNavHost(
+                                    HydraulicAppNavHost(
                                         appState = appState,
                                         onShowSnackbar = { message, action ->
                                             snackbarHostState.showSnackbar(

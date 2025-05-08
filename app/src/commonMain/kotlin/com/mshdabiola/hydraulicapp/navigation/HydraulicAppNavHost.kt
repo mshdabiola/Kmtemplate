@@ -12,15 +12,15 @@ import androidx.navigation.compose.NavHost
 import com.mshdabiola.detail.navigation.Detail
 import com.mshdabiola.detail.navigation.detailScreen
 import com.mshdabiola.detail.navigation.navigateToDetail
-import com.mshdabiola.hydraulicapp.ui.SkAppState
+import com.mshdabiola.hydraulicapp.ui.HydraulicAppState
 import com.mshdabiola.main.navigation.Main
 import com.mshdabiola.main.navigation.mainScreen
 import com.mshdabiola.setting.navigation.settingScreen
 
 @OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
-fun SkNavHost(
-    appState: SkAppState,
+fun HydraulicAppNavHost(
+    appState: HydraulicAppState,
     onShowSnackbar: suspend (String, String?) -> Boolean = { _, _ -> false },
     modifier: Modifier = Modifier,
 ) {
