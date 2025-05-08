@@ -51,9 +51,10 @@ fun DynamicAsyncImage(
         if (isLoading && !isLocalInspection) {
             // Display a progress bar while loading
             CircularProgressIndicator(
-                modifier = Modifier
-                    .align(Alignment.Center)
-                    .size(80.dp),
+                modifier =
+                    Modifier
+                        .align(Alignment.Center)
+                        .size(80.dp),
                 color = MaterialTheme.colorScheme.tertiary,
             )
         }
