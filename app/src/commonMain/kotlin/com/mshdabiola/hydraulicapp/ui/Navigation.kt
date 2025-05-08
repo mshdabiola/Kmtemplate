@@ -9,17 +9,11 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.LocalLibrary
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.NavigationBar
-import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.NavigationDrawerItem
 import androidx.compose.material3.NavigationDrawerItemDefaults
-import androidx.compose.material3.NavigationRail
-import androidx.compose.material3.NavigationRailItem
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -31,6 +25,11 @@ import androidx.navigation.NavController
 import androidx.navigation.NavDestination.Companion.hasRoute
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.navOptions
+import com.mshdabiola.designsystem.component.HyaNavigationBar
+import com.mshdabiola.designsystem.component.HyaNavigationBarItem
+import com.mshdabiola.designsystem.component.HyaNavigationRail
+import com.mshdabiola.designsystem.component.HyaNavigationRailItem
+import com.mshdabiola.designsystem.icon.HyaIcons
 import com.mshdabiola.designsystem.string.appName
 import com.mshdabiola.designsystem.string.cbtNavigator
 import com.mshdabiola.designsystem.string.settingNavigator
@@ -57,7 +56,7 @@ fun CommonNavigation(
                     .verticalScroll(state = rememberScrollState()),
         ) {
             Row(verticalAlignment = Alignment.CenterVertically) {
-                Icon(Icons.Default.LocalLibrary, "Logo")
+                Icon(HyaIcons.LocalLibrary, "Logo")
                 Text(
                     appName,
                     style = MaterialTheme.typography.headlineSmall,
@@ -139,7 +138,7 @@ fun CommonRail(
     modifier: Modifier = Modifier,
     navController: NavController,
 ) {
-    NavigationRail(modifier) {
+    HyaNavigationRail(modifier) {
         Column(
             verticalArrangement = Arrangement.SpaceBetween,
             horizontalAlignment = Alignment.CenterHorizontally,
@@ -148,7 +147,7 @@ fun CommonRail(
                     .padding(8.dp)
                     .verticalScroll(state = rememberScrollState()),
         ) {
-            Icon(Icons.Default.LocalLibrary, "Logo")
+            Icon(HyaIcons.LocalLibrary, "Logo")
 
             Spacer(Modifier.height(32.dp))
 
@@ -159,7 +158,7 @@ fun CommonRail(
                 Text("Main")
                 TOP_LEVEL_ROUTES
                     .forEachIndexed { index, navigator ->
-                        NavigationRailItem(
+                        HyaNavigationRailItem(
                             selected =
                                 navController
                                     .currentBackStackEntryAsState()
@@ -187,7 +186,7 @@ fun CommonRail(
             ) {
                 SETTING_LEVEL_ROUTES
                     .forEachIndexed { index, navigator ->
-                        NavigationRailItem(
+                        HyaNavigationRailItem(
                             selected =
                                 navController
                                     .currentBackStackEntryAsState()
@@ -227,10 +226,10 @@ fun CommonBar(
     modifier: Modifier = Modifier,
     navController: NavController,
 ) {
-    NavigationBar(modifier) {
+    HyaNavigationBar(modifier) {
         TOP_LEVEL_ROUTES
             .forEachIndexed { index, navigator ->
-                NavigationBarItem(
+                HyaNavigationBarItem(
                     selected =
                         navController
                             .currentBackStackEntryAsState()
