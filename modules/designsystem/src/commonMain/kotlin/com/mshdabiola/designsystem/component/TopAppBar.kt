@@ -20,10 +20,6 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.testTag
 import com.mshdabiola.designsystem.icon.HyaIcons
 import com.mshdabiola.designsystem.theme.HyaTheme
-import hydraulic.modules.designsystem.generated.resources.Res
-import hydraulic.modules.designsystem.generated.resources.app_name
-import org.jetbrains.compose.resources.StringResource
-import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @OptIn(ExperimentalMaterial3Api::class)

@@ -122,7 +122,7 @@ fun HydraulicApp() {
                                     if (appState.shouldShowTopBar) {
                                         if (appState.isMain) {
                                             HyaTopAppBar(
-                                                 titleRes = "Note",
+                                                titleRes = "Note",
                                                 navigationIcon = HyaIcons.Person,
                                                 navigationIconContentDescription = "",
                                                 actionIcon = HyaIcons.Settings,
