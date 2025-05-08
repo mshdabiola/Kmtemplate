@@ -1,0 +1,8 @@
+
+
+[*.{kt,kts}]    
+ktlint_hydraulic_prefer-method-name=disabled
+
+
+[*.{kt,kts}]
+ktlint_hydraulic_prefer-receiver-name=disabled
