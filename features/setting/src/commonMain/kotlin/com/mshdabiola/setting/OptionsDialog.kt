@@ -7,12 +7,12 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.util.fastForEachIndexed
+import com.mshdabiola.designsystem.component.HyaTextButton
 
 @Composable
 fun OptionsDialog(
@@ -25,7 +25,7 @@ fun OptionsDialog(
     AlertDialog(
         onDismissRequest = onDismiss,
         confirmButton = {
-            TextButton(onClick = onDismiss) {
+            HyaTextButton(onClick = onDismiss) {
                 Text("Close")
             }
         },

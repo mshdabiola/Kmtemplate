@@ -44,8 +44,8 @@ import com.mshdabiola.designsystem.component.HyaLoadingWheel
 import com.mshdabiola.designsystem.component.scrollbar.DraggableScrollbar
 import com.mshdabiola.designsystem.component.scrollbar.rememberDraggableScroller
 import com.mshdabiola.designsystem.component.scrollbar.scrollbarState
+import com.mshdabiola.designsystem.theme.HyaTheme
 import com.mshdabiola.designsystem.theme.LocalTintTheme
-import com.mshdabiola.designsystem.theme.lightDefaultScheme
 import com.mshdabiola.model.Note
 import com.mshdabiola.ui.SharedContentPreview
 import com.mshdabiola.ui.noteItems
@@ -232,7 +232,7 @@ private fun noteUiStateItemsSize(topicUiState: Result<List<Note>>) =
 @Preview
 @Composable
 fun MainLight() {
-    MaterialTheme(colorScheme = lightDefaultScheme) {
+    HyaTheme(darkTheme = false) {
         Surface {
             SharedContentPreview { sharedTransitionScope, animatedContentScope ->
                 MainScreen(
