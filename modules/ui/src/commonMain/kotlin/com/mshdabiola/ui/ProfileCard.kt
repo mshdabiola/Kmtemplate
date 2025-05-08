@@ -1,6 +1,5 @@
 package com.mshdabiola.ui
 
-import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.Logout
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.Icon
@@ -10,6 +9,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import com.mshdabiola.designsystem.icon.HyaIcons
 
 @Composable
 fun ProfileCard(
@@ -21,7 +21,7 @@ fun ProfileCard(
         colors = ListItemDefaults.colors(containerColor = Color.Transparent),
         headlineContent = { Text(name) },
         supportingContent = { Text(email) },
-        leadingContent = { Icon(Icons.Default.Person, "person") },
-        trailingContent = { Icon(Icons.AutoMirrored.Filled.Logout, "out", tint = Color.Red) },
+        leadingContent = { Icon(HyaIcons.Person, "person") },
+        trailingContent = { Icon(HyaIcons.Logout, "out", tint = Color.Red) },
     )
 }
