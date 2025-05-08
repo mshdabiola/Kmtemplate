@@ -37,9 +37,10 @@ fun HyaButton(
         onClick = onClick,
         modifier = modifier,
         enabled = enabled,
-        colors = ButtonDefaults.buttonColors(
-            containerColor = MaterialTheme.colorScheme.onBackground,
-        ),
+        colors =
+            ButtonDefaults.buttonColors(
+                containerColor = MaterialTheme.colorScheme.onBackground,
+            ),
         contentPadding = contentPadding,
         content = content,
     )
@@ -67,11 +68,12 @@ fun HyaButton(
         onClick = onClick,
         modifier = modifier,
         enabled = enabled,
-        contentPadding = if (leadingIcon != null) {
-            ButtonDefaults.ButtonWithIconContentPadding
-        } else {
-            ButtonDefaults.ContentPadding
-        },
+        contentPadding =
+            if (leadingIcon != null) {
+                ButtonDefaults.ButtonWithIconContentPadding
+            } else {
+                ButtonDefaults.ContentPadding
+            },
     ) {
         HyaButtonContent(
             text = text,
@@ -103,19 +105,22 @@ fun HyaOutlinedButton(
         onClick = onClick,
         modifier = modifier,
         enabled = enabled,
-        colors = ButtonDefaults.outlinedButtonColors(
-            contentColor = MaterialTheme.colorScheme.onBackground,
-        ),
-        border = BorderStroke(
-            width = HyaButtonDefaults.OutlinedButtonBorderWidth,
-            color = if (enabled) {
-                MaterialTheme.colorScheme.outline
-            } else {
-                MaterialTheme.colorScheme.onSurface.copy(
-                    alpha = HyaButtonDefaults.DISABLED_OUTLINED_BUTTON_BORDER_ALPHA,
-                )
-            },
-        ),
+        colors =
+            ButtonDefaults.outlinedButtonColors(
+                contentColor = MaterialTheme.colorScheme.onBackground,
+            ),
+        border =
+            BorderStroke(
+                width = HyaButtonDefaults.OutlinedButtonBorderWidth,
+                color =
+                    if (enabled) {
+                        MaterialTheme.colorScheme.outline
+                    } else {
+                        MaterialTheme.colorScheme.onSurface.copy(
+                            alpha = HyaButtonDefaults.DISABLED_OUTLINED_BUTTON_BORDER_ALPHA,
+                        )
+                    },
+            ),
         contentPadding = contentPadding,
         content = content,
     )
@@ -143,11 +148,12 @@ fun HyaOutlinedButton(
         onClick = onClick,
         modifier = modifier,
         enabled = enabled,
-        contentPadding = if (leadingIcon != null) {
-            ButtonDefaults.ButtonWithIconContentPadding
-        } else {
-            ButtonDefaults.ContentPadding
-        },
+        contentPadding =
+            if (leadingIcon != null) {
+                ButtonDefaults.ButtonWithIconContentPadding
+            } else {
+                ButtonDefaults.ContentPadding
+            },
     ) {
         HyaButtonContent(
             text = text,
@@ -176,9 +182,10 @@ fun HyaTextButton(
         onClick = onClick,
         modifier = modifier,
         enabled = enabled,
-        colors = ButtonDefaults.textButtonColors(
-            contentColor = MaterialTheme.colorScheme.onBackground,
-        ),
+        colors =
+            ButtonDefaults.textButtonColors(
+                contentColor = MaterialTheme.colorScheme.onBackground,
+            ),
         content = content,
     )
 }
@@ -232,11 +239,12 @@ private fun HyaButtonContent(
     Box(
         Modifier
             .padding(
-                start = if (leadingIcon != null) {
-                    ButtonDefaults.IconSpacing
-                } else {
-                    0.dp
-                },
+                start =
+                    if (leadingIcon != null) {
+                        ButtonDefaults.IconSpacing
+                    } else {
+                        0.dp
+                    },
             ),
     ) {
         text()
@@ -247,7 +255,7 @@ private fun HyaButtonContent(
 @Composable
 fun HyaButtonPreview() {
     HyaTheme {
-        HyaBackground (modifier = Modifier.size(150.dp, 50.dp)) {
+        HyaBackground(modifier = Modifier.size(150.dp, 50.dp)) {
             HyaButton(onClick = {}, text = { Text("Test button") })
         }
     }
