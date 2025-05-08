@@ -12,10 +12,10 @@ import androidx.navigation.compose.NavHost
 import com.mshdabiola.detail.navigation.Detail
 import com.mshdabiola.detail.navigation.detailScreen
 import com.mshdabiola.detail.navigation.navigateToDetail
+import com.mshdabiola.hydraulicapp.ui.SkAppState
 import com.mshdabiola.main.navigation.Main
 import com.mshdabiola.main.navigation.mainScreen
 import com.mshdabiola.setting.navigation.settingScreen
-import com.mshdabiola.hydraulicapp.ui.SkAppState
 
 @OptIn(ExperimentalSharedTransitionApi::class)
 @Composable

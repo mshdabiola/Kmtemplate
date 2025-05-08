@@ -17,8 +17,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.windowInsetsPadding
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBackIosNew
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExtendedFloatingActionButton
 import androidx.compose.material3.Icon
@@ -48,16 +46,16 @@ import com.mshdabiola.designsystem.component.HyaGradientBackground
 import com.mshdabiola.designsystem.component.HyaTopAppBar
 import com.mshdabiola.designsystem.icon.HyaIcons
 import com.mshdabiola.designsystem.theme.GradientColors
-import com.mshdabiola.designsystem.theme.LocalGradientColors
 import com.mshdabiola.designsystem.theme.HyaTheme
+import com.mshdabiola.designsystem.theme.LocalGradientColors
 import com.mshdabiola.detail.navigation.Detail
 import com.mshdabiola.detail.navigation.navigateToDetail
-import com.mshdabiola.model.DarkThemeConfig
-import com.mshdabiola.model.ThemeBrand
-import com.mshdabiola.setting.navigation.navigateToSetting
 import com.mshdabiola.hydraulicapp.MainActivityUiState
 import com.mshdabiola.hydraulicapp.MainAppViewModel
 import com.mshdabiola.hydraulicapp.navigation.SkNavHost
+import com.mshdabiola.model.DarkThemeConfig
+import com.mshdabiola.model.ThemeBrand
+import com.mshdabiola.setting.navigation.navigateToSetting
 import com.mshdabiola.ui.semanticsCommon
 import org.koin.compose.koinInject
 import org.koin.compose.viewmodel.koinViewModel
@@ -124,7 +122,7 @@ fun HydraulicApp() {
                                     if (appState.shouldShowTopBar) {
                                         if (appState.isMain) {
                                             HyaTopAppBar(
-                                               // titleRes = "Note",
+                                                // titleRes = "Note",
                                                 navigationIcon = HyaIcons.Person,
                                                 navigationIconContentDescription = "",
                                                 actionIcon = HyaIcons.Settings,
@@ -136,7 +134,7 @@ fun HydraulicApp() {
                                                 title = { Text("Setting") },
                                                 navigationIcon = {
                                                     IconButton(onClick = { appState.navController.popBackStack() }) {
-                                                        Icon(Icons.Default.ArrowBackIosNew, "back")
+                                                        Icon(HyaIcons.ArrowBack, "back")
                                                     }
                                                 },
                                             )
