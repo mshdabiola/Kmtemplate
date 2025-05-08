@@ -29,7 +29,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HyaTopAppBar(
-    titleRes: StringResource? = null,
+    titleRes: String,
     navigationIcon: ImageVector,
     navigationIconContentDescription: String,
     actionIcon: ImageVector,
@@ -40,7 +40,7 @@ fun HyaTopAppBar(
     onActionClick: () -> Unit = {},
 ) {
     CenterAlignedTopAppBar(
-        title = { Text(text = stringResource(titleRes ?: Res.string.app_name)) },
+        title = { Text(text = titleRes) },
         navigationIcon = {
             IconButton(onClick = onNavigationClick) {
                 Icon(
@@ -70,7 +70,7 @@ fun HyaTopAppBar(
 private fun HyaTopAppBarPreview() {
     HyaTheme {
         HyaTopAppBar(
-            titleRes = Res.string.app_name,
+            titleRes = "Preview",
             navigationIcon = HyaIcons.Search,
             navigationIconContentDescription = "Navigation icon",
             actionIcon = HyaIcons.MoreVert,
