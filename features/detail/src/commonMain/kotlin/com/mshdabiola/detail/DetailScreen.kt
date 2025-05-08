@@ -114,6 +114,7 @@ internal fun MainContent(
             ),
         ) {
             HyaTopAppBar(
+                titleRes = "Note",
                 navigationIcon = HyaIcons.ArrowBack,
                 navigationIconContentDescription = "",
                 actionIcon = HyaIcons.Delete,
