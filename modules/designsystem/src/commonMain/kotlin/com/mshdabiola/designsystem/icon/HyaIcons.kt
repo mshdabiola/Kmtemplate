@@ -6,6 +6,7 @@ package com.mshdabiola.designsystem.icon
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.rounded.ArrowBack
+import androidx.compose.material.icons.automirrored.rounded.Logout
 import androidx.compose.material.icons.automirrored.rounded.ShortText
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material.icons.outlined.Bookmarks
@@ -14,6 +15,7 @@ import androidx.compose.material.icons.rounded.Add
 import androidx.compose.material.icons.rounded.Bookmark
 import androidx.compose.material.icons.rounded.BookmarkBorder
 import androidx.compose.material.icons.rounded.Bookmarks
+import androidx.compose.material.icons.rounded.Cancel
 import androidx.compose.material.icons.rounded.Check
 import androidx.compose.material.icons.rounded.Close
 import androidx.compose.material.icons.rounded.Delete
@@ -25,6 +27,7 @@ import androidx.compose.material.icons.rounded.Upcoming
 import androidx.compose.material.icons.rounded.ViewDay
 
 object HyaIcons {
+    val Logout = Icons.AutoMirrored.Rounded.Logout
     val Add = Icons.Rounded.Add
     val ArrowBack = Icons.AutoMirrored.Rounded.ArrowBack
     val Bookmark = Icons.Rounded.Bookmark
@@ -43,4 +46,5 @@ object HyaIcons {
     val UpcomingBorder = Icons.Outlined.Upcoming
     val ViewDay = Icons.Rounded.ViewDay
     val Delete = Icons.Rounded.Delete
+    val Cancel = Icons.Rounded.Cancel
 }
