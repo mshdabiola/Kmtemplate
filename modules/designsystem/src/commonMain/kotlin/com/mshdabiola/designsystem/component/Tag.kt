@@ -25,23 +25,26 @@ fun HyaTopicTag(
     text: @Composable () -> Unit,
 ) {
     Box(modifier = modifier) {
-        val containerColor = if (followed) {
-            MaterialTheme.colorScheme.primaryContainer
-        } else {
-            MaterialTheme.colorScheme.surfaceVariant.copy(
-                alpha = HyaTagDefaults.UNFOLLOWED_TOPIC_TAG_CONTAINER_ALPHA,
-            )
-        }
+        val containerColor =
+            if (followed) {
+                MaterialTheme.colorScheme.primaryContainer
+            } else {
+                MaterialTheme.colorScheme.surfaceVariant.copy(
+                    alpha = HyaTagDefaults.UNFOLLOWED_TOPIC_TAG_CONTAINER_ALPHA,
+                )
+            }
         TextButton(
             onClick = onClick,
             enabled = enabled,
-            colors = ButtonDefaults.textButtonColors(
-                containerColor = containerColor,
-                contentColor = contentColorFor(backgroundColor = containerColor),
-                disabledContainerColor = MaterialTheme.colorScheme.onSurface.copy(
-                    alpha = HyaTagDefaults.DISABLED_TOPIC_TAG_CONTAINER_ALPHA,
+            colors =
+                ButtonDefaults.textButtonColors(
+                    containerColor = containerColor,
+                    contentColor = contentColorFor(backgroundColor = containerColor),
+                    disabledContainerColor =
+                        MaterialTheme.colorScheme.onSurface.copy(
+                            alpha = HyaTagDefaults.DISABLED_TOPIC_TAG_CONTAINER_ALPHA,
+                        ),
                 ),
-            ),
         ) {
             ProvideTextStyle(value = MaterialTheme.typography.labelSmall) {
                 text()
