@@ -1,4 +1,4 @@
-package org.example.project
+package com.mshdabiola.hydraulicapp
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
