@@ -1,10 +1,7 @@
 package com.mshdabiola.model
 
-enum class Platform {
-    Android,
-    IOS,
-    Linux,
-    MacOS,
-    Windows,
-    Web,
+interface Platform {
+    val name: String
 }
+
+expect fun getPlatform(): Platform
