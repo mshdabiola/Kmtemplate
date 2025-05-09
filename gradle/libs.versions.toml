@@ -270,6 +270,5 @@ compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "
 screenshot = { id = "com.android.compose.screenshot", version.ref = "screenshot" }
 kover = { id = "org.jetbrains.kotlinx.kover", version.ref = "kover" }
 composehot = { id = "org.jetbrains.compose.hot-reload", version.ref = "composehot" }
-foojay = { id = "org.gradle.toolchains.foojay-resolver-convention", version.ref = "foojay" }
 ktlint = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "ktlint" }
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }

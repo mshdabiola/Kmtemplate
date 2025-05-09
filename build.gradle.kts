@@ -27,7 +27,7 @@ plugins {
     alias(libs.plugins.screenshot) apply false
     alias(libs.plugins.kover) apply false
     alias(libs.plugins.composehot) apply false
-    alias(libs.plugins.foojay) apply false
+//    alias(libs.plugins.foojay) apply false
     alias(libs.plugins.module.graph)
     alias(libs.plugins.ktlint) apply false
     alias(libs.plugins.detekt) apply false
