@@ -7,6 +7,22 @@ pluginManagement {
         gradlePluginPortal()
     }
 }
+
+// settings.gradle.kts
+plugins {
+    id("org.gradle.toolchains.foojay-resolver") version "0.10.0"
+}
+
+toolchainManagement {
+    jvm {
+        javaRepositories {
+            repository("foojay") {
+                resolverClass.set(org.gradle.toolchains.foojay.FoojayToolchainResolver::class.java)
+            }
+        }
+    }
+}
+
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 dependencyResolutionManagement {
