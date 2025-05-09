@@ -55,78 +55,78 @@ fun CommonNavigation(
                     .padding(8.dp)
                     .verticalScroll(state = rememberScrollState()),
         ) {
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                Icon(HyaIcons.LocalLibrary, "Logo")
-                Text(
-                    appName,
-                    style = MaterialTheme.typography.headlineSmall,
-                )
-            }
-            Spacer(Modifier.height(32.dp))
-            if (showLong) {
-                Column(
-                    verticalArrangement = Arrangement.spacedBy(8.dp),
-                ) {
-                    Text("Main")
-                    TOP_LEVEL_ROUTES
-                        .forEachIndexed { index, navigator ->
-                            NavigationDrawerItem(
-                                selected =
-                                    navController
-                                        .currentBackStackEntryAsState().value?.destination?.hasRoute(
-                                            route = navigator.route::class,
-                                        )
-                                        == true,
-                                label = { Text(cbtNavigator[index]) },
-                                onClick = {
-                                    navController.navigate(
-                                        navigator.route,
-                                        navOptions =
-                                            navOptions {
-                                                launchSingleTop
-                                                restoreState
-                                            },
-                                    )
-                                },
-                                colors = color,
-                                icon = { Icon(navigator.icon, cbtNavigator[index]) },
-                            )
-                        }
-                }
-            }
-
-            Spacer(Modifier.height(64.dp))
-
-            Column(
-                verticalArrangement = Arrangement.spacedBy(8.dp),
-            ) {
-                SETTING_LEVEL_ROUTES
-                    .forEachIndexed { index, navigator ->
-                        NavigationDrawerItem(
-                            selected =
-                                navController
-                                    .currentBackStackEntryAsState()
-                                    .value?.destination
-                                    ?.hasRoute(route = navigator.route::class)
-                                    == true,
-                            label = { Text(settingNavigator[index]) },
-                            onClick = {
-                                navController.navigate(navigator.route)
-                            },
-                            colors = color,
-                            icon = {
-                                Icon(
-                                    navigator.icon,
-                                    settingNavigator[index],
-                                )
-                            },
-                        )
-                    }
-            }
-            Spacer(Modifier.height(8.dp))
-
-            HorizontalDivider()
-            Spacer(Modifier.height(8.dp))
+//            Row(verticalAlignment = Alignment.CenterVertically) {
+//                Icon(HyaIcons.LocalLibrary, "Logo")
+//                Text(
+//                    appName,
+//                    style = MaterialTheme.typography.headlineSmall,
+//                )
+//            }
+//            Spacer(Modifier.height(32.dp))
+//            if (showLong) {
+//                Column(
+//                    verticalArrangement = Arrangement.spacedBy(8.dp),
+//                ) {
+//                    Text("Main")
+//                    TOP_LEVEL_ROUTES
+//                        .forEachIndexed { index, navigator ->
+//                            NavigationDrawerItem(
+//                                selected =
+//                                    navController
+//                                        .currentBackStackEntryAsState().value?.destination?.hasRoute(
+//                                            route = navigator.route::class,
+//                                        )
+//                                        == true,
+//                                label = { Text(cbtNavigator[index]) },
+//                                onClick = {
+//                                    navController.navigate(
+//                                        navigator.route,
+//                                        navOptions =
+//                                            navOptions {
+//                                                launchSingleTop
+//                                                restoreState
+//                                            },
+//                                    )
+//                                },
+//                                colors = color,
+//                                icon = { Icon(navigator.icon, cbtNavigator[index]) },
+//                            )
+//                        }
+//                }
+//            }
+//
+//            Spacer(Modifier.height(64.dp))
+//
+//            Column(
+//                verticalArrangement = Arrangement.spacedBy(8.dp),
+//            ) {
+//                SETTING_LEVEL_ROUTES
+//                    .forEachIndexed { index, navigator ->
+//                        NavigationDrawerItem(
+//                            selected =
+//                                navController
+//                                    .currentBackStackEntryAsState()
+//                                    .value?.destination
+//                                    ?.hasRoute(route = navigator.route::class)
+//                                    == true,
+//                            label = { Text(settingNavigator[index]) },
+//                            onClick = {
+//                                navController.navigate(navigator.route)
+//                            },
+//                            colors = color,
+//                            icon = {
+//                                Icon(
+//                                    navigator.icon,
+//                                    settingNavigator[index],
+//                                )
+//                            },
+//                        )
+//                    }
+//            }
+//            Spacer(Modifier.height(8.dp))
+//
+//            HorizontalDivider()
+//            Spacer(Modifier.height(8.dp))
 
             ProfileCard()
         }
