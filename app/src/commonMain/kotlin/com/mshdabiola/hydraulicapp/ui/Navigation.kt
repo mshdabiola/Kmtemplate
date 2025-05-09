@@ -55,13 +55,13 @@ fun CommonNavigation(
                     .padding(8.dp)
                     .verticalScroll(state = rememberScrollState()),
         ) {
-//            Row(verticalAlignment = Alignment.CenterVertically) {
-//                Icon(HyaIcons.LocalLibrary, "Logo")
-//                Text(
-//                    appName,
-//                    style = MaterialTheme.typography.headlineSmall,
-//                )
-//            }
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Icon(HyaIcons.LocalLibrary, "Logo")
+                Text(
+                    appName,
+                    style = MaterialTheme.typography.headlineSmall,
+                )
+            }
 //            Spacer(Modifier.height(32.dp))
 //            if (showLong) {
 //                Column(
