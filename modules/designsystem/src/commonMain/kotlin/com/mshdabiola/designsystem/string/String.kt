@@ -39,14 +39,14 @@ fun getFileUri(fileName: String) = Res.getUri(fileName)
 
 @OptIn(ExperimentalResourceApi::class)
 suspend fun getByte(fileName: String) = Res.readBytes(fileName)
-
-val mainNavigator
-    @Composable
-    get() = stringArrayResource(Res.array.main_navigator)
-val settingNavigator
-    @Composable
-    get() = stringArrayResource(Res.array.setting_navigator)
-
-val cbtNavigator
-    @Composable
-    get() = stringArrayResource(Res.array.str_arr)
+//
+//val mainNavigator
+//    @Composable
+//    get() = stringArrayResource(Res.array.main_navigator)
+//val settingNavigator
+//    @Composable
+//    get() = stringArrayResource(Res.array.setting_navigator)
+//
+//val cbtNavigator
+//    @Composable
+//    get() = stringArrayResource(Res.array.str_arr)
