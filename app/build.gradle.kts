@@ -127,6 +127,7 @@ kotlin {
             implementation(libs.androidx.compose.material3.adaptive)
             implementation(libs.androidx.compose.material3.adaptive.layout)
             implementation(libs.androidx.compose.material3.adaptive.navigation)
+            implementation(compose.components.resources)
 
 
         }
