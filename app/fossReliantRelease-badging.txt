@@ -1,4 +1,4 @@
-package: name='com.mshdabiola.hydraulicapp.foss' versionCode='128' versionName='1.2.8' platformBuildVersionName='15' platformBuildVersionCode='35' compileSdkVersion='35' compileSdkVersionCodename='15'
+package: name='com.mshdabiola.hydraulicapp.foss' versionCode='129' versionName='1.2.9' platformBuildVersionName='15' platformBuildVersionCode='35' compileSdkVersion='35' compileSdkVersionCodename='15'
 minSdkVersion:'24'
 targetSdkVersion:'35'
 uses-permission: name='android.permission.WRITE_EXTERNAL_STORAGE'
