@@ -84,7 +84,7 @@ class AndroidLibraryConventionPlugin : Plugin<Project> {
                     }
                 }
 
-                jvmToolchain(17)
+                jvmToolchain(21)
                 applyDefaultHierarchyTemplate {
                     common {
                         group("nonJs") {
@@ -103,9 +103,9 @@ class AndroidLibraryConventionPlugin : Plugin<Project> {
                         }
 
                     }
-                   commonMain.dependencies {
-                            implementation(libs.findLibrary("koin.core").get())
-                            implementation(libs.findLibrary("kermit").get())
+                    commonMain.dependencies {
+                        implementation(libs.findLibrary("koin.core").get())
+                        implementation(libs.findLibrary("kermit").get())
                     }
 
                     androidMain.dependencies {
