@@ -48,7 +48,7 @@
     <a href="https://f-droid.org/packages/ru.tech.hydraulicshrinker"><img alt="F-Droid" src="./fastlane/metadata/android/en-US/images/buttons/fdroid.svg" height="60"/></a>
     <a href="https://github.com/mshdabiola/hydraulicapp/releases/latest"><img alt="GitHub" src="./fastlane/metadata/android/en-US/images/buttons/github.svg" height="60"/></a>
   <a href="https://hydraulicapp-desktop.onrender.com"><img alt="Desktop Download" src="./fastlane/metadata/android/en-US/images/buttons/desktop.svg" height="60"/></a>
-    <a href="https://hydraulicapp.onrender.com"><img alt="Hydraulic Online" src="./fastlane/metadata/android/en-US/images/buttons/online.svg" height="60"/></a>
+    <a href="https://hydraulicapp.onrender.com"><img alt="HydraulicApp Online" src="./fastlane/metadata/android/en-US/images/buttons/online.svg" height="60"/></a>
    
 
 </div>
@@ -58,7 +58,7 @@
 </div>
 
 <div align="center"> 
-     <h1>Hydraulic Compose Multiplatform Template</h1>
+     <h1>HydraulicApp Compose Multiplatform Template</h1>
 </div>
 
 <div style="text-align: center;">
@@ -227,8 +227,8 @@ Distribute the APK through your preferred channels (e.g., GitHub Releases, F-Dro
 
 ### Desktop
 
-This project leverages Hydraulic Conveyor for packaging and distributing the Desktop application.
-Hydraulic Conveyor simplifies the creation of installers and distributable packages across various
+This project leverages HydraulicApp Conveyor for packaging and distributing the Desktop application.
+HydraulicApp Conveyor simplifies the creation of installers and distributable packages across various
 operating systems (Windows, macOS, Linux).
 
 1. Install hydraulic conveyor at [Hydraulic](https://downloads.hydraulic.dev/)
@@ -362,5 +362,5 @@ And **[follow](https://github.com/mshdabiola)** me for my next creations! 🤩
 
 # License
 
-**Hydraulic** is distributed under the terms of the GNU License (Version 2.0). See the
+**HydraulicApp** is distributed under the terms of the GNU License (Version 2.0). See the
 [license](LICENSE) for more information.
