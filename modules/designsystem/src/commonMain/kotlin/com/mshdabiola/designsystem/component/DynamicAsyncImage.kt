@@ -19,8 +19,8 @@ import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.platform.LocalInspectionMode
 import androidx.compose.ui.unit.dp
 import com.mshdabiola.designsystem.theme.LocalTintTheme
-import hydraulic.modules.designsystem.generated.resources.Res
-import hydraulic.modules.designsystem.generated.resources.icon
+import hydraulicapp.modules.designsystem.generated.resources.Res
+import hydraulicapp.modules.designsystem.generated.resources.icon
 import org.jetbrains.compose.resources.painterResource
 
 /**

@@ -1,8 +1,8 @@
 package com.mshdabiola.designsystem.drawable
 
 import androidx.compose.runtime.Composable
-import hydraulic.modules.designsystem.generated.resources.Res
-import hydraulic.modules.designsystem.generated.resources.icon
+import hydraulicapp.modules.designsystem.generated.resources.Res
+import hydraulicapp.modules.designsystem.generated.resources.icon
 import org.jetbrains.compose.resources.painterResource
 
 val defaultAppIcon

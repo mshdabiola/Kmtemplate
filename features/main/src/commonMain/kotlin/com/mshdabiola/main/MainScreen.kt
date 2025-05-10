@@ -49,11 +49,11 @@ import com.mshdabiola.designsystem.theme.LocalTintTheme
 import com.mshdabiola.model.Note
 import com.mshdabiola.ui.SharedContentPreview
 import com.mshdabiola.ui.noteItems
-import hydraulic.features.main.generated.resources.Res
-import hydraulic.features.main.generated.resources.features_main_empty_description
-import hydraulic.features.main.generated.resources.features_main_empty_error
-import hydraulic.features.main.generated.resources.features_main_img_empty_bookmarks
-import hydraulic.features.main.generated.resources.features_main_loading
+import hydraulicapp.features.main.generated.resources.Res
+import hydraulicapp.features.main.generated.resources.features_main_empty_description
+import hydraulicapp.features.main.generated.resources.features_main_empty_error
+import hydraulicapp.features.main.generated.resources.features_main_img_empty_bookmarks
+import hydraulicapp.features.main.generated.resources.features_main_loading
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview

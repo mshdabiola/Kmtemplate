@@ -60,7 +60,7 @@ fun mainApp() {
 }
 
 fun main() {
-    val path = File("${System.getProperty("user.home")}/AppData/Local/hydraulic")
+    val path = File("${System.getProperty("user.home")}/AppData/Local/hydraulicapp")
     if (path.exists().not()) {
         path.mkdirs()
     }

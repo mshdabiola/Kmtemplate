@@ -36,9 +36,9 @@ import com.mshdabiola.designsystem.icon.HyaIcons
 import com.mshdabiola.model.DarkThemeConfig
 import com.mshdabiola.model.ThemeBrand
 import com.mshdabiola.ui.Waiting
-import hydraulic.features.setting.generated.resources.Res
-import hydraulic.features.setting.generated.resources.daynight
-import hydraulic.features.setting.generated.resources.theme
+import hydraulicapp.features.setting.generated.resources.Res
+import hydraulicapp.features.setting.generated.resources.daynight
+import hydraulicapp.features.setting.generated.resources.theme
 import org.jetbrains.compose.resources.stringArrayResource
 
 // import org.koin.androidx.compose.koinViewModel

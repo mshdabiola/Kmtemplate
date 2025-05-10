@@ -6,12 +6,12 @@ import org.jetbrains.kotlin.com.intellij.lang.ASTNode
 import org.jetbrains.kotlin.psi.KtCallExpression
 
 class PreferMethodNameRule : Rule(
-    RuleId("hydraulic:prefer-method-name"),
+    RuleId("hydraulicapp:prefer-method-name"),
     about =
         Rule.About(
             maintainer = "Your Name",
-            repositoryUrl = "https://github.com/mshdabiola/hydraulic",
-            issueTrackerUrl = "https://github.com/mshdabiola/hydraulic",
+            repositoryUrl = "https://github.com/mshdabiola/hydraulicapp",
+            issueTrackerUrl = "https://github.com/mshdabiola/hydraulicapp",
         ),
 ) {
     // Define the mapping of deprecated method names to preferred method names
