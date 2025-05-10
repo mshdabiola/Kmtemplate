@@ -62,71 +62,71 @@ fun CommonNavigation(
                     style = MaterialTheme.typography.headlineSmall,
                 )
             }
-//            Spacer(Modifier.height(32.dp))
-//            if (showLong) {
-//                Column(
-//                    verticalArrangement = Arrangement.spacedBy(8.dp),
-//                ) {
-//                    Text("Main")
-//                    TOP_LEVEL_ROUTES
-//                        .forEachIndexed { index, navigator ->
-//                            NavigationDrawerItem(
-//                                selected =
-//                                    navController
-//                                        .currentBackStackEntryAsState().value?.destination?.hasRoute(
-//                                            route = navigator.route::class,
-//                                        )
-//                                        == true,
-//                                label = { Text(cbtNavigator[index]) },
-//                                onClick = {
-//                                    navController.navigate(
-//                                        navigator.route,
-//                                        navOptions =
-//                                            navOptions {
-//                                                launchSingleTop
-//                                                restoreState
-//                                            },
-//                                    )
-//                                },
-//                                colors = color,
-//                                icon = { Icon(navigator.icon, cbtNavigator[index]) },
-//                            )
-//                        }
-//                }
-//            }
-//
-//            Spacer(Modifier.height(64.dp))
-//
-//            Column(
-//                verticalArrangement = Arrangement.spacedBy(8.dp),
-//            ) {
-//                SETTING_LEVEL_ROUTES
-//                    .forEachIndexed { index, navigator ->
-//                        NavigationDrawerItem(
-//                            selected =
-//                                navController
-//                                    .currentBackStackEntryAsState()
-//                                    .value?.destination
-//                                    ?.hasRoute(route = navigator.route::class)
-//                                    == true,
-//                            label = { Text(settingNavigator[index]) },
-//                            onClick = {
-//                                navController.navigate(navigator.route)
-//                            },
-//                            colors = color,
-//                            icon = {
-//                                Icon(
-//                                    navigator.icon,
-//                                    settingNavigator[index],
-//                                )
-//                            },
-//                        )
-//                    }
-//            }
-//            Spacer(Modifier.height(8.dp))
-//
-//            HorizontalDivider()
-//            Spacer(Modifier.height(8.dp))
+            Spacer(Modifier.height(32.dp))
+            if (showLong) {
+                Column(
+                    verticalArrangement = Arrangement.spacedBy(8.dp),
+                ) {
+                    Text("Main")
+                    TOP_LEVEL_ROUTES
+                        .forEachIndexed { index, navigator ->
+                            NavigationDrawerItem(
+                                selected =
+                                    navController
+                                        .currentBackStackEntryAsState().value?.destination?.hasRoute(
+                                            route = navigator.route::class,
+                                        )
+                                        == true,
+                                label = { Text("Testing") },
+                                onClick = {
+                                    navController.navigate(
+                                        navigator.route,
+                                        navOptions =
+                                            navOptions {
+                                                launchSingleTop
+                                                restoreState
+                                            },
+                                    )
+                                },
+                                colors = color,
+                                icon = { Icon(navigator.icon, "Testing") },
+                            )
+                        }
+                }
+            }
+
+            Spacer(Modifier.height(64.dp))
+
+            Column(
+                verticalArrangement = Arrangement.spacedBy(8.dp),
+            ) {
+                SETTING_LEVEL_ROUTES
+                    .forEachIndexed { index, navigator ->
+                        NavigationDrawerItem(
+                            selected =
+                                navController
+                                    .currentBackStackEntryAsState()
+                                    .value?.destination
+                                    ?.hasRoute(route = navigator.route::class)
+                                    == true,
+                            label = { Text("Setting") },
+                            onClick = {
+                                navController.navigate(navigator.route)
+                            },
+                            colors = color,
+                            icon = {
+                                Icon(
+                                    navigator.icon,
+                                    "Setting",
+                                )
+                            },
+                        )
+                    }
+            }
+            Spacer(Modifier.height(8.dp))
+
+            HorizontalDivider()
+            Spacer(Modifier.height(8.dp))
 
             ProfileCard()
         }
