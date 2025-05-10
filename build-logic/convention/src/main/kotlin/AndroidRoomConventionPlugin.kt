@@ -54,7 +54,7 @@ class AndroidRoomConventionPlugin : Plugin<Project> {
             extensions.configure<KotlinMultiplatformExtension> {
                 androidTarget()
                 jvm()
-                jvmToolchain(21)
+                jvmToolchain(17)
                 applyDefaultHierarchyTemplate {
                     common {
                         group("nonJs") {
