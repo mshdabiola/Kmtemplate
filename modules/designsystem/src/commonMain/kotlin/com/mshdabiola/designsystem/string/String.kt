@@ -1,15 +1,15 @@
 package com.mshdabiola.designsystem.string
 
 import androidx.compose.runtime.Composable
-import hydraulic.modules.designsystem.generated.resources.Res
-import hydraulic.modules.designsystem.generated.resources.app_name
-import hydraulic.modules.designsystem.generated.resources.main_navigator
-import hydraulic.modules.designsystem.generated.resources.modules_ui_cbt_exam_part
-import hydraulic.modules.designsystem.generated.resources.modules_ui_cbt_sections
-import hydraulic.modules.designsystem.generated.resources.modules_ui_cbt_subject
-import hydraulic.modules.designsystem.generated.resources.modules_ui_cbt_type
-import hydraulic.modules.designsystem.generated.resources.setting_navigator
-import hydraulic.modules.designsystem.generated.resources.str_arr
+import hydraulicapp.modules.designsystem.generated.resources.Res
+import hydraulicapp.modules.designsystem.generated.resources.app_name
+import hydraulicapp.modules.designsystem.generated.resources.main_navigator
+import hydraulicapp.modules.designsystem.generated.resources.modules_ui_cbt_exam_part
+import hydraulicapp.modules.designsystem.generated.resources.modules_ui_cbt_sections
+import hydraulicapp.modules.designsystem.generated.resources.modules_ui_cbt_subject
+import hydraulicapp.modules.designsystem.generated.resources.modules_ui_cbt_type
+import hydraulicapp.modules.designsystem.generated.resources.setting_navigator
+import hydraulicapp.modules.designsystem.generated.resources.str_arr
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.stringArrayResource
 import org.jetbrains.compose.resources.stringResource
