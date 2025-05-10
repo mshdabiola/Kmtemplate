@@ -3,13 +3,10 @@ package com.mshdabiola.designsystem.string
 import androidx.compose.runtime.Composable
 import hydraulicapp.modules.designsystem.generated.resources.Res
 import hydraulicapp.modules.designsystem.generated.resources.app_name
-import hydraulicapp.modules.designsystem.generated.resources.main_navigator
 import hydraulicapp.modules.designsystem.generated.resources.modules_ui_cbt_exam_part
 import hydraulicapp.modules.designsystem.generated.resources.modules_ui_cbt_sections
 import hydraulicapp.modules.designsystem.generated.resources.modules_ui_cbt_subject
 import hydraulicapp.modules.designsystem.generated.resources.modules_ui_cbt_type
-import hydraulicapp.modules.designsystem.generated.resources.setting_navigator
-import hydraulicapp.modules.designsystem.generated.resources.str_arr
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.stringArrayResource
 import org.jetbrains.compose.resources.stringResource
@@ -40,13 +37,13 @@ fun getFileUri(fileName: String) = Res.getUri(fileName)
 @OptIn(ExperimentalResourceApi::class)
 suspend fun getByte(fileName: String) = Res.readBytes(fileName)
 //
-//val mainNavigator
+// val mainNavigator
 //    @Composable
 //    get() = stringArrayResource(Res.array.main_navigator)
-//val settingNavigator
+// val settingNavigator
 //    @Composable
 //    get() = stringArrayResource(Res.array.setting_navigator)
 //
-//val cbtNavigator
+// val cbtNavigator
 //    @Composable
 //    get() = stringArrayResource(Res.array.str_arr)

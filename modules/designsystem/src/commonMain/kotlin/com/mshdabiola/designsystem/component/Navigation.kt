@@ -173,10 +173,9 @@ fun HyaNavigationRail(
 fun HyaNavigationSuiteScaffold(
     navigationSuiteItems: HyaNavigationSuiteScope.() -> Unit,
     modifier: Modifier = Modifier,
-    layoutType: NavigationSuiteType ,
+    layoutType: NavigationSuiteType,
     content: @Composable () -> Unit,
 ) {
-
     val navigationSuiteItemColors =
         NavigationSuiteItemColors(
             navigationBarItemColors =

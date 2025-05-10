@@ -44,22 +44,24 @@ fun CommonNavigation(
     showLong: Boolean = true,
 ) {
     val color = NavigationDrawerItemDefaults.colors(unselectedContainerColor = Color.Transparent)
-    val mainArray = stringArrayResource(Res.array.main_navigator).ifEmpty {
-        listOf(
-            "Contributions",
-            "NearBy",
-            "Explore",
-            "Bookmarks",
-            "Review",
-        )
-    }
-    val settingArray = stringArrayResource(Res.array.setting_navigator).ifEmpty {
-        listOf(
-            "Setting",
-            "Feedback",
-            "About",
-        )
-    }
+    val mainArray =
+        stringArrayResource(Res.array.main_navigator).ifEmpty {
+            listOf(
+                "Contributions",
+                "NearBy",
+                "Explore",
+                "Bookmarks",
+                "Review",
+            )
+        }
+    val settingArray =
+        stringArrayResource(Res.array.setting_navigator).ifEmpty {
+            listOf(
+                "Setting",
+                "Feedback",
+                "About",
+            )
+        }
     print("main string ${mainArray.joinToString()}")
     Surface(
         modifier = modifier,
@@ -94,7 +96,7 @@ fun CommonNavigation(
                                         .currentBackStackEntryAsState().value?.destination?.hasRoute(
                                             route = navigator.route::class,
                                         )
-                                            == true,
+                                        == true,
                                 label = { Text(mainArray[index]) },
                                 onClick = {
                                     navController.navigate(
@@ -126,7 +128,7 @@ fun CommonNavigation(
                                     .currentBackStackEntryAsState()
                                     .value?.destination
                                     ?.hasRoute(route = navigator.route::class)
-                                        == true,
+                                    == true,
                             label = { Text(settingArray[index]) },
                             onClick = {
                                 navController.navigate(navigator.route)
@@ -156,22 +158,24 @@ fun CommonRail(
     modifier: Modifier = Modifier,
     navController: NavController,
 ) {
-    val mainArray = stringArrayResource(Res.array.main_navigator).ifEmpty {
-        listOf(
-            "Contributions",
-            "NearBy",
-            "Explore",
-            "Bookmarks",
-            "Review",
-        )
-    }
-    val settingArray = stringArrayResource(Res.array.setting_navigator).ifEmpty {
-        listOf(
-            "Setting",
-            "Feedback",
-            "About",
-        )
-    }
+    val mainArray =
+        stringArrayResource(Res.array.main_navigator).ifEmpty {
+            listOf(
+                "Contributions",
+                "NearBy",
+                "Explore",
+                "Bookmarks",
+                "Review",
+            )
+        }
+    val settingArray =
+        stringArrayResource(Res.array.setting_navigator).ifEmpty {
+            listOf(
+                "Setting",
+                "Feedback",
+                "About",
+            )
+        }
     print("main string ${mainArray.joinToString()}")
     HyaNavigationRail(modifier) {
         Column(
@@ -199,7 +203,7 @@ fun CommonRail(
                                     .currentBackStackEntryAsState()
                                     .value?.destination
                                     ?.hasRoute(route = navigator.route::class)
-                                        == true,
+                                    == true,
                             label = { Text(settingArray[index]) },
                             onClick = {
                                 navController.navigate(navigator.route)
@@ -227,7 +231,7 @@ fun CommonRail(
                                     .currentBackStackEntryAsState()
                                     .value
                                     ?.destination?.hasRoute(route = navigator.route::class)
-                                        == true,
+                                    == true,
                             label = { Text(settingArray[index]) },
                             onClick = {
                                 navController.navigate(
@@ -261,22 +265,24 @@ fun CommonBar(
     modifier: Modifier = Modifier,
     navController: NavController,
 ) {
-    val mainArray = stringArrayResource(Res.array.main_navigator).ifEmpty {
-        listOf(
-            "Contributions",
-            "NearBy",
-            "Explore",
-            "Bookmarks",
-            "Review",
-        )
-    }
-    val settingArray = stringArrayResource(Res.array.setting_navigator).ifEmpty {
-        listOf(
-            "Setting",
-            "Feedback",
-            "About",
-        )
-    }
+    val mainArray =
+        stringArrayResource(Res.array.main_navigator).ifEmpty {
+            listOf(
+                "Contributions",
+                "NearBy",
+                "Explore",
+                "Bookmarks",
+                "Review",
+            )
+        }
+    val settingArray =
+        stringArrayResource(Res.array.setting_navigator).ifEmpty {
+            listOf(
+                "Setting",
+                "Feedback",
+                "About",
+            )
+        }
     print("main string ${mainArray.joinToString()}")
     HyaNavigationBar(modifier) {
         TOP_LEVEL_ROUTES
@@ -287,7 +293,7 @@ fun CommonBar(
                             .currentBackStackEntryAsState()
                             .value?.destination
                             ?.hasRoute(route = navigator.route::class)
-                                == true,
+                            == true,
                     label = { Text(mainArray[index]) },
                     onClick = {
                         navController.navigate(
