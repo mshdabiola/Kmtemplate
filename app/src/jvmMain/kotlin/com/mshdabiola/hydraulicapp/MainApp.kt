@@ -19,11 +19,13 @@ import co.touchlab.kermit.koin.KermitKoinLogger
 import co.touchlab.kermit.loggerConfigInit
 import co.touchlab.kermit.platformLogWriter
 import com.mshdabiola.designsystem.drawable.defaultAppIcon
-import com.mshdabiola.designsystem.string.appName
+import com.mshdabiola.hydraulicapp.app.generated.resources.Res
+import com.mshdabiola.hydraulicapp.app.generated.resources.app_name
 import com.mshdabiola.hydraulicapp.di.appModule
 import com.mshdabiola.hydraulicapp.ui.HydraulicApp
 import com.mshdabiola.ui.SplashScreen
 import kotlinx.coroutines.delay
+import org.jetbrains.compose.resources.stringResource
 import org.koin.core.context.GlobalContext.startKoin
 import org.koin.dsl.module
 import java.io.File
@@ -40,7 +42,7 @@ fun mainApp() {
         val version = "1.2.7"
         Window(
             onCloseRequest = ::exitApplication,
-            title = "$appName v$version",
+            title = "${stringResource(Res.string.app_name)} v$version",
             icon = defaultAppIcon,
             state = windowState,
         ) {
@@ -52,7 +54,9 @@ fun mainApp() {
             Box(Modifier.fillMaxSize()) {
                 HydraulicApp()
                 if (show.value) {
-                    SplashScreen()
+                    SplashScreen(
+                        appName = stringResource(Res.string.app_name),
+                    )
                 }
             }
         }
