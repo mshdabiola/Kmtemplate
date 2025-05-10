@@ -15,12 +15,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.mshdabiola.designsystem.drawable.defaultAppIcon
-import com.mshdabiola.designsystem.string.appName
 import com.mshdabiola.designsystem.theme.MyColors
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
-fun SplashScreen(modifier: Modifier = Modifier) {
+fun SplashScreen(
+    modifier: Modifier = Modifier,
+    appName: String = "HydraulicApp",
+) {
     Surface(
         modifier = modifier,
         color = MyColors.Default.primaryLight,

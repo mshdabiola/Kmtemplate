@@ -11,7 +11,7 @@ import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.stringArrayResource
 import org.jetbrains.compose.resources.stringResource
 
-val appName
+val appName2
     @Composable
     get() = stringResource(Res.string.app_name)
 
@@ -19,7 +19,7 @@ val subject
     @Composable
     get() = stringResource(Res.string.modules_ui_cbt_subject)
 
-val type
+val type2
     @Composable
     get() = stringResource(Res.string.modules_ui_cbt_type)
 
