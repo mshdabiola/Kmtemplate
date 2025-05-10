@@ -30,12 +30,13 @@ import com.mshdabiola.designsystem.component.HyaNavigationBarItem
 import com.mshdabiola.designsystem.component.HyaNavigationRail
 import com.mshdabiola.designsystem.component.HyaNavigationRailItem
 import com.mshdabiola.designsystem.icon.HyaIcons
-import com.mshdabiola.designsystem.string.appName
 import com.mshdabiola.hydraulicapp.app.generated.resources.Res
+import com.mshdabiola.hydraulicapp.app.generated.resources.app_name
 import com.mshdabiola.hydraulicapp.app.generated.resources.main_navigator
 import com.mshdabiola.hydraulicapp.app.generated.resources.setting_navigator
 import com.mshdabiola.ui.ProfileCard
 import org.jetbrains.compose.resources.stringArrayResource
+import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun CommonNavigation(
@@ -78,7 +79,7 @@ fun CommonNavigation(
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Icon(HyaIcons.LocalLibrary, "Logo")
                 Text(
-                    appName,
+                    stringResource(Res.string.app_name),
                     style = MaterialTheme.typography.headlineSmall,
                 )
             }
