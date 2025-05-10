@@ -15,10 +15,10 @@ androidxComposeMaterial3Adaptive = "1.1.0"
 androidxComposeMaterial3AdaptiveNavigationSuite = "1.3.2"
 androidxCore = "1.16.0"
 androidxCoreSplashscreen = "1.0.1"
-androidxDataStore = "1.1.5"
+androidxDataStore = "1.1.6"
 androidxEspresso = "3.6.1"
 androidxHiltNavigationCompose = "1.2.0"
-androidxLifecycle = "2.8.7"
+androidxLifecycle = "2.9.0"
 androidxMacroBenchmark = "1.3.4"
 androidxMetrics = "1.0.0-beta02"
 androidxProfileinstaller = "1.4.1"
@@ -59,8 +59,8 @@ kstore ="0.9.1"
 
 compose-plugin = "1.8.0"
 composeNavigation="2.9.0-beta01"
-androidxNavigationTest = "2.8.9" #for nav test
-compose = "1.8.0"
+androidxNavigationTest = "2.9.0" #for nav test
+compose = "1.8.1"
 composehot="1.0.0-alpha09"
 foojay="0.10.0"
 
@@ -74,10 +74,10 @@ firebaseCrashylyticsPlugins = "2.9.9"
 playServicesMlkitTextRecognition = "19.0.0"
 
 ktor = "3.1.2"
-uiTextGoogleFonts = "1.8.0"
+uiTextGoogleFonts = "1.8.1"
 
-koin = "4.0.4"
-koinCompose = "4.0.4"
+koin = "4.1.0-Beta10"
+koinCompose = "4.1.0-Beta10"
 
 conveyor = "1.12"
 
@@ -85,7 +85,7 @@ kermit = "2.0.5"
 slf4jSimple = "2.0.17"
 
 androidx-paging = "3.3.6"
-sqlite = "2.5.0"
+sqlite = "2.5.1"
 kotlinxCollectionImmutable = "0.3.8"
 windowSizeClass = "0.5.0"
 
@@ -97,8 +97,8 @@ detekt = "1.23.8"
 series = "0.0.19"
 calf = "0.7.1"
 
-versionCode = "127"
-versionName = "1.2.7"
+versionCode = "128"
+versionName = "1.2.8"
 
 
 
@@ -270,6 +270,5 @@ compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "
 screenshot = { id = "com.android.compose.screenshot", version.ref = "screenshot" }
 kover = { id = "org.jetbrains.kotlinx.kover", version.ref = "kover" }
 composehot = { id = "org.jetbrains.compose.hot-reload", version.ref = "composehot" }
-foojay = { id = "org.gradle.toolchains.foojay-resolver-convention", version.ref = "foojay" }
 ktlint = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "ktlint" }
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }

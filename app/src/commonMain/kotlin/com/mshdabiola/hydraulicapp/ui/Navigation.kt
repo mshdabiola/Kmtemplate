@@ -30,10 +30,13 @@ import com.mshdabiola.designsystem.component.HyaNavigationBarItem
 import com.mshdabiola.designsystem.component.HyaNavigationRail
 import com.mshdabiola.designsystem.component.HyaNavigationRailItem
 import com.mshdabiola.designsystem.icon.HyaIcons
-import com.mshdabiola.designsystem.string.appName
-import com.mshdabiola.designsystem.string.cbtNavigator
-import com.mshdabiola.designsystem.string.settingNavigator
+import com.mshdabiola.hydraulicapp.app.generated.resources.Res
+import com.mshdabiola.hydraulicapp.app.generated.resources.app_name
+import com.mshdabiola.hydraulicapp.app.generated.resources.main_navigator
+import com.mshdabiola.hydraulicapp.app.generated.resources.setting_navigator
 import com.mshdabiola.ui.ProfileCard
+import org.jetbrains.compose.resources.stringArrayResource
+import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun CommonNavigation(
@@ -42,7 +45,25 @@ fun CommonNavigation(
     showLong: Boolean = true,
 ) {
     val color = NavigationDrawerItemDefaults.colors(unselectedContainerColor = Color.Transparent)
-
+    val mainArray =
+        stringArrayResource(Res.array.main_navigator).ifEmpty {
+            listOf(
+                "Contributions",
+                "NearBy",
+                "Explore",
+                "Bookmarks",
+                "Review",
+            )
+        }
+    val settingArray =
+        stringArrayResource(Res.array.setting_navigator).ifEmpty {
+            listOf(
+                "Setting",
+                "Feedback",
+                "About",
+            )
+        }
+    print("main string ${mainArray.joinToString()}")
     Surface(
         modifier = modifier,
         color = MaterialTheme.colorScheme.surface,
@@ -58,7 +79,7 @@ fun CommonNavigation(
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Icon(HyaIcons.LocalLibrary, "Logo")
                 Text(
-                    appName,
+                    stringResource(Res.string.app_name),
                     style = MaterialTheme.typography.headlineSmall,
                 )
             }
@@ -77,7 +98,7 @@ fun CommonNavigation(
                                             route = navigator.route::class,
                                         )
                                         == true,
-                                label = { Text(cbtNavigator[index]) },
+                                label = { Text(mainArray[index]) },
                                 onClick = {
                                     navController.navigate(
                                         navigator.route,
@@ -89,7 +110,7 @@ fun CommonNavigation(
                                     )
                                 },
                                 colors = color,
-                                icon = { Icon(navigator.icon, cbtNavigator[index]) },
+                                icon = { Icon(navigator.icon, mainArray[index]) },
                             )
                         }
                 }
@@ -109,7 +130,7 @@ fun CommonNavigation(
                                     .value?.destination
                                     ?.hasRoute(route = navigator.route::class)
                                     == true,
-                            label = { Text(settingNavigator[index]) },
+                            label = { Text(settingArray[index]) },
                             onClick = {
                                 navController.navigate(navigator.route)
                             },
@@ -117,7 +138,7 @@ fun CommonNavigation(
                             icon = {
                                 Icon(
                                     navigator.icon,
-                                    settingNavigator[index],
+                                    settingArray[index],
                                 )
                             },
                         )
@@ -138,6 +159,25 @@ fun CommonRail(
     modifier: Modifier = Modifier,
     navController: NavController,
 ) {
+    val mainArray =
+        stringArrayResource(Res.array.main_navigator).ifEmpty {
+            listOf(
+                "Contributions",
+                "NearBy",
+                "Explore",
+                "Bookmarks",
+                "Review",
+            )
+        }
+    val settingArray =
+        stringArrayResource(Res.array.setting_navigator).ifEmpty {
+            listOf(
+                "Setting",
+                "Feedback",
+                "About",
+            )
+        }
+    print("main string ${mainArray.joinToString()}")
     HyaNavigationRail(modifier) {
         Column(
             verticalArrangement = Arrangement.SpaceBetween,
@@ -165,14 +205,14 @@ fun CommonRail(
                                     .value?.destination
                                     ?.hasRoute(route = navigator.route::class)
                                     == true,
-                            label = { Text(settingNavigator[index]) },
+                            label = { Text(settingArray[index]) },
                             onClick = {
                                 navController.navigate(navigator.route)
                             },
                             icon = {
                                 Icon(
                                     navigator.icon,
-                                    settingNavigator[index],
+                                    settingArray[index],
                                 )
                             },
                         )
@@ -193,7 +233,7 @@ fun CommonRail(
                                     .value
                                     ?.destination?.hasRoute(route = navigator.route::class)
                                     == true,
-                            label = { Text(settingNavigator[index]) },
+                            label = { Text(settingArray[index]) },
                             onClick = {
                                 navController.navigate(
                                     navigator.route,
@@ -207,7 +247,7 @@ fun CommonRail(
                             icon = {
                                 Icon(
                                     navigator.icon,
-                                    settingNavigator[index],
+                                    settingArray[index],
                                 )
                             },
                         )
@@ -226,6 +266,25 @@ fun CommonBar(
     modifier: Modifier = Modifier,
     navController: NavController,
 ) {
+    val mainArray =
+        stringArrayResource(Res.array.main_navigator).ifEmpty {
+            listOf(
+                "Contributions",
+                "NearBy",
+                "Explore",
+                "Bookmarks",
+                "Review",
+            )
+        }
+    val settingArray =
+        stringArrayResource(Res.array.setting_navigator).ifEmpty {
+            listOf(
+                "Setting",
+                "Feedback",
+                "About",
+            )
+        }
+    print("main string ${mainArray.joinToString()}")
     HyaNavigationBar(modifier) {
         TOP_LEVEL_ROUTES
             .forEachIndexed { index, navigator ->
@@ -236,7 +295,7 @@ fun CommonBar(
                             .value?.destination
                             ?.hasRoute(route = navigator.route::class)
                             == true,
-                    label = { Text(cbtNavigator[index]) },
+                    label = { Text(mainArray[index]) },
                     onClick = {
                         navController.navigate(
                             navigator.route,
@@ -251,7 +310,7 @@ fun CommonBar(
                     icon = {
                         Icon(
                             navigator.icon,
-                            cbtNavigator[index],
+                            mainArray[index],
                         )
                     },
                 )

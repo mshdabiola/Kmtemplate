@@ -14,13 +14,11 @@ import androidx.compose.material3.NavigationRail
 import androidx.compose.material3.NavigationRailItem
 import androidx.compose.material3.NavigationRailItemDefaults
 import androidx.compose.material3.Text
-import androidx.compose.material3.adaptive.WindowAdaptiveInfo
-import androidx.compose.material3.adaptive.currentWindowAdaptiveInfo
 import androidx.compose.material3.adaptive.navigationsuite.NavigationSuiteDefaults
 import androidx.compose.material3.adaptive.navigationsuite.NavigationSuiteItemColors
 import androidx.compose.material3.adaptive.navigationsuite.NavigationSuiteScaffold
-import androidx.compose.material3.adaptive.navigationsuite.NavigationSuiteScaffoldDefaults
 import androidx.compose.material3.adaptive.navigationsuite.NavigationSuiteScope
+import androidx.compose.material3.adaptive.navigationsuite.NavigationSuiteType
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -175,12 +173,9 @@ fun HyaNavigationRail(
 fun HyaNavigationSuiteScaffold(
     navigationSuiteItems: HyaNavigationSuiteScope.() -> Unit,
     modifier: Modifier = Modifier,
-    windowAdaptiveInfo: WindowAdaptiveInfo = currentWindowAdaptiveInfo(),
+    layoutType: NavigationSuiteType,
     content: @Composable () -> Unit,
 ) {
-    val layoutType =
-        NavigationSuiteScaffoldDefaults
-            .calculateFromAdaptiveInfo(windowAdaptiveInfo)
     val navigationSuiteItemColors =
         NavigationSuiteItemColors(
             navigationBarItemColors =

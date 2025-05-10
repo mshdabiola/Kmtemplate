@@ -3,7 +3,7 @@
 
 -->
 <resources>
-    <string name="app_name">Hydraulic App</string>
+    <string name="app_name">HydraulicApp</string>
     <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
 
 </resources>
