@@ -13,6 +13,7 @@ actual val analyticsModule: Module
             single {
                 object : AnalyticsHelper {
                     override fun logEvent(event: AnalyticsEvent) {
+                        println("Logging event: $event")
                     }
                 }
             } bind AnalyticsHelper::class
