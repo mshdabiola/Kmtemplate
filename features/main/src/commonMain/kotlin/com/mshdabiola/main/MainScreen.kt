@@ -30,6 +30,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -54,6 +55,7 @@ import hydraulicapp.features.main.generated.resources.features_main_empty_descri
 import hydraulicapp.features.main.generated.resources.features_main_empty_error
 import hydraulicapp.features.main.generated.resources.features_main_img_empty_bookmarks
 import hydraulicapp.features.main.generated.resources.features_main_loading
+import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
@@ -82,6 +84,7 @@ internal fun MainRoute(
         modifier = modifier,
         mainState = feedNote.value,
         navigateToDetail = navigateToDetail,
+        showSnackbar = showSnackbar,
         //   items = timeline,
     )
 }
@@ -96,7 +99,9 @@ internal fun MainScreen(
     animatedContentScope: AnimatedVisibilityScope,
     mainState: Result<List<Note>>,
     navigateToDetail: (Long) -> Unit = {},
+    showSnackbar: suspend (String, String?) -> Boolean = { _, _ -> false },
 ) {
+    val coroutineScope = rememberCoroutineScope()
     val state = rememberLazyListState()
     with(sharedTransitionScope) {
         Box(
@@ -137,7 +142,12 @@ internal fun MainScreen(
                                 sharedTransitionScope = sharedTransitionScope,
                                 animatedContentScope = animatedContentScope,
                                 items = mainState.data,
-                                onNoteClick = { navigateToDetail(it) },
+                                onNoteClick = {
+                                    navigateToDetail(it)
+                                    coroutineScope.launch {
+                                        showSnackbar("Note Opened", null)
+                                    }
+                                },
                             )
                         }
                     }
