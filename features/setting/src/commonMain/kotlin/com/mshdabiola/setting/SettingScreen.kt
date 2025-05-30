@@ -26,6 +26,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -39,6 +40,7 @@ import com.mshdabiola.ui.Waiting
 import hydraulicapp.features.setting.generated.resources.Res
 import hydraulicapp.features.setting.generated.resources.daynight
 import hydraulicapp.features.setting.generated.resources.theme
+import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.stringArrayResource
 
 // import org.koin.androidx.compose.koinViewModel
@@ -58,6 +60,7 @@ internal fun SettingRoute(
         setTheme = viewModel::setThemeBrand,
         setDarkMode = viewModel::setDarkThemeConfig,
         onBack = onBack,
+        onShowSnack = onShowSnack,
     )
 }
 
@@ -68,6 +71,7 @@ internal fun SettingScreen(
     setTheme: (ThemeBrand) -> Unit = {},
     setDarkMode: (DarkThemeConfig) -> Unit = {},
     onBack: () -> Unit = {},
+    onShowSnack: suspend (String, String?) -> Boolean = { _, _ -> false },
 ) {
     Card(modifier = modifier.testTag("setting:screen")) {
         AnimatedContent(settingState) {
@@ -80,6 +84,7 @@ internal fun SettingScreen(
                         setTheme = setTheme,
                         setDarkMode = setDarkMode,
                         onBack = onBack,
+                        onShowSnack = onShowSnack,
                     )
 
                 else -> {}
@@ -95,11 +100,13 @@ internal fun MainContent(
     setTheme: (ThemeBrand) -> Unit = {},
     setDarkMode: (DarkThemeConfig) -> Unit = {},
     onBack: () -> Unit = {},
+    onShowSnack: suspend (String, String?) -> Boolean = { _, _ -> false },
 ) {
     var dark by remember { mutableStateOf(false) }
     var theme by remember { mutableStateOf(false) }
     val themeArray = stringArrayResource(Res.array.theme)
     val dayLightArray = stringArrayResource(Res.array.daynight)
+    val couroutine = rememberCoroutineScope()
 
     Column(
         modifier.padding(16.dp),
@@ -121,7 +128,14 @@ internal fun MainContent(
         Spacer(Modifier.height(8.dp))
 
         ListItem(
-            modifier = Modifier.testTag("setting:theme").clickable { theme = true },
+            modifier =
+                Modifier.testTag("setting:theme")
+                    .clickable {
+                        theme = true
+                        couroutine.launch {
+                            onShowSnack("Theme", "Clicked")
+                        }
+                    },
             headlineContent = { Text("Theme") },
             supportingContent = {
                 Text(themeArray.getOrNull(settingState.themeBrand.ordinal) ?: "")
