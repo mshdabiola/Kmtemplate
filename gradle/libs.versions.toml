@@ -61,7 +61,7 @@ compose-plugin = "1.8.0"
 composeNavigation="2.9.0-beta01"
 androidxNavigationTest = "2.9.0" #for nav test
 compose = "1.8.1"
-composehot="1.0.0-alpha09"
+composehot="1.0.0-alpha10"
 foojay="0.10.0"
 
 playGame = "20.1.2"
