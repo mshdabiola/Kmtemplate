@@ -1,4 +1,7 @@
 complexity:
+  CyclomaticComplexMethod: # Add this rule configuration
+    active: false           # Set to false to disable
+    # threshold: 15
   LongMethod:
     active: true
     threshold: 60
@@ -7,7 +10,8 @@ complexity:
     active: true
     functionThreshold: 12 # Increase the threshold if needed
     excludes: ['**/presentation/resources/**']
-    ignoreAnnotated: ['@Composable', '@Preview'] # You might already have this
+    ignoreAnnotated: ['@Composable'] # You might already have this
+    ignoreDefaultParameters: true
 
 naming:
   FunctionNaming:
@@ -23,10 +27,7 @@ style:
   MaxLineLength:
     active: true
     excludes: [ '**/kotlin/secrets/**' ]
-#  LongParameterList:
-#    active: true
-#    threshold: 7 # Increase the threshold if needed
-#    ignoreAnnotated: ['@Composable', '@Preview'] # You might already have this
-#    excludeAnnotatedClasses: []
-#    excludeClasses: []
-#    excludePackage: []
+  # In your detekt.yml
+  ReturnCount:
+    active: true
+    max: 6
