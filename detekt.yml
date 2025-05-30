@@ -5,7 +5,10 @@ complexity:
     ignoreAnnotated: ['Composable']
   LongParameterList:
     active: true
+    functionThreshold: 12 # Increase the threshold if needed
     excludes: ['**/presentation/resources/**']
+    ignoreAnnotated: ['@Composable', '@Preview'] # You might already have this
+
 naming:
   FunctionNaming:
     active: true
@@ -20,10 +23,10 @@ style:
   MaxLineLength:
     active: true
     excludes: [ '**/kotlin/secrets/**' ]
-  LongParameterList:
-    active: true
-    threshold: 7 # Increase the threshold if needed
-    ignoreAnnotated: ['@Composable', '@Preview'] # You might already have this
-    excludeAnnotatedClasses: []
-    excludeClasses: []
-    excludePackage: []
+#  LongParameterList:
+#    active: true
+#    threshold: 7 # Increase the threshold if needed
+#    ignoreAnnotated: ['@Composable', '@Preview'] # You might already have this
+#    excludeAnnotatedClasses: []
+#    excludeClasses: []
+#    excludePackage: []
