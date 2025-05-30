@@ -133,7 +133,7 @@ fun ViewTogglePreviewCompact() {
  * Now in Android view toggle default values.
  */
 object HyaViewToggleDefaults {
-    // TODO: File bug
+    //  File bug
     // Various default button padding values aren't exposed via ButtonDefaults
     val ViewToggleButtonContentPadding =
         PaddingValues(

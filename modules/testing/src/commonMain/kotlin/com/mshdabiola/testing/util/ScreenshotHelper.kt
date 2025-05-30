@@ -132,18 +132,18 @@ private fun generateDescription(
 
     return description.trim()
 }
-
-/**
- * Extracts some properties from the spec string. Note that this function is not exhaustive.
- */
-private fun extractSpecs(deviceSpec: String): TestDeviceSpecs {
-    val specs =
-        deviceSpec.substringAfter("spec:")
-            .split(",").map { it.split("=") }.associate { it[0] to it[1] }
-    val width = specs["width"]?.toInt() ?: 640
-    val height = specs["height"]?.toInt() ?: 480
-    val dpi = specs["dpi"]?.toInt() ?: 480
-    return TestDeviceSpecs(width, height, dpi)
-}
+//
+// /**
+// * Extracts some properties from the spec string. Note that this function is not exhaustive.
+// */
+// private fun extractSpecs(deviceSpec: String): TestDeviceSpecs {
+//    val specs =
+//        deviceSpec.substringAfter("spec:")
+//            .split(",").map { it.split("=") }.associate { it[0] to it[1] }
+//    val width = specs["width"]?.toInt() ?: 640
+//    val height = specs["height"]?.toInt() ?: 480
+//    val dpi = specs["dpi"]?.toInt() ?: 480
+//    return TestDeviceSpecs(width, height, dpi)
+// }
 
 data class TestDeviceSpecs(val width: Int, val height: Int, val dpi: Int)

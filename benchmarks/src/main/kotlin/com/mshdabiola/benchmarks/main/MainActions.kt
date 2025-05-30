@@ -37,3 +37,15 @@ fun MacrobenchmarkScope.mainWaitForContent() {
     // Timeout here is quite big, because sometimes data loading takes a long time!
     //   obj.wait(untilHasChildren(), 60_000)
 }
+
+fun MacrobenchmarkScope.setAppTheme(isDark: Boolean) {
+    when (isDark) {
+        true -> device.findObject(By.text("Dark")).click()
+        false -> device.findObject(By.text("Light")).click()
+    }
+    device.waitForIdle()
+    device.findObject(By.text("OK")).click()
+
+    // Wait until the top app bar is visible on screen
+//    waitForObjectOnTopAppBar(By.text("Now in Android"))
+}

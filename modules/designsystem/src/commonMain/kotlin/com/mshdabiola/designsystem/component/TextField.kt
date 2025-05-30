@@ -12,7 +12,6 @@ import androidx.compose.foundation.interaction.collectIsFocusedAsState
 import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.BasicTextField
-import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.text.input.InputTransformation
 import androidx.compose.foundation.text.input.TextFieldLineLimits
@@ -51,7 +50,7 @@ fun HyaTextField(
     state: TextFieldState,
     placeholder: String? = null,
     imeAction: ImeAction = ImeAction.Done,
-    keyboardAction: () -> Unit = {},
+//    keyboardAction: () -> Unit = {},
     maxNum: TextFieldLineLimits = TextFieldLineLimits.Default,
 ) {
     MyTextField(
@@ -78,7 +77,7 @@ fun HyaTextField(
                 autoCorrectEnabled = true,
                 imeAction = imeAction,
             ),
-        keyboardActions = KeyboardActions { keyboardAction() },
+        // keyboardActions = KeyboardActions { keyboardAction() },
         lineLimits = maxNum,
     )
 }
@@ -101,7 +100,7 @@ fun MyTextField(
     isError: Boolean = false,
     visualTransformation: VisualTransformation = VisualTransformation.None,
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
-    keyboardActions: KeyboardActions = KeyboardActions.Default,
+    // keyboardActions: KeyboardActions = KeyboardActions.Default,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     shape: Shape = TextFieldDefaults.shape,
     colors: TextFieldColors = TextFieldDefaults.colors(),

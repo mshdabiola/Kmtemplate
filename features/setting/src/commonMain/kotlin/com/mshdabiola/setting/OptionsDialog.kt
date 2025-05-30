@@ -23,6 +23,7 @@ fun OptionsDialog(
     onDismiss: () -> Unit = {},
 ) {
     AlertDialog(
+        modifier = modifier,
         onDismissRequest = onDismiss,
         confirmButton = {
             HyaTextButton(onClick = onDismiss) {

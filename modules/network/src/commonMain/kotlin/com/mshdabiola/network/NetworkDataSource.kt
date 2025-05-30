@@ -5,9 +5,12 @@ import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.request.get
 import io.ktor.http.HttpStatusCode
+import io.ktor.http.Parameters
 import io.ktor.http.URLBuilder
 import io.ktor.http.URLProtocol
 import io.ktor.http.parametersOf
+import io.ktor.http.plus
+import kotlinx.io.IOException
 
 internal class NetworkDataSource constructor(
     private val wikiClient: HttpClient,
@@ -49,7 +52,7 @@ internal class NetworkDataSource constructor(
             if (response.status == HttpStatusCode.OK) {
                 response.body()
             } else {
-                throw Exception("Error occur")
+                throw IOException("Error occur")
             }
 
         return string
@@ -61,7 +64,7 @@ internal class NetworkDataSource constructor(
         offset: Int,
     ): Response {
         val parameter =
-            arrayOf(
+            parametersOf(
                 "generator" to listOf("search"),
                 "prop" to listOf("description|pageimages"),
                 "piprop" to listOf("thumbnail"),
@@ -81,7 +84,7 @@ internal class NetworkDataSource constructor(
         offset: Int,
     ): Response {
         val parameter =
-            arrayOf(
+            parametersOf(
                 "generator" to listOf("allcategories"),
                 "prop" to listOf("categoryinfo|description|pageimages"),
                 "piprop" to listOf("thumbnail"),
@@ -125,7 +128,7 @@ internal class NetworkDataSource constructor(
         continuation: String,
     ): Response {
         val parameter =
-            arrayOf(
+            parametersOf(
                 "generator" to listOf("random"),
                 "prop" to listOf("imageinfo"),
                 "iiprop" to listOf("mediatype|mime|user|userid|url|timestamp|sha1"),
@@ -142,19 +145,18 @@ internal class NetworkDataSource constructor(
         return getCommonResponse(parameter)
     }
 
-    private suspend fun getCommonResponse(parameterArrays: Array<Pair<String, List<String>>>): Response {
+    private suspend fun getCommonResponse(parameterArrays: Parameters): Response {
         val parameter =
             parametersOf(
                 "action" to listOf("query"),
                 "format" to listOf("json"),
                 "formatversion" to listOf("2"),
-                *parameterArrays,
             )
         val url =
             URLBuilder(
                 protocol = URLProtocol.HTTPS,
                 host = commonHost,
-                parameters = parameter,
+                parameters = parameter.plus(parameterArrays),
                 pathSegments = listOf("w", "api.php"),
             ).build()
         val response =
@@ -163,14 +165,14 @@ internal class NetworkDataSource constructor(
                     wikiClient
                         .get(url)
                 if (incomingResponse.status != HttpStatusCode.OK) {
-                    throw Exception("Http Error")
+                    throw IOException("Http Error")
                 }
                 incomingResponse.body<Response>()
-            } catch (exception: Exception) {
-                exception.printStackTrace()
-                throw exception
+            } catch (e: IOException) {
+                // Catch other general I/O errors (like UnknownHostException if not caught more specifically)
+                // Rethrow as is, or wrap in a custom domain exception
+                throw IOException("Network I/O error: ${e.message}", e)
             }
-
         return response
     }
 }

@@ -23,6 +23,7 @@ jobs:
     runs-on: ubuntu-latest
 
     permissions:
+      checks: write
       contents: write
       pull-requests: write
 
@@ -143,6 +144,16 @@ jobs:
           name: local-test-results
           path: '**/build/reports/tests/jvmTest'
 
+      - name: Publish Test Results
+        uses: EnricoMi/publish-unit-test-result-action@v2.20.0
+        with:
+            check_name: Test results
+            comment_title: Test results
+            large_files: true
+            ignore_runs: false
+            files: ./**/build/test-results/**/*.xml
+            
+
       - name: Check lint
         run: ./gradlew lintFossReliantRelease
 
@@ -159,18 +170,6 @@ jobs:
       - name: Generate coverage reports for Jvm
         run: ./gradlew koverXmlReportJvm; ./gradlew koverHtmlReportJvm   #koverHtmlReportJvm
 
-      #      - name: Add coverage report to PR
-      #        id: kover
-      #        uses: mi-kas/kover-report@v1
-      #        with:
-      #          path: |
-      #            ${{ github.workspace }}/modules/analytics/build/reports/kover/reportJvm.xml
-      #
-      #          title: Code Coverage
-      #          update-comment: true
-      #          min-coverage-overall: 40
-      #          min-coverage-changed-files: 60
-      #          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Upload local coverage reports (XML + HTML) (only API 30)
         uses: actions/upload-artifact@v4
@@ -180,6 +179,13 @@ jobs:
           compression-level: 1
           overwrite: false
           path: '**/build/reports/kover/'
+
+      - name: Upload coverage
+        uses: codecov/codecov-action@v5.4.3
+        with:
+            token: ${{ secrets.CODECOV_TOKEN }}
+            files: "**/reportJvm.xml"
+            verbose: true
 
   androidTest:
     runs-on: ubuntu-latest

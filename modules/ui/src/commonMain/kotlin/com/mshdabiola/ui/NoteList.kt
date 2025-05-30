@@ -30,20 +30,21 @@ fun LazyListScope.noteItems(
     itemContent = { note ->
         val analyticsHelper = LocalAnalyticsHelper.current
 
-        // with(sharedTransitionScope) {
-        NoteCard(
-            modifier = modifier,
-//                    .sharedBounds(
-//                        sharedContentState = rememberSharedContentState("item"),
-//                        animatedVisibilityScope = animatedContentScope,
-//                    ),
-            noteUiState = note,
-            onClick = {
-                analyticsHelper.logNoteOpened(note.id.toString())
-                onNoteClick(note.id)
-            },
-        )
-        // }
+        with(sharedTransitionScope) {
+            NoteCard(
+                modifier =
+                    modifier
+                        .sharedBounds(
+                            sharedContentState = rememberSharedContentState("item ${note.id}"),
+                            animatedVisibilityScope = animatedContentScope,
+                        ),
+                noteUiState = note,
+                onClick = {
+                    analyticsHelper.logNoteOpened(note.id.toString())
+                    onNoteClick(note.id)
+                },
+            )
+        }
     },
 )
 

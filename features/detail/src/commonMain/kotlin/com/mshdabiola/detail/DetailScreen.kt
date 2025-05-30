@@ -38,20 +38,25 @@ internal fun DetailRoute(
     onBack: () -> Unit,
     viewModel: DetailViewModel,
 ) {
+    val coroutineScope = rememberCoroutineScope()
     val state = viewModel.state.collectAsStateWithLifecycle()
     DetailScreen(
         modifier = modifier,
         state = state.value,
         sharedTransitionScope = sharedTransitionScope,
         animatedContentScope = animatedContentScope,
-        onShowSnackbar = onShowSnackbar,
         title = viewModel.title,
         content = viewModel.content,
         onDelete = {
             viewModel.onDelete()
             onBack()
         },
-        onBack = onBack,
+        onBack = {
+            onBack
+            coroutineScope.launch {
+                onShowSnackbar("Note Deleted", null)
+            }
+        },
     )
 }
 
@@ -68,7 +73,6 @@ internal fun DetailScreen(
     animatedContentScope: AnimatedVisibilityScope,
     title: TextFieldState = TextFieldState(),
     content: TextFieldState = TextFieldState(),
-    onShowSnackbar: suspend (String, String?) -> Boolean = { _, _ -> false },
     onBack: () -> Unit = {},
     onDelete: () -> Unit = {},
 ) {
@@ -83,10 +87,10 @@ internal fun DetailScreen(
                     animatedContentScope = animatedContentScope,
                     title = title,
                     content = content,
-                    onShowSnackbar = onShowSnackbar,
                     onBack = onBack,
                     onDelete = onDelete,
                 )
+
             else -> {}
         }
     }
@@ -96,20 +100,18 @@ internal fun DetailScreen(
 @Composable
 internal fun MainContent(
     modifier: Modifier = Modifier,
-    state: DetailState,
+    state: DetailState.Success,
     sharedTransitionScope: SharedTransitionScope,
     animatedContentScope: AnimatedVisibilityScope,
     title: TextFieldState = TextFieldState(),
     content: TextFieldState = TextFieldState(),
-    onShowSnackbar: suspend (String, String?) -> Boolean = { _, _ -> false },
     onBack: () -> Unit = {},
     onDelete: () -> Unit = {},
 ) {
-    val coroutineScope = rememberCoroutineScope()
     with(sharedTransitionScope) {
         Column(
             modifier.sharedBounds(
-                sharedContentState = rememberSharedContentState("item"),
+                sharedContentState = rememberSharedContentState("item ${state.id}"),
                 animatedVisibilityScope = animatedContentScope,
             ),
         ) {
@@ -141,7 +143,7 @@ internal fun MainContent(
                 state = content,
                 placeholder = "content",
                 imeAction = ImeAction.Done,
-                keyboardAction = { coroutineScope.launch { onShowSnackbar("Note Update", null) } },
+//                keyboardAction = { coroutineScope.launch { onShowSnackbar("Note Update", null) } },
             )
         }
     }

@@ -63,7 +63,7 @@ fun HyaTopAppBar(
 @OptIn(ExperimentalMaterial3Api::class)
 @Preview
 @Composable
-private fun HyaTopAppBarPreview() {
+internal fun HyaTopAppBarPreview() {
     HyaTheme {
         HyaTopAppBar(
             titleRes = "Preview",

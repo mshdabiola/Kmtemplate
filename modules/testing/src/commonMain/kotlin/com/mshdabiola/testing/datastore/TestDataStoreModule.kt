@@ -9,7 +9,6 @@ import androidx.datastore.core.okio.OkioStorage
 import com.mshdabiola.datastore.Store
 import com.mshdabiola.datastore.StoreImpl
 import com.mshdabiola.datastore.UserDataJsonSerializer
-import kotlinx.coroutines.CoroutineScope
 import okio.FileSystem
 import okio.Path.Companion.toOkioPath
 import org.junit.rules.TemporaryFolder
@@ -23,9 +22,7 @@ val dataStoreModule =
         single {
 
             val tmpFolder: TemporaryFolder = get()
-            tmpFolder.testUserPreferencesDataStore(
-                coroutineScope = get(),
-            )
+            tmpFolder.testUserPreferencesDataStore()
         }
 
         single {
@@ -36,7 +33,7 @@ val dataStoreModule =
         } bind Store::class
     }
 
-fun TemporaryFolder.testUserPreferencesDataStore(coroutineScope: CoroutineScope) =
+fun TemporaryFolder.testUserPreferencesDataStore() =
     DataStoreFactory.create(
         storage =
             OkioStorage(

@@ -18,6 +18,7 @@ fun ProfileCard(
     email: String = "Mshd@gmail.com",
 ) {
     ListItem(
+        modifier = modifier,
         colors = ListItemDefaults.colors(containerColor = Color.Transparent),
         headlineContent = { Text(name) },
         supportingContent = { Text(email) },
