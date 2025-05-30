@@ -119,7 +119,7 @@ fun ChipPreview() {
  * Now in Android chip default values.
  */
 object HyaChipDefaults {
-    // TODO: File bug
+    // TOD: File bug
     // FilterChip default values aren't exposed via FilterChipDefaults
     const val DISABLED_CHIP_CONTAINER_ALPHA = 0.12f
     const val DISABLED_CHIP_CONTENT_ALPHA = 0.38f

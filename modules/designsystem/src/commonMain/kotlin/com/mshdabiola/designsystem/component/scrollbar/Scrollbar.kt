@@ -13,7 +13,6 @@ import androidx.compose.foundation.gestures.detectVerticalDragGestures
 import androidx.compose.foundation.hoverable
 import androidx.compose.foundation.interaction.DragInteraction
 import androidx.compose.foundation.interaction.MutableInteractionSource
-import androidx.compose.foundation.interaction.PressInteraction
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -41,7 +40,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.util.packFloats
 import androidx.compose.ui.util.unpackFloat1
 import androidx.compose.ui.util.unpackFloat2
-import kotlinx.coroutines.TimeoutCancellationException
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.withTimeout
 import kotlin.jvm.JvmInline
@@ -228,27 +226,27 @@ fun Scrollbar(
                 .pointerInput(Unit) {
                     detectTapGestures(
                         onPress = { offset ->
-                            try {
-                                // Wait for a long press before scrolling
-                                withTimeout(viewConfiguration.longPressTimeoutMillis) {
-                                    tryAwaitRelease()
-                                }
-                            } catch (e: TimeoutCancellationException) {
-                                // Start the press triggered scroll
-                                val initialPress = PressInteraction.Press(offset)
-                                interactionSource?.tryEmit(initialPress)
-
-                                pressedOffset = offset
-                                interactionSource?.tryEmit(
-                                    when {
-                                        tryAwaitRelease() -> PressInteraction.Release(initialPress)
-                                        else -> PressInteraction.Cancel(initialPress)
-                                    },
-                                )
-
-                                // End the press
-                                pressedOffset = Offset.Unspecified
+//                            try {
+                            // Wait for a long press before scrolling
+                            withTimeout(viewConfiguration.longPressTimeoutMillis) {
+                                tryAwaitRelease()
                             }
+//                            } catch (e: TimeoutCancellationException) {
+//                                // Start the press triggered scroll
+//                                val initialPress = PressInteraction.Press(offset)
+//                                interactionSource?.tryEmit(initialPress)
+//
+//                                pressedOffset = offset
+//                                interactionSource?.tryEmit(
+//                                    when {
+//                                        tryAwaitRelease() -> PressInteraction.Release(initialPress)
+//                                        else -> PressInteraction.Cancel(initialPress)
+//                                    },
+//                                )
+//
+//                                // End the press
+//                                pressedOffset = Offset.Unspecified
+//                            }
                         },
                     )
                 }

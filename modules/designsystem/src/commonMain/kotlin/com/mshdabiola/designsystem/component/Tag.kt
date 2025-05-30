@@ -69,7 +69,7 @@ fun TagPreview() {
 object HyaTagDefaults {
     const val UNFOLLOWED_TOPIC_TAG_CONTAINER_ALPHA = 0.5f
 
-    // TODO: File bug
+    // TOD: File bug
     // Button disabled container alpha value not exposed by ButtonDefaults
     const val DISABLED_TOPIC_TAG_CONTAINER_ALPHA = 0.12f
 }
