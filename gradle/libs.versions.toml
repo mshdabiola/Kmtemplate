@@ -89,7 +89,7 @@ sqlite = "2.5.1"
 kotlinxCollectionImmutable = "0.3.8"
 windowSizeClass = "0.5.0"
 
-screenshot = "0.0.1-alpha09"
+screenshot = "0.0.1-alpha10"
 kover = "0.9.1"
 ktlint = "12.3.0"
 detekt = "1.23.8"
