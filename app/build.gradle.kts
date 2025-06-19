@@ -11,6 +11,7 @@ plugins {
     id("mshdabiola.android.application.flavor")
     alias(libs.plugins.conveyor)
     alias(libs.plugins.baselineprofile)
+    alias(libs.plugins.composehot)
 
 }
 
