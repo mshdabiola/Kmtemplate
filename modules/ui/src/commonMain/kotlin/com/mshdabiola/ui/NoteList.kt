@@ -33,11 +33,11 @@ fun LazyListScope.noteItems(
         with(sharedTransitionScope) {
             NoteCard(
                 modifier =
-                    modifier
-                        .sharedBounds(
-                            sharedContentState = rememberSharedContentState("item ${note.id}"),
-                            animatedVisibilityScope = animatedContentScope,
-                        ),
+                modifier
+                    .sharedBounds(
+                        sharedContentState = rememberSharedContentState("item ${note.id}"),
+                        animatedVisibilityScope = animatedContentScope,
+                    ),
                 noteUiState = note,
                 onClick = {
                     analyticsHelper.logNoteOpened(note.id.toString())
