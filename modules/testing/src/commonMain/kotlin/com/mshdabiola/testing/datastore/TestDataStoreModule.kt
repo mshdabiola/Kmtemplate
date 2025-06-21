@@ -36,17 +36,17 @@ val dataStoreModule =
 fun TemporaryFolder.testUserPreferencesDataStore() =
     DataStoreFactory.create(
         storage =
-            OkioStorage(
-                fileSystem = FileSystem.SYSTEM,
-                serializer = UserDataJsonSerializer,
-                producePath = {
-                    val path = File(newFolder(), "data")
-                    if (path.parentFile?.exists() == false) {
-                        path.mkdirs()
-                    }
-                    path.toOkioPath()
-                },
-            ),
+        OkioStorage(
+            fileSystem = FileSystem.SYSTEM,
+            serializer = UserDataJsonSerializer,
+            producePath = {
+                val path = File(newFolder(), "data")
+                if (path.parentFile?.exists() == false) {
+                    path.mkdirs()
+                }
+                path.toOkioPath()
+            },
+        ),
     )
 
 //
