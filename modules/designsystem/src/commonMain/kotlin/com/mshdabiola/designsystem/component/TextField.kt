@@ -64,19 +64,19 @@ fun HyaTextField(
             }
         },
         colors =
-            TextFieldDefaults.colors(
-                focusedContainerColor = Color.Transparent,
-                unfocusedContainerColor = Color.Transparent,
-                disabledContainerColor = Color.Transparent,
-                focusedIndicatorColor = Color.Transparent,
-                unfocusedIndicatorColor = Color.Transparent,
-            ),
+        TextFieldDefaults.colors(
+            focusedContainerColor = Color.Transparent,
+            unfocusedContainerColor = Color.Transparent,
+            disabledContainerColor = Color.Transparent,
+            focusedIndicatorColor = Color.Transparent,
+            unfocusedIndicatorColor = Color.Transparent,
+        ),
         keyboardOptions =
-            KeyboardOptions.Default.copy(
-                capitalization = KeyboardCapitalization.Sentences,
-                autoCorrectEnabled = true,
-                imeAction = imeAction,
-            ),
+        KeyboardOptions.Default.copy(
+            capitalization = KeyboardCapitalization.Sentences,
+            autoCorrectEnabled = true,
+            imeAction = imeAction,
+        ),
         // keyboardActions = KeyboardActions { keyboardAction() },
         lineLimits = maxNum,
     )
@@ -121,12 +121,12 @@ fun MyTextField(
         BasicTextField(
             state = state,
             modifier =
-                modifier
-                    .defaultErrorSemantics(isError, "Error occur")
-                    .defaultMinSize(
-                        minWidth = TextFieldDefaults.MinWidth,
-                        minHeight = TextFieldDefaults.MinHeight,
-                    ),
+            modifier
+                .defaultErrorSemantics(isError, "Error occur")
+                .defaultMinSize(
+                    minWidth = TextFieldDefaults.MinWidth,
+                    minHeight = TextFieldDefaults.MinHeight,
+                ),
             enabled = enabled,
             readOnly = readOnly,
             textStyle = mergedTextStyle,

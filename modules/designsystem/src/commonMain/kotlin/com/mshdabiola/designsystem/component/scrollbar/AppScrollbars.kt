@@ -121,14 +121,14 @@ private fun ScrollableState.DraggableScrollbarThumb(
 ) {
     Box(
         modifier =
-            Modifier
-                .run {
-                    when (orientation) {
-                        Vertical -> width(12.dp).fillMaxHeight()
-                        Horizontal -> height(12.dp).fillMaxWidth()
-                    }
+        Modifier
+            .run {
+                when (orientation) {
+                    Vertical -> width(12.dp).fillMaxHeight()
+                    Horizontal -> height(12.dp).fillMaxWidth()
                 }
-                .scrollThumb(this, interactionSource),
+            }
+            .scrollThumb(this, interactionSource),
     )
 }
 
@@ -142,14 +142,14 @@ private fun ScrollableState.DecorativeScrollbarThumb(
 ) {
     Box(
         modifier =
-            Modifier
-                .run {
-                    when (orientation) {
-                        Vertical -> width(2.dp).fillMaxHeight()
-                        Horizontal -> height(2.dp).fillMaxWidth()
-                    }
+        Modifier
+            .run {
+                when (orientation) {
+                    Vertical -> width(2.dp).fillMaxHeight()
+                    Horizontal -> height(2.dp).fillMaxWidth()
                 }
-                .scrollThumb(this, interactionSource),
+            }
+            .scrollThumb(this, interactionSource),
     )
 }
 
@@ -218,15 +218,15 @@ private fun scrollbarThumbColor(
     val color =
         animateColorAsState(
             targetValue =
-                when (state) {
-                    Active -> MaterialTheme.colorScheme.onSurface.copy(0.5f)
-                    Inactive -> MaterialTheme.colorScheme.onSurface.copy(alpha = 0.2f)
-                    Dormant -> Color.Transparent
-                },
+            when (state) {
+                Active -> MaterialTheme.colorScheme.onSurface.copy(0.5f)
+                Inactive -> MaterialTheme.colorScheme.onSurface.copy(alpha = 0.2f)
+                Dormant -> Color.Transparent
+            },
             animationSpec =
-                SpringSpec(
-                    stiffness = Spring.StiffnessLow,
-                ),
+            SpringSpec(
+                stiffness = Spring.StiffnessLow,
+            ),
             label = "Scrollbar thumb color",
         )
     LaunchedEffect(active) {

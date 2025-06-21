@@ -70,11 +70,11 @@ fun HyaGradientBackground(
     val currentBottomColor by rememberUpdatedState(gradientColors.bottom)
     Surface(
         color =
-            if (gradientColors.container == Color.Unspecified) {
-                Color.Transparent
-            } else {
-                gradientColors.container
-            },
+        if (gradientColors.container == Color.Unspecified) {
+            Color.Transparent
+        } else {
+            gradientColors.container
+        },
         modifier = modifier.fillMaxSize(),
     ) {
         Box(

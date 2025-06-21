@@ -37,14 +37,14 @@ fun HyaTopicTag(
             onClick = onClick,
             enabled = enabled,
             colors =
-                ButtonDefaults.textButtonColors(
-                    containerColor = containerColor,
-                    contentColor = contentColorFor(backgroundColor = containerColor),
-                    disabledContainerColor =
-                        MaterialTheme.colorScheme.onSurface.copy(
-                            alpha = HyaTagDefaults.DISABLED_TOPIC_TAG_CONTAINER_ALPHA,
-                        ),
+            ButtonDefaults.textButtonColors(
+                containerColor = containerColor,
+                contentColor = contentColorFor(backgroundColor = containerColor),
+                disabledContainerColor =
+                MaterialTheme.colorScheme.onSurface.copy(
+                    alpha = HyaTagDefaults.DISABLED_TOPIC_TAG_CONTAINER_ALPHA,
                 ),
+            ),
         ) {
             ProvideTextStyle(value = MaterialTheme.typography.labelSmall) {
                 text()

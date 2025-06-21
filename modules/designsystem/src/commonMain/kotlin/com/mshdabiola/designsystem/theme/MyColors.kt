@@ -246,37 +246,37 @@ val onPauseContainerDark = Color(0xFFCCE5FF)
 val extendedLight =
     ExtendedColorScheme(
         play =
-            ColorFamily(
-                playLight,
-                onPlayLight,
-                playContainerLight,
-                onPlayContainerLight,
-            ),
+        ColorFamily(
+            playLight,
+            onPlayLight,
+            playContainerLight,
+            onPlayContainerLight,
+        ),
         pause =
-            ColorFamily(
-                pauseLight,
-                onPauseLight,
-                pauseContainerLight,
-                onPauseContainerLight,
-            ),
+        ColorFamily(
+            pauseLight,
+            onPauseLight,
+            pauseContainerLight,
+            onPauseContainerLight,
+        ),
     )
 
 val extendedDark =
     ExtendedColorScheme(
         play =
-            ColorFamily(
-                playDark,
-                onPlayDark,
-                playContainerDark,
-                onPlayContainerDark,
-            ),
+        ColorFamily(
+            playDark,
+            onPlayDark,
+            playContainerDark,
+            onPlayContainerDark,
+        ),
         pause =
-            ColorFamily(
-                pauseDark,
-                onPauseDark,
-                pauseContainerDark,
-                onPauseContainerDark,
-            ),
+        ColorFamily(
+            pauseDark,
+            onPauseDark,
+            pauseContainerDark,
+            onPauseContainerDark,
+        ),
     )
 
 @Immutable

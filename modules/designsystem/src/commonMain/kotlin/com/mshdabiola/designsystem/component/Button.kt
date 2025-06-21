@@ -38,9 +38,9 @@ fun HyaButton(
         modifier = modifier,
         enabled = enabled,
         colors =
-            ButtonDefaults.buttonColors(
-                containerColor = MaterialTheme.colorScheme.onBackground,
-            ),
+        ButtonDefaults.buttonColors(
+            containerColor = MaterialTheme.colorScheme.onBackground,
+        ),
         contentPadding = contentPadding,
         content = content,
     )
@@ -69,11 +69,11 @@ fun HyaButton(
         modifier = modifier,
         enabled = enabled,
         contentPadding =
-            if (leadingIcon != null) {
-                ButtonDefaults.ButtonWithIconContentPadding
-            } else {
-                ButtonDefaults.ContentPadding
-            },
+        if (leadingIcon != null) {
+            ButtonDefaults.ButtonWithIconContentPadding
+        } else {
+            ButtonDefaults.ContentPadding
+        },
     ) {
         HyaButtonContent(
             text = text,
@@ -106,21 +106,21 @@ fun HyaOutlinedButton(
         modifier = modifier,
         enabled = enabled,
         colors =
-            ButtonDefaults.outlinedButtonColors(
-                contentColor = MaterialTheme.colorScheme.onBackground,
-            ),
+        ButtonDefaults.outlinedButtonColors(
+            contentColor = MaterialTheme.colorScheme.onBackground,
+        ),
         border =
-            BorderStroke(
-                width = HyaButtonDefaults.OutlinedButtonBorderWidth,
-                color =
-                    if (enabled) {
-                        MaterialTheme.colorScheme.outline
-                    } else {
-                        MaterialTheme.colorScheme.onSurface.copy(
-                            alpha = HyaButtonDefaults.DISABLED_OUTLINED_BUTTON_BORDER_ALPHA,
-                        )
-                    },
-            ),
+        BorderStroke(
+            width = HyaButtonDefaults.OutlinedButtonBorderWidth,
+            color =
+            if (enabled) {
+                MaterialTheme.colorScheme.outline
+            } else {
+                MaterialTheme.colorScheme.onSurface.copy(
+                    alpha = HyaButtonDefaults.DISABLED_OUTLINED_BUTTON_BORDER_ALPHA,
+                )
+            },
+        ),
         contentPadding = contentPadding,
         content = content,
     )
@@ -149,11 +149,11 @@ fun HyaOutlinedButton(
         modifier = modifier,
         enabled = enabled,
         contentPadding =
-            if (leadingIcon != null) {
-                ButtonDefaults.ButtonWithIconContentPadding
-            } else {
-                ButtonDefaults.ContentPadding
-            },
+        if (leadingIcon != null) {
+            ButtonDefaults.ButtonWithIconContentPadding
+        } else {
+            ButtonDefaults.ContentPadding
+        },
     ) {
         HyaButtonContent(
             text = text,
@@ -183,9 +183,9 @@ fun HyaTextButton(
         modifier = modifier,
         enabled = enabled,
         colors =
-            ButtonDefaults.textButtonColors(
-                contentColor = MaterialTheme.colorScheme.onBackground,
-            ),
+        ButtonDefaults.textButtonColors(
+            contentColor = MaterialTheme.colorScheme.onBackground,
+        ),
         content = content,
     )
 }
@@ -240,11 +240,11 @@ private fun HyaButtonContent(
         Modifier
             .padding(
                 start =
-                    if (leadingIcon != null) {
-                        ButtonDefaults.IconSpacing
-                    } else {
-                        0.dp
-                    },
+                if (leadingIcon != null) {
+                    ButtonDefaults.IconSpacing
+                } else {
+                    0.dp
+                },
             ),
     ) {
         text()

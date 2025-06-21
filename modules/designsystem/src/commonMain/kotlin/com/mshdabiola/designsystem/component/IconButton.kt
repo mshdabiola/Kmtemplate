@@ -45,18 +45,18 @@ fun HyaIconToggleButton(
         modifier = modifier,
         enabled = enabled,
         colors =
-            IconButtonDefaults.iconToggleButtonColors(
-                checkedContainerColor = MaterialTheme.colorScheme.primaryContainer,
-                checkedContentColor = MaterialTheme.colorScheme.onPrimaryContainer,
-                disabledContainerColor =
-                    if (checked) {
-                        MaterialTheme.colorScheme.onBackground.copy(
-                            alpha = HyaIconButtonDefaults.DISABLED_ICON_BUTTON_CONTAINER_ALPHA,
-                        )
-                    } else {
-                        Color.Transparent
-                    },
-            ),
+        IconButtonDefaults.iconToggleButtonColors(
+            checkedContainerColor = MaterialTheme.colorScheme.primaryContainer,
+            checkedContentColor = MaterialTheme.colorScheme.onPrimaryContainer,
+            disabledContainerColor =
+            if (checked) {
+                MaterialTheme.colorScheme.onBackground.copy(
+                    alpha = HyaIconButtonDefaults.DISABLED_ICON_BUTTON_CONTAINER_ALPHA,
+                )
+            } else {
+                Color.Transparent
+            },
+        ),
     ) {
         if (checked) checkedIcon() else icon()
     }

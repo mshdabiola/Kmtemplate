@@ -55,11 +55,11 @@ fun HyaLoadingWheel(
                 floatAnimValues[index].animateTo(
                     targetValue = 0F,
                     animationSpec =
-                        tween(
-                            durationMillis = 100,
-                            easing = FastOutSlowInEasing,
-                            delayMillis = 40 * index,
-                        ),
+                    tween(
+                        durationMillis = 100,
+                        easing = FastOutSlowInEasing,
+                        delayMillis = 40 * index,
+                    ),
                 )
             }
         }
@@ -70,9 +70,9 @@ fun HyaLoadingWheel(
         initialValue = 0F,
         targetValue = 360F,
         animationSpec =
-            infiniteRepeatable(
-                animation = tween(durationMillis = ROTATION_TIME, easing = LinearEasing),
-            ),
+        infiniteRepeatable(
+            animation = tween(durationMillis = ROTATION_TIME, easing = LinearEasing),
+        ),
         label = "wheel rotation animation",
     )
 
@@ -86,16 +86,16 @@ fun HyaLoadingWheel(
                 initialValue = baseLineColor,
                 targetValue = baseLineColor,
                 animationSpec =
-                    infiniteRepeatable(
-                        animation =
-                            keyframes {
-                                durationMillis = ROTATION_TIME / 2
-                                progressLineColor at ROTATION_TIME / NUM_OF_LINES / 2 using LinearEasing
-                                baseLineColor at ROTATION_TIME / NUM_OF_LINES using LinearEasing
-                            },
-                        repeatMode = RepeatMode.Restart,
-                        initialStartOffset = StartOffset(ROTATION_TIME / NUM_OF_LINES / 2 * index),
-                    ),
+                infiniteRepeatable(
+                    animation =
+                    keyframes {
+                        durationMillis = ROTATION_TIME / 2
+                        progressLineColor at ROTATION_TIME / NUM_OF_LINES / 2 using LinearEasing
+                        baseLineColor at ROTATION_TIME / NUM_OF_LINES using LinearEasing
+                    },
+                    repeatMode = RepeatMode.Restart,
+                    initialStartOffset = StartOffset(ROTATION_TIME / NUM_OF_LINES / 2 * index),
+                ),
                 label = "wheel color animation",
             )
         }
@@ -103,12 +103,12 @@ fun HyaLoadingWheel(
     // Draws out the LoadingWheel Canvas composable and sets the animations
     Canvas(
         modifier =
-            modifier
-                .size(48.dp)
-                .padding(8.dp)
-                .graphicsLayer { rotationZ = rotationAnim }
-                .semantics { contentDescription = contentDesc }
-                .testTag("loadingWheel"),
+        modifier
+            .size(48.dp)
+            .padding(8.dp)
+            .graphicsLayer { rotationZ = rotationAnim }
+            .semantics { contentDescription = contentDesc }
+            .testTag("loadingWheel"),
     ) {
         repeat(NUM_OF_LINES) { index ->
             rotate(degrees = index * 30f) {
@@ -136,8 +136,8 @@ fun HyaOverlayLoadingWheel(
         shadowElevation = 8.dp,
         color = MaterialTheme.colorScheme.surface.copy(alpha = 0.83f),
         modifier =
-            modifier
-                .size(60.dp),
+        modifier
+            .size(60.dp),
     ) {
         HyaLoadingWheel(
             contentDesc = contentDesc,

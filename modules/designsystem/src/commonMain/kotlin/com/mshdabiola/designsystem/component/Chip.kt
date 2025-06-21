@@ -49,57 +49,57 @@ fun HyaFilterChip(
         modifier = modifier,
         enabled = enabled,
         leadingIcon =
-            if (selected) {
-                {
-                    Icon(
-                        imageVector = HyaIcons.Check,
-                        contentDescription = null,
-                    )
-                }
-            } else {
-                null
-            },
+        if (selected) {
+            {
+                Icon(
+                    imageVector = HyaIcons.Check,
+                    contentDescription = null,
+                )
+            }
+        } else {
+            null
+        },
         shape = CircleShape,
         border =
-            FilterChipDefaults.filterChipBorder(
-                enabled = enabled,
-                selected = selected,
-                borderColor = MaterialTheme.colorScheme.onBackground,
-                selectedBorderColor = MaterialTheme.colorScheme.onBackground,
-                disabledBorderColor =
-                    MaterialTheme.colorScheme.onBackground.copy(
-                        alpha = HyaChipDefaults.DISABLED_CHIP_CONTENT_ALPHA,
-                    ),
-                disabledSelectedBorderColor =
-                    MaterialTheme.colorScheme.onBackground.copy(
-                        alpha = HyaChipDefaults.DISABLED_CHIP_CONTENT_ALPHA,
-                    ),
-                selectedBorderWidth = HyaChipDefaults.ChipBorderWidth,
+        FilterChipDefaults.filterChipBorder(
+            enabled = enabled,
+            selected = selected,
+            borderColor = MaterialTheme.colorScheme.onBackground,
+            selectedBorderColor = MaterialTheme.colorScheme.onBackground,
+            disabledBorderColor =
+            MaterialTheme.colorScheme.onBackground.copy(
+                alpha = HyaChipDefaults.DISABLED_CHIP_CONTENT_ALPHA,
             ),
+            disabledSelectedBorderColor =
+            MaterialTheme.colorScheme.onBackground.copy(
+                alpha = HyaChipDefaults.DISABLED_CHIP_CONTENT_ALPHA,
+            ),
+            selectedBorderWidth = HyaChipDefaults.ChipBorderWidth,
+        ),
         colors =
-            FilterChipDefaults.filterChipColors(
-                labelColor = MaterialTheme.colorScheme.onBackground,
-                iconColor = MaterialTheme.colorScheme.onBackground,
-                disabledContainerColor =
-                    if (selected) {
-                        MaterialTheme.colorScheme.onBackground.copy(
-                            alpha = HyaChipDefaults.DISABLED_CHIP_CONTAINER_ALPHA,
-                        )
-                    } else {
-                        Color.Transparent
-                    },
-                disabledLabelColor =
-                    MaterialTheme.colorScheme.onBackground.copy(
-                        alpha = HyaChipDefaults.DISABLED_CHIP_CONTENT_ALPHA,
-                    ),
-                disabledLeadingIconColor =
-                    MaterialTheme.colorScheme.onBackground.copy(
-                        alpha = HyaChipDefaults.DISABLED_CHIP_CONTENT_ALPHA,
-                    ),
-                selectedContainerColor = MaterialTheme.colorScheme.primaryContainer,
-                selectedLabelColor = MaterialTheme.colorScheme.onBackground,
-                selectedLeadingIconColor = MaterialTheme.colorScheme.onBackground,
+        FilterChipDefaults.filterChipColors(
+            labelColor = MaterialTheme.colorScheme.onBackground,
+            iconColor = MaterialTheme.colorScheme.onBackground,
+            disabledContainerColor =
+            if (selected) {
+                MaterialTheme.colorScheme.onBackground.copy(
+                    alpha = HyaChipDefaults.DISABLED_CHIP_CONTAINER_ALPHA,
+                )
+            } else {
+                Color.Transparent
+            },
+            disabledLabelColor =
+            MaterialTheme.colorScheme.onBackground.copy(
+                alpha = HyaChipDefaults.DISABLED_CHIP_CONTENT_ALPHA,
             ),
+            disabledLeadingIconColor =
+            MaterialTheme.colorScheme.onBackground.copy(
+                alpha = HyaChipDefaults.DISABLED_CHIP_CONTENT_ALPHA,
+            ),
+            selectedContainerColor = MaterialTheme.colorScheme.primaryContainer,
+            selectedLabelColor = MaterialTheme.colorScheme.onBackground,
+            selectedLeadingIconColor = MaterialTheme.colorScheme.onBackground,
+        ),
     )
 }
 
