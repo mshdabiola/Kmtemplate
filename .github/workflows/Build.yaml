@@ -55,8 +55,8 @@ jobs:
       - name: Check build-logic
         run: ./gradlew check -p build-logic
 
-      - name: Check ktlint
-        run: ./gradlew ktlintCheck
+      - name: Check spotless
+        run: ./gradlew spotlessCheck :build-logic:convention:spotlessCheck
 
       - name: Check Dependency Guard
         id: dependencyguard_verify
@@ -152,7 +152,7 @@ jobs:
             large_files: true
             ignore_runs: false
             files: ./**/build/test-results/**/*.xml
-            
+
 
       - name: Check lint
         run: ./gradlew lintFossReliantRelease
