@@ -18,13 +18,13 @@ internal const val PREFERENCES_DATA_STORE_FILE_NAME = "meetings.preferences_pb"
 fun createDataStoreUserData(producePath: () -> String): DataStore<UserData> =
     DataStoreFactory.create(
         storage =
-            OkioStorage(
-                fileSystem = FileSystem.SYSTEM,
-                serializer = UserDataJsonSerializer,
-                producePath = {
-                    producePath().toPath()
-                },
-            ),
+        OkioStorage(
+            fileSystem = FileSystem.SYSTEM,
+            serializer = UserDataJsonSerializer,
+            producePath = {
+                producePath().toPath()
+            },
+        ),
     )
 
 val json = Json

@@ -32,17 +32,17 @@ class UserDataTest : KoinTest {
                     single(qualifier = qualifier("userdata")) {
                         DataStoreFactory.create(
                             storage =
-                                OkioStorage(
-                                    fileSystem = FileSystem.SYSTEM,
-                                    serializer = UserDataJsonSerializer,
-                                    producePath = {
-                                        val path = File(FileSystem.SYSTEM_TEMPORARY_DIRECTORY.toFile(), "data")
-                                        if (!path.parentFile.exists()) {
-                                            path.mkdirs()
-                                        }
-                                        path.toOkioPath()
-                                    },
-                                ),
+                            OkioStorage(
+                                fileSystem = FileSystem.SYSTEM,
+                                serializer = UserDataJsonSerializer,
+                                producePath = {
+                                    val path = File(FileSystem.SYSTEM_TEMPORARY_DIRECTORY.toFile(), "data")
+                                    if (!path.parentFile.exists()) {
+                                        path.mkdirs()
+                                    }
+                                    path.toOkioPath()
+                                },
+                            ),
                         )
                     }
                 }
