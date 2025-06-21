@@ -53,11 +53,6 @@ dependencyResolutionManagement {
         maven(url = "https://androidx.dev/storage/compose-compiler/repository/")
         maven(url = "https://maven.pkg.jetbrains.space/kotlin/p/wasm/experimental")
     }
-    versionCatalogs {
-        create("mihon") {
-            from(files("gradle/mshd.versions.toml"))
-        }
-    }
 }
 rootProject.name = "HydraulicApp"
 include(":modules:database")
