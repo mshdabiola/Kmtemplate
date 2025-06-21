@@ -129,13 +129,13 @@ internal fun MainContent(
 
         ListItem(
             modifier =
-                Modifier.testTag("setting:theme")
-                    .clickable {
-                        theme = true
-                        couroutine.launch {
-                            onShowSnack("Theme", "Clicked")
-                        }
-                    },
+            Modifier.testTag("setting:theme")
+                .clickable {
+                    theme = true
+                    couroutine.launch {
+                        onShowSnack("Theme", "Clicked")
+                    }
+                },
             headlineContent = { Text("Theme") },
             supportingContent = {
                 Text(themeArray.getOrNull(settingState.themeBrand.ordinal) ?: "")

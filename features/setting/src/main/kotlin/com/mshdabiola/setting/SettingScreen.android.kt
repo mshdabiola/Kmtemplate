@@ -12,9 +12,9 @@ import com.mshdabiola.model.ThemeBrand
 fun ScreenPreview() {
     SettingScreen(
         settingState =
-            SettingState.Success(
-                themeBrand = ThemeBrand.DEFAULT,
-                darkThemeConfig = DarkThemeConfig.DARK,
-            ),
+        SettingState.Success(
+            themeBrand = ThemeBrand.DEFAULT,
+            darkThemeConfig = DarkThemeConfig.DARK,
+        ),
     )
 }

@@ -19,9 +19,9 @@ class MainScreenTest {
             SharedContentPreview { sharedTransitionScope, animatedContentScope ->
                 MainScreen(
                     mainState =
-                        Result.Success(
-                            notes,
-                        ),
+                    Result.Success(
+                        notes,
+                    ),
                     sharedTransitionScope = sharedTransitionScope,
                     animatedContentScope = animatedContentScope,
                 )

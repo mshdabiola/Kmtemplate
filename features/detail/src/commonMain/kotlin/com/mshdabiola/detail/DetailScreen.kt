@@ -126,9 +126,9 @@ internal fun MainContent(
             )
             HyaTextField(
                 modifier =
-                    Modifier
-                        .fillMaxWidth()
-                        .testTag("detail:title"),
+                Modifier
+                    .fillMaxWidth()
+                    .testTag("detail:title"),
                 state = title,
                 placeholder = "Title",
                 maxNum = TextFieldLineLimits.SingleLine,
@@ -136,10 +136,10 @@ internal fun MainContent(
             )
             HyaTextField(
                 modifier =
-                    Modifier
-                        .fillMaxWidth()
-                        .testTag("detail:content")
-                        .weight(1f),
+                Modifier
+                    .fillMaxWidth()
+                    .testTag("detail:content")
+                    .weight(1f),
                 state = content,
                 placeholder = "content",
                 imeAction = ImeAction.Done,

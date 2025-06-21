@@ -35,9 +35,9 @@ fun OptionsDialog(
                 options.fastForEachIndexed { i, s ->
                     Row(
                         modifier =
-                            Modifier.clickable {
-                                onSelect(i)
-                            },
+                        Modifier.clickable {
+                            onSelect(i)
+                        },
                         verticalAlignment = Alignment.CenterVertically,
                         horizontalArrangement = Arrangement.spacedBy(4.dp),
                     ) {
