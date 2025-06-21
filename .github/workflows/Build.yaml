@@ -55,6 +55,9 @@ jobs:
       - name: Check build-logic
         run: ./gradlew check -p build-logic
 
+      - name: Check ktlint
+        run: ./gradlew ktlintCheck
+
       - name: Check spotless
         run: ./gradlew spotlessCheck :build-logic:convention:spotlessCheck
 
