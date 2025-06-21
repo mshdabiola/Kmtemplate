@@ -8,11 +8,11 @@ import org.jetbrains.kotlin.psi.KtCallExpression
 class PreferMethodNameRule : Rule(
     RuleId("hydraulicapp:prefer-method-name"),
     about =
-        Rule.About(
-            maintainer = "Your Name",
-            repositoryUrl = "https://github.com/mshdabiola/hydraulicapp",
-            issueTrackerUrl = "https://github.com/mshdabiola/hydraulicapp",
-        ),
+    Rule.About(
+        maintainer = "Your Name",
+        repositoryUrl = "https://github.com/mshdabiola/hydraulicapp",
+        issueTrackerUrl = "https://github.com/mshdabiola/hydraulicapp",
+    ),
 ) {
     // Define the mapping of deprecated method names to preferred method names
     private val methodNameReplacements =

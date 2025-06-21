@@ -8,11 +8,11 @@ import org.jetbrains.kotlin.psi.KtDotQualifiedExpression
 class PreferReceiverNameRule : Rule(
     RuleId("hydraulicapp:prefer-receiver-name"),
     about =
-        Rule.About(
-            maintainer = "Your Name",
-            repositoryUrl = "https://github.com/mshdabiola/hydraulicapp",
-            issueTrackerUrl = "https://github.com/mshdabiola/hydraulicapp",
-        ),
+    Rule.About(
+        maintainer = "Your Name",
+        repositoryUrl = "https://github.com/mshdabiola/hydraulicapp",
+        issueTrackerUrl = "https://github.com/mshdabiola/hydraulicapp",
+    ),
 ) {
     // Define the mapping of deprecated receiver names to preferred receiver names
     private val stringStringMap =
