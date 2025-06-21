@@ -1,0 +1,7 @@
+[plugins]
+android-application = { id = "mihon.plugins.android.application" }
+android-library = { id = "mihon.plugins.android.library" }
+compose-multiplatform = { id = "mihon.plugins.compose.multiplatform" }
+kotlin-android = { id = "mihon.plugins.kotlin.android" }
+kotlin-multiplatform = { id = "mihon.plugins.kotlin.multiplatform" }
+spotless = { id = "mihon.plugins.spotless" }
