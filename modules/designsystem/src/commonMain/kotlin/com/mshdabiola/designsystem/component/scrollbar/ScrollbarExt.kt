@@ -1,7 +1,20 @@
 /*
- *abiola 2023
+ * Copyright (C) 2023-2025 MshdAbiola
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published
+ * by the Free Software Foundation, version 3.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program. If not, see <https://www.gnu.org/licenses/>.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
  */
-
 package com.mshdabiola.designsystem.component.scrollbar
 
 import androidx.compose.foundation.gestures.Orientation
@@ -41,13 +54,13 @@ fun LazyListState.scrollbarState(
             val firstIndex =
                 min(
                     a =
-                        interpolateFirstItemIndex(
-                            visibleItems = visibleItemsInfo,
-                            itemSize = { it.size },
-                            offset = { it.offset },
-                            nextItemOnMainAxis = { first -> visibleItemsInfo.find { it != first } },
-                            itemIndex = itemIndex,
-                        ),
+                    interpolateFirstItemIndex(
+                        visibleItems = visibleItemsInfo,
+                        itemSize = { it.size },
+                        offset = { it.offset },
+                        nextItemOnMainAxis = { first -> visibleItemsInfo.find { it != first } },
+                        itemIndex = itemIndex,
+                    ),
                     b = itemsAvailable.toFloat(),
                 )
             if (firstIndex.isNaN()) return@snapshotFlow null
@@ -75,10 +88,10 @@ fun LazyListState.scrollbarState(
             scrollbarStateValue(
                 thumbSizePercent = thumbSizePercent,
                 thumbMovedPercent =
-                    when {
-                        layoutInfo.reverseLayout -> 1f - thumbTravelPercent
-                        else -> thumbTravelPercent
-                    },
+                when {
+                    layoutInfo.reverseLayout -> 1f - thumbTravelPercent
+                    else -> thumbTravelPercent
+                },
             )
         }
             .filterNotNull()
@@ -110,25 +123,25 @@ fun LazyGridState.scrollbarState(
             val firstIndex =
                 min(
                     a =
-                        interpolateFirstItemIndex(
-                            visibleItems = visibleItemsInfo,
-                            itemSize = { layoutInfo.orientation.valueOf(it.size) },
-                            offset = { layoutInfo.orientation.valueOf(it.offset) },
-                            nextItemOnMainAxis = { first ->
-                                when (layoutInfo.orientation) {
-                                    Orientation.Vertical ->
-                                        visibleItemsInfo.find {
-                                            it != first && it.row != first.row
-                                        }
+                    interpolateFirstItemIndex(
+                        visibleItems = visibleItemsInfo,
+                        itemSize = { layoutInfo.orientation.valueOf(it.size) },
+                        offset = { layoutInfo.orientation.valueOf(it.offset) },
+                        nextItemOnMainAxis = { first ->
+                            when (layoutInfo.orientation) {
+                                Orientation.Vertical ->
+                                    visibleItemsInfo.find {
+                                        it != first && it.row != first.row
+                                    }
 
-                                    Orientation.Horizontal ->
-                                        visibleItemsInfo.find {
-                                            it != first && it.column != first.column
-                                        }
-                                }
-                            },
-                            itemIndex = itemIndex,
-                        ),
+                                Orientation.Horizontal ->
+                                    visibleItemsInfo.find {
+                                        it != first && it.column != first.column
+                                    }
+                            }
+                        },
+                        itemIndex = itemIndex,
+                    ),
                     b = itemsAvailable.toFloat(),
                 )
             if (firstIndex.isNaN()) return@snapshotFlow null
@@ -156,10 +169,10 @@ fun LazyGridState.scrollbarState(
             scrollbarStateValue(
                 thumbSizePercent = thumbSizePercent,
                 thumbMovedPercent =
-                    when {
-                        layoutInfo.reverseLayout -> 1f - thumbTravelPercent
-                        else -> thumbTravelPercent
-                    },
+                when {
+                    layoutInfo.reverseLayout -> 1f - thumbTravelPercent
+                    else -> thumbTravelPercent
+                },
             )
         }
             .filterNotNull()
@@ -192,15 +205,15 @@ fun LazyStaggeredGridState.scrollbarState(
             val firstIndex =
                 min(
                     a =
-                        interpolateFirstItemIndex(
-                            visibleItems = visibleItemsInfo,
-                            itemSize = { layoutInfo.orientation.valueOf(it.size) },
-                            offset = { layoutInfo.orientation.valueOf(it.offset) },
-                            nextItemOnMainAxis = { first ->
-                                visibleItemsInfo.find { it != first && it.lane == first.lane }
-                            },
-                            itemIndex = itemIndex,
-                        ),
+                    interpolateFirstItemIndex(
+                        visibleItems = visibleItemsInfo,
+                        itemSize = { layoutInfo.orientation.valueOf(it.size) },
+                        offset = { layoutInfo.orientation.valueOf(it.offset) },
+                        nextItemOnMainAxis = { first ->
+                            visibleItemsInfo.find { it != first && it.lane == first.lane }
+                        },
+                        itemIndex = itemIndex,
+                    ),
                     b = itemsAvailable.toFloat(),
                 )
             if (firstIndex.isNaN()) return@snapshotFlow null

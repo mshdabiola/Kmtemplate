@@ -58,6 +58,20 @@ jobs:
       - name: Check ktlint
         run: ./gradlew ktlintCheck
 
+      - name: Check spotless
+        run: ./gradlew spotlessCheck :build-logic:convention:spotlessCheck
+
+#      - name: Apply Spotless
+#        run: ./gradlew spotlessApply
+#
+#      - name: Commit Spotless changes
+#        uses: stefanzweifel/git-auto-commit-action@v5
+#        with:
+#            commit_message: 🤖 Apply Spotless formatting
+#            file_pattern: '**/*.kt **/*.kts **/*.java **/*.xml'
+
+
+
       - name: Check Dependency Guard
         id: dependencyguard_verify
         continue-on-error: true
@@ -152,7 +166,7 @@ jobs:
             large_files: true
             ignore_runs: false
             files: ./**/build/test-results/**/*.xml
-            
+
 
       - name: Check lint
         run: ./gradlew lintFossReliantRelease

@@ -1,8 +1,20 @@
-
 /*
- *abiola 2024
+ * Copyright (C) 2024-2025 MshdAbiola
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published
+ * by the Free Software Foundation, version 3.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program. If not, see <https://www.gnu.org/licenses/>.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
  */
-
 package com.mshdabiola.designsystem.component
 
 import androidx.compose.foundation.ScrollState
@@ -64,19 +76,19 @@ fun HyaTextField(
             }
         },
         colors =
-            TextFieldDefaults.colors(
-                focusedContainerColor = Color.Transparent,
-                unfocusedContainerColor = Color.Transparent,
-                disabledContainerColor = Color.Transparent,
-                focusedIndicatorColor = Color.Transparent,
-                unfocusedIndicatorColor = Color.Transparent,
-            ),
+        TextFieldDefaults.colors(
+            focusedContainerColor = Color.Transparent,
+            unfocusedContainerColor = Color.Transparent,
+            disabledContainerColor = Color.Transparent,
+            focusedIndicatorColor = Color.Transparent,
+            unfocusedIndicatorColor = Color.Transparent,
+        ),
         keyboardOptions =
-            KeyboardOptions.Default.copy(
-                capitalization = KeyboardCapitalization.Sentences,
-                autoCorrectEnabled = true,
-                imeAction = imeAction,
-            ),
+        KeyboardOptions.Default.copy(
+            capitalization = KeyboardCapitalization.Sentences,
+            autoCorrectEnabled = true,
+            imeAction = imeAction,
+        ),
         // keyboardActions = KeyboardActions { keyboardAction() },
         lineLimits = maxNum,
     )
@@ -121,12 +133,12 @@ fun MyTextField(
         BasicTextField(
             state = state,
             modifier =
-                modifier
-                    .defaultErrorSemantics(isError, "Error occur")
-                    .defaultMinSize(
-                        minWidth = TextFieldDefaults.MinWidth,
-                        minHeight = TextFieldDefaults.MinHeight,
-                    ),
+            modifier
+                .defaultErrorSemantics(isError, "Error occur")
+                .defaultMinSize(
+                    minWidth = TextFieldDefaults.MinWidth,
+                    minHeight = TextFieldDefaults.MinHeight,
+                ),
             enabled = enabled,
             readOnly = readOnly,
             textStyle = mergedTextStyle,

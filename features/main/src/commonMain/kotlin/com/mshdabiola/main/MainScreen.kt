@@ -1,7 +1,20 @@
 /*
- *abiola 2022
+ * Copyright (C) 2022-2025 MshdAbiola
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published
+ * by the Free Software Foundation, version 3.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program. If not, see <https://www.gnu.org/licenses/>.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
  */
-
 package com.mshdabiola.main
 
 import androidx.compose.animation.AnimatedVisibilityScope
@@ -106,20 +119,20 @@ internal fun MainScreen(
     with(sharedTransitionScope) {
         Box(
             modifier =
-                modifier
-                    .testTag("main:screen")
-                    .sharedBounds(
-                        sharedContentState = rememberSharedContentState("container"),
-                        animatedVisibilityScope = animatedContentScope,
-                    ),
+            modifier
+                .testTag("main:screen")
+                .sharedBounds(
+                    sharedContentState = rememberSharedContentState("container"),
+                    animatedVisibilityScope = animatedContentScope,
+                ),
         ) {
             LazyColumn(
                 state = state,
                 contentPadding = PaddingValues(16.dp),
                 verticalArrangement = Arrangement.spacedBy(16.dp),
                 modifier =
-                    Modifier
-                        .testTag("main:list"),
+                Modifier
+                    .testTag("main:list"),
             ) {
                 item {
                     // Spacer(Modifier.windowInsetsTopHeight(WindowInsets.safeDrawing))
@@ -163,17 +176,17 @@ internal fun MainScreen(
                 )
             state.DraggableScrollbar(
                 modifier =
-                    Modifier
-                        .fillMaxHeight()
-                        .windowInsetsPadding(WindowInsets.systemBars)
-                        .padding(horizontal = 2.dp)
-                        .align(Alignment.CenterEnd),
+                Modifier
+                    .fillMaxHeight()
+                    .windowInsetsPadding(WindowInsets.systemBars)
+                    .padding(horizontal = 2.dp)
+                    .align(Alignment.CenterEnd),
                 state = scrollbarState,
                 orientation = Orientation.Vertical,
                 onThumbMoved =
-                    state.rememberDraggableScroller(
-                        itemsAvailable = itemsAvailable,
-                    ),
+                state.rememberDraggableScroller(
+                    itemsAvailable = itemsAvailable,
+                ),
             )
         }
     }
@@ -195,10 +208,10 @@ private fun LoadingState(modifier: Modifier = Modifier) {
 private fun EmptyState(modifier: Modifier = Modifier) {
     Column(
         modifier =
-            modifier
-                .padding(16.dp)
-                .fillMaxSize()
-                .testTag("main:empty"),
+        modifier
+            .padding(16.dp)
+            .fillMaxSize()
+            .testTag("main:empty"),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
@@ -248,9 +261,9 @@ fun MainLight() {
                 MainScreen(
                     modifier = Modifier.fillMaxSize(),
                     mainState =
-                        Result.Success(
-                            listOf(Note(title = "abiola", content = "what is your name")),
-                        ),
+                    Result.Success(
+                        listOf(Note(title = "abiola", content = "what is your name")),
+                    ),
                     sharedTransitionScope = sharedTransitionScope,
                     animatedContentScope = animatedContentScope,
                 )

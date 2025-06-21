@@ -1,3 +1,20 @@
+/*
+ * Copyright (C) 2025 MshdAbiola
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published
+ * by the Free Software Foundation, version 3.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program. If not, see <https://www.gnu.org/licenses/>.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
 package com.mshdabiola.hydraulicapp.ui
 
 import androidx.compose.foundation.layout.Arrangement
@@ -72,9 +89,9 @@ fun CommonNavigation(
         Column(
             verticalArrangement = Arrangement.SpaceBetween,
             modifier =
-                modifier
-                    .padding(8.dp)
-                    .verticalScroll(state = rememberScrollState()),
+            modifier
+                .padding(8.dp)
+                .verticalScroll(state = rememberScrollState()),
         ) {
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Icon(HyaIcons.LocalLibrary, "Logo")
@@ -93,20 +110,20 @@ fun CommonNavigation(
                         .forEachIndexed { index, navigator ->
                             NavigationDrawerItem(
                                 selected =
-                                    navController
-                                        .currentBackStackEntryAsState().value?.destination?.hasRoute(
-                                            route = navigator.route::class,
-                                        )
-                                        == true,
+                                navController
+                                    .currentBackStackEntryAsState().value?.destination?.hasRoute(
+                                        route = navigator.route::class,
+                                    )
+                                    == true,
                                 label = { Text(mainArray[index]) },
                                 onClick = {
                                     navController.navigate(
                                         navigator.route,
                                         navOptions =
-                                            navOptions {
-                                                launchSingleTop
-                                                restoreState
-                                            },
+                                        navOptions {
+                                            launchSingleTop
+                                            restoreState
+                                        },
                                     )
                                 },
                                 colors = color,
@@ -125,11 +142,11 @@ fun CommonNavigation(
                     .forEachIndexed { index, navigator ->
                         NavigationDrawerItem(
                             selected =
-                                navController
-                                    .currentBackStackEntryAsState()
-                                    .value?.destination
-                                    ?.hasRoute(route = navigator.route::class)
-                                    == true,
+                            navController
+                                .currentBackStackEntryAsState()
+                                .value?.destination
+                                ?.hasRoute(route = navigator.route::class)
+                                == true,
                             label = { Text(settingArray[index]) },
                             onClick = {
                                 navController.navigate(navigator.route)
@@ -183,9 +200,9 @@ fun CommonRail(
             verticalArrangement = Arrangement.SpaceBetween,
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier =
-                Modifier
-                    .padding(8.dp)
-                    .verticalScroll(state = rememberScrollState()),
+            Modifier
+                .padding(8.dp)
+                .verticalScroll(state = rememberScrollState()),
         ) {
             Icon(HyaIcons.LocalLibrary, "Logo")
 
@@ -200,11 +217,11 @@ fun CommonRail(
                     .forEachIndexed { index, navigator ->
                         HyaNavigationRailItem(
                             selected =
-                                navController
-                                    .currentBackStackEntryAsState()
-                                    .value?.destination
-                                    ?.hasRoute(route = navigator.route::class)
-                                    == true,
+                            navController
+                                .currentBackStackEntryAsState()
+                                .value?.destination
+                                ?.hasRoute(route = navigator.route::class)
+                                == true,
                             label = { Text(settingArray[index]) },
                             onClick = {
                                 navController.navigate(navigator.route)
@@ -228,20 +245,20 @@ fun CommonRail(
                     .forEachIndexed { index, navigator ->
                         HyaNavigationRailItem(
                             selected =
-                                navController
-                                    .currentBackStackEntryAsState()
-                                    .value
-                                    ?.destination?.hasRoute(route = navigator.route::class)
-                                    == true,
+                            navController
+                                .currentBackStackEntryAsState()
+                                .value
+                                ?.destination?.hasRoute(route = navigator.route::class)
+                                == true,
                             label = { Text(settingArray[index]) },
                             onClick = {
                                 navController.navigate(
                                     navigator.route,
                                     navOptions =
-                                        navOptions {
-                                            launchSingleTop
-                                            restoreState
-                                        },
+                                    navOptions {
+                                        launchSingleTop
+                                        restoreState
+                                    },
                                 )
                             },
                             icon = {
@@ -290,20 +307,20 @@ fun CommonBar(
             .forEachIndexed { index, navigator ->
                 HyaNavigationBarItem(
                     selected =
-                        navController
-                            .currentBackStackEntryAsState()
-                            .value?.destination
-                            ?.hasRoute(route = navigator.route::class)
-                            == true,
+                    navController
+                        .currentBackStackEntryAsState()
+                        .value?.destination
+                        ?.hasRoute(route = navigator.route::class)
+                        == true,
                     label = { Text(mainArray[index]) },
                     onClick = {
                         navController.navigate(
                             navigator.route,
                             navOptions =
-                                navOptions {
-                                    launchSingleTop
-                                    restoreState
-                                },
+                            navOptions {
+                                launchSingleTop
+                                restoreState
+                            },
                         )
                     },
                     alwaysShowLabel = false,

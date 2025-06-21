@@ -1,6 +1,21 @@
-import dev.iurysouza.modulegraph.ModuleType.AndroidApp
-import dev.iurysouza.modulegraph.ModuleType.AndroidLibrary
-import dev.iurysouza.modulegraph.ModuleType.Custom
+/*
+ * Copyright (C) 2025 AntsyLich and The Mihon Authors
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published
+ * by the Free Software Foundation, version 3.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program. If not, see <https://www.gnu.org/licenses/>.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
+import com.diffplug.gradle.spotless.SpotlessExtension
 import dev.iurysouza.modulegraph.Theme
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 
@@ -31,11 +46,13 @@ plugins {
     alias(libs.plugins.module.graph)
     alias(libs.plugins.ktlint) apply false
     alias(libs.plugins.detekt) apply false
+    alias(libs.plugins.spotless)
 }
+
 
 moduleGraphConfig {
     heading = "###  HydraulicApp Module Graph"
-    readmePath = "${rootDir}/FULLGRAPH.md"
+    readmePath = "$rootDir/FULLGRAPH.md"
     showFullPath = false
     setStyleByModuleType.set(true)
     theme.set(
@@ -53,10 +70,9 @@ moduleGraphConfig {
     )
 
     graph(
-        readmePath = "${rootDir}/features/main/README.md",
+        readmePath = "$rootDir/features/main/README.md",
         heading = "### Main Module Graph",
     ) {
-
 
         showFullPath = false
         this.focusedModulesRegex = ".*(features:main).*"
@@ -73,7 +89,7 @@ moduleGraphConfig {
         )
     }
     graph(
-        readmePath = "${rootDir}/features/detail/README.md",
+        readmePath = "$rootDir/features/detail/README.md",
         heading = "### Detail Module Graph",
     ) {
         this.focusedModulesRegex = ".*(features:detail).*"
@@ -91,7 +107,7 @@ moduleGraphConfig {
         )
     }
     graph(
-        readmePath = "${rootDir}/features/setting/README.md",
+        readmePath = "$rootDir/features/setting/README.md",
         heading = "### Setting Module Graph",
     ) {
         this.focusedModulesRegex = ".*(features:setting).*"
@@ -110,7 +126,7 @@ moduleGraphConfig {
     }
 
     graph(
-        readmePath = "${rootDir}/modules/analytics/README.md",
+        readmePath = "$rootDir/modules/analytics/README.md",
         heading = "### Analytics Module Graph",
     ) {
         this.focusedModulesRegex = ".*(modules:analytics).*"
@@ -129,7 +145,7 @@ moduleGraphConfig {
     }
 
     graph(
-        readmePath = "${rootDir}/modules/data/README.md",
+        readmePath = "$rootDir/modules/data/README.md",
         heading = "### Data Module Graph",
     ) {
         this.focusedModulesRegex = ".*(modules:data).*"
@@ -147,7 +163,7 @@ moduleGraphConfig {
         )
     }
     graph(
-        readmePath = "${rootDir}/modules/database/README.md",
+        readmePath = "$rootDir/modules/database/README.md",
         heading = "### Database Module Graph",
     ) {
         this.focusedModulesRegex = ".*(modules:database).*"
@@ -166,7 +182,7 @@ moduleGraphConfig {
     }
 
     graph(
-        readmePath = "${rootDir}/modules/datastore/README.md",
+        readmePath = "$rootDir/modules/datastore/README.md",
         heading = "### DataStore Module Graph",
     ) {
         this.focusedModulesRegex = ".*(modules:datastore).*"
@@ -185,7 +201,7 @@ moduleGraphConfig {
     }
 
     graph(
-        readmePath = "${rootDir}/modules/domain/README.md",
+        readmePath = "$rootDir/modules/domain/README.md",
         heading = "### Domain Module Graph",
     ) {
         this.focusedModulesRegex = ".*(modules:domain).*"
@@ -203,7 +219,7 @@ moduleGraphConfig {
         )
     }
     graph(
-        readmePath = "${rootDir}/modules/model/README.md",
+        readmePath = "$rootDir/modules/model/README.md",
         heading = "### Model Module Graph",
     ) {
         this.focusedModulesRegex = ".*(modules:model).*"
@@ -222,7 +238,7 @@ moduleGraphConfig {
     }
 
     graph(
-        readmePath = "${rootDir}/modules/network/README.md",
+        readmePath = "$rootDir/modules/network/README.md",
         heading = "### Network Module Graph",
     ) {
         this.focusedModulesRegex = ".*(modules:network).*"
@@ -240,7 +256,7 @@ moduleGraphConfig {
         )
     }
     graph(
-        readmePath = "${rootDir}/modules/ui/README.md",
+        readmePath = "$rootDir/modules/ui/README.md",
         heading = "### UI Module Graph",
     ) {
         this.focusedModulesRegex = ".*(modules:ui).*"
@@ -259,7 +275,7 @@ moduleGraphConfig {
     }
 
     graph(
-        readmePath = "${rootDir}/modules/testing/README.md",
+        readmePath = "$rootDir/modules/testing/README.md",
         heading = "### Testing Module Graph",
     ) {
         this.focusedModulesRegex = ".*(modules:testing).*"
@@ -278,7 +294,7 @@ moduleGraphConfig {
     }
 
     graph(
-        readmePath = "${rootDir}/modules/designsystem/README.md",
+        readmePath = "$rootDir/modules/designsystem/README.md",
         heading = "### Design System Module Graph",
     ) {
         this.focusedModulesRegex = ".*(modules:designsystem).*"
@@ -297,7 +313,7 @@ moduleGraphConfig {
     }
 
     graph(
-        readmePath = "${rootDir}/benchmarks/README.md",
+        readmePath = "$rootDir/benchmarks/README.md",
         heading = "### Benchmarks Module Graph",
     ) {
         this.focusedModulesRegex = ".*(benchmarks).*"
@@ -314,19 +330,36 @@ moduleGraphConfig {
             focusColor = "#FA8140",
         )
     }
-
 }
 
 subprojects {
+    apply(plugin = "com.diffplug.spotless")
     apply(plugin = "org.jlleitschuh.gradle.ktlint")
     configure<org.jlleitschuh.gradle.ktlint.KtlintExtension> {
         debug.set(true)
-        //ignoreFailures.set(true)
+        // ignoreFailures.set(true)
 //        reporters {
 //            reporter(org.jlleitschuh.gradle.ktlint.reporter.ReporterType.HTML)
 //            reporter(org.jlleitschuh.gradle.ktlint.reporter.ReporterType.CHECKSTYLE)
 //            reporter(org.jlleitschuh.gradle.ktlint.reporter.ReporterType.PLAIN)
 //        }
+    }
+    configure<SpotlessExtension> {
+        spotless {
+            val ktlintVersion = rootProject.libs.ktlint.cli.get().version
+            kotlin {
+                target("src/**/*.kt")
+                ktlint(ktlintVersion).setEditorConfigPath(rootProject.file("./.editorconfig"))
+                licenseHeaderFile(rootProject.file("./spotless/copyright.kt")).updateYearWithLatest(true)
+            }
+
+            kotlinGradle {
+                target("*.gradle.kts")
+                ktlint(ktlintVersion).setEditorConfigPath(rootProject.file("./.editorconfig"))
+                licenseHeaderFile(rootProject.file("./spotless/copyright.kt"), "(^(?![\\/ ]\\**).*$)")
+                    .updateYearWithLatest(true)
+            }
+        }
     }
     dependencies {
         add("ktlint", project(":ktlint"))

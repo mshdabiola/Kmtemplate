@@ -1,7 +1,20 @@
 /*
- *abiola 2024
+ * Copyright (C) 2024-2025 MshdAbiola
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published
+ * by the Free Software Foundation, version 3.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program. If not, see <https://www.gnu.org/licenses/>.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
  */
-
 package com.mshdabiola.designsystem.component
 
 import androidx.compose.foundation.BorderStroke
@@ -38,9 +51,9 @@ fun HyaButton(
         modifier = modifier,
         enabled = enabled,
         colors =
-            ButtonDefaults.buttonColors(
-                containerColor = MaterialTheme.colorScheme.onBackground,
-            ),
+        ButtonDefaults.buttonColors(
+            containerColor = MaterialTheme.colorScheme.onBackground,
+        ),
         contentPadding = contentPadding,
         content = content,
     )
@@ -69,11 +82,11 @@ fun HyaButton(
         modifier = modifier,
         enabled = enabled,
         contentPadding =
-            if (leadingIcon != null) {
-                ButtonDefaults.ButtonWithIconContentPadding
-            } else {
-                ButtonDefaults.ContentPadding
-            },
+        if (leadingIcon != null) {
+            ButtonDefaults.ButtonWithIconContentPadding
+        } else {
+            ButtonDefaults.ContentPadding
+        },
     ) {
         HyaButtonContent(
             text = text,
@@ -106,21 +119,21 @@ fun HyaOutlinedButton(
         modifier = modifier,
         enabled = enabled,
         colors =
-            ButtonDefaults.outlinedButtonColors(
-                contentColor = MaterialTheme.colorScheme.onBackground,
-            ),
+        ButtonDefaults.outlinedButtonColors(
+            contentColor = MaterialTheme.colorScheme.onBackground,
+        ),
         border =
-            BorderStroke(
-                width = HyaButtonDefaults.OutlinedButtonBorderWidth,
-                color =
-                    if (enabled) {
-                        MaterialTheme.colorScheme.outline
-                    } else {
-                        MaterialTheme.colorScheme.onSurface.copy(
-                            alpha = HyaButtonDefaults.DISABLED_OUTLINED_BUTTON_BORDER_ALPHA,
-                        )
-                    },
-            ),
+        BorderStroke(
+            width = HyaButtonDefaults.OutlinedButtonBorderWidth,
+            color =
+            if (enabled) {
+                MaterialTheme.colorScheme.outline
+            } else {
+                MaterialTheme.colorScheme.onSurface.copy(
+                    alpha = HyaButtonDefaults.DISABLED_OUTLINED_BUTTON_BORDER_ALPHA,
+                )
+            },
+        ),
         contentPadding = contentPadding,
         content = content,
     )
@@ -149,11 +162,11 @@ fun HyaOutlinedButton(
         modifier = modifier,
         enabled = enabled,
         contentPadding =
-            if (leadingIcon != null) {
-                ButtonDefaults.ButtonWithIconContentPadding
-            } else {
-                ButtonDefaults.ContentPadding
-            },
+        if (leadingIcon != null) {
+            ButtonDefaults.ButtonWithIconContentPadding
+        } else {
+            ButtonDefaults.ContentPadding
+        },
     ) {
         HyaButtonContent(
             text = text,
@@ -183,9 +196,9 @@ fun HyaTextButton(
         modifier = modifier,
         enabled = enabled,
         colors =
-            ButtonDefaults.textButtonColors(
-                contentColor = MaterialTheme.colorScheme.onBackground,
-            ),
+        ButtonDefaults.textButtonColors(
+            contentColor = MaterialTheme.colorScheme.onBackground,
+        ),
         content = content,
     )
 }
@@ -240,11 +253,11 @@ private fun HyaButtonContent(
         Modifier
             .padding(
                 start =
-                    if (leadingIcon != null) {
-                        ButtonDefaults.IconSpacing
-                    } else {
-                        0.dp
-                    },
+                if (leadingIcon != null) {
+                    ButtonDefaults.IconSpacing
+                } else {
+                    0.dp
+                },
             ),
     ) {
         text()

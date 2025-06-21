@@ -1,3 +1,20 @@
+/*
+ * Copyright (C) 2025 MshdAbiola
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published
+ * by the Free Software Foundation, version 3.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program. If not, see <https://www.gnu.org/licenses/>.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
 package com.mshdabiola.app
 
 import com.android.SdkConstants
@@ -19,7 +36,6 @@ import org.gradle.api.tasks.OutputFile
 import org.gradle.api.tasks.PathSensitive
 import org.gradle.api.tasks.PathSensitivity
 import org.gradle.api.tasks.TaskAction
-import org.gradle.configurationcache.extensions.capitalized
 import org.gradle.kotlin.dsl.register
 import org.gradle.language.base.plugins.LifecycleBasePlugin
 import org.gradle.process.ExecOperations
@@ -84,7 +100,7 @@ abstract class CheckBadgingTask : DefaultTask() {
     fun taskAction() {
         assertWithMessage(
             "Generated badging is different from golden badging! " +
-                    "If this change is intended, run ./gradlew ${updateBadgingTaskName.get()}",
+                "If this change is intended, run ./gradlew ${updateBadgingTaskName.get()}",
         )
             .that(generatedBadging.get().asFile.readText())
             .isEqualTo(goldenBadging.get().asFile.readText())
@@ -111,8 +127,8 @@ fun Project.configureBadgingTasks(
                     File(
                         baseExtension.sdkDirectory,
                         "${SdkConstants.FD_BUILD_TOOLS}/" +
-                                "${baseExtension.buildToolsVersion}/" +
-                                SdkConstants.FN_AAPT2,
+                            "${baseExtension.buildToolsVersion}/" +
+                            SdkConstants.FN_AAPT2,
                     ),
                 )
 

@@ -1,5 +1,23 @@
+/*
+ * Copyright (C) 2025 MshdAbiola
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published
+ * by the Free Software Foundation, version 3.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program. If not, see <https://www.gnu.org/licenses/>.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
 plugins {
     `kotlin-dsl`
+    alias(libs.plugins.spotless)
 }
 
 group = "com.mshdabiola.buildlogic"
@@ -7,6 +25,27 @@ group = "com.mshdabiola.buildlogic"
 java {
     sourceCompatibility = JavaVersion.VERSION_17
     targetCompatibility = JavaVersion.VERSION_17
+}
+
+//kotlin {
+//    jvmToolchain(21)
+//}
+
+// Configuration should be synced with [/build-logic/src/main/kotlin/mihon/gradle/configurations/spotless.kt]
+spotless {
+    val ktlintVersion = libs.ktlint.cli.get().version
+    kotlin {
+        target("src/**/*.kt")
+        ktlint(ktlintVersion).setEditorConfigPath(rootProject.file("../.editorconfig"))
+        licenseHeaderFile(rootProject.file("../spotless/copyright.kt")).updateYearWithLatest(true)
+    }
+
+    kotlinGradle {
+        target("*.gradle.kts")
+        ktlint(ktlintVersion).setEditorConfigPath(rootProject.file("../.editorconfig"))
+        licenseHeaderFile(rootProject.file("../spotless/copyright.kt"), "(^(?![\\/ ]\\**).*$)")
+            .updateYearWithLatest(true)
+    }
 }
 
 dependencies {
@@ -23,6 +62,7 @@ dependencies {
     compileOnly(libs.compose.gradlePlugin)
     compileOnly(libs.kover.gradlePlugin)
     compileOnly(libs.compose.hot.gradlePlugin)
+
 
 
 
@@ -49,7 +89,7 @@ gradlePlugin {
             id = "mshdabiola.android.application"
             implementationClass = "AndroidApplicationConventionPlugin"
         }
-       
+
 
         register("androidLibraryCompose") {
             id = "mshdabiola.android.library.compose"
@@ -84,6 +124,7 @@ gradlePlugin {
             id = "mshdabiola.android.room"
             implementationClass = "AndroidRoomConventionPlugin"
         }
+
     }
 }
 

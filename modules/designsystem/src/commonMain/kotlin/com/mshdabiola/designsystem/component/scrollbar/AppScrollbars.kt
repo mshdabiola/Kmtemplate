@@ -1,7 +1,20 @@
 /*
- *abiola 2023
+ * Copyright (C) 2023-2025 MshdAbiola
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published
+ * by the Free Software Foundation, version 3.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program. If not, see <https://www.gnu.org/licenses/>.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
  */
-
 package com.mshdabiola.designsystem.component.scrollbar
 
 import androidx.compose.animation.animateColorAsState
@@ -121,14 +134,14 @@ private fun ScrollableState.DraggableScrollbarThumb(
 ) {
     Box(
         modifier =
-            Modifier
-                .run {
-                    when (orientation) {
-                        Vertical -> width(12.dp).fillMaxHeight()
-                        Horizontal -> height(12.dp).fillMaxWidth()
-                    }
+        Modifier
+            .run {
+                when (orientation) {
+                    Vertical -> width(12.dp).fillMaxHeight()
+                    Horizontal -> height(12.dp).fillMaxWidth()
                 }
-                .scrollThumb(this, interactionSource),
+            }
+            .scrollThumb(this, interactionSource),
     )
 }
 
@@ -142,14 +155,14 @@ private fun ScrollableState.DecorativeScrollbarThumb(
 ) {
     Box(
         modifier =
-            Modifier
-                .run {
-                    when (orientation) {
-                        Vertical -> width(2.dp).fillMaxHeight()
-                        Horizontal -> height(2.dp).fillMaxWidth()
-                    }
+        Modifier
+            .run {
+                when (orientation) {
+                    Vertical -> width(2.dp).fillMaxHeight()
+                    Horizontal -> height(2.dp).fillMaxWidth()
                 }
-                .scrollThumb(this, interactionSource),
+            }
+            .scrollThumb(this, interactionSource),
     )
 }
 
@@ -218,15 +231,15 @@ private fun scrollbarThumbColor(
     val color =
         animateColorAsState(
             targetValue =
-                when (state) {
-                    Active -> MaterialTheme.colorScheme.onSurface.copy(0.5f)
-                    Inactive -> MaterialTheme.colorScheme.onSurface.copy(alpha = 0.2f)
-                    Dormant -> Color.Transparent
-                },
+            when (state) {
+                Active -> MaterialTheme.colorScheme.onSurface.copy(0.5f)
+                Inactive -> MaterialTheme.colorScheme.onSurface.copy(alpha = 0.2f)
+                Dormant -> Color.Transparent
+            },
             animationSpec =
-                SpringSpec(
-                    stiffness = Spring.StiffnessLow,
-                ),
+            SpringSpec(
+                stiffness = Spring.StiffnessLow,
+            ),
             label = "Scrollbar thumb color",
         )
     LaunchedEffect(active) {

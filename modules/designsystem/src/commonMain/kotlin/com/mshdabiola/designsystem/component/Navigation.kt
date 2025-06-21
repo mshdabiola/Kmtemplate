@@ -1,5 +1,20 @@
-
-
+/*
+ * Copyright (C) 2025 MshdAbiola
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published
+ * by the Free Software Foundation, version 3.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program. If not, see <https://www.gnu.org/licenses/>.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
 package com.mshdabiola.designsystem.component
 
 import androidx.compose.foundation.layout.ColumnScope
@@ -62,13 +77,13 @@ fun RowScope.HyaNavigationBarItem(
         label = label,
         alwaysShowLabel = alwaysShowLabel,
         colors =
-            NavigationBarItemDefaults.colors(
-                selectedIconColor = HyaNavigationDefaults.navigationSelectedItemColor(),
-                unselectedIconColor = HyaNavigationDefaults.navigationContentColor(),
-                selectedTextColor = HyaNavigationDefaults.navigationSelectedItemColor(),
-                unselectedTextColor = HyaNavigationDefaults.navigationContentColor(),
-                indicatorColor = HyaNavigationDefaults.navigationIndicatorColor(),
-            ),
+        NavigationBarItemDefaults.colors(
+            selectedIconColor = HyaNavigationDefaults.navigationSelectedItemColor(),
+            unselectedIconColor = HyaNavigationDefaults.navigationContentColor(),
+            selectedTextColor = HyaNavigationDefaults.navigationSelectedItemColor(),
+            unselectedTextColor = HyaNavigationDefaults.navigationContentColor(),
+            indicatorColor = HyaNavigationDefaults.navigationIndicatorColor(),
+        ),
     )
 }
 
@@ -127,13 +142,13 @@ fun HyaNavigationRailItem(
         label = label,
         alwaysShowLabel = alwaysShowLabel,
         colors =
-            NavigationRailItemDefaults.colors(
-                selectedIconColor = HyaNavigationDefaults.navigationSelectedItemColor(),
-                unselectedIconColor = HyaNavigationDefaults.navigationContentColor(),
-                selectedTextColor = HyaNavigationDefaults.navigationSelectedItemColor(),
-                unselectedTextColor = HyaNavigationDefaults.navigationContentColor(),
-                indicatorColor = HyaNavigationDefaults.navigationIndicatorColor(),
-            ),
+        NavigationRailItemDefaults.colors(
+            selectedIconColor = HyaNavigationDefaults.navigationSelectedItemColor(),
+            unselectedIconColor = HyaNavigationDefaults.navigationContentColor(),
+            selectedTextColor = HyaNavigationDefaults.navigationSelectedItemColor(),
+            unselectedTextColor = HyaNavigationDefaults.navigationContentColor(),
+            indicatorColor = HyaNavigationDefaults.navigationIndicatorColor(),
+        ),
     )
 }
 
@@ -179,28 +194,28 @@ fun HyaNavigationSuiteScaffold(
     val navigationSuiteItemColors =
         NavigationSuiteItemColors(
             navigationBarItemColors =
-                NavigationBarItemDefaults.colors(
-                    selectedIconColor = HyaNavigationDefaults.navigationSelectedItemColor(),
-                    unselectedIconColor = HyaNavigationDefaults.navigationContentColor(),
-                    selectedTextColor = HyaNavigationDefaults.navigationSelectedItemColor(),
-                    unselectedTextColor = HyaNavigationDefaults.navigationContentColor(),
-                    indicatorColor = HyaNavigationDefaults.navigationIndicatorColor(),
-                ),
+            NavigationBarItemDefaults.colors(
+                selectedIconColor = HyaNavigationDefaults.navigationSelectedItemColor(),
+                unselectedIconColor = HyaNavigationDefaults.navigationContentColor(),
+                selectedTextColor = HyaNavigationDefaults.navigationSelectedItemColor(),
+                unselectedTextColor = HyaNavigationDefaults.navigationContentColor(),
+                indicatorColor = HyaNavigationDefaults.navigationIndicatorColor(),
+            ),
             navigationRailItemColors =
-                NavigationRailItemDefaults.colors(
-                    selectedIconColor = HyaNavigationDefaults.navigationSelectedItemColor(),
-                    unselectedIconColor = HyaNavigationDefaults.navigationContentColor(),
-                    selectedTextColor = HyaNavigationDefaults.navigationSelectedItemColor(),
-                    unselectedTextColor = HyaNavigationDefaults.navigationContentColor(),
-                    indicatorColor = HyaNavigationDefaults.navigationIndicatorColor(),
-                ),
+            NavigationRailItemDefaults.colors(
+                selectedIconColor = HyaNavigationDefaults.navigationSelectedItemColor(),
+                unselectedIconColor = HyaNavigationDefaults.navigationContentColor(),
+                selectedTextColor = HyaNavigationDefaults.navigationSelectedItemColor(),
+                unselectedTextColor = HyaNavigationDefaults.navigationContentColor(),
+                indicatorColor = HyaNavigationDefaults.navigationIndicatorColor(),
+            ),
             navigationDrawerItemColors =
-                NavigationDrawerItemDefaults.colors(
-                    selectedIconColor = HyaNavigationDefaults.navigationSelectedItemColor(),
-                    unselectedIconColor = HyaNavigationDefaults.navigationContentColor(),
-                    selectedTextColor = HyaNavigationDefaults.navigationSelectedItemColor(),
-                    unselectedTextColor = HyaNavigationDefaults.navigationContentColor(),
-                ),
+            NavigationDrawerItemDefaults.colors(
+                selectedIconColor = HyaNavigationDefaults.navigationSelectedItemColor(),
+                unselectedIconColor = HyaNavigationDefaults.navigationContentColor(),
+                selectedTextColor = HyaNavigationDefaults.navigationSelectedItemColor(),
+                unselectedTextColor = HyaNavigationDefaults.navigationContentColor(),
+            ),
         )
 
     NavigationSuiteScaffold(
@@ -213,10 +228,10 @@ fun HyaNavigationSuiteScaffold(
         layoutType = layoutType,
         containerColor = Color.Transparent,
         navigationSuiteColors =
-            NavigationSuiteDefaults.colors(
-                navigationBarContentColor = HyaNavigationDefaults.navigationContentColor(),
-                navigationRailContainerColor = Color.Transparent,
-            ),
+        NavigationSuiteDefaults.colors(
+            navigationBarContentColor = HyaNavigationDefaults.navigationContentColor(),
+            navigationRailContainerColor = Color.Transparent,
+        ),
         modifier = modifier,
     ) {
         content()

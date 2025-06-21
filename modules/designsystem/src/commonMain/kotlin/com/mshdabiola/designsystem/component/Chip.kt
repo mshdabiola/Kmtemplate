@@ -1,7 +1,20 @@
 /*
- *abiola 2022
+ * Copyright (C) 2022-2025 MshdAbiola
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published
+ * by the Free Software Foundation, version 3.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program. If not, see <https://www.gnu.org/licenses/>.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
  */
-
 package com.mshdabiola.designsystem.component
 
 import androidx.compose.foundation.layout.size
@@ -49,57 +62,57 @@ fun HyaFilterChip(
         modifier = modifier,
         enabled = enabled,
         leadingIcon =
-            if (selected) {
-                {
-                    Icon(
-                        imageVector = HyaIcons.Check,
-                        contentDescription = null,
-                    )
-                }
-            } else {
-                null
-            },
+        if (selected) {
+            {
+                Icon(
+                    imageVector = HyaIcons.Check,
+                    contentDescription = null,
+                )
+            }
+        } else {
+            null
+        },
         shape = CircleShape,
         border =
-            FilterChipDefaults.filterChipBorder(
-                enabled = enabled,
-                selected = selected,
-                borderColor = MaterialTheme.colorScheme.onBackground,
-                selectedBorderColor = MaterialTheme.colorScheme.onBackground,
-                disabledBorderColor =
-                    MaterialTheme.colorScheme.onBackground.copy(
-                        alpha = HyaChipDefaults.DISABLED_CHIP_CONTENT_ALPHA,
-                    ),
-                disabledSelectedBorderColor =
-                    MaterialTheme.colorScheme.onBackground.copy(
-                        alpha = HyaChipDefaults.DISABLED_CHIP_CONTENT_ALPHA,
-                    ),
-                selectedBorderWidth = HyaChipDefaults.ChipBorderWidth,
+        FilterChipDefaults.filterChipBorder(
+            enabled = enabled,
+            selected = selected,
+            borderColor = MaterialTheme.colorScheme.onBackground,
+            selectedBorderColor = MaterialTheme.colorScheme.onBackground,
+            disabledBorderColor =
+            MaterialTheme.colorScheme.onBackground.copy(
+                alpha = HyaChipDefaults.DISABLED_CHIP_CONTENT_ALPHA,
             ),
+            disabledSelectedBorderColor =
+            MaterialTheme.colorScheme.onBackground.copy(
+                alpha = HyaChipDefaults.DISABLED_CHIP_CONTENT_ALPHA,
+            ),
+            selectedBorderWidth = HyaChipDefaults.ChipBorderWidth,
+        ),
         colors =
-            FilterChipDefaults.filterChipColors(
-                labelColor = MaterialTheme.colorScheme.onBackground,
-                iconColor = MaterialTheme.colorScheme.onBackground,
-                disabledContainerColor =
-                    if (selected) {
-                        MaterialTheme.colorScheme.onBackground.copy(
-                            alpha = HyaChipDefaults.DISABLED_CHIP_CONTAINER_ALPHA,
-                        )
-                    } else {
-                        Color.Transparent
-                    },
-                disabledLabelColor =
-                    MaterialTheme.colorScheme.onBackground.copy(
-                        alpha = HyaChipDefaults.DISABLED_CHIP_CONTENT_ALPHA,
-                    ),
-                disabledLeadingIconColor =
-                    MaterialTheme.colorScheme.onBackground.copy(
-                        alpha = HyaChipDefaults.DISABLED_CHIP_CONTENT_ALPHA,
-                    ),
-                selectedContainerColor = MaterialTheme.colorScheme.primaryContainer,
-                selectedLabelColor = MaterialTheme.colorScheme.onBackground,
-                selectedLeadingIconColor = MaterialTheme.colorScheme.onBackground,
+        FilterChipDefaults.filterChipColors(
+            labelColor = MaterialTheme.colorScheme.onBackground,
+            iconColor = MaterialTheme.colorScheme.onBackground,
+            disabledContainerColor =
+            if (selected) {
+                MaterialTheme.colorScheme.onBackground.copy(
+                    alpha = HyaChipDefaults.DISABLED_CHIP_CONTAINER_ALPHA,
+                )
+            } else {
+                Color.Transparent
+            },
+            disabledLabelColor =
+            MaterialTheme.colorScheme.onBackground.copy(
+                alpha = HyaChipDefaults.DISABLED_CHIP_CONTENT_ALPHA,
             ),
+            disabledLeadingIconColor =
+            MaterialTheme.colorScheme.onBackground.copy(
+                alpha = HyaChipDefaults.DISABLED_CHIP_CONTENT_ALPHA,
+            ),
+            selectedContainerColor = MaterialTheme.colorScheme.primaryContainer,
+            selectedLabelColor = MaterialTheme.colorScheme.onBackground,
+            selectedLeadingIconColor = MaterialTheme.colorScheme.onBackground,
+        ),
     )
 }
 
