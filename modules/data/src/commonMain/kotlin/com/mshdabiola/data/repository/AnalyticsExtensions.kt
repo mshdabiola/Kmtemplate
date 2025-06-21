@@ -17,9 +17,9 @@ internal fun AnalyticsHelper.logNewsResourceBookmarkToggled(
         AnalyticsEvent(
             type = eventType,
             extras =
-                listOf(
-                    AnalyticsEvent.Param(key = paramKey, value = newsResourceId),
-                ),
+            listOf(
+                AnalyticsEvent.Param(key = paramKey, value = newsResourceId),
+            ),
         ),
     )
 }
@@ -34,9 +34,9 @@ internal fun AnalyticsHelper.logTopicFollowToggled(
         AnalyticsEvent(
             type = eventType,
             extras =
-                listOf(
-                    AnalyticsEvent.Param(key = paramKey, value = followedTopicId),
-                ),
+            listOf(
+                AnalyticsEvent.Param(key = paramKey, value = followedTopicId),
+            ),
         ),
     )
 }
@@ -46,9 +46,9 @@ internal fun AnalyticsHelper.logThemeChanged(themeName: String) =
         AnalyticsEvent(
             type = "theme_changed",
             extras =
-                listOf(
-                    AnalyticsEvent.Param(key = "theme_name", value = themeName),
-                ),
+            listOf(
+                AnalyticsEvent.Param(key = "theme_name", value = themeName),
+            ),
         ),
     )
 
@@ -57,9 +57,9 @@ internal fun AnalyticsHelper.logContrastChanged(contrastName: String) =
         AnalyticsEvent(
             type = "Contrast_changed",
             extras =
-                listOf(
-                    AnalyticsEvent.Param(key = "theme_name", value = contrastName),
-                ),
+            listOf(
+                AnalyticsEvent.Param(key = "theme_name", value = contrastName),
+            ),
         ),
     )
 
@@ -68,9 +68,9 @@ internal fun AnalyticsHelper.logDarkThemeConfigChanged(darkThemeConfigName: Stri
         AnalyticsEvent(
             type = "dark_theme_config_changed",
             extras =
-                listOf(
-                    AnalyticsEvent.Param(key = "dark_theme_config", value = darkThemeConfigName),
-                ),
+            listOf(
+                AnalyticsEvent.Param(key = "dark_theme_config", value = darkThemeConfigName),
+            ),
         ),
     )
 
@@ -79,12 +79,12 @@ internal fun AnalyticsHelper.logDynamicColorPreferenceChanged(useDynamicColor: B
         AnalyticsEvent(
             type = "dynamic_color_preference_changed",
             extras =
-                listOf(
-                    AnalyticsEvent.Param(
-                        key = "dynamic_color_preference",
-                        value = useDynamicColor.toString(),
-                    ),
+            listOf(
+                AnalyticsEvent.Param(
+                    key = "dynamic_color_preference",
+                    value = useDynamicColor.toString(),
                 ),
+            ),
         ),
     )
 
