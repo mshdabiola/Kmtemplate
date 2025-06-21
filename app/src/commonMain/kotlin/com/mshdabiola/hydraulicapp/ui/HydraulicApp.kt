@@ -89,11 +89,11 @@ fun HydraulicApp() {
             HyaBackground {
                 HyaGradientBackground(
                     gradientColors =
-                        if (shouldShowGradientBackground) {
-                            LocalGradientColors.current
-                        } else {
-                            GradientColors()
-                        },
+                    if (shouldShowGradientBackground) {
+                        LocalGradientColors.current
+                    } else {
+                        GradientColors()
+                    },
                 ) {
                     val snackbarHostState = remember { SnackbarHostState() }
                     PermanentNavigationDrawer(

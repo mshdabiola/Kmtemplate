@@ -72,9 +72,9 @@ fun CommonNavigation(
         Column(
             verticalArrangement = Arrangement.SpaceBetween,
             modifier =
-                modifier
-                    .padding(8.dp)
-                    .verticalScroll(state = rememberScrollState()),
+            modifier
+                .padding(8.dp)
+                .verticalScroll(state = rememberScrollState()),
         ) {
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Icon(HyaIcons.LocalLibrary, "Logo")
@@ -93,20 +93,20 @@ fun CommonNavigation(
                         .forEachIndexed { index, navigator ->
                             NavigationDrawerItem(
                                 selected =
-                                    navController
-                                        .currentBackStackEntryAsState().value?.destination?.hasRoute(
-                                            route = navigator.route::class,
-                                        )
-                                        == true,
+                                navController
+                                    .currentBackStackEntryAsState().value?.destination?.hasRoute(
+                                        route = navigator.route::class,
+                                    )
+                                    == true,
                                 label = { Text(mainArray[index]) },
                                 onClick = {
                                     navController.navigate(
                                         navigator.route,
                                         navOptions =
-                                            navOptions {
-                                                launchSingleTop
-                                                restoreState
-                                            },
+                                        navOptions {
+                                            launchSingleTop
+                                            restoreState
+                                        },
                                     )
                                 },
                                 colors = color,
@@ -125,11 +125,11 @@ fun CommonNavigation(
                     .forEachIndexed { index, navigator ->
                         NavigationDrawerItem(
                             selected =
-                                navController
-                                    .currentBackStackEntryAsState()
-                                    .value?.destination
-                                    ?.hasRoute(route = navigator.route::class)
-                                    == true,
+                            navController
+                                .currentBackStackEntryAsState()
+                                .value?.destination
+                                ?.hasRoute(route = navigator.route::class)
+                                == true,
                             label = { Text(settingArray[index]) },
                             onClick = {
                                 navController.navigate(navigator.route)
@@ -183,9 +183,9 @@ fun CommonRail(
             verticalArrangement = Arrangement.SpaceBetween,
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier =
-                Modifier
-                    .padding(8.dp)
-                    .verticalScroll(state = rememberScrollState()),
+            Modifier
+                .padding(8.dp)
+                .verticalScroll(state = rememberScrollState()),
         ) {
             Icon(HyaIcons.LocalLibrary, "Logo")
 
@@ -200,11 +200,11 @@ fun CommonRail(
                     .forEachIndexed { index, navigator ->
                         HyaNavigationRailItem(
                             selected =
-                                navController
-                                    .currentBackStackEntryAsState()
-                                    .value?.destination
-                                    ?.hasRoute(route = navigator.route::class)
-                                    == true,
+                            navController
+                                .currentBackStackEntryAsState()
+                                .value?.destination
+                                ?.hasRoute(route = navigator.route::class)
+                                == true,
                             label = { Text(settingArray[index]) },
                             onClick = {
                                 navController.navigate(navigator.route)
@@ -228,20 +228,20 @@ fun CommonRail(
                     .forEachIndexed { index, navigator ->
                         HyaNavigationRailItem(
                             selected =
-                                navController
-                                    .currentBackStackEntryAsState()
-                                    .value
-                                    ?.destination?.hasRoute(route = navigator.route::class)
-                                    == true,
+                            navController
+                                .currentBackStackEntryAsState()
+                                .value
+                                ?.destination?.hasRoute(route = navigator.route::class)
+                                == true,
                             label = { Text(settingArray[index]) },
                             onClick = {
                                 navController.navigate(
                                     navigator.route,
                                     navOptions =
-                                        navOptions {
-                                            launchSingleTop
-                                            restoreState
-                                        },
+                                    navOptions {
+                                        launchSingleTop
+                                        restoreState
+                                    },
                                 )
                             },
                             icon = {
@@ -290,20 +290,20 @@ fun CommonBar(
             .forEachIndexed { index, navigator ->
                 HyaNavigationBarItem(
                     selected =
-                        navController
-                            .currentBackStackEntryAsState()
-                            .value?.destination
-                            ?.hasRoute(route = navigator.route::class)
-                            == true,
+                    navController
+                        .currentBackStackEntryAsState()
+                        .value?.destination
+                        ?.hasRoute(route = navigator.route::class)
+                        == true,
                     label = { Text(mainArray[index]) },
                     onClick = {
                         navController.navigate(
                             navigator.route,
                             navOptions =
-                                navOptions {
-                                    launchSingleTop
-                                    restoreState
-                                },
+                            navOptions {
+                                launchSingleTop
+                                restoreState
+                            },
                         )
                     },
                     alwaysShowLabel = false,
