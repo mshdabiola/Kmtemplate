@@ -1,3 +1,20 @@
+/*
+ * Copyright (C) 2025 MshdAbiola
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published
+ * by the Free Software Foundation, version 3.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program. If not, see <https://www.gnu.org/licenses/>.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
 import com.android.build.gradle.LibraryExtension
 import com.mshdabiola.app.configureAndroidCompose
 import com.mshdabiola.app.libs
@@ -22,7 +39,6 @@ class AndroidLibraryComposeConventionPlugin : Plugin<Project> {
 
                     experimentalProperties["android.experimental.enableScreenshotTest"] = true
                 }
-
             }
 
             dependencies {
@@ -33,12 +49,9 @@ class AndroidLibraryComposeConventionPlugin : Plugin<Project> {
                     "screenshotTestImplementation",
                     libs.findLibrary("androidx.compose.ui.tooling").get(),
                 )
-               add("screenshotTestImplementation",  project(":modules:model"))
-               add("screenshotTestImplementation",  project(":modules:testing"))
-
-
+                add("screenshotTestImplementation", project(":modules:model"))
+                add("screenshotTestImplementation", project(":modules:testing"))
             }
         }
     }
-
 }

@@ -1,3 +1,20 @@
+/*
+ * Copyright (C) 2025 MshdAbiola
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published
+ * by the Free Software Foundation, version 3.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program. If not, see <https://www.gnu.org/licenses/>.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
 package com.mshdabiola.app
 
 import com.android.build.api.dsl.CommonExtension
@@ -5,8 +22,6 @@ import org.gradle.api.Project
 import org.gradle.api.provider.Provider
 import org.gradle.kotlin.dsl.configure
 import org.gradle.kotlin.dsl.dependencies
-import org.gradle.kotlin.dsl.withType
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.jetbrains.kotlin.compose.compiler.gradle.ComposeCompilerGradlePluginExtension
 import org.jetbrains.kotlin.compose.compiler.gradle.ComposeFeatureFlag
 
@@ -16,7 +31,6 @@ import org.jetbrains.kotlin.compose.compiler.gradle.ComposeFeatureFlag
 internal fun Project.configureAndroidCompose(
     commonExtension: CommonExtension<*, *, *, *, *, *>,
 ) {
-
     commonExtension.apply {
         buildFeatures {
             compose = true
@@ -26,7 +40,6 @@ internal fun Project.configureAndroidCompose(
 //            kotlinCompilerExtensionVersion =
 //                libs.findVersion("androidxComposeCompiler").get().toString()
 //        }
-
 
         dependencies {
 //            val bom = libs.findLibrary("androidx-compose-bom").get()

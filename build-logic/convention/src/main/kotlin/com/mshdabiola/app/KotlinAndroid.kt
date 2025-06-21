@@ -1,3 +1,20 @@
+/*
+ * Copyright (C) 2025 MshdAbiola
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published
+ * by the Free Software Foundation, version 3.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program. If not, see <https://www.gnu.org/licenses/>.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
 package com.mshdabiola.app
 
 import com.android.build.api.dsl.CommonExtension
@@ -21,9 +38,7 @@ internal fun Project.configureKotlinAndroid(
         compileSdk = 35
 
         defaultConfig {
-            minSdk = 26 //24
-
-
+            minSdk = 26 // 24
         }
 
         compileOptions {
@@ -44,10 +59,8 @@ internal fun Project.configureKotlinAndroid(
 
     dependencies {
 //        add("coreLibraryDesugaring", libs.findLibrary("android.desugarJdkLibs").get())
-
     }
 }
-
 
 /**
  * Configure base Kotlin options for JVM (non-Android)
@@ -62,7 +75,6 @@ internal fun Project.configureKotlinJvm() {
 
     configureKotlin()
 }
-
 
 /**
  * Configure base Kotlin options
@@ -79,11 +91,10 @@ private fun Project.configureKotlin() {
             val warningsAsErrors: String? by project
             allWarningsAsErrors.set(warningsAsErrors.toBoolean())
             freeCompilerArgs.set(mutableListOf("-opt-in=kotlinx.coroutines.ExperimentalCoroutinesApi"))
-
         }
     }
 }
 //
-//fun CommonExtension<*, *, *, *, *>.kotlinOptions(block: KotlinJvmOptions.() -> Unit) {
+// fun CommonExtension<*, *, *, *, *>.kotlinOptions(block: KotlinJvmOptions.() -> Unit) {
 //    (this as ExtensionAware).extensions.configure("kotlinOptions", block)
-//}
+// }
