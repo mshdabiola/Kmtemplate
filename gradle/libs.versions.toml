@@ -98,7 +98,7 @@ ktlint2 = "1.5.0"
 spotless = "7.0.2"
 
 series = "0.0.19"
-calf = "0.7.1"
+calf = "0.8.0"
 
 versionCode = "129"
 versionName = "1.2.9"
