@@ -42,6 +42,8 @@ class AndroidLibraryConventionPlugin : Plugin<Project> {
                 apply("mshdabiola.android.lint")
                 apply("org.jetbrains.kotlin.plugin.power-assert")
                 apply("org.jetbrains.kotlinx.kover")
+                apply("mshdabiola.spotless")
+
 
 //                apply("screenshot-test-gradle-plugin")
             }

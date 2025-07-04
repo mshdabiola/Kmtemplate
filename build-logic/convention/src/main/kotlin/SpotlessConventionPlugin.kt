@@ -40,18 +40,21 @@ class SpotlessConventionPlugin : Plugin<Project> {
 //                            .userData(mapOf("android" to "true"))
 //                            .editorConfigOverride(mapOf("indent_size" to 2, "continuation_indent_size" to 2))
                         licenseHeaderFile(rootProject.file("$rootDir/spotless/copyright.kt"))
+                            .updateYearWithLatest(true)
                     }
                     format("kts") {
                         target("**/*.kts")
                         targetExclude("**/build/**/*.kts")
                         // Look for the first line that doesn't have a block comment (assumed to be the license)
                         licenseHeaderFile(rootProject.file("spotless/copyright.kts"), "(^(?![\\/ ]\\*).*$)")
+                            .updateYearWithLatest(true)
                     }
                     format("xml") {
                         target("**/*.xml")
                         targetExclude("**/build/**/*.xml")
                         // Look for the first XML tag that isn't a comment (<!--) or the xml declaration (<?xml)
                         licenseHeaderFile(rootProject.file("spotless/copyright.xml"), "(<[^!?])")
+                            .updateYearWithLatest(true)
                     }
                 }
             }
