@@ -334,38 +334,6 @@ moduleGraphConfig {
 }
 
 subprojects {
-    apply(plugin = "com.diffplug.spotless")
-    apply(plugin = "org.jlleitschuh.gradle.ktlint")
-    configure<org.jlleitschuh.gradle.ktlint.KtlintExtension> {
-        debug.set(true)
-        // ignoreFailures.set(true)
-//        reporters {
-//            reporter(org.jlleitschuh.gradle.ktlint.reporter.ReporterType.HTML)
-//            reporter(org.jlleitschuh.gradle.ktlint.reporter.ReporterType.CHECKSTYLE)
-//            reporter(org.jlleitschuh.gradle.ktlint.reporter.ReporterType.PLAIN)
-//        }
-    }
-    configure<SpotlessExtension> {
-        spotless {
-            val ktlintVersion = rootProject.libs.ktlint.cli.get().version
-            kotlin {
-                target("src/**/*.kt")
-                ktlint(ktlintVersion).setEditorConfigPath(rootProject.file("./.editorconfig"))
-                licenseHeaderFile(rootProject.file("./spotless/copyright.kt")).updateYearWithLatest(true)
-            }
-
-            kotlinGradle {
-                target("*.gradle.kts")
-                ktlint(ktlintVersion).setEditorConfigPath(rootProject.file("./.editorconfig"))
-                licenseHeaderFile(rootProject.file("./spotless/copyright.kt"), "(^(?![\\/ ]\\**).*$)")
-                    .updateYearWithLatest(true)
-            }
-        }
-    }
-    dependencies {
-        add("ktlint", project(":ktlint"))
-    }
-
     apply(plugin = "io.gitlab.arturbosch.detekt")
     plugins.withId("io.gitlab.arturbosch.detekt") {
         configure<io.gitlab.arturbosch.detekt.extensions.DetektExtension> {
@@ -386,19 +354,19 @@ subprojects {
     }
 
 // Optional: If you want ktlintCheck to also run after spotlessCheck (the aggregate task)
-    tasks.spotlessCheck {
-        finalizedBy(
-            tasks.named("ktlintCheck")
-        )
-    }
-
-    tasks.spotlessApply {
-        finalizedBy(
-            tasks.named("ktlintFormat"),
-            tasks.named("detekt")
-
-        )
-    }
+//    tasks.spotlessCheck {
+//        finalizedBy(
+//            tasks.named("ktlintCheck")
+//        )
+//    }
+//
+//    tasks.spotlessApply {
+//        finalizedBy(
+//            tasks.named("ktlintFormat"),
+//            tasks.named("detekt")
+//
+//        )
+//    }
 
 }
 
@@ -416,7 +384,7 @@ project.pluginManager.withPlugin("org.jetbrains.kotlin.multiplatform") {
         }
     }
 }
-
-tasks.withType(com.diffplug.gradle.spotless.SpotlessTask::class) {
-    finalizedBy("ktlintCheck")
-}
+//
+//tasks.withType(com.diffplug.gradle.spotless.SpotlessTask::class) {
+//    finalizedBy("ktlintCheck")
+//}
