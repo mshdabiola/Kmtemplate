@@ -65,7 +65,7 @@ import com.mshdabiola.detail.navigation.Detail
 import com.mshdabiola.detail.navigation.navigateToDetail
 import com.mshdabiola.kotlinmultiplatformtemplate.MainActivityUiState
 import com.mshdabiola.kotlinmultiplatformtemplate.MainAppViewModel
-import com.mshdabiola.kotlinmultiplatformtemplate.navigation.HydraulicAppNavHost
+import com.mshdabiola.kotlinmultiplatformtemplate.navigation.KotlinMultiplatformTemplateAppNavHost
 import com.mshdabiola.model.DarkThemeConfig
 import com.mshdabiola.model.ThemeBrand
 import com.mshdabiola.setting.navigation.navigateToSetting
@@ -79,11 +79,11 @@ import org.koin.core.annotation.KoinExperimentalAPI
     ExperimentalMaterial3Api::class,
 )
 @Composable
-fun KotlinMultiplatformTemplate() {
+fun KotlinMultiplatformTemplateApp() {
     val windowAdaptiveInfo = currentWindowAdaptiveInfo()
 
     val appState =
-        rememberHydraulicAppState(
+        rememberKotlinMultiplatformTemplateAppState(
             windowSizeClass = windowAdaptiveInfo.windowSizeClass,
         )
     val shouldShowGradientBackground = false
@@ -189,7 +189,7 @@ fun KotlinMultiplatformTemplate() {
                                             WindowInsets.safeDrawing.only(WindowInsetsSides.Horizontal),
                                         ),
                                 ) {
-                                    HydraulicAppNavHost(
+                                    KotlinMultiplatformTemplateAppNavHost(
                                         appState = appState,
                                         onShowSnackbar = { message, action ->
                                             snackbarHostState.showSnackbar(

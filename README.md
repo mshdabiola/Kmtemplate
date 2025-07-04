@@ -62,7 +62,7 @@
 </div>
 
 <div style="text-align: center;">
-kotlinmultiplatformtemplate is a compose multiplatform template. that use note app as an example. it is multi-module architecture.
+KotlinMultiplatformTemplate is a Compose Multiplatform template that uses a note app as an example and features a multi-module architecture.
 </div>
 
 
@@ -227,8 +227,8 @@ Distribute the APK through your preferred channels (e.g., GitHub Releases, F-Dro
 
 ### Desktop
 
-This project leverages KotlinMultiplatformTemplate Conveyor for packaging and distributing the Desktop application.
-KotlinMultiplatformTemplate Conveyor simplifies the creation of installers and distributable packages across various
+This project leverages Conveyor for packaging and distributing the Desktop application.
+Conveyor simplifies the creation of installers and distributable packages across various
 operating systems (Windows, macOS, Linux).
 
 1. Install hydraulic conveyor at [Hydraulic](https://downloads.hydraulic.dev/)

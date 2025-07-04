@@ -194,7 +194,7 @@ fun CommonRail(
                 "About",
             )
         }
-    print("main string ${mainArray.joinToString()}")
+
     KmtNavigationRail(modifier) {
         Column(
             verticalArrangement = Arrangement.SpaceBetween,
@@ -301,7 +301,7 @@ fun CommonBar(
                 "About",
             )
         }
-    print("main string ${mainArray.joinToString()}")
+
     KmtNavigationBar(modifier) {
         TOP_LEVEL_ROUTES
             .forEachIndexed { index, navigator ->

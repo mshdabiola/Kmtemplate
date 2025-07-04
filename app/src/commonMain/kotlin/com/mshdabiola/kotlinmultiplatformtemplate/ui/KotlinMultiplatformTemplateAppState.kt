@@ -33,17 +33,17 @@ import com.mshdabiola.main.navigation.Main
 import kotlinx.coroutines.CoroutineScope
 
 @Composable
-fun rememberHydraulicAppState(
+fun rememberKotlinMultiplatformTemplateAppState(
     windowSizeClass: WindowSizeClass,
     coroutineScope: CoroutineScope = rememberCoroutineScope(),
     navController: NavHostController = rememberNavController(),
-): HydraulicAppState {
+): KotlinMultiplatformTemplateAppState {
     return remember(
         navController,
         coroutineScope,
         windowSizeClass,
     ) {
-        HydraulicAppState(
+        KotlinMultiplatformTemplateAppState(
             navController,
             coroutineScope,
             windowSizeClass,
@@ -52,7 +52,7 @@ fun rememberHydraulicAppState(
 }
 
 @Stable
-class HydraulicAppState(
+class KotlinMultiplatformTemplateAppState(
     val navController: NavHostController,
     val coroutineScope: CoroutineScope,
     val windowSizeClass: WindowSizeClass,
