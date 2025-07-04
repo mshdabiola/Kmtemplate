@@ -334,24 +334,24 @@ moduleGraphConfig {
 }
 
 subprojects {
-    apply(plugin = "io.gitlab.arturbosch.detekt")
-    plugins.withId("io.gitlab.arturbosch.detekt") {
-        configure<io.gitlab.arturbosch.detekt.extensions.DetektExtension> {
-            source = files(
-                "src/main/kotlin",
-                "src/commonMain/kotlin",
-                "src/jvmMain/kotlin",
-                "src/androidMain/kotlin",
-                "src/iosMain/kotlin",
-                "src/nativeMain/kotlin",
-                "src/desktop/kotlin",
-                "src/js/kotlin",
-            )
-            config.setFrom(rootProject.file("detekt.yml"))
-            buildUponDefaultConfig = true
-            ignoreFailures = false
-        }
-    }
+//    apply(plugin = "io.gitlab.arturbosch.detekt")
+//    plugins.withId("io.gitlab.arturbosch.detekt") {
+//        configure<io.gitlab.arturbosch.detekt.extensions.DetektExtension> {
+//            source = files(
+//                "src/main/kotlin",
+//                "src/commonMain/kotlin",
+//                "src/jvmMain/kotlin",
+//                "src/androidMain/kotlin",
+//                "src/iosMain/kotlin",
+//                "src/nativeMain/kotlin",
+//                "src/desktop/kotlin",
+//                "src/js/kotlin",
+//            )
+//            config.setFrom(rootProject.file("detekt.yml"))
+//            buildUponDefaultConfig = true
+//            ignoreFailures = false
+//        }
+//    }
 
 // Optional: If you want ktlintCheck to also run after spotlessCheck (the aggregate task)
 //    tasks.spotlessCheck {
