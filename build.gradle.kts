@@ -16,6 +16,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 import com.diffplug.gradle.spotless.SpotlessExtension
+import com.diffplug.gradle.spotless.SpotlessTask
 import dev.iurysouza.modulegraph.Theme
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 
@@ -333,56 +334,40 @@ moduleGraphConfig {
 }
 
 subprojects {
-    apply(plugin = "com.diffplug.spotless")
-    apply(plugin = "org.jlleitschuh.gradle.ktlint")
-    configure<org.jlleitschuh.gradle.ktlint.KtlintExtension> {
-        debug.set(true)
-        // ignoreFailures.set(true)
-//        reporters {
-//            reporter(org.jlleitschuh.gradle.ktlint.reporter.ReporterType.HTML)
-//            reporter(org.jlleitschuh.gradle.ktlint.reporter.ReporterType.CHECKSTYLE)
-//            reporter(org.jlleitschuh.gradle.ktlint.reporter.ReporterType.PLAIN)
+//    apply(plugin = "io.gitlab.arturbosch.detekt")
+//    plugins.withId("io.gitlab.arturbosch.detekt") {
+//        configure<io.gitlab.arturbosch.detekt.extensions.DetektExtension> {
+//            source = files(
+//                "src/main/kotlin",
+//                "src/commonMain/kotlin",
+//                "src/jvmMain/kotlin",
+//                "src/androidMain/kotlin",
+//                "src/iosMain/kotlin",
+//                "src/nativeMain/kotlin",
+//                "src/desktop/kotlin",
+//                "src/js/kotlin",
+//            )
+//            config.setFrom(rootProject.file("detekt.yml"))
+//            buildUponDefaultConfig = true
+//            ignoreFailures = false
 //        }
-    }
-    configure<SpotlessExtension> {
-        spotless {
-            val ktlintVersion = rootProject.libs.ktlint.cli.get().version
-            kotlin {
-                target("src/**/*.kt")
-                ktlint(ktlintVersion).setEditorConfigPath(rootProject.file("./.editorconfig"))
-                licenseHeaderFile(rootProject.file("./spotless/copyright.kt")).updateYearWithLatest(true)
-            }
+//    }
 
-            kotlinGradle {
-                target("*.gradle.kts")
-                ktlint(ktlintVersion).setEditorConfigPath(rootProject.file("./.editorconfig"))
-                licenseHeaderFile(rootProject.file("./spotless/copyright.kt"), "(^(?![\\/ ]\\**).*$)")
-                    .updateYearWithLatest(true)
-            }
-        }
-    }
-    dependencies {
-        add("ktlint", project(":ktlint"))
-    }
+// Optional: If you want ktlintCheck to also run after spotlessCheck (the aggregate task)
+//    tasks.spotlessCheck {
+//        finalizedBy(
+//            tasks.named("ktlintCheck")
+//        )
+//    }
+//
+//    tasks.spotlessApply {
+//        finalizedBy(
+//            tasks.named("ktlintFormat"),
+//            tasks.named("detekt")
+//
+//        )
+//    }
 
-    apply(plugin = "io.gitlab.arturbosch.detekt")
-    plugins.withId("io.gitlab.arturbosch.detekt") {
-        configure<io.gitlab.arturbosch.detekt.extensions.DetektExtension> {
-            source = files(
-                "src/main/kotlin",
-                "src/commonMain/kotlin",
-                "src/jvmMain/kotlin",
-                "src/androidMain/kotlin",
-                "src/iosMain/kotlin",
-                "src/nativeMain/kotlin",
-                "src/desktop/kotlin",
-                "src/js/kotlin",
-            )
-            config.setFrom(rootProject.file("detekt.yml"))
-            buildUponDefaultConfig = true
-            ignoreFailures = false
-        }
-    }
 }
 
 val installGitHook = tasks.register("installGitHook", Copy::class) {
@@ -399,3 +384,7 @@ project.pluginManager.withPlugin("org.jetbrains.kotlin.multiplatform") {
         }
     }
 }
+//
+//tasks.withType(com.diffplug.gradle.spotless.SpotlessTask::class) {
+//    finalizedBy("ktlintCheck")
+//}
