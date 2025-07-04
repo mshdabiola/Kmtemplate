@@ -16,6 +16,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 import com.diffplug.gradle.spotless.SpotlessExtension
+import com.diffplug.gradle.spotless.SpotlessTask
 import dev.iurysouza.modulegraph.Theme
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 
@@ -383,6 +384,22 @@ subprojects {
             ignoreFailures = false
         }
     }
+
+// Optional: If you want ktlintCheck to also run after spotlessCheck (the aggregate task)
+    tasks.spotlessCheck {
+        finalizedBy(
+            tasks.named("ktlintCheck")
+        )
+    }
+
+    tasks.spotlessApply {
+        finalizedBy(
+            tasks.named("ktlintFormat"),
+            tasks.named("detekt")
+
+        )
+    }
+
 }
 
 val installGitHook = tasks.register("installGitHook", Copy::class) {
@@ -398,4 +415,8 @@ project.pluginManager.withPlugin("org.jetbrains.kotlin.multiplatform") {
             compileKotlinTask.dependsOn(installGitHook)
         }
     }
+}
+
+tasks.withType(com.diffplug.gradle.spotless.SpotlessTask::class) {
+    finalizedBy("ktlintCheck")
 }
