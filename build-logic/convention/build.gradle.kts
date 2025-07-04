@@ -64,7 +64,9 @@ dependencies {
     compileOnly(libs.compose.hot.gradlePlugin)
     compileOnly(libs.spotless.gradlePlugin)
     compileOnly(libs.jlleitschuh.gradlePlugin)
-    compileOnly("org.jlleitschuh.gradle:ktlint-gradle:12.3.0")
+    compileOnly(libs.detekt.gradlePlugin)
+
+//    compileOnly("org.jlleitschuh.gradle:ktlint-gradle:12.3.0")
 
 
 
