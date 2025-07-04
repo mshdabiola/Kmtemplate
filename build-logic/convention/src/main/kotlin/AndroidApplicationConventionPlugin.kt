@@ -35,6 +35,8 @@ class AndroidApplicationConventionPlugin : Plugin<Project> {
                 apply("org.jetbrains.kotlinx.kover")
                 apply("mshdabiola.android.lint")
                 apply("com.dropbox.dependency-guard")
+                apply("mshdabiola.spotless")
+
             }
 
             extensions.configure<ApplicationExtension> {
