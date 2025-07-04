@@ -33,16 +33,16 @@ java {
 
 // Configuration should be synced with [/build-logic/src/main/kotlin/mihon/gradle/configurations/spotless.kt]
 spotless {
-    val ktlintVersion = libs.ktlint.cli.get().version
+
     kotlin {
         target("src/**/*.kt")
-        ktlint(ktlintVersion).setEditorConfigPath(rootProject.file("../.editorconfig"))
+        ktlint().setEditorConfigPath(rootProject.file("../.editorconfig"))
         licenseHeaderFile(rootProject.file("../spotless/copyright.kt")).updateYearWithLatest(true)
     }
 
     kotlinGradle {
         target("*.gradle.kts")
-        ktlint(ktlintVersion).setEditorConfigPath(rootProject.file("../.editorconfig"))
+        ktlint().setEditorConfigPath(rootProject.file("../.editorconfig"))
         licenseHeaderFile(rootProject.file("../spotless/copyright.kt"), "(^(?![\\/ ]\\**).*$)")
             .updateYearWithLatest(true)
     }
@@ -63,6 +63,9 @@ dependencies {
     compileOnly(libs.kover.gradlePlugin)
     compileOnly(libs.compose.hot.gradlePlugin)
     compileOnly(libs.spotless.gradlePlugin)
+    compileOnly(libs.jlleitschuh.gradlePlugin)
+    compileOnly("org.jlleitschuh.gradle:ktlint-gradle:12.3.0")
+
 
 
 

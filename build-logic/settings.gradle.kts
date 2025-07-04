@@ -2,6 +2,7 @@
 dependencyResolutionManagement {
     @Suppress("UnstableApiUsage")
     repositories {
+        maven("https://plugins.gradle.org/m2/")
         google()
         mavenCentral()
     }
