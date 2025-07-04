@@ -62,6 +62,7 @@ dependencies {
     compileOnly(libs.compose.gradlePlugin)
     compileOnly(libs.kover.gradlePlugin)
     compileOnly(libs.compose.hot.gradlePlugin)
+    compileOnly(libs.spotless.gradlePlugin)
 
 
 
@@ -123,6 +124,10 @@ gradlePlugin {
         register("androidRoom") {
             id = "mshdabiola.android.room"
             implementationClass = "AndroidRoomConventionPlugin"
+        }
+        register("spotless") {
+            id = "mshdabiola.spotless"
+            implementationClass = "SpotlessConventionPlugin"
         }
 
     }
