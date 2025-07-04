@@ -54,7 +54,7 @@ dependencyResolutionManagement {
         maven(url = "https://maven.pkg.jetbrains.space/kotlin/p/wasm/experimental")
     }
 }
-rootProject.name = "Kotlin-Multiplatform-Template"
+rootProject.name = "KotlinMultiplatformTemplate"
 include(":modules:database")
 include(":modules:designsystem")
 include(":modules:model")

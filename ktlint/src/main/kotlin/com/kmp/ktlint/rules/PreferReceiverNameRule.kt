@@ -27,8 +27,8 @@ class PreferReceiverNameRule : Rule(
     about =
     Rule.About(
         maintainer = "Your Name",
-        repositoryUrl = "https://github.com/mshdabiola/kotlin-multiplatform-template",
-        issueTrackerUrl = "https://github.com/mshdabiola/kotlin-multiplatform-template",
+        repositoryUrl = "https://github.com/mshdabiola/kotlinmultiplatformtemplate",
+        issueTrackerUrl = "https://github.com/mshdabiola/kotlinmultiplatformtemplate",
     ),
 ) {
     // Define the mapping of deprecated receiver names to preferred receiver names

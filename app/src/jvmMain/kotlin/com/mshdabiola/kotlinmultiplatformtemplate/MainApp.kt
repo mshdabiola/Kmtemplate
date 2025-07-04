@@ -81,7 +81,7 @@ fun mainApp() {
 }
 
 fun main() {
-    val path = File("${System.getProperty("user.home")}/AppData/Local/kotlin_multiplatform_template")
+    val path = File("${System.getProperty("user.home")}/AppData/Local/kotlinmultiplatformtemplate")
     if (path.exists().not()) {
         path.mkdirs()
     }

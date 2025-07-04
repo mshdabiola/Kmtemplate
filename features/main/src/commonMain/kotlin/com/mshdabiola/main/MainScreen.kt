@@ -63,11 +63,11 @@ import com.mshdabiola.designsystem.theme.LocalTintTheme
 import com.mshdabiola.model.Note
 import com.mshdabiola.ui.SharedContentPreview
 import com.mshdabiola.ui.noteItems
-import kotlin_multiplatform_template.features.main.generated.resources.Res
-import kotlin_multiplatform_template.features.main.generated.resources.features_main_empty_description
-import kotlin_multiplatform_template.features.main.generated.resources.features_main_empty_error
-import kotlin_multiplatform_template.features.main.generated.resources.features_main_img_empty_bookmarks
-import kotlin_multiplatform_template.features.main.generated.resources.features_main_loading
+import kotlinmultiplatformtemplate.features.main.generated.resources.Res
+import kotlinmultiplatformtemplate.features.main.generated.resources.features_main_empty_description
+import kotlinmultiplatformtemplate.features.main.generated.resources.features_main_empty_error
+import kotlinmultiplatformtemplate.features.main.generated.resources.features_main_img_empty_bookmarks
+import kotlinmultiplatformtemplate.features.main.generated.resources.features_main_loading
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource

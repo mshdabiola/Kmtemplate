@@ -10,25 +10,25 @@
   <br>
   <br>
  <a href="">
-<img src="https://tokei.rs/b1/github/mshdabiola/kotlin_multiplatform_template?category=code&color=orange&style=for-the-badge" alt=""/>
+<img src="https://tokei.rs/b1/github/mshdabiola/kotlinmultiplatformtemplate?category=code&color=orange&style=for-the-badge" alt=""/>
 </a>
-    <a href="https://github.com/mshdabiola/kotlin-multiplatform-template/actions">
-  <img alt="GitHub commits since tagged version (branch)" src="https://img.shields.io/github/commits-since/mshdabiola/kotlin_multiplatform_template/1.0.0?color=palegreen&label=Commits&style=for-the-badge">
-  <img alt="GitHub code size in bytes" src="https://img.shields.io/github/languages/code-size/mshdabiola/kotlin_multiplatform_template?style=for-the-badge&color=37ABB5">
+    <a href="https://github.com/mshdabiola/kotlinmultiplatformtemplate/actions">
+  <img alt="GitHub commits since tagged version (branch)" src="https://img.shields.io/github/commits-since/mshdabiola/kotlinmultiplatformtemplate/1.0.0?color=palegreen&label=Commits&style=for-the-badge">
+  <img alt="GitHub code size in bytes" src="https://img.shields.io/github/languages/code-size/mshdabiola/kotlinmultiplatformtemplate?style=for-the-badge&color=37ABB5">
   <img src="https://wakatime.com/badge/user/8e707c95-01e6-41d3-a760-223960f0cdf7.svg?style=for-the-badge" alt=""/>
 </a>
   <br>
-  <a href="https://hits.sh/github.com/mshdabiola/kotlin-multiplatform-template/">
-      <img alt="Hits" src="https://hits.sh/github.com/mshdabiola/kotlin-multiplatform-template.svg?style=for-the-badge&label=Views&extraCount=7500&color=ff3f6f"/></a>
-  <a href="https://github.com/mshdabiola/kotlin-multiplatform-template/releases">
-      <img src="https://img.shields.io/github/downloads/mshdabiola/kotlin_multiplatform_template/total?color=orange&style=for-the-badge"/>
+  <a href="https://hits.sh/github.com/mshdabiola/kotlinmultiplatformtemplate/">
+      <img alt="Hits" src="https://hits.sh/github.com/mshdabiola/kotlinmultiplatformtemplate.svg?style=for-the-badge&label=Views&extraCount=7500&color=ff3f6f"/></a>
+  <a href="https://github.com/mshdabiola/kotlinmultiplatformtemplate/releases">
+      <img src="https://img.shields.io/github/downloads/mshdabiola/kotlinmultiplatformtemplate/total?color=orange&style=for-the-badge"/>
   </a>
-  <a href="https://github.com/mshdabiola/kotlin-multiplatform-template/stargazers">
-      <img src="https://img.shields.io/github/stars/mshdabiola/kotlin_multiplatform_template?color=ffff00&style=for-the-badge"/>
+  <a href="https://github.com/mshdabiola/kotlinmultiplatformtemplate/stargazers">
+      <img src="https://img.shields.io/github/stars/mshdabiola/kotlinmultiplatformtemplate?color=ffff00&style=for-the-badge"/>
   </a>
   <br>
-  <a href="https://github.com/mshdabiola/kotlin-multiplatform-template/releases/latest">
-      <img src="https://img.shields.io/github/v/release/mshdabiola/kotlin_multiplatform_template?color=purple&include_prereleases&logo=github&style=for-the-badge"/>
+  <a href="https://github.com/mshdabiola/kotlinmultiplatformtemplate/releases/latest">
+      <img src="https://img.shields.io/github/v/release/mshdabiola/kotlinmultiplatformtemplate?color=purple&include_prereleases&logo=github&style=for-the-badge"/>
   </a>
 
 [//]: # (   <a href="https://play.google.com/store/apps/details?id=ru.tech.hydraulicshrinker">)
@@ -46,9 +46,9 @@
 <div align="center">
     <a href="https://example.com"><img alt="Google Play" src="./fastlane/metadata/android/en-US/images/buttons/gplay.svg" height="60"></a>
     <a href="https://f-droid.org/packages/ru.tech.hydraulicshrinker"><img alt="F-Droid" src="./fastlane/metadata/android/en-US/images/buttons/fdroid.svg" height="60"/></a>
-    <a href="https://github.com/mshdabiola/kotlin-multiplatform-template/releases/latest"><img alt="GitHub" src="./fastlane/metadata/android/en-US/images/buttons/github.svg" height="60"/></a>
-  <a href="https://kotlin_multiplatform_template-desktop.onrender.com"><img alt="Desktop Download" src="./fastlane/metadata/android/en-US/images/buttons/desktop.svg" height="60"/></a>
-    <a href="https://kotlin_multiplatform_template.onrender.com"><img alt="KotlinMultiplatformTemplate Online" src="./fastlane/metadata/android/en-US/images/buttons/online.svg" height="60"/></a>
+    <a href="https://github.com/mshdabiola/kotlinmultiplatformtemplate/releases/latest"><img alt="GitHub" src="./fastlane/metadata/android/en-US/images/buttons/github.svg" height="60"/></a>
+  <a href="https://kotlinmultiplatformtemplate-desktop.onrender.com"><img alt="Desktop Download" src="./fastlane/metadata/android/en-US/images/buttons/desktop.svg" height="60"/></a>
+    <a href="https://kotlinmultiplatformtemplate.onrender.com"><img alt="KotlinMultiplatformTemplate Online" src="./fastlane/metadata/android/en-US/images/buttons/online.svg" height="60"/></a>
 
 
 </div>
@@ -62,7 +62,7 @@
 </div>
 
 <div style="text-align: center;">
-kotlin_multiplatform_template is a compose multiplatform template. that use note app as an example. it is multi-module architecture.
+kotlinmultiplatformtemplate is a compose multiplatform template. that use note app as an example. it is multi-module architecture.
 </div>
 
 
@@ -335,18 +335,18 @@ remains performant and responsive as the application evolves.
 
 ## Find this repository useful?
 
-Support it by joining **[stargazers](https://github.com/mshdabiola/kotlin-multiplatform-template/stargazers)** for this
+Support it by joining **[stargazers](https://github.com/mshdabiola/kotlinmultiplatformtemplate/stargazers)** for this
 repository. :star: <br>
 And **[follow](https://github.com/mshdabiola)** me for my next creations! 🤩
 
 ## Star History
 
 <div align="center">
-<a href="https://star-history.com/#mshdabiola/kotlin_multiplatform_template&Date">
+<a href="https://star-history.com/#mshdabiola/kotlinmultiplatformtemplate&Date">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=mshdabiola/kotlin_multiplatform_template&type=Date&theme=dark" />
-    <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=mshdabiola/kotlin_multiplatform_template&type=Date" />
-    <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=mshdabiola/kotlin_multiplatform_template&type=Date" />
+    <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=mshdabiola/kotlinmultiplatformtemplate&type=Date&theme=dark" />
+    <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=mshdabiola/kotlinmultiplatformtemplate&type=Date" />
+    <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=mshdabiola/kotlinmultiplatformtemplate&type=Date" />
   </picture>
 </a>
 
@@ -355,8 +355,8 @@ And **[follow](https://github.com/mshdabiola)** me for my next creations! 🤩
 
 ## Contributors
 
-<a href="https://github.com/mshdabiola/kotlin-multiplatform-template/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=mshdabiola/kotlin_multiplatform_template" />
+<a href="https://github.com/mshdabiola/kotlinmultiplatformtemplate/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=mshdabiola/kotlinmultiplatformtemplate" />
 </a>
 
 

@@ -50,9 +50,9 @@ import com.mshdabiola.designsystem.icon.KmtIcons
 import com.mshdabiola.model.DarkThemeConfig
 import com.mshdabiola.model.ThemeBrand
 import com.mshdabiola.ui.Waiting
-import kotlin_multiplatform_template.features.setting.generated.resources.Res
-import kotlin_multiplatform_template.features.setting.generated.resources.daynight
-import kotlin_multiplatform_template.features.setting.generated.resources.theme
+import kotlinmultiplatformtemplate.features.setting.generated.resources.Res
+import kotlinmultiplatformtemplate.features.setting.generated.resources.daynight
+import kotlinmultiplatformtemplate.features.setting.generated.resources.theme
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.stringArrayResource
 
