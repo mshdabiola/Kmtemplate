@@ -9,7 +9,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:801461677522:android:63a1c6467747f0a2a3ac0b",
         "android_client_info": {
-          "package_name": "com.mshdabiola.kotlin_multiplatform_template.play.debug"
+          "package_name": "com.mshdabiola.kotlinmultiplatformtemplate.play.debug"
         }
       },
       "oauth_client": [
@@ -38,7 +38,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:801461677522:android:63a1c6467747f0a2a3ac0b",
         "android_client_info": {
-          "package_name": "com.mshdabiola.kotlin_multiplatform_template.foss.debug"
+          "package_name": "com.mshdabiola.kotlinmultiplatformtemplate.foss.debug"
         }
       },
       "oauth_client": [
@@ -67,7 +67,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:801461677522:android:63a1c6467747f0a2a3ac0b",
         "android_client_info": {
-          "package_name": "com.mshdabiola.kotlin_multiplatform_template.play"
+          "package_name": "com.mshdabiola.kotlinmultiplatformtemplate.play"
         }
       },
       "oauth_client": [
@@ -96,7 +96,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:801461677522:android:63a1c6467747f0a2a3ac0b",
         "android_client_info": {
-          "package_name": "com.mshdabiola.kotlin_multiplatform_template.foss"
+          "package_name": "com.mshdabiola.kotlinmultiplatformtemplate.foss"
         }
       },
       "oauth_client": [
@@ -125,7 +125,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:801461677522:android:63a1c6467747f0a2a3ac0b",
         "android_client_info": {
-          "package_name": "com.mshdabiola.kotlin_multiplatform_template.play.benchmark"
+          "package_name": "com.mshdabiola.kotlinmultiplatformtemplate.play.benchmark"
         }
       },
       "oauth_client": [
@@ -154,7 +154,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:801461677522:android:63a1c6467747f0a2a3ac0b",
         "android_client_info": {
-          "package_name": "com.mshdabiola.kotlin_multiplatform_template.foss.benchmark"
+          "package_name": "com.mshdabiola.kotlinmultiplatformtemplate.foss.benchmark"
         }
       },
       "oauth_client": [

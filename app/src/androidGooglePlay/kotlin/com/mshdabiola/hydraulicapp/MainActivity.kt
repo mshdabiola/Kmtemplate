@@ -15,7 +15,7 @@
  *
  * SPDX-License-Identifier: AGPL-3.0-only
  */
-package com.mshdabiola.kotlin_multiplatform_template
+package com.mshdabiola.kotlinmultiplatformtemplate
 
 import android.graphics.Color
 import android.os.Bundle
@@ -36,8 +36,8 @@ import com.google.firebase.Firebase
 import com.google.firebase.messaging.FirebaseMessaging
 import com.google.firebase.remoteconfig.remoteConfig
 import com.google.firebase.remoteconfig.remoteConfigSettings
-import com.mshdabiola.kotlin_multiplatform_template.ui.KotlinMultiplatformTemplate
-import com.mshdabiola.kotlin_multiplatform_template.ui.shouldUseDarkTheme
+import com.mshdabiola.kotlinmultiplatformtemplate.ui.KotlinMultiplatformTemplate
+import com.mshdabiola.kotlinmultiplatformtemplate.ui.shouldUseDarkTheme
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch

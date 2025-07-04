@@ -15,7 +15,7 @@
  *
  * SPDX-License-Identifier: AGPL-3.0-only
  */
-package com.mshdabiola.kotlin_multiplatform_template
+package com.mshdabiola.kotlinmultiplatformtemplate
 
 import android.graphics.Color
 import android.os.Bundle
@@ -31,8 +31,8 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import com.mshdabiola.kotlin_multiplatform_template.ui.KotlinMultiplatformTemplate
-import com.mshdabiola.kotlin_multiplatform_template.ui.shouldUseDarkTheme
+import com.mshdabiola.kotlinmultiplatformtemplate.ui.KotlinMultiplatformTemplate
+import com.mshdabiola.kotlinmultiplatformtemplate.ui.shouldUseDarkTheme
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch

@@ -23,7 +23,7 @@ import org.jetbrains.kotlin.com.intellij.lang.ASTNode
 import org.jetbrains.kotlin.psi.KtCallExpression
 
 class PreferMethodNameRule : Rule(
-    RuleId("kotlin_multiplatform_template:prefer-method-name"),
+    RuleId("kotlinmultiplatformtemplate:prefer-method-name"),
     about =
     Rule.About(
         maintainer = "Your Name",

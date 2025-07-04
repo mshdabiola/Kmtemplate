@@ -15,7 +15,7 @@
  *
  * SPDX-License-Identifier: AGPL-3.0-only
  */
-package com.mshdabiola.kotlin_multiplatform_template.ui
+package com.mshdabiola.kotlinmultiplatformtemplate.ui
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -47,10 +47,10 @@ import com.mshdabiola.designsystem.component.KmtNavigationBarItem
 import com.mshdabiola.designsystem.component.KmtNavigationRail
 import com.mshdabiola.designsystem.component.KmtNavigationRailItem
 import com.mshdabiola.designsystem.icon.KmtIcons
-import com.mshdabiola.kotlin_multiplatform_template.app.generated.resources.Res
-import com.mshdabiola.kotlin_multiplatform_template.app.generated.resources.app_name
-import com.mshdabiola.kotlin_multiplatform_template.app.generated.resources.main_navigator
-import com.mshdabiola.kotlin_multiplatform_template.app.generated.resources.setting_navigator
+import com.mshdabiola.kotlinmultiplatformtemplate.app.generated.resources.Res
+import com.mshdabiola.kotlinmultiplatformtemplate.app.generated.resources.app_name
+import com.mshdabiola.kotlinmultiplatformtemplate.app.generated.resources.main_navigator
+import com.mshdabiola.kotlinmultiplatformtemplate.app.generated.resources.setting_navigator
 import com.mshdabiola.ui.ProfileCard
 import org.jetbrains.compose.resources.stringArrayResource
 import org.jetbrains.compose.resources.stringResource

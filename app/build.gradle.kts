@@ -32,7 +32,7 @@ plugins {
 
 }
 
-group = "com.mshdabiola.kotlin_multiplatform_template"
+group = "com.mshdabiola.kotlinmultiplatformtemplate"
 version = libs.versions.versionName.get()
 
 dependencies {
@@ -181,10 +181,10 @@ android {
     sourceSets["main"].res.srcDirs("src/androidMain/res")
     sourceSets["main"].resources.srcDirs("src/commonMain/composeResources")
 
-    namespace = "com.mshdabiola.kotlin_multiplatform_template"
+    namespace = "com.mshdabiola.kotlinmultiplatformtemplate"
 
     defaultConfig {
-        applicationId = "com.mshdabiola.kotlin_multiplatform_template"
+        applicationId = "com.mshdabiola.kotlinmultiplatformtemplate"
         versionCode = libs.versions.versionCode.get().toIntOrNull()
         versionName = System.getenv("VERSION_NAME") ?: libs.versions.versionName.get()
 
@@ -242,7 +242,7 @@ android {
 
 compose.desktop {
     application {
-        mainClass = "com.mshdabiola.kotlin_multiplatform_template.MainAppKt"
+        mainClass = "com.mshdabiola.kotlinmultiplatformtemplate.MainAppKt"
 
 
         buildTypes.release.proguard {

@@ -30,8 +30,8 @@ import androidx.compose.ui.window.WindowPlacement
 import androidx.compose.ui.window.WindowPosition
 import androidx.compose.ui.window.application
 import androidx.compose.ui.window.rememberWindowState
-import com.mshdabiola.kotlin_multiplatform_template.di.appModule
-import com.mshdabiola.kotlin_multiplatform_template.ui.KotlinMultiplatformTemplate
+import com.mshdabiola.kotlinmultiplatformtemplate.di.appModule
+import com.mshdabiola.kotlinmultiplatformtemplate.ui.KotlinMultiplatformTemplate
 import org.koin.core.context.GlobalContext.startKoin
 import java.util.prefs.Preferences
 

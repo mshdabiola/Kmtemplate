@@ -23,7 +23,7 @@ import org.jetbrains.kotlin.com.intellij.lang.ASTNode
 import org.jetbrains.kotlin.psi.KtDotQualifiedExpression
 
 class PreferReceiverNameRule : Rule(
-    RuleId("kotlin_multiplatform_template:prefer-receiver-name"),
+    RuleId("kotlinmultiplatformtemplate:prefer-receiver-name"),
     about =
     Rule.About(
         maintainer = "Your Name",

@@ -15,13 +15,13 @@
  *
  * SPDX-License-Identifier: AGPL-3.0-only
  */
-package com.mshdabiola.kotlin_multiplatform_template
+package com.mshdabiola.kotlinmultiplatformtemplate
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mshdabiola.data.repository.UserDataRepository
-import com.mshdabiola.kotlin_multiplatform_template.MainActivityUiState.Loading
-import com.mshdabiola.kotlin_multiplatform_template.MainActivityUiState.Success
+import com.mshdabiola.kotlinmultiplatformtemplate.MainActivityUiState.Loading
+import com.mshdabiola.kotlinmultiplatformtemplate.MainActivityUiState.Success
 import com.mshdabiola.model.UserData
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow

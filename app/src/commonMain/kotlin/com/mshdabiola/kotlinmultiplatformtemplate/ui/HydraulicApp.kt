@@ -15,7 +15,7 @@
  *
  * SPDX-License-Identifier: AGPL-3.0-only
  */
-package com.mshdabiola.kotlin_multiplatform_template.ui
+package com.mshdabiola.kotlinmultiplatformtemplate.ui
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Column
@@ -63,9 +63,9 @@ import com.mshdabiola.designsystem.theme.KmtTheme
 import com.mshdabiola.designsystem.theme.LocalGradientColors
 import com.mshdabiola.detail.navigation.Detail
 import com.mshdabiola.detail.navigation.navigateToDetail
-import com.mshdabiola.kotlin_multiplatform_template.MainActivityUiState
-import com.mshdabiola.kotlin_multiplatform_template.MainAppViewModel
-import com.mshdabiola.kotlin_multiplatform_template.navigation.HydraulicAppNavHost
+import com.mshdabiola.kotlinmultiplatformtemplate.MainActivityUiState
+import com.mshdabiola.kotlinmultiplatformtemplate.MainAppViewModel
+import com.mshdabiola.kotlinmultiplatformtemplate.navigation.HydraulicAppNavHost
 import com.mshdabiola.model.DarkThemeConfig
 import com.mshdabiola.model.ThemeBrand
 import com.mshdabiola.setting.navigation.navigateToSetting

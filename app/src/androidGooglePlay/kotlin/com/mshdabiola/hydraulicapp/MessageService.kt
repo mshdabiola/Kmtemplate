@@ -15,7 +15,7 @@
  *
  * SPDX-License-Identifier: AGPL-3.0-only
  */
-package com.mshdabiola.kotlin_multiplatform_template
+package com.mshdabiola.kotlinmultiplatformtemplate
 
 // import androidx.work.Worker
 // import androidx.work.WorkerParameters

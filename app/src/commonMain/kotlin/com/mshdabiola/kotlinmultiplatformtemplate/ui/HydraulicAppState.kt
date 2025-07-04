@@ -15,7 +15,7 @@
  *
  * SPDX-License-Identifier: AGPL-3.0-only
  */
-package com.mshdabiola.kotlin_multiplatform_template.ui
+package com.mshdabiola.kotlinmultiplatformtemplate.ui
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable

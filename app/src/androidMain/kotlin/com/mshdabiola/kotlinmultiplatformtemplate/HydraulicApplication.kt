@@ -15,14 +15,14 @@
  *
  * SPDX-License-Identifier: AGPL-3.0-only
  */
-package com.mshdabiola.kotlin_multiplatform_template
+package com.mshdabiola.kotlinmultiplatformtemplate
 
 import android.app.Application
 import co.touchlab.kermit.Logger
 import co.touchlab.kermit.koin.KermitKoinLogger
 import co.touchlab.kermit.loggerConfigInit
 import co.touchlab.kermit.platformLogWriter
-import com.mshdabiola.kotlin_multiplatform_template.di.appModule
+import com.mshdabiola.kotlinmultiplatformtemplate.di.appModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 import org.koin.dsl.module
