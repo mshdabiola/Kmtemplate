@@ -1,4 +1,4 @@
-# Code of Conduct for HydraulicApp
+# Code of Conduct for KotlinMultiplatformTemplate
 
 ## Our Pledge
 

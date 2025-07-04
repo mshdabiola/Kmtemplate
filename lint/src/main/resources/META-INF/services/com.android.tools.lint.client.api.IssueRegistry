@@ -14,4 +14,4 @@
 #  limitations under the License.
 #
 
-com.google.samples.apps.nowinandroid.lint.HyaIssueRegistry
+com.google.samples.apps.nowinandroid.lint.KmtIssueRegistry

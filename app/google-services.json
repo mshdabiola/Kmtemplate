@@ -1,15 +1,15 @@
 {
   "project_info": {
     "project_number": "801461677522",
-    "project_id": "hydraulicapp-7ec62",
-    "storage_bucket": "hydraulicapp-7ec62.appspot.com"
+    "project_id": "kotlin_multiplatform_template-7ec62",
+    "storage_bucket": "kotlin_multiplatform_template-7ec62.appspot.com"
   },
   "client": [
     {
       "client_info": {
         "mobilesdk_app_id": "1:801461677522:android:63a1c6467747f0a2a3ac0b",
         "android_client_info": {
-          "package_name": "com.mshdabiola.hydraulicapp.play.debug"
+          "package_name": "com.mshdabiola.kotlin_multiplatform_template.play.debug"
         }
       },
       "oauth_client": [
@@ -38,7 +38,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:801461677522:android:63a1c6467747f0a2a3ac0b",
         "android_client_info": {
-          "package_name": "com.mshdabiola.hydraulicapp.foss.debug"
+          "package_name": "com.mshdabiola.kotlin_multiplatform_template.foss.debug"
         }
       },
       "oauth_client": [
@@ -67,7 +67,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:801461677522:android:63a1c6467747f0a2a3ac0b",
         "android_client_info": {
-          "package_name": "com.mshdabiola.hydraulicapp.play"
+          "package_name": "com.mshdabiola.kotlin_multiplatform_template.play"
         }
       },
       "oauth_client": [
@@ -96,7 +96,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:801461677522:android:63a1c6467747f0a2a3ac0b",
         "android_client_info": {
-          "package_name": "com.mshdabiola.hydraulicapp.foss"
+          "package_name": "com.mshdabiola.kotlin_multiplatform_template.foss"
         }
       },
       "oauth_client": [
@@ -125,7 +125,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:801461677522:android:63a1c6467747f0a2a3ac0b",
         "android_client_info": {
-          "package_name": "com.mshdabiola.hydraulicapp.play.benchmark"
+          "package_name": "com.mshdabiola.kotlin_multiplatform_template.play.benchmark"
         }
       },
       "oauth_client": [
@@ -154,7 +154,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:801461677522:android:63a1c6467747f0a2a3ac0b",
         "android_client_info": {
-          "package_name": "com.mshdabiola.hydraulicapp.foss.benchmark"
+          "package_name": "com.mshdabiola.kotlin_multiplatform_template.foss.benchmark"
         }
       },
       "oauth_client": [

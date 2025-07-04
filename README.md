@@ -5,30 +5,30 @@
  <a>
   <img alt="Kotlin" src="https://img.shields.io/badge/Kotlin-Multiplatform-%237f52ff?logo=kotlin&style=for-the-badge"/>
 </a>
-  <img alt="Jetpack Compose" src="https://img.shields.io/static/v1?style=for-the-badge&message=Jetpack+Compose&color=4285F4&logo=Jetpack+Compose&logoColor=FFFFFF&label="/> 
+  <img alt="Jetpack Compose" src="https://img.shields.io/static/v1?style=for-the-badge&message=Jetpack+Compose&color=4285F4&logo=Jetpack+Compose&logoColor=FFFFFF&label="/>
     <img alt="material" src="https://custom-icon-badges.demolab.com/badge/material%20you-lightblue?style=for-the-badge&logoColor=333&logo=material-you"/>
   <br>
   <br>
  <a href="">
-<img src="https://tokei.rs/b1/github/mshdabiola/hydraulicapp?category=code&color=orange&style=for-the-badge" alt=""/>
+<img src="https://tokei.rs/b1/github/mshdabiola/kotlin_multiplatform_template?category=code&color=orange&style=for-the-badge" alt=""/>
 </a>
-    <a href="https://github.com/mshdabiola/hydraulicapp/actions">
-  <img alt="GitHub commits since tagged version (branch)" src="https://img.shields.io/github/commits-since/mshdabiola/hydraulicapp/1.0.0?color=palegreen&label=Commits&style=for-the-badge">
-  <img alt="GitHub code size in bytes" src="https://img.shields.io/github/languages/code-size/mshdabiola/hydraulicapp?style=for-the-badge&color=37ABB5">
+    <a href="https://github.com/mshdabiola/kotlin-multiplatform-template/actions">
+  <img alt="GitHub commits since tagged version (branch)" src="https://img.shields.io/github/commits-since/mshdabiola/kotlin_multiplatform_template/1.0.0?color=palegreen&label=Commits&style=for-the-badge">
+  <img alt="GitHub code size in bytes" src="https://img.shields.io/github/languages/code-size/mshdabiola/kotlin_multiplatform_template?style=for-the-badge&color=37ABB5">
   <img src="https://wakatime.com/badge/user/8e707c95-01e6-41d3-a760-223960f0cdf7.svg?style=for-the-badge" alt=""/>
 </a>
   <br>
-  <a href="https://hits.sh/github.com/mshdabiola/hydraulicapp/">
-      <img alt="Hits" src="https://hits.sh/github.com/mshdabiola/hydraulicapp.svg?style=for-the-badge&label=Views&extraCount=7500&color=ff3f6f"/></a>
-  <a href="https://github.com/mshdabiola/hydraulicapp/releases">
-      <img src="https://img.shields.io/github/downloads/mshdabiola/hydraulicapp/total?color=orange&style=for-the-badge"/>
+  <a href="https://hits.sh/github.com/mshdabiola/kotlin-multiplatform-template/">
+      <img alt="Hits" src="https://hits.sh/github.com/mshdabiola/kotlin-multiplatform-template.svg?style=for-the-badge&label=Views&extraCount=7500&color=ff3f6f"/></a>
+  <a href="https://github.com/mshdabiola/kotlin-multiplatform-template/releases">
+      <img src="https://img.shields.io/github/downloads/mshdabiola/kotlin_multiplatform_template/total?color=orange&style=for-the-badge"/>
   </a>
-  <a href="https://github.com/mshdabiola/hydraulicapp/stargazers">
-      <img src="https://img.shields.io/github/stars/mshdabiola/hydraulicapp?color=ffff00&style=for-the-badge"/>
+  <a href="https://github.com/mshdabiola/kotlin-multiplatform-template/stargazers">
+      <img src="https://img.shields.io/github/stars/mshdabiola/kotlin_multiplatform_template?color=ffff00&style=for-the-badge"/>
   </a>
   <br>
-  <a href="https://github.com/mshdabiola/hydraulicapp/releases/latest">
-      <img src="https://img.shields.io/github/v/release/mshdabiola/hydraulicapp?color=purple&include_prereleases&logo=github&style=for-the-badge"/>
+  <a href="https://github.com/mshdabiola/kotlin-multiplatform-template/releases/latest">
+      <img src="https://img.shields.io/github/v/release/mshdabiola/kotlin_multiplatform_template?color=purple&include_prereleases&logo=github&style=for-the-badge"/>
   </a>
 
 [//]: # (   <a href="https://play.google.com/store/apps/details?id=ru.tech.hydraulicshrinker">)
@@ -46,10 +46,10 @@
 <div align="center">
     <a href="https://example.com"><img alt="Google Play" src="./fastlane/metadata/android/en-US/images/buttons/gplay.svg" height="60"></a>
     <a href="https://f-droid.org/packages/ru.tech.hydraulicshrinker"><img alt="F-Droid" src="./fastlane/metadata/android/en-US/images/buttons/fdroid.svg" height="60"/></a>
-    <a href="https://github.com/mshdabiola/hydraulicapp/releases/latest"><img alt="GitHub" src="./fastlane/metadata/android/en-US/images/buttons/github.svg" height="60"/></a>
-  <a href="https://hydraulicapp-desktop.onrender.com"><img alt="Desktop Download" src="./fastlane/metadata/android/en-US/images/buttons/desktop.svg" height="60"/></a>
-    <a href="https://hydraulicapp.onrender.com"><img alt="HydraulicApp Online" src="./fastlane/metadata/android/en-US/images/buttons/online.svg" height="60"/></a>
-   
+    <a href="https://github.com/mshdabiola/kotlin-multiplatform-template/releases/latest"><img alt="GitHub" src="./fastlane/metadata/android/en-US/images/buttons/github.svg" height="60"/></a>
+  <a href="https://kotlin_multiplatform_template-desktop.onrender.com"><img alt="Desktop Download" src="./fastlane/metadata/android/en-US/images/buttons/desktop.svg" height="60"/></a>
+    <a href="https://kotlin_multiplatform_template.onrender.com"><img alt="KotlinMultiplatformTemplate Online" src="./fastlane/metadata/android/en-US/images/buttons/online.svg" height="60"/></a>
+
 
 </div>
 
@@ -57,12 +57,12 @@
 <img src="./fastlane/metadata/android/en-US/images/icon.png" width="40%"  alt=""/>
 </div>
 
-<div align="center"> 
-     <h1>HydraulicApp Compose Multiplatform Template</h1>
+<div align="center">
+     <h1>KotlinMultiplatformTemplate Compose Multiplatform Template</h1>
 </div>
 
 <div style="text-align: center;">
-hydraulicapp is a compose multiplatform template. that use note app as an example. it is multi-module architecture. 
+kotlin_multiplatform_template is a compose multiplatform template. that use note app as an example. it is multi-module architecture.
 </div>
 
 
@@ -134,7 +134,7 @@ hydraulicapp is a compose multiplatform template. that use note app as an exampl
 
     - [Lifecycle](https://developer.android.com/jetpack/androidx/releases/lifecycle) - Observe
       Android lifecycles and handle UI states upon the lifecycle changes.
-  
+
 - [Turbine](https://github.com/cashapp/turbine) - A small testing library for kotlinx.coroutines Flow.
 
 - [Timber](https://github.com/JakeWharton/timber) - A logger with a small, extensible API.
@@ -145,7 +145,7 @@ hydraulicapp is a compose multiplatform template. that use note app as an exampl
     - MVVM Architecture (Compose - ViewModel - Model)
     - Repository Pattern
     - This project use android modularization. You can find full graph [FULLGRAPH](FULLGRAPH.md)
-      
+
 
 ## Build
 
@@ -227,8 +227,8 @@ Distribute the APK through your preferred channels (e.g., GitHub Releases, F-Dro
 
 ### Desktop
 
-This project leverages HydraulicApp Conveyor for packaging and distributing the Desktop application.
-HydraulicApp Conveyor simplifies the creation of installers and distributable packages across various
+This project leverages KotlinMultiplatformTemplate Conveyor for packaging and distributing the Desktop application.
+KotlinMultiplatformTemplate Conveyor simplifies the creation of installers and distributable packages across various
 operating systems (Windows, macOS, Linux).
 
 1. Install hydraulic conveyor at [Hydraulic](https://downloads.hydraulic.dev/)
@@ -335,18 +335,18 @@ remains performant and responsive as the application evolves.
 
 ## Find this repository useful?
 
-Support it by joining **[stargazers](https://github.com/mshdabiola/hydraulicapp/stargazers)** for this
+Support it by joining **[stargazers](https://github.com/mshdabiola/kotlin-multiplatform-template/stargazers)** for this
 repository. :star: <br>
 And **[follow](https://github.com/mshdabiola)** me for my next creations! 🤩
 
 ## Star History
 
 <div align="center">
-<a href="https://star-history.com/#mshdabiola/hydraulicapp&Date">
+<a href="https://star-history.com/#mshdabiola/kotlin_multiplatform_template&Date">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=mshdabiola/hydraulicapp&type=Date&theme=dark" />
-    <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=mshdabiola/hydraulicapp&type=Date" />
-    <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=mshdabiola/hydraulicapp&type=Date" />
+    <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=mshdabiola/kotlin_multiplatform_template&type=Date&theme=dark" />
+    <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=mshdabiola/kotlin_multiplatform_template&type=Date" />
+    <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=mshdabiola/kotlin_multiplatform_template&type=Date" />
   </picture>
 </a>
 
@@ -355,12 +355,12 @@ And **[follow](https://github.com/mshdabiola)** me for my next creations! 🤩
 
 ## Contributors
 
-<a href="https://github.com/mshdabiola/hydraulicapp/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=mshdabiola/hydraulicapp" />
+<a href="https://github.com/mshdabiola/kotlin-multiplatform-template/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=mshdabiola/kotlin_multiplatform_template" />
 </a>
 
 
 # License
 
-**HydraulicApp** is distributed under the terms of the GNU License (Version 2.0). See the
+**KotlinMultiplatformTemplate** is distributed under the terms of the GNU License (Version 2.0). See the
 [license](LICENSE) for more information.

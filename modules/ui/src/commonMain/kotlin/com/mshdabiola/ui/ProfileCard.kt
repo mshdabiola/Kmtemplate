@@ -26,7 +26,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import com.mshdabiola.designsystem.icon.HyaIcons
+import com.mshdabiola.designsystem.icon.KmtIcons
 
 @Composable
 fun ProfileCard(
@@ -39,7 +39,7 @@ fun ProfileCard(
         colors = ListItemDefaults.colors(containerColor = Color.Transparent),
         headlineContent = { Text(name) },
         supportingContent = { Text(email) },
-        leadingContent = { Icon(HyaIcons.Person, "person") },
-        trailingContent = { Icon(HyaIcons.Logout, "out", tint = Color.Red) },
+        leadingContent = { Icon(KmtIcons.Person, "person") },
+        trailingContent = { Icon(KmtIcons.Logout, "out", tint = Color.Red) },
     )
 }

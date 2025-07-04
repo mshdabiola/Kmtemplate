@@ -51,7 +51,7 @@ plugins {
 
 
 moduleGraphConfig {
-    heading = "###  HydraulicApp Module Graph"
+    heading = "###  KotlinMultiplatformTemplate Module Graph"
     readmePath = "$rootDir/FULLGRAPH.md"
     showFullPath = false
     setStyleByModuleType.set(true)

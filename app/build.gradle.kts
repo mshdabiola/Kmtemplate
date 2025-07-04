@@ -32,7 +32,7 @@ plugins {
 
 }
 
-group = "com.mshdabiola.hydraulicapp"
+group = "com.mshdabiola.kotlin_multiplatform_template"
 version = libs.versions.versionName.get()
 
 dependencies {
@@ -181,10 +181,10 @@ android {
     sourceSets["main"].res.srcDirs("src/androidMain/res")
     sourceSets["main"].resources.srcDirs("src/commonMain/composeResources")
 
-    namespace = "com.mshdabiola.hydraulicapp"
+    namespace = "com.mshdabiola.kotlin_multiplatform_template"
 
     defaultConfig {
-        applicationId = "com.mshdabiola.hydraulicapp"
+        applicationId = "com.mshdabiola.kotlin_multiplatform_template"
         versionCode = libs.versions.versionCode.get().toIntOrNull()
         versionName = System.getenv("VERSION_NAME") ?: libs.versions.versionName.get()
 
@@ -242,7 +242,7 @@ android {
 
 compose.desktop {
     application {
-        mainClass = "com.mshdabiola.hydraulicapp.MainAppKt"
+        mainClass = "com.mshdabiola.kotlin_multiplatform_template.MainAppKt"
 
 
         buildTypes.release.proguard {

@@ -15,13 +15,13 @@
  *
  * SPDX-License-Identifier: AGPL-3.0-only
  */
-package com.mshdabiola.hydraulicapp
+package com.mshdabiola.kotlin_multiplatform_template
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mshdabiola.data.repository.UserDataRepository
-import com.mshdabiola.hydraulicapp.MainActivityUiState.Loading
-import com.mshdabiola.hydraulicapp.MainActivityUiState.Success
+import com.mshdabiola.kotlin_multiplatform_template.MainActivityUiState.Loading
+import com.mshdabiola.kotlin_multiplatform_template.MainActivityUiState.Success
 import com.mshdabiola.model.UserData
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow

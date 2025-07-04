@@ -15,7 +15,7 @@
  *
  * SPDX-License-Identifier: AGPL-3.0-only
  */
-package com.mshdabiola.hydraulicapp
+package com.mshdabiola.kotlin_multiplatform_template
 
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
@@ -24,7 +24,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.createGraph
 import androidx.window.core.layout.WindowSizeClass
-import com.mshdabiola.hydraulicapp.ui.HydraulicAppState
+import com.mshdabiola.kotlin_multiplatform_template.ui.HydraulicAppState
 import kotlinx.coroutines.test.runTest
 import org.junit.Rule
 import org.junit.Test

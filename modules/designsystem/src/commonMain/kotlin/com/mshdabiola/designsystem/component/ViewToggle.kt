@@ -31,8 +31,8 @@ import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.mshdabiola.designsystem.icon.HyaIcons
-import com.mshdabiola.designsystem.theme.HyaTheme
+import com.mshdabiola.designsystem.icon.KmtIcons
+import com.mshdabiola.designsystem.theme.KmtTheme
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 /**
@@ -48,7 +48,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
  * @param expandedText The text label content to show in compact mode.
  */
 @Composable
-fun HyaViewToggleButton(
+fun KmtViewToggleButton(
     expanded: Boolean,
     onExpandedChange: (Boolean) -> Unit,
     modifier: Modifier = Modifier,
@@ -64,13 +64,13 @@ fun HyaViewToggleButton(
         ButtonDefaults.textButtonColors(
             contentColor = MaterialTheme.colorScheme.onBackground,
         ),
-        contentPadding = HyaViewToggleDefaults.ViewToggleButtonContentPadding,
+        contentPadding = KmtViewToggleDefaults.ViewToggleButtonContentPadding,
     ) {
-        HyaViewToggleButtonContent(
+        KmtViewToggleButtonContent(
             text = if (expanded) expandedText else compactText,
             trailingIcon = {
                 Icon(
-                    imageVector = if (expanded) HyaIcons.ViewDay else HyaIcons.ShortText,
+                    imageVector = if (expanded) KmtIcons.ViewDay else KmtIcons.ShortText,
                     contentDescription = null,
                 )
             },
@@ -86,7 +86,7 @@ fun HyaViewToggleButton(
  * @param trailingIcon The button trailing icon content. Default is `null` for no trailing icon.
  */
 @Composable
-private fun HyaViewToggleButtonContent(
+private fun KmtViewToggleButtonContent(
     text: @Composable () -> Unit,
     trailingIcon: @Composable (() -> Unit)? = null,
 ) {
@@ -115,9 +115,9 @@ private fun HyaViewToggleButtonContent(
 @Preview
 @Composable
 fun ViewTogglePreviewExpanded() {
-    HyaTheme {
+    KmtTheme {
         Surface {
-            HyaViewToggleButton(
+            KmtViewToggleButton(
                 expanded = true,
                 onExpandedChange = { },
                 compactText = { Text(text = "Compact view") },
@@ -130,9 +130,9 @@ fun ViewTogglePreviewExpanded() {
 @Preview
 @Composable
 fun ViewTogglePreviewCompact() {
-    HyaTheme {
+    KmtTheme {
         Surface {
-            HyaViewToggleButton(
+            KmtViewToggleButton(
                 expanded = false,
                 onExpandedChange = { },
                 compactText = { Text(text = "Compact view") },
@@ -145,7 +145,7 @@ fun ViewTogglePreviewCompact() {
 /**
  * Now in Android view toggle default values.
  */
-object HyaViewToggleDefaults {
+object KmtViewToggleDefaults {
     //  File bug
     // Various default button padding values aren't exposed via ButtonDefaults
     val ViewToggleButtonContentPadding =

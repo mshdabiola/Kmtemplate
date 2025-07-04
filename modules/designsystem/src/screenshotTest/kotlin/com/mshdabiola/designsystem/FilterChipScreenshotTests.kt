@@ -20,7 +20,7 @@ package com.mshdabiola.designsystem
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
-import com.mshdabiola.designsystem.component.HyaFilterChip
+import com.mshdabiola.designsystem.component.KmtFilterChip
 import com.mshdabiola.testing.util.CaptureMultiTheme
 
 class FilterChipScreenshotTests {
@@ -29,7 +29,7 @@ class FilterChipScreenshotTests {
     @Composable
     fun UnSelectedFilterChip() {
         CaptureMultiTheme {
-            HyaFilterChip(selected = false, onSelectedChange = {}) {
+            KmtFilterChip(selected = false, onSelectedChange = {}) {
                 Text("Unselected chip")
             }
         }
@@ -39,7 +39,7 @@ class FilterChipScreenshotTests {
     @Composable
     fun SelectedFilterChip() {
         CaptureMultiTheme {
-            HyaFilterChip(selected = true, onSelectedChange = {}) {
+            KmtFilterChip(selected = true, onSelectedChange = {}) {
                 Text("Selected Chip")
             }
         }
@@ -50,7 +50,7 @@ class FilterChipScreenshotTests {
     @Composable
     fun HugeFontFilterChip() {
         CaptureMultiTheme {
-            HyaFilterChip(selected = true, onSelectedChange = {}) {
+            KmtFilterChip(selected = true, onSelectedChange = {}) {
                 Text("Chip")
             }
         }

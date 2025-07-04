@@ -15,7 +15,7 @@
  *
  * SPDX-License-Identifier: AGPL-3.0-only
  */
-package com.mshdabiola.hydraulicapp
+package com.mshdabiola.kotlin_multiplatform_template
 
 import co.touchlab.kermit.DefaultFormatter
 import co.touchlab.kermit.LogWriter

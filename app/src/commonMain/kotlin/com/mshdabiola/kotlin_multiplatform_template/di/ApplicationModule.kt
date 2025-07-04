@@ -15,11 +15,11 @@
  *
  * SPDX-License-Identifier: AGPL-3.0-only
  */
-package com.mshdabiola.hydraulicapp.di
+package com.mshdabiola.kotlin_multiplatform_template.di
 
 import com.mshdabiola.data.di.dataModule
 import com.mshdabiola.detail.detailModule
-import com.mshdabiola.hydraulicapp.MainAppViewModel
+import com.mshdabiola.kotlin_multiplatform_template.MainAppViewModel
 import com.mshdabiola.main.mainModule
 import com.mshdabiola.setting.settingModule
 import org.koin.core.module.dsl.viewModel

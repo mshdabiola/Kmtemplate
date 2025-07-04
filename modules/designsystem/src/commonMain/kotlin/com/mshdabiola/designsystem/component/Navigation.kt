@@ -38,8 +38,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.mshdabiola.designsystem.icon.HyaIcons
-import com.mshdabiola.designsystem.theme.HyaTheme
+import com.mshdabiola.designsystem.icon.KmtIcons
+import com.mshdabiola.designsystem.theme.KmtTheme
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 /**
@@ -58,7 +58,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
  * only be shown when this item is selected.
  */
 @Composable
-fun RowScope.HyaNavigationBarItem(
+fun RowScope.KmtNavigationBarItem(
     selected: Boolean,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
@@ -78,11 +78,11 @@ fun RowScope.HyaNavigationBarItem(
         alwaysShowLabel = alwaysShowLabel,
         colors =
         NavigationBarItemDefaults.colors(
-            selectedIconColor = HyaNavigationDefaults.navigationSelectedItemColor(),
-            unselectedIconColor = HyaNavigationDefaults.navigationContentColor(),
-            selectedTextColor = HyaNavigationDefaults.navigationSelectedItemColor(),
-            unselectedTextColor = HyaNavigationDefaults.navigationContentColor(),
-            indicatorColor = HyaNavigationDefaults.navigationIndicatorColor(),
+            selectedIconColor = KmtNavigationDefaults.navigationSelectedItemColor(),
+            unselectedIconColor = KmtNavigationDefaults.navigationContentColor(),
+            selectedTextColor = KmtNavigationDefaults.navigationSelectedItemColor(),
+            unselectedTextColor = KmtNavigationDefaults.navigationContentColor(),
+            indicatorColor = KmtNavigationDefaults.navigationIndicatorColor(),
         ),
     )
 }
@@ -95,13 +95,13 @@ fun RowScope.HyaNavigationBarItem(
  * [NavigationBarItem]s.
  */
 @Composable
-fun HyaNavigationBar(
+fun KmtNavigationBar(
     modifier: Modifier = Modifier,
     content: @Composable RowScope.() -> Unit,
 ) {
     NavigationBar(
         modifier = modifier,
-        contentColor = HyaNavigationDefaults.navigationContentColor(),
+        contentColor = KmtNavigationDefaults.navigationContentColor(),
         tonalElevation = 0.dp,
         content = content,
     )
@@ -123,7 +123,7 @@ fun HyaNavigationBar(
  * only be shown when this item is selected.
  */
 @Composable
-fun HyaNavigationRailItem(
+fun KmtNavigationRailItem(
     selected: Boolean,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
@@ -143,11 +143,11 @@ fun HyaNavigationRailItem(
         alwaysShowLabel = alwaysShowLabel,
         colors =
         NavigationRailItemDefaults.colors(
-            selectedIconColor = HyaNavigationDefaults.navigationSelectedItemColor(),
-            unselectedIconColor = HyaNavigationDefaults.navigationContentColor(),
-            selectedTextColor = HyaNavigationDefaults.navigationSelectedItemColor(),
-            unselectedTextColor = HyaNavigationDefaults.navigationContentColor(),
-            indicatorColor = HyaNavigationDefaults.navigationIndicatorColor(),
+            selectedIconColor = KmtNavigationDefaults.navigationSelectedItemColor(),
+            unselectedIconColor = KmtNavigationDefaults.navigationContentColor(),
+            selectedTextColor = KmtNavigationDefaults.navigationSelectedItemColor(),
+            unselectedTextColor = KmtNavigationDefaults.navigationContentColor(),
+            indicatorColor = KmtNavigationDefaults.navigationIndicatorColor(),
         ),
     )
 }
@@ -161,7 +161,7 @@ fun HyaNavigationRailItem(
  * [NavigationRailItem]s.
  */
 @Composable
-fun HyaNavigationRail(
+fun KmtNavigationRail(
     modifier: Modifier = Modifier,
     header: @Composable (ColumnScope.() -> Unit)? = null,
     content: @Composable ColumnScope.() -> Unit,
@@ -169,7 +169,7 @@ fun HyaNavigationRail(
     NavigationRail(
         modifier = modifier,
         containerColor = Color.Transparent,
-        contentColor = HyaNavigationDefaults.navigationContentColor(),
+        contentColor = KmtNavigationDefaults.navigationContentColor(),
         header = header,
         content = content,
     )
@@ -180,13 +180,13 @@ fun HyaNavigationRail(
  * Wraps Material 3 [NavigationSuiteScaffold].
  *
  * @param modifier Modifier to be applied to the navigation suite scaffold.
- * @param navigationSuiteItems A slot to display multiple items via [HyaNavigationSuiteScope].
+ * @param navigationSuiteItems A slot to display multiple items via [KmtNavigationSuiteScope].
  * @param windowAdaptiveInfo The window adaptive info.
  * @param content The app content inside the scaffold.
  */
 @Composable
-fun HyaNavigationSuiteScaffold(
-    navigationSuiteItems: HyaNavigationSuiteScope.() -> Unit,
+fun KmtNavigationSuiteScaffold(
+    navigationSuiteItems: KmtNavigationSuiteScope.() -> Unit,
     modifier: Modifier = Modifier,
     layoutType: NavigationSuiteType,
     content: @Composable () -> Unit,
@@ -195,32 +195,32 @@ fun HyaNavigationSuiteScaffold(
         NavigationSuiteItemColors(
             navigationBarItemColors =
             NavigationBarItemDefaults.colors(
-                selectedIconColor = HyaNavigationDefaults.navigationSelectedItemColor(),
-                unselectedIconColor = HyaNavigationDefaults.navigationContentColor(),
-                selectedTextColor = HyaNavigationDefaults.navigationSelectedItemColor(),
-                unselectedTextColor = HyaNavigationDefaults.navigationContentColor(),
-                indicatorColor = HyaNavigationDefaults.navigationIndicatorColor(),
+                selectedIconColor = KmtNavigationDefaults.navigationSelectedItemColor(),
+                unselectedIconColor = KmtNavigationDefaults.navigationContentColor(),
+                selectedTextColor = KmtNavigationDefaults.navigationSelectedItemColor(),
+                unselectedTextColor = KmtNavigationDefaults.navigationContentColor(),
+                indicatorColor = KmtNavigationDefaults.navigationIndicatorColor(),
             ),
             navigationRailItemColors =
             NavigationRailItemDefaults.colors(
-                selectedIconColor = HyaNavigationDefaults.navigationSelectedItemColor(),
-                unselectedIconColor = HyaNavigationDefaults.navigationContentColor(),
-                selectedTextColor = HyaNavigationDefaults.navigationSelectedItemColor(),
-                unselectedTextColor = HyaNavigationDefaults.navigationContentColor(),
-                indicatorColor = HyaNavigationDefaults.navigationIndicatorColor(),
+                selectedIconColor = KmtNavigationDefaults.navigationSelectedItemColor(),
+                unselectedIconColor = KmtNavigationDefaults.navigationContentColor(),
+                selectedTextColor = KmtNavigationDefaults.navigationSelectedItemColor(),
+                unselectedTextColor = KmtNavigationDefaults.navigationContentColor(),
+                indicatorColor = KmtNavigationDefaults.navigationIndicatorColor(),
             ),
             navigationDrawerItemColors =
             NavigationDrawerItemDefaults.colors(
-                selectedIconColor = HyaNavigationDefaults.navigationSelectedItemColor(),
-                unselectedIconColor = HyaNavigationDefaults.navigationContentColor(),
-                selectedTextColor = HyaNavigationDefaults.navigationSelectedItemColor(),
-                unselectedTextColor = HyaNavigationDefaults.navigationContentColor(),
+                selectedIconColor = KmtNavigationDefaults.navigationSelectedItemColor(),
+                unselectedIconColor = KmtNavigationDefaults.navigationContentColor(),
+                selectedTextColor = KmtNavigationDefaults.navigationSelectedItemColor(),
+                unselectedTextColor = KmtNavigationDefaults.navigationContentColor(),
             ),
         )
 
     NavigationSuiteScaffold(
         navigationSuiteItems = {
-            HyaNavigationSuiteScope(
+            KmtNavigationSuiteScope(
                 navigationSuiteScope = this,
                 navigationSuiteItemColors = navigationSuiteItemColors,
             ).run(navigationSuiteItems)
@@ -229,7 +229,7 @@ fun HyaNavigationSuiteScaffold(
         containerColor = Color.Transparent,
         navigationSuiteColors =
         NavigationSuiteDefaults.colors(
-            navigationBarContentColor = HyaNavigationDefaults.navigationContentColor(),
+            navigationBarContentColor = KmtNavigationDefaults.navigationContentColor(),
             navigationRailContainerColor = Color.Transparent,
         ),
         modifier = modifier,
@@ -241,7 +241,7 @@ fun HyaNavigationSuiteScaffold(
 /**
  * A wrapper around [NavigationSuiteScope] to declare navigation items.
  */
-class HyaNavigationSuiteScope internal constructor(
+class KmtNavigationSuiteScope internal constructor(
     private val navigationSuiteScope: NavigationSuiteScope,
     private val navigationSuiteItemColors: NavigationSuiteItemColors,
 ) {
@@ -270,25 +270,25 @@ class HyaNavigationSuiteScope internal constructor(
 
 @Preview
 @Composable
-fun HyaNavigationBarPreview() {
+fun KmtNavigationBarPreview() {
     val items = listOf("For you", "Saved", "Interests")
     val icons =
         listOf(
-            HyaIcons.UpcomingBorder,
-            HyaIcons.BookmarksBorder,
-            HyaIcons.Grid3x3,
+            KmtIcons.UpcomingBorder,
+            KmtIcons.BookmarksBorder,
+            KmtIcons.Grid3x3,
         )
     val selectedIcons =
         listOf(
-            HyaIcons.Upcoming,
-            HyaIcons.Bookmarks,
-            HyaIcons.Grid3x3,
+            KmtIcons.Upcoming,
+            KmtIcons.Bookmarks,
+            KmtIcons.Grid3x3,
         )
 
-    HyaTheme {
-        HyaNavigationBar {
+    KmtTheme {
+        KmtNavigationBar {
             items.forEachIndexed { index, item ->
-                HyaNavigationBarItem(
+                KmtNavigationBarItem(
                     icon = {
                         Icon(
                             imageVector = icons[index],
@@ -312,25 +312,25 @@ fun HyaNavigationBarPreview() {
 
 @Preview
 @Composable
-fun HyaNavigationRailPreview() {
+fun KmtNavigationRailPreview() {
     val items = listOf("For you", "Saved", "Interests")
     val icons =
         listOf(
-            HyaIcons.UpcomingBorder,
-            HyaIcons.BookmarksBorder,
-            HyaIcons.Grid3x3,
+            KmtIcons.UpcomingBorder,
+            KmtIcons.BookmarksBorder,
+            KmtIcons.Grid3x3,
         )
     val selectedIcons =
         listOf(
-            HyaIcons.Upcoming,
-            HyaIcons.Bookmarks,
-            HyaIcons.Grid3x3,
+            KmtIcons.Upcoming,
+            KmtIcons.Bookmarks,
+            KmtIcons.Grid3x3,
         )
 
-    HyaTheme {
-        HyaNavigationRail {
+    KmtTheme {
+        KmtNavigationRail {
             items.forEachIndexed { index, item ->
-                HyaNavigationRailItem(
+                KmtNavigationRailItem(
                     icon = {
                         Icon(
                             imageVector = icons[index],
@@ -355,7 +355,7 @@ fun HyaNavigationRailPreview() {
 /**
  * Now in Android navigation default values.
  */
-object HyaNavigationDefaults {
+object KmtNavigationDefaults {
     @Composable
     fun navigationContentColor() = MaterialTheme.colorScheme.onSurfaceVariant
 

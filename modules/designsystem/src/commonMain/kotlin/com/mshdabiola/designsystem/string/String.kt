@@ -18,12 +18,12 @@
 package com.mshdabiola.designsystem.string
 
 import androidx.compose.runtime.Composable
-import hydraulicapp.modules.designsystem.generated.resources.Res
-import hydraulicapp.modules.designsystem.generated.resources.app_name
-import hydraulicapp.modules.designsystem.generated.resources.modules_ui_cbt_exam_part
-import hydraulicapp.modules.designsystem.generated.resources.modules_ui_cbt_sections
-import hydraulicapp.modules.designsystem.generated.resources.modules_ui_cbt_subject
-import hydraulicapp.modules.designsystem.generated.resources.modules_ui_cbt_type
+import kotlin_multiplatform_template.modules.designsystem.generated.resources.Res
+import kotlin_multiplatform_template.modules.designsystem.generated.resources.app_name
+import kotlin_multiplatform_template.modules.designsystem.generated.resources.modules_ui_cbt_exam_part
+import kotlin_multiplatform_template.modules.designsystem.generated.resources.modules_ui_cbt_sections
+import kotlin_multiplatform_template.modules.designsystem.generated.resources.modules_ui_cbt_subject
+import kotlin_multiplatform_template.modules.designsystem.generated.resources.modules_ui_cbt_type
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.stringArrayResource
 import org.jetbrains.compose.resources.stringResource

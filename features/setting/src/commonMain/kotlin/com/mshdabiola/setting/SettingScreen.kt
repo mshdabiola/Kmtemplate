@@ -46,13 +46,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.mshdabiola.designsystem.icon.HyaIcons
+import com.mshdabiola.designsystem.icon.KmtIcons
 import com.mshdabiola.model.DarkThemeConfig
 import com.mshdabiola.model.ThemeBrand
 import com.mshdabiola.ui.Waiting
-import hydraulicapp.features.setting.generated.resources.Res
-import hydraulicapp.features.setting.generated.resources.daynight
-import hydraulicapp.features.setting.generated.resources.theme
+import kotlin_multiplatform_template.features.setting.generated.resources.Res
+import kotlin_multiplatform_template.features.setting.generated.resources.daynight
+import kotlin_multiplatform_template.features.setting.generated.resources.theme
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.stringArrayResource
 
@@ -134,7 +134,7 @@ internal fun MainContent(
             IconButton(
                 onClick = onBack,
             ) {
-                Icon(imageVector = HyaIcons.Cancel, "cancel")
+                Icon(imageVector = KmtIcons.Cancel, "cancel")
             }
         }
 

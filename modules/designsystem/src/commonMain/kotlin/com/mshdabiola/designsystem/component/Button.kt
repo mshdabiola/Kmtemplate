@@ -34,12 +34,12 @@ import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.mshdabiola.designsystem.icon.HyaIcons
-import com.mshdabiola.designsystem.theme.HyaTheme
+import com.mshdabiola.designsystem.icon.KmtIcons
+import com.mshdabiola.designsystem.theme.KmtTheme
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
-fun HyaButton(
+fun KmtButton(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
@@ -70,14 +70,14 @@ fun HyaButton(
  * @param leadingIcon The button leading icon content. Pass `null` here for no leading icon.
  */
 @Composable
-fun HyaButton(
+fun KmtButton(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
     text: @Composable () -> Unit,
     leadingIcon: @Composable (() -> Unit)? = null,
 ) {
-    HyaButton(
+    KmtButton(
         onClick = onClick,
         modifier = modifier,
         enabled = enabled,
@@ -88,7 +88,7 @@ fun HyaButton(
             ButtonDefaults.ContentPadding
         },
     ) {
-        HyaButtonContent(
+        KmtButtonContent(
             text = text,
             leadingIcon = leadingIcon,
         )
@@ -107,7 +107,7 @@ fun HyaButton(
  * @param content The button content.
  */
 @Composable
-fun HyaOutlinedButton(
+fun KmtOutlinedButton(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
@@ -124,13 +124,13 @@ fun HyaOutlinedButton(
         ),
         border =
         BorderStroke(
-            width = HyaButtonDefaults.OutlinedButtonBorderWidth,
+            width = KmtButtonDefaults.OutlinedButtonBorderWidth,
             color =
             if (enabled) {
                 MaterialTheme.colorScheme.outline
             } else {
                 MaterialTheme.colorScheme.onSurface.copy(
-                    alpha = HyaButtonDefaults.DISABLED_OUTLINED_BUTTON_BORDER_ALPHA,
+                    alpha = KmtButtonDefaults.DISABLED_OUTLINED_BUTTON_BORDER_ALPHA,
                 )
             },
         ),
@@ -150,14 +150,14 @@ fun HyaOutlinedButton(
  * @param leadingIcon The button leading icon content. Pass `null` here for no leading icon.
  */
 @Composable
-fun HyaOutlinedButton(
+fun KmtOutlinedButton(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
     text: @Composable () -> Unit,
     leadingIcon: @Composable (() -> Unit)? = null,
 ) {
-    HyaOutlinedButton(
+    KmtOutlinedButton(
         onClick = onClick,
         modifier = modifier,
         enabled = enabled,
@@ -168,7 +168,7 @@ fun HyaOutlinedButton(
             ButtonDefaults.ContentPadding
         },
     ) {
-        HyaButtonContent(
+        KmtButtonContent(
             text = text,
             leadingIcon = leadingIcon,
         )
@@ -185,7 +185,7 @@ fun HyaOutlinedButton(
  * @param content The button content.
  */
 @Composable
-fun HyaTextButton(
+fun KmtTextButton(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
@@ -214,19 +214,19 @@ fun HyaTextButton(
  * @param leadingIcon The button leading icon content. Pass `null` here for no leading icon.
  */
 @Composable
-fun HyaTextButton(
+fun KmtTextButton(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
     text: @Composable () -> Unit,
     leadingIcon: @Composable (() -> Unit)? = null,
 ) {
-    HyaTextButton(
+    KmtTextButton(
         onClick = onClick,
         modifier = modifier,
         enabled = enabled,
     ) {
-        HyaButtonContent(
+        KmtButtonContent(
             text = text,
             leadingIcon = leadingIcon,
         )
@@ -240,7 +240,7 @@ fun HyaTextButton(
  * @param leadingIcon The button leading icon content. Default is `null` for no leading icon.Ï
  */
 @Composable
-private fun HyaButtonContent(
+private fun KmtButtonContent(
     text: @Composable () -> Unit,
     leadingIcon: @Composable (() -> Unit)? = null,
 ) {
@@ -266,33 +266,33 @@ private fun HyaButtonContent(
 
 @Preview
 @Composable
-fun HyaButtonPreview() {
-    HyaTheme {
-        HyaBackground(modifier = Modifier.size(150.dp, 50.dp)) {
-            HyaButton(onClick = {}, text = { Text("Test button") })
+fun KmtButtonPreview() {
+    KmtTheme {
+        KmtBackground(modifier = Modifier.size(150.dp, 50.dp)) {
+            KmtButton(onClick = {}, text = { Text("Test button") })
         }
     }
 }
 
 @Preview
 @Composable
-fun HyaOutlinedButtonPreview() {
-    HyaTheme {
-        HyaBackground(modifier = Modifier.size(150.dp, 50.dp)) {
-            HyaOutlinedButton(onClick = {}, text = { Text("Test button") })
+fun KmtOutlinedButtonPreview() {
+    KmtTheme {
+        KmtBackground(modifier = Modifier.size(150.dp, 50.dp)) {
+            KmtOutlinedButton(onClick = {}, text = { Text("Test button") })
         }
     }
 }
 
 @Preview
 @Composable
-fun HyaButtonLeadingIconPreview() {
-    HyaTheme {
-        HyaBackground(modifier = Modifier.size(150.dp, 50.dp)) {
-            HyaButton(
+fun KmtButtonLeadingIconPreview() {
+    KmtTheme {
+        KmtBackground(modifier = Modifier.size(150.dp, 50.dp)) {
+            KmtButton(
                 onClick = {},
                 text = { Text("Test button") },
-                leadingIcon = { Icon(imageVector = HyaIcons.Add, contentDescription = null) },
+                leadingIcon = { Icon(imageVector = KmtIcons.Add, contentDescription = null) },
             )
         }
     }
@@ -301,7 +301,7 @@ fun HyaButtonLeadingIconPreview() {
 /**
  * Now in Android button default values.
  */
-object HyaButtonDefaults {
+object KmtButtonDefaults {
     // OutlinedButton border color doesn't respect disabled state by default
     const val DISABLED_OUTLINED_BUTTON_BORDER_ALPHA = 0.12f
 
