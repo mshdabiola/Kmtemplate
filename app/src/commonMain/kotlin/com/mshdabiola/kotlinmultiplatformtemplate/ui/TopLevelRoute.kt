@@ -15,10 +15,10 @@
  *
  * SPDX-License-Identifier: AGPL-3.0-only
  */
-package com.mshdabiola.hydraulicapp.ui
+package com.mshdabiola.kotlinmultiplatformtemplate.ui
 
 import androidx.compose.ui.graphics.vector.ImageVector
-import com.mshdabiola.designsystem.icon.HyaIcons
+import com.mshdabiola.designsystem.icon.KmtIcons
 import com.mshdabiola.main.navigation.Main
 import com.mshdabiola.setting.navigation.Setting
 
@@ -26,13 +26,13 @@ data class TopLevelRoute<T : Any>(val route: T, val icon: ImageVector)
 
 val TOP_LEVEL_ROUTES =
     listOf(
-        TopLevelRoute(route = Main, icon = HyaIcons.Domain),
-        TopLevelRoute(route = Unit, icon = HyaIcons.Person),
-        TopLevelRoute(route = Unit, icon = HyaIcons.Stairs),
+        TopLevelRoute(route = Main, icon = KmtIcons.Domain),
+        TopLevelRoute(route = Unit, icon = KmtIcons.Person),
+        TopLevelRoute(route = Unit, icon = KmtIcons.Stairs),
     )
 
 val SETTING_LEVEL_ROUTES =
     listOf(
-        TopLevelRoute(route = Setting, icon = HyaIcons.Settings),
-        TopLevelRoute(route = Setting, icon = HyaIcons.Info),
+        TopLevelRoute(route = Setting, icon = KmtIcons.Settings),
+        TopLevelRoute(route = Setting, icon = KmtIcons.Info),
     )

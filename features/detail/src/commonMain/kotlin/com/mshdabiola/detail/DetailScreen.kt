@@ -34,9 +34,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.input.ImeAction
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.mshdabiola.designsystem.component.HyaTextField
-import com.mshdabiola.designsystem.component.HyaTopAppBar
-import com.mshdabiola.designsystem.icon.HyaIcons
+import com.mshdabiola.designsystem.component.KmtTextField
+import com.mshdabiola.designsystem.component.KmtTopAppBar
+import com.mshdabiola.designsystem.icon.KmtIcons
 import com.mshdabiola.ui.TrackScreenViewEvent
 import com.mshdabiola.ui.Waiting
 import kotlinx.coroutines.launch
@@ -128,16 +128,16 @@ internal fun MainContent(
                 animatedVisibilityScope = animatedContentScope,
             ),
         ) {
-            HyaTopAppBar(
+            KmtTopAppBar(
                 titleRes = "Note",
-                navigationIcon = HyaIcons.ArrowBack,
+                navigationIcon = KmtIcons.ArrowBack,
                 navigationIconContentDescription = "",
-                actionIcon = HyaIcons.Delete,
+                actionIcon = KmtIcons.Delete,
                 actionIconContentDescription = "delete",
                 onActionClick = { onDelete() },
                 onNavigationClick = { onBack() },
             )
-            HyaTextField(
+            KmtTextField(
                 modifier =
                 Modifier
                     .fillMaxWidth()
@@ -147,7 +147,7 @@ internal fun MainContent(
                 maxNum = TextFieldLineLimits.SingleLine,
                 imeAction = ImeAction.Next,
             )
-            HyaTextField(
+            KmtTextField(
                 modifier =
                 Modifier
                     .fillMaxWidth()

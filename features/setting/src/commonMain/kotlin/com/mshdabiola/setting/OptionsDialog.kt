@@ -29,7 +29,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.util.fastForEachIndexed
-import com.mshdabiola.designsystem.component.HyaTextButton
+import com.mshdabiola.designsystem.component.KmtTextButton
 
 @Composable
 fun OptionsDialog(
@@ -43,7 +43,7 @@ fun OptionsDialog(
         modifier = modifier,
         onDismissRequest = onDismiss,
         confirmButton = {
-            HyaTextButton(onClick = onDismiss) {
+            KmtTextButton(onClick = onDismiss) {
                 Text("Close")
             }
         },

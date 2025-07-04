@@ -31,13 +31,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.testTag
-import com.mshdabiola.designsystem.icon.HyaIcons
-import com.mshdabiola.designsystem.theme.HyaTheme
+import com.mshdabiola.designsystem.icon.KmtIcons
+import com.mshdabiola.designsystem.theme.KmtTheme
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HyaTopAppBar(
+fun KmtTopAppBar(
     titleRes: String,
     navigationIcon: ImageVector,
     navigationIconContentDescription: String,
@@ -69,20 +69,20 @@ fun HyaTopAppBar(
             }
         },
         colors = colors,
-        modifier = modifier.testTag("HyaTopAppBar"),
+        modifier = modifier.testTag("KmtTopAppBar"),
     )
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Preview
 @Composable
-internal fun HyaTopAppBarPreview() {
-    HyaTheme {
-        HyaTopAppBar(
+internal fun KmtTopAppBarPreview() {
+    KmtTheme {
+        KmtTopAppBar(
             titleRes = "Preview",
-            navigationIcon = HyaIcons.Search,
+            navigationIcon = KmtIcons.Search,
             navigationIconContentDescription = "Navigation icon",
-            actionIcon = HyaIcons.MoreVert,
+            actionIcon = KmtIcons.MoreVert,
             actionIconContentDescription = "Action icon",
         )
     }

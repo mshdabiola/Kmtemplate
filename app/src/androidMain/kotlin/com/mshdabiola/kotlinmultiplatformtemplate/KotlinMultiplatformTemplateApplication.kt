@@ -15,19 +15,19 @@
  *
  * SPDX-License-Identifier: AGPL-3.0-only
  */
-package com.mshdabiola.hydraulicapp
+package com.mshdabiola.kotlinmultiplatformtemplate
 
 import android.app.Application
 import co.touchlab.kermit.Logger
 import co.touchlab.kermit.koin.KermitKoinLogger
 import co.touchlab.kermit.loggerConfigInit
 import co.touchlab.kermit.platformLogWriter
-import com.mshdabiola.hydraulicapp.di.appModule
+import com.mshdabiola.kotlinmultiplatformtemplate.di.appModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 import org.koin.dsl.module
 
-class HydraulicApplication : Application() {
+class KotlinMultiplatformTemplateApplication : Application() {
     override fun onCreate() {
         super.onCreate()
 
@@ -47,7 +47,7 @@ class HydraulicApplication : Application() {
             logger(
                 KermitKoinLogger(Logger.withTag("koin")),
             )
-            androidContext(this@HydraulicApplication)
+            androidContext(this@KotlinMultiplatformTemplateApplication)
             modules(appModule, logModule)
         }
 

@@ -15,7 +15,7 @@
  *
  * SPDX-License-Identifier: AGPL-3.0-only
  */
-package com.mshdabiola.hydraulicapp
+package com.mshdabiola.kotlinmultiplatformtemplate
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -28,10 +28,10 @@ import androidx.compose.ui.window.ComposeViewport
 import co.touchlab.kermit.Logger
 import co.touchlab.kermit.loggerConfigInit
 import co.touchlab.kermit.platformLogWriter
-import com.mshdabiola.hydraulicapp.app.generated.resources.Res
-import com.mshdabiola.hydraulicapp.app.generated.resources.app_name
-import com.mshdabiola.hydraulicapp.di.appModule
-import com.mshdabiola.hydraulicapp.ui.HydraulicApp
+import com.mshdabiola.kotlinmultiplatformtemplate.app.generated.resources.Res
+import com.mshdabiola.kotlinmultiplatformtemplate.app.generated.resources.app_name
+import com.mshdabiola.kotlinmultiplatformtemplate.di.appModule
+import com.mshdabiola.kotlinmultiplatformtemplate.ui.KotlinMultiplatformTemplateApp
 import com.mshdabiola.ui.SplashScreen
 import kotlinx.browser.document
 import kotlinx.coroutines.delay
@@ -50,7 +50,7 @@ fun mainApp() {
             show.value = false
         }
         Box(Modifier.fillMaxSize()) {
-            HydraulicApp()
+            KotlinMultiplatformTemplateApp()
             if (show.value) {
                 SplashScreen(
                     appName = stringResource(Res.string.app_name),

@@ -1,4 +1,4 @@
-###  HydraulicApp Module Graph
+###  KotlinMultiplatformTemplate Module Graph
 
 ```mermaid
 %%{

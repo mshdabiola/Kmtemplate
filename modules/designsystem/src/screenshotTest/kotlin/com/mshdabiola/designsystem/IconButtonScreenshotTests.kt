@@ -20,8 +20,8 @@ package com.mshdabiola.designsystem
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
-import com.mshdabiola.designsystem.component.HyaIconToggleButton
-import com.mshdabiola.designsystem.icon.HyaIcons
+import com.mshdabiola.designsystem.component.KmtIconToggleButton
+import com.mshdabiola.designsystem.icon.KmtIcons
 import com.mshdabiola.testing.util.CaptureMultiTheme
 
 class IconButtonScreenshotTests {
@@ -30,18 +30,18 @@ class IconButtonScreenshotTests {
     @Composable
     fun ToggleButton() {
         CaptureMultiTheme {
-            HyaIconToggleButton(
+            KmtIconToggleButton(
                 checked = true,
                 onCheckedChange = { },
                 icon = {
                     Icon(
-                        imageVector = HyaIcons.BookmarkBorder,
+                        imageVector = KmtIcons.BookmarkBorder,
                         contentDescription = null,
                     )
                 },
                 checkedIcon = {
                     Icon(
-                        imageVector = HyaIcons.Bookmark,
+                        imageVector = KmtIcons.Bookmark,
                         contentDescription = null,
                     )
                 },
@@ -53,18 +53,18 @@ class IconButtonScreenshotTests {
     @Composable
     fun UnToggleButton() {
         CaptureMultiTheme {
-            HyaIconToggleButton(
+            KmtIconToggleButton(
                 checked = false,
                 onCheckedChange = { },
                 icon = {
                     Icon(
-                        imageVector = HyaIcons.BookmarkBorder,
+                        imageVector = KmtIcons.BookmarkBorder,
                         contentDescription = null,
                     )
                 },
                 checkedIcon = {
                     Icon(
-                        imageVector = HyaIcons.Bookmark,
+                        imageVector = KmtIcons.Bookmark,
                         contentDescription = null,
                     )
                 },

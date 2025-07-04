@@ -21,7 +21,7 @@ import com.android.tools.lint.client.api.Vendor
 import com.android.tools.lint.detector.api.CURRENT_API
 import com.google.samples.apps.nowinandroid.lint.designsystem.DesignSystemDetector
 
-class HyaIssueRegistry : IssueRegistry() {
+class KmtIssueRegistry : IssueRegistry() {
     override val issues =
         listOf(
             DesignSystemDetector.ISSUE,

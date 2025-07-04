@@ -31,7 +31,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.mshdabiola.designsystem.theme.HyaTheme
+import com.mshdabiola.designsystem.theme.KmtTheme
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 /**
@@ -45,7 +45,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
  * @param text The text label content.
  */
 @Composable
-fun HyaTab(
+fun KmtTab(
     selected: Boolean,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
@@ -62,7 +62,7 @@ fun HyaTab(
             ProvideTextStyle(
                 value = style,
                 content = {
-                    Box(modifier = Modifier.padding(top = HyaTabDefaults.TabTopPadding)) {
+                    Box(modifier = Modifier.padding(top = KmtTabDefaults.TabTopPadding)) {
                         text()
                     }
                 },
@@ -76,11 +76,11 @@ fun HyaTab(
  *
  * @param selectedTabIndex The index of the currently selected tab.
  * @param modifier Modifier to be applied to the tab row.
- * @param tabs The tabs inside this tab row. Typically this will be multiple [HyaTab]s. Each element
+ * @param tabs The tabs inside this tab row. Typically this will be multiple [KmtTab]s. Each element
  * inside this lambda will be measured and placed evenly across the row, each taking up equal space.
  */
 @Composable
-fun HyaTabRow(
+fun KmtTabRow(
     selectedTabIndex: Int,
     modifier: Modifier = Modifier,
     tabs: @Composable () -> Unit,
@@ -104,11 +104,11 @@ fun HyaTabRow(
 @Preview
 @Composable
 fun TabsPreview() {
-    HyaTheme {
+    KmtTheme {
         val titles = listOf("Topics", "People")
-        HyaTabRow(selectedTabIndex = 0) {
+        KmtTabRow(selectedTabIndex = 0) {
             titles.forEachIndexed { index, title ->
-                HyaTab(
+                KmtTab(
                     selected = index == 0,
                     onClick = { },
                     text = { Text(text = title) },
@@ -118,6 +118,6 @@ fun TabsPreview() {
     }
 }
 
-object HyaTabDefaults {
+object KmtTabDefaults {
     val TabTopPadding = 7.dp
 }

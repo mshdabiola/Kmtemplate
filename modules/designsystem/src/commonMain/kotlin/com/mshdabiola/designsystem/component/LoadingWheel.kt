@@ -48,12 +48,12 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
-import com.mshdabiola.designsystem.theme.HyaTheme
+import com.mshdabiola.designsystem.theme.KmtTheme
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
-fun HyaLoadingWheel(
+fun KmtLoadingWheel(
     contentDesc: String,
     modifier: Modifier = Modifier,
 ) {
@@ -140,7 +140,7 @@ fun HyaLoadingWheel(
 }
 
 @Composable
-fun HyaOverlayLoadingWheel(
+fun KmtOverlayLoadingWheel(
     contentDesc: String,
     modifier: Modifier = Modifier,
 ) {
@@ -152,7 +152,7 @@ fun HyaOverlayLoadingWheel(
         modifier
             .size(60.dp),
     ) {
-        HyaLoadingWheel(
+        KmtLoadingWheel(
             contentDesc = contentDesc,
         )
     }
@@ -160,20 +160,20 @@ fun HyaOverlayLoadingWheel(
 
 @Preview
 @Composable
-fun HyaLoadingWheelPreview() {
-    HyaTheme {
+fun KmtLoadingWheelPreview() {
+    KmtTheme {
         Surface {
-            HyaLoadingWheel(contentDesc = "LoadingWheel")
+            KmtLoadingWheel(contentDesc = "LoadingWheel")
         }
     }
 }
 
 @Preview
 @Composable
-fun HyaOverlayLoadingWheelPreview() {
-    HyaTheme {
+fun KmtOverlayLoadingWheelPreview() {
+    KmtTheme {
         Surface {
-            HyaOverlayLoadingWheel(contentDesc = "LoadingWheel")
+            KmtOverlayLoadingWheel(contentDesc = "LoadingWheel")
         }
     }
 }

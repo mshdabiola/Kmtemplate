@@ -15,7 +15,7 @@
  *
  * SPDX-License-Identifier: AGPL-3.0-only
  */
-package com.mshdabiola.hydraulicapp.ui
+package com.mshdabiola.kotlinmultiplatformtemplate.ui
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Column
@@ -54,18 +54,18 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.mshdabiola.analytics.AnalyticsHelper
 import com.mshdabiola.analytics.LocalAnalyticsHelper
-import com.mshdabiola.designsystem.component.HyaBackground
-import com.mshdabiola.designsystem.component.HyaGradientBackground
-import com.mshdabiola.designsystem.component.HyaTopAppBar
-import com.mshdabiola.designsystem.icon.HyaIcons
+import com.mshdabiola.designsystem.component.KmtBackground
+import com.mshdabiola.designsystem.component.KmtGradientBackground
+import com.mshdabiola.designsystem.component.KmtTopAppBar
+import com.mshdabiola.designsystem.icon.KmtIcons
 import com.mshdabiola.designsystem.theme.GradientColors
-import com.mshdabiola.designsystem.theme.HyaTheme
+import com.mshdabiola.designsystem.theme.KmtTheme
 import com.mshdabiola.designsystem.theme.LocalGradientColors
 import com.mshdabiola.detail.navigation.Detail
 import com.mshdabiola.detail.navigation.navigateToDetail
-import com.mshdabiola.hydraulicapp.MainActivityUiState
-import com.mshdabiola.hydraulicapp.MainAppViewModel
-import com.mshdabiola.hydraulicapp.navigation.HydraulicAppNavHost
+import com.mshdabiola.kotlinmultiplatformtemplate.MainActivityUiState
+import com.mshdabiola.kotlinmultiplatformtemplate.MainAppViewModel
+import com.mshdabiola.kotlinmultiplatformtemplate.navigation.KotlinMultiplatformTemplateAppNavHost
 import com.mshdabiola.model.DarkThemeConfig
 import com.mshdabiola.model.ThemeBrand
 import com.mshdabiola.setting.navigation.navigateToSetting
@@ -79,11 +79,11 @@ import org.koin.core.annotation.KoinExperimentalAPI
     ExperimentalMaterial3Api::class,
 )
 @Composable
-fun HydraulicApp() {
+fun KotlinMultiplatformTemplateApp() {
     val windowAdaptiveInfo = currentWindowAdaptiveInfo()
 
     val appState =
-        rememberHydraulicAppState(
+        rememberKotlinMultiplatformTemplateAppState(
             windowSizeClass = windowAdaptiveInfo.windowSizeClass,
         )
     val shouldShowGradientBackground = false
@@ -94,13 +94,13 @@ fun HydraulicApp() {
     val darkTheme = shouldUseDarkTheme(uiState)
 
     CompositionLocalProvider(LocalAnalyticsHelper provides analyticsHelper) {
-        HyaTheme(
+        KmtTheme(
             androidTheme = shouldUseAndroidTheme(uiState),
             darkTheme = darkTheme,
             disableDynamicTheming = shouldDisableDynamicTheming(uiState),
         ) {
-            HyaBackground {
-                HyaGradientBackground(
+            KmtBackground {
+                KmtGradientBackground(
                     gradientColors =
                     if (shouldShowGradientBackground) {
                         LocalGradientColors.current
@@ -134,11 +134,11 @@ fun HydraulicApp() {
                                 topBar = {
                                     if (appState.shouldShowTopBar) {
                                         if (appState.isMain) {
-                                            HyaTopAppBar(
+                                            KmtTopAppBar(
                                                 titleRes = "Note",
-                                                navigationIcon = HyaIcons.Person,
+                                                navigationIcon = KmtIcons.Person,
                                                 navigationIconContentDescription = "",
-                                                actionIcon = HyaIcons.Settings,
+                                                actionIcon = KmtIcons.Settings,
                                                 actionIconContentDescription = "se",
                                                 onActionClick = { appState.navController.navigateToSetting() },
                                             )
@@ -147,7 +147,7 @@ fun HydraulicApp() {
                                                 title = { Text("Setting") },
                                                 navigationIcon = {
                                                     IconButton(onClick = { appState.navController.popBackStack() }) {
-                                                        Icon(HyaIcons.ArrowBack, "back")
+                                                        Icon(KmtIcons.ArrowBack, "back")
                                                     }
                                                 },
                                             )
@@ -161,7 +161,7 @@ fun HydraulicApp() {
                                             text = { Text("Add Note") },
                                             icon = {
                                                 Icon(
-                                                    HyaIcons.Add,
+                                                    KmtIcons.Add,
                                                     contentDescription = "add",
                                                 )
                                             },
@@ -189,7 +189,7 @@ fun HydraulicApp() {
                                             WindowInsets.safeDrawing.only(WindowInsetsSides.Horizontal),
                                         ),
                                 ) {
-                                    HydraulicAppNavHost(
+                                    KotlinMultiplatformTemplateAppNavHost(
                                         appState = appState,
                                         onShowSnackbar = { message, action ->
                                             snackbarHostState.showSnackbar(

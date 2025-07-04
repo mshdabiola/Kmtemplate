@@ -23,18 +23,18 @@ import org.jetbrains.kotlin.com.intellij.lang.ASTNode
 import org.jetbrains.kotlin.psi.KtDotQualifiedExpression
 
 class PreferReceiverNameRule : Rule(
-    RuleId("hydraulicapp:prefer-receiver-name"),
+    RuleId("kotlinmultiplatformtemplate:prefer-receiver-name"),
     about =
     Rule.About(
         maintainer = "Your Name",
-        repositoryUrl = "https://github.com/mshdabiola/hydraulicapp",
-        issueTrackerUrl = "https://github.com/mshdabiola/hydraulicapp",
+        repositoryUrl = "https://github.com/mshdabiola/kotlinmultiplatformtemplate",
+        issueTrackerUrl = "https://github.com/mshdabiola/kotlinmultiplatformtemplate",
     ),
 ) {
     // Define the mapping of deprecated receiver names to preferred receiver names
     private val stringStringMap =
         mapOf(
-            "Icons" to "HyaIcons",
+            "Icons" to "KmtIcons",
         )
 
     override fun beforeVisitChildNodes(

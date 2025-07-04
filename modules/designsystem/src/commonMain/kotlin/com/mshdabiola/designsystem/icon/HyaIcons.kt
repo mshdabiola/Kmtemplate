@@ -43,7 +43,7 @@ import androidx.compose.material.icons.rounded.Stairs
 import androidx.compose.material.icons.rounded.Upcoming
 import androidx.compose.material.icons.rounded.ViewDay
 
-object HyaIcons {
+object KmtIcons {
     val Stairs = Icons.Rounded.Stairs
     val LocalLibrary = Icons.Rounded.LocalLibrary
     val Logout = Icons.AutoMirrored.Rounded.Logout

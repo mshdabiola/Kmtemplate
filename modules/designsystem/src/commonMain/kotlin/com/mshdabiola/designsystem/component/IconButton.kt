@@ -25,8 +25,8 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import com.mshdabiola.designsystem.icon.HyaIcons
-import com.mshdabiola.designsystem.theme.HyaTheme
+import com.mshdabiola.designsystem.icon.KmtIcons
+import com.mshdabiola.designsystem.theme.KmtTheme
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 /**
@@ -42,7 +42,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
  * @param checkedIcon The icon content to show when checked.
  */
 @Composable
-fun HyaIconToggleButton(
+fun KmtIconToggleButton(
     checked: Boolean,
     onCheckedChange: (Boolean) -> Unit,
     modifier: Modifier = Modifier,
@@ -64,7 +64,7 @@ fun HyaIconToggleButton(
             disabledContainerColor =
             if (checked) {
                 MaterialTheme.colorScheme.onBackground.copy(
-                    alpha = HyaIconButtonDefaults.DISABLED_ICON_BUTTON_CONTAINER_ALPHA,
+                    alpha = KmtIconButtonDefaults.DISABLED_ICON_BUTTON_CONTAINER_ALPHA,
                 )
             } else {
                 Color.Transparent
@@ -78,19 +78,19 @@ fun HyaIconToggleButton(
 @Preview
 @Composable
 fun IconButtonPreview() {
-    HyaTheme {
-        HyaIconToggleButton(
+    KmtTheme {
+        KmtIconToggleButton(
             checked = true,
             onCheckedChange = { },
             icon = {
                 Icon(
-                    imageVector = HyaIcons.BookmarkBorder,
+                    imageVector = KmtIcons.BookmarkBorder,
                     contentDescription = null,
                 )
             },
             checkedIcon = {
                 Icon(
-                    imageVector = HyaIcons.Bookmark,
+                    imageVector = KmtIcons.Bookmark,
                     contentDescription = null,
                 )
             },
@@ -101,19 +101,19 @@ fun IconButtonPreview() {
 @Preview
 @Composable
 fun IconButtonPreviewUnchecked() {
-    HyaTheme {
-        HyaIconToggleButton(
+    KmtTheme {
+        KmtIconToggleButton(
             checked = false,
             onCheckedChange = { },
             icon = {
                 Icon(
-                    imageVector = HyaIcons.BookmarkBorder,
+                    imageVector = KmtIcons.BookmarkBorder,
                     contentDescription = null,
                 )
             },
             checkedIcon = {
                 Icon(
-                    imageVector = HyaIcons.Bookmark,
+                    imageVector = KmtIcons.Bookmark,
                     contentDescription = null,
                 )
             },
@@ -124,7 +124,7 @@ fun IconButtonPreviewUnchecked() {
 /**
  * Now in Android icon button default values.
  */
-object HyaIconButtonDefaults {
+object KmtIconButtonDefaults {
     //  File bug
     // IconToggleButton disabled container alpha not exposed by IconButtonDefaults
     const val DISABLED_ICON_BUTTON_CONTAINER_ALPHA = 0.12f

@@ -23,8 +23,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.mshdabiola.model.DarkThemeConfig
 import com.mshdabiola.model.ThemeBrand
-import hydraulicapp.features.setting.generated.resources.Res
-import hydraulicapp.features.setting.generated.resources.theme
+import kotlinmultiplatformtemplate.features.setting.generated.resources.Res
+import kotlinmultiplatformtemplate.features.setting.generated.resources.theme
 import org.jetbrains.compose.resources.stringArrayResource
 
 @Preview

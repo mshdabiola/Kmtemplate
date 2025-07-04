@@ -1,7 +1,7 @@
 <resources>
 
 
-    <string name="app_name">HydraulicApp</string>
+    <string name="app_name">KotlinMultiplatformTemplate</string>
     <string name="add_image">Add New Images</string>
     <string name="main">Main</string>
 

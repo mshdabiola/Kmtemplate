@@ -15,7 +15,7 @@
  *
  * SPDX-License-Identifier: AGPL-3.0-only
  */
-package com.mshdabiola.hydraulicapp
+package com.mshdabiola.kotlinmultiplatformtemplate
 
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
@@ -24,17 +24,17 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.createGraph
 import androidx.window.core.layout.WindowSizeClass
-import com.mshdabiola.hydraulicapp.ui.HydraulicAppState
+import com.mshdabiola.kotlinmultiplatformtemplate.ui.KotlinMultiplatformTemplateAppState
 import kotlinx.coroutines.test.runTest
 import org.junit.Rule
 import org.junit.Test
 import kotlin.test.assertEquals
 
-class HydraulicAppStateTest {
+class KotlinMultiplatformTemplateAppStateTest {
     @get:Rule
     val composeTestRule = createComposeRule()
 
-    private lateinit var state: HydraulicAppState
+    private lateinit var state: KotlinMultiplatformTemplateAppState
 
     @Test
     fun currentDestination() =
@@ -53,7 +53,7 @@ class HydraulicAppStateTest {
                     }
                 state =
                     remember(navController) {
-                        HydraulicAppState(
+                        KotlinMultiplatformTemplateAppState(
                             navController = navController,
                             coroutineScope = backgroundScope,
                             WindowSizeClass.compute(456f, 456f),

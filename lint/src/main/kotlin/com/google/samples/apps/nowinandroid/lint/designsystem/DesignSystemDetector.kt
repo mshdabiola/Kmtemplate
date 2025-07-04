@@ -79,30 +79,30 @@ class DesignSystemDetector : Detector(), Detector.UastScanner {
         // instead of hardcoded names.
         val METHOD_NAMES =
             mapOf(
-                "MaterialTheme" to "HyaTheme",
-                "Button" to "HyaButton",
-                "OutlinedButton" to "HyaOutlinedButton",
-                "TextButton" to "HyaTextButton",
-                "FilterChip" to "HyaFilterChip",
-                "ElevatedFilterChip" to "HyaFilterChip",
-                "NavigationBar" to "HyaNavigationBar",
-                "NavigationBarItem" to "HyaNavigationBarItem",
-                "NavigationRail" to "HyaNavigationRail",
-                "NavigationRailItem" to "HyaNavigationRailItem",
-                "TabRow" to "HyaTabRow",
-                "Tab" to "HyaTab",
-                "IconToggleButton" to "HyaIconToggleButton",
-                "FilledIconToggleButton" to "HyaIconToggleButton",
-                "FilledTonalIconToggleButton" to "HyaIconToggleButton",
-                "OutlinedIconToggleButton" to "HyaIconToggleButton",
-                "CenterAlignedTopAppBar" to "HyaTopAppBar",
-                "SmallTopAppBar" to "HyaTopAppBar",
-                "MediumTopAppBar" to "HyaTopAppBar",
-                "LargeTopAppBar" to "HyaTopAppBar",
+                "MaterialTheme" to "KmtTheme",
+                "Button" to "KmtButton",
+                "OutlinedButton" to "KmtOutlinedButton",
+                "TextButton" to "KmtTextButton",
+                "FilterChip" to "KmtFilterChip",
+                "ElevatedFilterChip" to "KmtFilterChip",
+                "NavigationBar" to "KmtNavigationBar",
+                "NavigationBarItem" to "KmtNavigationBarItem",
+                "NavigationRail" to "KmtNavigationRail",
+                "NavigationRailItem" to "KmtNavigationRailItem",
+                "TabRow" to "KmtTabRow",
+                "Tab" to "KmtTab",
+                "IconToggleButton" to "KmtIconToggleButton",
+                "FilledIconToggleButton" to "KmtIconToggleButton",
+                "FilledTonalIconToggleButton" to "KmtIconToggleButton",
+                "OutlinedIconToggleButton" to "KmtIconToggleButton",
+                "CenterAlignedTopAppBar" to "KmtTopAppBar",
+                "SmallTopAppBar" to "KmtTopAppBar",
+                "MediumTopAppBar" to "KmtTopAppBar",
+                "LargeTopAppBar" to "KmtTopAppBar",
             )
         val RECEIVER_NAMES =
             mapOf(
-                "Icons" to "HyaIcons",
+                "Icons" to "KmtIcons",
             )
 
         fun reportIssue(

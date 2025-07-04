@@ -26,11 +26,11 @@ import androidx.compose.material3.TextButton
 import androidx.compose.material3.contentColorFor
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.mshdabiola.designsystem.theme.HyaTheme
+import com.mshdabiola.designsystem.theme.KmtTheme
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
-fun HyaTopicTag(
+fun KmtTopicTag(
     modifier: Modifier = Modifier,
     followed: Boolean,
     onClick: () -> Unit,
@@ -43,7 +43,7 @@ fun HyaTopicTag(
                 MaterialTheme.colorScheme.primaryContainer
             } else {
                 MaterialTheme.colorScheme.surfaceVariant.copy(
-                    alpha = HyaTagDefaults.UNFOLLOWED_TOPIC_TAG_CONTAINER_ALPHA,
+                    alpha = KmtTagDefaults.UNFOLLOWED_TOPIC_TAG_CONTAINER_ALPHA,
                 )
             }
         TextButton(
@@ -55,7 +55,7 @@ fun HyaTopicTag(
                 contentColor = contentColorFor(backgroundColor = containerColor),
                 disabledContainerColor =
                 MaterialTheme.colorScheme.onSurface.copy(
-                    alpha = HyaTagDefaults.DISABLED_TOPIC_TAG_CONTAINER_ALPHA,
+                    alpha = KmtTagDefaults.DISABLED_TOPIC_TAG_CONTAINER_ALPHA,
                 ),
             ),
         ) {
@@ -69,8 +69,8 @@ fun HyaTopicTag(
 @Preview
 @Composable
 fun TagPreview() {
-    HyaTheme {
-        HyaTopicTag(followed = true, onClick = {}) {
+    KmtTheme {
+        KmtTopicTag(followed = true, onClick = {}) {
             Text("Topic".uppercase())
         }
     }
@@ -79,7 +79,7 @@ fun TagPreview() {
 /**
  * Now in Android tag default values.
  */
-object HyaTagDefaults {
+object KmtTagDefaults {
     const val UNFOLLOWED_TOPIC_TAG_CONTAINER_ALPHA = 0.5f
 
     // TOD: File bug

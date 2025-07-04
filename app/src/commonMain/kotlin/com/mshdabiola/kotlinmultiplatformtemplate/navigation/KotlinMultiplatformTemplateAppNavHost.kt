@@ -15,7 +15,7 @@
  *
  * SPDX-License-Identifier: AGPL-3.0-only
  */
-package com.mshdabiola.hydraulicapp.navigation
+package com.mshdabiola.kotlinmultiplatformtemplate.navigation
 
 import androidx.compose.animation.ExperimentalSharedTransitionApi
 import androidx.compose.animation.SharedTransitionLayout
@@ -25,15 +25,15 @@ import androidx.navigation.compose.NavHost
 import com.mshdabiola.detail.navigation.Detail
 import com.mshdabiola.detail.navigation.detailScreen
 import com.mshdabiola.detail.navigation.navigateToDetail
-import com.mshdabiola.hydraulicapp.ui.HydraulicAppState
+import com.mshdabiola.kotlinmultiplatformtemplate.ui.KotlinMultiplatformTemplateAppState
 import com.mshdabiola.main.navigation.Main
 import com.mshdabiola.main.navigation.mainScreen
 import com.mshdabiola.setting.navigation.settingScreen
 
 @OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
-fun HydraulicAppNavHost(
-    appState: HydraulicAppState,
+fun KotlinMultiplatformTemplateAppNavHost(
+    appState: KotlinMultiplatformTemplateAppState,
     onShowSnackbar: suspend (String, String?) -> Boolean = { _, _ -> false },
     modifier: Modifier = Modifier,
 ) {

@@ -15,22 +15,18 @@
  *
  * SPDX-License-Identifier: AGPL-3.0-only
  */
-package com.mshdabiola.hydraulicapp
+package com.mshdabiola.kotlinmultiplatformtemplate.di
 
-import co.touchlab.kermit.DefaultFormatter
-import co.touchlab.kermit.LogWriter
-import co.touchlab.kermit.Message
-import co.touchlab.kermit.Severity
-import co.touchlab.kermit.Tag
+import com.mshdabiola.data.di.dataModule
+import com.mshdabiola.detail.detailModule
+import com.mshdabiola.kotlinmultiplatformtemplate.MainAppViewModel
+import com.mshdabiola.main.mainModule
+import com.mshdabiola.setting.settingModule
+import org.koin.core.module.dsl.viewModel
+import org.koin.dsl.module
 
-class Writer() : LogWriter() {
-    override fun log(
-        severity: Severity,
-        message: String,
-        tag: String,
-        throwable: Throwable?,
-    ) {
-        val messageStr = DefaultFormatter.formatMessage(severity, Tag(tag), Message(message))
-        println(messageStr)
+val appModule =
+    module {
+        includes(dataModule, detailModule, mainModule, settingModule)
+        viewModel { MainAppViewModel(get()) }
     }
-}

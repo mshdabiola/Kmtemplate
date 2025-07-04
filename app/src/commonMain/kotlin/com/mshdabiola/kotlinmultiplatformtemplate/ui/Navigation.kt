@@ -15,7 +15,7 @@
  *
  * SPDX-License-Identifier: AGPL-3.0-only
  */
-package com.mshdabiola.hydraulicapp.ui
+package com.mshdabiola.kotlinmultiplatformtemplate.ui
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -42,15 +42,15 @@ import androidx.navigation.NavController
 import androidx.navigation.NavDestination.Companion.hasRoute
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.navOptions
-import com.mshdabiola.designsystem.component.HyaNavigationBar
-import com.mshdabiola.designsystem.component.HyaNavigationBarItem
-import com.mshdabiola.designsystem.component.HyaNavigationRail
-import com.mshdabiola.designsystem.component.HyaNavigationRailItem
-import com.mshdabiola.designsystem.icon.HyaIcons
-import com.mshdabiola.hydraulicapp.app.generated.resources.Res
-import com.mshdabiola.hydraulicapp.app.generated.resources.app_name
-import com.mshdabiola.hydraulicapp.app.generated.resources.main_navigator
-import com.mshdabiola.hydraulicapp.app.generated.resources.setting_navigator
+import com.mshdabiola.designsystem.component.KmtNavigationBar
+import com.mshdabiola.designsystem.component.KmtNavigationBarItem
+import com.mshdabiola.designsystem.component.KmtNavigationRail
+import com.mshdabiola.designsystem.component.KmtNavigationRailItem
+import com.mshdabiola.designsystem.icon.KmtIcons
+import com.mshdabiola.kotlinmultiplatformtemplate.app.generated.resources.Res
+import com.mshdabiola.kotlinmultiplatformtemplate.app.generated.resources.app_name
+import com.mshdabiola.kotlinmultiplatformtemplate.app.generated.resources.main_navigator
+import com.mshdabiola.kotlinmultiplatformtemplate.app.generated.resources.setting_navigator
 import com.mshdabiola.ui.ProfileCard
 import org.jetbrains.compose.resources.stringArrayResource
 import org.jetbrains.compose.resources.stringResource
@@ -94,7 +94,7 @@ fun CommonNavigation(
                 .verticalScroll(state = rememberScrollState()),
         ) {
             Row(verticalAlignment = Alignment.CenterVertically) {
-                Icon(HyaIcons.LocalLibrary, "Logo")
+                Icon(KmtIcons.LocalLibrary, "Logo")
                 Text(
                     stringResource(Res.string.app_name),
                     style = MaterialTheme.typography.headlineSmall,
@@ -194,8 +194,8 @@ fun CommonRail(
                 "About",
             )
         }
-    print("main string ${mainArray.joinToString()}")
-    HyaNavigationRail(modifier) {
+
+    KmtNavigationRail(modifier) {
         Column(
             verticalArrangement = Arrangement.SpaceBetween,
             horizontalAlignment = Alignment.CenterHorizontally,
@@ -204,7 +204,7 @@ fun CommonRail(
                 .padding(8.dp)
                 .verticalScroll(state = rememberScrollState()),
         ) {
-            Icon(HyaIcons.LocalLibrary, "Logo")
+            Icon(KmtIcons.LocalLibrary, "Logo")
 
             Spacer(Modifier.height(32.dp))
 
@@ -215,7 +215,7 @@ fun CommonRail(
                 Text("Main")
                 TOP_LEVEL_ROUTES
                     .forEachIndexed { index, navigator ->
-                        HyaNavigationRailItem(
+                        KmtNavigationRailItem(
                             selected =
                             navController
                                 .currentBackStackEntryAsState()
@@ -243,7 +243,7 @@ fun CommonRail(
             ) {
                 SETTING_LEVEL_ROUTES
                     .forEachIndexed { index, navigator ->
-                        HyaNavigationRailItem(
+                        KmtNavigationRailItem(
                             selected =
                             navController
                                 .currentBackStackEntryAsState()
@@ -301,11 +301,11 @@ fun CommonBar(
                 "About",
             )
         }
-    print("main string ${mainArray.joinToString()}")
-    HyaNavigationBar(modifier) {
+
+    KmtNavigationBar(modifier) {
         TOP_LEVEL_ROUTES
             .forEachIndexed { index, navigator ->
-                HyaNavigationBarItem(
+                KmtNavigationBarItem(
                     selected =
                     navController
                         .currentBackStackEntryAsState()
