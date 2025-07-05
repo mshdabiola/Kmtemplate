@@ -34,7 +34,7 @@ import com.google.firebase.Firebase
 import com.google.firebase.messaging.FirebaseMessaging
 import com.google.firebase.remoteconfig.remoteConfig
 import com.google.firebase.remoteconfig.remoteConfigSettings
-import com.mshdabiola.kotlinmultiplatformtemplate.ui.KotlinMultiplatformTemplate
+import com.mshdabiola.kotlinmultiplatformtemplate.ui.KotlinMultiplatformTemplateApp
 import com.mshdabiola.kotlinmultiplatformtemplate.ui.shouldUseDarkTheme
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.onEach
@@ -147,7 +147,7 @@ class MainActivity : ComponentActivity() {
                 onDispose {}
             }
 
-            KotlinMultiplatformTemplate()
+           KotlinMultiplatformTemplateApp()
         }
     }
 }
