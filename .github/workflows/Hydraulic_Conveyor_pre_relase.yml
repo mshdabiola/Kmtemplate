@@ -34,7 +34,7 @@ jobs:
         env:
           TOKEN: ${{ secrets.TOKEN }}
         with:
-          command: app
+          command: make app
           signing_key: ${{ secrets.SIGNING_KEY }}
           extra_flags: -f ci.conveyor.conf
           agree_to_license: 1
