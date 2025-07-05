@@ -147,7 +147,7 @@ class MainActivity : ComponentActivity() {
                 onDispose {}
             }
 
-           KotlinMultiplatformTemplateApp()
+            KotlinMultiplatformTemplateApp()
         }
     }
 }
