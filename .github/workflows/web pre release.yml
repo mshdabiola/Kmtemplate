@@ -1,0 +1,38 @@
+name: PreRelease Web CI
+
+  on:
+  push:
+    tags:
+      - '[0-9]+.[0-9]+.[0-9]+-*'
+
+permissions:
+  contents: write
+jobs:
+  build:
+
+    runs-on: ubuntu-22.04
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version: 21
+
+      - name: kotlinUpgradeYarnLock
+        run: ./gradlew kotlinUpgradeYarnLock
+
+
+      - name: Build web app
+        run: ./gradlew wasmJsBrowserDistribution
+
+      # If main branch update, deploy to gh-pages
+      - name: Deploy
+        #        if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main'
+        uses: JamesIves/github-pages-deploy-action@v4.7.3
+        with:
+          GITHUB_TOKEN: ${{ secrets.TOKEN }}
+          BRANCH: prerelease-web # The branch the action should deploy to.
+          FOLDER: app/build/dist/wasmJs/productionExecutable # The folder the action should deploy.
+          CLEAN: true # Automatically remove deleted files from the deploy branch

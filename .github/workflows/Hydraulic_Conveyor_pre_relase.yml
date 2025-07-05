@@ -1,4 +1,4 @@
-name: Release Windows and Linux Hydraulic Conveyor
+name: PreRelease Windows and Linux Hydraulic Conveyor
 
 on:
   push:

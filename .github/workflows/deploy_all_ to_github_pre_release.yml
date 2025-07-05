@@ -1,4 +1,4 @@
-name: Deploy All Android to github Pre Release
+name:  Pre Release Deploy All Android to github
 
 on:
   push:
@@ -38,19 +38,19 @@ jobs:
           build-scan-terms-of-use-url: "https://gradle.com/terms-of-service"
           build-scan-terms-of-use-agree: "yes"
 
-      # - name: Build  google play release variant apk
-      #   run: ./gradlew assembleGooglePlayRelease
+      - name: Build  google play release variant apk
+        run: ./gradlew assembleGooglePlayRelease
 
-      # - name: Sign google play APK
-      #   uses: r0adkll/sign-android-release@v1.0.4
-      #   with:
-      #     releaseDirectory: app/build/outputs/apk/googlePlay/release
-      #     signingKeyBase64: ${{ secrets.SIGNING_KEY2 }}
-      #     alias: ${{ secrets.ALIAS }}
-      #     keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
-      #     keyPassword: ${{ secrets.KEY_PASSWORD }}
-      #   env:
-      #     BUILD_TOOLS_VERSION: "34.0.0"
+      - name: Sign google play APK
+        uses: r0adkll/sign-android-release@v1.0.4
+        with:
+          releaseDirectory: app/build/outputs/apk/googlePlay/release
+          signingKeyBase64: ${{ secrets.SIGNING_KEY2 }}
+          alias: ${{ secrets.ALIAS }}
+          keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
+          keyPassword: ${{ secrets.KEY_PASSWORD }}
+        env:
+          BUILD_TOOLS_VERSION: "34.0.0"
       
           # sed -i -e '/with(target) {/,/^        }/d' -e '/CrashlyticsExtension/d' build-logic/convention/src/main/kotlin/AndroidApplicationFirebaseConventionPlugin.kt
 
