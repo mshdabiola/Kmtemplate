@@ -84,7 +84,7 @@ jobs:
           disable_globbing: true
           commit_message: "🤖 Apply Spotless formatting"
 
-      - uses: github/codeql-action/upload-sarif@v2
+      - uses: github/codeql-action/upload-sarif@v3.29.2
         if: success() || failure()
         with:
           sarif_file: build/detekt-merged.sarif
@@ -189,7 +189,7 @@ jobs:
       - name: Check lint
         run: ./gradlew lintFossReliantRelease
 
-      - uses: github/codeql-action/upload-sarif@v2
+      - uses: github/codeql-action/upload-sarif@v3.29.2
         if: success() || failure()
         with:
           sarif_file: build/lint-merged.sarif
