@@ -1,9 +1,11 @@
 name: Deploy All Android to github Pre Release
 
-on:
-  push:
-    tags:
-      - '[0-9]+.[0-9]+.[0-9]+-*'
+# on:
+#   push:
+#     tags:
+#       - '[0-9]+.[0-9]+.[0-9]+-*'
+on: workflow_dispatch
+
 
 permissions:
   contents: read
@@ -72,12 +74,12 @@ jobs:
           BUILD_TOOLS_VERSION: "34.0.0"
 
       # 4
-      - name: Draft Release
-        uses: ncipollo/release-action@v1.16.0
-        with:
-          allowUpdates: true
-          artifacts: "app/build/outputs/apk/**/**/**/*.apk,app/build/outputs/mapping/**/**/*.txt"
-          token: ${{ secrets.TOKEN }}
-          generateReleaseNotes: true
-          bodyFile: distribution/whatsnew/whatsnew-en-US
-          prerelease: true
+      # - name: Draft Release
+      #   uses: ncipollo/release-action@v1.16.0
+      #   with:
+      #     allowUpdates: true
+      #     artifacts: "app/build/outputs/apk/**/**/**/*.apk,app/build/outputs/mapping/**/**/*.txt"
+      #     token: ${{ secrets.TOKEN }}
+      #     generateReleaseNotes: true
+      #     bodyFile: distribution/whatsnew/whatsnew-en-US
+      #     prerelease: true

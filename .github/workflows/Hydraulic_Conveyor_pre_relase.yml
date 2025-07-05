@@ -1,9 +1,11 @@
 name: Release Windows and Linux Hydraulic Conveyor
 
-on:
-  push:
-    tags:
-      - 'v[0-9]+.[0-9]+.[0-9]+'
+# on:
+#   push:
+#     tags:
+#       - 'v[0-9]+.[0-9]+.[0-9]+'
+on: workflow_dispatch
+
 
 jobs:
   build-and-release:
