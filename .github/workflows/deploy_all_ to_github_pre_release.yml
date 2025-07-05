@@ -54,20 +54,10 @@ jobs:
 
       - name: Remove Firebase References
         run: |
-          sed -i -e '/maven(url = "https:\/\/maven.pkg.jetbrains.space/d' -e '/maven(url = "https:\/\/androidx.dev\/storage\/compose-compiler/d' settings.gradle.kts
-          sed -i '1,$d' build-logic/convention/src/main/kotlin/AndroidApplicationFirebaseConventionPlugin.kt
-          sed -i '1i\
-                import org.gradle.api.Plugin\
-                import org.gradle.api.Project\
-                \
-                class AndroidApplicationFirebaseConventionPlugin : Plugin<Project> {\
-                override fun apply(target: Project) {\
-                \
-                }\
-                }
-              ' build-logic/convention/src/main/kotlin/AndroidApplicationFirebaseConventionPlugin.kt
-          sed -i -e '/libs.firebase/d' build-logic/convention/build.gradle.kts
-          sed -i -e '/alias(libs.plugins.firebase./d' build.gradle.kts
+         sed -i -e '/maven(url = "https:\/\/maven.pkg.jetbrains.space/d' -e '/maven(url = "https:\/\/androidx.dev\/storage\/compose-compiler/d' settings.gradle.kts 
+         sed -i -e '/with(target) {/,/^ }/d' -e '/CrashlyticsExtension/d' build-logic/convention/src/main/kotlin/AndroidApplicationFirebaseConventionPlugin.kt 
+         sed -i -e '/libs.firebase/d' build-logic/convention/build.gradle.kts 
+         sed -i -e '/alias(libs.plugins.firebase./d' build.gradle.kts
 
       - name: Build foss reliant release variant apk
         run: ./gradlew assembleFossReliantRelease
