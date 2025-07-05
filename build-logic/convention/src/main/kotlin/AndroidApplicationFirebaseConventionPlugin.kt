@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 import com.android.build.api.variant.ApplicationAndroidComponentsExtension
-//import com.google.firebase.crashlytics.buildtools.gradle.CrashlyticsExtension
+import com.google.firebase.crashlytics.buildtools.gradle.CrashlyticsExtension
 import com.google.firebase.perf.plugin.FirebasePerfExtension
 import org.gradle.api.Plugin
 import org.gradle.api.Project
