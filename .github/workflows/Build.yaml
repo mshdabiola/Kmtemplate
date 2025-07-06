@@ -72,12 +72,21 @@ jobs:
 
       - name: Apply Spotless if check failed and it's a PR
         id: spotless_apply
+        continue-on-error: true
+        # Runs if previous job failed
+        # This will apply Spotless formatting to the codebase if the check fails
+        # and the event is a pull request.
+        # This is useful for ensuring that the code is always formatted correctly
+        # before merging the pull request.
         if: steps.spotless_check.outcome == 'failure' && github.event_name == 'pull_request'
         run: |
           ./gradlew spotlessApply :build-logic:convention:spotlessApply
 
       - name: Push new Spotless Apply if available
         uses: stefanzweifel/git-auto-commit-action@v6.0.1
+        continue-on-error: true
+        # This step will push the changes made by the Spotless Apply step
+        # to the repository if the Spotless Apply step was successful.
         if: steps.spotless_apply.outcome == 'success'
         with:
           file_pattern: '**/*.kt **/*.kts **/*.java **/*.xml'
