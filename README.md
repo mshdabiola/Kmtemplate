@@ -100,7 +100,7 @@ This project follows Clean Architecture principles, ensuring a scalable, maintai
 The codebase is organized into multiple Gradle modules to improve maintainability, scalability, and reusability:
 
 - :app – Main application module for Android, JVM, and WASM.
-- :modules: – Core features and shared logic, such as data, domain, model, analytics, designsystem, and ui.
+- :modules: – Core features and shared logic, such as analytics, data, database, datastore, designsystem, domain, model, network, testing, and ui.
 - :features: – Feature-specific modules (e.g., main, detail, setting) for isolated development and testing.
 - :benchmarks: – Performance and baseline profiling.
 - :build-logic: – Centralized Gradle plugin and build configuration management.
