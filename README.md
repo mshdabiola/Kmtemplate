@@ -29,7 +29,6 @@
   </a>
 
 </p>
- 
 
 <div align="center">
   <img alt="badge-Android" src="https://img.shields.io/badge/Platform-Android-brightgreen"/>
@@ -50,7 +49,7 @@
 </p>
 
 
-<div align="center">
+<div align="center" style="display: flex; flex-direction: row; justify-content: center; gap: 16px;">
   <a href="https://play.google.com/store/apps/details?id=com.mshdabiola.kotlinmultiplatformtemplate">
     <img alt="Google Play" src="./fastlane/metadata/android/en-US/images/buttons/gplay.svg" height="60">
   </a>
@@ -97,7 +96,7 @@ The codebase is organized into multiple Gradle modules to improve maintainabilit
 - :features: – Feature-specific modules (e.g., main, detail, setting) for isolated development and testing.
 - :benchmarks: – Performance and baseline profiling.
 - :build-logic: – Centralized Gradle plugin and build configuration management.
-- :lint, :ktlint, :spotless: – Code quality and formatting tools, including custom rules for enforcing the design system.
+- :ktlint, :spotless: – Code quality and formatting tools, including custom rules for enforcing the design system.
 
 This modular approach enables independent development, easier testing, and faster build times, while supporting code sharing across all supported platforms.
 
@@ -142,7 +141,6 @@ See the app in action across all supported platforms:
   <img src="./fastlane/metadata/android/en-US/images/webScreenshots/1.png" width="200" />
    <img src="./fastlane/metadata/android/en-US/images/webScreenshots/2.png" width="200" />
     <img src="./fastlane/metadata/android/en-US/images/webScreenshots/3.png" width="200" />
-  
 </p>
 
 ---
@@ -325,7 +323,7 @@ You can also [follow me](https://github.com/mshdabiola) for updates and future p
     </picture>
   </a>
   <br/>
-  <img alt="Repobeats analytics image" src="https://repobeats.axiom.co/api/embed/a0893eb63066333a921a4197172ab150fe896a37.svg" />
+  <img alt="Repobeats analytics image" src="https://repobeats.axiom.co/api/embed/38e2708cee576cecfba6e0cba2b2cdb7b6954f93.svg" />
 </div>
 
 ---
