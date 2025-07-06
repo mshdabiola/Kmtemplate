@@ -50,17 +50,25 @@
 
 
 <div align="center" style="display: flex; flex-direction: row; justify-content: center; gap: 16px;">
-  <a href="https://play.google.com/store/apps/details?id=com.mshdabiola.kotlinmultiplatformtemplate">
-    <img alt="Google Play" src="./fastlane/metadata/android/en-US/images/buttons/gplay.svg" height="60">
+  <a href="https://play.google.com/store/apps/details?id=com.mshdabiola.kotlinmultiplatformtemplate" style="display:inline-block; margin:0 8px; text-decoration:none;">
+    <button style="display:inline-flex;align-items:center;padding:8px 18px;background:#4285F4;color:#fff;border:none;border-radius:6px;font-size:16px;font-weight:bold;cursor:pointer;gap:8px;">
+      <span style="font-size:20px;">📱</span> Google Play
+    </button>
   </a>
-  <a href="https://f-droid.org/packages/com.mshdabiola.kotlinmultiplatformtemplate">
-    <img alt="F-Droid" src="./fastlane/metadata/android/en-US/images/buttons/fdroid.svg" height="60"/>
+  <a href="https://f-droid.org/packages/com.mshdabiola.kotlinmultiplatformtemplate" style="display:inline-block; margin:0 8px; text-decoration:none;">
+    <button style="display:inline-flex;align-items:center;padding:8px 18px;background:#1976d2;color:#fff;border:none;border-radius:6px;font-size:16px;font-weight:bold;cursor:pointer;gap:8px;">
+      <span style="font-size:20px;">🤖</span> F-Droid
+    </button>
   </a>
-  <a href="https://github.com/mshdabiola/kotlinmultiplatformtemplate/releases/latest">
-    <img alt="GitHub" src="./fastlane/metadata/android/en-US/images/buttons/github.svg" height="60"/>
+  <a href="https://github.com/mshdabiola/kotlinmultiplatformtemplate/releases/latest" style="display:inline-block; margin:0 8px; text-decoration:none;">
+    <button style="display:inline-flex;align-items:center;padding:8px 18px;background:#24292f;color:#fff;border:none;border-radius:6px;font-size:16px;font-weight:bold;cursor:pointer;gap:8px;">
+      <span style="font-size:20px;">🐙</span> GitHub
+    </button>
   </a>
-  <a href="https://kotlinmultiplatformtemplate-desktop.onrender.com">
-    <img alt="Desktop Download" src="./fastlane/metadata/android/en-US/images/buttons/desktop.svg" height="60"/>
+  <a href="https://kotlinmultiplatformtemplate-desktop.onrender.com" style="display:inline-block; margin:0 8px; text-decoration:none;">
+    <button style="display:inline-flex;align-items:center;padding:8px 18px;background:#8e4e31;color:#fff;border:none;border-radius:6px;font-size:16px;font-weight:bold;cursor:pointer;gap:8px;">
+      <span style="font-size:20px;">🖥️</span> Desktop
+    </button>
   </a>
 </div>
 <br>
