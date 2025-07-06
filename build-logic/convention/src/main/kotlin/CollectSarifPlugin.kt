@@ -11,9 +11,10 @@ target.tasks.register(MERGE_LINT_TASK_NAME, SarifMergeTask::class.java) {
             outputSarifFile.set(target.layout.buildDirectory.file("lint-merged.sarif"))
         }
         }
-        target.tasks.register(MERGE_DETEKT_TASK_NAME, ReportMergeTask::class.java) {
+target.tasks.register(MERGE_DETEKT_TASK_NAME, SarifMergeTask::class.java) {
             group = JavaBasePlugin.VERIFICATION_GROUP
-            output.set(target.layout.buildDirectory.file("detekt-merged.sarif"))
+            outputSarifFile.set(target.layout.buildDirectory.file("detekt-merged.sarif"))
+        }
         }
     }
 
