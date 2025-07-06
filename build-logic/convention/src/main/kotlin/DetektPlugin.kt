@@ -37,14 +37,15 @@ class DetektPlugin : Plugin<Project> {
                 reports.sarif.required.set(true)
             }
 
-            rootProject.plugins.withId("appyx-collect-sarif") {
-                rootProject.tasks.named(
-                    CollectSarifPlugin.MERGE_DETEKT_TASK_NAME,
-                    ReportMergeTask::class.java,
-                ) {
-                    input.from(detektTask.map { it.sarifReportFile }.orNull)
-                    mustRunAfter(detektTask)
-                }
+rootProject.plugins.withId("appyx-collect-sarif") { // TODO: Use the correct registered plugin ID
+    rootProject.tasks.named(
+        CollectSarifPlugin.MERGE_DETEKT_TASK_NAME,
+        SarifMergeTask::class.java,
+    ) {
+        inputSarifFiles.from(detektTask.flatMap { it.sarifReportFile })
+        mustRunAfter(detektTask)
+    }
+}
             }
         }
 
