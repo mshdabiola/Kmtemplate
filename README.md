@@ -1,6 +1,3 @@
-<div align="center">
-
-
 <p align="center">
  <a>
   <img alt="Kotlin" src="https://img.shields.io/badge/Kotlin-Multiplatform-%237f52ff?logo=kotlin&style=for-the-badge"/>
@@ -31,123 +28,137 @@
       <img src="https://img.shields.io/github/v/release/mshdabiola/kotlinmultiplatformtemplate?color=purple&include_prereleases&logo=github&style=for-the-badge"/>
   </a>
 
-[//]: # (   <a href="https://play.google.com/store/apps/details?id=ru.tech.hydraulicshrinker">)
+</p>
+ 
 
-[//]: # (      <img src="https://img.shields.io/endpoint?color=purple&logo=google-play&style=for-the-badge&label=Play%20store&url=https%3A%2F%2Fplay.cuzi.workers.dev%2Fplay%3Fi%3Dru.tech.hydraulicshrinker%26l%3DAndroid%26m%3D%24version"/>)
+<div align="center">
+  <img alt="badge-Android" src="https://img.shields.io/badge/Platform-Android-brightgreen"/>
+  <!-- <img alt="badge-iOS" src="https://img.shields.io/badge/Platform-iOS-lightgray"/> -->
+  <img alt="badge-JVM" src="https://img.shields.io/badge/Platform-JVM-orange"/>
+  <img alt="badge-macOS" src="https://img.shields.io/badge/Platform-macOS-purple"/>
+  <img alt="badge-web" src="https://img.shields.io/badge/Platform-Web-blue"/>
+  <a href="https://codecov.io/github/mshdabiola/KotlinMultiplatformTemplate">
+    <img alt="codecov" src="https://codecov.io/github/mshdabiola/KotlinMultiplatformTemplate/graph/badge.svg?token=QEMUHWH4YW"/>
+  </a>
+</div>
 
-[//]: # (  </a>)
+#  Kotlin Multiplatform Template
 
-[//]: # (  <a href="https://f-droid.org/packages/ru.tech.hydraulicshrinker">)
 
-[//]: # (      <img src="https://img.shields.io/f-droid/v/ru.tech.hydraulicshrinker?color=purple&include_prereleases&logo=FDROID&style=for-the-badge"/>)
+<p align="center">
+  <img src="./fastlane/metadata/android/en-US/images/icon.png" width="200" />
 </p>
 
 
 <div align="center">
-    <a href="https://example.com"><img alt="Google Play" src="./fastlane/metadata/android/en-US/images/buttons/gplay.svg" height="60"></a>
-    <a href="https://f-droid.org/packages/ru.tech.hydraulicshrinker"><img alt="F-Droid" src="./fastlane/metadata/android/en-US/images/buttons/fdroid.svg" height="60"/></a>
-    <a href="https://github.com/mshdabiola/kotlinmultiplatformtemplate/releases/latest"><img alt="GitHub" src="./fastlane/metadata/android/en-US/images/buttons/github.svg" height="60"/></a>
-  <a href="https://kotlinmultiplatformtemplate-desktop.onrender.com"><img alt="Desktop Download" src="./fastlane/metadata/android/en-US/images/buttons/desktop.svg" height="60"/></a>
-    <a href="https://kotlinmultiplatformtemplate.onrender.com"><img alt="KotlinMultiplatformTemplate Online" src="./fastlane/metadata/android/en-US/images/buttons/online.svg" height="60"/></a>
-
-
+  <a href="https://play.google.com/store/apps/details?id=com.mshdabiola.kotlinmultiplatformtemplate">
+    <img alt="Google Play" src="./fastlane/metadata/android/en-US/images/buttons/gplay.svg" height="60">
+  </a>
+  <a href="https://f-droid.org/packages/com.mshdabiola.kotlinmultiplatformtemplate">
+    <img alt="F-Droid" src="./fastlane/metadata/android/en-US/images/buttons/fdroid.svg" height="60"/>
+  </a>
+  <a href="https://github.com/mshdabiola/kotlinmultiplatformtemplate/releases/latest">
+    <img alt="GitHub" src="./fastlane/metadata/android/en-US/images/buttons/github.svg" height="60"/>
+  </a>
+  <a href="https://kotlinmultiplatformtemplate-desktop.onrender.com">
+    <img alt="Desktop Download" src="./fastlane/metadata/android/en-US/images/buttons/desktop.svg" height="60"/>
+  </a>
 </div>
-
 <br>
-<img src="./fastlane/metadata/android/en-US/images/icon.png" width="40%"  alt=""/>
-</div>
-
-<div align="center">
-     <h1>KotlinMultiplatformTemplate Compose Multiplatform Template</h1>
-</div>
-
-<div style="text-align: center;">
-KotlinMultiplatformTemplate is a Compose Multiplatform template that uses a note app as an example and features a multi-module architecture.
-</div>
-
-
-## Screenshot
-
-### Phone
-
-<p style="text-align: center;">
-    <img src="./fastlane/metadata/android/en-US/images/phoneScreenshots/1.png" width="30%"  alt=""/>
-    <img src="./fastlane/metadata/android/en-US/images/phoneScreenshots/2.png" width="30%"  alt=""/>
-    <img src="./fastlane/metadata/android/en-US/images/phoneScreenshots/3.png" width="30%"  alt=""/>
-</p>
-
-### Desktop
-
-<p style="text-align: center;">
-    <img src="./fastlane/metadata/android/en-US/images/desktopScreenshots/1.png" width="30%"  alt=""/>
-    <img src="./fastlane/metadata/android/en-US/images/desktopScreenshots/2.png" width="30%"  alt=""/>
-    <img src="./fastlane/metadata/android/en-US/images/desktopScreenshots/3.png" width="30%"  alt=""/>
-</p>
-
-### Web
-
-<p style="text-align: center;">
-    <img src="./fastlane/metadata/android/en-US/images/webScreenshots/1.png" width="30%"  alt=""/>
-    <img src="./fastlane/metadata/android/en-US/images/webScreenshots/2.png" width="30%"  alt=""/>
-    <img src="./fastlane/metadata/android/en-US/images/webScreenshots/3.png" width="30%"  alt=""/>
-</p>
-
-## Features
-
-- Dark mode theme
-- Change theme
-
-  <summary>Available filters</summary>
   <br>
 
-# Tech stack & Open-source libraries
+Kotlin Multiplatform Template is a robust project starter designed with a modern multi-module architecture. It enables seamless code sharing and modular development across JVM, Android, and WASM platforms. The template leverages Kotlin Multiplatform to maximize code reuse, maintainability, and scalability, making it ideal for building cross-platform applications with clean separation of concerns and platform-specific optimizations.
 
-- Minimum SDK level 21
-
-- [Kotlin](https://kotlinlang.org/) based
-
-
-- [Dynamic Theme](https://github.com/mshdabiola/DynamicTheme) - library, which allows you to easily
-  implement custom color theming.
-
-- [Coroutines](https://github.com/Kotlin/kotlinx.coroutines) for asynchronous work.
-
-- [Flow](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/)
-  to emit values from data layer reactively.
-
-- [Koin](https://github.com/InsertKoinIO/koin) for dependency injection.
-
-- [Coil](https://github.com/coil-kt/coil) for loading images.
-
-- Jetpack
-
-    - [Compose](https://developer.android.com/jetpack/compose) - Modern Declarative UI style
-      framework based on composable functions.
-
-    - [Material You Kit](https://developer.android.com/jetpack/androidx/releases/compose-material3) -
-      Material 3 powerful UI components.
-
-    - [Room](https://developer.android.com/jetpack/androidx/releases/room) Constructs Database by providing an abstraction layer over SQLite to allow fluent database access.
-
-    - [Data Store](https://developer.android.com/jetpack/androidx/releases/datastore) - Store data
-      asynchronously, consistently, and transactionally.
-
-    - [Lifecycle](https://developer.android.com/jetpack/androidx/releases/lifecycle) - Observe
-      Android lifecycles and handle UI states upon the lifecycle changes.
-
-- [Turbine](https://github.com/cashapp/turbine) - A small testing library for kotlinx.coroutines Flow.
-
-- [Timber](https://github.com/JakeWharton/timber) - A logger with a small, extensible API.
-
-- [ksp](https://github.com/google/ksp): Kotlin Symbol Processing API.
-
-- Architecture
-    - MVVM Architecture (Compose - ViewModel - Model)
-    - Repository Pattern
-    - This project use android modularization. You can find full graph [FULLGRAPH](FULLGRAPH.md)
+- Multi-module architecture for clear separation of concerns and scalable codebase.
+- Shared business logic across JVM, Android, and WASM using Kotlin Multiplatform.
+- Platform-specific modules for optimized Android, JVM, and WASM implementations.
+- Android app supports two build types: **Google Play** and **FossReliant**.
+- Centralized build logic for plugins and configuration management.
+- Uses **Hydraulic Conveyor** to package desktop apps for Linux, Windows, and Mac.
+- Compose Multiplatform UI support for modern, declarative interfaces.
+- Easy integration of new modules and features.
+- Clean Architecture principles for maintainability and testability.
+- Ready for localization and code quality tools (Spotless, Detekt, Jacoco).
+- Code quality enforced with **Spotless**, **ktlint**, **detekt**, and custom ktlint rules for the design system.
 
 
-## Build
+## 🏗️ Architecture
+This project follows Clean Architecture principles, ensuring a scalable, maintainable, and testable codebase. The architecture separates concerns into distinct layers, promoting clear boundaries between business logic, data handling, and presentation. Shared logic is implemented in common modules, while platform-specific code is isolated for Android, JVM, and WASM targets.
+
+- Presentation Layer: UI and user interaction, built with Compose Multiplatform.
+- Domain Layer: Business logic, use cases, and interfaces.
+- Data Layer: Repositories, data sources, and models for local (Room, DataStore) and remote (Ktor) data.
+
+## 🧩 Modularization
+The codebase is organized into multiple Gradle modules to improve maintainability, scalability, and reusability:
+
+- :app – Main application module for Android, JVM, and WASM.
+- :modules: – Core features and shared logic, such as data, domain, model, analytics, designsystem, and ui.
+- :features: – Feature-specific modules (e.g., main, detail, setting) for isolated development and testing.
+- :benchmarks: – Performance and baseline profiling.
+- :build-logic: – Centralized Gradle plugin and build configuration management.
+- :lint, :ktlint, :spotless: – Code quality and formatting tools, including custom rules for enforcing the design system.
+
+This modular approach enables independent development, easier testing, and faster build times, while supporting code sharing across all supported platforms.
+
+## 🛠️ Tech Stack & Open-source Libraries
+This project leverages a modern, production-ready tech stack and a curated set of open-source libraries to ensure high performance, maintainability, and a delightful developer experience:
+
+- Kotlin Multiplatform (KMP): Share business logic across Android, JVM, and WASM.
+- Jetpack Compose & Compose Multiplatform: Declarative UI for Android and desktop.
+- Ktor: Asynchronous HTTP client for network requests.
+- Room: Local database for structured data persistence.
+- DataStore: Modern, type-safe data storage solution.
+- Koin: Lightweight dependency injection framework.
+- Coil: Fast image loading for Android.
+- Kotlinx Serialization: JSON serialization and parsing.
+- Coroutines & Flow: Asynchronous and reactive programming.
+- Navigation Compose: Type-safe navigation for Compose UI.
+- Spotless, ktlint, detekt: Code formatting and static analysis, with custom rules for enforcing the design system.
+- Junit5, Turbine: Unit and state testing.
+- Jacoco: Code coverage reports.
+- Hydraulic Conveyor: Cross-platform desktop packaging for Linux, Windows, and Mac.
+
+## 📸 Screenshots
+
+See the app in action across all supported platforms:
+
+### 🤖 Android
+<p align="center">
+  <img src="./fastlane/metadata/android/en-US/images/phoneScreenshots/1.png" width="200" />
+   <img src="./fastlane/metadata/android/en-US/images/phoneScreenshots/2.png" width="200" />
+    <img src="./fastlane/metadata/android/en-US/images/phoneScreenshots/3.png" width="200" />
+</p>
+
+### 💻 JVM (Desktop)
+<p align="center">
+  <img src="./fastlane/metadata/android/en-US/images/desktopScreenshots/1.png" width="200" />
+   <img src="./fastlane/metadata/android/en-US/images/desktopScreenshots/2.png" width="200" />
+    <img src="./fastlane/metadata/android/en-US/images/desktopScreenshots/3.png" width="200" />
+</p>
+
+### 🌐 WASM (Web)
+<p align="center">
+  <img src="./fastlane/metadata/android/en-US/images/webScreenshots/1.png" width="200" />
+   <img src="./fastlane/metadata/android/en-US/images/webScreenshots/2.png" width="200" />
+    <img src="./fastlane/metadata/android/en-US/images/webScreenshots/3.png" width="200" />
+  
+</p>
+
+---
+
+## 🌍 Localization Support
+
+KotlinMultiplatformTemplate is built with comprehensive localization support, making it easy to adapt the app for any language or region:
+
+- 🌐 Seamlessly translate all app content using Kotlin Multiplatform's localization tools.
+- 📝 Dynamic text updates based on user language or locale preferences.
+- 🏳️ Effortlessly add or update translations for new languages.
+- 🔄 Instantly switch languages at runtime for a global user experience.
+
+This ensures your application is ready for international audiences and can grow with your user base.
+
+## 🚀 Getting Started
 
 This project utilizes Kotlin Multiplatform to target Android, Desktop, and WebAssembly (WASM).
 Android has two build variants: **GooglePlay** and **FossReliant**. To build and run the project on
@@ -156,211 +167,180 @@ each platform, follow the instructions below:
 ### Android
 
 #### GooglePlay Variant
-
 1. Open the project in Android Studio.
 2. Select the **GooglePlay** build variant.
 3. Connect an Android device or start an emulator.
-4. Run the `app` module. This will build an APK with Google Play dependencies and install it on your
-   device or emulator.
+4. Run the `app` module to build and install the APK with Google Play dependencies.
 
 #### FossReliant Variant
-
 1. Open the project in Android Studio.
 2. Select the **FossReliant** build variant.
 3. Connect an Android device or start an emulator.
-4. Run the `app` module. This will build an APK without Google Play dependencies, relying on FOSS
-   alternatives, and install it on your device or emulator.
+4. Run the `app` module to build and install the APK without Google Play dependencies (FOSS only).
 
 ### Desktop
 
-Run the following command to build the desktop application:
+Build and run the desktop application (Windows, macOS, or Linux):
 
-```bash
+```sh
 ./gradlew app:run
 ```
 
-This will run an executable file on your operating system (Windows, macOS, or Linux).
-
 ### Web
 
-Run the following command to build the web application:
+Build and run the web application with a development server:
 
-```bash
+```sh
 ./gradlew wasmJsBrowserRun -t
 ```
 
-This will start a development server that serves the web application. Open the provided URL in your
-browser to access the application.
+Open the provided URL in your browser to access the app.
 
-**Note:** You may need to install Node.js and Yarn for the web build to work correctly.
+> **Note:** Node.js and Yarn may be required for web builds.
+
+---
 
 ## Release
 
-This project offers releases for Android, Desktop, and Web. Below are instructions for releasing the
-application on each platform.
+Release builds are available for Android, Desktop, and Web. Use the following instructions for each platform.
 
 ### Android
 
 #### GooglePlay Variant
-
-To release the GooglePlay variant, follow these steps:
-
-Build the release APK using the following Gradle command:
-
-```bash
+Build the release APK:
+```sh
 ./gradlew assembleGooglePlayRelease
 ```
-
 Upload the signed APK to the Google Play Console.
 
 #### FossReliant Variant
-
-To release the FossReliant variant, follow these steps:
-
-Build the release APK using the following Gradle command:
-
-```bash
+Build the release APK:
+```sh
 ./gradlew assembleFossReliantRelease
 ```
-
-Distribute the APK through your preferred channels (e.g., GitHub Releases, F-Droid).
+Distribute the APK via your preferred channels (e.g., GitHub Releases, F-Droid).
 
 ### Desktop
 
-This project leverages Conveyor for packaging and distributing the Desktop application.
-Conveyor simplifies the creation of installers and distributable packages across various
-operating systems (Windows, macOS, Linux).
+This project uses Conveyor to package and distribute desktop applications for Windows, macOS, and Linux.
 
-1. Install hydraulic conveyor at [Hydraulic](https://downloads.hydraulic.dev/)
-
-2. Build the release executable using the following Gradle command:
-
-```bash
-conveyor make app
-```
-
-3. To create site for the all desktop platform
-
-```bash
-conveyor make site
-```
+1. Install Conveyor from [Hydraulic](https://downloads.hydraulic.dev/).
+2. Build the release executable:
+   ```sh
+   conveyor make app
+   ```
+3. Create a site for all desktop platforms:
+   ```sh
+   conveyor make site
+   ```
 
 ### Web
 
-To release the Web application, follow these steps:
-
-Build the release version of the web application using the following Gradle command:
-
-```bash
+Build the release version of the web application:
+```sh
 ./gradlew wasmJsBrowserDistribution
 ```
+Deploy the output files to your web server or hosting provider.
 
-Deploy the built files to your web server or hosting provider.
+---
 
-## Testing
+## 🧪 Testing
+
+KotlinMultiplatformTemplate provides a robust testing suite to ensure code quality, reliability, and UI consistency across all platforms.
 
 ### JVM Tests
 
-This project includes a comprehensive suite of JVM tests to ensure the correctness and reliability
-of the core logic and functionality. These tests are written using JvmTest and cover various aspects
-of the application, including:
+- **Unit Tests:** Validate individual components and functions in isolation.
+- **Integration Tests:** Ensure correct interaction between modules and system components.
+- **Data Layer Tests:** Check data access, persistence, and retrieval logic.
+- **Business Logic Tests:** Confirm the correct implementation of business rules and workflows.
 
-* **Unit tests:** Verify the behavior of individual components and functions in isolation.
-* **Integration tests:** Test the interaction between different modules or components of the system.
-* **Data layer tests:** Validate data access, persistence, and retrieval operations.
-* **Business logic tests:**  Ensure the correct implementation of business rules and workflows.
-
-**Running Tests**
-
-To run the JVM tests, you can use the following Gradle command:
-
-```bash
+Run all JVM tests with:
+```sh
 ./gradlew jvmTest
 ```
 
-### Screenshot Test
+### UI Screenshot Testing
 
-Compose Screenshot Testing is an essential part of ensuring UI quality. A screenshot test captures
-an image of a Composable function or a section of your app's UI and compares it to a previously
-saved reference image, known as a "golden" or "baseline" image. This ensures that UI changes don't
-unintentionally introduce visual regressions.
+Compose Screenshot Testing helps prevent visual regressions by comparing the current UI against baseline images ("goldens").
 
-**Compose ScreenshotTest and Gradle Tasks**
+Automated screenshot tests are powered by the Compose Screenshot Test. Key Gradle tasks include:
 
-Compose screenshot testing can be seamlessly integrated with the Paparazzi library, providing
-automated image comparisons. Paparazzi offers the following useful Gradle tasks:
+- `validateFossReliantDebugScreenshotTest`: Run all screenshot tests and compare with baseline images to detect visual changes.
+- `updateFossReliantDebugScreenshotTest`: Update baseline images after intentional UI changes.
+- `testFossReliantDebugScreenshotTest`: Generate comparison images highlighting differences between failed tests and baselines.
 
-- `validateFossReliantDebugScreenshotTest`: Executes all screenshot tests, comparing captured images
-  with the baseline images. This process helps detect any visual discrepancies introduced by code
-  changes.
-- `updateFossReliantDebugScreenshotTest`: Generates new baseline images. Use this command after
-  intentionally modifying the UI and manually verifying the correctness of the new visuals. The
-  newly captured screenshots then become the new baseline for future comparisons.
-- `testFossReliantDebugScreenshotTest`: Creates comparison images highlighting the differences
-  between failed tests and the baseline images. These images aid in pinpointing visual
-  discrepancies, simplifying debugging efforts.
+These tools ensure your UI remains visually consistent and any unintended changes are caught early.
 
-## Performance
+## 🚦 Performance
+
+KotlinMultiplatformTemplate is optimized for speed, responsiveness, and efficiency across all supported platforms. The project integrates several tools and strategies to monitor and improve performance:
 
 ### Benchmarks
 
-We utilize benchmarking tools to measure the performance of key operations in our application. This
-helps identify potential bottlenecks and areas for optimization. Benchmarks are focused on critical
-aspects, such as UI rendering, data processing, and network operations, ensuring a smooth and
-responsive user experience.
+- Automated benchmarking tools are used to measure the performance of critical operations, including UI rendering, data processing, and network requests.
+- Benchmark results help identify bottlenecks and guide targeted optimizations for a smooth user experience.
 
-### Baseline Profile
+### Baseline Profiles
 
-Baseline Profiles are integrated into our build process to enhance app startup time and reduce
-initial rendering latency. These profiles provide guidance to the Android Runtime (ART) for
-pre-compiling frequently used code paths, leading to faster loading times and improved overall
-performance.
+- Baseline Profiles are included in the build process to improve app startup time and reduce initial rendering latency.
+- These profiles instruct the Android Runtime (ART) to pre-compile frequently used code paths, resulting in faster launches and better runtime performance.
 
-
-```bash
+Generate a Baseline Profile with:
+```sh
 ./gradlew generateReleaseBaselineProfile
 ```
 
 ### Compose Compiler Metrics
 
-We leverage Compose Compiler Metrics to monitor and analyze the performance of our Compose UI.
-Metrics like recomposition counts and skippability rates help identify potential areas for
-optimization and ensure efficient UI rendering. This proactive approach ensures that our Compose UI
-remains performant and responsive as the application evolves.
+- Compose Compiler Metrics provide insights into UI performance, such as recomposition counts and skippability rates.
+- These metrics help proactively detect and resolve inefficiencies, ensuring the Compose UI remains fast and responsive as the app evolves.
 
-
-```bash
+Enable Compose Compiler Metrics with:
+```sh
 ./gradlew assembleDebug -PenableComposeCompilerMetrics=true -PenableComposeCompilerReports=true
 ```
 
-## Find this repository useful?
+---
 
-Support it by joining **[stargazers](https://github.com/mshdabiola/kotlinmultiplatformtemplate/stargazers)** for this
-repository. :star: <br>
-And **[follow](https://github.com/mshdabiola)** me for my next creations! 🤩
 
-## Star History
+## ⭐️ Found this project useful?
+
+If you find KotlinMultiplatformTemplate helpful, please consider supporting it by starring the repository:
+
+[🌟 Star on GitHub](https://github.com/mshdabiola/kotlinmultiplatformtemplate/stargazers)
+
+You can also [follow me](https://github.com/mshdabiola) for updates and future projects! 🤩
+
+---
+
+## 📈 Star History
 
 <div align="center">
-<a href="https://star-history.com/#mshdabiola/kotlinmultiplatformtemplate&Date">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=mshdabiola/kotlinmultiplatformtemplate&type=Date&theme=dark" />
-    <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=mshdabiola/kotlinmultiplatformtemplate&type=Date" />
-    <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=mshdabiola/kotlinmultiplatformtemplate&type=Date" />
-  </picture>
-</a>
-
-![Alt](https://repobeats.axiom.co/api/embed/a0893eb63066333a921a4197172ab150fe896a37.svg "Repobeats analytics image")
+  <a href="https://star-history.com/#mshdabiola/kotlinmultiplatformtemplate&Date">
+    <picture>
+      <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=mshdabiola/kotlinmultiplatformtemplate&type=Date&theme=dark" />
+      <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=mshdabiola/kotlinmultiplatformtemplate&type=Date" />
+      <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=mshdabiola/kotlinmultiplatformtemplate&type=Date" />
+    </picture>
+  </a>
+  <br/>
+  <img alt="Repobeats analytics image" src="https://repobeats.axiom.co/api/embed/a0893eb63066333a921a4197172ab150fe896a37.svg" />
 </div>
 
-## Contributors
+---
+
+## 👥 Contributors
+
+A huge thank you to all the amazing people who have contributed to this project:
 
 <a href="https://github.com/mshdabiola/kotlinmultiplatformtemplate/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=mshdabiola/kotlinmultiplatformtemplate" />
+  <img src="https://contrib.rocks/image?repo=mshdabiola/kotlinmultiplatformtemplate" alt="Contributors" />
 </a>
 
+---
 
-# License
+## 📝 License
 
-**KotlinMultiplatformTemplate** is distributed under the terms of the Apache License, Version 2.0. See the
-[license](LICENSE) for more information.
+KotlinMultiplatformTemplate is distributed under the terms of the Apache License, Version 2.0. See the [LICENSE](LICENSE) file for details.
+
