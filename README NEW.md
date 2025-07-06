@@ -47,6 +47,22 @@
 </p>
 
 
+<div align="center">
+  <a href="https://play.google.com/store/apps/details?id=com.mshdabiola.kotlinmultiplatformtemplate">
+    <img alt="Google Play" src="./fastlane/metadata/android/en-US/images/buttons/gplay.svg" height="60">
+  </a>
+  <a href="https://f-droid.org/packages/com.mshdabiola.kotlinmultiplatformtemplate">
+    <img alt="F-Droid" src="./fastlane/metadata/android/en-US/images/buttons/fdroid.svg" height="60"/>
+  </a>
+  <a href="https://github.com/mshdabiola/kotlinmultiplatformtemplate/releases/latest">
+    <img alt="GitHub" src="./fastlane/metadata/android/en-US/images/buttons/github.svg" height="60"/>
+  </a>
+  <a href="https://kotlinmultiplatformtemplate-desktop.onrender.com">
+    <img alt="Desktop Download" src="./fastlane/metadata/android/en-US/images/buttons/desktop.svg" height="60"/>
+  </a>
+</div>
+
+
 Kotlin Multiplatform Template is a robust project starter designed with a modern multi-module architecture. It enables seamless code sharing and modular development across JVM, Android, and WASM platforms. The template leverages Kotlin Multiplatform to maximize code reuse, maintainability, and scalability, making it ideal for building cross-platform applications with clean separation of concerns and platform-specific optimizations.
 
 - Multi-module architecture for clear separation of concerns and scalable codebase.
@@ -324,17 +340,3 @@ A huge thank you to all the amazing people who have contributed to this project:
 
 KotlinMultiplatformTemplate is distributed under the terms of the Apache License, Version 2.0. See the [LICENSE](LICENSE) file for details.
 
-<div align="center">
-  <a href="https://play.google.com/store/apps/details?id=com.mshdabiola.kotlinmultiplatformtemplate">
-    <img alt="Google Play" src="./fastlane/metadata/android/en-US/images/buttons/gplay.svg" height="60">
-  </a>
-  <a href="https://f-droid.org/packages/com.mshdabiola.kotlinmultiplatformtemplate">
-    <img alt="F-Droid" src="./fastlane/metadata/android/en-US/images/buttons/fdroid.svg" height="60"/>
-  </a>
-  <a href="https://github.com/mshdabiola/kotlinmultiplatformtemplate/releases/latest">
-    <img alt="GitHub" src="./fastlane/metadata/android/en-US/images/buttons/github.svg" height="60"/>
-  </a>
-  <a href="https://kotlinmultiplatformtemplate-desktop.onrender.com">
-    <img alt="Desktop Download" src="./fastlane/metadata/android/en-US/images/buttons/desktop.svg" height="60"/>
-  </a>
-</div>
