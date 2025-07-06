@@ -42,7 +42,7 @@
   </a>
 </div>
 
-#  Kotlin Multiplatform Template
+# Kotlin Multiplatform Template
 
 
 <p align="center">
