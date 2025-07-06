@@ -27,6 +27,15 @@
   <a href="https://github.com/mshdabiola/kotlinmultiplatformtemplate/releases/latest">
       <img src="https://img.shields.io/github/v/release/mshdabiola/kotlinmultiplatformtemplate?color=purple&include_prereleases&logo=github&style=for-the-badge"/>
   </a>
+  
+
+  ![badge-Android](https://img.shields.io/badge/Platform-Android-brightgreen)
+<!-- ![badge-iOS](https://img.shields.io/badge/Platform-iOS-lightgray) -->
+  ![badge-JVM](https://img.shields.io/badge/Platform-JVM-orange)
+  ![badge-macOS](https://img.shields.io/badge/Platform-macOS-purple)
+  ![badge-web](https://img.shields.io/badge/Platform-Web-blue)
+  [![codecov](https://codecov.io/github/mshdabiola/KotlinMultiplatformTemplate/graph/badge.svg?token=QEMUHWH4YW)](https://codecov.io/github/mshdabiola/KotlinMultiplatformTemplate)
+
 
 [//]: # (   <a href="https://play.google.com/store/apps/details?id=ru.tech.hydraulicshrinker">)
 
@@ -61,7 +70,8 @@
     <img alt="Desktop Download" src="./fastlane/metadata/android/en-US/images/buttons/desktop.svg" height="60"/>
   </a>
 </div>
-
+<br>
+  <br>
 
 Kotlin Multiplatform Template is a robust project starter designed with a modern multi-module architecture. It enables seamless code sharing and modular development across JVM, Android, and WASM platforms. The template leverages Kotlin Multiplatform to maximize code reuse, maintainability, and scalability, making it ideal for building cross-platform applications with clean separation of concerns and platform-specific optimizations.
 
