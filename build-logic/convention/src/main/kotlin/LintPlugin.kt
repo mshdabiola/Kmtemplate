@@ -25,17 +25,18 @@ class LintPlugin : Plugin<Project> {
         }
 
         val rootProject = target.rootProject
-        rootProject.plugins.withId("appyx-collect-sarif") {
-            rootProject.tasks.named(
-                CollectSarifPlugin.MERGE_LINT_TASK_NAME,
-                ReportMergeTask::class.java,
-            ) {
-                input.from(
-                    target.tasks
-                        .named("lintReportDebug", AndroidLintTask::class.java)
-                        .flatMap { it.sarifReportOutputFile }
-                )
-            }
+rootProject.plugins.withId("appyx-collect-sarif") { // TODO: Use the correct registered plugin ID
+    rootProject.tasks.named(
+        CollectSarifPlugin.MERGE_LINT_TASK_NAME,
+        SarifMergeTask::class.java,
+    ) {
+        inputSarifFiles.from(
+            target.tasks
+                .named("lintReportDebug", AndroidLintTask::class.java)
+                .flatMap { it.sarifReportOutputFile }
+        )
+    }
+}
         }
     }
 }
