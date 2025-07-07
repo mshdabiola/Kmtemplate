@@ -101,7 +101,8 @@ jobs:
       - uses: github/codeql-action/upload-sarif@v3.29.2
         if: success() || failure()
         with:
-          sarif_file: build/detekt-merged.sarif
+          checkout_path: ${{ github.workspace }}
+          sarif_file: ${{ github.workspace }}/build/detekt-merged.sarif
           category: detekt
 
       - name: Check If Design System is Follow
@@ -211,7 +212,8 @@ jobs:
       - uses: github/codeql-action/upload-sarif@v3.29.2
         if: success() || failure()
         with:
-          sarif_file: app/build/reports/lint-results-fossReliantRelease.sarif
+          checkout_path: ${{ github.workspace }}
+          sarif_file: ${{ github.workspace }}/app/build/reports/lint-results-fossReliantRelease.sarif
           category: lint
 
       - name: Upload lint reports (HTML)
