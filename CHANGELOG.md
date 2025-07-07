@@ -1,3 +1,11 @@
+## 2025-07-07
+
+### Added
+- SARIF report handling.
+- Improved Spotless apply steps.
+- Refactored Detekt and Lint configurations.
+- Enabled Detekt and Lint SARIF uploads.
+
 ## 2025-06-06
 
 ### Changed
