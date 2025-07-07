@@ -69,7 +69,7 @@ class DetektConventionPlugin : Plugin<Project> {
                         CollectSarifPlugin.MERGE_DETEKT_TASK_NAME,
                         ReportMergeTask::class.java,
                     ) {
-                        input.from(detektTask.map { it.sarifReportFile }.orNull)
+                        input.from(detektTask.flatMap { it.sarifReportFile })
                         mustRunAfter(detektTask)
                     }
                 }
