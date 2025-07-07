@@ -32,9 +32,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        with:
-          ref: ${{ github.event.pull_request.head.ref }}
-          repository: ${{ github.event.pull_request.head.repo.full_name }}
+#        with:
+#          ref: ${{ github.event.pull_request.head.ref }}
+#          repository: ${{ github.event.pull_request.head.repo.full_name }}
 
       - name: Validate Gradle Wrapper
         uses: gradle/wrapper-validation-action@v2
@@ -98,7 +98,7 @@ jobs:
         continue-on-error: true
         run: ./gradlew mergeDetektSarif
 
-      - uses: github/codeql-action/upload-sarif@v3
+      - uses: github/codeql-action/upload-sarif@v3.29.2
         if: success() || failure()
         with:
           sarif_file: build/detekt-merged.sarif
@@ -208,7 +208,7 @@ jobs:
       - name: Check lint
         run: ./gradlew lintFossReliantRelease
 
-      - uses: github/codeql-action/upload-sarif@v3
+      - uses: github/codeql-action/upload-sarif@v3.29.2
         if: success() || failure()
         with:
           sarif_file: app/build/reports/lint-results-fossReliantRelease.sarif
