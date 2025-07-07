@@ -32,9 +32,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        with:
-          ref: ${{ github.event.pull_request.head.ref }}
-          repository: ${{ github.event.pull_request.head.repo.full_name }}
+#        with:
+#          ref: ${{ github.event.pull_request.head.ref }}
+#          repository: ${{ github.event.pull_request.head.repo.full_name }}
 
       - name: Validate Gradle Wrapper
         uses: gradle/wrapper-validation-action@v2
@@ -72,23 +72,43 @@ jobs:
 
       - name: Apply Spotless if check failed and it's a PR
         id: spotless_apply
+        continue-on-error: true
+        # Runs if previous job failed
+        # This will apply Spotless formatting to the codebase if the check fails
+        # and the event is a pull request.
+        # This is useful for ensuring that the code is always formatted correctly
+        # before merging the pull request.
         if: steps.spotless_check.outcome == 'failure' && github.event_name == 'pull_request'
         run: |
           ./gradlew spotlessApply :build-logic:convention:spotlessApply
 
       - name: Push new Spotless Apply if available
-        uses: stefanzweifel/git-auto-commit-action@v6.0.1
+        uses: stefanzweifel/git-auto-commit-action@v5
+        continue-on-error: true
+        # This step will push the changes made by the Spotless Apply step
+        # to the repository if the Spotless Apply step was successful.
         if: steps.spotless_apply.outcome == 'success'
         with:
           file_pattern: '**/*.kt **/*.kts **/*.java **/*.xml'
           disable_globbing: true
           commit_message: "🤖 Apply Spotless formatting"
 
-      # - uses: github/codeql-action/upload-sarif@v3.29.2
-      #   if: success() || failure()
-      #   with:
-      #     sarif_file: build/detekt-merged.sarif
-      #     category: detekt
+      - name: Merge Detekt Sarif
+        id: merge_dekekt
+        continue-on-error: true
+        run: ./gradlew detekt mergeDetektSarif
+
+      - uses: github/codeql-action/upload-sarif@v3.29.2
+        if: success() || failure()
+        with:
+#          checkout_path: ${{ github.workspace }}
+          sarif_file: build/detekt-merged.sarif
+          category: detekt
+
+      - name: Check If Design System is Follow
+        id: dscheck_verify
+        continue-on-error: true
+        run: ./gradlew ktlintCheck
 
       - name: Check Dependency Guard
         id: dependencyguard_verify
@@ -110,7 +130,7 @@ jobs:
           ./gradlew dependencyGuardBaseline
 
       - name: Push new Dependency Guard baselines if available
-        uses: stefanzweifel/git-auto-commit-action@v6.0.1
+        uses: stefanzweifel/git-auto-commit-action@v5
         if: steps.dependencyguard_baseline.outcome == 'success'
         with:
           file_pattern: '**/dependencies/*.txt'
@@ -137,7 +157,7 @@ jobs:
           ./gradlew updateFossReliantDebugScreenshotTest
 
       - name: Push new screenshots if available
-        uses: stefanzweifel/git-auto-commit-action@v6.0.1
+        uses: stefanzweifel/git-auto-commit-action@v5
         if: steps.screenshotsrecord.outcome == 'success'
         with:
           file_pattern: '*/*.png'
@@ -185,15 +205,14 @@ jobs:
             ignore_runs: false
             files: ./**/build/test-results/**/*.xml
 
-
       - name: Check lint
         run: ./gradlew lintFossReliantRelease
 
-      # - uses: github/codeql-action/upload-sarif@v3.29.2
-      #   if: success() || failure()
-      #   with:
-      #     sarif_file: build/lint-merged.sarif
-      #     category: lint
+      - uses: github/codeql-action/upload-sarif@v3.29.2
+        if: success() || failure()
+        with:
+          sarif_file: app/build/reports/lint-results-fossReliantRelease.sarif
+          category: lint
 
       - name: Upload lint reports (HTML)
         if: always()
