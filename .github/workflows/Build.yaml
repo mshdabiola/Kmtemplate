@@ -98,12 +98,6 @@ jobs:
         continue-on-error: true
         run: ./gradlew detekt mergeDetektSarif
 
-      - name: List build directory contents
-        run: |
-          ls -al /home/runner/work/KotlinMultiplatformTemplate/KotlinMultiplatformTemplate/build/
-          ls -al /home/runner/work/KotlinMultiplatformTemplate/KotlinMultiplatformTemplate/build/reports/detekt/ # If you configured it to output there
-        continue-on-error: true # So the workflow doesn't fail if the path doesn't exist yet
-
       - uses: github/codeql-action/upload-sarif@v3.29.2
         if: success() || failure()
         with:
@@ -218,8 +212,7 @@ jobs:
       - uses: github/codeql-action/upload-sarif@v3.29.2
         if: success() || failure()
         with:
-          checkout_path: ${{ github.workspace }}
-          sarif_file: ${{ github.workspace }}/app/build/reports/lint-results-fossReliantRelease.sarif
+          sarif_file: app/build/reports/lint-results-fossReliantRelease.sarif
           category: lint
 
       - name: Upload lint reports (HTML)
