@@ -100,15 +100,15 @@ jobs:
 
       - name: List build directory contents
         run: |
-          ls -al /home/runner/work/KotlinMultiplatformTemplate/build/
-          ls -al /home/runner/work/KotlinMultiplatformTemplate/build/reports/detekt/ # If you configured it to output there
+          ls -al /home/runner/work/KotlinMultiplatformTemplate/KotlinMultiplatformTemplate/build/
+          ls -al /home/runner/work/KotlinMultiplatformTemplate/KotlinMultiplatformTemplate/build/reports/detekt/ # If you configured it to output there
         continue-on-error: true # So the workflow doesn't fail if the path doesn't exist yet
 
       - uses: github/codeql-action/upload-sarif@v3.29.2
         if: success() || failure()
         with:
 #          checkout_path: ${{ github.workspace }}
-          sarif_file: /home/runner/work/KotlinMultiplatformTemplate/build/detekt-merged.sarif
+          sarif_file: /home/runner/work/KotlinMultiplatformTemplate/KotlinMultiplatformTemplate/build/detekt-merged.sarif
           category: detekt
 
       - name: Check If Design System is Follow
