@@ -132,6 +132,14 @@ gradlePlugin {
             id = "mshdabiola.spotless"
             implementationClass = "SpotlessConventionPlugin"
         }
+        register("detekt") {
+            id = "mshdabiola.detekt"
+            implementationClass = "DetektConventionPlugin"
+        }
+        register("appyx-collect-sarif") {
+            id = "mshdabiola.collect.sarif"
+            implementationClass = "CollectSarifPlugin"
+        }
 
     }
 }

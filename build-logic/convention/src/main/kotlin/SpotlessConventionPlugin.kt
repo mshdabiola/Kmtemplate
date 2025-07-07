@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 import com.diffplug.gradle.spotless.SpotlessExtension
-import io.gitlab.arturbosch.detekt.extensions.DetektExtension
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure
@@ -28,17 +27,11 @@ class SpotlessConventionPlugin : Plugin<Project> {
             with(pluginManager) {
                 apply("com.diffplug.spotless")
                 apply("org.jlleitschuh.gradle.ktlint")
-                apply("io.gitlab.arturbosch.detekt")
+                apply("mshdabiola.detekt")
             }
 
             extensions.configure<KtlintExtension> {
                 debug.set(true)
-                // ignoreFailures.set(true)
-//        reporters {
-//            reporter(org.jlleitschuh.gradle.ktlint.reporter.ReporterType.HTML)
-//            reporter(org.jlleitschuh.gradle.ktlint.reporter.ReporterType.CHECKSTYLE)
-//            reporter(org.jlleitschuh.gradle.ktlint.reporter.ReporterType.PLAIN)
-//        }
             }
 
             extensions.configure<SpotlessExtension> {
@@ -46,9 +39,7 @@ class SpotlessConventionPlugin : Plugin<Project> {
                     target("**/*.kt")
                     targetExclude("**/build/**/*.kt")
                     ktlint()
-//                            .setUseExperimental(true)
-//                            .userData(mapOf("android" to "true"))
-//                            .editorConfigOverride(mapOf("indent_size" to 2, "continuation_indent_size" to 2))
+
                     licenseHeaderFile(rootProject.file("$rootDir/spotless/copyright.kt"))
                         .updateYearWithLatest(true)
                 }
@@ -67,48 +58,9 @@ class SpotlessConventionPlugin : Plugin<Project> {
                         .updateYearWithLatest(true)
                 }
             }
-            target.plugins.withId("io.gitlab.arturbosch.detekt") {
-                val rootProject = target.rootProject
-
-                target.extensions.configure<DetektExtension> {
-                    source = files(
-                        "src/main/kotlin",
-                        "src/commonMain/kotlin",
-                        "src/jvmMain/kotlin",
-                        "src/androidMain/kotlin",
-                        "src/iosMain/kotlin",
-                        "src/nativeMain/kotlin",
-                        "src/desktop/kotlin",
-                        "src/js/kotlin",
-                    )
-                    config.setFrom(rootProject.file("detekt.yml"))
-                    buildUponDefaultConfig = true
-                    ignoreFailures = false
-                }
-            }
 
             dependencies {
                 add("ktlint", project(":ktlint"))
-            }
-
-            // Configure tasks after the project has been evaluated to ensure all tasks are available
-            afterEvaluate {
-                // Make 'ktlintCheck' run after 'spotlessCheck'
-                tasks.withType(com.diffplug.gradle.spotless.SpotlessTask::class.java) {
-                    if (name == "spotlessCheck") {
-                        finalizedBy(tasks.named("ktlintCheck")) // Ensure ktlintCheck runs after spotlessCheck
-                    }
-                }
-
-                // Make 'ktlintFormat' and 'detekt' run after 'spotlessApply'
-                tasks.withType(com.diffplug.gradle.spotless.SpotlessTask::class.java) {
-                    if (name == "spotlessApply") {
-                        finalizedBy(
-                            tasks.named("ktlintFormat"), // Ensure ktlintFormat runs after spotlessApply
-                            tasks.named("detekt"), // Ensure detekt runs after spotlessApply
-                        )
-                    }
-                }
             }
         }
     }
