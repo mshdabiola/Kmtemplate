@@ -98,10 +98,16 @@ jobs:
         continue-on-error: true
         run: ./gradlew mergeDetektSarif
 
+      - name: List build directory contents
+        run: |
+          ls -al ${{ github.workspace }}/build/
+          ls -al ${{ github.workspace }}/build/reports/detekt/ # If you configured it to output there
+        continue-on-error: true # So the workflow doesn't fail if the path doesn't exist yet
+
       - uses: github/codeql-action/upload-sarif@v3.29.2
         if: success() || failure()
         with:
-          checkout_path: ${{ github.workspace }}
+#          checkout_path: ${{ github.workspace }}
           sarif_file: ${{ github.workspace }}/build/detekt-merged.sarif
           category: detekt
 
