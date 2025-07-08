@@ -7,39 +7,38 @@
 		{
 			groupName: 'Kotlin, KSP and Compose Compiler',
 			groupSlug: 'kotlin',
-			matchPackagePrefixes: [
-				'com.google.devtools.ksp',
-				'androidx.compose.compiler',
-			],
-			matchPackagePatterns: [
-				'org.jetbrains.kotlin.*',
+			matchPackageNames: [
+				'com.google.devtools.ksp{/,}**',
+				'androidx.compose.compiler{/,}**',
+				'/org.jetbrains.kotlin.*/',
 			],
 		},
 		{
 			description: 'Automatically merge minor and patch-level updates',
-			matchUpdateTypes: ['minor', 'patch', 'digest'],
+			matchUpdateTypes: [
+				'minor',
+				'patch',
+				'digest',
+			],
 			automerge: true,
 			automergeType: 'pr',
 			platformAutomerge: true,
-		}
+		},
 	],
 	ignorePresets: [
-		// Ensure we get the latest version and are not pinned to old versions.
 		'workarounds:javaLTSVersions',
 	],
 	customManagers: [
-		// Update .java-version file with the latest JDK version.
 		{
 			customType: 'regex',
-			fileMatch: [
-				'\\.java-version$',
+			managerFilePatterns: [
+				'/\\.java-version$/',
 			],
 			matchStrings: [
 				'(?<currentValue>.*)\\n',
 			],
 			datasourceTemplate: 'java-version',
 			depNameTemplate: 'java',
-			// Only write the major version.
 			extractVersionTemplate: '^(?<version>\\d+)',
 		},
 	],
