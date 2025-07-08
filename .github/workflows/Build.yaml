@@ -215,7 +215,7 @@ jobs:
             verbose: true
 
       - name: Push new Spotless Apply if available
-        uses: stefanzweifel/git-auto-commit-action@v5
+        uses: stefanzweifel/git-auto-commit-action@v6
         continue-on-error: true
         if: steps.spotless_apply.outcome == 'success'
         with:
@@ -224,7 +224,7 @@ jobs:
           commit_message: "🤖 Apply Spotless formatting"
 
       - name: Push new Dependency Guard baselines if available
-        uses: stefanzweifel/git-auto-commit-action@v5
+        uses: stefanzweifel/git-auto-commit-action@v6
         if: steps.dependencyguard_baseline.outcome == 'success'
         with:
           file_pattern: '**/dependencies/*.txt'
@@ -232,7 +232,7 @@ jobs:
           commit_message: "🤖 Updates baselines for Dependency Guard"
 
       - name: Push new screenshots if available
-        uses: stefanzweifel/git-auto-commit-action@v5
+        uses: stefanzweifel/git-auto-commit-action@v6
         if: steps.screenshotsrecord.outcome == 'success'
         with:
           file_pattern: '*/*.png'
