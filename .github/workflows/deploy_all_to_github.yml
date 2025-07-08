@@ -13,11 +13,12 @@ jobs:
     steps:
       # 1
       - uses: actions/checkout@v4
-      - name: Set up JDK 21
+
+      - name: Set up JDK 
         uses: actions/setup-java@v4
         with:
           distribution: 'zulu'
-          java-version: 21
+          java-version-file: .github/workflows/.java-version
       # 2
 
       - name: Setup Android SDK
