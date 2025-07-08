@@ -247,8 +247,8 @@ org.jetbrains.compose.desktop:desktop-jvm:1.9.0-alpha01
 org.jetbrains.compose.desktop:desktop:1.9.0-alpha01
 org.jetbrains.compose.foundation:foundation-layout:1.9.0-alpha01
 org.jetbrains.compose.foundation:foundation:1.9.0-alpha01
-org.jetbrains.compose.material3.adaptive:adaptive-layout:1.1.0
-org.jetbrains.compose.material3.adaptive:adaptive-navigation:1.1.0
+org.jetbrains.compose.material3.adaptive:adaptive-layout:1.1.2
+org.jetbrains.compose.material3.adaptive:adaptive-navigation:1.1.2
 org.jetbrains.compose.material3.adaptive:adaptive:1.2.0-alpha01
 org.jetbrains.compose.material3:material3-adaptive-navigation-suite:1.9.0-alpha01
 org.jetbrains.compose.material3:material3:1.9.0-alpha01
