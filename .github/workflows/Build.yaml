@@ -75,25 +75,9 @@ jobs:
       - name: Apply Spotless if check failed and it's a PR
         id: spotless_apply
         continue-on-error: true
-        # Runs if previous job failed
-        # This will apply Spotless formatting to the codebase if the check fails
-        # and the event is a pull request.
-        # This is useful for ensuring that the code is always formatted correctly
-        # before merging the pull request.
         if: steps.spotless_check.outcome == 'failure' && github.event_name == 'pull_request'
         run: |
           ./gradlew spotlessApply :build-logic:convention:spotlessApply
-
-      - name: Push new Spotless Apply if available
-        uses: stefanzweifel/git-auto-commit-action@v5
-        continue-on-error: true
-        # This step will push the changes made by the Spotless Apply step
-        # to the repository if the Spotless Apply step was successful.
-        if: steps.spotless_apply.outcome == 'success'
-        with:
-          file_pattern: '**/*.kt **/*.kts **/*.java **/*.xml'
-          disable_globbing: true
-          commit_message: "🤖 Apply Spotless formatting"
 
       - name: Merge Detekt Sarif
         id: merge_dekekt
@@ -131,14 +115,6 @@ jobs:
         run: |
           ./gradlew dependencyGuardBaseline
 
-      - name: Push new Dependency Guard baselines if available
-        uses: stefanzweifel/git-auto-commit-action@v5
-        if: steps.dependencyguard_baseline.outcome == 'success'
-        with:
-          file_pattern: '**/dependencies/*.txt'
-          disable_globbing: true
-          commit_message: "🤖 Updates baselines for Dependency Guard"
-
       - name: Run all local screenshot tests
         id: screenshotsverify
         continue-on-error: true
@@ -157,14 +133,6 @@ jobs:
         if: steps.screenshotsverify.outcome == 'failure' && github.event_name == 'pull_request'
         run: |
           ./gradlew updateFossReliantDebugScreenshotTest
-
-      - name: Push new screenshots if available
-        uses: stefanzweifel/git-auto-commit-action@v5
-        if: steps.screenshotsrecord.outcome == 'success'
-        with:
-          file_pattern: '*/*.png'
-          disable_globbing: true
-          commit_message: "🤖 Updates screenshots"
 
       - name: Create Module Graph
         if: github.event_name == 'pull_request'
@@ -245,6 +213,31 @@ jobs:
             token: ${{ secrets.CODECOV_TOKEN }}
             files: "**/reportJvm.xml"
             verbose: true
+
+      - name: Push new Spotless Apply if available
+        uses: stefanzweifel/git-auto-commit-action@v5
+        continue-on-error: true
+        if: steps.spotless_apply.outcome == 'success'
+        with:
+          file_pattern: '**/*.kt **/*.kts **/*.java **/*.xml'
+          disable_globbing: true
+          commit_message: "🤖 Apply Spotless formatting"
+
+      - name: Push new Dependency Guard baselines if available
+        uses: stefanzweifel/git-auto-commit-action@v5
+        if: steps.dependencyguard_baseline.outcome == 'success'
+        with:
+          file_pattern: '**/dependencies/*.txt'
+          disable_globbing: true
+          commit_message: "🤖 Updates baselines for Dependency Guard"
+
+      - name: Push new screenshots if available
+        uses: stefanzweifel/git-auto-commit-action@v5
+        if: steps.screenshotsrecord.outcome == 'success'
+        with:
+          file_pattern: '*/*.png'
+          disable_globbing: true
+          commit_message: "🤖 Updates screenshots"
 
   androidTest:
     runs-on: ubuntu-latest
