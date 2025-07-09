@@ -60,7 +60,7 @@ kstore ="0.9.1"
 compose-plugin = "1.9.0-alpha03"
 composeNavigation="2.9.0-beta02"
 androidxNavigationTest = "2.9.0" #for nav test
-compose = "1.8.2"
+compose = "1.8.3"
 composehot="1.0.0-alpha10"
 foojay="0.10.0"
 
