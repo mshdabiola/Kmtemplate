@@ -1,10 +1,10 @@
 name: PreRelease Windows and Linux Hydraulic Conveyor
 
-on:
-  push:
-    tags:
-      - '[0-9]+.[0-9]+.[0-9]+-*'
-# on: workflow_dispatch
+# on:
+#   push:
+#     tags:
+#       - '[0-9]+.[0-9]+.[0-9]+-*'
+on: workflow_dispatch
 
 
 jobs:
@@ -38,3 +38,8 @@ jobs:
           signing_key: ${{ secrets.SIGNING_KEY }}
           extra_flags: -f ci.conveyor.conf
           agree_to_license: 1
+
+      - name: List output directory contents
+        run: |
+          echo "Listing contents of output directory:"
+          ls -alR output
