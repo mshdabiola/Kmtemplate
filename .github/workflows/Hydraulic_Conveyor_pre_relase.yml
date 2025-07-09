@@ -13,7 +13,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Set up JDK 
+      - name: Set up JDK
         uses: actions/setup-java@v4
         with:
           distribution: 'zulu'
@@ -34,21 +34,7 @@ jobs:
         env:
           TOKEN: ${{ secrets.TOKEN }}
         with:
-          command: make site
+          command: make copied-site
           signing_key: ${{ secrets.SIGNING_KEY }}
           extra_flags: -f ci.conveyor.conf
           agree_to_license: 1
-
-      - name: List output directory contents
-        run: |
-          echo "Listing contents of output directory:"
-          ls -alR output
-
-      - name: Deploy
-        #        if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main'
-        uses: JamesIves/github-pages-deploy-action@v4.7.3
-        with:
-          GITHUB_TOKEN: ${{ secrets.TOKEN }}
-          BRANCH: pr-pages # The branch the action should deploy to.
-          FOLDER: output # The folder the action should deploy.
-          CLEAN: true # Automatically remove deleted files from the deploy branch
