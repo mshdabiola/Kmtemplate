@@ -43,3 +43,12 @@ jobs:
         run: |
           echo "Listing contents of output directory:"
           ls -alR output
+
+      - name: Deploy
+        #        if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main'
+        uses: JamesIves/github-pages-deploy-action@v4.7.3
+        with:
+          GITHUB_TOKEN: ${{ secrets.TOKEN }}
+          BRANCH: pr-pages # The branch the action should deploy to.
+          FOLDER: output # The folder the action should deploy.
+          CLEAN: true # Automatically remove deleted files from the deploy branch
