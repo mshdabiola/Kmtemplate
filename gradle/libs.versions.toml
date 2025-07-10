@@ -64,7 +64,7 @@ compose = "1.8.3"
 composehot="1.0.0-beta01"
 foojay="0.10.0"
 
-playGame = "20.1.2"
+playGame = "21.0.0"
 playReview = "2.0.2"
 playUpdate = "2.1.0"
 playCoroutine = "1.10.2"
