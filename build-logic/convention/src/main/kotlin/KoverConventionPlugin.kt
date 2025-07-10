@@ -24,15 +24,19 @@ class KoverConventionPlugin : Plugin<Project> {
             val koverPlugin = "org.jetbrains.kotlinx.kover"
             pluginManager.apply(koverPlugin)
             val exclude = listOf(
-                "app", "benchmarks", "features", "modules", "analytics",
-                "data", "model", "domain", "ktlint", "ui", "designsystem", "testing",
+                "app",
+                "benchmarks",
+                "analytics",
+                "model",
+                "ktlint",
+                "designsystem",
+                "testing",
             )
 
             rootProject.subprojects {
                 if (exclude.contains(this@subprojects.name)) return@subprojects
 
 //                if (this@subprojects.name == target.name) return@subprojects
-                println(this@subprojects.name)
 
                 this@subprojects.beforeEvaluate {
                     this@subprojects.pluginManager.apply(koverPlugin)
@@ -74,22 +78,6 @@ class KoverConventionPlugin : Plugin<Project> {
                         }
                     }
                 }
-//                currentProject {
-//                    createVariant("unit") {
-//                        this.
-//                        sources.includedSourceSets.add("unitTest")
-//                    }
-//
-//                    createVariant("integration") {
-//                        sources.includedSourceSets.add("integrationTest")
-//                    }
-//                }
-
-//                reports {
-//                    filters {
-//                        includes.packages("dev.dai.android.architecture.template.*")
-//                    }
-//                }
             }
         }
     }
