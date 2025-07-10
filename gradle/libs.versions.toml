@@ -55,7 +55,7 @@ room = "2.7.2"
 secrets = "2.0.1"
 truth = "1.4.4"
 turbine = "1.2.1"
-kstore ="0.9.1"
+kstore ="1.0.0"
 
 compose-plugin = "1.9.0-alpha03"
 composeNavigation="2.9.0-beta02"
