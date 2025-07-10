@@ -140,6 +140,10 @@ gradlePlugin {
             id = "mshdabiola.collect.sarif"
             implementationClass = "CollectSarifPlugin"
         }
+        register("kover") {
+            id = "mshdabiola.kover"
+            implementationClass = "KoverConventionPlugin"
+        }
 
     }
 }
