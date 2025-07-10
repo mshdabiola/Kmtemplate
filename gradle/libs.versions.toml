@@ -61,7 +61,7 @@ compose-plugin = "1.9.0-alpha03"
 composeNavigation="2.9.0-beta02"
 androidxNavigationTest = "2.9.1" #for nav test
 compose = "1.8.3"
-composehot="1.0.0-beta01"
+composehot="1.0.0-beta03"
 foojay="0.10.0"
 
 playGame = "21.0.0"
@@ -245,7 +245,7 @@ room-gradlePlugin = { group = "androidx.room", name = "room-gradle-plugin", vers
 kotlin-powerAssert = { module = "org.jetbrains.kotlin:kotlin-power-assert", version.ref = "kotlin" }
 screenShot-gradlePlugin = { module = "com.android.compose.screenshot:screenshot-test-gradle-plugin", version.ref = "screenshot" }
 kover-gradlePlugin = { module = "org.jetbrains.kotlinx:kover-gradle-plugin", version.ref = "kover" }
-compose-hot-gradlePlugin = { module = "org.jetbrains.compose.hot-reload:gradle-plugin", version.ref = "composehot" }
+compose-hot-gradlePlugin = { module = "org.jetbrains.compose.hot-reload:hot-reload-gradle-plugin", version.ref = "composehot" }
 spotless-gradlePlugin = { group = "com.diffplug.spotless", name = "spotless-plugin-gradle", version.ref = "spotless" }
 jlleitschuh-gradlePlugin = { module = "org.jlleitschuh.gradle:ktlint-gradle", version.ref = "ktlint" }
 detekt-gradlePlugin = { module = "io.gitlab.arturbosch.detekt:detekt-gradle-plugin", version.ref = "detekt" }

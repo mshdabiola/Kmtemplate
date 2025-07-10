@@ -78,20 +78,20 @@ dependencies {
     googlePlayImplementation(libs.play.review)
     googlePlayImplementation(libs.play.review.kts)
 }
-java {
-    toolchain {
-        languageVersion = JavaLanguageVersion.of(21)
-        vendor = JvmVendorSpec.JETBRAINS
-        implementation = JvmImplementation.VENDOR_SPECIFIC
-    }
-}
+//java {
+//    toolchain {
+//        languageVersion = JavaLanguageVersion.of(21)
+//        vendor = JvmVendorSpec.JETBRAINS
+//        implementation = JvmImplementation.VENDOR_SPECIFIC
+//    }
+//}
 kotlin {
     androidTarget()
     jvm()
 
     @OptIn(org.jetbrains.kotlin.gradle.ExperimentalWasmDsl::class)
     wasmJs {
-        moduleName = "composeApp"
+        outputModuleName = "composeApp"
         browser {
             val rootDirPath = project.rootDir.path
             val projectDirPath = project.projectDir.path

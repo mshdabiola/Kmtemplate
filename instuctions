@@ -18,10 +18,14 @@ export TOKEN="your_actual_token"
     conveyor make site
     ./gradlew run
 
-./gradlew jvmRunHot -PmainClass=com.mshdabiola.kotlinmultiplatformtemplate.MainAppKt
+./gradlew app:jvmRunHot -PmainClass=com.mshdabiola.kotlinmultiplatformtemplate.MainAppKt
 ./gradlew app:jvmRun -PmainClass=com.mshdabiola.kotlinmultiplatformtemplate.MainAppKt
+Use `./gradlew reload` to hot reload the application
+| Use `./gradlew :app:hotReloadJvmMain` to hot reload the application (alternative)
+| Use `./gradlew :app:jvmRunHot --auto` to automatically reload the application on source changes
 
 //./gradlew assembleDebug -PenableComposeCompilerReports=true
 // ./gradlew assembleDebug -PenableComposeCompilerMetrics=true
 ./gradlew build-logic:convention:spotlessApply
 https://randombits.dev/articles/android/fdroid
+

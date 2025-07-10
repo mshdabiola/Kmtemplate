@@ -1,44 +1,27 @@
-/*
- * Copyright (C) 2025 AntsyLich and The Mihon Authors
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Affero General Public License as published
- * by the Free Software Foundation, version 3.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU Affero General Public License for more details.
- *
- * You should have received a copy of the GNU Affero General Public License
- * along with this program. If not, see <https://www.gnu.org/licenses/>.
- *
- * SPDX-License-Identifier: AGPL-3.0-only
- */
+
 pluginManagement {
     repositories {
         includeBuild("build-logic")
-        // maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
         google()
         mavenCentral()
         gradlePluginPortal()
     }
 }
-
-// settings.gradle.kts
-plugins {
-    id("org.gradle.toolchains.foojay-resolver") version "1.0.0"
-}
-
-toolchainManagement {
-    jvm {
-        javaRepositories {
-            repository("foojay") {
-                resolverClass.set(org.gradle.toolchains.foojay.FoojayToolchainResolver::class.java)
-            }
-        }
-    }
-}
+//
+//// settings.gradle.kts
+//plugins {
+//    id("org.gradle.toolchains.foojay-resolver") version "1.0.0"
+//}
+//
+//toolchainManagement {
+//    jvm {
+//        javaRepositories {
+//            repository("foojay") {
+//                resolverClass.set(org.gradle.toolchains.foojay.FoojayToolchainResolver::class.java)
+//            }
+//        }
+//    }
+//}
 
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
@@ -72,5 +55,4 @@ include(":app")
 include(":features:main")
 include(":features:detail")
 include(":features:setting")
-// include(":lint")
 include(":ktlint")
