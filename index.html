@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Main Website - Home</title>
+
+    <style>
+        :root {
+            --backdrop: #f8f8f8;
+            --foreground: black;
+            --button-text: white;
+            --button-face: #01e675;
+            --pane-color: #fff;
+            --no-go-color: #f3f3f3;
+            --note-text: #3d3d3d;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --backdrop: #44475A;
+                --foreground: #F8F8F2;
+                --button-text: #F8F8F2;
+                --button-face: #07e73f;
+                --pane-color: #282A36;
+                --no-go-color: #282A36;
+                --note-text: #c3c3c3;
+            }
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+            font-size: x-large; /* Adjusted for general page content, might need fine-tuning */
+            background-color: var(--backdrop);
+            color: var(--foreground);
+            min-height: 100%;
+            margin: 0;
+        }
+
+        html {
+            height: 100%;
+        }
+
+        /* Styles for the download button (applied to general links/buttons if class is used) */
+        .download-button > svg > g > path {
+            fill: var(--button-text);
+        }
+
+        .download-button > svg {
+            padding-right: 1em
+        }
+
+        .download-button:hover {
+            filter: brightness(1.02);
+        }
+
+        /* Applying the pane style to main content sections for consistency */
+        .pane {
+            align-items: center;
+            background-color: var(--pane-color);
+            border-radius: 4px;
+            box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2),0px 1px 1px 0px rgba(0, 0, 0, 0.14),0px 1px 3px 0px rgba(0,0,0,.3);
+            box-sizing: border-box;
+            display: flex; /* Using flex to help with content layout */
+            flex-direction: column;
+            padding: 2em;
+            margin: 1em auto; /* Center the pane */
+            max-width: 900px; /* Limit width for readability */
+            text-align: center; /* Center text within panes */
+        }
+
+        /* Mobile adjustments from your download.html */
+        @media only screen and (min-device-width: 768px) {
+            .download-button {
+                align-items: center;
+                background-color: var(--button-face);
+                border-radius: 80px;
+                color: var(--button-text) !important;
+                cursor: pointer;
+                display: inline-flex;
+                font-weight: 500;
+                justify-content: center;
+                letter-spacing: 0.071em;
+                padding: 25px 45px;
+                text-decoration: none;
+                text-transform: uppercase;
+                white-space: nowrap;
+                width: 23em; /* Keep button width consistent */
+            }
+        }
+
+        @media only screen and (max-device-width: 768px) {
+            /** Mobile. */
+            body { /* Adjusted font size for mobile on general page */
+                font-size: large;
+            }
+            .pane {
+                margin: 0.5em; /* Smaller margin on mobile */
+                padding: 1.5em;
+            }
+            .download-button { /* Adjust button size for mobile */
+                width: auto;
+                padding: 15px 25px;
+            }
+        }
+
+        /* General styles for consistent look */
+        h1, h2, h3 {
+            color: var(--foreground);
+            margin-top: 0;
+        }
+
+        p {
+            color: var(--foreground);
+            line-height: 1.8;
+        }
+
+        a {
+            color: var(--button-face); /* Links use your accent color */
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* Navigation styling */
+        nav ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+            gap: 20px; /* Space between nav items */
+        }
+
+        nav ul li a {
+            color: var(--foreground); /* Nav links might be different color */
+            font-size: large;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        nav ul li a:hover {
+            color: var(--button-face);
+            text-decoration: none;
+        }
+
+        /* Specific styles for index page layout */
+        .header-content {
+            padding: 2em;
+            text-align: center;
+        }
+
+        .hero-section {
+            padding: 3em 1em;
+            background-color: var(--pane-color); /* Use pane color for sections */
+            border-radius: 4px;
+            margin-bottom: 2em;
+            box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2),0px 1px 1px 0px rgba(0, 0, 0, 0.14),0px 1px 3px 0px rgba(0,0,0,.3);
+        }
+
+        .section-content {
+            padding: 1.5em 1em;
+            background-color: var(--pane-color);
+            border-radius: 4px;
+            margin-bottom: 2em;
+            box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2),0px 1px 1px 0px rgba(0, 0, 0, 0.14),0px 1px 3px 0px rgba(0,0,0,.3);
+        }
+
+        .features-list {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .features-list li {
+            background-color: var(--backdrop); /* Use backdrop for list item background */
+            padding: 1em;
+            border-radius: 4px;
+            box-shadow: inset 0 0 5px rgba(0,0,0,0.1);
+            flex: 1 1 calc(33% - 40px); /* For 3 columns, adjust as needed */
+            min-width: 250px; /* Minimum width before wrapping */
+            text-align: left;
+            box-sizing: border-box; /* Include padding in width calculation */
+        }
+        .features-list li::before {
+            content: "• "; /* Simple bullet point */
+            color: var(--button-face);
+            font-weight: bold;
+            margin-right: 5px;
+        }
+
+        footer {
+            padding: 2em;
+            text-align: center;
+            background-color: var(--pane-color); /* Use pane color for footer */
+            color: var(--note-text); /* Use note text color for footer text */
+            box-shadow: 0px -2px 1px -1px rgba(0, 0, 0, 0.2);
+            margin-top: 2em;
+        }
+    </style>
+    </head>
+<body>
+    <header>
+        <div class="header-content pane">
+            <h1>Kotlin Multiplatform Template</h1>
+            <p>Your cross-platform solution for desktop and mobile applications.</p>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="features.html">Features</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="download.html">Download App</a></li> <li><a href="https://github.com/mshdabiola/KotlinMultiplatformTemplate/releases" target="_blank" rel="noopener noreferrer">Android App (GitHub)</a></li> </ul>
+        </nav>
+    </header>
+
+    <main class="pane">
+        <section class="hero-section">
+            <h2>Build Once, Deploy Everywhere.</h2>
+            <p>Leverage the power of Kotlin Multiplatform to create stunning and performant applications for desktop (Windows, macOS, Linux) and Android from a single codebase.</p>
+            <a href="download.html" class="download-button">
+                <svg width="2em" height="2em" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 3V17M12 17L17 12M12 17L7 12M21 17H3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <span>Get Desktop App</span>
+            </a>
+            <p style="margin-top: 1em;">
+                <a href="https://github.com/mshdabiola/KotlinMultiplatformTemplate/releases" target="_blank" rel="noopener noreferrer">Download Android App from GitHub Releases</a>
+            </p>
+        </section>
+
+        <section class="section-content">
+            <h3>Key Advantages</h3>
+            <ul class="features-list">
+                <li>
+                    <h4>Single Codebase</h4>
+                    <p>Develop your logic once and reuse it across multiple platforms, saving time and effort.</p>
+                </li>
+                <li>
+                    <h4>Native Performance</h4>
+                    <p>Enjoy native UI and performance on each platform for a smooth user experience.</p>
+                </li>
+                <li>
+                    <h4>Rich Ecosystem</h4>
+                    <p>Benefit from the extensive Kotlin and Java libraries, along with platform-specific APIs.</p>
+                </li>
+                <li>
+                    <h4>Faster Development</h4>
+                    <p>Streamline your development process with modern tools and frameworks.</p>
+                </li>
+                <li>
+                    <h4>Cross-Platform UI</h4>
+                    <p>Explore options like Compose Multiplatform for shared UI across desktop and Android.</p>
+                </li>
+            </ul>
+        </section>
+
+        <section class="section-content">
+            <h3>About This Template</h3>
+            <p>This template provides a solid foundation for your Kotlin Multiplatform projects, featuring a ready-to-use structure for common application needs. It showcases best practices for building robust and scalable cross-platform applications.</p>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 KotlinMultiplatformTemplate. All rights reserved.</p>
+        <p class="smaller-fonts">Powered by a passionate coding partner.</p>
+    </footer>
+</body>
+</html>
