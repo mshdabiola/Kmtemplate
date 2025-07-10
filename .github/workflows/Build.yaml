@@ -44,7 +44,7 @@ jobs:
       - name: Copy CI gradle.properties
         run: mkdir -p ~/.gradle ; cp .github/ci-gradle.properties ~/.gradle/gradle.properties
 
-      - name: Set up JDK 
+      - name: Set up JDK
         uses: actions/setup-java@v4
         with:
           distribution: 'zulu'
@@ -211,7 +211,7 @@ jobs:
         uses: codecov/codecov-action@v5.4.3
         with:
             token: ${{ secrets.CODECOV_TOKEN }}
-            files: "**/reportJvm.xml"
+            files: "app/build/reports/kover/reportJvm.xml"
             verbose: true
 
       - name: Push new Spotless Apply if available
