@@ -95,7 +95,7 @@ ktlint = "12.3.0"
 detekt = "1.23.8"
 
 ktlint2 = "1.5.0"
-spotless = "7.0.4"
+spotless = "7.1.0"
 
 series = "0.0.19"
 calf = "0.7.1"
