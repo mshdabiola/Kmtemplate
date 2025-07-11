@@ -19,7 +19,6 @@ import co.touchlab.kermit.Logger
 import com.mshdabiola.analytics.AnalyticsHelper
 import com.mshdabiola.datastore.Store
 import com.mshdabiola.model.DarkThemeConfig
-import com.mshdabiola.model.ThemeBrand
 import com.mshdabiola.model.UserData
 import kotlinx.coroutines.flow.Flow
 
@@ -36,11 +35,11 @@ internal class OfflineFirstUserDataRepository(
         settings
             .userData
 
-    override suspend fun setThemeBrand(themeBrand: ThemeBrand) {
+    override suspend fun setContrast(contrast: Int) {
         settings.updateUserData {
-            it.copy(themeBrand)
+            it.copy(contrast = contrast)
         }
-        analyticsHelper.logThemeChanged(themeBrand.name)
+        // analyticsHelper.logThemeChanged(themeBrand.name)
     }
 
     override suspend fun setDarkThemeConfig(darkThemeConfig: DarkThemeConfig) {
