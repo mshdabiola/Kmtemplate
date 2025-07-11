@@ -2,26 +2,27 @@
 pluginManagement {
     repositories {
         includeBuild("build-logic")
+        // maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
         google()
         mavenCentral()
         gradlePluginPortal()
     }
 }
-//
-//// settings.gradle.kts
-//plugins {
-//    id("org.gradle.toolchains.foojay-resolver") version "1.0.0"
-//}
-//
-//toolchainManagement {
-//    jvm {
-//        javaRepositories {
-//            repository("foojay") {
-//                resolverClass.set(org.gradle.toolchains.foojay.FoojayToolchainResolver::class.java)
-//            }
-//        }
-//    }
-//}
+
+// settings.gradle.kts
+plugins {
+    id("org.gradle.toolchains.foojay-resolver") version "1.0.0"
+}
+
+toolchainManagement {
+    jvm {
+        javaRepositories {
+            repository("foojay") {
+                resolverClass.set(org.gradle.toolchains.foojay.FoojayToolchainResolver::class.java)
+            }
+        }
+    }
+}
 
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
@@ -55,4 +56,5 @@ include(":app")
 include(":features:main")
 include(":features:detail")
 include(":features:setting")
+// include(":lint")
 include(":ktlint")
