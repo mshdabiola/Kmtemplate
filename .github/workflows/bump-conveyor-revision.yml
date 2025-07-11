@@ -18,10 +18,10 @@ jobs:
       - name: Read and increment revision
         id: bump
         run: |
-          rev=$(cat .revision-version)
+          rev=$(cat .github/workflows/.revision-version) # Updated path
           new_rev=$((rev + 1))
           echo "New revision: $new_rev"
-          echo "$new_rev" > .revision-version
+          echo "$new_rev" > .github/workflows/.revision-version # Updated path
           # Update revision in ci.conveyor.conf
           sed -i -E "s/(revision\s*=\s*")[0-9]+(\")/\1$new_rev\2/" ci.conveyor.conf
           # If the above doesn't match, try without quotes
@@ -30,6 +30,7 @@ jobs:
 
       - name: Commit and push changes
         run: |
-          git add .revision-version ci.conveyor.conf
+          git add .github/workflows/.revision-version ci.conveyor.conf # Updated path
           git commit -m "chore: bump Conveyor revision to ${{ env.revision }}" || echo "No changes to commit"
           git push
+
