@@ -1,4 +1,4 @@
-name:  Pre Release Deploy All Android to github
+name:  Pre Release of Android, Desktop, and Web
 
 on:
   push:
@@ -11,8 +11,7 @@ permissions:
   packages: write
 
 jobs:
-  ## 3
-  build:
+  android:
     name: Build and  Deploy Android Pre Release
     runs-on: ubuntu-latest
     steps:
@@ -87,7 +86,7 @@ jobs:
           bodyFile: distribution/whatsnew/whatsnew-en-US
           prerelease: true
 
-    
+  desktop:
     name: Build and  Deploy Desktop Pre Release
     runs-on: ubuntu-latest
     steps:
@@ -119,6 +118,7 @@ jobs:
           extra_flags: -f ci.conveyor.conf
           agree_to_license: 1
 
+  web:
     name: Build and  Deploy Web Pre Release
     runs-on: ubuntu-latest
     steps:
@@ -140,7 +140,7 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@v4.7.3
         with:
           GITHUB_TOKEN: ${{ secrets.TOKEN }}
-          BRANCH: prerelease-web # The branch the action should deploy to.
+          BRANCH: prerelease-compose-web # The branch the action should deploy to.
           FOLDER: app/build/dist/wasmJs/productionExecutable # The folder the action should deploy.
           CLEAN: true # Automatically remove deleted files from the deploy branch
 
