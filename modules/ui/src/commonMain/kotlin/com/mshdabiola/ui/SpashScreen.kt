@@ -30,7 +30,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.mshdabiola.designsystem.drawable.defaultAppIcon
-import com.mshdabiola.designsystem.theme.MyColors
+import com.mshdabiola.designsystem.theme.onPrimaryLight
+import com.mshdabiola.designsystem.theme.primaryLight
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
@@ -40,7 +41,7 @@ fun SplashScreen(
 ) {
     Surface(
         modifier = modifier,
-        color = MyColors.Default.primaryLight,
+        color = primaryLight,
     ) {
         Column(
             modifier =
@@ -59,7 +60,7 @@ fun SplashScreen(
             Text(
                 text = appName,
                 style = MaterialTheme.typography.headlineSmall,
-                color = MyColors.Default.onPrimaryLight,
+                color = onPrimaryLight,
             )
         }
     }
