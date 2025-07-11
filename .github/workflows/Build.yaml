@@ -60,24 +60,8 @@ jobs:
       - name: Check build-logic
         run: ./gradlew check -p build-logic
 
-      - name: Check Spotless, Detekt and Design system is used
-        id: spotless_check
-        continue-on-error: true
-        run: ./gradlew lintCheck :build-logic:convention:spotlessCheck
-
-      - name: Prevent updating Spotless if this is a fork
-        id: checkfork_spotless
-        continue-on-error: false
-        if: steps.spotless_check.outcome == 'failure' && github.event.pull_request.head.repo.full_name != github.repository
-        run: |
-          echo "::error::Spotless failed, please update  with: ./gradlew spotlessApply" && exit 1
-
-      - name: Apply Spotless if check failed and it's a PR
-        id: spotless_apply
-        continue-on-error: true
-        if: steps.spotless_check.outcome == 'failure' && github.event_name == 'pull_request'
-        run: |
-          ./gradlew spotlessApply :build-logic:convention:spotlessApply
+      - name: Check Detekt and Design system is used
+        run: ./gradlew lintCheck
 
       - name: Upload merge detekt
         uses: github/codeql-action/upload-sarif@v3.29.2
@@ -85,7 +69,6 @@ jobs:
         with:
           sarif_file: build/reports/detekt/merge.sarif
           category: detekt
-
 
       - name: Check Dependency Guard
         id: dependencyguard_verify
@@ -192,13 +175,14 @@ jobs:
       - name: Check badging
         run: ./gradlew checkFossReliantReleaseBadging
 
+      - name: Apply Spotless
+        run: |
+          ./gradlew spotlessApply :build-logic:convention:spotlessApply
+
       - name: Push new Spotless Apply if available
         uses: stefanzweifel/git-auto-commit-action@v5
-        continue-on-error: true
-        if: steps.spotless_apply.outcome == 'success'
         with:
           file_pattern: '**/*.kt **/*.kts **/*.java **/*.xml'
-          disable_globbing: true
           commit_message: "🤖 Apply Spotless formatting"
 
       - name: Push new Dependency Guard baselines if available
