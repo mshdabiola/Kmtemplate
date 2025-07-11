@@ -149,7 +149,7 @@ internal fun MainContent(
                 },
             headlineContent = { Text("Theme") },
             supportingContent = {
-                Text(themeArray.getOrNull(settingState.themeBrand.ordinal) ?: "")
+                Text(themeArray.getOrNull(settingState.contrast) ?: "")
             },
         )
 
@@ -166,7 +166,7 @@ internal fun MainContent(
         OptionsDialog(
             modifier = Modifier,
             options = themeArray,
-            current = settingState.themeBrand.ordinal,
+            current = settingState.contrast,
             onDismiss = { theme = false },
             onSelect = { setTheme(ThemeBrand.entries[it]) },
         )

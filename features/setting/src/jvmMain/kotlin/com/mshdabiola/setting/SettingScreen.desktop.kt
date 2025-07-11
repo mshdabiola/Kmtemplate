@@ -20,7 +20,6 @@ import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.mshdabiola.model.DarkThemeConfig
-import com.mshdabiola.model.ThemeBrand
 import kotlinmultiplatformtemplate.features.setting.generated.resources.Res
 import kotlinmultiplatformtemplate.features.setting.generated.resources.theme
 import org.jetbrains.compose.resources.stringArrayResource
@@ -43,7 +42,7 @@ fun ScreenPreview() {
         modifier = Modifier,
         settingState =
         SettingState.Success(
-            themeBrand = ThemeBrand.DEFAULT,
+            contrast = 0,
             darkThemeConfig = DarkThemeConfig.DARK,
         ),
     )

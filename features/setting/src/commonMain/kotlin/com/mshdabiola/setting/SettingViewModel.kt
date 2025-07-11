@@ -40,7 +40,7 @@ class SettingViewModel constructor(
         viewModelScope.launch {
             _settingState.value = SettingState.Loading()
 
-            userDataRepository.setThemeBrand(themeBrand)
+            userDataRepository.setContrast(0)
 
             update()
         }
@@ -64,7 +64,7 @@ class SettingViewModel constructor(
             _settingState.value =
                 userDataRepository.userData.map {
                     SettingState.Success(
-                        themeBrand = it.themeBrand,
+                        contrast = it.contrast,
                         darkThemeConfig = it.darkThemeConfig,
                     )
                 }.first()
