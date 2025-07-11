@@ -20,7 +20,6 @@ import androidx.datastore.core.DataStoreFactory
 import androidx.datastore.core.okio.OkioSerializer
 import androidx.datastore.core.okio.OkioStorage
 import com.mshdabiola.model.DarkThemeConfig
-import com.mshdabiola.model.ThemeBrand
 import com.mshdabiola.model.UserData
 import kotlinx.serialization.json.Json
 import okio.BufferedSink
@@ -48,7 +47,7 @@ object UserDataJsonSerializer : OkioSerializer<UserData> {
     override val defaultValue: UserData
         get() =
             UserData(
-                themeBrand = ThemeBrand.DEFAULT,
+                contrast = 0,
                 darkThemeConfig = DarkThemeConfig.LIGHT,
                 useDynamicColor = false,
                 shouldHideOnboarding = false,
