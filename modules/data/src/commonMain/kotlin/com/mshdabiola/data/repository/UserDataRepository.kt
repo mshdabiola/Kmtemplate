@@ -16,7 +16,6 @@
 package com.mshdabiola.data.repository
 
 import com.mshdabiola.model.DarkThemeConfig
-import com.mshdabiola.model.ThemeBrand
 import com.mshdabiola.model.UserData
 import kotlinx.coroutines.flow.Flow
 
@@ -26,7 +25,7 @@ interface UserDataRepository {
      */
     val userData: Flow<UserData>
 
-    suspend fun setThemeBrand(themeBrand: ThemeBrand)
+    suspend fun setContrast(contrast: Int)
 
     /**
      * Sets the desired dark theme config.
