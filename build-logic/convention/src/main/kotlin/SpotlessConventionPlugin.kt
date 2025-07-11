@@ -63,7 +63,6 @@ class SpotlessConventionPlugin : Plugin<Project> {
                 add("ktlint", project(":ktlint"))
             }
 
-
             tasks.register("lintCheck") {
                 dependsOn(tasks.named("ktlintCheck"))
                 dependsOn(tasks.named("detekt"))
