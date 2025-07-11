@@ -65,7 +65,6 @@ import com.mshdabiola.kotlinmultiplatformtemplate.MainActivityUiState
 import com.mshdabiola.kotlinmultiplatformtemplate.MainAppViewModel
 import com.mshdabiola.kotlinmultiplatformtemplate.navigation.KotlinMultiplatformTemplateAppNavHost
 import com.mshdabiola.model.DarkThemeConfig
-import com.mshdabiola.model.ThemeBrand
 import com.mshdabiola.setting.navigation.navigateToSetting
 import com.mshdabiola.ui.semanticsCommon
 import org.koin.compose.koinInject
@@ -93,7 +92,7 @@ fun KotlinMultiplatformTemplateApp() {
 
     CompositionLocalProvider(LocalAnalyticsHelper provides analyticsHelper) {
         KmtTheme(
-            androidTheme = shouldUseAndroidTheme(uiState),
+            contrast = chooseContrast(uiState),
             darkTheme = darkTheme,
             disableDynamicTheming = shouldDisableDynamicTheming(uiState),
         ) {
@@ -216,14 +215,10 @@ fun KotlinMultiplatformTemplateApp() {
 //    }
 
 @Composable
-private fun shouldUseAndroidTheme(uiState: MainActivityUiState): Boolean =
+private fun chooseContrast(uiState: MainActivityUiState): Int =
     when (uiState) {
-        MainActivityUiState.Loading -> false
-        is MainActivityUiState.Success ->
-            when (uiState.userData.themeBrand) {
-                ThemeBrand.DEFAULT -> false
-                ThemeBrand.GREEN -> true
-            }
+        MainActivityUiState.Loading -> 0
+        is MainActivityUiState.Success -> uiState.userData.contrast
     }
 
 @Composable
