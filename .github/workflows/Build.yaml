@@ -219,7 +219,7 @@ jobs:
       - name: Upload build artifacts for Foss Reliant
         uses: actions/upload-artifact@v4
         with:
-          name: APKs
+          name: Foss Reliant APKs
           path: '**/build/outputs/apk/**/*.apk'
 
   buildGooglePlay:
@@ -259,7 +259,7 @@ jobs:
       - name: Upload build artifacts for Google Play
         uses: actions/upload-artifact@v4
         with:
-          name: APKs
+          name: Google Play APKs
           path: '**/build/outputs/apk/**/*.apk'
 
   androidTest:
