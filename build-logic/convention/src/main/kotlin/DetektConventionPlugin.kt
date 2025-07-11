@@ -1,9 +1,11 @@
+import com.mshdabiola.app.libs
 import io.gitlab.arturbosch.detekt.Detekt
 import io.gitlab.arturbosch.detekt.extensions.DetektExtension
 import io.gitlab.arturbosch.detekt.report.ReportMergeTask
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure
+import org.gradle.kotlin.dsl.dependencies
 import org.gradle.kotlin.dsl.getValue
 import org.gradle.kotlin.dsl.provideDelegate
 import org.gradle.kotlin.dsl.registering
@@ -14,13 +16,24 @@ class DetektConventionPlugin : Plugin<Project> {
         pluginManager.apply("io.gitlab.arturbosch.detekt")
 
         extensions.configure<DetektExtension> {
-            config.setFrom(files("$rootDir/detekt.yml"))
+            val rootDetektConfig = target.rootProject.file("detekt.yml")
+            val localDetektConfig = target.file("detekt.yml")
+
+            val rootDetektComposeConfig = target.rootProject.file("detekt-compose.yml")
+            if (localDetektConfig.exists()) {
+                config.from(localDetektConfig, rootDetektConfig,rootDetektComposeConfig)
+            } else {
+                config.from(rootDetektConfig, rootDetektComposeConfig)
+            }
+//            config.setFrom(files("$rootDir/detekt.yml"))
             buildUponDefaultConfig = true
             parallel = true
             ignoreFailures = true
             basePath = rootProject.projectDir.absolutePath
         }
-
+        dependencies {
+                add("detektPlugins", libs.findLibrary("detekt-compose").get())
+        }
         val reportMerge by tasks.registering(ReportMergeTask::class) {
             output.set(rootProject.layout.buildDirectory.file("reports/detekt/merge.sarif"))
         }

@@ -93,6 +93,7 @@ screenshot = "0.0.1-alpha10"
 kover = "0.9.1"
 ktlint = "13.0.0"
 detekt = "1.23.8"
+detektCompose = "0.1.6"
 
 ktlint2 = "1.5.0"
 spotless = "7.1.0"
@@ -249,6 +250,7 @@ compose-hot-gradlePlugin = { module = "org.jetbrains.compose.hot-reload:hot-relo
 spotless-gradlePlugin = { group = "com.diffplug.spotless", name = "spotless-plugin-gradle", version.ref = "spotless" }
 jlleitschuh-gradlePlugin = { module = "org.jlleitschuh.gradle:ktlint-gradle", version.ref = "ktlint" }
 detekt-gradlePlugin = { module = "io.gitlab.arturbosch.detekt:detekt-gradle-plugin", version.ref = "detekt" }
+detekt-compose= { module = "io.nlopez.compose.rules:detekt", version.ref = "detektCompose" }
 
 
 [plugins]
