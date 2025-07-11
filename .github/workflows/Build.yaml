@@ -44,7 +44,7 @@ jobs:
       - name: Copy CI gradle.properties
         run: mkdir -p ~/.gradle ; cp .github/ci-gradle.properties ~/.gradle/gradle.properties
 
-      - name: Set up JDK 
+      - name: Set up JDK
         uses: actions/setup-java@v4
         with:
           distribution: 'zulu'
@@ -56,45 +56,22 @@ jobs:
           build-scan-publish: true
           build-scan-terms-of-use-url: "https://gradle.com/terms-of-service"
           build-scan-terms-of-use-agree: "yes"
+      - name: Apply Spotless
+        run: |
+          ./gradlew spotlessApply :build-logic:convention:spotlessApply
 
       - name: Check build-logic
         run: ./gradlew check -p build-logic
 
-      - name: Check Spotless
-        id: spotless_check
-        continue-on-error: true
-        run: ./gradlew spotlessCheck :build-logic:convention:spotlessCheck
+      - name: Check Detekt and Design system is used
+        run: ./gradlew lintCheck
 
-      - name: Prevent updating Spotless if this is a fork
-        id: checkfork_spotless
-        continue-on-error: false
-        if: steps.spotless_check.outcome == 'failure' && github.event.pull_request.head.repo.full_name != github.repository
-        run: |
-          echo "::error::Spotless failed, please update  with: ./gradlew spotlessApply" && exit 1
-
-      - name: Apply Spotless if check failed and it's a PR
-        id: spotless_apply
-        continue-on-error: true
-        if: steps.spotless_check.outcome == 'failure' && github.event_name == 'pull_request'
-        run: |
-          ./gradlew spotlessApply :build-logic:convention:spotlessApply
-
-      - name: Merge Detekt Sarif
-        id: merge_dekekt
-        continue-on-error: true
-        run: ./gradlew detekt mergeDetektSarif
-
-      - uses: github/codeql-action/upload-sarif@v3.29.2
+      - name: Upload merge detekt
+        uses: github/codeql-action/upload-sarif@v3.29.2
         if: success() || failure()
         with:
-#          checkout_path: ${{ github.workspace }}
-          sarif_file: build/detekt-merged.sarif
+          sarif_file: build/reports/detekt/merge.sarif
           category: detekt
-
-      - name: Check If Design System is Follow
-        id: dscheck_verify
-        continue-on-error: true
-        run: ./gradlew ktlintCheck
 
       - name: Check Dependency Guard
         id: dependencyguard_verify
@@ -134,18 +111,6 @@ jobs:
         run: |
           ./gradlew updateFossReliantDebugScreenshotTest
 
-      - name: Create Module Graph
-        if: github.event_name == 'pull_request'
-        run: ./gradlew createModuleGraph
-
-      # Run local tests after screenshot tests to avoid wrong UP-TO-DATE. TODO: Ignore screenshots.
-      - name: Run local tests and create report
-        if: always()
-        run: ./gradlew jvmTest
-      # Replace task exclusions with `-Pandroidx.baselineprofile.skipgeneration` when
-      # https://android-review.googlesource.com/c/platform/frameworks/support/+/2602790 landed in a
-      # release build
-
       - name: Build all build type and flavor permutations
         run: ./gradlew assembleFossReliant :benchmarks:assembleFossReliant
           -x pixel6Api33FossReliantNonMinifiedReleaseAndroidTest
@@ -158,6 +123,9 @@ jobs:
         with:
           name: APKs
           path: '**/build/outputs/apk/**/*.apk'
+
+      - name: Generate coverage reports for Jvm
+        run: ./gradlew koverXmlReportJvm; ./gradlew koverHtmlReportJvm   #koverHtmlReportJvm
 
       - name: Upload JVM local results (HTML)
         if: always()
@@ -174,6 +142,22 @@ jobs:
             large_files: true
             ignore_runs: false
             files: ./**/build/test-results/**/*.xml
+
+      - name: Upload local coverage reports (XML + HTML) (only API 30)
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-reports
+          if-no-files-found: error
+          compression-level: 1
+          overwrite: false
+          path: '**/build/reports/kover/'
+
+      - name: Upload coverage
+        uses: codecov/codecov-action@v5.4.3
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: "app/build/reports/kover/reportJvm.xml"
+          verbose: true
 
       - name: Check lint
         run: ./gradlew lintFossReliantRelease
@@ -194,33 +178,10 @@ jobs:
       - name: Check badging
         run: ./gradlew checkFossReliantReleaseBadging
 
-      - name: Generate coverage reports for Jvm
-        run: ./gradlew koverXmlReportJvm; ./gradlew koverHtmlReportJvm   #koverHtmlReportJvm
-
-
-      - name: Upload local coverage reports (XML + HTML) (only API 30)
-        uses: actions/upload-artifact@v4
-        with:
-          name: coverage-reports
-          if-no-files-found: error
-          compression-level: 1
-          overwrite: false
-          path: '**/build/reports/kover/'
-
-      - name: Upload coverage
-        uses: codecov/codecov-action@v5.4.3
-        with:
-            token: ${{ secrets.CODECOV_TOKEN }}
-            files: "**/reportJvm.xml"
-            verbose: true
-
       - name: Push new Spotless Apply if available
         uses: stefanzweifel/git-auto-commit-action@v5
-        continue-on-error: true
-        if: steps.spotless_apply.outcome == 'success'
         with:
           file_pattern: '**/*.kt **/*.kts **/*.java **/*.xml'
-          disable_globbing: true
           commit_message: "🤖 Apply Spotless formatting"
 
       - name: Push new Dependency Guard baselines if available

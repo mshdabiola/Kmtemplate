@@ -30,7 +30,7 @@ class AndroidApplicationConventionPlugin : Plugin<Project> {
         with(target) {
             with(pluginManager) {
                 apply("com.android.application")
-                apply("org.jetbrains.kotlinx.kover")
+                apply("mshdabiola.kover")
                 apply("mshdabiola.android.lint")
                 apply("com.dropbox.dependency-guard")
                 apply("mshdabiola.spotless")
