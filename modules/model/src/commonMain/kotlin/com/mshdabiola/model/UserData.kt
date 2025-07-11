@@ -22,7 +22,7 @@ import kotlinx.serialization.Serializable
  */
 @Serializable
 data class UserData(
-    val themeBrand: ThemeBrand = ThemeBrand.DEFAULT,
+    val contrast: Int = 0,
     val darkThemeConfig: DarkThemeConfig = DarkThemeConfig.DARK,
     val useDynamicColor: Boolean = true,
     val shouldHideOnboarding: Boolean = false,
