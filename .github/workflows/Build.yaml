@@ -18,8 +18,8 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  test_and_apk:
-    name: "Local tests and APKs"
+  test:
+    name: "Local tests"
     runs-on: ubuntu-latest
 
     permissions:
@@ -34,12 +34,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-#        with:
-#          ref: ${{ github.event.pull_request.head.ref }}
-#          repository: ${{ github.event.pull_request.head.repo.full_name }}
-
-      - name: Validate Gradle Wrapper
-        uses: gradle/wrapper-validation-action@v3
 
       - name: Copy CI gradle.properties
         run: mkdir -p ~/.gradle ; cp .github/ci-gradle.properties ~/.gradle/gradle.properties
@@ -56,6 +50,7 @@ jobs:
           build-scan-publish: true
           build-scan-terms-of-use-url: "https://gradle.com/terms-of-service"
           build-scan-terms-of-use-agree: "yes"
+
       - name: Apply Spotless
         run: |
           ./gradlew spotlessApply :build-logic:convention:spotlessApply
@@ -110,19 +105,6 @@ jobs:
         if: steps.screenshotsverify.outcome == 'failure' && github.event_name == 'pull_request'
         run: |
           ./gradlew updateFossReliantDebugScreenshotTest
-
-      - name: Build all build type and flavor permutations
-        run: ./gradlew assembleFossReliant :benchmarks:assembleFossReliant
-          -x pixel6Api33FossReliantNonMinifiedReleaseAndroidTest
-          -x pixel6Api33FossReliantNonMinifiedBenchmarkAndroidTest
-          -x collectFossReliantNonMinifiedReleaseBaselineProfile
-          -x collectFossReliantNonMinifiedBenchmarkBaselineProfile
-
-      - name: Upload build outputs (APKs)
-        uses: actions/upload-artifact@v4
-        with:
-          name: APKs
-          path: '**/build/outputs/apk/**/*.apk'
 
       - name: Generate coverage reports for Jvm
         run: ./gradlew koverXmlReportJvm; ./gradlew koverHtmlReportJvm   #koverHtmlReportJvm
@@ -200,6 +182,86 @@ jobs:
           disable_globbing: true
           commit_message: "🤖 Updates screenshots"
 
+  buildFossReliant:
+    name: "Build Foss Reliant"
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Copy CI gradle.properties
+        run: mkdir -p ~/.gradle ; cp .github/ci-gradle.properties ~/.gradle/gradle.properties
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version-file: .github/workflows/.java-version
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          build-scan-publish: true
+          build-scan-terms-of-use-url: "https://gradle.com/terms-of-service"
+          build-scan-terms-of-use-agree: "yes"
+
+      - name: Build all Foss Reliant APKs
+        run: ./gradlew assembleFossReliant :benchmarks:assembleFossReliant
+          -x pixel6Api33FossReliantNonMinifiedReleaseAndroidTest
+          -x pixel6Api33FossReliantNonMinifiedBenchmarkAndroidTest
+          -x collectFossReliantNonMinifiedReleaseBaselineProfile
+          -x collectFossReliantNonMinifiedBenchmarkBaselineProfile
+
+      - name: Upload build artifacts for Foss Reliant
+        uses: actions/upload-artifact@v4
+        with:
+          name: APKs
+          path: '**/build/outputs/apk/**/*.apk'
+
+  buildGooglePlay:
+    name: "Build Google Play"
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Copy CI gradle.properties
+        run: mkdir -p ~/.gradle ; cp .github/ci-gradle.properties ~/.gradle/gradle.properties
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version-file: .github/workflows/.java-version
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          build-scan-publish: true
+          build-scan-terms-of-use-url: "https://gradle.com/terms-of-service"
+          build-scan-terms-of-use-agree: "yes"
+
+      - name: Build all Google Play APKs
+        run: ./gradlew assembleGooglePlay :benchmarks:assembleGooglePlay
+          -x pixel6Api33GooglePlayNonMinifiedReleaseAndroidTest
+          -x pixel6Api33GooglePlayNonMinifiedBenchmarkAndroidTest
+          -x collectGooglePlayNonMinifiedReleaseBaselineProfile
+          -x collectGooglePlayNonMinifiedBenchmarkBaselineProfile
+
+      - name: Upload build artifacts for Google Play
+        uses: actions/upload-artifact@v4
+        with:
+          name: APKs
+          path: '**/build/outputs/apk/**/*.apk'
+
   androidTest:
     runs-on: ubuntu-latest
     timeout-minutes: 55
@@ -232,11 +294,11 @@ jobs:
       - name: Copy CI gradle.properties
         run: mkdir -p ~/.gradle ; cp .github/ci-gradle.properties ~/.gradle/gradle.properties
 
-      - name: Set up JDK 17
+      - name: Set up JDK
         uses: actions/setup-java@v4
         with:
           distribution: 'zulu'
-          java-version: 17
+          java-version-file: .github/workflows/.java-version
 
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v4
