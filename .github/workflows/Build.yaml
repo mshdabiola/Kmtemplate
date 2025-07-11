@@ -79,16 +79,15 @@ jobs:
         run: |
           ./gradlew spotlessApply :build-logic:convention:spotlessApply
 
-      - name: Merge Detekt Sarif
-        id: merge_dekekt
+      - name: Detekt Sarif
+        id: dekekt
         continue-on-error: true
-        run: ./gradlew detekt mergeDetektSarif
+        run: ./gradlew detekt
 
       - uses: github/codeql-action/upload-sarif@v3.29.2
         if: success() || failure()
         with:
-#          checkout_path: ${{ github.workspace }}
-          sarif_file: build/detekt-merged.sarif
+          sarif_file: build/reports/detekt/merge.sarif
           category: detekt
 
       - name: Check If Design System is Follow
@@ -134,9 +133,6 @@ jobs:
         run: |
           ./gradlew updateFossReliantDebugScreenshotTest
 
-      - name: Create Module Graph
-        if: github.event_name == 'pull_request'
-        run: ./gradlew createModuleGraph
 
       # Run local tests after screenshot tests to avoid wrong UP-TO-DATE. TODO: Ignore screenshots.
       - name: Run local tests and create report
