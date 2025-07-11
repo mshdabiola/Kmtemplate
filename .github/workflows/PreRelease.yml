@@ -1,0 +1,147 @@
+name:  Pre Release Deploy All Android to github
+
+on:
+  push:
+    tags:
+      - '[0-9]+.[0-9]+.[0-9]+-*'
+  workflow_dispatch: # Allows manual triggering from the GitHub UI
+
+permissions:
+  contents: write
+  packages: write
+
+jobs:
+  ## 3
+  build:
+    name: Build and  Deploy Android Pre Release
+    runs-on: ubuntu-latest
+    steps:
+      # 1
+      - uses: actions/checkout@v4
+
+      - name: Set up JDK 
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version-file: .github/workflows/.java-version
+      # 2
+
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Accept Android licenses
+        run: yes | "$ANDROID_HOME"/cmdline-tools/latest/bin/sdkmanager --licenses || true
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          build-scan-publish: true
+          build-scan-terms-of-use-url: "https://gradle.com/terms-of-service"
+          build-scan-terms-of-use-agree: "yes"
+
+      - name: Build  google play release variant apk
+        run: ./gradlew assembleGooglePlayRelease
+
+      - name: Sign google play APK
+        uses: r0adkll/sign-android-release@v1.0.4
+        with:
+          releaseDirectory: app/build/outputs/apk/googlePlay/release
+          signingKeyBase64: ${{ secrets.SIGNING_KEY2 }}
+          alias: ${{ secrets.ALIAS }}
+          keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
+          keyPassword: ${{ secrets.KEY_PASSWORD }}
+        env:
+          BUILD_TOOLS_VERSION: "34.0.0"
+      
+          # sed -i -e '/with(target) {/,/^        }/d' -e '/CrashlyticsExtension/d' build-logic/convention/src/main/kotlin/AndroidApplicationFirebaseConventionPlugin.kt
+
+      - name: Remove Firebase References
+        run: |
+          sed -i -e '/maven(url = "https:\/\/androidx.dev\/storage\/compose-compiler/d' settings.gradle.kts
+          sed -i -e '/with(target) {/,/^        }/d' -e '/CrashlyticsExtension/d' build-logic/convention/src/main/kotlin/AndroidApplicationFirebaseConventionPlugin.kt
+          sed -i '/import com.google.firebase.perf.plugin.FirebasePerfExtension/d' build-logic/convention/src/main/kotlin/AndroidApplicationFirebaseConventionPlugin.kt
+          sed -i -e '/libs.firebase/d' build-logic/convention/build.gradle.kts
+          sed -i -e '/alias(libs.plugins.firebase./d' build.gradle.kts
+
+      - name: Build foss reliant release variant apk
+        run: ./gradlew assembleFossReliantRelease
+
+      - name: Sign foss reliant APK
+        uses: r0adkll/sign-android-release@v1.0.4
+        with:
+          releaseDirectory: app/build/outputs/apk/fossReliant/release
+          signingKeyBase64: ${{ secrets.SIGNING_KEY2 }}
+          alias: ${{ secrets.ALIAS }}
+          keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
+          keyPassword: ${{ secrets.KEY_PASSWORD }}
+        env:
+          BUILD_TOOLS_VERSION: "34.0.0"
+
+      - name: Draft Release
+        uses: ncipollo/release-action@v1.18.0
+        with:
+          allowUpdates: true
+          artifacts: "app/build/outputs/apk/**/**/**/*.apk,app/build/outputs/mapping/**/**/*.txt"
+          # token: ${{ secrets.TOKEN }}
+          generateReleaseNotes: true
+          bodyFile: distribution/whatsnew/whatsnew-en-US
+          prerelease: true
+
+    
+    name: Build and  Deploy Desktop Pre Release
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version-file: .github/workflows/.java-version
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          build-scan-publish: true
+          build-scan-terms-of-use-url: "https://gradle.com/terms-of-service"
+          build-scan-terms-of-use-agree: "yes"
+
+      - name: Build jar
+        run: ./gradlew createReleaseDistributable
+
+      - name: Run Conveyor
+        uses: hydraulic-software/conveyor/actions/build@v18.1
+        env:
+          TOKEN: ${{ secrets.TOKEN }}
+        with:
+          command: make copied-site
+          signing_key: ${{ secrets.SIGNING_KEY }}
+          extra_flags: -f ci.conveyor.conf
+          agree_to_license: 1
+
+    name: Build and  Deploy Web Pre Release
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up JDK 
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version-file: .github/workflows/.java-version
+
+      - name: kotlinUpgradeYarnLock
+        run: ./gradlew kotlinUpgradeYarnLock
+
+      - name: Build web app
+        run: ./gradlew wasmJsBrowserDistribution
+
+      - name: Deploy
+        uses: JamesIves/github-pages-deploy-action@v4.7.3
+        with:
+          GITHUB_TOKEN: ${{ secrets.TOKEN }}
+          BRANCH: prerelease-web # The branch the action should deploy to.
+          FOLDER: app/build/dist/wasmJs/productionExecutable # The folder the action should deploy.
+          CLEAN: true # Automatically remove deleted files from the deploy branch
+
+    
