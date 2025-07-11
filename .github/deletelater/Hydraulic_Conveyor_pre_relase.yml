@@ -1,0 +1,40 @@
+name: PreRelease Windows and Linux Hydraulic Conveyor
+
+on:
+  push:
+    tags:
+      - '[0-9]+.[0-9]+.[0-9]+-*' # Trigger on tags matching the pattern (e.g., 1.2.3-alpha, 0.1.0-rc1)
+  workflow_dispatch: # Allows manual triggering from the GitHub UI
+
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version-file: .github/workflows/.java-version
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          build-scan-publish: true
+          build-scan-terms-of-use-url: "https://gradle.com/terms-of-service"
+          build-scan-terms-of-use-agree: "yes"
+
+      - name: Build jar
+        run: ./gradlew createReleaseDistributable
+
+      - name: Run Conveyor
+        uses: hydraulic-software/conveyor/actions/build@v18.1
+        env:
+          TOKEN: ${{ secrets.TOKEN }}
+        with:
+          command: make copied-site
+          signing_key: ${{ secrets.SIGNING_KEY }}
+          extra_flags: -f ci.conveyor.conf
+          agree_to_license: 1

@@ -1,0 +1,37 @@
+name: Web CI
+
+on:
+  push:
+    tags:
+      - 'v[0-9]+.[0-9]+.[0-9]+'
+
+jobs:
+  build:
+
+    runs-on: ubuntu-24.04
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up JDK 
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version-file: .github/workflows/.java-version
+
+      - name: kotlinUpgradeYarnLock
+        run: ./gradlew kotlinUpgradeYarnLock
+
+
+      - name: Build web app
+        run: ./gradlew wasmJsBrowserDistribution
+
+      # If main branch update, deploy to gh-pages
+      - name: Deploy
+        #        if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main'
+        uses: JamesIves/github-pages-deploy-action@v4.7.3
+        with:
+          GITHUB_TOKEN: ${{ secrets.TOKEN }}
+          BRANCH: gh-web # The branch the action should deploy to.
+          FOLDER: app/build/dist/wasmJs/productionExecutable # The folder the action should deploy.
+          CLEAN: true # Automatically remove deleted files from the deploy branch
