@@ -17,7 +17,6 @@ package com.mshdabiola.testing.fake.repository
 
 import com.mshdabiola.data.repository.UserDataRepository
 import com.mshdabiola.model.DarkThemeConfig
-import com.mshdabiola.model.ThemeBrand
 import com.mshdabiola.model.UserData
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -36,9 +35,9 @@ class FakeUserDataRepository : UserDataRepository {
     override val userData: Flow<UserData> =
         _userData.asStateFlow()
 
-    override suspend fun setThemeBrand(themeBrand: ThemeBrand) {
+    override suspend fun setContrast(contrast: Int) {
         _userData.update {
-            it.copy(themeBrand = themeBrand)
+            it.copy(contrast = contrast)
         }
     }
 
