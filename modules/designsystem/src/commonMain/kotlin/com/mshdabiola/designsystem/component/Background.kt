@@ -164,7 +164,7 @@ fun BackgroundDynamic() {
 @Preview
 @Composable
 fun BackgroundAndroid() {
-    KmtTheme(androidTheme = true) {
+    KmtTheme {
         KmtBackground(Modifier.size(100.dp), content = {})
     }
 }
@@ -188,7 +188,7 @@ fun GradientBackgroundDynamic() {
 @Preview
 @Composable
 fun GradientBackgroundAndroid() {
-    KmtTheme(androidTheme = true) {
+    KmtTheme {
         KmtGradientBackground(Modifier.size(100.dp), content = {})
     }
 }
