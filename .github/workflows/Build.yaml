@@ -56,6 +56,9 @@ jobs:
           build-scan-publish: true
           build-scan-terms-of-use-url: "https://gradle.com/terms-of-service"
           build-scan-terms-of-use-agree: "yes"
+      - name: Apply Spotless
+        run: |
+          ./gradlew spotlessApply :build-logic:convention:spotlessApply
 
       - name: Check build-logic
         run: ./gradlew check -p build-logic
@@ -174,10 +177,6 @@ jobs:
 
       - name: Check badging
         run: ./gradlew checkFossReliantReleaseBadging
-
-      - name: Apply Spotless
-        run: |
-          ./gradlew spotlessApply :build-logic:convention:spotlessApply
 
       - name: Push new Spotless Apply if available
         uses: stefanzweifel/git-auto-commit-action@v5
