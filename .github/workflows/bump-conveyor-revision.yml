@@ -1,7 +1,14 @@
 name: Bump Conveyor Revision
 
+
+
 on:
   workflow_dispatch:
+
+permissions:
+  contents: write
+  packages: write
+  pull-requests: read
 
 jobs:
   bump-revision:
