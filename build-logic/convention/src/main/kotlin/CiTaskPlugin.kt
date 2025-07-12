@@ -16,29 +16,20 @@
 import com.mshdabiola.app.BumpConveyorRevisionTask
 import com.mshdabiola.app.BumpVersionTask
 import com.mshdabiola.app.SetVersionFromTagTask
-import io.gitlab.arturbosch.detekt.report.ReportMergeTask
 import org.gradle.api.Plugin
 import org.gradle.api.Project
-import org.gradle.api.plugins.JavaBasePlugin
 import org.gradle.kotlin.dsl.register
 
 class CiTaskPlugin : Plugin<Project> {
 
     override fun apply(target: Project) {
-//        target.tasks.register(MERGE_LINT_TASK_NAME, ReportMergeTask::class.java) {
-//            group = JavaBasePlugin.VERIFICATION_GROUP
-//            output.set(project.layout.buildDirectory.file("lint-merged.sarif"))
-//        }
-//        target.tasks.register(MERGE_DETEKT_TASK_NAME, ReportMergeTask::class.java) {
-//            group = JavaBasePlugin.VERIFICATION_GROUP
-//            output.set(project.layout.buildDirectory.file("detekt-merged.sarif"))
-//        }
         target.tasks.register<BumpConveyorRevisionTask>("bumpConveyorRevision") {
             description = "Reads, increments, and updates the Conveyor revision number in files."
 
             // Point the task to the necessary files
             revisionFile.set(target.rootProject.file(".github/workflows/.revision-version"))
-            outputRevisionFile.set(target.rootProject.file(".github/workflows/.revision-version")) // Same file for output
+            outputRevisionFile.set(target.rootProject.file(".github/workflows/.revision-version"))
+            // Same file for output
             conveyorConfigFile.set(target.rootProject.file("ci.conveyor.conf"))
 
             // Ensure the task always runs if needed, useful for tasks that modify files.
@@ -48,16 +39,18 @@ class CiTaskPlugin : Plugin<Project> {
             outputs.upToDateWhen { false }
         }
 
-
         target.tasks.register<BumpVersionTask>("bumpVersionNameAndCode") {
-            description = "Updates the versionName and increments the versionCode in gradle/libs.versions.toml."
+            description = "Updates the versionName and " +
+                "increments the versionCode in gradle/libs.versions.toml."
 
             // This property must be set when the task is called, e.g., via -PnewVersionName=...
             // There's no default here because it's expected to come from the tag.
-            newVersionName.convention("0.0.0") // Provide a default for local testing, will be overridden by -P
+            newVersionName.convention("0.0.0")
+            // Provide a default for local testing, will be overridden by -P
 
             libsVersionsTomlFile.set(target.rootProject.file("gradle/libs.versions.toml"))
-            outputLibsVersionsTomlFile.set(target.rootProject.file("gradle/libs.versions.toml")) // Same file
+            outputLibsVersionsTomlFile.set(target.rootProject.file("gradle/libs.versions.toml"))
+            // Same file
 
             // For tasks that modify files and are part of a CI/CD pipeline,
             // it's often practical to make them always run.
@@ -65,24 +58,22 @@ class CiTaskPlugin : Plugin<Project> {
         }
 
         target.tasks.register<SetVersionFromTagTask>("setVersionFromTag") {
-            description = "Sets the versionName and versionCode in gradle/libs.versions.toml based on provided tag values."
+            description = "Sets the versionName and versionCode in " +
+                "gradle/libs.versions.toml based on provided tag values."
 
-            // These properties must be set when the task is called, e.g., via -PnewVersionName=... -PnewVersionCode=...
+            // These properties must be set when the task is called, e.g.,
+            // via -PnewVersionName=... -PnewVersionCode=...
             // Provide convention values for local testing/default, but expect them to be overridden.
             newVersionName.convention("0.0.1")
             newVersionCode.convention(0) // Default to 0 for int property
 
             libsVersionsTomlFile.set(target.rootProject.file("gradle/libs.versions.toml"))
-            outputLibsVersionsTomlFile.set(target.rootProject.file("gradle/libs.versions.toml")) // Same file
+            outputLibsVersionsTomlFile.set(target.rootProject.file("gradle/libs.versions.toml"))
+            // Same file
 
             // For tasks that modify files and are part of a CI/CD pipeline,
             // it's often practical to make them always run.
             outputs.upToDateWhen { false }
         }
     }
-
-//    companion object {
-//        const val MERGE_LINT_TASK_NAME: String = "mergeLintSarif"
-//        const val MERGE_DETEKT_TASK_NAME: String = "mergeDetektSarif"
-//    }
 }
