@@ -15,6 +15,7 @@
  */
 import com.mshdabiola.app.BumpConveyorRevisionTask
 import com.mshdabiola.app.BumpVersionTask
+import com.mshdabiola.app.SetVersionFromTagTask
 import io.gitlab.arturbosch.detekt.report.ReportMergeTask
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -54,6 +55,22 @@ class CiTaskPlugin : Plugin<Project> {
             // This property must be set when the task is called, e.g., via -PnewVersionName=...
             // There's no default here because it's expected to come from the tag.
             newVersionName.convention("0.0.0") // Provide a default for local testing, will be overridden by -P
+
+            libsVersionsTomlFile.set(target.rootProject.file("gradle/libs.versions.toml"))
+            outputLibsVersionsTomlFile.set(target.rootProject.file("gradle/libs.versions.toml")) // Same file
+
+            // For tasks that modify files and are part of a CI/CD pipeline,
+            // it's often practical to make them always run.
+            outputs.upToDateWhen { false }
+        }
+
+        target.tasks.register<SetVersionFromTagTask>("setVersionFromTag") {
+            description = "Sets the versionName and versionCode in gradle/libs.versions.toml based on provided tag values."
+
+            // These properties must be set when the task is called, e.g., via -PnewVersionName=... -PnewVersionCode=...
+            // Provide convention values for local testing/default, but expect them to be overridden.
+            newVersionName.convention("0.0.1")
+            newVersionCode.convention(0) // Default to 0 for int property
 
             libsVersionsTomlFile.set(target.rootProject.file("gradle/libs.versions.toml"))
             outputLibsVersionsTomlFile.set(target.rootProject.file("gradle/libs.versions.toml")) // Same file
