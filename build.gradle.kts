@@ -26,7 +26,7 @@ plugins {
     alias(libs.plugins.ktlint) apply false
     alias(libs.plugins.detekt) apply false
     alias(libs.plugins.spotless)
-//    id("mshdabiola.collect.sarif")
+    id("mshdabiola.ci.task")
 
 }
 

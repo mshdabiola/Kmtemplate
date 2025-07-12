@@ -136,10 +136,10 @@ gradlePlugin {
             id = "mshdabiola.detekt"
             implementationClass = "DetektConventionPlugin"
         }
-//        register("appyx-collect-sarif") {
-//            id = "mshdabiola.collect.sarif"
-//            implementationClass = "CollectSarifPlugin"
-//        }
+        register("ci.task") {
+            id = "mshdabiola.ci.task"
+            implementationClass = "CiTaskPlugin"
+        }
         register("kover") {
             id = "mshdabiola.kover"
             implementationClass = "KoverConventionPlugin"
