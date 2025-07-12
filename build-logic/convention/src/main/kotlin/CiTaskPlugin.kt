@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 import com.mshdabiola.app.BumpConveyorRevisionTask
+import com.mshdabiola.app.BumpVersionTask
 import io.gitlab.arturbosch.detekt.report.ReportMergeTask
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -43,6 +44,22 @@ class CiTaskPlugin : Plugin<Project> {
             // However, if you want Gradle to track inputs and outputs for caching,
             // you might define specific output files and let Gradle determine up-to-dateness.
             // For this kind of file manipulation, making it always run or careful input/output declaration is key.
+            outputs.upToDateWhen { false }
+        }
+
+
+        target.tasks.register<BumpVersionTask>("bumpVersionNameAndCode") {
+            description = "Updates the versionName and increments the versionCode in gradle/libs.versions.toml."
+
+            // This property must be set when the task is called, e.g., via -PnewVersionName=...
+            // There's no default here because it's expected to come from the tag.
+            newVersionName.convention("0.0.0") // Provide a default for local testing, will be overridden by -P
+
+            libsVersionsTomlFile.set(target.rootProject.file("gradle/libs.versions.toml"))
+            outputLibsVersionsTomlFile.set(target.rootProject.file("gradle/libs.versions.toml")) // Same file
+
+            // For tasks that modify files and are part of a CI/CD pipeline,
+            // it's often practical to make them always run.
             outputs.upToDateWhen { false }
         }
     }
