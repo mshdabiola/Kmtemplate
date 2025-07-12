@@ -64,15 +64,15 @@ class DetektConventionPlugin2 : Plugin<Project> {
                 detektTask.configure {
                     reports.sarif.required.set(true)
                 }
-                rootProject.plugins.withId("mshdabiola.collect.sarif") {
-                    rootProject.tasks.named(
-                        CollectSarifPlugin.MERGE_DETEKT_TASK_NAME,
-                        ReportMergeTask::class.java,
-                    ) {
-                        input.from(detektTask.flatMap { it.sarifReportFile })
-                        mustRunAfter(detektTask)
-                    }
-                }
+//                rootProject.plugins.withId("mshdabiola.collect.sarif") {
+//                    rootProject.tasks.named(
+//                        CiTaskPlugin.MERGE_DETEKT_TASK_NAME,
+//                        ReportMergeTask::class.java,
+//                    ) {
+//                        input.from(detektTask.flatMap { it.sarifReportFile })
+//                        mustRunAfter(detektTask)
+//                    }
+//                }
             }
 
             dependencies {
