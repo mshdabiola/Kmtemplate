@@ -16,13 +16,14 @@
 package com.mshdabiola.detail.navigation
 
 import androidx.compose.animation.ExperimentalSharedTransitionApi
-import androidx.compose.animation.SharedTransitionScope
 import androidx.compose.ui.Modifier
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import androidx.navigation.toRoute
-import com.mshdabiola.detail.DetailRoute
+import com.mshdabiola.detail.DetailScreen
 import com.mshdabiola.detail.DetailViewModel
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.annotation.KoinExperimentalAPI
@@ -38,14 +39,13 @@ fun NavController.navigateToDetail(detail: Detail) {
 @OptIn(KoinExperimentalAPI::class, ExperimentalSharedTransitionApi::class)
 fun NavGraphBuilder.detailScreen(
     modifier: Modifier = Modifier,
-    sharedTransitionScope: SharedTransitionScope,
-    onShowSnack: suspend (String, String?) -> Boolean,
     onBack: () -> Unit,
 ) {
     composable<Detail> { backStack ->
 
         val detail: Detail = backStack.toRoute()
 
+//        val viewModel= koinViewModel<DetailViewModel>{ parametersOf(id)}
         val viewModel: DetailViewModel =
             koinViewModel(
                 parameters = {
@@ -54,14 +54,17 @@ fun NavGraphBuilder.detailScreen(
                     )
                 },
             )
+        val detailState = viewModel.detailState.collectAsStateWithLifecycle()
 
-        DetailRoute(
+        DetailScreen(
             modifier = modifier,
-            sharedTransitionScope = sharedTransitionScope,
-            animatedContentScope = this,
-            onShowSnackbar = onShowSnack,
+            state = detailState.value,
             onBack = onBack,
-            viewModel = viewModel,
+            onDelete = {
+                viewModel.onDelete()
+                onBack()
+            },
+
         )
     }
 }
