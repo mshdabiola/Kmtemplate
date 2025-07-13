@@ -39,17 +39,6 @@ fun <T : HttpClientEngineConfig> HttpClientConfig<T>.init() {
             },
         )
     }
-//    defaultRequest {
-//        headers {
-//            this[HttpHeaders.Authorization] = "Bearer ${Config.token}"
-//            this[HttpHeaders.Accept] = "application/json"
-//            this[HttpHeaders.ContentType] = "application/json"
-//        }
-//        url {
-//            host = "api.spotify.com"
-//            protocol = URLProtocol.HTTPS
-//        }
-//    }
     install(UserAgent) {
         agent = "my app"
     }
