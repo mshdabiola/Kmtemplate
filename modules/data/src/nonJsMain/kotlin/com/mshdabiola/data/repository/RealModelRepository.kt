@@ -64,28 +64,4 @@ internal class RealModelRepository(
             noteDao.delete(id)
         }
     }
-
-//    @OptIn(ExperimentalPagingApi::class)
-//    override fun imagePagingData(): Flow<PagingData<Image>> {
-//
-//        return Pager(
-//            PagingConfig(4),
-//            remoteMediator = ModeRemoteMediator(iNetworkDataSource,imageDao)
-//        ){
-//            imageDao.pagingSource()
-//        }
-//            .flow
-//            .map { pagingData -> pagingData.map { it.asImage() } }
-//
-//
-//    }
-//
-//    override fun notePagingData(): Flow<PagingData<Note>>{
-//        return Pager(PagingConfig(20)){
-//            noteDao.pagingSource()
-//        }
-//            .flow
-//            .map { pagingData -> pagingData.map { it.asNote() } }
-//
-//    }
 }
