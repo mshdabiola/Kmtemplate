@@ -16,13 +16,15 @@
 package com.mshdabiola.main.navigation
 
 import androidx.compose.animation.ExperimentalSharedTransitionApi
-import androidx.compose.animation.SharedTransitionScope
 import androidx.compose.ui.Modifier
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavOptions
 import androidx.navigation.compose.composable
-import com.mshdabiola.main.MainRoute
+import com.mshdabiola.main.MainScreen
+import com.mshdabiola.main.MainViewModel
+import org.koin.compose.viewmodel.koinViewModel
 
 fun NavController.navigateToMain(
     main: Main,
@@ -32,16 +34,15 @@ fun NavController.navigateToMain(
 @OptIn(ExperimentalSharedTransitionApi::class)
 fun NavGraphBuilder.mainScreen(
     modifier: Modifier = Modifier,
-    sharedTransitionScope: SharedTransitionScope,
-    onShowSnack: suspend (String, String?) -> Boolean,
     navigateToDetail: (Long) -> Unit,
 ) {
     composable<Main> {
-        MainRoute(
+        val viewModel = koinViewModel<MainViewModel>()
+        val mainState = viewModel.mainState.collectAsStateWithLifecycle()
+
+        MainScreen(
             modifier = modifier,
-            sharedTransitionScope = sharedTransitionScope,
-            animatedContentScope = this,
-            showSnackbar = onShowSnack,
+            mainState = mainState.value,
             navigateToDetail = navigateToDetail,
         )
     }

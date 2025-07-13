@@ -16,8 +16,8 @@
 package com.mshdabiola.main
 
 import app.cash.turbine.test
-import com.mshdabiola.data.model.Result
 import com.mshdabiola.data.repository.NoteRepository
+import com.mshdabiola.model.Result
 import com.mshdabiola.testing.fake.testDataModule
 import com.mshdabiola.testing.util.MainDispatcherRule
 import kotlinx.coroutines.test.runTest
@@ -53,7 +53,7 @@ class MainViewModelTest : KoinTest {
                 )
 
             viewModel
-                .notes
+                .mainState
                 .test {
                     var state = awaitItem()
 
