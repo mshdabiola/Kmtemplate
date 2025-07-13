@@ -17,7 +17,7 @@ package com.mshdabiola.main
 
 import androidx.compose.animation.ExperimentalSharedTransitionApi
 import androidx.compose.ui.test.junit4.createComposeRule
-import com.mshdabiola.data.model.Result
+import com.mshdabiola.model.Result
 import com.mshdabiola.testing.fake.notes
 import com.mshdabiola.ui.SharedContentPreview
 import org.junit.Rule

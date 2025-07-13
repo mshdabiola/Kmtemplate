@@ -13,8 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.mshdabiola.network
+package com.mshdabiola.main
 
-object Config {
-    var token = ""
+import com.mshdabiola.model.Note
+
+sealed class MainState {
+    data class Success(val notes: List<Note>) : MainState()
+
+    data object Loading : MainState()
+
+    data object Empty : MainState()
 }
