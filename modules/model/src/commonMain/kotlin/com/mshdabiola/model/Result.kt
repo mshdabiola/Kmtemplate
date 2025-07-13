@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.mshdabiola.data.model
+package com.mshdabiola.model
 
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
