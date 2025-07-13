@@ -78,16 +78,11 @@ dependencies {
     googlePlayImplementation(libs.play.review)
     googlePlayImplementation(libs.play.review.kts)
 }
-java {
-    toolchain {
-        languageVersion = JavaLanguageVersion.of(21)
-        vendor = JvmVendorSpec.JETBRAINS
-        implementation = JvmImplementation.VENDOR_SPECIFIC
-    }
-}
+
 kotlin {
     androidTarget()
     jvm()
+    jvmToolchain(21)
 
     @OptIn(org.jetbrains.kotlin.gradle.ExperimentalWasmDsl::class)
     wasmJs {
