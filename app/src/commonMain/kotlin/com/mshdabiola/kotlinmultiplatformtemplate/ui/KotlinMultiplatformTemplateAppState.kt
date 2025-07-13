@@ -59,9 +59,6 @@ class KotlinMultiplatformTemplateAppState(
         @Composable get() =
             navController
                 .currentBackStackEntryAsState().value?.destination
-//    val currentRoute: String
-//        @Composable get() = navController
-//            .currentBackStackEntryAsState().value?.destination?.route ?: ""
 
     val isMain: Boolean
         @Composable get() =
