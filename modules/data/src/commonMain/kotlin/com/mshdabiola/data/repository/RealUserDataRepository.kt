@@ -22,7 +22,7 @@ import com.mshdabiola.model.DarkThemeConfig
 import com.mshdabiola.model.UserData
 import kotlinx.coroutines.flow.Flow
 
-internal class OfflineFirstUserDataRepository(
+internal class RealUserDataRepository(
     private val settings: Store,
     private val analyticsHelper: AnalyticsHelper,
     private val logger: Logger,
@@ -46,20 +46,17 @@ internal class OfflineFirstUserDataRepository(
         settings.updateUserData {
             it.copy(darkThemeConfig = darkThemeConfig)
         }
-        analyticsHelper.logDarkThemeConfigChanged(darkThemeConfig.name)
     }
 
     override suspend fun setDynamicColorPreference(useDynamicColor: Boolean) {
         settings.updateUserData {
             it.copy(useDynamicColor = useDynamicColor)
         }
-        analyticsHelper.logDynamicColorPreferenceChanged(useDynamicColor)
     }
 
     override suspend fun setShouldHideOnboarding(shouldHideOnboarding: Boolean) {
         settings.updateUserData {
             it.copy(shouldHideOnboarding = shouldHideOnboarding)
         }
-        analyticsHelper.logOnboardingStateChanged(shouldHideOnboarding)
     }
 }

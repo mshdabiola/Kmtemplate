@@ -26,8 +26,4 @@ interface NoteRepository {
     fun getOne(id: Long): Flow<Note?>
 
     suspend fun delete(id: Long)
-
-//    fun imagePagingData (): Flow<PagingData<Image>>
-
-//    fun notePagingData (): Flow<PagingData<Note>>
 }
