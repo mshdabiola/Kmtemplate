@@ -13,8 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.mshabiola.database.util
+package com.mshdabiola.database.util
 
 object Constant {
-    const val DATABASE_NAME = "hydraulic_database.db"
+    const val DATABASE_NAME = "kmt_database.db"
 }
