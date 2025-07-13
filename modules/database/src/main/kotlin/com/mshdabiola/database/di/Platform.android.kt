@@ -18,8 +18,8 @@ package com.mshdabiola.database.di
 import android.content.Context
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.mshabiola.database.util.Constant
-import com.mshdabiola.database.SkeletonDatabase
+import com.mshdabiola.database.KmtDatabase
+import com.mshdabiola.database.util.Constant
 import org.koin.core.module.Module
 import org.koin.dsl.module
 
@@ -32,10 +32,10 @@ actual val databaseModule: Module
             includes(daoModules)
         }
 
-fun getDatabaseBuilder(context: Context): RoomDatabase.Builder<SkeletonDatabase> {
+fun getDatabaseBuilder(context: Context): RoomDatabase.Builder<KmtDatabase> {
     val appContext = context.applicationContext
     val dbFile = appContext.getDatabasePath(Constant.DATABASE_NAME)
-    return Room.databaseBuilder<SkeletonDatabase>(
+    return Room.databaseBuilder<KmtDatabase>(
         context = appContext,
         name = dbFile.absolutePath,
     )
