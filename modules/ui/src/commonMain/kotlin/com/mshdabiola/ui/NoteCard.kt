@@ -15,17 +15,22 @@
  */
 package com.mshdabiola.ui
 
-import androidx.compose.material3.Surface
+import androidx.compose.foundation.clickable
+import androidx.compose.material3.ListItem
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import com.mshdabiola.designsystem.theme.KmtTheme
+import androidx.compose.ui.Modifier
+import com.mshdabiola.model.Note
 
-@DevicePreviews
-@ThemePreviews
 @Composable
-fun ProfileCardPreview() {
-    KmtTheme {
-        Surface {
-            ProfileCard()
-        }
-    }
+fun NoteCard(
+    modifier: Modifier = Modifier,
+    noteUiState: Note,
+    onClick: (Long) -> Unit,
+) {
+    ListItem(
+        modifier = modifier.clickable { onClick(noteUiState.id) },
+        headlineContent = { Text(text = noteUiState.title) },
+        supportingContent = { Text(text = noteUiState.content) },
+    )
 }
