@@ -33,13 +33,14 @@ import co.touchlab.kermit.Logger
 import co.touchlab.kermit.koin.KermitKoinLogger
 import co.touchlab.kermit.loggerConfigInit
 import co.touchlab.kermit.platformLogWriter
-import com.mshdabiola.designsystem.drawable.defaultAppIcon
 import com.mshdabiola.kotlinmultiplatformtemplate.app.generated.resources.Res
 import com.mshdabiola.kotlinmultiplatformtemplate.app.generated.resources.app_name
+import com.mshdabiola.kotlinmultiplatformtemplate.app.generated.resources.icon
 import com.mshdabiola.kotlinmultiplatformtemplate.di.appModule
 import com.mshdabiola.kotlinmultiplatformtemplate.ui.KotlinMultiplatformTemplateApp
-import com.mshdabiola.ui.SplashScreen
+import com.mshdabiola.kotlinmultiplatformtemplate.ui.SplashScreen
 import kotlinx.coroutines.delay
+import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import org.koin.core.context.GlobalContext.startKoin
 import org.koin.dsl.module
@@ -58,7 +59,7 @@ fun mainApp() {
         Window(
             onCloseRequest = ::exitApplication,
             title = "${stringResource(Res.string.app_name)} v$version",
-            icon = defaultAppIcon,
+            icon = painterResource(Res.drawable.icon),
             state = windowState,
         ) {
             val show = remember { mutableStateOf(true) }

@@ -43,19 +43,14 @@ fun KotlinMultiplatformTemplateAppNavHost(
         ) {
             mainScreen(
                 modifier = Modifier,
-                sharedTransitionScope = this@SharedTransitionLayout,
-                onShowSnack = onShowSnackbar,
                 navigateToDetail = { navController.navigateToDetail(Detail(it)) },
             )
             detailScreen(
                 modifier = Modifier,
-                sharedTransitionScope = this@SharedTransitionLayout,
-                onShowSnack = onShowSnackbar,
                 onBack = navController::popBackStack,
             )
             settingScreen(
                 modifier = Modifier,
-                onShowSnack = onShowSnackbar,
                 onBack = navController::popBackStack,
             )
         }
