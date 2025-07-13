@@ -17,57 +17,46 @@
 
 package com.mshdabiola.designsystem.component
 
-import androidx.compose.material3.CenterAlignedTopAppBar
+import androidx.compose.foundation.layout.RowScope
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
+import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
+import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarColors
 import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.platform.testTag
-import com.mshdabiola.designsystem.icon.KmtIcons
+import androidx.compose.ui.unit.Dp
 import com.mshdabiola.designsystem.theme.KmtTheme
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 fun KmtTopAppBar(
-    titleRes: String,
-    navigationIcon: ImageVector,
-    navigationIconContentDescription: String,
-    actionIcon: ImageVector,
-    actionIconContentDescription: String,
+    title: @Composable () -> Unit,
+    subtitle: @Composable () -> Unit = {},
     modifier: Modifier = Modifier,
+    navigationIcon: @Composable () -> Unit = {},
+    actions: @Composable RowScope.() -> Unit = {},
+    titleHorizontalAlignment: Alignment.Horizontal = Alignment.Start,
+    expandedHeight: Dp = TopAppBarDefaults.TopAppBarExpandedHeight,
+    windowInsets: WindowInsets = TopAppBarDefaults.windowInsets,
     colors: TopAppBarColors = TopAppBarDefaults.topAppBarColors(),
-    onNavigationClick: () -> Unit = {},
-    onActionClick: () -> Unit = {},
+    scrollBehavior: TopAppBarScrollBehavior? = null,
 ) {
-    CenterAlignedTopAppBar(
-        title = { Text(text = titleRes) },
-        navigationIcon = {
-            IconButton(onClick = onNavigationClick) {
-                Icon(
-                    imageVector = navigationIcon,
-                    contentDescription = navigationIconContentDescription,
-                    tint = MaterialTheme.colorScheme.onSurface,
-                )
-            }
-        },
-        actions = {
-            IconButton(onClick = onActionClick) {
-                Icon(
-                    imageVector = actionIcon,
-                    contentDescription = actionIconContentDescription,
-                    tint = MaterialTheme.colorScheme.onSurface,
-                )
-            }
-        },
+    TopAppBar(
+        title = title,
+        subtitle = subtitle,
+        titleHorizontalAlignment = titleHorizontalAlignment,
+        modifier = modifier,
+        navigationIcon = navigationIcon,
+        actions = actions,
+        expandedHeight = expandedHeight,
+        windowInsets = windowInsets,
         colors = colors,
-        modifier = modifier.testTag("KmtTopAppBar"),
+        scrollBehavior = scrollBehavior,
     )
 }
 
@@ -76,12 +65,12 @@ fun KmtTopAppBar(
 @Composable
 internal fun KmtTopAppBarPreview() {
     KmtTheme {
-        KmtTopAppBar(
-            titleRes = "Preview",
-            navigationIcon = KmtIcons.Search,
-            navigationIconContentDescription = "Navigation icon",
-            actionIcon = KmtIcons.MoreVert,
-            actionIconContentDescription = "Action icon",
-        )
+//        KmtTopAppBar(
+//            titleRes = "Preview",
+//            navigationIcon = KmtIcons.Search,
+//            navigationIconContentDescription = "Navigation icon",
+//            actionIcon = KmtIcons.MoreVert,
+//            actionIconContentDescription = "Action icon",
+//        )
     }
 }
