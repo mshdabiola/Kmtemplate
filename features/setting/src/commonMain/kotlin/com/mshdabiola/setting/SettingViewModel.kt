@@ -19,55 +19,37 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mshdabiola.data.repository.UserDataRepository
 import com.mshdabiola.model.DarkThemeConfig
-import com.mshdabiola.model.ThemeBrand
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
 class SettingViewModel constructor(
     private val userDataRepository: UserDataRepository,
 ) : ViewModel() {
-    private val _settingState = MutableStateFlow<SettingState>(SettingState.Loading())
-    val settingState = _settingState.asStateFlow()
+    val settingState = userDataRepository
+        .userData
+        .map { userData ->
+            SettingState(
+                contrast = userData.contrast,
+                darkThemeConfig = userData.darkThemeConfig,
+            )
+        }
+        .stateIn(
+            scope = viewModelScope,
+            started = SharingStarted.WhileSubscribed(),
+            initialValue = SettingState(),
+        )
 
-    init {
-        update()
-    }
-
-    fun setThemeBrand(themeBrand: ThemeBrand) {
+    fun setContrast(contrast: Int) {
         viewModelScope.launch {
-            _settingState.value = SettingState.Loading()
-
-            userDataRepository.setContrast(0)
-
-            update()
+            userDataRepository.setContrast(contrast)
         }
     }
 
-    /**
-     * Sets the desired dark theme config.
-     */
     fun setDarkThemeConfig(darkThemeConfig: DarkThemeConfig) {
         viewModelScope.launch {
-            _settingState.value = SettingState.Loading()
-
             userDataRepository.setDarkThemeConfig(darkThemeConfig)
-
-            update()
-        }
-    }
-
-    private fun update() {
-        viewModelScope.launch {
-            _settingState.value =
-                userDataRepository.userData.map {
-                    SettingState.Success(
-                        contrast = it.contrast,
-                        darkThemeConfig = it.darkThemeConfig,
-                    )
-                }.first()
         }
     }
 }

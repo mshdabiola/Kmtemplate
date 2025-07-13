@@ -19,7 +19,6 @@ import androidx.compose.animation.ExperimentalSharedTransitionApi
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithTag
 import com.mshdabiola.model.DarkThemeConfig
-import com.mshdabiola.model.ThemeBrand
 import org.junit.Rule
 import kotlin.test.Test
 
