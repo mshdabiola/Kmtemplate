@@ -16,7 +16,6 @@
 package com.mshdabiola.kotlinmultiplatformtemplate.navigation
 
 import androidx.compose.animation.ExperimentalSharedTransitionApi
-import androidx.compose.animation.SharedTransitionLayout
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
@@ -32,27 +31,25 @@ import com.mshdabiola.setting.navigation.settingScreen
 @Composable
 fun KotlinMultiplatformTemplateAppNavHost(
     appState: KotlinMultiplatformTemplateAppState,
-    onShowSnackbar: suspend (String, String?) -> Boolean = { _, _ -> false },
     modifier: Modifier = Modifier,
 ) {
     val navController = appState.navController
-    SharedTransitionLayout(modifier = modifier) {
-        NavHost(
-            navController = navController,
-            startDestination = Main,
-        ) {
-            mainScreen(
-                modifier = Modifier,
-                navigateToDetail = { navController.navigateToDetail(Detail(it)) },
-            )
-            detailScreen(
-                modifier = Modifier,
-                onBack = navController::popBackStack,
-            )
-            settingScreen(
-                modifier = Modifier,
-                onBack = navController::popBackStack,
-            )
-        }
+
+    NavHost(
+        navController = navController,
+        startDestination = Main,
+    ) {
+        mainScreen(
+            modifier = Modifier,
+            navigateToDetail = { navController.navigateToDetail(Detail(it)) },
+        )
+        detailScreen(
+            modifier = Modifier,
+            onBack = navController::popBackStack,
+        )
+        settingScreen(
+            modifier = Modifier,
+            onBack = navController::popBackStack,
+        )
     }
 }
