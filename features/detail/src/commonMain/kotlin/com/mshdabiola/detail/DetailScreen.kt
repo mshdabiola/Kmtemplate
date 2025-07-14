@@ -15,6 +15,7 @@
  */
 package com.mshdabiola.detail
 
+import androidx.compose.animation.ExperimentalSharedTransitionApi
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -31,55 +32,65 @@ import com.mshdabiola.designsystem.component.KmtIconButton
 import com.mshdabiola.designsystem.component.KmtTextField
 import com.mshdabiola.designsystem.component.KmtTopAppBar
 import com.mshdabiola.designsystem.icon.KmtIcons
+import com.mshdabiola.ui.LocalNavAnimatedContentScope
+import com.mshdabiola.ui.LocalSharedTransitionScope
 
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalSharedTransitionApi::class)
 @Composable
 internal fun DetailScreen(
     modifier: Modifier = Modifier,
+    id: Long = -1,
     state: DetailState,
     onBack: () -> Unit = {},
     onDelete: () -> Unit = {},
 ) {
-    Scaffold(
-        modifier = modifier,
-        topBar = {
-            KmtTopAppBar(
-                title = { Text("Note") },
-                actions = {
-                    KmtIconButton(onClick = onDelete) {
-                        Icon(imageVector = KmtIcons.Delete, contentDescription = "delete")
-                    }
-                },
-                navigationIcon = {
-                    KmtIconButton(onClick = onBack) {
-                        Icon(imageVector = KmtIcons.ArrowBack, contentDescription = "back")
-                    }
-                },
-            )
-        },
-    ) { paddingValues ->
-        Column(
-            modifier = Modifier
-                .padding(paddingValues)
-                .fillMaxSize(),
-        ) {
-            KmtTextField(
-                modifier =
-                Modifier
-                    .fillMaxWidth(),
-                state = state.title,
-                placeholder = "Title",
-                maxNum = TextFieldLineLimits.SingleLine,
-                imeAction = ImeAction.Next,
-            )
-            KmtTextField(
-                modifier =
-                Modifier
-                    .fillMaxWidth()
-                    .weight(1f),
-                state = state.detail,
-                placeholder = "content",
-            )
+    val sharedTransitionScope = LocalSharedTransitionScope.current
+    val animatedContentScope = LocalNavAnimatedContentScope.current
+    with(sharedTransitionScope) {
+        Scaffold(
+            modifier = modifier.sharedBounds(
+                sharedContentState = rememberSharedContentState("note_$id"),
+                animatedVisibilityScope = animatedContentScope,
+            ),
+            topBar = {
+                KmtTopAppBar(
+                    title = { Text("Note") },
+                    actions = {
+                        KmtIconButton(onClick = onDelete) {
+                            Icon(imageVector = KmtIcons.Delete, contentDescription = "delete")
+                        }
+                    },
+                    navigationIcon = {
+                        KmtIconButton(onClick = onBack) {
+                            Icon(imageVector = KmtIcons.ArrowBack, contentDescription = "back")
+                        }
+                    },
+                )
+            },
+        ) { paddingValues ->
+            Column(
+                modifier = Modifier
+                    .padding(paddingValues)
+                    .fillMaxSize(),
+            ) {
+                KmtTextField(
+                    modifier =
+                    Modifier
+                        .fillMaxWidth(),
+                    state = state.title,
+                    placeholder = "Title",
+                    maxNum = TextFieldLineLimits.SingleLine,
+                    imeAction = ImeAction.Next,
+                )
+                KmtTextField(
+                    modifier =
+                    Modifier
+                        .fillMaxWidth()
+                        .weight(1f),
+                    state = state.detail,
+                    placeholder = "content",
+                )
+            }
         }
     }
 }

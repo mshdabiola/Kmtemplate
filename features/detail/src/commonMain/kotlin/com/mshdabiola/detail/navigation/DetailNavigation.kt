@@ -16,6 +16,7 @@
 package com.mshdabiola.detail.navigation
 
 import androidx.compose.animation.ExperimentalSharedTransitionApi
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -25,6 +26,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.toRoute
 import com.mshdabiola.detail.DetailScreen
 import com.mshdabiola.detail.DetailViewModel
+import com.mshdabiola.ui.LocalNavAnimatedContentScope
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.annotation.KoinExperimentalAPI
 import org.koin.core.parameter.parameterSetOf
@@ -55,16 +57,20 @@ fun NavGraphBuilder.detailScreen(
                 },
             )
         val detailState = viewModel.detailState.collectAsStateWithLifecycle()
+        CompositionLocalProvider(
+            LocalNavAnimatedContentScope provides this,
+        ) {
+            DetailScreen(
+                modifier = modifier,
+                id = detail.id,
+                state = detailState.value,
+                onBack = onBack,
+                onDelete = {
+                    viewModel.onDelete()
+                    onBack()
+                },
 
-        DetailScreen(
-            modifier = modifier,
-            state = detailState.value,
-            onBack = onBack,
-            onDelete = {
-                viewModel.onDelete()
-                onBack()
-            },
-
-        )
+            )
+        }
     }
 }
