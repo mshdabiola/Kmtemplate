@@ -36,6 +36,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.platform.testTag // Import testTag
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -50,6 +51,20 @@ import kotlinmultiplatformtemplate.features.main.generated.resources.features_ma
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
+// Define a TestTags object for MainScreen
+internal object MainScreenTestTags {
+    const val SCREEN_ROOT = "MainScreenRoot"
+    const val TOP_APP_BAR = "MainScreenTopAppBar"
+    const val LOADING_INDICATOR = "MainScreenLoadingIndicator"
+    const val EMPTY_STATE_COLUMN = "MainScreenEmptyStateColumn"
+    const val EMPTY_STATE_IMAGE = "MainScreenEmptyStateImage"
+    const val EMPTY_STATE_TITLE = "MainScreenEmptyStateTitle"
+    const val EMPTY_STATE_DESCRIPTION = "MainScreenEmptyStateDescription"
+    const val NOTE_LIST = "MainScreenNoteList"
+    // You might want a way to tag individual NoteCard items if needed for specific tests,
+    // e.g., by appending the note ID: fun noteCardTag(id: Long) = "MainScreenNoteCard_$id"
+}
+
 @OptIn(
     ExperimentalSharedTransitionApi::class,
     ExperimentalMaterial3Api::class,
@@ -61,10 +76,11 @@ internal fun MainScreen(
     navigateToDetail: (Long) -> Unit = {},
 ) {
     Scaffold(
-        modifier = modifier,
+        modifier = modifier.testTag(MainScreenTestTags.SCREEN_ROOT), // Apply testTag to the root
         topBar = {
             KmtTopAppBar(
-                title = { Text("") },
+                modifier = Modifier.testTag(MainScreenTestTags.TOP_APP_BAR),
+                title = { Text("") }, // Consider adding a test tag if the title becomes dynamic
                 titleHorizontalAlignment = Alignment.CenterHorizontally,
             )
         },
@@ -72,23 +88,36 @@ internal fun MainScreen(
         when (mainState) {
             is MainState.Loading -> {
                 Box(
-                    modifier = modifier
+                    modifier = Modifier
                         .padding(paddingValues)
-                        .fillMaxSize(),
+                        .fillMaxSize()
+                        .testTag(MainScreenTestTags.LOADING_INDICATOR), // Tag for loading state
                     contentAlignment = Alignment.Center,
                 ) {
-                    KmtLoading()
+                    KmtLoading() // If KmtLoading is a simple composable, this tag might be on the Box.
+                    // If KmtLoading is complex, it might need its own internal tags.
                 }
             }
             is MainState.Empty -> {
-                EmptyState()
+                EmptyState(
+                    modifier = Modifier.padding(paddingValues),
+                    // Pass padding if EmptyState should be inside Scaffold's content area
+                )
             }
             is MainState.Success -> {
                 LazyColumn(
-                    modifier = Modifier.padding(paddingValues),
+                    modifier = Modifier
+                        .padding(paddingValues)
+                        .testTag(MainScreenTestTags.NOTE_LIST), // Tag for the list of notes
                 ) {
-                    items(items = mainState.notes) { note ->
-                        NoteCard(noteUiState = note, onClick = navigateToDetail)
+                    items(items = mainState.notes, key = { note -> note.id }) { note ->
+                        // Assuming NoteUiState has an id
+                        NoteCard(
+                            noteUiState = note,
+                            onClick = navigateToDetail,
+                            // If you need to test individual cards, apply a dynamic tag here:
+                            // modifier = Modifier.testTag(MainScreenTestTags.noteCardTag(note.id))
+                        )
                     }
                 }
             }
@@ -99,26 +128,30 @@ internal fun MainScreen(
 @Composable
 private fun EmptyState(modifier: Modifier = Modifier) {
     Column(
-        modifier =
-        modifier
+        modifier = modifier
             .padding(16.dp)
-            .fillMaxSize(),
+            .fillMaxSize()
+            .testTag(MainScreenTestTags.EMPTY_STATE_COLUMN), // Tag for the empty state container
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         val iconTint = LocalTintTheme.current.iconTint
         Image(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .fillMaxWidth()
+                .testTag(MainScreenTestTags.EMPTY_STATE_IMAGE),
             painter = painterResource(Res.drawable.features_main_img_empty_bookmarks),
             colorFilter = if (iconTint != Color.Unspecified) ColorFilter.tint(iconTint) else null,
-            contentDescription = null,
+            contentDescription = null, // Consider adding a content description for accessibility and testing
         )
 
         Spacer(modifier = Modifier.height(48.dp))
 
         Text(
             text = stringResource(Res.string.features_main_empty_error),
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .fillMaxWidth()
+                .testTag(MainScreenTestTags.EMPTY_STATE_TITLE),
             textAlign = TextAlign.Center,
             style = MaterialTheme.typography.titleMedium,
             fontWeight = FontWeight.Bold,
@@ -128,7 +161,9 @@ private fun EmptyState(modifier: Modifier = Modifier) {
 
         Text(
             text = stringResource(Res.string.features_main_empty_description),
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .fillMaxWidth()
+                .testTag(MainScreenTestTags.EMPTY_STATE_DESCRIPTION),
             textAlign = TextAlign.Center,
             style = MaterialTheme.typography.bodyMedium,
         )
