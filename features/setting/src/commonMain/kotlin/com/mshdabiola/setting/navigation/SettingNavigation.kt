@@ -38,6 +38,12 @@ fun NavGraphBuilder.settingScreen(
     dialog<Setting> {
         val viewModel: SettingViewModel = koinViewModel()
 
+//        CompositionLocalProvider(
+//            LocalNavAnimatedContentScope provides this,
+//        ) {
+//
+//        }
+
 //        AnimatedVisibility(dark) {
 //            OptionsDialog(
 //                modifier = Modifier,
