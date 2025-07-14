@@ -20,14 +20,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mshdabiola.data.repository.NoteRepository
 import com.mshdabiola.model.Note
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
@@ -40,13 +38,7 @@ class DetailViewModel(
 
     private val idFlow = MutableStateFlow(initId)
 
-    @OptIn(ExperimentalCoroutinesApi::class)
-    private val notesFlow = idFlow
-        .flatMapLatest {
-            noteRepository.getOne(it)
-        }
-
-    val initDetailState = DetailState()
+    val initDetailState = DetailState(id = initId)
 
     private val titleFlow = snapshotFlow { initDetailState.title.text }
         .debounce(300)
@@ -57,13 +49,13 @@ class DetailViewModel(
     private var isInit = true
 
     val detailState = combine(
-        notesFlow,
+        idFlow,
         titleFlow,
         detailFlow,
-    ) { note, title, detail ->
+    ) { id, title, detail ->
 
         when {
-            note == null && isInit -> {
+            id == -1L && isInit -> {
                 val newId = noteRepository.upsert(Note())
                 idFlow.update { newId }
 
@@ -71,8 +63,10 @@ class DetailViewModel(
                 initDetailState.copy(id = newId)
             }
 
-            note != null && isInit -> {
+            isInit -> {
+                val note = noteRepository.getOne(id).first()!!
                 isInit = false
+
                 initDetailState.title.edit {
                     append(note.title)
                 }
@@ -83,6 +77,8 @@ class DetailViewModel(
             }
 
             else -> {
+                val note = noteRepository.getOne(id).first()
+
                 val newNote = note!!.copy(title = title.toString(), content = detail.toString())
                 if (newNote != note) {
                     noteRepository.upsert(newNote)

@@ -50,7 +50,6 @@ internal object DetailScreenTestTags {
 @Composable
 internal fun DetailScreen(
     modifier: Modifier = Modifier,
-    id: Long = -1,
     state: DetailState,
     onBack: () -> Unit = {},
     onDelete: () -> Unit = {},
@@ -61,7 +60,7 @@ internal fun DetailScreen(
         Scaffold(
             modifier = modifier
                 .sharedBounds(
-                    sharedContentState = rememberSharedContentState("note_$id"),
+                    sharedContentState = rememberSharedContentState("note_${state.id}"),
                     animatedVisibilityScope = animatedContentScope,
                 )
                 .testTag(DetailScreenTestTags.SCREEN_ROOT), // Apply testTag to the root
