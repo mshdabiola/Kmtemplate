@@ -13,13 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.mshdabiola.testing.di
+package com.mshdabiola.testing.fake.repository
 
 import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import org.koin.dsl.bind
 import org.koin.dsl.module
 
+@OptIn(ExperimentalCoroutinesApi::class)
 val testDispatcherModule =
     module {
         single { UnconfinedTestDispatcher() } bind CoroutineDispatcher::class
