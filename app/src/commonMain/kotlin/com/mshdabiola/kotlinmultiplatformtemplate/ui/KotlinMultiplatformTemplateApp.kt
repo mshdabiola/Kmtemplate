@@ -15,6 +15,7 @@
  */
 package com.mshdabiola.kotlinmultiplatformtemplate.ui
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.ExperimentalSharedTransitionApi
 import androidx.compose.animation.SharedTransitionLayout
 import androidx.compose.foundation.isSystemInDarkTheme
@@ -109,9 +110,14 @@ fun KotlinMultiplatformTemplateApp() {
                             snackbarHost = { SnackbarHost(snackbarHostState) },
 
                             floatingActionButton = {
-                                if (appState.isMain) {
+                                AnimatedVisibility(appState.isMain) {
                                     ExtendedFloatingActionButton(
-                                        modifier = Modifier.testTag("main:add"),
+                                        modifier = Modifier
+                                            .sharedBounds(
+                                                sharedContentState = rememberSharedContentState("note_-1"),
+                                                animatedVisibilityScope = this,
+                                            )
+                                            .testTag("main:add"),
                                         text = { Text("Add Note") },
                                         icon = {
                                             Icon(
