@@ -16,6 +16,7 @@
 package com.mshdabiola.main.navigation
 
 import androidx.compose.animation.ExperimentalSharedTransitionApi
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
@@ -24,6 +25,7 @@ import androidx.navigation.NavOptions
 import androidx.navigation.compose.composable
 import com.mshdabiola.main.MainScreen
 import com.mshdabiola.main.MainViewModel
+import com.mshdabiola.ui.LocalNavAnimatedContentScope
 import org.koin.compose.viewmodel.koinViewModel
 
 fun NavController.navigateToMain(
@@ -39,11 +41,14 @@ fun NavGraphBuilder.mainScreen(
     composable<Main> {
         val viewModel = koinViewModel<MainViewModel>()
         val mainState = viewModel.mainState.collectAsStateWithLifecycle()
-
-        MainScreen(
-            modifier = modifier,
-            mainState = mainState.value,
-            navigateToDetail = navigateToDetail,
-        )
+        CompositionLocalProvider(
+            LocalNavAnimatedContentScope provides this,
+        ) {
+            MainScreen(
+                modifier = modifier,
+                mainState = mainState.value,
+                navigateToDetail = navigateToDetail,
+            )
+        }
     }
 }
