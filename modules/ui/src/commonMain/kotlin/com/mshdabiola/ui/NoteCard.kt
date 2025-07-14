@@ -15,22 +15,68 @@
  */
 package com.mshdabiola.ui
 
+import androidx.compose.animation.ExperimentalSharedTransitionApi
 import androidx.compose.foundation.clickable
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag // Import testTag
 import com.mshdabiola.model.Note
+import org.jetbrains.compose.ui.tooling.preview.Preview
 
+// It's a good practice to define your test tags as constants
+object NoteCardTestTags {
+    const val ROOT = "NoteCardRoot"
+    const val TITLE = "NoteCardTitle"
+    const val CONTENT = "NoteCardContent"
+}
+
+@OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
 fun NoteCard(
     modifier: Modifier = Modifier,
     noteUiState: Note,
     onClick: (Long) -> Unit,
 ) {
-    ListItem(
-        modifier = modifier.clickable { onClick(noteUiState.id) },
-        headlineContent = { Text(text = noteUiState.title) },
-        supportingContent = { Text(text = noteUiState.content) },
-    )
+    val sharedTransitionScope = LocalSharedTransitionScope.current
+    val animatedContentScope = LocalNavAnimatedContentScope.current
+    with(sharedTransitionScope) {
+        ListItem(
+            modifier = modifier
+                .testTag(NoteCardTestTags.ROOT) // Add test tag to the root element
+                .sharedBounds(
+                    sharedContentState = rememberSharedContentState("note_${noteUiState.id}"),
+                    animatedVisibilityScope = animatedContentScope,
+                )
+                .clickable { onClick(noteUiState.id) },
+            headlineContent = {
+                Text(
+                    text = noteUiState.title,
+                    modifier = Modifier.testTag(NoteCardTestTags.TITLE), // Add test tag to the title
+                )
+            },
+            supportingContent = {
+                Text(
+                    text = noteUiState.content,
+                    modifier = Modifier.testTag(NoteCardTestTags.CONTENT), // Add test tag to the content
+                )
+            },
+        )
+    }
+}
+
+@OptIn(ExperimentalSharedTransitionApi::class)
+@Preview
+@Composable
+fun NoteCardPreview() {
+    val noteUiState =
+        Note(id = 1L, title = "Sample Note", content = "This is a sample note content.")
+
+    SharedTransitionContainer {
+        NoteCard(
+            noteUiState = noteUiState,
+            onClick = {},
+        )
+    }
 }
