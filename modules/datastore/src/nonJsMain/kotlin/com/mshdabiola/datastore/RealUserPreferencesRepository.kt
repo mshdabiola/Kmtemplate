@@ -16,23 +16,33 @@
 package com.mshdabiola.datastore
 
 import androidx.datastore.core.DataStore
+import com.mshdabiola.model.DarkThemeConfig
 import com.mshdabiola.model.UserData
-import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.withContext
 
-class StoreImpl(
+class RealUserPreferencesRepository(
     private val userdata: DataStore<UserData>,
-    private val coroutineDispatcher: CoroutineDispatcher,
-) : Store {
+) : UserPreferencesRepository {
     override val userData: Flow<UserData>
         get() =
             userdata
                 .data
 
-    override suspend fun updateUserData(transform: suspend (UserData) -> UserData): UserData {
-        return withContext(coroutineDispatcher) {
-            userdata.updateData(transform)
+    override suspend fun setContrast(contrast: Int) {
+        userdata.updateData {
+            it.copy(contrast = contrast)
         }
+    }
+
+    override suspend fun setDarkThemeConfig(darkThemeConfig: DarkThemeConfig) {
+        userdata.updateData { it.copy(darkThemeConfig = darkThemeConfig) }
+    }
+
+    override suspend fun setDynamicColorPreference(useDynamicColor: Boolean) {
+        userdata.updateData { it.copy(useDynamicColor = useDynamicColor) }
+    }
+
+    override suspend fun setShouldHideOnboarding(shouldHideOnboarding: Boolean) {
+        userdata.updateData { it.copy(shouldHideOnboarding = shouldHideOnboarding) }
     }
 }

@@ -15,8 +15,8 @@
  */
 package com.mshdabiola.datastore.di
 
-import com.mshdabiola.datastore.Store
-import com.mshdabiola.datastore.StoreImpl
+import com.mshdabiola.datastore.RealUserPreferencesRepository
+import com.mshdabiola.datastore.UserPreferencesRepository
 import org.koin.core.qualifier.qualifier
 import org.koin.dsl.bind
 import org.koin.dsl.module
@@ -26,9 +26,8 @@ internal val commonModule =
         // single { Dispatchers.IO }
 
         single {
-            StoreImpl(
+            RealUserPreferencesRepository(
                 userdata = get(qualifier = qualifier("userdata")),
-                coroutineDispatcher = get(),
             )
-        } bind Store::class
+        } bind UserPreferencesRepository::class
     }
