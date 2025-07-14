@@ -19,23 +19,23 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import com.mshdabiola.designsystem.component.KmtContainedLoading
 import com.mshdabiola.designsystem.component.KmtLoading
-import com.mshdabiola.testing.util.CaptureMultiTheme
+import com.mshdabiola.designsystem.theme.KmtTheme
 
 class LoadingWheelScreenshotTests {
 
     @Preview
     @Composable
     fun LoadingWheel() {
-        CaptureMultiTheme {
-            KmtLoading(contentDesc = "test")
+        KmtTheme {
+            KmtLoading()
         }
     }
 
     @Preview
     @Composable
     fun OverlayLoadingWheel() {
-        CaptureMultiTheme {
-            KmtContainedLoading(contentDesc = "test")
+        KmtTheme {
+            KmtContainedLoading()
         }
     }
 }

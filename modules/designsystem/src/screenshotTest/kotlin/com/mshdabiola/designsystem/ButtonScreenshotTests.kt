@@ -21,14 +21,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import com.mshdabiola.designsystem.component.KmtButton
 import com.mshdabiola.designsystem.icon.KmtIcons
-import com.mshdabiola.testing.util.CaptureMultiTheme
+import com.mshdabiola.designsystem.theme.KmtTheme
 
 class ButtonScreenshotTests {
 
     @Preview
     @Composable
     fun Button() {
-        CaptureMultiTheme {
+        KmtTheme {
             KmtButton(onClick = {}, text = { Text(" Button") })
         }
     }
@@ -36,7 +36,7 @@ class ButtonScreenshotTests {
     @Preview
     @Composable
     fun ButtonWithLeadIcon() {
-        CaptureMultiTheme {
+        KmtTheme {
             KmtButton(
                 onClick = {},
                 text = { Text("Icon Button") },

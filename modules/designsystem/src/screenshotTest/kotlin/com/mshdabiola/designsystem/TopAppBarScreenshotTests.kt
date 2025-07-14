@@ -15,40 +15,21 @@
  */
 package com.mshdabiola.designsystem
 
-import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import com.mshdabiola.designsystem.component.KmtTopAppBar
-import com.mshdabiola.designsystem.icon.KmtIcons
-import com.mshdabiola.testing.util.CaptureMultiTheme
+import com.mshdabiola.designsystem.theme.KmtTheme
 
 class TopAppBarScreenshotTests() {
 
     @Preview
     @Composable
     fun TopAppBar() {
-        CaptureMultiTheme {
-            KmtTopAppBarExample()
+        KmtTheme {
+            KmtTopAppBar(
+                title = { Text("Untitled") },
+            )
         }
-    }
-
-    @Preview(fontScale = 2.0f)
-    @Composable
-    fun TopAppBarHumFontScale2() {
-        CaptureMultiTheme {
-            KmtTopAppBarExample()
-        }
-    }
-
-    @OptIn(ExperimentalMaterial3Api::class)
-    @Composable
-    private fun KmtTopAppBarExample() {
-        KmtTopAppBar(
-            titleRes = "untitled",
-            navigationIcon = KmtIcons.Search,
-            navigationIconContentDescription = "Navigation icon",
-            actionIcon = KmtIcons.MoreVert,
-            actionIconContentDescription = "Action icon",
-        )
     }
 }
