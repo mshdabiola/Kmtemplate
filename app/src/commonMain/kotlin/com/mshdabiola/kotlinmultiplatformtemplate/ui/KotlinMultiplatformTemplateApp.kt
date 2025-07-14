@@ -15,6 +15,8 @@
  */
 package com.mshdabiola.kotlinmultiplatformtemplate.ui
 
+import androidx.compose.animation.ExperimentalSharedTransitionApi
+import androidx.compose.animation.SharedTransitionLayout
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.WindowInsets
@@ -29,10 +31,8 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExtendedFloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.SnackbarDuration
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
-import androidx.compose.material3.SnackbarResult
 import androidx.compose.material3.Text
 import androidx.compose.material3.adaptive.currentWindowAdaptiveInfo
 import androidx.compose.runtime.Composable
@@ -57,6 +57,7 @@ import com.mshdabiola.kotlinmultiplatformtemplate.MainActivityUiState
 import com.mshdabiola.kotlinmultiplatformtemplate.MainAppViewModel
 import com.mshdabiola.kotlinmultiplatformtemplate.navigation.KotlinMultiplatformTemplateAppNavHost
 import com.mshdabiola.model.DarkThemeConfig
+import com.mshdabiola.ui.LocalSharedTransitionScope
 import com.mshdabiola.ui.semanticsCommon
 import org.koin.compose.koinInject
 import org.koin.compose.viewmodel.koinViewModel
@@ -65,6 +66,7 @@ import org.koin.core.annotation.KoinExperimentalAPI
 @OptIn(
     KoinExperimentalAPI::class,
     ExperimentalMaterial3Api::class,
+    ExperimentalSharedTransitionApi::class,
 )
 @Composable
 fun KotlinMultiplatformTemplateApp() {
@@ -80,70 +82,68 @@ fun KotlinMultiplatformTemplateApp() {
     val analyticsHelper = koinInject<AnalyticsHelper>()
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     val darkTheme = shouldUseDarkTheme(uiState)
-
-    CompositionLocalProvider(LocalAnalyticsHelper provides analyticsHelper) {
-        KmtTheme(
-            contrast = chooseContrast(uiState),
-            darkTheme = darkTheme,
-            disableDynamicTheming = shouldDisableDynamicTheming(uiState),
+    SharedTransitionLayout {
+        CompositionLocalProvider(
+            LocalAnalyticsHelper provides analyticsHelper,
+            LocalSharedTransitionScope provides this,
         ) {
-            KmtBackground {
-                KmtGradientBackground(
-                    gradientColors =
-                    if (shouldShowGradientBackground) {
-                        LocalGradientColors.current
-                    } else {
-                        GradientColors()
-                    },
-                ) {
-                    val snackbarHostState = remember { SnackbarHostState() }
-                    Scaffold(
-                        modifier = Modifier.semanticsCommon {},
-                        containerColor = Color.Transparent,
-                        contentWindowInsets = WindowInsets(0, 0, 0, 0),
-                        snackbarHost = { SnackbarHost(snackbarHostState) },
-
-                        floatingActionButton = {
-                            if (appState.isMain) {
-                                ExtendedFloatingActionButton(
-                                    modifier = Modifier.testTag("main:add"),
-                                    text = { Text("Add Note") },
-                                    icon = {
-                                        Icon(
-                                            KmtIcons.Add,
-                                            contentDescription = "add",
-                                        )
-                                    },
-                                    onClick = {
-                                        appState.navController.navigateToDetail(
-                                            Detail(-1),
-                                        )
-                                    },
-                                )
-                            }
+            KmtTheme(
+                contrast = chooseContrast(uiState),
+                darkTheme = darkTheme,
+                disableDynamicTheming = shouldDisableDynamicTheming(uiState),
+            ) {
+                KmtBackground {
+                    KmtGradientBackground(
+                        gradientColors =
+                        if (shouldShowGradientBackground) {
+                            LocalGradientColors.current
+                        } else {
+                            GradientColors()
                         },
-                    ) { padding ->
+                    ) {
+                        val snackbarHostState = remember { SnackbarHostState() }
+                        Scaffold(
+                            modifier = Modifier.semanticsCommon {},
+                            containerColor = Color.Transparent,
+                            contentWindowInsets = WindowInsets(0, 0, 0, 0),
+                            snackbarHost = { SnackbarHost(snackbarHostState) },
 
-                        Column(
-                            Modifier
-                                .fillMaxSize()
-                                .padding(padding)
-                                .consumeWindowInsets(padding)
-                                .windowInsetsPadding(
-                                    WindowInsets.safeDrawing.only(WindowInsetsSides.Horizontal),
-                                ),
-                        ) {
-                            KotlinMultiplatformTemplateAppNavHost(
-                                appState = appState,
-                                onShowSnackbar = { message, action ->
-                                    snackbarHostState.showSnackbar(
-                                        message = message,
-                                        actionLabel = action,
-                                        duration = SnackbarDuration.Short,
-                                    ) == SnackbarResult.ActionPerformed
-                                },
-                            )
+                            floatingActionButton = {
+                                if (appState.isMain) {
+                                    ExtendedFloatingActionButton(
+                                        modifier = Modifier.testTag("main:add"),
+                                        text = { Text("Add Note") },
+                                        icon = {
+                                            Icon(
+                                                KmtIcons.Add,
+                                                contentDescription = "add",
+                                            )
+                                        },
+                                        onClick = {
+                                            appState.navController.navigateToDetail(
+                                                Detail(-1),
+                                            )
+                                        },
+                                    )
+                                }
+                            },
+                        ) { padding ->
+
+                            Column(
+                                Modifier
+                                    .fillMaxSize()
+                                    .padding(padding)
+                                    .consumeWindowInsets(padding)
+                                    .windowInsetsPadding(
+                                        WindowInsets.safeDrawing.only(WindowInsetsSides.Horizontal),
+                                    ),
+                            ) {
+                                KotlinMultiplatformTemplateAppNavHost(
+                                    appState = appState,
+
+                                )
 //                                            }
+                            }
                         }
                     }
                 }
