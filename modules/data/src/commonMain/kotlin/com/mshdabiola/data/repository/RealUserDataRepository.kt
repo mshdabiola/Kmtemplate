@@ -15,48 +15,40 @@
  */
 package com.mshdabiola.data.repository
 
-import co.touchlab.kermit.Logger
-import com.mshdabiola.analytics.AnalyticsHelper
-import com.mshdabiola.datastore.Store
+import com.mshdabiola.datastore.UserPreferencesRepository
 import com.mshdabiola.model.DarkThemeConfig
 import com.mshdabiola.model.UserData
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.withContext
 
 internal class RealUserDataRepository(
-    private val settings: Store,
-    private val analyticsHelper: AnalyticsHelper,
-    private val logger: Logger,
+    private val userPreferencesRepository: UserPreferencesRepository,
+    private val ioDispatcher: CoroutineDispatcher,
+
+//    private val analyticsHelper: AnalyticsHelper,
+//    private val logger: Logger,
 ) : UserDataRepository {
-    init {
-        logger.d { "OfflineFirstUserDataRepository init" }
-    }
 
     override val userData: Flow<UserData> =
-        settings
+        userPreferencesRepository
             .userData
 
     override suspend fun setContrast(contrast: Int) {
-        settings.updateUserData {
-            it.copy(contrast = contrast)
+        withContext(ioDispatcher) {
+            userPreferencesRepository.setContrast(contrast)
         }
-        // analyticsHelper.logThemeChanged(themeBrand.name)
     }
 
     override suspend fun setDarkThemeConfig(darkThemeConfig: DarkThemeConfig) {
-        settings.updateUserData {
-            it.copy(darkThemeConfig = darkThemeConfig)
-        }
+        withContext(ioDispatcher) { userPreferencesRepository.setDarkThemeConfig(darkThemeConfig) }
     }
 
     override suspend fun setDynamicColorPreference(useDynamicColor: Boolean) {
-        settings.updateUserData {
-            it.copy(useDynamicColor = useDynamicColor)
-        }
+        withContext(ioDispatcher) { userPreferencesRepository.setDynamicColorPreference(useDynamicColor) }
     }
 
     override suspend fun setShouldHideOnboarding(shouldHideOnboarding: Boolean) {
-        settings.updateUserData {
-            it.copy(shouldHideOnboarding = shouldHideOnboarding)
-        }
+        withContext(ioDispatcher) { userPreferencesRepository.setShouldHideOnboarding(shouldHideOnboarding) }
     }
 }
