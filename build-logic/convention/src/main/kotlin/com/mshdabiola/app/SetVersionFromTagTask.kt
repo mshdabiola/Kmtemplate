@@ -40,7 +40,12 @@ abstract class SetVersionFromTagTask : DefaultTask() {
     @TaskAction
     fun setVersion() {
         val tomlFile = libsVersionsTomlFile.asFile.get()
-        val versionNameToSet = newVersionName.get()
+        val versionGet = newVersionName.get()
+        val versionNameToSet = if (versionGet.isNotEmpty() && versionGet[0].isLetter()) {
+            versionGet.substring(1) // Remove the first character if it's an alphabet
+        } else {
+            versionGet // Otherwise, keep it as is
+        }
         val versionCodeToSet = versionStringToNumber(versionNameToSet)
 
         println("Setting versionName to: $versionNameToSet")
