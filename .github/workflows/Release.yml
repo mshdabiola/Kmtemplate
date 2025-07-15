@@ -18,7 +18,7 @@ jobs:
       # 1
       - uses: actions/checkout@v4
 
-      - name: Set up JDK 
+      - name: Set up JDK
         uses: actions/setup-java@v4
         with:
           distribution: 'zulu'
@@ -38,6 +38,9 @@ jobs:
           build-scan-terms-of-use-url: "https://gradle.com/terms-of-service"
           build-scan-terms-of-use-agree: "yes"
 
+      - name: Run setVersionFromTag
+        run: setVersionFromTag -PnewVersionName=${{ github.ref_name }}
+
       - name: Build  google play release variant apk
         run: ./gradlew assembleGooglePlayRelease
 
@@ -51,7 +54,7 @@ jobs:
           keyPassword: ${{ secrets.KEY_PASSWORD }}
         env:
           BUILD_TOOLS_VERSION: "34.0.0"
-      
+
           # sed -i -e '/with(target) {/,/^        }/d' -e '/CrashlyticsExtension/d' build-logic/convention/src/main/kotlin/AndroidApplicationFirebaseConventionPlugin.kt
 
       - name: Remove Firebase References
@@ -85,14 +88,14 @@ jobs:
           generateReleaseNotes: true
           bodyFile: distribution/whatsnew/whatsnew-en-US
           prerelease: false
-    
+
   web:
     name: Build and  Deploy Web Pre Release
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
-      - name: Set up JDK 
+      - name: Set up JDK
         uses: actions/setup-java@v4
         with:
           distribution: 'zulu'
@@ -112,4 +115,3 @@ jobs:
           FOLDER: app/build/dist/wasmJs/productionExecutable # The folder the action should deploy.
           CLEAN: true # Automatically remove deleted files from the deploy branch
 
-    
