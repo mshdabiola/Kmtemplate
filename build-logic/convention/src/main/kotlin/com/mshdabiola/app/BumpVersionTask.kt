@@ -28,8 +28,8 @@ import org.gradle.api.tasks.TaskAction
  */
 abstract class BumpVersionTask : DefaultTask() {
 
-    @get:Input
-    abstract val newVersionName: Property<String>
+    @get:InputFile
+    abstract val revisionFile: RegularFileProperty
 
     @get:InputFile
     abstract val libsVersionsTomlFile: RegularFileProperty
@@ -40,9 +40,15 @@ abstract class BumpVersionTask : DefaultTask() {
     @TaskAction
     fun bumpVersion() {
         val tomlFile = libsVersionsTomlFile.asFile.get()
-        val versionNameToSet = newVersionName.get()
+        val revFile = revisionFile.asFile.get()
 
-        println("Updating versionName to: $versionNameToSet")
+        // 1. Read and increment revision
+        val currentRevision = if (revFile.exists()) {
+            revFile.readText().trim().toIntOrNull() ?: 0
+        } else {
+            0
+        }
+
 
         // Read all lines from the TOML file
         val lines = tomlFile.readLines()
@@ -54,15 +60,6 @@ abstract class BumpVersionTask : DefaultTask() {
         for (line in lines) {
             var modifiedLine = line
 
-            // 1. Update versionName
-            val versionNameRegex = """(versionName\s*=\s*")[^"]+(")""".toRegex()
-            if (line.contains("versionName = ") && versionNameRegex.containsMatchIn(line)) {
-                modifiedLine = versionNameRegex.replace(line) { matchResult ->
-                    val (prefix, suffix) = matchResult.destructured
-                    "$prefix$versionNameToSet$suffix"
-                }
-                println("Updated versionName line: '$line' -> '$modifiedLine'")
-            }
 
             // 2. Increment versionCode
             // This regex needs to handle both `versionCode = "123"` and `versionCode = 123`
@@ -72,7 +69,7 @@ abstract class BumpVersionTask : DefaultTask() {
                 modifiedLine = versionCodeRegex.replace(modifiedLine) { matchResult ->
                     val (prefix, quote, codeStr) = matchResult.destructured
                     currentVersionCode = codeStr.toInt()
-                    val newCode = currentVersionCode + 1
+                    val newCode = currentVersionCode + 1+currentRevision
                     println("Incrementing versionCode: $currentVersionCode -> $newCode")
                     "$prefix$quote$newCode$quote"
                 }
