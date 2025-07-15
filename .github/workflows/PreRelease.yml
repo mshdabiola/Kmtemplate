@@ -38,6 +38,11 @@ jobs:
           build-scan-terms-of-use-url: "https://gradle.com/terms-of-service"
           build-scan-terms-of-use-agree: "yes"
 
+      - name: Bump version code
+        id: bump_version_code
+        run: |
+          ./gradlew bumpVersionCode
+
       - name: Build  google play release variant apk
         run: ./gradlew assembleGooglePlayRelease
 
@@ -106,7 +111,7 @@ jobs:
           build-scan-terms-of-use-agree: "yes"
 
       - name: Read and increment revision
-        id: bump
+        id: bump_conveyor_revision
         run: |
           ./gradlew bumpConveyorRevision
 
