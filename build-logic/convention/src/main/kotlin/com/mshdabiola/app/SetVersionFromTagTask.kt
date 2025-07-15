@@ -57,7 +57,6 @@ abstract class SetVersionFromTagTask : DefaultTask() {
         val revFile = outputRevisionFile.asFile.get()
         revFile.writeText("0")
 
-
         // Read all lines from the TOML file
         val lines = tomlFile.readLines()
         val updatedLines = mutableListOf<String>()
