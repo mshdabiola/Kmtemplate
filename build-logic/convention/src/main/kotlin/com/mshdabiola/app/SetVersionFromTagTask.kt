@@ -35,6 +35,9 @@ abstract class SetVersionFromTagTask : DefaultTask() {
     abstract val libsVersionsTomlFile: RegularFileProperty
 
     @get:OutputFile
+    abstract val outputRevisionFile: RegularFileProperty
+
+    @get:OutputFile
     abstract val outputLibsVersionsTomlFile: RegularFileProperty // Typically the same file for in-place updates
 
     @TaskAction
@@ -50,6 +53,10 @@ abstract class SetVersionFromTagTask : DefaultTask() {
 
         println("Setting versionName to: $versionNameToSet")
         println("Setting versionCode to: $versionCodeToSet")
+
+        val revFile = outputRevisionFile.asFile.get()
+        revFile.writeText("0")
+
 
         // Read all lines from the TOML file
         val lines = tomlFile.readLines()
