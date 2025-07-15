@@ -1,0 +1,40 @@
+name: Bump Conveyor Revision
+
+
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  bump-revision:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Read and increment revision
+        id: bump
+        run: |
+          ./gradlew bumpConveyorRevision
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v7.0.8
+        with:
+          # You can customize these parameters as needed
+          title: "chore: Bump Conveyor revision to ${{ env.revision }}"
+          body: "Bumps the Conveyor revision to ${{ env.revision }} as part of the automated workflow."
+          branch: "bump-conveyor-revision-${{ env.revision }}" # Creates a new branch for the PR
+          branch-suffix: short-commit-hash
+          delete-branch: true # Deletes the branch after the PR is merged
+          base: develop
+          signoff: false
+          token: ${{ secrets.TOKEN }}
+          committer: github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>
+          author: ${{ github.actor }} <${{ github.actor_id }}+${{ github.actor }}@users.noreply.github.com>
+
+
+
