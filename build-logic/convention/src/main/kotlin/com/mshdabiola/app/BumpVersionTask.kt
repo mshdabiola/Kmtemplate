@@ -17,8 +17,6 @@ package com.mshdabiola.app
 
 import org.gradle.api.DefaultTask
 import org.gradle.api.file.RegularFileProperty
-import org.gradle.api.provider.Property
-import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.InputFile
 import org.gradle.api.tasks.OutputFile
 import org.gradle.api.tasks.TaskAction
@@ -49,7 +47,6 @@ abstract class BumpVersionTask : DefaultTask() {
             0
         }
 
-
         // Read all lines from the TOML file
         val lines = tomlFile.readLines()
         val updatedLines = mutableListOf<String>()
@@ -60,7 +57,6 @@ abstract class BumpVersionTask : DefaultTask() {
         for (line in lines) {
             var modifiedLine = line
 
-
             // 2. Increment versionCode
             // This regex needs to handle both `versionCode = "123"` and `versionCode = 123`
             val versionCodeRegex = """(versionCode\s*=\s*)(["']?)(\d+)\2""".toRegex()
@@ -69,7 +65,7 @@ abstract class BumpVersionTask : DefaultTask() {
                 modifiedLine = versionCodeRegex.replace(modifiedLine) { matchResult ->
                     val (prefix, quote, codeStr) = matchResult.destructured
                     currentVersionCode = codeStr.toInt()
-                    val newCode = currentVersionCode + 1+currentRevision
+                    val newCode = currentVersionCode + 1 + currentRevision
                     println("Incrementing versionCode: $currentVersionCode -> $newCode")
                     "$prefix$quote$newCode$quote"
                 }
