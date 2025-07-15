@@ -209,6 +209,9 @@ jobs:
           build-scan-terms-of-use-url: "https://gradle.com/terms-of-service"
           build-scan-terms-of-use-agree: "yes"
 
+      - name: Remove Firebase References
+        run: ./gradlew removeFirebaseReferences
+
       - name: Build all Foss Reliant APKs
         run: ./gradlew assembleFossReliant :benchmarks:assembleFossReliant
           -x pixel6Api33FossReliantNonMinifiedReleaseAndroidTest
