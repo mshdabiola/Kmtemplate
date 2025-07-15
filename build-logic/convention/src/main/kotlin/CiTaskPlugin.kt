@@ -39,13 +39,11 @@ class CiTaskPlugin : Plugin<Project> {
             outputs.upToDateWhen { false }
         }
 
-        target.tasks.register<BumpVersionTask>("bumpVersionNameAndCode") {
+        target.tasks.register<BumpVersionTask>("bumpVersionCode") {
             description = "Updates the versionName and " +
                 "increments the versionCode in gradle/libs.versions.toml."
 
-            // This property must be set when the task is called, e.g., via -PnewVersionName=...
-            // There's no default here because it's expected to come from the tag.
-            newVersionName.convention("0.0.0")
+            revisionFile.set(target.rootProject.file(".github/workflows/.revision-version"))
             // Provide a default for local testing, will be overridden by -P
 
             libsVersionsTomlFile.set(target.rootProject.file("gradle/libs.versions.toml"))
@@ -64,8 +62,7 @@ class CiTaskPlugin : Plugin<Project> {
             // These properties must be set when the task is called, e.g.,
             // via -PnewVersionName=... -PnewVersionCode=...
             // Provide convention values for local testing/default, but expect them to be overridden.
-            newVersionName.convention("0.0.1")
-            newVersionCode.convention(0) // Default to 0 for int property
+            newVersionName.set(project.providers.gradleProperty("newVersionName").orElse("0.0.1"))
 
             libsVersionsTomlFile.set(target.rootProject.file("gradle/libs.versions.toml"))
             outputLibsVersionsTomlFile.set(target.rootProject.file("gradle/libs.versions.toml"))
