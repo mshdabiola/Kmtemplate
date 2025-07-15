@@ -73,33 +73,16 @@ abstract class RemoveFirebaseReferencesTask : DefaultTask() {
             firebaseConventionPluginFile.get().asFile,
             outputFirebaseConventionPluginFile.get().asFile,
         ) { lines ->
-            val modifiedLines = mutableListOf<String>()
-            var inWithTargetBlock = false
+            val newcode = """
+               import org.gradle.api.Plugin
+               import org.gradle.api.Project
 
-            for (line in lines) {
-                when {
-                    // Check for start of 'with(target) {' block
-                    line.contains("with(target) {") -> {
-                        inWithTargetBlock = true
-                        // Do not add this line (start of block)
-                    }
-                    // Check for end of 'with(target) {' block (assuming it ends with '}')
-                    inWithTargetBlock && line.trim() == "}" -> {
-                        inWithTargetBlock = false
-                        // Do not add this line (end of block)
-                    }
-                    // Skip lines within the block or lines containing CrashlyticsExtension or FirebasePerfExtension import
-                    inWithTargetBlock ||
-                        line.contains("CrashlyticsExtension") ||
-                        line.contains("import com.google.firebase.perf.plugin.FirebasePerfExtension") -> {
-                        // Skip this line
-                    }
-                    else -> {
-                        modifiedLines.add(line) // Add line if it doesn't match any exclusion criteria
-                    }
-                }
-            }
-            modifiedLines
+               class AndroidApplicationFirebaseConventionPlugin : Plugin<Project> {
+                   override fun apply(target: Project) {
+                   }
+               }
+            """.trimIndent()
+            newcode.lines()
         }
 
         // 3. Process build-logic/convention/build.gradle.kts
