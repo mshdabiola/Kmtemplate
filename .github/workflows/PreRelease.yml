@@ -18,7 +18,7 @@ jobs:
       # 1
       - uses: actions/checkout@v4
 
-      - name: Set up JDK 
+      - name: Set up JDK
         uses: actions/setup-java@v4
         with:
           distribution: 'zulu'
@@ -51,7 +51,7 @@ jobs:
           keyPassword: ${{ secrets.KEY_PASSWORD }}
         env:
           BUILD_TOOLS_VERSION: "34.0.0"
-      
+
           # sed -i -e '/with(target) {/,/^        }/d' -e '/CrashlyticsExtension/d' build-logic/convention/src/main/kotlin/AndroidApplicationFirebaseConventionPlugin.kt
 
       - name: Remove Firebase References
@@ -105,6 +105,11 @@ jobs:
           build-scan-terms-of-use-url: "https://gradle.com/terms-of-service"
           build-scan-terms-of-use-agree: "yes"
 
+      - name: Read and increment revision
+        id: bump
+        run: |
+          ./gradlew bumpConveyorRevision
+
       - name: Build jar
         run: ./gradlew createReleaseDistributable
 
@@ -118,13 +123,27 @@ jobs:
           extra_flags: -f ci.conveyor.conf
           agree_to_license: 1
 
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v7.0.8
+        with:
+          title: "chore: Bump Conveyor revision "
+          body: "Bumps the Conveyor revision "
+          branch: "bump-conveyor-revision"
+          branch-suffix: short-commit-hash
+          delete-branch: true
+          base: develop
+          signoff: false
+          token: ${{ secrets.TOKEN }}
+          committer: github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>
+          author: ${{ github.actor }} <${{ github.actor_id }}+${{ github.actor }}@users.noreply.github.com>
+
   web:
     name: Build and  Deploy Web Pre Release
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
-      - name: Set up JDK 
+      - name: Set up JDK
         uses: actions/setup-java@v4
         with:
           distribution: 'zulu'
@@ -144,4 +163,3 @@ jobs:
           FOLDER: app/build/dist/wasmJs/productionExecutable # The folder the action should deploy.
           CLEAN: true # Automatically remove deleted files from the deploy branch
 
-    
