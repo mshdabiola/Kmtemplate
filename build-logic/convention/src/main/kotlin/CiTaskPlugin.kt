@@ -67,6 +67,7 @@ class CiTaskPlugin : Plugin<Project> {
             libsVersionsTomlFile.set(target.rootProject.file("gradle/libs.versions.toml"))
             outputLibsVersionsTomlFile.set(target.rootProject.file("gradle/libs.versions.toml"))
             // Same file
+            outputRevisionFile.set(target.rootProject.file(".github/workflows/.revision-version"))
 
             // For tasks that modify files and are part of a CI/CD pipeline,
             // it's often practical to make them always run.
