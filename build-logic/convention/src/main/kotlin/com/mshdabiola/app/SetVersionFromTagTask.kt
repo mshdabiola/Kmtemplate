@@ -31,9 +31,6 @@ abstract class SetVersionFromTagTask : DefaultTask() {
     @get:Input
     abstract val newVersionName: Property<String>
 
-    @get:Input
-    abstract val newVersionCode: Property<Int> // Using Int directly as it's a number
-
     @get:InputFile
     abstract val libsVersionsTomlFile: RegularFileProperty
 
@@ -44,7 +41,7 @@ abstract class SetVersionFromTagTask : DefaultTask() {
     fun setVersion() {
         val tomlFile = libsVersionsTomlFile.asFile.get()
         val versionNameToSet = newVersionName.get()
-        val versionCodeToSet = newVersionCode.get()
+        val versionCodeToSet = versionStringToNumber(versionNameToSet)
 
         println("Setting versionName to: $versionNameToSet")
         println("Setting versionCode to: $versionCodeToSet")
@@ -83,5 +80,13 @@ abstract class SetVersionFromTagTask : DefaultTask() {
         // Write the updated lines back to the file
         tomlFile.writeText(updatedLines.joinToString("\n"))
         println("Successfully updated ${tomlFile.name}.")
+    }
+
+    private fun versionStringToNumber(versionString: String): Long {
+        // Remove all non-digit characters (like dots)
+        val numericString = versionString.replace(".", "")
+
+        // Convert the resulting string to an integer
+        return numericString.toLongOrNull() ?: 1
     }
 }
