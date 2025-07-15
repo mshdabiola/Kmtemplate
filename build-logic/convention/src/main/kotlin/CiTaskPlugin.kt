@@ -15,6 +15,7 @@
  */
 import com.mshdabiola.app.BumpConveyorRevisionTask
 import com.mshdabiola.app.BumpVersionTask
+import com.mshdabiola.app.RemoveFirebaseReferencesTask
 import com.mshdabiola.app.SetVersionFromTagTask
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -71,6 +72,42 @@ class CiTaskPlugin : Plugin<Project> {
 
             // For tasks that modify files and are part of a CI/CD pipeline,
             // it's often practical to make them always run.
+            outputs.upToDateWhen { false }
+        }
+        // In your root build.gradle.kts
+
+// ... (other plugins, dependencies, etc.)
+
+        target.tasks.register<RemoveFirebaseReferencesTask>("removeFirebaseReferences") {
+            description = "Removes all known Firebase-related declarations from various Gradle files."
+
+            // Set up input and output files
+            // Make sure these paths are correct relative to your project root!
+            settingsGradleKtsFile.set(target.rootProject.file("settings.gradle.kts"))
+            outputSettingsGradleKtsFile.set(target.rootProject.file("settings.gradle.kts")) // Modify in place
+
+            firebaseConventionPluginFile.set(
+                target.rootProject.file(
+                    "build-logic/convention/src/main/kotlin/AndroidApplicationFirebaseConventionPlugin.kt",
+                ),
+            )
+            outputFirebaseConventionPluginFile.set(
+                target.rootProject.file(
+                    "build-logic/convention/src/main/kotlin/AndroidApplicationFirebaseConventionPlugin.kt",
+                ),
+            ) // Modify in place
+
+            buildLogicConventionBuildGradleKtsFile.set(
+                target.rootProject.file("build-logic/convention/build.gradle.kts"),
+            )
+            outputBuildLogicConventionBuildGradleKtsFile.set(
+                target.rootProject.file("build-logic/convention/build.gradle.kts"),
+            ) // Modify in place
+
+            rootBuildGradleKtsFile.set(target.rootProject.file("build.gradle.kts"))
+            outputRootBuildGradleKtsFile.set(target.rootProject.file("build.gradle.kts")) // Modify in place
+
+            // This task modifies files, so it should almost always run.
             outputs.upToDateWhen { false }
         }
     }
