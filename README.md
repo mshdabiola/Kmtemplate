@@ -48,7 +48,7 @@
   <img src="./fastlane/metadata/android/en-US/images/icon.png" width="200" />
 </p>
 
-<div div align="center" >
+<div align="center">
 <!-- <a href="https://apt.izzysoft.de/packages/com.mshdabiola.kmttemplate/"><img src="https://gitlab.com/IzzyOnDroid/repo/-/raw/master/assets/IzzyOnDroid.png" height="80"></a> -->
  <a href="https://f-droid.org/en/packages/com.mshdabiola.kmttemplate"><img src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png" height="80"></a> 
  <!-- <a href="https://www.openapk.net/simpmusic/com.mshdabiola.kmttemplate/"><img src="https://www.openapk.net/images/openapk-badge.png" height="80"></a> -->
