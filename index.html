@@ -3,7 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Main Website - Home</title>
+    <title>Kotlin Multiplatform Template - Build Smarter, Ship Faster</title>
+
+    <link rel=icon href="icon.svg" sizes="any" type="image/svg+xml">
+
 
     <style>
         :root {
@@ -16,32 +19,40 @@
             --note-text: #3d3d3d;
         }
 
+
         @media (prefers-color-scheme: dark) {
-            :root {
-                --backdrop: #44475A;
-                --foreground: #F8F8F2;
-                --button-text: #F8F8F2;
-                --button-face: #07e73f;
-                --pane-color: #282A36;
-                --no-go-color: #282A36;
-                --note-text: #c3c3c3;
-            }
+
+
+        :root {
+            --backdrop: #44475A;
+            --foreground: #F8F8F2;
+            --button-text: #F8F8F2;
+            --button-face: #07e73f;
+            --pane-color: #282A36;
+            --no-go-color: #282A36;
+            --note-text: #c3c3c3;
         }
+
+
+        }
+
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-            font-size: x-large; /* Adjusted for general page content, might need fine-tuning */
+            font-size: x-large;
             background-color: var(--backdrop);
             color: var(--foreground);
+        }
+
+        /* Only set dimensions if needed for flex centering */
+        html {
+            height: 100%;
+        }
+        body {
             min-height: 100%;
             margin: 0;
         }
 
-        html {
-            height: 100%;
-        }
-
-        /* Styles for the download button (applied to general links/buttons if class is used) */
         .download-button > svg > g > path {
             fill: var(--button-text);
         }
@@ -50,26 +61,26 @@
             padding-right: 1em
         }
 
-        .download-button:hover {
+         .download-button:hover {
             filter: brightness(1.02);
         }
 
-        /* Applying the pane style to main content sections for consistency */
-        .pane {
+        .container {
+            display: flex;
             align-items: center;
-            background-color: var(--pane-color);
-            border-radius: 4px;
-            box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2),0px 1px 1px 0px rgba(0, 0, 0, 0.14),0px 1px 3px 0px rgba(0,0,0,.3);
-            box-sizing: border-box;
-            display: flex; /* Using flex to help with content layout */
             flex-direction: column;
-            padding: 2em;
-            margin: 1em auto; /* Center the pane */
-            max-width: 900px; /* Limit width for readability */
-            text-align: center; /* Center text within panes */
+            justify-content: center;
+            text-align: center;
+            width: 100%;
+            height: 100%;
         }
 
-        /* Mobile adjustments from your download.html */
+        #logo {
+            padding: 2em;
+            padding-top: 2.5em;
+            text-align: center;
+        }
+
         @media only screen and (min-device-width: 768px) {
             .download-button {
                 align-items: center;
@@ -85,145 +96,274 @@
                 text-decoration: none;
                 text-transform: uppercase;
                 white-space: nowrap;
-                width: 23em; /* Keep button width consistent */
+                width: 23em;
+            }
+
+            .pane {
+                align-items: center;
+                background-color: var(--pane-color);
+                border-radius: 4px;
+                box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2),0px 1px 1px 0px rgba(0, 0, 0, 0.14),0px 1px 3px 0px rgba(0,0,0,.3);
+                box-sizing: border-box;
+                display: flex;
+                flex-direction: column;
+                padding: 2em;
+                margin: 1em;
+            }
+
+            #version {
+                color: darkgrey;
+            }
+
+            .alternative-downloads, .alternative-downloads a {
+                padding-top: 2em;
+            }
+
+            .alternative-downloads a {
+                padding-right: 1em;
+            }
+
+            #no-go {
+                display: none;
             }
         }
 
         @media only screen and (max-device-width: 768px) {
             /** Mobile. */
-            body { /* Adjusted font size for mobile on general page */
-                font-size: large;
+            .container {
+                font-size: xx-large;
             }
-            .pane {
-                margin: 0.5em; /* Smaller margin on mobile */
-                padding: 1.5em;
-            }
-            .download-button { /* Adjust button size for mobile */
-                width: auto;
-                padding: 15px 25px;
+
+            #panes, #conveyor-logo {
+                display: none;
             }
         }
 
-        /* General styles for consistent look */
-        h1, h2, h3 {
-            color: var(--foreground);
-            margin-top: 0;
+        .smaller-fonts, .smaller-fonts a {
+            font-size: medium;
+            color: #666666;
         }
 
-        p {
-            color: var(--foreground);
-            line-height: 1.8;
-        }
-
-        a {
-            color: var(--button-face); /* Links use your accent color */
-            text-decoration: none;
-        }
-
-        a:hover {
-            text-decoration: underline;
-        }
-
-        /* Navigation styling */
-        nav ul {
-            list-style: none;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            margin-top: 20px;
-            gap: 20px; /* Space between nav items */
-        }
-
-        nav ul li a {
-            color: var(--foreground); /* Nav links might be different color */
-            font-size: large;
-            font-weight: bold;
-            text-transform: uppercase;
-        }
-
-        nav ul li a:hover {
-            color: var(--button-face);
-            text-decoration: none;
-        }
-
-        /* Specific styles for index page layout */
-        .header-content {
+        #no-go {
             padding: 2em;
+            margin-top: 2em;
+            background-color: var(--no-go-color);
+        }
+
+        #version {
+            margin-bottom: 2em;
+        }
+
+        .terminal {
+            background-color: black;
+            border-radius: 10px;
+            white-space: pre-line;
+            text-align: left;
+            padding: 1em;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .terminal a {
+            color: white;
+        }
+
+        .terminal-icon-container {
+            flex-grow: 1;
+        }
+
+        .terminal-icon-container > .tooltip {
+            float: right;
+            display: flex;
+            align-items: center;
+        }
+
+        /* This class lets us simulate a <br> inside a flexbox. */
+        .flex-line-break {
+            flex-basis: 100%;
+            height: 0;
+        }
+
+        .note {
+            line-height: 200%;
+            text-align: left;
+            display: block;
+            color: var(--note-text);
+        }
+
+        .note > * {
+            vertical-align: middle;
+        }
+
+        .note a {
+            color: #395ee7;
+        }
+
+        .help-pane {
+            text-align: left;
+        }
+
+        .cli-instructions {
+            padding-top: 1em;
+        }
+
+        .copy-button {
+            padding-left: 40px;
+            cursor: pointer;
+        }
+
+        /** See here: https://blog.logrocket.com/creating-beautiful-tooltips-with-only-css/ - thanks LogRocket! */
+
+        .tooltip {
+            position: relative; /* making the .tooltip span a container for the tooltip text */
+            border-bottom: 1px dashed #000; /* little indicater to indicate it's hoverable */
+        }
+
+        .tooltip:before {
+            content: attr(data-text); /* here's the magic */
+            position: absolute;
+            font-family: sans-serif;
+            font-size: smaller;
+
+            top: 50%;
+            transform: translateY(-70%);
+
+            left: 100%;
+            margin-left: 15px; /* and add a small left margin */
+
+            /* basic styles */
+            width: fit-content;
+            white-space: nowrap;
+            padding: 10px;
+            border-radius: 10px;
+            background: #555;
+            color: #fff;
             text-align: center;
+
+            opacity: 0;
+            transition: .3s opacity;
         }
 
-        .hero-section {
-            padding: 3em 1em;
-            background-color: var(--pane-color); /* Use pane color for sections */
-            border-radius: 4px;
-            margin-bottom: 2em;
-            box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2),0px 1px 1px 0px rgba(0, 0, 0, 0.14),0px 1px 3px 0px rgba(0,0,0,.3);
+        .tooltip:after {
+            content: "";
+            position: absolute;
+
+            left: 100%;
+            margin-left: -5px;
+
+            top: 50%;
+            transform: translateY(-70%);
+
+            /* the arrow */
+            border: 10px solid #000;
+            border-color: transparent #555 transparent transparent;
+
+            opacity: 0;
+            transition: .3s;
         }
 
-        .section-content {
-            padding: 1.5em 1em;
-            background-color: var(--pane-color);
-            border-radius: 4px;
-            margin-bottom: 2em;
-            box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2),0px 1px 1px 0px rgba(0, 0, 0, 0.14),0px 1px 3px 0px rgba(0,0,0,.3);
+        .tooltip:hover:before, .tooltip:hover:after {
+            display: block;
         }
 
-        .features-list {
-            list-style: none;
-            padding: 0;
+        /* Specific image styling for responsiveness and consistent placement */
+        .hero-image, .screenshot-gallery img {
+            max-width: 100%; /* Ensures images don't overflow their containers */
+            height: auto; /* Maintains aspect ratio */
+            display: block; /* Removes extra space below images */
+            margin: 1em auto; /* Centers images and adds vertical spacing */
+            border-radius: 4px; /* Matches pane border-radius */
+        }
+
+        .feature-icon {
+            /* This class is no longer needed but kept in case you add icons back */
+            width: 2em; /* Size for feature icons */
+            height: 2em;
+            margin-right: 1em; /* Space between icon and text */
+            flex-shrink: 0; /* Prevent icon from shrinking */
+        }
+
+        .screenshot-gallery {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 20px;
+            gap: 1em;
+            margin-top: 2em;
+        }
+
+        .screenshot-gallery img {
+            max-width: 48%; /* Two images per row on larger screens */
+            flex-grow: 1; /* Allows images to grow to fill space */
+            object-fit: contain; /* Ensures entire image is visible */
+        }
+
+        @media only screen and (max-device-width: 768px) {
+            .screenshot-gallery img {
+                max-width: 100%; /* One image per row on mobile */
+            }
+            /* Adjust features list for no images */
+            .features-list li {
+                flex-direction: column; /* Stack heading and text */
+                align-items: flex-start; /* Align text to start */
+                text-align: left;
+            }
+            .features-list li h4, .features-list li p {
+                margin-right: 0;
+                margin-bottom: 0.5em; /* Add some space between heading and paragraph */
+            }
+        }
+
+        /* Adjusted features-list for a simple bullet list with no icons */
+        .features-list {
+            list-style: none; /* Remove default bullet points */
+            padding: 0;
+            text-align: left; /* Align text to the left for readability */
+            margin: 0 auto;
+            max-width: 700px; /* Constrain width for readability */
         }
 
         .features-list li {
-            background-color: var(--backdrop); /* Use backdrop for list item background */
-            padding: 1em;
-            border-radius: 4px;
-            box-shadow: inset 0 0 5px rgba(0,0,0,0.1);
-            flex: 1 1 calc(33% - 40px); /* For 3 columns, adjust as needed */
-            min-width: 250px; /* Minimum width before wrapping */
-            text-align: left;
-            box-sizing: border-box; /* Include padding in width calculation */
+            background-color: var(--pane-color); /* Use pane color for list item background */
+            padding: 1em 0; /* Adjust padding for bullet style */
+            display: block; /* Make it a block element to control spacing easily */
+            margin-bottom: 1em; /* Space between list items */
+            box-shadow: none; /* Remove box shadow for a cleaner list */
+            border-bottom: 1px solid var(--no-go-color); /* Subtle separator */
         }
-        .features-list li::before {
-            content: "• "; /* Simple bullet point */
-            color: var(--button-face);
-            font-weight: bold;
-            margin-right: 5px;
+        .features-list li:last-child {
+            border-bottom: none; /* No separator after the last item */
         }
 
-        footer {
-            padding: 2em;
-            text-align: center;
-            background-color: var(--pane-color); /* Use pane color for footer */
-            color: var(--note-text); /* Use note text color for footer text */
-            box-shadow: 0px -2px 1px -1px rgba(0, 0, 0, 0.2);
-            margin-top: 2em;
+        .features-list li h4 {
+            margin: 0; /* Remove default margins */
+            color: var(--foreground);
+            font-size: large; /* Adjust size to fit in bullet list */
+            margin-bottom: 0.25em; /* Small space below heading */
+        }
+
+        .features-list li p {
+            margin: 0; /* Remove default margins */
+            font-size: medium; /* Adjust size for descriptions */
+            color: var(--note-text); /* Lighter text for descriptions */
         }
     </style>
     </head>
 <body>
-    <header>
-        <div class="header-content pane">
+    
+        <main class="header-content pane">
+            <div id="logo">
+                <img width="256" height="256" src="icon.svg">
+            </div>
             <h1>Kotlin Multiplatform Template</h1>
-            <p>Your cross-platform solution for desktop and mobile applications.</p>
-        </div>
-        <nav>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="about.html">About Us</a></li>
-                <li><a href="features.html">Features</a></li>
-                <li><a href="contact.html">Contact</a></li>
-                <li><a href="download.html">Download App</a></li> <li><a href="https://github.com/mshdabiola/KotlinMultiplatformTemplate/releases" target="_blank" rel="noopener noreferrer">Android App (GitHub)</a></li> </ul>
-        </nav>
-    </header>
+    
+            <p>The Kotlin Multiplatform Template is a robust project starter with a modern multi-module architecture. It enables seamless code sharing and modular development across JVM, Android, and WASM. Maximize code reuse, maintainability, and scalability for your next cross-platform application.</p>
 
-    <main class="pane">
-        <section class="hero-section">
-            <h2>Build Once, Deploy Everywhere.</h2>
-            <p>Leverage the power of Kotlin Multiplatform to create stunning and performant applications for desktop (Windows, macOS, Linux) and Android from a single codebase.</p>
+            <img src="path/to/your/hero-image.png" alt="Illustrative image showing code being shared across different device screens (desktop, mobile, web)" class="hero-image">
+          
+
             <a href="download.html" class="download-button">
                 <svg width="2em" height="2em" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M12 3V17M12 17L17 12M12 17L7 12M21 17H3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -233,43 +373,56 @@
             <p style="margin-top: 1em;">
                 <a href="https://github.com/mshdabiola/KotlinMultiplatformTemplate/releases" target="_blank" rel="noopener noreferrer">Download Android App from GitHub Releases</a>
             </p>
-        </section>
 
-        <section class="section-content">
-            <h3>Key Advantages</h3>
+            <h3>Core Advantages & Features</h3>
             <ul class="features-list">
                 <li>
-                    <h4>Single Codebase</h4>
-                    <p>Develop your logic once and reuse it across multiple platforms, saving time and effort.</p>
+                    <h4>Multi-Module Architecture:</h4>
+                    <p>Clear separation of concerns for a scalable codebase. Manage large projects with ease.</p>
                 </li>
                 <li>
-                    <h4>Native Performance</h4>
-                    <p>Enjoy native UI and performance on each platform for a smooth user experience.</p>
+                    <h4>Shared Business Logic:</h4>
+                    <p>Reuse core logic across JVM, Android, and WASM. Ensures consistency and saves time.</p>
                 </li>
                 <li>
-                    <h4>Rich Ecosystem</h4>
-                    <p>Benefit from the extensive Kotlin and Java libraries, along with platform-specific APIs.</p>
+                    <h4>Platform-Specific Optimizations:</h4>
+                    <p>Optimized solutions for each platform for native performance and user experience.</p>
                 </li>
                 <li>
-                    <h4>Faster Development</h4>
-                    <p>Streamline your development process with modern tools and frameworks.</p>
+                    <h4>Flexible Android Builds:</h4>
+                    <p>Supports Google Play and FossReliant build types for varied distribution.</p>
                 </li>
                 <li>
-                    <h4>Cross-Platform UI</h4>
-                    <p>Explore options like Compose Multiplatform for shared UI across desktop and Android.</p>
+                    <h4>Centralized Build Logic:</h4>
+                    <p>Streamline project setup and maintenance with unified plugin and configuration management.</p>
+                </li>
+                <li>
+                    <h4>Desktop Packaging with Hydraulic Conveyor:</h4>
+                    <p>Easily package and distribute desktop apps for Linux, Windows, and Mac.</p>
+                </li>
+                <li>
+                    <h4>Compose Multiplatform UI:</h4>
+                    <p>Build modern, consistent UIs across desktop and Android with declarative Compose.</p>
+                </li>
+                <li>
+                    <h4>Clean Architecture & Quality Tools:</h4>
+                    <p>Built with Clean Architecture for maintainability. Ready for localization, Spotless, Detekt, and Jacoco.</p>
+                </li>
+                <li>
+                    <h4>Enforced Code Quality:</h4>
+                    <p>High standards enforced by Spotless, ktlint, detekt, and custom ktlint rules for design system.</p>
                 </li>
             </ul>
-        </section>
 
-        <section class="section-content">
-            <h3>About This Template</h3>
-            <p>This template provides a solid foundation for your Kotlin Multiplatform projects, featuring a ready-to-use structure for common application needs. It showcases best practices for building robust and scalable cross-platform applications.</p>
-        </section>
-    </main>
+            <h3>Why Choose This Template?</h3>
+            <p>This template offers a robust, modern, and scalable foundation for your Kotlin Multiplatform projects. It integrates best practices and simplifies cross-platform development. Build high-quality applications with confidence and efficiency.</p>
+            <p>It's engineered for developers who prioritize code reuse, maintainability, and scalability. Achieve clear separation of concerns for complex applications.</p>
+        </main>
+   
 
-    <footer>
+
+    <footer class="section-content pane">
         <p>&copy; 2025 KotlinMultiplatformTemplate. All rights reserved.</p>
-        <p class="smaller-fonts">Powered by a passionate coding partner.</p>
     </footer>
 </body>
 </html>
