@@ -48,29 +48,17 @@
   <img src="./fastlane/metadata/android/en-US/images/icon.png" width="200" />
 </p>
 
+<div align="center">
+<!-- <a href="https://apt.izzysoft.de/packages/com.mshdabiola.kmttemplate/"><img src="https://gitlab.com/IzzyOnDroid/repo/-/raw/master/assets/IzzyOnDroid.png" height="80"></a> -->
+<a href="https://f-droid.org/en/packages/com.mshdabiola.kmttemplate"><img src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png" height="80" alt="Get it on F-Droid"></a> 
+  <a href="https://github.com/mshdabiola/KotlinMultiplatformTemplate/releases"><img src="./fastlane/metadata/android/en-US/images/buttons/desktop-icon.png" height="80" alt="Download for Desktop"></a>
+   <a href="https://github.com/mshdabiola/KotlinMultiplatformTemplate/releases"><img src="./fastlane/metadata/android/en-US/images/buttons/web-icon.png" height="80" alt="Try it on Web"></a>
+    <a href="https://github.com/mshdabiola/KotlinMultiplatformTemplate/releases"><img src="https://raw.githubusercontent.com/NeoApplications/Neo-Backup/034b226cea5c1b30eb4f6a6f313e4dadcbb0ece4/badge_github.png" height="80" alt="Get it on Github"></a>
 
-<div align="center" style="display: flex; flex-direction: row; justify-content: center; gap: 16px;">
-  <a href="https://play.google.com/store/apps/details?id=com.mshdabiola.kotlinmultiplatformtemplate" style="display:inline-block; margin:0 8px; text-decoration:none;">
-    <button style="display:inline-flex;align-items:center;padding:8px 18px;background:#3DDC84;color:#fff;border:none;border-radius:6px;font-size:16px;font-weight:bold;cursor:pointer;gap:8px;">
-      <span style="font-size:20px;">📱</span> Google Play
-    </button>
-  </a>
-  <a href="https://f-droid.org/packages/com.mshdabiola.kotlinmultiplatformtemplate" style="display:inline-block; margin:0 8px; text-decoration:none;">
-    <button style="display:inline-flex;align-items:center;padding:8px 18px;background:#1976d2;color:#fff;border:none;border-radius:6px;font-size:16px;font-weight:bold;cursor:pointer;gap:8px;">
-      <span style="font-size:20px;">🤖</span> F-Droid
-    </button>
-  </a>
-  <a href="https://github.com/mshdabiola/kotlinmultiplatformtemplate/releases/latest" style="display:inline-block; margin:0 8px; text-decoration:none;">
-    <button style="display:inline-flex;align-items:center;padding:8px 18px;background:#24292f;color:#fff;border:none;border-radius:6px;font-size:16px;font-weight:bold;cursor:pointer;gap:8px;">
-      <span style="font-size:20px;">🐙</span> GitHub
-    </button>
-  </a>
-  <a href="https://kotlinmultiplatformtemplate-desktop.onrender.com" style="display:inline-block; margin:0 8px; text-decoration:none;">
-    <button style="display:inline-flex;align-items:center;padding:8px 18px;background:#00B8D9;color:#fff;border:none;border-radius:6px;font-size:16px;font-weight:bold;cursor:pointer;gap:8px;">
-      <span style="font-size:20px;">🖥️</span> Desktop
-    </button>
-  </a>
 </div>
+   <!-- <a href="https://www.producthunt.com/posts/simpmusic?embed=true&utm_source=badge-featured&utm_medium=badge&utm_souce=badge-simpmusic" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=797736&theme=light&t=1737299913224" alt="SimpMusic - A&#0032;FOSS&#0032;YouTube&#0032;Music&#0032;client&#0032;for&#0032;Android&#0032;with&#0032;many&#0032;features | Product Hunt" style="width: 250px; height: 80px;" width="250" height="80" /></a> -->
+       
+  
 <br>
   <br>
 
