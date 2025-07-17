@@ -164,6 +164,7 @@ jobs:
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           file_pattern: '**/*.kt **/*.kts **/*.java **/*.xml'
+          disable_globbing: true
           commit_message: "🤖 Apply Spotless formatting"
 
       - name: Push new Dependency Guard baselines if available
