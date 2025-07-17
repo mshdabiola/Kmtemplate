@@ -30,6 +30,7 @@ interface NoteDao {
 
     @Insert
     suspend fun insert(noteEntity: NoteEntity): Long
+
     @Update
     suspend fun update(noteEntity: NoteEntity)
 

@@ -31,14 +31,13 @@ internal class RealModelRepository(
 ) : NoteRepository {
     override suspend fun upsert(note: Note): Long {
         return withContext(ioDispatcher) {
-            val entity=note.asNoteEntity()
-            if (entity.id==null){
+            val entity = note.asNoteEntity()
+            if (entity.id == null) {
                 noteDao.insert(entity)
-            }else{
+            } else {
                 noteDao.update(entity)
                 note.id
             }
-
         }
     }
 
