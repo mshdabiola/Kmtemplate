@@ -54,111 +54,111 @@ jobs:
       - name: Apply Spotless
         run: |
           ./gradlew spotlessApply :build-logic:convention:spotlessApply
-#
-#      - name: Check build-logic
-#        run: ./gradlew check -p build-logic
-#
-#      - name: Check Detekt and Design system is used
-#        run: ./gradlew lintCheck
-#
-#      - name: Upload merge detekt
-#        uses: github/codeql-action/upload-sarif@v3.29.2
-#        if: success() || failure()
-#        with:
-#          sarif_file: build/reports/detekt/merge.sarif
-#          category: detekt
-#
-#      - name: Check Dependency Guard
-#        id: dependencyguard_verify
-#        continue-on-error: true
-#        run: ./gradlew dependencyGuard
-#
-#      - name: Prevent updating Dependency Guard baselines if this is a fork
-#        id: checkfork_dependencyguard
-#        continue-on-error: false
-#        if: steps.dependencyguard_verify.outcome == 'failure' && github.event.pull_request.head.repo.full_name != github.repository
-#        run: |
-#          echo "::error::Dependency Guard failed, please update baselines with: ./gradlew dependencyGuardBaseline" && exit 1
-#
-#        # Runs if previous job failed
-#      - name: Generate new Dependency Guard baselines if verification failed and it's a PR
-#        id: dependencyguard_baseline
-#        if: steps.dependencyguard_verify.outcome == 'failure' && github.event_name == 'pull_request'
-#        run: |
-#          ./gradlew dependencyGuardBaseline
-#
-#      - name: Run all local screenshot tests
-#        id: screenshotsverify
-#        continue-on-error: true
-#        run: ./gradlew validateFossReliantDebugScreenshotTest
-#
-#      - name: Prevent pushing new screenshots if this is a fork
-#        id: checkfork_screenshots
-#        continue-on-error: false
-#        if: steps.screenshotsverify.outcome == 'failure' && github.event.pull_request.head.repo.full_name != github.repository
-#        run: |
-#          echo "::error::Screenshot tests failed, please create a PR in your fork first." && exit 1
-#
-#      # Runs if previous job failed
-#      - name: Generate new screenshots if verification failed and it's a PR
-#        id: screenshotsrecord
-#        if: steps.screenshotsverify.outcome == 'failure' && github.event_name == 'pull_request'
-#        run: |
-#          ./gradlew updateFossReliantDebugScreenshotTest
-#
-#      - name: Generate coverage reports for Jvm
-#        run: ./gradlew koverXmlReportJvm; ./gradlew koverHtmlReportJvm   #koverHtmlReportJvm
-#
-#      - name: Upload JVM local results (HTML)
-#        if: always()
-#        uses: actions/upload-artifact@v4
-#        with:
-#          name: local-test-results
-#          path: '**/build/reports/tests/jvmTest'
-#
-#      - name: Publish Test Results
-#        uses: EnricoMi/publish-unit-test-result-action@v2.20.0
-#        with:
-#            check_name: Test results
-#            comment_title: Test results
-#            large_files: true
-#            ignore_runs: false
-#            files: ./**/build/test-results/**/*.xml
-#
-#      - name: Upload local coverage reports (XML + HTML) (only API 30)
-#        uses: actions/upload-artifact@v4
-#        with:
-#          name: coverage-reports
-#          if-no-files-found: error
-#          compression-level: 1
-#          overwrite: false
-#          path: '**/build/reports/kover/'
-#
-#      - name: Upload coverage
-#        uses: codecov/codecov-action@v5.4.3
-#        with:
-#          token: ${{ secrets.CODECOV_TOKEN }}
-#          files: "app/build/reports/kover/reportJvm.xml"
-#          verbose: true
-#
-#      - name: Check lint
-#        run: ./gradlew lintFossReliantRelease
-#
-#      - uses: github/codeql-action/upload-sarif@v3.29.2
-#        if: success() || failure()
-#        with:
-#          sarif_file: app/build/reports/lint-results-fossReliantRelease.sarif
-#          category: lint
-#
-#      - name: Upload lint reports (HTML)
-#        if: always()
-#        uses: actions/upload-artifact@v4
-#        with:
-#          name: lint-reports
-#          path: '**/build/reports/lint-results-*.html'
-#
-#      - name: Check badging
-#        run: ./gradlew checkFossReliantReleaseBadging
+
+      - name: Check build-logic
+        run: ./gradlew check -p build-logic
+
+      - name: Check Detekt and Design system is used
+        run: ./gradlew lintCheck
+
+      - name: Upload merge detekt
+        uses: github/codeql-action/upload-sarif@v3.29.2
+        if: success() || failure()
+        with:
+          sarif_file: build/reports/detekt/merge.sarif
+          category: detekt
+
+      - name: Check Dependency Guard
+        id: dependencyguard_verify
+        continue-on-error: true
+        run: ./gradlew dependencyGuard
+
+      - name: Prevent updating Dependency Guard baselines if this is a fork
+        id: checkfork_dependencyguard
+        continue-on-error: false
+        if: steps.dependencyguard_verify.outcome == 'failure' && github.event.pull_request.head.repo.full_name != github.repository
+        run: |
+          echo "::error::Dependency Guard failed, please update baselines with: ./gradlew dependencyGuardBaseline" && exit 1
+
+        # Runs if previous job failed
+      - name: Generate new Dependency Guard baselines if verification failed and it's a PR
+        id: dependencyguard_baseline
+        if: steps.dependencyguard_verify.outcome == 'failure' && github.event_name == 'pull_request'
+        run: |
+          ./gradlew dependencyGuardBaseline
+
+      - name: Run all local screenshot tests
+        id: screenshotsverify
+        continue-on-error: true
+        run: ./gradlew validateFossReliantDebugScreenshotTest
+
+      - name: Prevent pushing new screenshots if this is a fork
+        id: checkfork_screenshots
+        continue-on-error: false
+        if: steps.screenshotsverify.outcome == 'failure' && github.event.pull_request.head.repo.full_name != github.repository
+        run: |
+          echo "::error::Screenshot tests failed, please create a PR in your fork first." && exit 1
+
+      # Runs if previous job failed
+      - name: Generate new screenshots if verification failed and it's a PR
+        id: screenshotsrecord
+        if: steps.screenshotsverify.outcome == 'failure' && github.event_name == 'pull_request'
+        run: |
+          ./gradlew updateFossReliantDebugScreenshotTest
+
+      - name: Generate coverage reports for Jvm
+        run: ./gradlew koverXmlReportJvm; ./gradlew koverHtmlReportJvm   #koverHtmlReportJvm
+
+      - name: Upload JVM local results (HTML)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: local-test-results
+          path: '**/build/reports/tests/jvmTest'
+
+      - name: Publish Test Results
+        uses: EnricoMi/publish-unit-test-result-action@v2.20.0
+        with:
+            check_name: Test results
+            comment_title: Test results
+            large_files: true
+            ignore_runs: false
+            files: ./**/build/test-results/**/*.xml
+
+      - name: Upload local coverage reports (XML + HTML) (only API 30)
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-reports
+          if-no-files-found: error
+          compression-level: 1
+          overwrite: false
+          path: '**/build/reports/kover/'
+
+      - name: Upload coverage
+        uses: codecov/codecov-action@v5.4.3
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: "app/build/reports/kover/reportJvm.xml"
+          verbose: true
+
+      - name: Check lint
+        run: ./gradlew lintFossReliantRelease
+
+      - uses: github/codeql-action/upload-sarif@v3.29.2
+        if: success() || failure()
+        with:
+          sarif_file: app/build/reports/lint-results-fossReliantRelease.sarif
+          category: lint
+
+      - name: Upload lint reports (HTML)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: lint-reports
+          path: '**/build/reports/lint-results-*.html'
+
+      - name: Check badging
+        run: ./gradlew checkFossReliantReleaseBadging
 
       - name: Push new Spotless Apply if available
         uses: stefanzweifel/git-auto-commit-action@v5
