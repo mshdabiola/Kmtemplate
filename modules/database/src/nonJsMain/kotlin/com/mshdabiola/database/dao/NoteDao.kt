@@ -16,7 +16,9 @@
 package com.mshdabiola.database.dao
 
 import androidx.room.Dao
+import androidx.room.Insert
 import androidx.room.Query
+import androidx.room.Update
 import androidx.room.Upsert
 import com.mshdabiola.database.model.NoteEntity
 import kotlinx.coroutines.flow.Flow
@@ -25,6 +27,12 @@ import kotlinx.coroutines.flow.Flow
 interface NoteDao {
     @Upsert
     suspend fun upsert(noteEntity: NoteEntity): Long
+
+    @Insert
+    suspend fun insert(noteEntity: NoteEntity): Long
+
+    @Update
+    suspend fun update(noteEntity: NoteEntity)
 
     @Query("SELECT * FROM note_table")
     fun getAll(): Flow<List<NoteEntity>>
