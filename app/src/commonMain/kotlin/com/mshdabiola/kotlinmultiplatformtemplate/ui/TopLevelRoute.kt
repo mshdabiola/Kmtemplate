@@ -15,22 +15,44 @@
  */
 package com.mshdabiola.kotlinmultiplatformtemplate.ui
 
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Star
+import androidx.compose.material.icons.outlined.FavoriteBorder
+import androidx.compose.material.icons.outlined.Home
+import androidx.compose.material.icons.outlined.StarBorder
 import androidx.compose.ui.graphics.vector.ImageVector
 import com.mshdabiola.designsystem.icon.KmtIcons
 import com.mshdabiola.main.navigation.Main
 import com.mshdabiola.setting.navigation.Setting
 
-data class TopLevelRoute<T : Any>(val route: T, val icon: ImageVector)
+val items = listOf("Home", "Search", "Settings")
+val selectedIcons = listOf(Icons.Filled.Home, Icons.Filled.Favorite, Icons.Filled.Star)
+val unselectedIcons =
+    listOf(Icons.Outlined.Home, Icons.Outlined.FavoriteBorder, Icons.Outlined.StarBorder)
+data class TopLevelRoute<T : Any>(
+    val route: T,
+    val selectedIcon: ImageVector,
+    val unSelectedIcon: ImageVector,
+    val label: String,
+)
 
 val TOP_LEVEL_ROUTES =
     listOf(
-        TopLevelRoute(route = Main, icon = KmtIcons.Domain),
-        TopLevelRoute(route = Unit, icon = KmtIcons.Person),
-        TopLevelRoute(route = Unit, icon = KmtIcons.Stairs),
-    )
-
-val SETTING_LEVEL_ROUTES =
-    listOf(
-        TopLevelRoute(route = Setting, icon = KmtIcons.Settings),
-        TopLevelRoute(route = Setting, icon = KmtIcons.Info),
+        TopLevelRoute(route = Main,
+            selectedIcon = KmtIcons.Home,
+            unSelectedIcon = KmtIcons.HomeOutlined,
+            label = "Home"
+        ),
+        TopLevelRoute(route = Setting,
+            selectedIcon = KmtIcons.Settings,
+            unSelectedIcon = KmtIcons.SettingsOutlined,
+            label = "Settings"
+        ),
+        TopLevelRoute(route = Unit,
+            selectedIcon = KmtIcons.About,
+            unSelectedIcon = KmtIcons.AboutOutlined,
+            label = "About"
+        ),
     )
