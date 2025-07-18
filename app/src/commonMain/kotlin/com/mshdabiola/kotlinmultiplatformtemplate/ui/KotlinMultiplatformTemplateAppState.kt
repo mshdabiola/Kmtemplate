@@ -15,6 +15,12 @@
  */
 package com.mshdabiola.kotlinmultiplatformtemplate.ui
 
+import androidx.compose.material3.DrawerState
+import androidx.compose.material3.DrawerValue
+import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
+import androidx.compose.material3.WideNavigationRailState
+import androidx.compose.material3.rememberDrawerState
+import androidx.compose.material3.rememberWideNavigationRailState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.remember
@@ -25,16 +31,18 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.window.core.layout.WindowSizeClass
-import androidx.window.core.layout.WindowWidthSizeClass
-import com.mshdabiola.detail.navigation.Detail
 import com.mshdabiola.main.navigation.Main
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
 
+@OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 fun rememberKotlinMultiplatformTemplateAppState(
     windowSizeClass: WindowSizeClass,
     coroutineScope: CoroutineScope = rememberCoroutineScope(),
     navController: NavHostController = rememberNavController(),
+    wideNavigationRailState: WideNavigationRailState= rememberWideNavigationRailState(),
+    drawerState: DrawerState = rememberDrawerState(initialValue = DrawerValue.Closed )
 ): KotlinMultiplatformTemplateAppState {
     return remember(
         navController,
@@ -45,15 +53,20 @@ fun rememberKotlinMultiplatformTemplateAppState(
             navController,
             coroutineScope,
             windowSizeClass,
+            wideNavigationRailState,
+            drawerState=drawerState
         )
     }
 }
 
+@OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Stable
 class KotlinMultiplatformTemplateAppState(
     val navController: NavHostController,
     val coroutineScope: CoroutineScope,
     val windowSizeClass: WindowSizeClass,
+    val wideNavigationRailState: WideNavigationRailState,
+    val drawerState: DrawerState
 ) {
     val currentDestination: NavDestination?
         @Composable get() =
@@ -63,15 +76,58 @@ class KotlinMultiplatformTemplateAppState(
     val isMain: Boolean
         @Composable get() =
             currentDestination?.hasRoute(Main::class) == true
+    val isTopRoute
+        @Composable get() = TOP_LEVEL_ROUTES.any { navController.currentDestination?.hasRoute(it.route::class)?:false }
 
-    val shouldShowTopBar: Boolean
-        @Composable get() = currentDestination?.hasRoute(Detail::class) != true
-    val shouldShowBottomBar: Boolean
-        @Composable get() = windowSizeClass.windowWidthSizeClass == WindowWidthSizeClass.COMPACT && isMain
+    val showDrawer: Boolean
+    @Composable get() = windowSizeClass.isWidthCompact && isTopRoute
 
-    val shouldShowNavRail: Boolean
-        @Composable get() = windowSizeClass.windowWidthSizeClass == WindowWidthSizeClass.MEDIUM && isMain
+    val showFab: Boolean
+    @Composable get() = windowSizeClass.isWidthCompact && isMain
 
-    val shouldShowDrawer: Boolean
-        @Composable get() = windowSizeClass.windowWidthSizeClass == WindowWidthSizeClass.EXPANDED && isMain
+    val showRail: Boolean
+    @Composable get() = (windowSizeClass.isWidthMedium || windowSizeClass.isWidthExpanded) && isTopRoute
+
+    fun expand(){
+        coroutineScope.launch {
+            if (windowSizeClass.isWidthCompact){
+                drawerState.open()
+            }else{
+                wideNavigationRailState.expand()
+            }
+
+        }
+    }
+
+    fun collapse(){
+        coroutineScope.launch {
+            if (windowSizeClass.isWidthCompact){
+                drawerState.close()
+            }else{
+                wideNavigationRailState.collapse()
+            }
+
+        }
+    }
+
+    @Composable
+    fun currentRoute(any: Any): Boolean{
+       return currentDestination?.hasRoute(any::class)==true
+    }
+
+
+
+
 }
+
+@Stable
+val WindowSizeClass.isWidthCompact: Boolean
+     get() = minWidthDp<WindowSizeClass.WIDTH_DP_MEDIUM_LOWER_BOUND
+
+@Stable
+inline val WindowSizeClass.isWidthMedium: Boolean
+    get() = minWidthDp>=WindowSizeClass.WIDTH_DP_MEDIUM_LOWER_BOUND && minWidthDp<WindowSizeClass.WIDTH_DP_EXPANDED_LOWER_BOUND
+
+@Stable
+inline val WindowSizeClass.isWidthExpanded: Boolean
+    get() = minWidthDp>=WindowSizeClass.WIDTH_DP_EXPANDED_LOWER_BOUND
