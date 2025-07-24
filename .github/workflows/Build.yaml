@@ -62,7 +62,7 @@ jobs:
         run: ./gradlew lintCheck
 
       - name: Upload merge detekt
-        uses: github/codeql-action/upload-sarif@v3.29.2
+        uses: github/codeql-action/upload-sarif@v3.29.4
         if: success() || failure()
         with:
           sarif_file: build/reports/detekt/merge.sarif
@@ -144,7 +144,7 @@ jobs:
       - name: Check lint
         run: ./gradlew lintFossReliantRelease
 
-      - uses: github/codeql-action/upload-sarif@v3.29.2
+      - uses: github/codeql-action/upload-sarif@v3.29.4
         if: success() || failure()
         with:
           sarif_file: app/build/reports/lint-results-fossReliantRelease.sarif
