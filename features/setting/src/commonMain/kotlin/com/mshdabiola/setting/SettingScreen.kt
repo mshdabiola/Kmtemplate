@@ -15,28 +15,56 @@
  */
 package com.mshdabiola.setting
 
+import androidx.compose.animation.ExperimentalSharedTransitionApi
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Contrast
+import androidx.compose.material.icons.filled.DarkMode
+import androidx.compose.material.icons.filled.LightMode
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import com.mshdabiola.designsystem.component.KmtIconButton
+import com.mshdabiola.designsystem.component.KmtTopAppBar
 import com.mshdabiola.designsystem.icon.KmtIcons
+import com.mshdabiola.model.DarkThemeConfig
+import com.mshdabiola.ui.LocalNavAnimatedContentScope
+import com.mshdabiola.ui.LocalSharedTransitionScope
+import com.mshdabiola.ui.SharedTransitionContainer
+import kotlinmultiplatformtemplate.features.setting.generated.resources.Res
+import kotlinmultiplatformtemplate.features.setting.generated.resources.daynight
+import org.jetbrains.compose.resources.stringArrayResource
+import org.jetbrains.compose.ui.tooling.preview.Preview
 
 // import org.koin.androidx.compose.koinViewModel
 
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalSharedTransitionApi::class)
 @Composable
 internal fun SettingScreen(
     settingState: SettingState,
@@ -45,41 +73,223 @@ internal fun SettingScreen(
     onDarkClick: () -> Unit = {},
     onBack: () -> Unit = {},
 ) {
-    Column(
-        modifier.padding(16.dp),
-        verticalArrangement = Arrangement.spacedBy(4.dp),
-    ) {
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically,
-        ) {
-            Text(text = "Settings", style = MaterialTheme.typography.titleLarge)
-            IconButton(
-                onClick = onBack,
+    val contrastOptions = remember {
+        listOf(
+            ContrastOption(
+                id = 0,
+                icon = Icons.Filled.LightMode, // Representing "Low Contrast"
+                contentDescription = "Low Contrast",
+                label = "Low",
+            ),
+            ContrastOption(
+                id = 1,
+                icon = Icons.Filled.Contrast, // Representing "Standard Contrast"
+                contentDescription = "Standard Contrast",
+                label = "Standard",
+            ),
+            ContrastOption(
+                id = 2,
+                icon = Icons.Filled.DarkMode, // Representing "High Contrast"
+                contentDescription = "High Contrast",
+                label = "High",
+            ),
+        )
+    }
+    val dayNightOptions = stringArrayResource(Res.array.daynight)
+
+    val sharedTransitionScope = LocalSharedTransitionScope.current
+    val animatedContentScope = LocalNavAnimatedContentScope.current
+    with(sharedTransitionScope) {
+        Scaffold(
+            modifier = modifier.sharedBounds(
+                sharedContentState = rememberSharedContentState("setting"),
+                animatedVisibilityScope = animatedContentScope,
+            ),
+            topBar = {
+                KmtTopAppBar(
+                    title = { Text("Setting") },
+                    navigationIcon = {
+                        KmtIconButton(onClick = onBack) {
+                            Icon(
+                                imageVector = KmtIcons.ArrowBack,
+                                contentDescription = "Back",
+                            )
+                        }
+                    },
+                )
+            },
+        ) { paddingValues ->
+
+            Column(
+                modifier
+                    .padding(paddingValues)
+                    .padding(16.dp),
+                verticalArrangement = Arrangement.spacedBy(4.dp),
             ) {
-                Icon(imageVector = KmtIcons.Cancel, "cancel")
+                ListItem(
+                    modifier = Modifier,
+                    headlineContent = { Text("Contrast") },
+                    supportingContent = {
+                        ContrastTimeline(
+                            options = contrastOptions,
+                            selectedOptionId = settingState.contrast,
+                            onOptionSelected = setContrast,
+                        )
+                    },
+                )
+
+                Spacer(Modifier.height(8.dp))
+
+                ListItem(
+                    modifier = Modifier.clickable { onDarkClick() },
+                    headlineContent = { Text("DayNight mode") },
+                    supportingContent = {
+                        Text(dayNightOptions[settingState.darkThemeConfig.ordinal])
+                    },
+                )
             }
         }
+    }
+}
 
-        Spacer(Modifier.height(8.dp))
+@Preview
+@Composable
+internal fun SettingScreenPreview() {
+    val settingState = SettingState(
+        contrast = 0,
+        darkThemeConfig = DarkThemeConfig.DARK,
+    )
+    SharedTransitionContainer {
+        SettingScreen(settingState = settingState)
+    }
+}
 
-        ListItem(
-            modifier =
-            Modifier.testTag("setting:theme")
-                .clickable {},
-            headlineContent = { Text("Theme") },
-            supportingContent = {
-                Text("")
-            },
-        )
+data class ContrastOption(
+    val id: Int, // Unique identifier for the option
+    val icon: ImageVector,
+    val contentDescription: String,
+    val label: String, // Optional label below the icon
+)
 
-        ListItem(
-            modifier = Modifier.testTag("setting:mode").clickable { onDarkClick() },
-            headlineContent = { Text("DayNight mode") },
-            supportingContent = {
-                Text("")
-            },
+@Composable
+fun ContrastTimeline(
+    modifier: Modifier = Modifier,
+    options: List<ContrastOption>,
+    selectedOptionId: Int,
+    onOptionSelected: (Int) -> Unit,
+    iconSize: Dp = 24.dp,
+    lineThickness: Dp = 2.dp,
+    selectedIndicatorSize: Dp = 32.dp,
+    unselectedIndicatorSize: Dp = 28.dp,
+    lineColor: Color = MaterialTheme.colorScheme.outlineVariant,
+    selectedIconColor: Color = MaterialTheme.colorScheme.primary,
+    unselectedIconColor: Color = MaterialTheme.colorScheme.onSurfaceVariant,
+    selectedBackgroundColor: Color = MaterialTheme.colorScheme.primaryContainer,
+    unselectedBackgroundColor: Color = MaterialTheme.colorScheme.surfaceVariant,
+) {
+    Row(
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(vertical = 16.dp),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.SpaceEvenly,
+    ) {
+        options.forEachIndexed { index, option ->
+            val isSelected = option.id == selectedOptionId
+            val currentIndicatorSize = if (isSelected) selectedIndicatorSize else unselectedIndicatorSize
+
+            // Clickable area for the icon and its surrounding
+            Box(
+                contentAlignment = Alignment.Center,
+                modifier = Modifier
+                    .weight(1f) // Distribute space
+                    .clickable(
+                        onClick = { onOptionSelected(option.id) },
+                        role = Role.RadioButton, // Good for accessibility
+                        onClickLabel = "Select ${option.label}",
+                    )
+                    .padding(horizontal = 4.dp), // Padding around each clickable item
+            ) {
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    // Line before the first item (conditionally)
+                    if (index > 0) {
+                        HorizontalDivider(
+                            modifier = Modifier
+                                .weight(1f) // Flexible line
+                                .height(lineThickness),
+                            color = lineColor,
+                        )
+                    } else {
+                        Spacer(modifier = Modifier.weight(1f)) // Placeholder for even distribution
+                    }
+
+                    Box(
+                        modifier = Modifier
+                            .size(currentIndicatorSize)
+                            .clip(CircleShape)
+                            .background(if (isSelected) selectedBackgroundColor else unselectedBackgroundColor)
+                            .border(
+                                width = if (isSelected) 1.5.dp else 0.dp,
+                                color = if (isSelected) selectedIconColor else Color.Transparent,
+                                shape = CircleShape,
+                            ),
+                        contentAlignment = Alignment.Center,
+                    ) {
+                        Icon(
+                            imageVector = option.icon,
+                            contentDescription = option.contentDescription,
+                            modifier = Modifier.size(iconSize),
+                            tint = if (isSelected) selectedIconColor else unselectedIconColor,
+                        )
+                    }
+
+                    // Line after the last item (conditionally)
+                    if (index < options.size - 1) {
+                        HorizontalDivider(
+                            modifier = Modifier
+                                .weight(1f) // Flexible line
+                                .height(lineThickness),
+                            color = lineColor,
+                        )
+                    } else {
+                        Spacer(modifier = Modifier.weight(1f)) // Placeholder for even distribution
+                    }
+                }
+            }
+        }
+    }
+}
+
+@Preview
+@Composable
+fun ContrastTimelinePreview() {
+    val contrastOptions = listOf(
+        ContrastOption(
+            id = 0,
+            icon = Icons.Filled.LightMode, // Representing "Low Contrast"
+            contentDescription = "Low Contrast",
+            label = "Low",
+        ),
+        ContrastOption(
+            id = 1,
+            icon = Icons.Filled.Contrast, // Representing "Standard Contrast"
+            contentDescription = "Standard Contrast",
+            label = "Standard",
+        ),
+        ContrastOption(
+            id = 2,
+            icon = Icons.Filled.DarkMode, // Representing "High Contrast"
+            contentDescription = "High Contrast",
+            label = "High",
+        ),
+    )
+
+    MaterialTheme {
+        // Use your app's theme
+        ContrastTimeline(
+            options = contrastOptions,
+            selectedOptionId = 0,
+            onOptionSelected = { },
         )
     }
 }
