@@ -33,6 +33,9 @@ import androidx.navigation.compose.rememberNavController
 import androidx.window.core.layout.WindowSizeClass
 import androidx.window.core.layout.WindowWidthSizeClass
 import com.mshdabiola.main.navigation.Main
+import com.mshdabiola.main.navigation.navigateToMain
+import com.mshdabiola.setting.navigation.Setting
+import com.mshdabiola.setting.navigation.navigateToSetting
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
@@ -80,21 +83,6 @@ class KmtAppState(
     val isTopRoute
         @Composable get() = TOP_LEVEL_ROUTES.any { currentDestination?.hasRoute(it.route::class) ?: false }
 
-    val showDrawer: Boolean
-        @Composable get() = windowSizeClass.isWidthCompact && isTopRoute
-
-    val showFab: Boolean
-        @Composable get() = windowSizeClass.isWidthCompact && isMain
-
-    val showDrawerFab: Boolean
-        @Composable get() = !windowSizeClass.isWidthCompact && isMain
-
-    val showRail: Boolean
-        @Composable get() = windowSizeClass.isWidthMedium && isTopRoute
-
-    val showPermanentDrawer: Boolean
-        @Composable get() = windowSizeClass.isWidthExpanded && isTopRoute
-
     fun expand() {
         coroutineScope.launch {
             if (windowSizeClass.isWidthCompact) {
@@ -114,9 +102,16 @@ class KmtAppState(
             }
         }
     }
+    fun navigateTopRoute(any: Any) {
+        when (any) {
+            is Main -> navController.navigateToMain()
+            is Setting -> navController.navigateToSetting()
+            else -> {}
+        }
+    }
 
     @Composable
-    fun currentRoute(any: Any): Boolean {
+    fun isInCurrentRoute(any: Any): Boolean {
         return currentDestination?.hasRoute(any::class) == true
     }
 }
