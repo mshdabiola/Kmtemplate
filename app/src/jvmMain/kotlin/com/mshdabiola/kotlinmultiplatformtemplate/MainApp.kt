@@ -37,7 +37,7 @@ import com.mshdabiola.kotlinmultiplatformtemplate.app.generated.resources.Res
 import com.mshdabiola.kotlinmultiplatformtemplate.app.generated.resources.app_name
 import com.mshdabiola.kotlinmultiplatformtemplate.app.generated.resources.icon
 import com.mshdabiola.kotlinmultiplatformtemplate.di.appModule
-import com.mshdabiola.kotlinmultiplatformtemplate.ui.KotlinMultiplatformTemplateApp
+import com.mshdabiola.kotlinmultiplatformtemplate.ui.KmtApp
 import com.mshdabiola.kotlinmultiplatformtemplate.ui.SplashScreen
 import kotlinx.coroutines.delay
 import org.jetbrains.compose.resources.painterResource
@@ -68,7 +68,7 @@ fun mainApp() {
                 show.value = false
             }
             Box(Modifier.fillMaxSize()) {
-                KotlinMultiplatformTemplateApp()
+                KmtApp()
                 if (show.value) {
                     SplashScreen(
                         appName = stringResource(Res.string.app_name),

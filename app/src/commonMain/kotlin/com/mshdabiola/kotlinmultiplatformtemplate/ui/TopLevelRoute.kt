@@ -40,19 +40,22 @@ data class TopLevelRoute<T : Any>(
 
 val TOP_LEVEL_ROUTES =
     listOf(
-        TopLevelRoute(route = Main,
+        TopLevelRoute(
+            route = Main,
             selectedIcon = KmtIcons.Home,
             unSelectedIcon = KmtIcons.HomeOutlined,
-            label = "Home"
+            label = "Home",
         ),
-        TopLevelRoute(route = Setting,
+        TopLevelRoute(
+            route = Setting,
             selectedIcon = KmtIcons.Settings,
             unSelectedIcon = KmtIcons.SettingsOutlined,
-            label = "Settings"
+            label = "Settings",
         ),
-        TopLevelRoute(route = Unit,
+        TopLevelRoute(
+            route = Unit,
             selectedIcon = KmtIcons.About,
             unSelectedIcon = KmtIcons.AboutOutlined,
-            label = "About"
+            label = "About",
         ),
     )

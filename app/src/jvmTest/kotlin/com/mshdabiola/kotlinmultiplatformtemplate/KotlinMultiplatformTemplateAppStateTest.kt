@@ -22,7 +22,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.createGraph
 import androidx.window.core.layout.WindowSizeClass
-import com.mshdabiola.kotlinmultiplatformtemplate.ui.KotlinMultiplatformTemplateAppState
+import com.mshdabiola.kotlinmultiplatformtemplate.ui.KmtAppState
 import kotlinx.coroutines.test.runTest
 import org.junit.Rule
 import org.junit.Test
@@ -32,7 +32,7 @@ class KotlinMultiplatformTemplateAppStateTest {
     @get:Rule
     val composeTestRule = createComposeRule()
 
-    private lateinit var state: KotlinMultiplatformTemplateAppState
+    private lateinit var state: KmtAppState
 
     @Test
     fun currentDestination() =
@@ -51,7 +51,7 @@ class KotlinMultiplatformTemplateAppStateTest {
                     }
                 state =
                     remember(navController) {
-                        KotlinMultiplatformTemplateAppState(
+                        KmtAppState(
                             navController = navController,
                             coroutineScope = backgroundScope,
                             WindowSizeClass.compute(456f, 456f),

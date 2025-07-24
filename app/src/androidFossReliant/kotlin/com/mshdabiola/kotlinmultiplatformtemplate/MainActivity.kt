@@ -29,7 +29,7 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import com.mshdabiola.kotlinmultiplatformtemplate.ui.KotlinMultiplatformTemplateApp
+import com.mshdabiola.kotlinmultiplatformtemplate.ui.KmtApp
 import com.mshdabiola.kotlinmultiplatformtemplate.ui.shouldUseDarkTheme
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.onEach
@@ -83,7 +83,7 @@ class MainActivity : ComponentActivity() {
                 onDispose {}
             }
 
-            KotlinMultiplatformTemplateApp()
+            KmtApp()
         }
     }
 }
