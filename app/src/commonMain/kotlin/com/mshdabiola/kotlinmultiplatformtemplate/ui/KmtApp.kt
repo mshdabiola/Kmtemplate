@@ -34,6 +34,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.mshdabiola.analytics.AnalyticsHelper
 import com.mshdabiola.analytics.LocalAnalyticsHelper
@@ -47,6 +48,7 @@ import com.mshdabiola.kotlinmultiplatformtemplate.MainAppViewModel
 import com.mshdabiola.kotlinmultiplatformtemplate.navigation.KotlinMultiplatformTemplateAppNavHost
 import com.mshdabiola.model.DarkThemeConfig
 import com.mshdabiola.ui.LocalSharedTransitionScope
+import com.mshdabiola.ui.semanticsCommon
 import org.koin.compose.koinInject
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.annotation.KoinExperimentalAPI
@@ -90,7 +92,13 @@ fun KmtApp() {
                             GradientColors()
                         },
                     ) {
-                        KmtScaffold(appState = appState) { padding ->
+                        KmtScaffold(
+
+                            modifier = Modifier.semanticsCommon {},
+                            containerColor = Color.Transparent,
+                            contentWindowInsets = WindowInsets(0, 0, 0, 0),
+                            appState = appState,
+                        ) { padding ->
                             Column(
                                 Modifier
                                     .fillMaxSize()
@@ -100,11 +108,7 @@ fun KmtApp() {
                                         WindowInsets.safeDrawing.only(WindowInsetsSides.Horizontal),
                                     ),
                             ) {
-                                KotlinMultiplatformTemplateAppNavHost(
-                                    appState = appState,
-
-                                )
-//                                            }
+                                KotlinMultiplatformTemplateAppNavHost(appState = appState)
                             }
                         }
                     }

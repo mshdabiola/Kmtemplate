@@ -38,12 +38,14 @@ import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalDrawerSheet
 import androidx.compose.material3.ModalNavigationDrawer
 import androidx.compose.material3.NavigationDrawerItem
 import androidx.compose.material3.PermanentDrawerSheet
 import androidx.compose.material3.PermanentNavigationDrawer
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.ScaffoldDefaults
 import androidx.compose.material3.SmallExtendedFloatingActionButton
 import androidx.compose.material3.SmallFloatingActionButton
 import androidx.compose.material3.Text
@@ -51,6 +53,7 @@ import androidx.compose.material3.WideNavigationRail
 import androidx.compose.material3.WideNavigationRailItem
 import androidx.compose.material3.WideNavigationRailValue
 import androidx.compose.material3.adaptive.currentWindowAdaptiveInfo
+import androidx.compose.material3.contentColorFor
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.material3.rememberWideNavigationRailState
 import androidx.compose.runtime.Composable
@@ -69,7 +72,6 @@ import com.mshdabiola.detail.navigation.navigateToDetail
 import com.mshdabiola.main.navigation.Main
 import com.mshdabiola.setting.navigation.Setting
 import com.mshdabiola.ui.LocalSharedTransitionScope
-import com.mshdabiola.ui.semanticsCommon
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @OptIn(ExperimentalMaterial3ExpressiveApi::class, ExperimentalSharedTransitionApi::class)
@@ -77,121 +79,132 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 fun KmtScaffold(
     modifier: Modifier = Modifier,
     appState: KmtAppState,
+    topBar: @Composable () -> Unit = {},
+    bottomBar: @Composable () -> Unit = {},
+    snackbarHost: @Composable () -> Unit = {},
+    containerColor: Color = MaterialTheme.colorScheme.background,
+    contentColor: Color = contentColorFor(containerColor),
+    contentWindowInsets: WindowInsets = ScaffoldDefaults.contentWindowInsets,
     content: @Composable (PaddingValues) -> Unit,
 ) {
     val sharedScope = LocalSharedTransitionScope.current
 
     with(sharedScope) {
-        PermanentNavigationDrawer(
-            modifier = modifier,
-            drawerContent = {
-                if (appState.isTopRoute) {
-                    if (appState is Medium) {
-                        WideNavigationRail(
-                            modifier = Modifier.fillMaxHeight(),
-                            state = appState.wideNavigationRailState,
-                            header = {
-                                IconButton(
-                                    modifier =
-                                    Modifier.padding(start = 24.dp).semantics {
-                                        // The button must announce the expanded or collapsed state of the rail
-                                        // for accessibility.
-                                        stateDescription =
-                                            if (appState.wideNavigationRailState.currentValue ==
+        if (appState is Compact) {
+            ModalNavigationDrawer(
+                modifier = modifier,
+                drawerContent = {
+                    ModalDrawerSheet(
+                        modifier = Modifier.width(300.dp),
+                        drawerState = appState.drawerState,
+                    ) {
+                        DrawerContent(
+                            modifier = Modifier.padding(16.dp),
+                            appState = appState,
+                        )
+                    }
+                },
+                drawerState = appState.drawerState,
+                gesturesEnabled = appState.isTopRoute,
+            ) {
+                Scaffold(
+                    containerColor = containerColor,
+                    contentWindowInsets = contentWindowInsets,
+                    contentColor = contentColor,
+                    topBar = topBar,
+                    bottomBar = bottomBar,
+                    snackbarHost = snackbarHost,
+
+                    floatingActionButton = {
+                        AnimatedVisibility(appState.isMain) {
+                            Fab(
+                                appState = appState,
+                                modifier = Modifier
+                                    .sharedBounds(
+                                        sharedContentState = rememberSharedContentState("note_-1"),
+                                        animatedVisibilityScope = this,
+                                    ),
+                            )
+                        }
+                    },
+                ) { paddingValues ->
+                    content(paddingValues)
+                }
+            }
+        } else {
+            PermanentNavigationDrawer(
+                modifier = modifier,
+                drawerContent = {
+                    if (appState.isTopRoute) {
+                        if (appState is Medium) {
+                            WideNavigationRail(
+                                modifier = Modifier.fillMaxHeight(),
+                                state = appState.wideNavigationRailState,
+                                header = {
+                                    IconButton(
+                                        modifier =
+                                        Modifier.padding(start = 24.dp).semantics {
+                                            // The button must announce the expanded or collapsed state of the rail
+                                            // for accessibility.
+                                            stateDescription =
+                                                if (appState.wideNavigationRailState.currentValue ==
+                                                    WideNavigationRailValue.Expanded
+                                                ) {
+                                                    "Expanded"
+                                                } else {
+                                                    "Collapsed"
+                                                }
+                                        },
+                                        onClick = {
+                                            if (appState.wideNavigationRailState.targetValue ==
                                                 WideNavigationRailValue.Expanded
                                             ) {
-                                                "Expanded"
+                                                appState.collapse()
                                             } else {
-                                                "Collapsed"
+                                                appState.expand()
                                             }
-                                    },
-                                    onClick = {
+                                        },
+                                    ) {
                                         if (appState.wideNavigationRailState.targetValue ==
                                             WideNavigationRailValue.Expanded
                                         ) {
-                                            appState.collapse()
+                                            Icon(Icons.AutoMirrored.Filled.MenuOpen, "Collapse rail")
                                         } else {
-                                            appState.expand()
+                                            Icon(Icons.Filled.Menu, "Expand rail")
                                         }
-                                    },
-                                ) {
-                                    if (appState.wideNavigationRailState.targetValue ==
-                                        WideNavigationRailValue.Expanded
-                                    ) {
-                                        Icon(Icons.AutoMirrored.Filled.MenuOpen, "Collapse rail")
-                                    } else {
-                                        Icon(Icons.Filled.Menu, "Expand rail")
                                     }
-                                }
-                            },
-                        ) {
-                            DrawerContent(
-                                appState = appState,
-                            )
+                                },
+                            ) {
+                                DrawerContent(
+                                    appState = appState,
+                                )
+                            }
                         }
-                    }
-                    if (appState is Expand) {
-                        PermanentDrawerSheet(modifier = Modifier.width(300.dp)) {
-                            DrawerContent(
-                                modifier = Modifier.padding(16.dp),
-                                appState = appState,
-                            )
-                        }
-                    }
-                }
-            },
-        ) {
-            if (appState is Compact){
-                ModalNavigationDrawer(
-                    drawerContent = {
-
-                            ModalDrawerSheet(
+                        if (appState is Expand) {
+                            PermanentDrawerSheet(
+                                drawerContainerColor = Color.Transparent,
                                 modifier = Modifier.width(300.dp),
-                                drawerState = appState.drawerState,
                             ) {
                                 DrawerContent(
                                     modifier = Modifier.padding(16.dp),
                                     appState = appState,
                                 )
                             }
-
-                    },
-                    drawerState = appState.drawerState,
-                    modifier = Modifier,
-                    gesturesEnabled = appState.isTopRoute,
-                ) {
-                    Scaffold(
-                        modifier = Modifier.semanticsCommon {},
-                        containerColor = Color.Transparent,
-                        contentWindowInsets = WindowInsets(0, 0, 0, 0),
-
-                        floatingActionButton = {
-                            AnimatedVisibility(appState.isMain) {
-                                Fab(
-                                    appState = appState,
-                                    modifier = Modifier
-                                        .sharedBounds(
-                                            sharedContentState = rememberSharedContentState("note_-1"),
-                                            animatedVisibilityScope = this,
-                                        ),
-                                )
-                            }
-                        },
-                    ) { paddingValues ->
-                        content(paddingValues)
+                        }
                     }
-                }
-            }
-            else{
+                },
+            ) {
                 Scaffold(
-                    modifier = Modifier.semanticsCommon {},
-                    containerColor = Color.Transparent,
-                    contentWindowInsets = WindowInsets(0, 0, 0, 0),
+                    containerColor = containerColor,
+                    contentWindowInsets = contentWindowInsets,
+                    contentColor = contentColor,
+                    topBar = topBar,
+                    bottomBar = bottomBar,
+                    snackbarHost = snackbarHost,
                 ) { paddingValues ->
                     content(paddingValues)
                 }
             }
-
         }
     }
 }

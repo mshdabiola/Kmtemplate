@@ -52,22 +52,19 @@ fun rememberKmtAppState(
         navController,
         windowSizeClass,
     ) {
-
-        when{
+        when {
             windowSizeClass.isWidthCompact -> Compact(navController, coroutineScope, drawerState)
             windowSizeClass.isWidthMedium -> Medium(navController, coroutineScope, wideNavigationRailState)
             else -> Expand(navController)
         }
-
     }
 }
-
 
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Stable
 sealed class KmtAppState(
-    open val navController: NavHostController
-){
+    open val navController: NavHostController,
+) {
     val currentDestination: NavDestination?
         @Composable get() =
             navController
@@ -95,32 +92,34 @@ sealed class KmtAppState(
 
 data class Compact(
     override val navController: NavHostController,
-        val coroutineScope: CoroutineScope,
+    val coroutineScope: CoroutineScope,
 
-    val drawerState: DrawerState
+    val drawerState: DrawerState,
 ) : KmtAppState(navController)
 
-data class Medium @OptIn(ExperimentalMaterial3ExpressiveApi::class) constructor(
+data class Medium
+@OptIn(ExperimentalMaterial3ExpressiveApi::class)
+constructor(
     override val navController: NavHostController,
     val coroutineScope: CoroutineScope,
 
-    val wideNavigationRailState: WideNavigationRailState
-) : KmtAppState(navController){
+    val wideNavigationRailState: WideNavigationRailState,
+) : KmtAppState(navController) {
 
     @OptIn(ExperimentalMaterial3ExpressiveApi::class)
-    fun expand(){
+    fun expand() {
         coroutineScope.launch {
             wideNavigationRailState.expand()
         }
     }
+
     @OptIn(ExperimentalMaterial3ExpressiveApi::class)
-    fun collapse(){
+    fun collapse() {
         coroutineScope.launch {
-           wideNavigationRailState.collapse()
+            wideNavigationRailState.collapse()
         }
     }
 }
-
 
 data class Expand(
     override val navController: NavHostController,
@@ -137,6 +136,3 @@ inline val WindowSizeClass.isWidthMedium: Boolean
 @Stable
 inline val WindowSizeClass.isWidthExpanded: Boolean
     get() = windowWidthSizeClass == WindowWidthSizeClass.EXPANDED
-
-
-
