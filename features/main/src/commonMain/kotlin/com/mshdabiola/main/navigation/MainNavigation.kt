@@ -23,6 +23,7 @@ import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavOptions
 import androidx.navigation.compose.composable
+import androidx.navigation.navOptions
 import com.mshdabiola.main.MainScreen
 import com.mshdabiola.main.MainViewModel
 import com.mshdabiola.ui.LocalNavAnimatedContentScope
@@ -30,7 +31,7 @@ import org.koin.compose.viewmodel.koinViewModel
 
 fun NavController.navigateToMain(
     main: Main,
-    navOptions: NavOptions,
+    navOptions: NavOptions = navOptions { launchSingleTop = true },
 ) = navigate(main, navOptions)
 
 @OptIn(ExperimentalSharedTransitionApi::class)
