@@ -85,92 +85,79 @@ fun KmtScaffold(
         PermanentNavigationDrawer(
             modifier = modifier,
             drawerContent = {
-                if (appState.showRail) {
-                    WideNavigationRail(
-                        modifier = Modifier.fillMaxHeight(),
-                        state = appState.wideNavigationRailState,
-                        header = {
-                            IconButton(
-                                modifier =
-                                Modifier.padding(start = 24.dp).semantics {
-                                    // The button must announce the expanded or collapsed state of the rail
-                                    // for accessibility.
-                                    stateDescription =
-                                        if (appState.wideNavigationRailState.currentValue ==
+                if (appState.isTopRoute) {
+                    if (appState.windowSizeClass.isWidthMedium) {
+                        WideNavigationRail(
+                            modifier = Modifier.fillMaxHeight(),
+                            state = appState.wideNavigationRailState,
+                            header = {
+                                IconButton(
+                                    modifier =
+                                    Modifier.padding(start = 24.dp).semantics {
+                                        // The button must announce the expanded or collapsed state of the rail
+                                        // for accessibility.
+                                        stateDescription =
+                                            if (appState.wideNavigationRailState.currentValue ==
+                                                WideNavigationRailValue.Expanded
+                                            ) {
+                                                "Expanded"
+                                            } else {
+                                                "Collapsed"
+                                            }
+                                    },
+                                    onClick = {
+                                        if (appState.wideNavigationRailState.targetValue ==
                                             WideNavigationRailValue.Expanded
                                         ) {
-                                            "Expanded"
+                                            appState.collapse()
                                         } else {
-                                            "Collapsed"
+                                            appState.expand()
                                         }
-                                },
-                                onClick = {
+                                    },
+                                ) {
                                     if (appState.wideNavigationRailState.targetValue ==
                                         WideNavigationRailValue.Expanded
                                     ) {
-                                        appState.collapse()
+                                        Icon(Icons.AutoMirrored.Filled.MenuOpen, "Collapse rail")
                                     } else {
-                                        appState.expand()
+                                        Icon(Icons.Filled.Menu, "Expand rail")
                                     }
-                                },
-                            ) {
-                                if (appState.wideNavigationRailState.targetValue == WideNavigationRailValue.Expanded) {
-                                    Icon(Icons.AutoMirrored.Filled.MenuOpen, "Collapse rail")
-                                } else {
-                                    Icon(Icons.Filled.Menu, "Expand rail")
                                 }
-                            }
-                        },
-                    ) {
-                        DrawerContent(
-                            appState = appState,
-                        )
+                            },
+                        ) {
+                            DrawerContent(
+                                appState = appState,
+                            )
+                        }
                     }
-                }
-                if (appState.showPermanentDrawer) {
-                    PermanentDrawerSheet(modifier = Modifier.width(300.dp)) {
-                        DrawerContent(
-                            modifier = Modifier.padding(16.dp),
-                            appState = appState,
-                        )
+                    if (appState.windowSizeClass.isWidthExpanded) {
+                        PermanentDrawerSheet(modifier = Modifier.width(300.dp)) {
+                            DrawerContent(
+                                modifier = Modifier.padding(16.dp),
+                                appState = appState,
+                            )
+                        }
                     }
                 }
             },
         ) {
             ModalNavigationDrawer(
                 drawerContent = {
-                    if (appState.showDrawer) {
+                    if (appState.windowSizeClass.isWidthCompact) {
                         ModalDrawerSheet(
                             modifier = Modifier.width(300.dp),
                             drawerState = appState.drawerState,
                         ) {
-                            Column(modifier = Modifier.padding(16.dp)) {
-                                TOP_LEVEL_ROUTES.forEach { item ->
-
-                                    NavigationDrawerItem(
-                                        modifier = Modifier,
-                                        icon = {
-                                            val imageVector =
-                                                if (appState.currentRoute(item.route)) {
-                                                    item.selectedIcon
-                                                } else {
-                                                    item.unSelectedIcon
-                                                }
-                                            Icon(imageVector = imageVector, contentDescription = null)
-                                        },
-                                        label = { Text(item.label) },
-                                        selected = appState.currentRoute(item.route),
-                                        onClick = {
-                                        },
-                                    )
-                                }
-                            }
+                            DrawerContent(
+                                modifier = Modifier.padding(16.dp),
+                                appState = appState,
+                            )
                         }
                     }
                 },
                 drawerState = appState.drawerState,
                 modifier = Modifier,
-                gesturesEnabled = appState.showDrawer,
+                gesturesEnabled = appState.isTopRoute,
             ) {
                 Scaffold(
                     modifier = Modifier.semanticsCommon {},
@@ -178,7 +165,7 @@ fun KmtScaffold(
                     contentWindowInsets = WindowInsets(0, 0, 0, 0),
 
                     floatingActionButton = {
-                        AnimatedVisibility(appState.showFab) {
+                        AnimatedVisibility(appState.isMain && appState.windowSizeClass.isWidthCompact) {
                             Fab(
                                 appState = appState,
                                 modifier = Modifier
@@ -247,7 +234,7 @@ fun DrawerContent(
         modifier = modifier,
         verticalArrangement = Arrangement.spacedBy(8.dp),
     ) {
-        if (appState.showDrawer || appState.showPermanentDrawer) {
+        if (!appState.windowSizeClass.isWidthMedium) {
             Row(
                 modifier = Modifier,
                 horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.CenterHorizontally),
@@ -258,9 +245,14 @@ fun DrawerContent(
             }
             Spacer(modifier = Modifier.height(32.dp))
         }
-        if (appState.showDrawerFab) {
+        if (!appState.windowSizeClass.isWidthCompact && appState.isMain) {
+            val modifier = if (appState.windowSizeClass.isWidthMedium) {
+                Modifier.padding(start = 24.dp)
+            } else {
+                Modifier
+            }
             Fab(
-                modifier = Modifier,
+                modifier = modifier,
                 appState = appState,
             )
 
@@ -268,13 +260,13 @@ fun DrawerContent(
         }
         TOP_LEVEL_ROUTES.forEach { item ->
 
-            if (appState.showRail) {
+            if (appState.windowSizeClass.isWidthMedium) {
                 WideNavigationRailItem(
                     modifier = Modifier,
                     railExpanded = appState.wideNavigationRailState.targetValue == WideNavigationRailValue.Expanded,
                     icon = {
                         val imageVector =
-                            if (appState.currentRoute(item.route)) {
+                            if (appState.isInCurrentRoute(item.route)) {
                                 item.selectedIcon
                             } else {
                                 item.unSelectedIcon
@@ -282,8 +274,9 @@ fun DrawerContent(
                         Icon(imageVector = imageVector, contentDescription = null)
                     },
                     label = { Text(item.label) },
-                    selected = appState.currentRoute(item.route),
+                    selected = appState.isInCurrentRoute(item.route),
                     onClick = {
+                        appState.navigateTopRoute(item.route)
                     },
                 )
             } else {
@@ -291,7 +284,7 @@ fun DrawerContent(
                     modifier = Modifier,
                     icon = {
                         val imageVector =
-                            if (appState.currentRoute(item.route)) {
+                            if (appState.isInCurrentRoute(item.route)) {
                                 item.selectedIcon
                             } else {
                                 item.unSelectedIcon
@@ -299,8 +292,9 @@ fun DrawerContent(
                         Icon(imageVector = imageVector, contentDescription = null)
                     },
                     label = { Text(item.label) },
-                    selected = appState.currentRoute(item.route),
+                    selected = appState.isInCurrentRoute(item.route),
                     onClick = {
+                        appState.navigateTopRoute(item.route)
                     },
                 )
             }
