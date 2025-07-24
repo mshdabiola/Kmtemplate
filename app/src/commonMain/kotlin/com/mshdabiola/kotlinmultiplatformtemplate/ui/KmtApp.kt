@@ -15,7 +15,6 @@
  */
 package com.mshdabiola.kotlinmultiplatformtemplate.ui
 
-import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.ExperimentalSharedTransitionApi
 import androidx.compose.animation.SharedTransitionLayout
 import androidx.compose.foundation.isSystemInDarkTheme
@@ -30,37 +29,24 @@ import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
-import androidx.compose.material3.ExtendedFloatingActionButton
-import androidx.compose.material3.Icon
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.SnackbarHost
-import androidx.compose.material3.SnackbarHostState
-import androidx.compose.material3.Text
 import androidx.compose.material3.adaptive.currentWindowAdaptiveInfo
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.testTag
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.mshdabiola.analytics.AnalyticsHelper
 import com.mshdabiola.analytics.LocalAnalyticsHelper
 import com.mshdabiola.designsystem.component.KmtBackground
 import com.mshdabiola.designsystem.component.KmtGradientBackground
-import com.mshdabiola.designsystem.icon.KmtIcons
 import com.mshdabiola.designsystem.theme.GradientColors
 import com.mshdabiola.designsystem.theme.KmtTheme
 import com.mshdabiola.designsystem.theme.LocalGradientColors
-import com.mshdabiola.detail.navigation.Detail
-import com.mshdabiola.detail.navigation.navigateToDetail
 import com.mshdabiola.kotlinmultiplatformtemplate.MainActivityUiState
 import com.mshdabiola.kotlinmultiplatformtemplate.MainAppViewModel
 import com.mshdabiola.kotlinmultiplatformtemplate.navigation.KotlinMultiplatformTemplateAppNavHost
 import com.mshdabiola.model.DarkThemeConfig
 import com.mshdabiola.ui.LocalSharedTransitionScope
-import com.mshdabiola.ui.semanticsCommon
 import org.koin.compose.koinInject
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.annotation.KoinExperimentalAPI
@@ -68,14 +54,15 @@ import org.koin.core.annotation.KoinExperimentalAPI
 @OptIn(
     KoinExperimentalAPI::class,
     ExperimentalMaterial3Api::class,
-    ExperimentalSharedTransitionApi::class, ExperimentalMaterial3ExpressiveApi::class,
+    ExperimentalSharedTransitionApi::class,
+    ExperimentalMaterial3ExpressiveApi::class,
 )
 @Composable
-fun KotlinMultiplatformTemplateApp() {
+fun KmtApp() {
     val windowAdaptiveInfo = currentWindowAdaptiveInfo()
 
     val appState =
-        rememberKotlinMultiplatformTemplateAppState(
+        rememberKmtAppState(
             windowSizeClass = windowAdaptiveInfo.windowSizeClass,
         )
     val shouldShowGradientBackground = false
@@ -103,39 +90,7 @@ fun KotlinMultiplatformTemplateApp() {
                             GradientColors()
                         },
                     ) {
-                        val snackbarHostState = remember { SnackbarHostState() }
-                        Scaffold(
-                            modifier = Modifier.semanticsCommon {},
-                            containerColor = Color.Transparent,
-                            contentWindowInsets = WindowInsets(0, 0, 0, 0),
-                            snackbarHost = { SnackbarHost(snackbarHostState) },
-
-                            floatingActionButton = {
-                                AnimatedVisibility(appState.isMain) {
-                                    ExtendedFloatingActionButton(
-                                        modifier = Modifier
-                                            .sharedBounds(
-                                                sharedContentState = rememberSharedContentState("note_-1"),
-                                                animatedVisibilityScope = this,
-                                            )
-                                            .testTag("main:add"),
-                                        text = { Text("Add Note") },
-                                        icon = {
-                                            Icon(
-                                                KmtIcons.Add,
-                                                contentDescription = "add",
-                                            )
-                                        },
-                                        onClick = {
-                                            appState.navController.navigateToDetail(
-                                                Detail(-1),
-                                            )
-                                        },
-                                    )
-                                }
-                            },
-                        ) { padding ->
-
+                        KmtScaffold(appState = appState) { padding ->
                             Column(
                                 Modifier
                                     .fillMaxSize()
