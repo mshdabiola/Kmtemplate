@@ -30,9 +30,8 @@ import com.mshdabiola.ui.LocalNavAnimatedContentScope
 import org.koin.compose.viewmodel.koinViewModel
 
 fun NavController.navigateToMain(
-    main: Main,
     navOptions: NavOptions = navOptions { launchSingleTop = true },
-) = navigate(main, navOptions)
+) = navigate(Main, navOptions)
 
 @OptIn(ExperimentalSharedTransitionApi::class)
 fun NavGraphBuilder.mainScreen(

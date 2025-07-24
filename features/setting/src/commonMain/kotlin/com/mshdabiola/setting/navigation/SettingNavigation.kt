@@ -27,6 +27,7 @@ import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavOptions
 import androidx.navigation.compose.composable
+import androidx.navigation.navOptions
 import com.mshdabiola.model.DarkThemeConfig
 import com.mshdabiola.setting.OptionsDialog
 import com.mshdabiola.setting.SettingScreen
@@ -38,7 +39,9 @@ import org.jetbrains.compose.resources.stringArrayResource
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.annotation.KoinExperimentalAPI
 
-fun NavController.navigateToSetting(navOptions: NavOptions = androidx.navigation.navOptions { }) =
+fun NavController.navigateToSetting(
+    navOptions: NavOptions = navOptions { launchSingleTop = true },
+) =
     navigate(
         Setting,
         navOptions,
