@@ -86,7 +86,7 @@ fun KmtScaffold(
             modifier = modifier,
             drawerContent = {
                 if (appState.isTopRoute) {
-                    if (appState.windowSizeClass.isWidthMedium) {
+                    if (appState is Medium) {
                         WideNavigationRail(
                             modifier = Modifier.fillMaxHeight(),
                             state = appState.wideNavigationRailState,
@@ -130,7 +130,7 @@ fun KmtScaffold(
                             )
                         }
                     }
-                    if (appState.windowSizeClass.isWidthExpanded) {
+                    if (appState is Expand) {
                         PermanentDrawerSheet(modifier = Modifier.width(300.dp)) {
                             DrawerContent(
                                 modifier = Modifier.padding(16.dp),
@@ -141,45 +141,57 @@ fun KmtScaffold(
                 }
             },
         ) {
-            ModalNavigationDrawer(
-                drawerContent = {
-                    if (appState.windowSizeClass.isWidthCompact) {
-                        ModalDrawerSheet(
-                            modifier = Modifier.width(300.dp),
-                            drawerState = appState.drawerState,
-                        ) {
-                            DrawerContent(
-                                modifier = Modifier.padding(16.dp),
-                                appState = appState,
-                            )
-                        }
+            if (appState is Compact){
+                ModalNavigationDrawer(
+                    drawerContent = {
+
+                            ModalDrawerSheet(
+                                modifier = Modifier.width(300.dp),
+                                drawerState = appState.drawerState,
+                            ) {
+                                DrawerContent(
+                                    modifier = Modifier.padding(16.dp),
+                                    appState = appState,
+                                )
+                            }
+
+                    },
+                    drawerState = appState.drawerState,
+                    modifier = Modifier,
+                    gesturesEnabled = appState.isTopRoute,
+                ) {
+                    Scaffold(
+                        modifier = Modifier.semanticsCommon {},
+                        containerColor = Color.Transparent,
+                        contentWindowInsets = WindowInsets(0, 0, 0, 0),
+
+                        floatingActionButton = {
+                            AnimatedVisibility(appState.isMain) {
+                                Fab(
+                                    appState = appState,
+                                    modifier = Modifier
+                                        .sharedBounds(
+                                            sharedContentState = rememberSharedContentState("note_-1"),
+                                            animatedVisibilityScope = this,
+                                        ),
+                                )
+                            }
+                        },
+                    ) { paddingValues ->
+                        content(paddingValues)
                     }
-                },
-                drawerState = appState.drawerState,
-                modifier = Modifier,
-                gesturesEnabled = appState.isTopRoute,
-            ) {
+                }
+            }
+            else{
                 Scaffold(
                     modifier = Modifier.semanticsCommon {},
                     containerColor = Color.Transparent,
                     contentWindowInsets = WindowInsets(0, 0, 0, 0),
-
-                    floatingActionButton = {
-                        AnimatedVisibility(appState.isMain && appState.windowSizeClass.isWidthCompact) {
-                            Fab(
-                                appState = appState,
-                                modifier = Modifier
-                                    .sharedBounds(
-                                        sharedContentState = rememberSharedContentState("note_-1"),
-                                        animatedVisibilityScope = this,
-                                    ),
-                            )
-                        }
-                    },
                 ) { paddingValues ->
                     content(paddingValues)
                 }
             }
+
         }
     }
 }
@@ -234,7 +246,7 @@ fun DrawerContent(
         modifier = modifier,
         verticalArrangement = Arrangement.spacedBy(8.dp),
     ) {
-        if (!appState.windowSizeClass.isWidthMedium) {
+        if (appState !is Medium) {
             Row(
                 modifier = Modifier,
                 horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.CenterHorizontally),
@@ -245,8 +257,8 @@ fun DrawerContent(
             }
             Spacer(modifier = Modifier.height(32.dp))
         }
-        if (!appState.windowSizeClass.isWidthCompact && appState.isMain) {
-            val modifier = if (appState.windowSizeClass.isWidthMedium) {
+        if (appState !is Compact && appState.isMain) {
+            val modifier = if (appState is Medium) {
                 Modifier.padding(start = 24.dp)
             } else {
                 Modifier
@@ -260,7 +272,7 @@ fun DrawerContent(
         }
         TOP_LEVEL_ROUTES.forEach { item ->
 
-            if (appState.windowSizeClass.isWidthMedium) {
+            if (appState is Medium) {
                 WideNavigationRailItem(
                     modifier = Modifier,
                     railExpanded = appState.wideNavigationRailState.targetValue == WideNavigationRailValue.Expanded,
@@ -309,7 +321,7 @@ fun Fab(
     appState: KmtAppState,
 ) {
     AnimatedContent(
-        appState.windowSizeClass.isWidthMedium &&
+        appState is Medium &&
             appState.wideNavigationRailState.targetValue == WideNavigationRailValue.Collapsed,
     ) {
         if (it) {
