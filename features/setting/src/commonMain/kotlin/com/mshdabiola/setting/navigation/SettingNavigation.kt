@@ -15,12 +15,26 @@
  */
 package com.mshdabiola.setting.navigation
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavOptions
-import androidx.navigation.compose.dialog
+import androidx.navigation.compose.composable
+import com.mshdabiola.model.DarkThemeConfig
+import com.mshdabiola.setting.OptionsDialog
+import com.mshdabiola.setting.SettingScreen
 import com.mshdabiola.setting.SettingViewModel
+import com.mshdabiola.ui.LocalNavAnimatedContentScope
+import kotlinmultiplatformtemplate.features.setting.generated.resources.Res
+import kotlinmultiplatformtemplate.features.setting.generated.resources.daynight
+import org.jetbrains.compose.resources.stringArrayResource
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.annotation.KoinExperimentalAPI
 
@@ -35,23 +49,32 @@ fun NavGraphBuilder.settingScreen(
     modifier: Modifier,
     onBack: () -> Unit,
 ) {
-    dialog<Setting> {
+    composable<Setting> {
         val viewModel: SettingViewModel = koinViewModel()
+        val dayLightArray = stringArrayResource(Res.array.daynight)
+        val settingState = viewModel.settingState.collectAsStateWithLifecycle()
+        var showDarkThemeConfig by rememberSaveable { mutableStateOf(false) }
 
-//        CompositionLocalProvider(
-//            LocalNavAnimatedContentScope provides this,
-//        ) {
-//
-//        }
+        CompositionLocalProvider(
+            LocalNavAnimatedContentScope provides this,
+        ) {
+            SettingScreen(
+                settingState = settingState.value,
+                modifier = modifier,
+                setContrast = { viewModel.setContrast(it) },
+                onDarkClick = { showDarkThemeConfig = true },
+                onBack = onBack,
+            )
+        }
 
-//        AnimatedVisibility(dark) {
-//            OptionsDialog(
-//                modifier = Modifier,
-//                options = dayLightArray,
-//                current = settingState.darkThemeConfig.ordinal,
-//                onDismiss = { dark = false },
-//                onSelect = { setDarkMode(DarkThemeConfig.entries[it]) },
-//            )
-//        }
+        AnimatedVisibility(showDarkThemeConfig) {
+            OptionsDialog(
+                modifier = Modifier,
+                options = dayLightArray,
+                current = settingState.value.darkThemeConfig.ordinal,
+                onDismiss = { showDarkThemeConfig = false },
+                onSelect = { viewModel.setDarkThemeConfig(DarkThemeConfig.entries[it]) },
+            )
+        }
     }
 }
