@@ -50,28 +50,24 @@ fun rememberKmtAppState(
 ): KmtAppState {
     return remember(
         navController,
-        coroutineScope,
         windowSizeClass,
     ) {
-        KmtAppState(
-            navController,
-            coroutineScope,
-            windowSizeClass,
-            wideNavigationRailState,
-            drawerState = drawerState,
-        )
+
+        when{
+            windowSizeClass.isWidthCompact -> Compact(navController, coroutineScope, drawerState)
+            windowSizeClass.isWidthMedium -> Medium(navController, coroutineScope, wideNavigationRailState)
+            else -> Expand(navController)
+        }
+
     }
 }
 
+
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Stable
-class KmtAppState(
-    val navController: NavHostController,
-    val coroutineScope: CoroutineScope,
-    val windowSizeClass: WindowSizeClass,
-    val wideNavigationRailState: WideNavigationRailState,
-    val drawerState: DrawerState,
-) {
+sealed class KmtAppState(
+    open val navController: NavHostController
+){
     val currentDestination: NavDestination?
         @Composable get() =
             navController
@@ -83,25 +79,6 @@ class KmtAppState(
     val isTopRoute
         @Composable get() = TOP_LEVEL_ROUTES.any { currentDestination?.hasRoute(it.route::class) ?: false }
 
-    fun expand() {
-        coroutineScope.launch {
-            if (windowSizeClass.isWidthCompact) {
-                drawerState.open()
-            } else {
-                wideNavigationRailState.expand()
-            }
-        }
-    }
-
-    fun collapse() {
-        coroutineScope.launch {
-            if (windowSizeClass.isWidthCompact) {
-                drawerState.close()
-            } else {
-                wideNavigationRailState.collapse()
-            }
-        }
-    }
     fun navigateTopRoute(any: Any) {
         when (any) {
             is Main -> navController.navigateToMain()
@@ -116,6 +93,39 @@ class KmtAppState(
     }
 }
 
+data class Compact(
+    override val navController: NavHostController,
+        val coroutineScope: CoroutineScope,
+
+    val drawerState: DrawerState
+) : KmtAppState(navController)
+
+data class Medium @OptIn(ExperimentalMaterial3ExpressiveApi::class) constructor(
+    override val navController: NavHostController,
+    val coroutineScope: CoroutineScope,
+
+    val wideNavigationRailState: WideNavigationRailState
+) : KmtAppState(navController){
+
+    @OptIn(ExperimentalMaterial3ExpressiveApi::class)
+    fun expand(){
+        coroutineScope.launch {
+            wideNavigationRailState.expand()
+        }
+    }
+    @OptIn(ExperimentalMaterial3ExpressiveApi::class)
+    fun collapse(){
+        coroutineScope.launch {
+           wideNavigationRailState.collapse()
+        }
+    }
+}
+
+
+data class Expand(
+    override val navController: NavHostController,
+) : KmtAppState(navController)
+
 @Stable
 val WindowSizeClass.isWidthCompact: Boolean
     get() = windowWidthSizeClass == WindowWidthSizeClass.COMPACT
@@ -127,3 +137,6 @@ inline val WindowSizeClass.isWidthMedium: Boolean
 @Stable
 inline val WindowSizeClass.isWidthExpanded: Boolean
     get() = windowWidthSizeClass == WindowWidthSizeClass.EXPANDED
+
+
+
