@@ -14,15 +14,21 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<resources>
-
-
-    <string name="app_name">KMTemplate</string>
-
-
-<!--    <string-array name="modules_ui_cbt_sections">-->
-<!--        <item>Objective</item>-->
-<!--        <item>Theory</item>-->
-<!--    </string-array>-->
-
-</resources>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="110.66dp"
+    android:height="127dp"
+    android:viewportWidth="110.66"
+    android:viewportHeight="127">
+  <path
+      android:pathData="M0,0h110.66v25.65h-110.66z"
+      android:fillColor="#fff"/>
+  <path
+      android:pathData="M0,127l0,-92.76l25.65,-0l0,92.76z"
+      android:fillColor="#fff"/>
+  <path
+      android:pathData="M42.51,127l0,-92.76l25.65,-0l0,92.76z"
+      android:fillColor="#fff"/>
+  <path
+      android:pathData="M85.01,127l0,-92.76l25.65,-0l0,92.76z"
+      android:fillColor="#fff"/>
+</vector>
