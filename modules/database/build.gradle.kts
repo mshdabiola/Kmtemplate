@@ -34,8 +34,8 @@ dependencies {
     //add("implementation", libs.findLibrary("room.ktx").get())
     //add("implementation", libs.findLibrary("room.paging").get())
     //add("ksp", libs.findLibrary("room.compiler").get())
-    // add("kspAndroid", libs.findLibrary("room.compiler").get())
-    add("ksp", libs.room.compiler)
+     add("kspAndroid", libs.room.compiler)
+    add("kspJvm", libs.room.compiler)
 
 
 }
