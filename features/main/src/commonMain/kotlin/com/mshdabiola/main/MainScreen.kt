@@ -28,6 +28,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -40,8 +41,10 @@ import androidx.compose.ui.platform.testTag // Import testTag
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.mshdabiola.designsystem.component.KmtIconButton
 import com.mshdabiola.designsystem.component.KmtLoading
 import com.mshdabiola.designsystem.component.KmtTopAppBar
+import com.mshdabiola.designsystem.icon.KmtIcons
 import com.mshdabiola.designsystem.theme.LocalTintTheme
 import com.mshdabiola.ui.NoteCard
 import kotlinmultiplatformtemplate.features.main.generated.resources.Res
@@ -73,17 +76,27 @@ internal object MainScreenTestTags {
 internal fun MainScreen(
     modifier: Modifier = Modifier,
     mainState: MainState,
+    title: String? = null,
     navigateToDetail: (Long) -> Unit = {},
+    onDrawer: (() -> Unit)? = null,
 ) {
     Scaffold(
         modifier = modifier.testTag(MainScreenTestTags.SCREEN_ROOT), // Apply testTag to the root
         topBar = {
             KmtTopAppBar(
                 modifier = Modifier.testTag(MainScreenTestTags.TOP_APP_BAR),
-                title = { Text("") }, // Consider adding a test tag if the title becomes dynamic
-                titleHorizontalAlignment = Alignment.CenterHorizontally,
+                title = { Text(title ?: "Main") }, // Consider adding a test tag if the title becomes dynamic
+                titleHorizontalAlignment = Alignment.Start,
+                navigationIcon = {
+                    if (onDrawer != null) {
+                        KmtIconButton(onClick = onDrawer) {
+                            Icon(KmtIcons.Menu, "menu")
+                        }
+                    }
+                },
             )
         },
+        containerColor = Color.Transparent,
     ) { paddingValues ->
         when (mainState) {
             is MainState.Loading -> {
@@ -108,7 +121,9 @@ internal fun MainScreen(
                 LazyColumn(
                     modifier = Modifier
                         .padding(paddingValues)
+                        .padding(horizontal = 16.dp)
                         .testTag(MainScreenTestTags.NOTE_LIST), // Tag for the list of notes
+                    verticalArrangement = Arrangement.spacedBy(8.dp),
                 ) {
                     items(items = mainState.notes, key = { note -> note.id }) { note ->
                         // Assuming NoteUiState has an id
