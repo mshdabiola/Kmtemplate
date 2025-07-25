@@ -22,6 +22,7 @@ import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.outlined.Home
 import androidx.compose.material.icons.outlined.Info
+import androidx.compose.material.icons.outlined.Menu
 import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material.icons.rounded.Add
 import androidx.compose.material.icons.rounded.Delete
@@ -42,4 +43,6 @@ object KmtIcons {
 
     val Settings = Icons.Default.Settings
     val SettingsOutlined = Icons.Outlined.Settings
+
+    val Menu = Icons.Outlined.Menu
 }
