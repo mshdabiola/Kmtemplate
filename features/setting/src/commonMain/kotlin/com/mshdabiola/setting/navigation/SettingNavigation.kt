@@ -50,7 +50,7 @@ fun NavController.navigateToSetting(
 @OptIn(KoinExperimentalAPI::class)
 fun NavGraphBuilder.settingScreen(
     modifier: Modifier,
-    onBack: () -> Unit,
+    onDrawer: (() -> Unit)?,
 ) {
     composable<Setting> {
         val viewModel: SettingViewModel = koinViewModel()
@@ -66,7 +66,7 @@ fun NavGraphBuilder.settingScreen(
                 modifier = modifier,
                 setContrast = { viewModel.setContrast(it) },
                 onDarkClick = { showDarkThemeConfig = true },
-                onBack = onBack,
+                onDrawer = onDrawer,
             )
         }
 

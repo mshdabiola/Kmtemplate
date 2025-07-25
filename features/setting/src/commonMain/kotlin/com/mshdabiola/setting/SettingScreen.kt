@@ -71,7 +71,7 @@ internal fun SettingScreen(
     modifier: Modifier = Modifier,
     setContrast: (Int) -> Unit = {},
     onDarkClick: () -> Unit = {},
-    onBack: () -> Unit = {},
+    onDrawer: (() -> Unit)?,
 ) {
     val contrastOptions = remember {
         listOf(
@@ -109,15 +109,18 @@ internal fun SettingScreen(
                 KmtTopAppBar(
                     title = { Text("Setting") },
                     navigationIcon = {
-                        KmtIconButton(onClick = onBack) {
-                            Icon(
-                                imageVector = KmtIcons.ArrowBack,
-                                contentDescription = "Back",
-                            )
+                        if (onDrawer != null) {
+                            KmtIconButton(onClick = onDrawer) {
+                                Icon(
+                                    imageVector = KmtIcons.Menu,
+                                    contentDescription = "menu",
+                                )
+                            }
                         }
                     },
                 )
             },
+            containerColor = Color.Transparent,
         ) { paddingValues ->
 
             Column(
@@ -160,7 +163,10 @@ internal fun SettingScreenPreview() {
         darkThemeConfig = DarkThemeConfig.DARK,
     )
     SharedTransitionContainer {
-        SettingScreen(settingState = settingState)
+        SettingScreen(
+            settingState = settingState,
+            onDrawer = {},
+        )
     }
 }
 
