@@ -43,7 +43,8 @@ kotlin {
             dependencies {
                 api(compose.runtime)
                 api(compose.foundation)
-                api(compose.material3)
+//                api(compose.material3)
+                api("org.jetbrains.compose.material3:material3:1.9.0-alpha04")
                 api(compose.materialIconsExtended)
                 api(compose.components.resources)
                 api(compose.material3AdaptiveNavigationSuite)
