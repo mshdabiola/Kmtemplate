@@ -32,12 +32,15 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.window.core.layout.WindowSizeClass
 import androidx.window.core.layout.WindowWidthSizeClass
+import com.mshdabiola.kotlinmultiplatformtemplate.app.generated.resources.Res
+import com.mshdabiola.kotlinmultiplatformtemplate.app.generated.resources.app_name
 import com.mshdabiola.main.navigation.Main
 import com.mshdabiola.main.navigation.navigateToMain
 import com.mshdabiola.setting.navigation.Setting
 import com.mshdabiola.setting.navigation.navigateToSetting
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
+import org.jetbrains.compose.resources.stringResource
 
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
@@ -65,6 +68,12 @@ fun rememberKmtAppState(
 sealed class KmtAppState(
     open val navController: NavHostController,
 ) {
+
+    @get:Composable
+    abstract val appName: String?
+
+    abstract val onDrawer: (() -> Unit)?
+
     val currentDestination: NavDestination?
         @Composable get() =
             navController
@@ -73,8 +82,16 @@ sealed class KmtAppState(
     val isMain: Boolean
         @Composable get() =
             currentDestination?.hasRoute(Main::class) == true
+
     val isTopRoute
-        @Composable get() = TOP_LEVEL_ROUTES.any { currentDestination?.hasRoute(it.route::class) ?: false }
+        @Composable get() = remember(currentDestination) {
+            TOP_LEVEL_ROUTES.any {
+                TOP_LEVEL_ROUTES.any {
+                    navController.currentDestination?.hasRoute(it.route::class)
+                        ?: false
+                }
+            }
+        }
 
     fun navigateTopRoute(any: Any) {
         when (any) {
@@ -95,7 +112,23 @@ data class Compact(
     val coroutineScope: CoroutineScope,
 
     val drawerState: DrawerState,
-) : KmtAppState(navController)
+) : KmtAppState(navController) {
+    override val appName: String?
+        @Composable get() = stringResource(Res.string.app_name)
+
+    override val onDrawer: (() -> Unit)?
+        get() = {
+            if (drawerState.isOpen) {
+                coroutineScope.launch {
+                    drawerState.close()
+                }
+            } else {
+                coroutineScope.launch {
+                    drawerState.open()
+                }
+            }
+        }
+}
 
 data class Medium
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
@@ -105,6 +138,11 @@ constructor(
 
     val wideNavigationRailState: WideNavigationRailState,
 ) : KmtAppState(navController) {
+
+    override val appName: String?
+        @Composable get() = stringResource(Res.string.app_name)
+    override val onDrawer: (() -> Unit)?
+        get() = null
 
     @OptIn(ExperimentalMaterial3ExpressiveApi::class)
     fun expand() {
@@ -123,7 +161,12 @@ constructor(
 
 data class Expand(
     override val navController: NavHostController,
-) : KmtAppState(navController)
+) : KmtAppState(navController) {
+    override val appName: String?
+        @Composable get() = null
+    override val onDrawer: (() -> Unit)?
+        get() = null
+}
 
 @Stable
 val WindowSizeClass.isWidthCompact: Boolean

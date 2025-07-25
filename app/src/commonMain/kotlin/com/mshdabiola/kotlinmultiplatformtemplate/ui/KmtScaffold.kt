@@ -28,10 +28,10 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.MenuOpen
-import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.DrawerValue
@@ -50,6 +50,7 @@ import androidx.compose.material3.SmallExtendedFloatingActionButton
 import androidx.compose.material3.SmallFloatingActionButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.WideNavigationRail
+import androidx.compose.material3.WideNavigationRailDefaults
 import androidx.compose.material3.WideNavigationRailItem
 import androidx.compose.material3.WideNavigationRailValue
 import androidx.compose.material3.adaptive.currentWindowAdaptiveInfo
@@ -69,9 +70,14 @@ import androidx.navigation.createGraph
 import com.mshdabiola.designsystem.icon.KmtIcons
 import com.mshdabiola.detail.navigation.Detail
 import com.mshdabiola.detail.navigation.navigateToDetail
+import com.mshdabiola.kotlinmultiplatformtemplate.app.generated.resources.Res
+import com.mshdabiola.kotlinmultiplatformtemplate.app.generated.resources.app_icon
+import com.mshdabiola.kotlinmultiplatformtemplate.app.generated.resources.app_name
 import com.mshdabiola.main.navigation.Main
 import com.mshdabiola.setting.navigation.Setting
 import com.mshdabiola.ui.LocalSharedTransitionScope
+import org.jetbrains.compose.resources.stringResource
+import org.jetbrains.compose.resources.vectorResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @OptIn(ExperimentalMaterial3ExpressiveApi::class, ExperimentalSharedTransitionApi::class)
@@ -140,6 +146,7 @@ fun KmtScaffold(
                             WideNavigationRail(
                                 modifier = Modifier.fillMaxHeight(),
                                 state = appState.wideNavigationRailState,
+                                colors = WideNavigationRailDefaults.colors(containerColor = containerColor),
                                 header = {
                                     IconButton(
                                         modifier =
@@ -182,7 +189,7 @@ fun KmtScaffold(
                         }
                         if (appState is Expand) {
                             PermanentDrawerSheet(
-                                drawerContainerColor = Color.Transparent,
+                                drawerContainerColor = containerColor,
                                 modifier = Modifier.width(300.dp),
                             ) {
                                 DrawerContent(
@@ -259,18 +266,25 @@ fun DrawerContent(
         modifier = modifier,
         verticalArrangement = Arrangement.spacedBy(8.dp),
     ) {
-        if (appState !is Medium) {
+        AnimatedVisibility(appState !is Medium) {
             Row(
                 modifier = Modifier,
                 horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.CenterHorizontally),
                 verticalAlignment = Alignment.CenterVertically,
             ) {
-                Icon(imageVector = Icons.Default.Home, contentDescription = null)
-                Text("KMTemplate")
+                Icon(
+                    modifier = Modifier.size(24.dp),
+                    imageVector = vectorResource(Res.drawable.app_icon),
+                    contentDescription = "brand",
+                )
+                Text(
+                    stringResource(Res.string.app_name),
+                    style = MaterialTheme.typography.titleLarge,
+                )
             }
-            Spacer(modifier = Modifier.height(32.dp))
+            Spacer(modifier = Modifier.height(64.dp))
         }
-        if (appState !is Compact && appState.isMain) {
+        AnimatedVisibility(appState !is Compact && appState.isMain) {
             val modifier = if (appState is Medium) {
                 Modifier.padding(start = 24.dp)
             } else {
@@ -281,7 +295,7 @@ fun DrawerContent(
                 appState = appState,
             )
 
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(64.dp))
         }
         TOP_LEVEL_ROUTES.forEach { item ->
 

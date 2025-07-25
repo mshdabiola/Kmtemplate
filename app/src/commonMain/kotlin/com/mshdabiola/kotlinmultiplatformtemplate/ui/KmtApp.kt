@@ -67,7 +67,7 @@ fun KmtApp() {
         rememberKmtAppState(
             windowSizeClass = windowAdaptiveInfo.windowSizeClass,
         )
-    val shouldShowGradientBackground = false
+    val shouldShowGradientBackground = true
 
     val viewModel: MainAppViewModel = koinViewModel()
     val analyticsHelper = koinInject<AnalyticsHelper>()

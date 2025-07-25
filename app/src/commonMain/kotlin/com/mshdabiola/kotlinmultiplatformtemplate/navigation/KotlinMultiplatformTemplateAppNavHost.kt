@@ -34,13 +34,17 @@ fun KotlinMultiplatformTemplateAppNavHost(
     modifier: Modifier = Modifier,
 ) {
     val navController = appState.navController
+    val title = appState.appName
 
     NavHost(
+        modifier = modifier,
         navController = navController,
         startDestination = Main,
     ) {
         mainScreen(
             modifier = Modifier,
+            onDrawer = appState.onDrawer,
+            title = title,
             navigateToDetail = { navController.navigateToDetail(Detail(it)) },
         )
         detailScreen(
@@ -49,7 +53,7 @@ fun KotlinMultiplatformTemplateAppNavHost(
         )
         settingScreen(
             modifier = Modifier,
-            onBack = navController::popBackStack,
+            onDrawer = appState.onDrawer,
         )
     }
 }

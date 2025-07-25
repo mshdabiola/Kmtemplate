@@ -15,22 +15,13 @@
  */
 package com.mshdabiola.kotlinmultiplatformtemplate.ui
 
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.Star
-import androidx.compose.material.icons.outlined.FavoriteBorder
 import androidx.compose.material.icons.outlined.Home
-import androidx.compose.material.icons.outlined.StarBorder
 import androidx.compose.ui.graphics.vector.ImageVector
 import com.mshdabiola.designsystem.icon.KmtIcons
 import com.mshdabiola.main.navigation.Main
 import com.mshdabiola.setting.navigation.Setting
 
-val items = listOf("Home", "Search", "Settings")
-val selectedIcons = listOf(Icons.Filled.Home, Icons.Filled.Favorite, Icons.Filled.Star)
-val unselectedIcons =
-    listOf(Icons.Outlined.Home, Icons.Outlined.FavoriteBorder, Icons.Outlined.StarBorder)
 data class TopLevelRoute<T : Any>(
     val route: T,
     val selectedIcon: ImageVector,
@@ -39,7 +30,7 @@ data class TopLevelRoute<T : Any>(
 )
 
 val TOP_LEVEL_ROUTES =
-    listOf(
+    setOf(
         TopLevelRoute(
             route = Main,
             selectedIcon = KmtIcons.Home,
