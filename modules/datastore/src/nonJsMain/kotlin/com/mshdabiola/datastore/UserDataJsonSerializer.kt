@@ -58,11 +58,11 @@ object UserDataJsonSerializer : OkioSerializer<UserData> {
     }
 
     override suspend fun writeTo(
-        userData: UserData,
+        t: UserData,
         sink: BufferedSink,
     ) {
         sink.use {
-            it.writeUtf8(json.encodeToString(UserData.serializer(), userData))
+            it.writeUtf8(json.encodeToString(UserData.serializer(), t))
         }
     }
 }
