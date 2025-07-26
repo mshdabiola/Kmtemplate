@@ -32,15 +32,12 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.window.core.layout.WindowSizeClass
 import androidx.window.core.layout.WindowWidthSizeClass
-import com.mshdabiola.kotlinmultiplatformtemplate.app.generated.resources.Res
-import com.mshdabiola.kotlinmultiplatformtemplate.app.generated.resources.app_name
 import com.mshdabiola.main.navigation.Main
 import com.mshdabiola.main.navigation.navigateToMain
 import com.mshdabiola.setting.navigation.Setting
 import com.mshdabiola.setting.navigation.navigateToSetting
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
-import org.jetbrains.compose.resources.stringResource
 
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
@@ -68,9 +65,6 @@ fun rememberKmtAppState(
 sealed class KmtAppState(
     open val navController: NavHostController,
 ) {
-
-    @get:Composable
-    abstract val appName: String?
 
     abstract val onDrawer: (() -> Unit)?
 
@@ -113,8 +107,6 @@ data class Compact(
 
     val drawerState: DrawerState,
 ) : KmtAppState(navController) {
-    override val appName: String?
-        @Composable get() = stringResource(Res.string.app_name)
 
     override val onDrawer: (() -> Unit)?
         get() = {
@@ -139,8 +131,6 @@ constructor(
     val wideNavigationRailState: WideNavigationRailState,
 ) : KmtAppState(navController) {
 
-    override val appName: String?
-        @Composable get() = stringResource(Res.string.app_name)
     override val onDrawer: (() -> Unit)?
         get() = null
 
@@ -162,8 +152,7 @@ constructor(
 data class Expand(
     override val navController: NavHostController,
 ) : KmtAppState(navController) {
-    override val appName: String?
-        @Composable get() = null
+
     override val onDrawer: (() -> Unit)?
         get() = null
 }

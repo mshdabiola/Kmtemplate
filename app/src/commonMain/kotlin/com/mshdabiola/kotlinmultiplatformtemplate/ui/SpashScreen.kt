@@ -29,17 +29,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.mshdabiola.designsystem.drawable.KmtDrawable
+import com.mshdabiola.designsystem.strings.KmtStrings
 import com.mshdabiola.designsystem.theme.onPrimaryLight
 import com.mshdabiola.designsystem.theme.primaryLight
-import com.mshdabiola.kotlinmultiplatformtemplate.app.generated.resources.Res
-import com.mshdabiola.kotlinmultiplatformtemplate.app.generated.resources.icon
-import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
 fun SplashScreen(
     modifier: Modifier = Modifier,
-    appName: String = "KotlinMultiplatformTemplate",
 ) {
     Surface(
         modifier = modifier,
@@ -54,13 +52,13 @@ fun SplashScreen(
         ) {
             Image(
                 modifier = Modifier.sizeIn(maxWidth = 200.dp, maxHeight = 200.dp),
-                painter = painterResource(Res.drawable.icon),
+                imageVector = KmtDrawable.brand,
                 contentDescription = "app icon",
             )
 
             Spacer(Modifier.height(32.dp))
             Text(
-                text = appName,
+                text = KmtStrings.brand,
                 style = MaterialTheme.typography.headlineSmall,
                 color = onPrimaryLight,
             )

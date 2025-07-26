@@ -15,10 +15,8 @@
  */
 package com.mshdabiola.kotlinmultiplatformtemplate.ui
 
-import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.outlined.Home
 import androidx.compose.ui.graphics.vector.ImageVector
-import com.mshdabiola.designsystem.icon.KmtIcons
+import com.mshdabiola.designsystem.drawable.KmtIcons
 import com.mshdabiola.main.navigation.Main
 import com.mshdabiola.setting.navigation.Setting
 
@@ -43,10 +41,5 @@ val TOP_LEVEL_ROUTES =
             unSelectedIcon = KmtIcons.SettingsOutlined,
             label = "Settings",
         ),
-        TopLevelRoute(
-            route = Unit,
-            selectedIcon = KmtIcons.About,
-            unSelectedIcon = KmtIcons.AboutOutlined,
-            label = "About",
-        ),
+
     )

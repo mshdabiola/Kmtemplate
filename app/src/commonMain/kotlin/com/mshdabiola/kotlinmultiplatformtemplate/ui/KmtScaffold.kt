@@ -64,17 +64,14 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.createGraph
-import com.mshdabiola.designsystem.icon.KmtIcons
+import com.mshdabiola.designsystem.drawable.KmtDrawable
+import com.mshdabiola.designsystem.drawable.KmtIcons
+import com.mshdabiola.designsystem.strings.KmtStrings
 import com.mshdabiola.detail.navigation.Detail
 import com.mshdabiola.detail.navigation.navigateToDetail
-import com.mshdabiola.kotlinmultiplatformtemplate.app.generated.resources.Res
-import com.mshdabiola.kotlinmultiplatformtemplate.app.generated.resources.app_icon
-import com.mshdabiola.kotlinmultiplatformtemplate.app.generated.resources.app_name
 import com.mshdabiola.main.navigation.Main
 import com.mshdabiola.setting.navigation.Setting
 import com.mshdabiola.ui.LocalSharedTransitionScope
-import org.jetbrains.compose.resources.stringResource
-import org.jetbrains.compose.resources.vectorResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @OptIn(ExperimentalMaterial3ExpressiveApi::class, ExperimentalSharedTransitionApi::class)
@@ -271,11 +268,11 @@ fun DrawerContent(
             ) {
                 Icon(
                     modifier = Modifier.size(24.dp),
-                    imageVector = vectorResource(Res.drawable.app_icon),
+                    imageVector = KmtDrawable.brand,
                     contentDescription = "brand",
                 )
                 Text(
-                    stringResource(Res.string.app_name),
+                    KmtStrings.brand,
                     style = MaterialTheme.typography.titleLarge,
                 )
             }
