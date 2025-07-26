@@ -15,6 +15,24 @@
      limitations under the License.
 -->
 <resources>
+
+    <string name="screen_name">Settings</string>
+
+    <string-array name="segment">
+        <item>General</item>
+        <item>Support</item>
+    </string-array>
+
+    <string-array name="general">
+        <item>Appearance</item>
+    </string-array>
+
+    <string-array name="support">
+        <item>Report an Issue</item>
+        <item>FAQ</item>
+        <item>About</item>
+    </string-array>
+
     <string-array name="theme">
         <item>Default</item>
         <item>Green</item>
