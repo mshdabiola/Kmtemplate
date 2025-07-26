@@ -17,12 +17,4 @@
 <resources>
 
 
-    <string name="app_name">KMTemplate</string>
-
-
-<!--    <string-array name="modules_ui_cbt_sections">-->
-<!--        <item>Objective</item>-->
-<!--        <item>Theory</item>-->
-<!--    </string-array>-->
-
 </resources>
