@@ -16,40 +16,48 @@
 package com.mshdabiola.designsystem.drawable
 
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.Chat
-import androidx.compose.material.icons.automirrored.outlined.MenuOpen
 import androidx.compose.material.icons.automirrored.rounded.ArrowBack
-import androidx.compose.material.icons.filled.BugReport
-import androidx.compose.material.icons.filled.DisplaySettings
-import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.Info
-import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material.icons.automirrored.rounded.Chat
+import androidx.compose.material.icons.automirrored.rounded.MenuOpen
 import androidx.compose.material.icons.outlined.Home
-import androidx.compose.material.icons.outlined.Info
-import androidx.compose.material.icons.outlined.Menu
 import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material.icons.rounded.Add
+import androidx.compose.material.icons.rounded.BugReport
+import androidx.compose.material.icons.rounded.Contrast
+import androidx.compose.material.icons.rounded.DarkMode
 import androidx.compose.material.icons.rounded.Delete
+import androidx.compose.material.icons.rounded.DisplaySettings
+import androidx.compose.material.icons.rounded.ExpandLess
+import androidx.compose.material.icons.rounded.ExpandMore
+import androidx.compose.material.icons.rounded.Home
+import androidx.compose.material.icons.rounded.Info
+import androidx.compose.material.icons.rounded.LightMode
+import androidx.compose.material.icons.rounded.Menu
+import androidx.compose.material.icons.rounded.Settings
 
 object KmtIcons {
+    val ExpandLess = Icons.Rounded.ExpandLess
+    val ExpandMore = Icons.Rounded.ExpandMore
+    val LightMode = Icons.Rounded.LightMode
+    val Contrast = Icons.Rounded.Contrast
+    val DarkMode = Icons.Rounded.DarkMode
     val Add = Icons.Rounded.Add
     val ArrowBack = Icons.AutoMirrored.Rounded.ArrowBack
     val Delete = Icons.Rounded.Delete
 
-    val Home = Icons.Default.Home
+    val Home = Icons.Rounded.Home
     val HomeOutlined = Icons.Outlined.Home
 
-    val About = Icons.Default.Info
-    val AboutOutlined = Icons.Outlined.Info
+    val About = Icons.Rounded.Info
 
-    val Settings = Icons.Default.Settings
+    val Settings = Icons.Rounded.Settings
     val SettingsOutlined = Icons.Outlined.Settings
 
-    val Menu = Icons.Outlined.Menu
-    val MenuOpen = Icons.AutoMirrored.Outlined.MenuOpen
+    val Menu = Icons.Rounded.Menu
+    val MenuOpen = Icons.AutoMirrored.Rounded.MenuOpen
 
-    val Appearence = Icons.Default.DisplaySettings
+    val Appearance = Icons.Rounded.DisplaySettings
 
-    val BugReport = Icons.Default.BugReport
-    val Faq = Icons.AutoMirrored.Filled.Chat
+    val BugReport = Icons.Rounded.BugReport
+    val Faq = Icons.AutoMirrored.Rounded.Chat
 }
