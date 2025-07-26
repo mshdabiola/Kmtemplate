@@ -47,5 +47,5 @@ object KmtIcons {
     val SettingsOutlined = Icons.Outlined.Settings
 
     val Menu = Icons.Outlined.Menu
-    val MenuOpen =Icons.AutoMirrored.Outlined.MenuOpen
+    val MenuOpen = Icons.AutoMirrored.Outlined.MenuOpen
 }
