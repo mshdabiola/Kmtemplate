@@ -15,6 +15,7 @@
  */
 package com.mshdabiola.designsystem.component
 
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.size
@@ -52,8 +53,8 @@ fun KmtTextButton(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
+    contentPadding: PaddingValues = ButtonDefaults.TextButtonContentPadding,
     content: @Composable RowScope.() -> Unit,
-
 ) {
     TextButton(
         onClick = onClick,
@@ -61,6 +62,7 @@ fun KmtTextButton(
         enabled = enabled,
         content = content,
         shapes = ButtonDefaults.shapes(),
+        contentPadding = contentPadding,
 
     )
 }
