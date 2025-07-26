@@ -33,7 +33,7 @@ import androidx.compose.ui.text.input.ImeAction
 import com.mshdabiola.designsystem.component.KmtIconButton
 import com.mshdabiola.designsystem.component.KmtTextField
 import com.mshdabiola.designsystem.component.KmtTopAppBar
-import com.mshdabiola.designsystem.icon.KmtIcons
+import com.mshdabiola.designsystem.drawable.KmtIcons
 import com.mshdabiola.ui.LocalNavAnimatedContentScope
 import com.mshdabiola.ui.LocalSharedTransitionScope
 
