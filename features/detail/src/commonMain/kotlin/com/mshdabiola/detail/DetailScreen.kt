@@ -87,7 +87,7 @@ internal fun DetailScreen(
                     },
                 )
             },
-            containerColor = MaterialTheme.colorScheme.surface,
+            containerColor = MaterialTheme.colorScheme.surfaceVariant,
         ) { paddingValues ->
             Column(
                 modifier = Modifier
