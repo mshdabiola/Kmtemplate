@@ -15,7 +15,6 @@
  */
 package com.mshdabiola.setting
 
-import androidx.compose.animation.ExperimentalSharedTransitionApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -28,6 +27,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Contrast
@@ -40,8 +41,13 @@ import androidx.compose.material3.ListItem
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.adaptive.ExperimentalMaterial3AdaptiveApi
+import androidx.compose.material3.adaptive.layout.AnimatedPane
+import androidx.compose.material3.adaptive.layout.ListDetailPaneScaffold
+import androidx.compose.material3.adaptive.layout.ListDetailPaneScaffoldRole
+import androidx.compose.material3.adaptive.navigation.rememberListDetailPaneScaffoldNavigator
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -54,108 +60,205 @@ import com.mshdabiola.designsystem.component.KmtIconButton
 import com.mshdabiola.designsystem.component.KmtTopAppBar
 import com.mshdabiola.designsystem.icon.KmtIcons
 import com.mshdabiola.model.DarkThemeConfig
-import com.mshdabiola.ui.LocalNavAnimatedContentScope
-import com.mshdabiola.ui.LocalSharedTransitionScope
 import com.mshdabiola.ui.SharedTransitionContainer
-import kotlinmultiplatformtemplate.features.setting.generated.resources.Res
-import kotlinmultiplatformtemplate.features.setting.generated.resources.daynight
-import org.jetbrains.compose.resources.stringArrayResource
+import kotlinx.coroutines.launch
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
-// import org.koin.androidx.compose.koinViewModel
+enum class SettingNav {
+    Appearance,
+    About,
+    Faq,
+    Issue,
+}
 
-@OptIn(ExperimentalMaterial3Api::class, ExperimentalSharedTransitionApi::class)
+@OptIn(ExperimentalMaterial3AdaptiveApi::class)
 @Composable
-internal fun SettingScreen(
-    settingState: SettingState,
+fun SettingScreen(
     modifier: Modifier = Modifier,
-    setContrast: (Int) -> Unit = {},
-    onDarkClick: () -> Unit = {},
     onDrawer: (() -> Unit)?,
-) {
-    val contrastOptions = remember {
-        listOf(
-            ContrastOption(
-                id = 0,
-                icon = Icons.Filled.LightMode, // Representing "Low Contrast"
-                contentDescription = "Low Contrast",
-                label = "Low",
-            ),
-            ContrastOption(
-                id = 1,
-                icon = Icons.Filled.Contrast, // Representing "Standard Contrast"
-                contentDescription = "Standard Contrast",
-                label = "Standard",
-            ),
-            ContrastOption(
-                id = 2,
-                icon = Icons.Filled.DarkMode, // Representing "High Contrast"
-                contentDescription = "High Contrast",
-                label = "High",
-            ),
-        )
-    }
-    val dayNightOptions = stringArrayResource(Res.array.daynight)
 
-    val sharedTransitionScope = LocalSharedTransitionScope.current
-    val animatedContentScope = LocalNavAnimatedContentScope.current
-    with(sharedTransitionScope) {
-        Scaffold(
-            modifier = modifier.sharedBounds(
-                sharedContentState = rememberSharedContentState("setting"),
-                animatedVisibilityScope = animatedContentScope,
-            ),
-            topBar = {
-                KmtTopAppBar(
-                    title = { Text("Setting") },
-                    navigationIcon = {
-                        if (onDrawer != null) {
-                            KmtIconButton(onClick = onDrawer) {
-                                Icon(
-                                    imageVector = KmtIcons.Menu,
-                                    contentDescription = "menu",
-                                )
-                            }
+) {
+    val navigator = rememberListDetailPaneScaffoldNavigator<SettingNav>()
+    val coroutineScope = rememberCoroutineScope()
+    val settingsMap = mapOf(
+        "General" to
+            listOf(
+                SettingList(
+                    icon = Icons.Default.Contrast,
+                    label = "Appearance",
+                    onClick = {
+                        coroutineScope.launch {
+                            navigator.navigateTo(
+                                pane = ListDetailPaneScaffoldRole.Detail,
+                                contentKey = SettingNav.Appearance,
+                            )
                         }
                     },
-                )
-            },
-            containerColor = Color.Transparent,
-        ) { paddingValues ->
-
-            Column(
-                modifier
-                    .padding(paddingValues)
-                    .padding(16.dp),
-                verticalArrangement = Arrangement.spacedBy(4.dp),
-            ) {
-                ListItem(
-                    modifier = Modifier,
-                    headlineContent = { Text("Contrast") },
-                    supportingContent = {
-                        ContrastTimeline(
-                            options = contrastOptions,
-                            selectedOptionId = settingState.contrast,
-                            onOptionSelected = setContrast,
-                        )
+                ),
+            ),
+        "Support" to
+            listOf(
+                SettingList(
+                    icon = Icons.Default.Contrast,
+                    label = "Report an isssue",
+                    onClick = {
+                        coroutineScope.launch {
+                            navigator.navigateTo(
+                                pane = ListDetailPaneScaffoldRole.Detail,
+                                contentKey = SettingNav.Issue,
+                            )
+                        }
                     },
-                )
-
-                Spacer(Modifier.height(8.dp))
-
-                ListItem(
-                    modifier = Modifier.clickable { onDarkClick() },
-                    headlineContent = { Text("DayNight mode") },
-                    supportingContent = {
-                        Text(dayNightOptions[settingState.darkThemeConfig.ordinal])
+                ),
+                SettingList(
+                    icon = Icons.Default.Contrast,
+                    label = "FAQ",
+                    onClick = {
+                        coroutineScope.launch {
+                            navigator.navigateTo(
+                                pane = ListDetailPaneScaffoldRole.Detail,
+                                contentKey = SettingNav.Faq,
+                            )
+                        }
                     },
+                ),
+                SettingList(
+                    icon = Icons.Default.Contrast,
+                    label = "About",
+                    onClick = {
+                        coroutineScope.launch {
+                            navigator.navigateTo(
+                                pane = ListDetailPaneScaffoldRole.Detail,
+                                contentKey = SettingNav.About,
+                            )
+                        }
+                    },
+                ),
+            ),
+    )
+    ListDetailPaneScaffold(
+        modifier = Modifier,
+        directive = navigator.scaffoldDirective,
+        value = navigator.scaffoldValue,
+        listPane = {
+            AnimatedPane {
+                SettingListScreen(
+                    modifier = modifier,
+                    settingsMap = settingsMap,
+                    onDrawer = onDrawer,
                 )
+            }
+        },
+        detailPane = {
+            AnimatedPane {
+                SettingContentScreen(
+                    modifier = modifier,
+                    onBack = if (navigator.canNavigateBack()) {
+                        {
+                            coroutineScope.launch {
+                                navigator.navigateBack()
+                            }
+                        }
+                    } else {
+                        null
+                    },
+                    settingNav = navigator.currentDestination?.contentKey ?: SettingNav.Appearance,
+                )
+            }
+        },
+    )
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+internal fun SettingListScreen(
+    modifier: Modifier = Modifier,
+    settingsMap: Map<String, List<SettingList>>,
+    onDrawer: (() -> Unit)?,
+) {
+    Scaffold(
+        modifier = modifier,
+        topBar = {
+            KmtTopAppBar(
+                title = { Text("Setting") },
+                navigationIcon = {
+                    if (onDrawer != null) {
+                        KmtIconButton(onClick = onDrawer) {
+                            Icon(
+                                imageVector = KmtIcons.Menu,
+                                contentDescription = "menu",
+                            )
+                        }
+                    }
+                },
+            )
+        },
+        containerColor = Color.Transparent,
+    ) { paddingValues ->
+        LazyColumn(
+            modifier = Modifier
+                .padding(paddingValues)
+                .padding(16.dp),
+            verticalArrangement = Arrangement.spacedBy(4.dp),
+        ) {
+            settingsMap.forEach { (title, settingList) ->
+                item {
+                    Text(title, style = MaterialTheme.typography.titleSmall)
+                }
+                items(settingList) { setting ->
+                    ListItem(
+                        modifier = Modifier.clickable { setting.onClick() },
+                        leadingContent = { Icon(setting.icon, contentDescription = setting.label) },
+                        headlineContent = {
+                            Text(setting.label)
+                        },
+                    )
+                }
+                item {
+                    Spacer(modifier = Modifier.height(8.dp))
+                }
             }
         }
     }
 }
 
-@Preview
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+internal fun SettingContentScreen(
+    modifier: Modifier = Modifier,
+    onBack: (() -> Unit)?,
+    settingNav: SettingNav,
+) {
+    Scaffold(
+        modifier = modifier,
+        topBar = {
+            KmtTopAppBar(
+                title = { Text(settingNav.name) },
+                navigationIcon = {
+                    if (onBack != null) {
+                        KmtIconButton(onClick = onBack) {
+                            Icon(
+                                imageVector = KmtIcons.ArrowBack,
+                                contentDescription = "back",
+                            )
+                        }
+                    }
+                },
+            )
+        },
+        containerColor = Color.Transparent,
+    ) { paddingValues ->
+        Column(
+            modifier = Modifier
+                .padding(paddingValues)
+                .padding(16.dp),
+            verticalArrangement = Arrangement.spacedBy(4.dp),
+        ) {
+        }
+    }
+}
+
+@Preview()
 @Composable
 internal fun SettingScreenPreview() {
     val settingState = SettingState(
@@ -164,7 +267,7 @@ internal fun SettingScreenPreview() {
     )
     SharedTransitionContainer {
         SettingScreen(
-            settingState = settingState,
+            modifier = Modifier,
             onDrawer = {},
         )
     }

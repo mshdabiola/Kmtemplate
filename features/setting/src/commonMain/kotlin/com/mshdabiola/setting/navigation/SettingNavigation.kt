@@ -62,10 +62,10 @@ fun NavGraphBuilder.settingScreen(
             LocalNavAnimatedContentScope provides this,
         ) {
             SettingScreen(
-                settingState = settingState.value,
+//                settingState = settingState.value,
                 modifier = modifier,
-                setContrast = { viewModel.setContrast(it) },
-                onDarkClick = { showDarkThemeConfig = true },
+//                setContrast = { viewModel.setContrast(it) },
+//                onDarkClick = { showDarkThemeConfig = true },
                 onDrawer = onDrawer,
             )
         }

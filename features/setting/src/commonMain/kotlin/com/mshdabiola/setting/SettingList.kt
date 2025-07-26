@@ -13,26 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.mshdabiola.setting
 
-@Suppress("DSL_SCOPE_VIOLATION")
-plugins {
-    id("mshdabiola.android.feature")
-}
+import androidx.compose.ui.graphics.vector.ImageVector
 
-android {
-    namespace = "com.mshdabiola.setting"
-}
-kotlin {
-    sourceSets {
-        val commonMain by getting {
-            dependencies {
-                api(compose.components.resources)
-                implementation(libs.androidx.compose.material3.adaptive)
-                implementation(libs.androidx.compose.material3.adaptive.layout)
-                implementation(libs.androidx.compose.material3.adaptive.navigation)
-            }
-        }
-
-
-    }
-}
+data class SettingList(
+    val icon: ImageVector,
+    val label: String,
+    val onClick: () -> Unit = {},
+)
