@@ -15,24 +15,36 @@
  */
 package com.mshdabiola.setting.detailscreen
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
+import com.mshdabiola.designsystem.component.KmtTextButton
+import com.mshdabiola.designsystem.drawable.KmtDrawable
 import com.mshdabiola.designsystem.strings.KmtStrings
-import com.mshdabiola.designsystem.strings.KmtStrings.version
+import com.mshdabiola.designsystem.theme.KmtTheme
 import kotlinmultiplatformtemplate.features.setting.generated.resources.Res
 import kotlinmultiplatformtemplate.features.setting.generated.resources.about_me
+import kotlinmultiplatformtemplate.features.setting.generated.resources.contact_us
+import kotlinmultiplatformtemplate.features.setting.generated.resources.developed_by
+import kotlinmultiplatformtemplate.features.setting.generated.resources.developer
 import kotlinmultiplatformtemplate.features.setting.generated.resources.last_update
+import kotlinmultiplatformtemplate.features.setting.generated.resources.privacy_policy
 import kotlinmultiplatformtemplate.features.setting.generated.resources.terms_and_condition
 import kotlinmultiplatformtemplate.features.setting.generated.resources.version
 import org.jetbrains.compose.resources.stringResource
@@ -42,58 +54,113 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 fun AboutScreen(
     modifier: Modifier = Modifier,
 ) {
-    Column(modifier = modifier.padding(start = 24.dp, end = 24.dp, top = 200.dp)) {
+    val contactUs = openEmail(
+        "mshdabiola@gmail.com",
+        "Feedback for KMTemplate",
+    )
+    Column(
+        modifier = modifier
+            .fillMaxSize()
+            .verticalScroll(rememberScrollState())
+            .padding(horizontal = 24.dp, vertical = 32.dp),
+        verticalArrangement = Arrangement.spacedBy(8.dp),
+        horizontalAlignment = Alignment.Start,
+    ) {
+        Icon(
+            imageVector = KmtDrawable.brand,
+            contentDescription = "brand",
+            modifier = Modifier
+                .align(Alignment.CenterHorizontally)
+                .testTag("about:app_icon"),
+        )
+        Spacer(modifier = Modifier.height(8.dp))
         Text(
             text = KmtStrings.brand,
             style = MaterialTheme.typography.headlineMedium,
+            color = MaterialTheme.colorScheme.onBackground,
             modifier = Modifier.testTag("about:app_name"),
         )
-        Spacer(Modifier.height(8.dp))
         HorizontalDivider(
             modifier = Modifier.width(64.dp),
             thickness = 4.dp,
             color = MaterialTheme.colorScheme.primary,
         )
+        Text(
+            text = stringResource(Res.string.about_me),
+            style = MaterialTheme.typography.bodyMedium,
+            color = MaterialTheme.colorScheme.onSurface,
+            modifier = Modifier.testTag("about:about_me")
+                .padding(bottom = 8.dp),
 
-        Spacer(Modifier.height(16.dp))
+        )
 
         Text(
             text = stringResource(Res.string.version),
-            color = Color.Gray,
-            style = MaterialTheme.typography.bodySmall,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
+            style = MaterialTheme.typography.labelLarge,
         )
         Text(
-            text = version,
+            text = KmtStrings.version,
             style = MaterialTheme.typography.bodyLarge,
+            color = MaterialTheme.colorScheme.onSurface,
             modifier = Modifier.testTag("about:version_value"),
         )
 
-        Spacer(Modifier.height(8.dp))
         Text(
             text = stringResource(Res.string.last_update),
-            color = Color.Gray,
-            style = MaterialTheme.typography.bodySmall,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
+            style = MaterialTheme.typography.labelLarge,
         )
         Text(
             text = KmtStrings.lastUpdate,
             style = MaterialTheme.typography.bodyLarge,
+            color = MaterialTheme.colorScheme.onSurface,
             modifier = Modifier.testTag("about:last_update_value"),
         )
-        Spacer(Modifier.height(16.dp))
+
         Text(
-            text = stringResource(Res.string.about_me),
-            modifier = Modifier.testTag("about:about_me"),
+            text = stringResource(Res.string.developed_by),
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
+            style = MaterialTheme.typography.labelLarge,
         )
-        Spacer(Modifier.height(16.dp))
+
         Text(
-            text = stringResource(Res.string.terms_and_condition),
-            modifier = Modifier.testTag("about:terms"),
+            text = stringResource(Res.string.developer),
+            style = MaterialTheme.typography.bodyLarge,
+            color = MaterialTheme.colorScheme.onSurface,
+            modifier = Modifier.testTag("about:last_update_value"),
         )
+
+        Text(
+            text = stringResource(Res.string.contact_us),
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
+            style = MaterialTheme.typography.labelLarge,
+        )
+        KmtTextButton(
+            onClick = { contactUs() },
+            contentPadding = PaddingValues(0.dp),
+        ) {
+            Text("mshdabiola@gmail.com")
+        }
+        KmtTextButton(
+            onClick = {},
+            contentPadding = PaddingValues(0.dp),
+        ) {
+            Text(stringResource(Res.string.privacy_policy))
+        }
+        KmtTextButton(
+            onClick = { contactUs() },
+            contentPadding = PaddingValues(0.dp),
+        ) {
+            Text(stringResource(Res.string.terms_and_condition))
+        }
     }
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
 fun AboutScreenPreview() {
-    AboutScreen()
+    KmtTheme {
+        AboutScreen()
+    }
 }

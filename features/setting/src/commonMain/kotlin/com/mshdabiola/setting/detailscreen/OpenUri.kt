@@ -19,3 +19,6 @@ import androidx.compose.runtime.Composable
 
 @Composable
 expect fun openUrl(url: String): () -> Unit
+
+@Composable
+expect fun openEmail(emailAddress: String, subject: String = "", body: String = ""): () -> Unit

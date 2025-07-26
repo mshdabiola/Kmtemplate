@@ -19,8 +19,13 @@
     <string name="screen_name">Settings</string>
     <string name="version">Version</string>
     <string name="last_update">Last Update</string>
-    <string name="about_me">About Me</string>
+    <string name="about_me">KMTemplate: An open-source template to help developers explore and build with Kotlin Multiplatform.</string>
+    <string name="developed_by">Developed by</string>
+    <string name="developer">Mshdabiola</string>
+    <string name="contact_us">Contact Us</string>
+    <string name="privacy_policy">Privacy Policy</string>
     <string name="terms_and_condition">Terms and Condition</string>
+
 
 
     <string-array name="segment">

@@ -24,3 +24,18 @@ actual fun openUrl(url: String): () -> Unit {
         window.open(url, "_blank")
     }
 }
+
+@androidx.compose.runtime.Composable
+actual fun openEmail(
+    emailAddress: String,
+    subject: String,
+    body: String,
+): () -> Unit {
+    return {
+        // Simple mailto link for Wasm/JS.
+        // Encoding subject and body is important for special characters.
+        val encodedSubject = kotlin.js.js("encodeURIComponent(subject)") as String
+        val encodedBody = kotlin.js.js("encodeURIComponent(body)") as String
+        window.open("mailto:$emailAddress?subject=$encodedSubject&body=$encodedBody", "_self")
+    }
+}
