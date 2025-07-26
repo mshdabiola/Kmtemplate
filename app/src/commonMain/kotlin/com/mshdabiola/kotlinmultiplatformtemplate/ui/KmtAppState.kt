@@ -87,7 +87,7 @@ sealed class KmtAppState(
             }
         }
 
-    fun navigateTopRoute(any: Any) {
+    open fun navigateTopRoute(any: Any) {
         when (any) {
             is Main -> navController.navigateToMain()
             is Setting -> navController.navigateToSetting()
@@ -120,6 +120,11 @@ data class Compact(
                 }
             }
         }
+
+    override fun navigateTopRoute(any: Any) {
+        super.navigateTopRoute(any)
+        onDrawer?.invoke()
+    }
 }
 
 data class Medium
