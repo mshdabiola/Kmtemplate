@@ -16,11 +16,9 @@
 -->
 <resources>
     <string name="undefined">Undefined</string>">
-
-    <string-array name="str_arr">
-        <item>Home</item>
-        <item>Profile</item>
-        <item>Ranks</item>
-    </string-array>
+    <string name="brand">KMTemplate</string>">
+    <string name="version_name">1.2.5</string>
+    <string name="version">1.2.5</string>
+    <string name="last_update">12, October 2023</string>"
 
 </resources>
