@@ -44,7 +44,8 @@ import androidx.compose.ui.unit.dp
 import com.mshdabiola.designsystem.component.KmtIconButton
 import com.mshdabiola.designsystem.component.KmtLoading
 import com.mshdabiola.designsystem.component.KmtTopAppBar
-import com.mshdabiola.designsystem.icon.KmtIcons
+import com.mshdabiola.designsystem.drawable.KmtIcons
+import com.mshdabiola.designsystem.strings.KmtStrings
 import com.mshdabiola.designsystem.theme.LocalTintTheme
 import com.mshdabiola.ui.NoteCard
 import kotlinmultiplatformtemplate.features.main.generated.resources.Res
@@ -76,7 +77,6 @@ internal object MainScreenTestTags {
 internal fun MainScreen(
     modifier: Modifier = Modifier,
     mainState: MainState,
-    title: String? = null,
     navigateToDetail: (Long) -> Unit = {},
     onDrawer: (() -> Unit)? = null,
 ) {
@@ -85,7 +85,9 @@ internal fun MainScreen(
         topBar = {
             KmtTopAppBar(
                 modifier = Modifier.testTag(MainScreenTestTags.TOP_APP_BAR),
-                title = { Text(title ?: "Main") }, // Consider adding a test tag if the title becomes dynamic
+                title = {
+                    Text(if (onDrawer != null) KmtStrings.brand else "Main")
+                }, // Consider adding a test tag if the title becomes dynamic
                 titleHorizontalAlignment = Alignment.Start,
                 navigationIcon = {
                     if (onDrawer != null) {

@@ -36,7 +36,6 @@ fun NavController.navigateToMain(
 @OptIn(ExperimentalSharedTransitionApi::class)
 fun NavGraphBuilder.mainScreen(
     modifier: Modifier = Modifier,
-    title: String?,
     onDrawer: (() -> Unit)?,
     navigateToDetail: (Long) -> Unit,
 ) {
@@ -50,7 +49,6 @@ fun NavGraphBuilder.mainScreen(
                 modifier = modifier,
                 mainState = mainState.value,
                 onDrawer = onDrawer,
-                title = title,
                 navigateToDetail = navigateToDetail,
             )
         }
