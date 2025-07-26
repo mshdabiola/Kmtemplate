@@ -175,9 +175,9 @@ fun KmtScaffold(
                                         if (appState.wideNavigationRailState.targetValue ==
                                             WideNavigationRailValue.Expanded
                                         ) {
-                                            Icon(Icons.AutoMirrored.Filled.MenuOpen, "Collapse rail")
+                                            Icon(KmtIcons.MenuOpen, "Collapse rail")
                                         } else {
-                                            Icon(Icons.Filled.Menu, "Expand rail")
+                                            Icon(KmtIcons.Menu, "Expand rail")
                                         }
                                     }
                                 },

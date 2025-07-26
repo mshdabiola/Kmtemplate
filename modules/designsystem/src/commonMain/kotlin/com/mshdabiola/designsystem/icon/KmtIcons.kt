@@ -16,6 +16,8 @@
 package com.mshdabiola.designsystem.icon
 
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.MenuOpen
+import androidx.compose.material.icons.automirrored.outlined.MenuOpen
 import androidx.compose.material.icons.automirrored.rounded.ArrowBack
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Info
@@ -45,4 +47,5 @@ object KmtIcons {
     val SettingsOutlined = Icons.Outlined.Settings
 
     val Menu = Icons.Outlined.Menu
+    val MenuOpen =Icons.AutoMirrored.Outlined.MenuOpen
 }
