@@ -17,6 +17,11 @@
 <resources>
 
     <string name="screen_name">Settings</string>
+    <string name="version">Version</string>
+    <string name="last_update">Last Update</string>
+    <string name="about_me">About Me</string>
+    <string name="terms_and_condition">Terms and Condition</string>
+
 
     <string-array name="segment">
         <item>General</item>
