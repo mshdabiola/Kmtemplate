@@ -33,15 +33,12 @@ import co.touchlab.kermit.Logger
 import co.touchlab.kermit.koin.KermitKoinLogger
 import co.touchlab.kermit.loggerConfigInit
 import co.touchlab.kermit.platformLogWriter
-import com.mshdabiola.kotlinmultiplatformtemplate.app.generated.resources.Res
-import com.mshdabiola.kotlinmultiplatformtemplate.app.generated.resources.app_name
-import com.mshdabiola.kotlinmultiplatformtemplate.app.generated.resources.icon
+import com.mshdabiola.designsystem.drawable.KmtDrawable
+import com.mshdabiola.designsystem.strings.KmtStrings
 import com.mshdabiola.kotlinmultiplatformtemplate.di.appModule
 import com.mshdabiola.kotlinmultiplatformtemplate.ui.KmtApp
 import com.mshdabiola.kotlinmultiplatformtemplate.ui.SplashScreen
 import kotlinx.coroutines.delay
-import org.jetbrains.compose.resources.painterResource
-import org.jetbrains.compose.resources.stringResource
 import org.koin.core.context.GlobalContext.startKoin
 import org.koin.dsl.module
 import java.io.File
@@ -58,8 +55,8 @@ fun mainApp() {
         val version = "1.2.9"
         Window(
             onCloseRequest = ::exitApplication,
-            title = "${stringResource(Res.string.app_name)} v$version",
-            icon = painterResource(Res.drawable.icon),
+            title = "${KmtStrings.brand} v${KmtStrings.version}",
+            icon = KmtDrawable.brandImage,
             state = windowState,
         ) {
             val show = remember { mutableStateOf(true) }
@@ -70,9 +67,7 @@ fun mainApp() {
             Box(Modifier.fillMaxSize()) {
                 KmtApp()
                 if (show.value) {
-                    SplashScreen(
-                        appName = stringResource(Res.string.app_name),
-                    )
+                    SplashScreen()
                 }
             }
         }
