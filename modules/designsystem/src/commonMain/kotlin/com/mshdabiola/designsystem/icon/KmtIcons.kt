@@ -16,9 +16,13 @@
 package com.mshdabiola.designsystem.icon
 
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.Chat
 import androidx.compose.material.icons.automirrored.filled.MenuOpen
 import androidx.compose.material.icons.automirrored.outlined.MenuOpen
 import androidx.compose.material.icons.automirrored.rounded.ArrowBack
+import androidx.compose.material.icons.filled.BugReport
+import androidx.compose.material.icons.filled.Chat
+import androidx.compose.material.icons.filled.DisplaySettings
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Settings
@@ -48,4 +52,9 @@ object KmtIcons {
 
     val Menu = Icons.Outlined.Menu
     val MenuOpen = Icons.AutoMirrored.Outlined.MenuOpen
+
+    val Appearence = Icons.Default.DisplaySettings
+
+    val BugReport = Icons.Default.BugReport
+    val Faq = Icons.AutoMirrored.Filled.Chat
 }
