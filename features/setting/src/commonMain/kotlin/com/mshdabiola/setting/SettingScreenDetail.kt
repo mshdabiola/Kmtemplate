@@ -1,0 +1,108 @@
+/*
+ * Designed and developed by 2024 mshdabiola (lawal abiola)
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package com.mshdabiola.setting
+
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
+import com.mshdabiola.designsystem.component.KmtIconButton
+import com.mshdabiola.designsystem.component.KmtTopAppBar
+import com.mshdabiola.designsystem.drawable.KmtIcons
+import com.mshdabiola.model.DarkThemeConfig
+import com.mshdabiola.setting.detailscreen.AboutScreen
+import com.mshdabiola.setting.detailscreen.AppearanceScreen
+import com.mshdabiola.setting.detailscreen.FaqScreen
+import kotlinmultiplatformtemplate.features.setting.generated.resources.Res
+import kotlinmultiplatformtemplate.features.setting.generated.resources.general
+import kotlinmultiplatformtemplate.features.setting.generated.resources.support
+import org.jetbrains.compose.resources.stringArrayResource
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+internal fun SettingDetailScreen(
+    modifier: Modifier = Modifier,
+    onBack: (() -> Unit)?,
+    settingNav: SettingNav,
+    settingState: SettingState,
+    onContrastChange: (Int) -> Unit = {},
+    onDarkModeChange: (DarkThemeConfig) -> Unit = {},
+) {
+    val generalArrayString = stringArrayResource(Res.array.general)
+
+    val supportArrayString = stringArrayResource(Res.array.support)
+
+    val stringArray = listOf(
+        generalArrayString,
+        supportArrayString,
+    )
+    Scaffold(
+        modifier = modifier,
+        topBar = {
+            KmtTopAppBar(
+                title = { Text(stringArray[settingNav.segment][settingNav.index]) },
+                navigationIcon = {
+                    if (onBack != null) {
+                        KmtIconButton(onClick = onBack) {
+                            Icon(
+                                imageVector = KmtIcons.ArrowBack,
+                                contentDescription = "back",
+                            )
+                        }
+                    }
+                },
+            )
+        },
+        containerColor = Color.Transparent,
+    ) { paddingValues ->
+        Column(
+            modifier = Modifier
+                .padding(paddingValues)
+                .padding(16.dp),
+            verticalArrangement = Arrangement.spacedBy(4.dp),
+        ) {
+            when (settingNav) {
+                SettingNav.Faq -> {
+                    FaqScreen(
+                        modifier = Modifier.fillMaxSize(),
+                    )
+                }
+                SettingNav.About -> {
+                    AboutScreen(
+                        modifier = Modifier.fillMaxSize(),
+                    )
+                }
+                SettingNav.Appearance -> {
+                    AppearanceScreen(
+                        modifier = Modifier.fillMaxSize(),
+                        settingsState = settingState,
+                        onContrastChange = onContrastChange,
+                        onDarkModeChange = onDarkModeChange,
+                    )
+                }
+                SettingNav.Issue -> {}
+            }
+        }
+    }
+}
