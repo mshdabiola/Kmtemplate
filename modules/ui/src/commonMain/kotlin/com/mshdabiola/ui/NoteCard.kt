@@ -17,11 +17,20 @@ package com.mshdabiola.ui
 
 import androidx.compose.animation.ExperimentalSharedTransitionApi
 import androidx.compose.foundation.clickable
-import androidx.compose.material3.ListItem
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag // Import testTag
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
 import com.mshdabiola.model.Note
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
@@ -42,27 +51,35 @@ fun NoteCard(
     val sharedTransitionScope = LocalSharedTransitionScope.current
     val animatedContentScope = LocalNavAnimatedContentScope.current
     with(sharedTransitionScope) {
-        ListItem(
+        Card(
             modifier = modifier
                 .testTag(NoteCardTestTags.ROOT) // Add test tag to the root element
                 .sharedBounds(
                     sharedContentState = rememberSharedContentState("note_${noteUiState.id}"),
                     animatedVisibilityScope = animatedContentScope,
                 )
+                .fillMaxWidth()
                 .clickable { onClick(noteUiState.id) },
-            headlineContent = {
+            elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
+            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant),
+        ) {
+            Column(
+                modifier = Modifier.padding(16.dp).fillMaxWidth(),
+            ) {
                 Text(
                     text = noteUiState.title,
-                    modifier = Modifier.testTag(NoteCardTestTags.TITLE), // Add test tag to the title
+                    style = MaterialTheme.typography.titleMedium,
+                    fontWeight = FontWeight.SemiBold,
+                    modifier = Modifier
+                        .testTag(NoteCardTestTags.TITLE),
                 )
-            },
-            supportingContent = {
+                Spacer(modifier = Modifier.width(8.dp))
                 Text(
                     text = noteUiState.content,
                     modifier = Modifier.testTag(NoteCardTestTags.CONTENT), // Add test tag to the content
                 )
-            },
-        )
+            }
+        }
     }
 }
 
