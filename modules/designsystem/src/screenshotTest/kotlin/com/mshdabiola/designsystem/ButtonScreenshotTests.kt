@@ -20,7 +20,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import com.mshdabiola.designsystem.component.KmtButton
-import com.mshdabiola.designsystem.icon.KmtIcons
+import com.mshdabiola.designsystem.drawable.KmtIcons
 import com.mshdabiola.designsystem.theme.KmtTheme
 
 class ButtonScreenshotTests {
