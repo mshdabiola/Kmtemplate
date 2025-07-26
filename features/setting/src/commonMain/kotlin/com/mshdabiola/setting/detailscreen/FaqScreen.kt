@@ -27,9 +27,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ExpandLess
-import androidx.compose.material.icons.filled.ExpandMore
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
@@ -44,6 +41,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import com.mshdabiola.designsystem.drawable.KmtIcons
+import com.mshdabiola.designsystem.theme.KmtTheme
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 data class FaqItem(
@@ -155,7 +154,7 @@ fun FaqListItem(
                 )
                 Spacer(modifier = Modifier.width(8.dp))
                 Icon(
-                    imageVector = if (expanded) Icons.Filled.ExpandLess else Icons.Filled.ExpandMore,
+                    imageVector = if (expanded) KmtIcons.ExpandLess else KmtIcons.ExpandMore,
                     contentDescription = if (expanded) "Collapse" else "Expand",
                 )
             }
@@ -178,7 +177,7 @@ fun FaqListItem(
 @Preview(showBackground = true, name = "FAQ Screen Preview")
 @Composable
 fun FaqScreenPreview() {
-    MaterialTheme {
+    KmtTheme {
         // Replace with your app's specific theme if needed
         FaqScreen()
     }
@@ -187,7 +186,7 @@ fun FaqScreenPreview() {
 @Preview(showBackground = true, name = "FAQ List Item Preview (Collapsed)")
 @Composable
 fun FaqListItemCollapsedPreview() {
-    MaterialTheme {
+    KmtTheme {
         FaqListItem(
             faqItem = FaqItem(
                 id = 5,
@@ -204,7 +203,7 @@ fun FaqListItemCollapsedPreview() {
 @Preview(showBackground = true, name = "FAQ List Item Preview (Expanded)")
 @Composable
 fun FaqListItemExpandedPreview() {
-    MaterialTheme {
+    KmtTheme {
         val item = FaqItem(
             id = 5,
             question = "Where can I find the shared code in this template?",

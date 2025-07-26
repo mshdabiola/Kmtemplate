@@ -28,10 +28,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Contrast
-import androidx.compose.material.icons.filled.DarkMode
-import androidx.compose.material.icons.filled.LightMode
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -46,6 +42,8 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import com.mshdabiola.designsystem.drawable.KmtIcons
+import com.mshdabiola.designsystem.theme.KmtTheme
 import com.mshdabiola.model.DarkThemeConfig
 import com.mshdabiola.setting.SettingState
 import kotlinmultiplatformtemplate.features.setting.generated.resources.Res
@@ -63,55 +61,81 @@ fun AppearanceScreen(
     val contrastOptions = listOf(
         ContrastOption(
             id = 0,
-            icon = Icons.Filled.LightMode, // Representing "Low Contrast"
+            icon = KmtIcons.LightMode, // Representing "Low Contrast"
             contentDescription = "Low Contrast",
             label = "Low",
         ),
         ContrastOption(
             id = 1,
-            icon = Icons.Filled.Contrast, // Representing "Standard Contrast"
+            icon = KmtIcons.Contrast, // Representing "Standard Contrast"
             contentDescription = "Standard Contrast",
             label = "Standard",
         ),
         ContrastOption(
             id = 2,
-            icon = Icons.Filled.DarkMode, // Representing "High Contrast"
+            icon = KmtIcons.DarkMode, // Representing "High Contrast"
             contentDescription = "High Contrast",
             label = "High",
         ),
     )
     val dayNightOptions = stringArrayResource(Res.array.daynight)
 
-    Column(modifier = modifier) {
-        Text("Contrast")
+    Column(modifier = modifier.padding(16.dp)) {
+        Text(
+            text = "Contrast",
+            style = MaterialTheme.typography.titleLarge,
+            modifier = Modifier.padding(bottom = 8.dp),
+        )
         ContrastTimeline(
             options = contrastOptions,
             selectedOptionId = settingsState.contrast,
             onOptionSelected = { onContrastChange(it) },
         )
-        Text("Dark Mode")
-        DarkThemeConfig.entries.forEach {
+
+        Spacer(modifier = Modifier.height(16.dp)) // Add space between sections
+
+        Text(
+            text = "Dark Mode",
+            style = MaterialTheme.typography.titleLarge,
+            modifier = Modifier.padding(bottom = 8.dp),
+        )
+        DarkThemeConfig.entries.forEach { darkThemeConfigEntry ->
             Row(
                 modifier = Modifier
-                    .clickable { onDarkModeChange(it) }
-                    .padding(8.dp),
+                    .fillMaxWidth()
+                    .clickable { onDarkModeChange(darkThemeConfigEntry) }
+                    .padding(vertical = 12.dp, horizontal = 8.dp),
                 verticalAlignment = Alignment.CenterVertically,
             ) {
                 RadioButton(
-                    selected = it.ordinal == settingsState.darkThemeConfig.ordinal,
-                    onClick = { onDarkModeChange(it) },
+                    selected = darkThemeConfigEntry.ordinal == settingsState.darkThemeConfig.ordinal,
+                    onClick = { onDarkModeChange(darkThemeConfigEntry) },
                 )
-                Text(dayNightOptions[it.ordinal])
+                Text(
+                    text = dayNightOptions[darkThemeConfigEntry.ordinal],
+                    style = MaterialTheme.typography.bodyLarge,
+                    modifier = Modifier.padding(start = 8.dp),
+                )
             }
         }
     }
 }
 
+@Preview
+@Composable
+fun AppearanceScreenPreview() {
+    AppearanceScreen(
+        settingsState = SettingState(contrast = 0, darkThemeConfig = DarkThemeConfig.DARK),
+        onContrastChange = {},
+        onDarkModeChange = {},
+    )
+}
+
 data class ContrastOption(
-    val id: Int, // Unique identifier for the option
+    val id: Int,
     val icon: ImageVector,
     val contentDescription: String,
-    val label: String, // Optional label below the icon
+    val label: String,
 )
 
 @Composable
@@ -145,25 +169,25 @@ fun ContrastTimeline(
             Box(
                 contentAlignment = Alignment.Center,
                 modifier = Modifier
-                    .weight(1f) // Distribute space
+                    .weight(1f)
                     .clickable(
                         onClick = { onOptionSelected(option.id) },
-                        role = Role.RadioButton, // Good for accessibility
+                        role = Role.RadioButton,
                         onClickLabel = "Select ${option.label}",
                     )
-                    .padding(horizontal = 4.dp), // Padding around each clickable item
+                    .padding(horizontal = 4.dp),
             ) {
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     // Line before the first item (conditionally)
                     if (index > 0) {
                         HorizontalDivider(
                             modifier = Modifier
-                                .weight(1f) // Flexible line
+                                .weight(1f)
                                 .height(lineThickness),
                             color = lineColor,
                         )
                     } else {
-                        Spacer(modifier = Modifier.weight(1f)) // Placeholder for even distribution
+                        Spacer(modifier = Modifier.weight(1f))
                     }
 
                     Box(
@@ -190,12 +214,12 @@ fun ContrastTimeline(
                     if (index < options.size - 1) {
                         HorizontalDivider(
                             modifier = Modifier
-                                .weight(1f) // Flexible line
+                                .weight(1f)
                                 .height(lineThickness),
                             color = lineColor,
                         )
                     } else {
-                        Spacer(modifier = Modifier.weight(1f)) // Placeholder for even distribution
+                        Spacer(modifier = Modifier.weight(1f))
                     }
                 }
             }
@@ -209,25 +233,25 @@ fun ContrastTimelinePreview() {
     val contrastOptions = listOf(
         ContrastOption(
             id = 0,
-            icon = Icons.Filled.LightMode, // Representing "Low Contrast"
+            icon = KmtIcons.LightMode,
             contentDescription = "Low Contrast",
             label = "Low",
         ),
         ContrastOption(
             id = 1,
-            icon = Icons.Filled.Contrast, // Representing "Standard Contrast"
+            icon = KmtIcons.Contrast,
             contentDescription = "Standard Contrast",
             label = "Standard",
         ),
         ContrastOption(
             id = 2,
-            icon = Icons.Filled.DarkMode, // Representing "High Contrast"
+            icon = KmtIcons.DarkMode,
             contentDescription = "High Contrast",
             label = "High",
         ),
     )
 
-    MaterialTheme {
+    KmtTheme {
         // Use your app's theme
         ContrastTimeline(
             options = contrastOptions,
