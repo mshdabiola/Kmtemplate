@@ -61,14 +61,25 @@ import com.mshdabiola.designsystem.component.KmtTopAppBar
 import com.mshdabiola.designsystem.icon.KmtIcons
 import com.mshdabiola.model.DarkThemeConfig
 import com.mshdabiola.ui.SharedTransitionContainer
+import kotlinmultiplatformtemplate.features.setting.generated.resources.Res
+import kotlinmultiplatformtemplate.features.setting.generated.resources.general
+import kotlinmultiplatformtemplate.features.setting.generated.resources.screen_name
+import kotlinmultiplatformtemplate.features.setting.generated.resources.segment
+import kotlinmultiplatformtemplate.features.setting.generated.resources.support
 import kotlinx.coroutines.launch
+import org.jetbrains.compose.resources.stringArrayResource
+import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
-enum class SettingNav {
-    Appearance,
-    About,
-    Faq,
-    Issue,
+enum class SettingNav(val segment: Int, val index: Int) {
+    // general
+    Appearance(0, 0),
+
+    // support
+    Issue(1, 0),
+    Faq(1, 1),
+
+    About(1, 2),
 }
 
 @OptIn(ExperimentalMaterial3AdaptiveApi::class)
@@ -80,62 +91,11 @@ fun SettingScreen(
 ) {
     val navigator = rememberListDetailPaneScaffoldNavigator<SettingNav>()
     val coroutineScope = rememberCoroutineScope()
-    val settingsMap = mapOf(
-        "General" to
-            listOf(
-                SettingList(
-                    icon = Icons.Default.Contrast,
-                    label = "Appearance",
-                    onClick = {
-                        coroutineScope.launch {
-                            navigator.navigateTo(
-                                pane = ListDetailPaneScaffoldRole.Detail,
-                                contentKey = SettingNav.Appearance,
-                            )
-                        }
-                    },
-                ),
-            ),
-        "Support" to
-            listOf(
-                SettingList(
-                    icon = Icons.Default.Contrast,
-                    label = "Report an isssue",
-                    onClick = {
-                        coroutineScope.launch {
-                            navigator.navigateTo(
-                                pane = ListDetailPaneScaffoldRole.Detail,
-                                contentKey = SettingNav.Issue,
-                            )
-                        }
-                    },
-                ),
-                SettingList(
-                    icon = Icons.Default.Contrast,
-                    label = "FAQ",
-                    onClick = {
-                        coroutineScope.launch {
-                            navigator.navigateTo(
-                                pane = ListDetailPaneScaffoldRole.Detail,
-                                contentKey = SettingNav.Faq,
-                            )
-                        }
-                    },
-                ),
-                SettingList(
-                    icon = Icons.Default.Contrast,
-                    label = "About",
-                    onClick = {
-                        coroutineScope.launch {
-                            navigator.navigateTo(
-                                pane = ListDetailPaneScaffoldRole.Detail,
-                                contentKey = SettingNav.About,
-                            )
-                        }
-                    },
-                ),
-            ),
-    )
+
+    val seeMap = SettingNav
+        .entries
+        .groupBy { it.segment }
+
     ListDetailPaneScaffold(
         modifier = Modifier,
         directive = navigator.scaffoldDirective,
@@ -144,8 +104,16 @@ fun SettingScreen(
             AnimatedPane {
                 SettingListScreen(
                     modifier = modifier,
-                    settingsMap = settingsMap,
+                    settingsMap = seeMap,
                     onDrawer = onDrawer,
+                    onSettingClick = {
+                        coroutineScope.launch {
+                            navigator.navigateTo(
+                                pane = ListDetailPaneScaffoldRole.Detail,
+                                contentKey = it,
+                            )
+                        }
+                    },
                 )
             }
         },
@@ -173,14 +141,38 @@ fun SettingScreen(
 @Composable
 internal fun SettingListScreen(
     modifier: Modifier = Modifier,
-    settingsMap: Map<String, List<SettingList>>,
+    settingsMap: Map<Int, List<SettingNav>>,
     onDrawer: (() -> Unit)?,
+    onSettingClick: (SettingNav) -> Unit = {},
 ) {
+    val segmentArrayString = stringArrayResource(Res.array.segment)
+
+    val generalIcon = listOf(
+        KmtIcons.Appearence,
+    )
+    val generalArrayString = stringArrayResource(Res.array.general)
+
+    val supportIcon = listOf(
+        KmtIcons.BugReport,
+        KmtIcons.Faq,
+        KmtIcons.About,
+    )
+    val supportArrayString = stringArrayResource(Res.array.support)
+
+    val stringArray = listOf(
+        generalArrayString,
+        supportArrayString,
+    )
+    val iconArray = listOf(
+        generalIcon,
+        supportIcon,
+    )
+
     Scaffold(
         modifier = modifier,
         topBar = {
             KmtTopAppBar(
-                title = { Text("Setting") },
+                title = { Text(stringResource(Res.string.screen_name)) },
                 navigationIcon = {
                     if (onDrawer != null) {
                         KmtIconButton(onClick = onDrawer) {
@@ -201,16 +193,21 @@ internal fun SettingListScreen(
                 .padding(16.dp),
             verticalArrangement = Arrangement.spacedBy(4.dp),
         ) {
-            settingsMap.forEach { (title, settingList) ->
+            settingsMap.forEach { (index, settingList) ->
                 item {
-                    Text(title, style = MaterialTheme.typography.titleSmall)
+                    Text(segmentArrayString[index], style = MaterialTheme.typography.titleSmall)
                 }
                 items(settingList) { setting ->
                     ListItem(
-                        modifier = Modifier.clickable { setting.onClick() },
-                        leadingContent = { Icon(setting.icon, contentDescription = setting.label) },
+                        modifier = Modifier.clickable { onSettingClick(setting) },
+                        leadingContent = {
+                            Icon(
+                                iconArray[setting.segment][setting.index],
+                                contentDescription = stringArray[setting.segment][setting.index],
+                            )
+                        },
                         headlineContent = {
-                            Text(setting.label)
+                            Text(stringArray[setting.segment][setting.index])
                         },
                     )
                 }
@@ -229,11 +226,19 @@ internal fun SettingContentScreen(
     onBack: (() -> Unit)?,
     settingNav: SettingNav,
 ) {
+    val generalArrayString = stringArrayResource(Res.array.general)
+
+    val supportArrayString = stringArrayResource(Res.array.support)
+
+    val stringArray = listOf(
+        generalArrayString,
+        supportArrayString,
+    )
     Scaffold(
         modifier = modifier,
         topBar = {
             KmtTopAppBar(
-                title = { Text(settingNav.name) },
+                title = { Text(stringArray[settingNav.segment][settingNav.index]) },
                 navigationIcon = {
                     if (onBack != null) {
                         KmtIconButton(onClick = onBack) {
