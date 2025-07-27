@@ -28,6 +28,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag // Ensure this is imported
 import androidx.compose.ui.unit.dp
 import com.mshdabiola.designsystem.drawable.KmtDrawable
 import com.mshdabiola.designsystem.strings.KmtStrings
@@ -35,29 +36,41 @@ import com.mshdabiola.designsystem.theme.onPrimaryLight
 import com.mshdabiola.designsystem.theme.primaryLight
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
+// Test Tags Object for SplashScreen
+object SplashScreenTestTags {
+    const val SCREEN_ROOT = "splash:screen_root" // Tag for the root Surface
+    const val BRAND_IMAGE = "splash:brand_image" // Tag for the brand Image
+    const val BRAND_TEXT = "splash:brand_text" // Tag for the brand Text
+}
+
 @Composable
 fun SplashScreen(
     modifier: Modifier = Modifier,
 ) {
     Surface(
-        modifier = modifier,
+        modifier = modifier
+            .fillMaxSize() // Apply fillMaxSize to the Surface as well for the root
+            .testTag(SplashScreenTestTags.SCREEN_ROOT), // Apply root tag here
         color = primaryLight,
     ) {
         Column(
             modifier =
             Modifier
-                .fillMaxSize(),
+                .fillMaxSize(), // This Column already fills the Surface
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             Image(
-                modifier = Modifier.sizeIn(maxWidth = 200.dp, maxHeight = 200.dp),
+                modifier = Modifier
+                    .sizeIn(maxWidth = 200.dp, maxHeight = 200.dp)
+                    .testTag(SplashScreenTestTags.BRAND_IMAGE), // Tag for the image
                 imageVector = KmtDrawable.brand,
-                contentDescription = "app icon",
+                contentDescription = "app icon", // Keep contentDescription for accessibility
             )
 
             Spacer(Modifier.height(32.dp))
             Text(
+                modifier = Modifier.testTag(SplashScreenTestTags.BRAND_TEXT), // Tag for the text
                 text = KmtStrings.brand,
                 style = MaterialTheme.typography.headlineSmall,
                 color = onPrimaryLight,

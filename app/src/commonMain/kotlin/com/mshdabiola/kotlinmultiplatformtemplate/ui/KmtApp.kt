@@ -35,6 +35,7 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.testTag // Ensure this is imported
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.mshdabiola.analytics.AnalyticsHelper
 import com.mshdabiola.analytics.LocalAnalyticsHelper
@@ -52,6 +53,14 @@ import com.mshdabiola.ui.semanticsCommon
 import org.koin.compose.koinInject
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.annotation.KoinExperimentalAPI
+
+// Test Tags for KmtApp
+object KmtAppTestTags {
+    const val APP_ROOT_LAYOUT = "kmt_app:root_layout" // For SharedTransitionLayout or KmtBackground
+    const val GRADIENT_BACKGROUND = "kmt_app:gradient_background"
+    const val MAIN_SCAFFOLD = "kmt_app:main_scaffold" // Instance of KmtScaffold
+    const val NAV_HOST = "kmt_app:nav_host"
+}
 
 @OptIn(
     KoinExperimentalAPI::class,
@@ -73,7 +82,10 @@ fun KmtApp() {
     val analyticsHelper = koinInject<AnalyticsHelper>()
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     val darkTheme = shouldUseDarkTheme(uiState)
-    SharedTransitionLayout {
+
+    SharedTransitionLayout(
+        modifier = Modifier.testTag(KmtAppTestTags.APP_ROOT_LAYOUT), // Tagging the outer layout
+    ) {
         CompositionLocalProvider(
             LocalAnalyticsHelper provides analyticsHelper,
             LocalSharedTransitionScope provides this,
@@ -84,7 +96,9 @@ fun KmtApp() {
                 disableDynamicTheming = shouldDisableDynamicTheming(uiState),
             ) {
                 KmtBackground {
+                    // This could also be APP_ROOT_LAYOUT if preferred
                     KmtGradientBackground(
+                        modifier = Modifier.testTag(KmtAppTestTags.GRADIENT_BACKGROUND),
                         gradientColors =
                         if (shouldShowGradientBackground) {
                             LocalGradientColors.current
@@ -93,8 +107,9 @@ fun KmtApp() {
                         },
                     ) {
                         KmtScaffold(
-
-                            modifier = Modifier.semanticsCommon {},
+                            modifier = Modifier
+                                .semanticsCommon {}
+                                .testTag(KmtAppTestTags.MAIN_SCAFFOLD), // Tagging the KmtScaffold instance
                             containerColor = Color.Transparent,
                             contentWindowInsets = WindowInsets(0, 0, 0, 0),
                             appState = appState,
@@ -108,7 +123,10 @@ fun KmtApp() {
                                         WindowInsets.safeDrawing.only(WindowInsetsSides.Horizontal),
                                     ),
                             ) {
-                                KotlinMultiplatformTemplateAppNavHost(appState = appState)
+                                KotlinMultiplatformTemplateAppNavHost(
+                                    appState = appState,
+                                    modifier = Modifier.testTag(KmtAppTestTags.NAV_HOST), // Tagging the NavHost
+                                )
                             }
                         }
                     }
