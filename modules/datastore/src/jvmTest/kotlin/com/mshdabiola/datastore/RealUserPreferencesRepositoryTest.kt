@@ -32,7 +32,7 @@ class RealUserPreferencesRepositoryTest {
 
     private val initialUserData = UserData(
         contrast = 0,
-        darkThemeConfig = DarkThemeConfig.FOLLOW_SYSTEM,
+        darkThemeConfig = DarkThemeConfig.LIGHT,
         useDynamicColor = false,
         shouldHideOnboarding = false,
     )
@@ -118,7 +118,7 @@ class RealUserPreferencesRepositoryTest {
         val repository = getDataStore("userdata_multiple_updates")
 
         // Initial state check
-        assertEquals(DarkThemeConfig.FOLLOW_SYSTEM, repository.userData.first().darkThemeConfig)
+        assertEquals(DarkThemeConfig.LIGHT, repository.userData.first().darkThemeConfig)
 
         // First update
         repository.setDarkThemeConfig(DarkThemeConfig.LIGHT)
