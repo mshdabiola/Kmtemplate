@@ -15,6 +15,7 @@
  */
 package com.mshdabiola.setting.navigation
 
+import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
@@ -27,6 +28,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navOptions
 import com.mshdabiola.setting.SettingScreen
 import com.mshdabiola.setting.SettingViewModel
+import com.mshdabiola.setting.WindowRepository
 import com.mshdabiola.ui.LocalNavAnimatedContentScope
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.annotation.KoinExperimentalAPI
@@ -47,6 +49,7 @@ fun NavGraphBuilder.settingScreen(
     composable<Setting> {
         val viewModel: SettingViewModel = koinViewModel()
         val settingState = viewModel.settingState.collectAsStateWithLifecycle()
+        val windowRepository: WindowRepository = getWindowRepository()
 
         CompositionLocalProvider(
             LocalNavAnimatedContentScope provides this,
@@ -64,3 +67,6 @@ fun NavGraphBuilder.settingScreen(
         }
     }
 }
+
+@Composable
+expect fun getWindowRepository(): WindowRepository

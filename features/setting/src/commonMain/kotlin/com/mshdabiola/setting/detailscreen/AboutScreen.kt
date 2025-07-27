@@ -82,13 +82,10 @@ object AboutScreenTestTags {
 @Composable
 fun AboutScreen(
     modifier: Modifier = Modifier,
+    openUrl: (String) -> Unit = {},
+    openEmail: (String, String, String) -> Unit = { _, _, _ -> },
 ) {
-    val openEmail: () -> Unit = openEmail(
-        emailAddress = "mshdabiola@gmail.com",
-        subject = "Feedback for KMTemplate",
-    )
-    val openPrivacyPolicy: () -> Unit = { }
-    val openTermsAndConditions: () -> Unit = { }
+
 
     Column(
         modifier = modifier
@@ -195,14 +192,18 @@ fun AboutScreen(
             ),
             modifier = Modifier
                 .clickable {
-                    openEmail()
+                    openEmail(
+                        "mshdabiola@gmail.com",
+                        "Feedback for KMTemplate",
+                        "",
+                    )
                 }
                 .padding(top = 4.dp, bottom = 16.dp) // Added bottom padding
                 .testTag(AboutScreenTestTags.EMAIL_LINK),
         )
 
         KmtTextButton(
-            onClick = openPrivacyPolicy,
+            onClick = {},
             contentPadding = PaddingValues(vertical = 4.dp),
             modifier = Modifier.testTag(AboutScreenTestTags.PRIVACY_POLICY_BUTTON),
         ) {
@@ -210,7 +211,7 @@ fun AboutScreen(
         }
 
         KmtTextButton(
-            onClick = openTermsAndConditions,
+            onClick = {},
             contentPadding = PaddingValues(vertical = 4.dp),
             modifier = Modifier.testTag(AboutScreenTestTags.TERMS_AND_CONDITIONS_BUTTON),
         ) {

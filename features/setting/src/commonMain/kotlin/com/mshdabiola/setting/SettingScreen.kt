@@ -25,7 +25,6 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import com.mshdabiola.model.DarkThemeConfig
-import com.mshdabiola.setting.detailscreen.openUrl
 import com.mshdabiola.ui.SharedTransitionContainer
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.ui.tooling.preview.Preview
@@ -38,6 +37,8 @@ fun SettingScreen(
     settingState: SettingState,
     onContrastChange: (Int) -> Unit = {},
     onDarkModeChange: (DarkThemeConfig) -> Unit = {},
+    openUrl: (String) -> Unit = {},
+    openEmail: (String, String, String) -> Unit = { _, _, _ -> },
 
 ) {
     val navigator = rememberListDetailPaneScaffoldNavigator<SettingNav>()
@@ -47,7 +48,6 @@ fun SettingScreen(
         .entries
         .groupBy { it.segment }
 
-    val openUri = openUrl("https://github.com/mshdabiola/KotlinMultiplatformTemplate/issues")
 
     ListDetailPaneScaffold(
         modifier = modifier.testTag(SettingScreenTestTags.SCREEN_ROOT), // Apply the tag here
@@ -61,7 +61,7 @@ fun SettingScreen(
                     onDrawer = onDrawer,
                     onSettingClick = {
                         if (it == SettingNav.Issue) {
-                            openUri()
+                            openUrl("https://github.com/mshdabiola/KotlinMultiplatformTemplate/issues")
                         } else {
                             coroutineScope.launch {
                                 navigator.navigateTo(
@@ -91,6 +91,8 @@ fun SettingScreen(
                     settingState = settingState,
                     onContrastChange = onContrastChange,
                     onDarkModeChange = onDarkModeChange,
+                    openUrl = openUrl,
+                    openEmail = openEmail,
                 )
             }
         },

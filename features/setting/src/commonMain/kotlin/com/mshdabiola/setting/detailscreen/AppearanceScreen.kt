@@ -98,7 +98,7 @@ fun AppearanceScreen(
                 .testTag(AppearanceScreenTestTags.CONTRAST_TITLE),
         )
         ContrastTimeline(
-            modifier = Modifier.testTag(AppearanceScreenTestTags.CONTRAST_TIMELINE),
+            modifier = Modifier,//.testTag(AppearanceScreenTestTags.CONTRAST_TIMELINE),
             options = contrastOptions,
             selectedOptionId = settingsState.contrast,
             onOptionSelected = { onContrastChange(it) },

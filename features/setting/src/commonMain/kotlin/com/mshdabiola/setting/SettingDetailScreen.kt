@@ -49,6 +49,8 @@ internal fun SettingDetailScreen(
     settingState: SettingState,
     onContrastChange: (Int) -> Unit = {},
     onDarkModeChange: (DarkThemeConfig) -> Unit = {},
+    openUrl: (String) -> Unit = {},
+    openEmail: (String, String, String) -> Unit = { _, _, _ -> },
 ) {
     val generalArrayString = stringArrayResource(Res.array.general)
     val supportArrayString = stringArrayResource(Res.array.support)
