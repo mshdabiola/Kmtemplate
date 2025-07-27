@@ -17,8 +17,11 @@ package com.mshdabiola.detail
 
 import androidx.compose.animation.ExperimentalSharedTransitionApi
 import androidx.compose.foundation.text.input.rememberTextFieldState
+import androidx.compose.ui.test.assertIsDisplayed
+import androidx.compose.ui.test.assertTextEquals
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithTag
+import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import com.mshdabiola.ui.SharedTransitionContainer
 import org.junit.Rule
@@ -31,24 +34,22 @@ class DetailScreenTest {
 
     @OptIn(ExperimentalSharedTransitionApi::class)
     @Test
-    fun detailScreen_elements_areDisplayed() {
+    fun detailScreen_elements_areDisplayedAndCorrectlyRendered() {
         // Arrange
+        val testTitle = "Initial Title"
+        val testContent = "Initial Content"
+        val testId = 1L
+
         composeRule.setContent {
             SharedTransitionContainer {
-                // Assuming DetailState.Success takes an id, and title/detail are part of the state
-                // and are TextFieldState. You might need to adjust DetailState and how it's initialized.
-                // For simplicity, I'm using rememberTextFieldState directly here,
-                // but ideally, this would come from a ViewModel or a more complex state holder.
-                val titleState = rememberTextFieldState("Initial Title")
-                val contentState = rememberTextFieldState("Initial Content")
-                val mockDetailState = DetailState(title = titleState, detail = contentState)
+                // Necessary wrapper
+                val titleState = rememberTextFieldState(testTitle)
+                val contentState = rememberTextFieldState(testContent)
+                // DetailState now includes id, title, and detail
+                val mockDetailState = DetailState(id = testId, title = titleState, detail = contentState)
 
                 DetailScreen(
-                    id = 1L, // Example ID
                     state = mockDetailState,
-                    // sharedTransitionScope and animatedContentScope are now implicitly handled
-                    // by DetailScreen if you're using LocalSharedTransitionScope.current etc.
-                    // If you need to pass them explicitly, ensure your DetailScreen composable accepts them.
                     onBack = {},
                     onDelete = {},
                 )
@@ -56,27 +57,38 @@ class DetailScreenTest {
         }
 
         // Assert
-        composeRule.onNodeWithTag(DetailScreenTestTags.TOP_APP_BAR).assertExists()
-        composeRule.onNodeWithTag(DetailScreenTestTags.BACK_BUTTON).assertExists()
-        composeRule.onNodeWithTag(DetailScreenTestTags.DELETE_BUTTON).assertExists()
-        composeRule.onNodeWithTag(DetailScreenTestTags.TITLE_TEXT_FIELD).assertExists()
-        composeRule.onNodeWithTag(DetailScreenTestTags.CONTENT_TEXT_FIELD).assertExists()
         composeRule.onNodeWithTag(DetailScreenTestTags.SCREEN_ROOT).assertExists()
+        composeRule.onNodeWithTag(DetailScreenTestTags.TOP_APP_BAR).assertExists()
+        composeRule.onNodeWithTag(DetailScreenTestTags.BACK_BUTTON).assertExists().assertIsDisplayed()
+        composeRule.onNodeWithTag(DetailScreenTestTags.DELETE_BUTTON).assertExists().assertIsDisplayed()
+
+        // Verify text fields are displayed and contain the initial text
+        composeRule.onNodeWithTag(DetailScreenTestTags.TITLE_TEXT_FIELD)
+            .assertExists()
+            .assertIsDisplayed()
+        composeRule.onNodeWithText(testTitle).assertExists().assertIsDisplayed() // Check content of title
+
+        composeRule.onNodeWithTag(DetailScreenTestTags.CONTENT_TEXT_FIELD)
+            .assertExists()
+            .assertIsDisplayed()
+        composeRule.onNodeWithText(testContent).assertExists().assertIsDisplayed() // Check content of detail
     }
 
     @OptIn(ExperimentalSharedTransitionApi::class)
     @Test
-    fun detailScreen_backButton_isClickable() {
+    fun detailScreen_backButton_isClickableAndTriggersCallback() {
         var backClicked = false
         // Arrange
         composeRule.setContent {
             SharedTransitionContainer {
-                val titleState = rememberTextFieldState()
-                val contentState = rememberTextFieldState()
-                val mockDetailState = DetailState(title = titleState, detail = contentState)
+                // Use empty TextFieldStates for simplicity as their content isn't the focus here
+                val mockDetailState = DetailState(
+                    id = 1L,
+                    title = rememberTextFieldState(),
+                    detail = rememberTextFieldState(),
+                )
 
                 DetailScreen(
-                    id = 1L,
                     state = mockDetailState,
                     onBack = { backClicked = true },
                     onDelete = {},
@@ -88,22 +100,23 @@ class DetailScreenTest {
         composeRule.onNodeWithTag(DetailScreenTestTags.BACK_BUTTON).performClick()
 
         // Assert
-        assertTrue(backClicked, "Back button should be clickable and trigger onBack lambda")
+        assertTrue(backClicked, "Back button should be clickable and trigger the onBack lambda.")
     }
 
     @OptIn(ExperimentalSharedTransitionApi::class)
     @Test
-    fun detailScreen_deleteButton_isClickable() {
+    fun detailScreen_deleteButton_isClickableAndTriggersCallback() {
         var deleteClicked = false
         // Arrange
         composeRule.setContent {
             SharedTransitionContainer {
-                val titleState = rememberTextFieldState()
-                val contentState = rememberTextFieldState()
-                val mockDetailState = DetailState(title = titleState, detail = contentState)
+                val mockDetailState = DetailState(
+                    id = 1L,
+                    title = rememberTextFieldState(),
+                    detail = rememberTextFieldState(),
+                )
 
                 DetailScreen(
-                    id = 1L,
                     state = mockDetailState,
                     onBack = {},
                     onDelete = { deleteClicked = true },
@@ -115,6 +128,57 @@ class DetailScreenTest {
         composeRule.onNodeWithTag(DetailScreenTestTags.DELETE_BUTTON).performClick()
 
         // Assert
-        assertTrue(deleteClicked, "Delete button should be clickable and trigger onDelete lambda")
+        assertTrue(deleteClicked, "Delete button should be clickable and trigger the onDelete lambda.")
+    }
+
+    // Optional: Test to ensure placeholders are visible when text fields are empty
+    @OptIn(ExperimentalSharedTransitionApi::class)
+    @Test
+    fun detailScreen_textFields_showPlaceholdersWhenEmpty() {
+        // Arrange
+        val titlePlaceholder = "Title" // Assuming this is your placeholder in KmtTextField
+        val contentPlaceholder = "content" // Assuming this is your placeholder in KmtTextField
+
+        composeRule.setContent {
+            SharedTransitionContainer {
+                val emptyTitleState = rememberTextFieldState("") // Empty initial value
+                val emptyContentState = rememberTextFieldState("") // Empty initial value
+                val mockDetailState = DetailState(
+                    id = 1L,
+                    title = emptyTitleState,
+                    detail = emptyContentState,
+                )
+
+                DetailScreen(
+                    state = mockDetailState,
+                    onBack = {},
+                    onDelete = {},
+                )
+            }
+        }
+
+        // Assert
+        // Check that the text fields themselves exist
+        composeRule.onNodeWithTag(DetailScreenTestTags.TITLE_TEXT_FIELD).assertExists()
+        composeRule.onNodeWithTag(DetailScreenTestTags.CONTENT_TEXT_FIELD).assertExists()
+
+        // Check for placeholder text.
+        // Note: Finding by placeholder text directly can be tricky as it's often not part of the
+        // semantic tree in the same way as actual text content.
+        // A more robust way if KmtTextField supports it is to check an attribute,
+        // or ensure the actual text content is empty and visually confirm placeholders in screenshots.
+        // For this example, we'll assert the text is empty and rely on visual confirmation/screenshot tests
+        // for placeholder visibility if direct placeholder checking is complex.
+
+        composeRule.onNodeWithTag(DetailScreenTestTags.TITLE_TEXT_FIELD)
+            .assertTextEquals("") // Assert the input text is empty
+        // To directly test placeholder, KmtTextField would need to expose it to semantics,
+        // or you'd check for a node with the placeholder text that is *not* the input field itself.
+        // For example, if the placeholder is a separate Text composable:
+        composeRule.onNodeWithText(titlePlaceholder).assertIsDisplayed()
+
+        composeRule.onNodeWithTag(DetailScreenTestTags.CONTENT_TEXT_FIELD)
+            .assertTextEquals("") // Assert the input text is empty
+        composeRule.onNodeWithText(contentPlaceholder).assertIsDisplayed()
     }
 }
