@@ -13,17 +13,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.mshdabiola.detail
+package com.mshdabiola.setting
 
 import androidx.compose.animation.ExperimentalSharedTransitionApi
-import androidx.compose.runtime.Composable
-import com.mshdabiola.designsystem.DevicePreviews
+import androidx.compose.ui.test.junit4.createComposeRule
+import androidx.compose.ui.test.onNodeWithTag
+import org.junit.Rule
+import kotlin.test.Test
 
-class ScreenScreenshotTests {
+class SettingDetailScreenTest {
+    @get:Rule
+    val composeRule = createComposeRule()
 
     @OptIn(ExperimentalSharedTransitionApi::class)
-    @DevicePreviews
-    @Composable
-    fun LoadingLight() {
+    @Test
+    fun main() {
+        composeRule.setContent {
+        }
+        composeRule.onNodeWithTag("setting:screen").assertExists()
+        composeRule.onNodeWithTag("setting:theme").assertExists()
+        composeRule.onNodeWithTag("setting:mode").assertExists()
     }
 }
