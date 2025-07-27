@@ -38,7 +38,7 @@ class DetailViewModel(
 
     private val idFlow = MutableStateFlow(initId)
 
-    val initDetailState = DetailState(id = initId)
+    val initDetailState = DetailState(note = Note(id = initId))
 
     private val titleFlow = snapshotFlow { initDetailState.title.text }
         .debounce(300)
@@ -60,7 +60,7 @@ class DetailViewModel(
                 idFlow.update { newId }
 
                 isInit = false
-                initDetailState.copy(id = newId)
+                initDetailState.copy(note = Note(id = newId))
             }
 
             isInit -> {
@@ -73,7 +73,7 @@ class DetailViewModel(
                 initDetailState.detail.edit {
                     append(note.content)
                 }
-                initDetailState.copy(id = note.id)
+                initDetailState.copy(note = note)
             }
 
             else -> {
@@ -83,7 +83,7 @@ class DetailViewModel(
                 if (newNote != note) {
                     noteRepository.upsert(newNote)
                 }
-                initDetailState.copy(id = note.id)
+                initDetailState.copy(note = note)
             }
         }
     }

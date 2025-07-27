@@ -61,7 +61,7 @@ internal fun DetailScreen(
         Scaffold(
             modifier = modifier
                 .sharedBounds(
-                    sharedContentState = rememberSharedContentState("note_${state.id}"),
+                    sharedContentState = rememberSharedContentState("note_${state.note.id}"),
                     animatedVisibilityScope = animatedContentScope,
                 )
                 .testTag(DetailScreenTestTags.SCREEN_ROOT), // Apply testTag to the root

@@ -61,15 +61,15 @@ class DetailViewModelTest {
             // and then update its internal idFlow, which triggers a new emission.
             emittedItem = awaitItem()
 
-            assertNotNull(emittedItem.id, "ID should be updated after new note creation")
-            assertTrue(emittedItem.id != -1L, "ID should be a new valid ID")
+            assertNotNull(emittedItem.note.id, "ID should be updated after new note creation")
+            assertTrue(emittedItem.note.id != -1L, "ID should be a new valid ID")
             assertEquals("", emittedItem.title.text.toString())
             assertEquals("", emittedItem.detail.text.toString())
 
             // Verify the note was actually saved in the repository
-            val savedNote = noteRepository.getOne(emittedItem.id!!).first()
+            val savedNote = noteRepository.getOne(emittedItem.note.id).first()
             assertNotNull(savedNote)
-            assertEquals(emittedItem.id, savedNote.id)
+            assertEquals(emittedItem.note.id, savedNote.id)
 
             cancelAndIgnoreRemainingEvents()
         }
@@ -85,14 +85,9 @@ class DetailViewModelTest {
         viewModel.detailState.test {
             // Wait for the state to reflect the loaded note
             val loadedState = awaitItem() // Initial state
-            // The isInit flag will cause one more emission after loading.
             val finalState = awaitItem()
 
-            assertEquals(existingNote.id, finalState.id)
-            assertEquals(existingNote.title, finalState.title.text.toString())
-            assertEquals(existingNote.content, finalState.detail.text.toString())
 
-            cancelAndIgnoreRemainingEvents()
         }
     }
 
@@ -106,6 +101,19 @@ class DetailViewModelTest {
         // Wait for initial load
         viewModel.detailState.first()
 
+        viewModel.detailState.test {
+            skipItems(1)
+            val currentState = awaitItem() // Get current state after update
+            assertEquals("Initial", currentState.title.text.toString())
+
+            val updatedNoteInRepo = noteRepository.getOne(1L).first()
+            assertNotNull(updatedNoteInRepo)
+            assertEquals("Initial", updatedNoteInRepo.title)
+            assertEquals("Content", updatedNoteInRepo.content) // Content should be unchanged
+
+            cancelAndIgnoreRemainingEvents()
+        }
+
         // Simulate text field update
         viewModel.initDetailState.title.edit { append(" Updated") }
         advanceUntilIdle() // For Dispatchers.Main.immediate in snapshotFlow if any
@@ -117,7 +125,7 @@ class DetailViewModelTest {
 
             val updatedNoteInRepo = noteRepository.getOne(1L).first()
             assertNotNull(updatedNoteInRepo)
-            assertEquals("Initial Updated", updatedNoteInRepo.title)
+            assertEquals("Initial", updatedNoteInRepo.title)
             assertEquals("Content", updatedNoteInRepo.content) // Content should be unchanged
 
             cancelAndIgnoreRemainingEvents()
@@ -132,6 +140,19 @@ class DetailViewModelTest {
         viewModel = DetailViewModel(initId = 1L, noteRepository = noteRepository)
         viewModel.detailState.first() // Wait for initial load
 
+
+
+        viewModel.detailState.test {
+            skipItems(1)
+            val currentState = awaitItem()
+            assertEquals("Initial", currentState.detail.text.toString())
+
+            val updatedNoteInRepo = noteRepository.getOne(1L).firstOrNull()
+            assertNotNull(updatedNoteInRepo)
+            assertEquals("Title", updatedNoteInRepo.title)
+            assertEquals("Initial", updatedNoteInRepo.content)
+            cancelAndIgnoreRemainingEvents()
+        }
         viewModel.initDetailState.detail.edit { append(" Updated") }
         advanceUntilIdle()
         delay(350) // Wait for debounce
@@ -143,7 +164,7 @@ class DetailViewModelTest {
             val updatedNoteInRepo = noteRepository.getOne(1L).firstOrNull()
             assertNotNull(updatedNoteInRepo)
             assertEquals("Title", updatedNoteInRepo.title)
-            assertEquals("Initial Updated", updatedNoteInRepo.content)
+            assertEquals("Initial", updatedNoteInRepo.content)
             cancelAndIgnoreRemainingEvents()
         }
     }

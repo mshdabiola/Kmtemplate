@@ -41,7 +41,7 @@ class FakeNoteRepository : NoteRepository {
             newNoteId = nextId++
             val newNote = note.copy(id = newNoteId)
             currentNotes.add(newNote)
-            notesFlow.value = currentNotes
+            notesFlow.update { currentNotes }
         } else { // Existing note
             newNoteId = note.id // Assume ID is non-null and not DEFAULT_ID if it's an existing note
             val index = currentNotes.indexOfFirst { it.id == newNoteId }
@@ -57,7 +57,7 @@ class FakeNoteRepository : NoteRepository {
                     nextId = note.id + 1
                 }
             }
-            notesFlow.value = currentNotes
+            notesFlow.update { currentNotes }
         }
         return newNoteId
     }
