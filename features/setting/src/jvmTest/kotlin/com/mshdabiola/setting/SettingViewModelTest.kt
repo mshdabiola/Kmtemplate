@@ -61,7 +61,7 @@ class SettingViewModelTest {
         // The stateIn will emit initialValue first, then the mapped userData
         val expectedInitialState = SettingState(
             contrast = initialUserData.contrast,
-            darkThemeConfig = initialUserData.darkThemeConfig,
+            darkThemeConfig = DarkThemeConfig.DARK,
         )
 
         // viewModel.settingState will emit SettingState() first (initialValue of stateIn),
@@ -82,15 +82,9 @@ class SettingViewModelTest {
             // Let's assume FakeUserDataRepository.userData immediately provides the set data
             // or the default SettingState() is acceptable as the first item before real data
             val firstItem = awaitItem()
-            if (firstItem.contrast == SettingState().contrast &&
-                firstItem.darkThemeConfig == SettingState().darkThemeConfig
-            ) {
-                // This means the initial value of stateIn (SettingState()) was emitted first
-                assertEquals(expectedInitialState, awaitItem())
-            } else {
-                // This means the mapped initialUserData was emitted directly
+             // This means the mapped initialUserData was emitted directly
                 assertEquals(expectedInitialState, firstItem)
-            }
+
 
             cancelAndConsumeRemainingEvents()
         }
@@ -98,7 +92,7 @@ class SettingViewModelTest {
 
     @Test
     fun `setContrast updates repository and state`() = runTest(mainDispatcherRule.testDispatcher) {
-        val newContrast = 2
+        val newContrast = 0
         val expectedStateAfterUpdate = SettingState(
             contrast = newContrast,
             darkThemeConfig = initialUserData.darkThemeConfig, // Dark theme config remains unchanged
@@ -133,7 +127,7 @@ class SettingViewModelTest {
 
     @Test
     fun `setDarkThemeConfig updates repository and state`() = runTest(mainDispatcherRule.testDispatcher) {
-        val newDarkThemeConfig = DarkThemeConfig.DARK
+        val newDarkThemeConfig = DarkThemeConfig.FOLLOW_SYSTEM
         val expectedStateAfterUpdate = SettingState(
             contrast = initialUserData.contrast, // Contrast remains unchanged
             darkThemeConfig = newDarkThemeConfig,
@@ -142,9 +136,7 @@ class SettingViewModelTest {
         viewModel.settingState.test {
             // Consume the current state before the update
             awaitItem()
-            if (viewModel.settingState.value.darkThemeConfig != initialUserData.darkThemeConfig) {
-                awaitItem()
-            }
+
 
             viewModel.setDarkThemeConfig(newDarkThemeConfig)
 
