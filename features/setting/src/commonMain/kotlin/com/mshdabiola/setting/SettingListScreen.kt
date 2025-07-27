@@ -37,6 +37,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.mshdabiola.designsystem.component.KmtIconButton
@@ -51,13 +52,9 @@ import org.jetbrains.compose.resources.stringArrayResource
 import org.jetbrains.compose.resources.stringResource
 
 enum class SettingNav(val segment: Int, val index: Int) {
-    // general
     Appearance(0, 0),
-
-    // support
     Issue(1, 0),
     Faq(1, 1),
-
     About(1, 2),
 }
 
@@ -70,36 +67,25 @@ internal fun SettingListScreen(
     onSettingClick: (SettingNav) -> Unit = {},
 ) {
     val segmentArrayString = stringArrayResource(Res.array.segment)
-
-    val generalIcon = listOf(
-        KmtIcons.Appearance,
-    )
+    val generalIcon = listOf(KmtIcons.Appearance)
     val generalArrayString = stringArrayResource(Res.array.general)
-
-    val supportIcon = listOf(
-        KmtIcons.BugReport,
-        KmtIcons.Faq,
-        KmtIcons.About,
-    )
+    val supportIcon = listOf(KmtIcons.BugReport, KmtIcons.Faq, KmtIcons.About)
     val supportArrayString = stringArrayResource(Res.array.support)
-
-    val stringArray = listOf(
-        generalArrayString,
-        supportArrayString,
-    )
-    val iconArray = listOf(
-        generalIcon,
-        supportIcon,
-    )
+    val stringArray = listOf(generalArrayString, supportArrayString)
+    val iconArray = listOf(generalIcon, supportIcon)
 
     Scaffold(
-        modifier = modifier,
+        modifier = modifier.testTag(SettingScreenListTestTags.SCREEN_ROOT),
         topBar = {
             KmtTopAppBar(
+                modifier = Modifier.testTag(SettingScreenListTestTags.TOP_APP_BAR),
                 title = { Text(stringResource(Res.string.screen_name)) },
                 navigationIcon = {
                     if (onDrawer != null) {
-                        KmtIconButton(onClick = onDrawer) {
+                        KmtIconButton(
+                            onClick = onDrawer,
+                            modifier = Modifier.testTag(SettingScreenListTestTags.MENU_ICON_BUTTON),
+                        ) {
                             Icon(
                                 imageVector = KmtIcons.Menu,
                                 contentDescription = "menu",
@@ -114,19 +100,25 @@ internal fun SettingListScreen(
         LazyColumn(
             modifier = Modifier
                 .padding(paddingValues)
-                .padding(16.dp),
+                .padding(16.dp)
+                .testTag(SettingScreenListTestTags.SETTINGS_LAZY_COLUMN),
             verticalArrangement = Arrangement.spacedBy(4.dp),
         ) {
-            settingsMap.forEach { (index, settingList) ->
+            settingsMap.forEach { (mapIndex, settingList) ->
                 item {
-                    Text(segmentArrayString[index], style = MaterialTheme.typography.titleSmall)
+                    Text(
+                        text = segmentArrayString[mapIndex],
+                        style = MaterialTheme.typography.titleSmall,
+                        modifier = Modifier.testTag("${SettingScreenListTestTags.SECTION_HEADER_TEXT_PREFIX}$mapIndex"),
+                    )
                 }
-                items(settingList) { setting ->
+                items(settingList, key = { it.name }) { setting ->
                     SettingListItem(
                         modifier = Modifier,
                         icon = iconArray[setting.segment][setting.index],
                         title = stringArray[setting.segment][setting.index],
                         onClick = { onSettingClick(setting) },
+                        settingNav = setting,
                     )
                 }
                 item {
@@ -143,30 +135,51 @@ fun SettingListItem(
     icon: ImageVector,
     title: String,
     onClick: () -> Unit,
+    settingNav: SettingNav,
 ) {
     Card(
         modifier = modifier
             .fillMaxWidth()
-            .clickable { onClick() },
+            .clickable { onClick() }
+            .testTag("${SettingScreenListTestTags.LIST_ITEM_CARD_PREFIX}${settingNav.name}"),
         elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant),
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier.padding(16.dp).fillMaxWidth(),
+            modifier = Modifier
+                .padding(16.dp)
+                .fillMaxWidth(),
         ) {
             Icon(
                 imageVector = icon,
                 contentDescription = title,
+                modifier = Modifier.testTag("${SettingScreenListTestTags.LIST_ITEM_ICON_PREFIX}${settingNav.name}"),
             )
             Spacer(modifier = Modifier.width(8.dp))
-
             Text(
                 text = title,
                 style = MaterialTheme.typography.titleMedium,
                 fontWeight = FontWeight.SemiBold,
-                modifier = Modifier.weight(1f),
+                modifier = Modifier
+                    .weight(1f)
+                    .testTag("${SettingScreenListTestTags.LIST_ITEM_TITLE_TEXT_PREFIX}${settingNav.name}"),
             )
         }
     }
+}
+
+object SettingScreenListTestTags {
+    const val SCREEN_ROOT = "setting_list:screen_root" // Typically the Scaffold or main LazyColumn
+    const val TOP_APP_BAR = "setting_list:top_app_bar"
+    const val MENU_ICON_BUTTON = "setting_list:menu_icon_button"
+    const val SETTINGS_LAZY_COLUMN = "setting_list:lazy_column"
+
+    // For dynamic section headers (using index)
+    const val SECTION_HEADER_TEXT_PREFIX = "setting_list:section_header_"
+
+    // For dynamic list items (using segment and index of SettingNav)
+    const val LIST_ITEM_CARD_PREFIX = "setting_list_item:card_" // e.g., setting_list_item:card_Appearance
+    const val LIST_ITEM_ICON_PREFIX = "setting_list_item:icon_"
+    const val LIST_ITEM_TITLE_TEXT_PREFIX = "setting_list_item:title_"
 }

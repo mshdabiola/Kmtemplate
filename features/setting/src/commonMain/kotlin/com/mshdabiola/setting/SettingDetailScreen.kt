@@ -26,6 +26,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 import com.mshdabiola.designsystem.component.KmtIconButton
 import com.mshdabiola.designsystem.component.KmtTopAppBar
@@ -50,21 +51,21 @@ internal fun SettingDetailScreen(
     onDarkModeChange: (DarkThemeConfig) -> Unit = {},
 ) {
     val generalArrayString = stringArrayResource(Res.array.general)
-
     val supportArrayString = stringArrayResource(Res.array.support)
+    val stringArray = listOf(generalArrayString, supportArrayString)
 
-    val stringArray = listOf(
-        generalArrayString,
-        supportArrayString,
-    )
     Scaffold(
-        modifier = modifier,
+        modifier = modifier.testTag(SettingDetailScreenTestTags.SCREEN_ROOT),
         topBar = {
             KmtTopAppBar(
+                modifier = Modifier.testTag(SettingDetailScreenTestTags.TOP_APP_BAR),
                 title = { Text(stringArray[settingNav.segment][settingNav.index]) },
                 navigationIcon = {
                     if (onBack != null) {
-                        KmtIconButton(onClick = onBack) {
+                        KmtIconButton(
+                            onClick = onBack,
+                            modifier = Modifier.testTag(SettingDetailScreenTestTags.BACK_ICON_BUTTON),
+                        ) {
                             Icon(
                                 imageVector = KmtIcons.ArrowBack,
                                 contentDescription = "back",
@@ -101,8 +102,22 @@ internal fun SettingDetailScreen(
                         onDarkModeChange = onDarkModeChange,
                     )
                 }
-                SettingNav.Issue -> {}
+                SettingNav.Issue -> { /* TODO: Implement Issue Screen */ }
             }
         }
     }
+}
+
+object SettingDetailScreenTestTags {
+    const val SCREEN_ROOT = "setting_detail:screen_root"
+    const val TOP_APP_BAR = "setting_detail:top_app_bar"
+    const val BACK_ICON_BUTTON = "setting_detail:back_icon_button"
+
+    // If you need to target specific detail content containers,
+    // you might add tags like:
+    // const val APPEARANCE_CONTENT_CONTAINER = "setting_detail:appearance_content"
+    // const val FAQ_CONTENT_CONTAINER = "setting_detail:faq_content"
+    // const val ABOUT_CONTENT_CONTAINER = "setting_detail:about_content"
+    // However, often the tags within the specific content screens (AppearanceScreen, FaqScreen, etc.)
+    // are sufficient. You can decide based on your testing needs.
 }

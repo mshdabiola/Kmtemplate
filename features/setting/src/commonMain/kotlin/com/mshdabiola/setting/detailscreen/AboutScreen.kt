@@ -15,6 +15,7 @@
  */
 package com.mshdabiola.setting.detailscreen
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -33,13 +34,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import com.mshdabiola.designsystem.component.KmtTextButton
 import com.mshdabiola.designsystem.drawable.KmtDrawable
 import com.mshdabiola.designsystem.strings.KmtStrings
 import com.mshdabiola.designsystem.theme.KmtTheme
 import kotlinmultiplatformtemplate.features.setting.generated.resources.Res
-import kotlinmultiplatformtemplate.features.setting.generated.resources.about_me
+import kotlinmultiplatformtemplate.features.setting.generated.resources.about
 import kotlinmultiplatformtemplate.features.setting.generated.resources.contact_us
 import kotlinmultiplatformtemplate.features.setting.generated.resources.developed_by
 import kotlinmultiplatformtemplate.features.setting.generated.resources.developer
@@ -50,110 +53,170 @@ import kotlinmultiplatformtemplate.features.setting.generated.resources.version
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
+object AboutScreenTestTags {
+    const val SCREEN_ROOT = "about:screen_root" // For the main Column
+
+    const val APP_ICON = "about:app_icon"
+    const val APP_NAME = "about:app_name"
+    const val APP_DESCRIPTION = "about:app_description" // From our previous discussion
+
+    const val VERSION_LABEL = "about:version_label"
+    const val VERSION_VALUE = "about:version_value"
+
+    const val LAST_UPDATE_LABEL = "about:last_update_label"
+    const val LAST_UPDATE_VALUE = "about:last_update_value"
+
+    // Assuming "about_me" from Res.string.about_me is the main text block
+    const val ABOUT_ME_TEXT = "about:about_me_text"
+
+    const val DEVELOPED_BY_LABEL = "about:developed_by_label"
+    const val DEVELOPER_NAME = "about:developer_name"
+
+    const val CONTACT_US_LABEL = "about:contact_us_label"
+    const val EMAIL_LINK = "about:email_link"
+
+    const val PRIVACY_POLICY_BUTTON = "about:privacy_policy_button"
+    const val TERMS_AND_CONDITIONS_BUTTON = "about:terms_and_conditions_button"
+}
+
 @Composable
 fun AboutScreen(
     modifier: Modifier = Modifier,
 ) {
-    val contactUs = openEmail(
-        "mshdabiola@gmail.com",
-        "Feedback for KMTemplate",
+    val openEmail: () -> Unit = openEmail(
+        emailAddress = "mshdabiola@gmail.com",
+        subject = "Feedback for KMTemplate",
     )
+    val openPrivacyPolicy: () -> Unit = { }
+    val openTermsAndConditions: () -> Unit = { }
+
     Column(
         modifier = modifier
             .fillMaxSize()
             .verticalScroll(rememberScrollState())
-            .padding(horizontal = 24.dp, vertical = 32.dp),
-        verticalArrangement = Arrangement.spacedBy(8.dp),
+            .padding(horizontal = 24.dp, vertical = 32.dp)
+            .testTag(AboutScreenTestTags.SCREEN_ROOT), // Tag for the root
+        verticalArrangement = Arrangement.Top, // Changed from SpacedBy to Top for more control with Spacers
         horizontalAlignment = Alignment.Start,
     ) {
         Icon(
             imageVector = KmtDrawable.brand,
-            contentDescription = "brand",
+            contentDescription = "App Logo",
             modifier = Modifier
                 .align(Alignment.CenterHorizontally)
-                .testTag("about:app_icon"),
+                .padding(bottom = 16.dp)
+                .testTag(AboutScreenTestTags.APP_ICON),
         )
-        Spacer(modifier = Modifier.height(8.dp))
+
         Text(
             text = KmtStrings.brand,
             style = MaterialTheme.typography.headlineMedium,
             color = MaterialTheme.colorScheme.onBackground,
-            modifier = Modifier.testTag("about:app_name"),
+            modifier = Modifier
+                .align(Alignment.CenterHorizontally)
+                .testTag(AboutScreenTestTags.APP_NAME),
         )
+
+        Text(
+            text = stringResource(Res.string.about),
+            style = MaterialTheme.typography.bodyMedium,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
+            modifier = Modifier
+                .align(Alignment.CenterHorizontally)
+                .padding(top = 4.dp, bottom = 8.dp)
+                .testTag(AboutScreenTestTags.APP_DESCRIPTION),
+        )
+
+        Spacer(Modifier.height(8.dp))
         HorizontalDivider(
-            modifier = Modifier.width(64.dp),
+            modifier = Modifier
+                .width(64.dp)
+                .align(Alignment.CenterHorizontally),
             thickness = 4.dp,
             color = MaterialTheme.colorScheme.primary,
         )
-        Text(
-            text = stringResource(Res.string.about_me),
-            style = MaterialTheme.typography.bodyMedium,
-            color = MaterialTheme.colorScheme.onSurface,
-            modifier = Modifier.testTag("about:about_me")
-                .padding(bottom = 8.dp),
-
-        )
+        Spacer(Modifier.height(24.dp))
 
         Text(
             text = stringResource(Res.string.version),
             color = MaterialTheme.colorScheme.onSurfaceVariant,
             style = MaterialTheme.typography.labelLarge,
+            modifier = Modifier.testTag(AboutScreenTestTags.VERSION_LABEL),
         )
         Text(
             text = KmtStrings.version,
             style = MaterialTheme.typography.bodyLarge,
             color = MaterialTheme.colorScheme.onSurface,
-            modifier = Modifier.testTag("about:version_value"),
+            modifier = Modifier.testTag(AboutScreenTestTags.VERSION_VALUE),
         )
 
+        Spacer(Modifier.height(16.dp))
         Text(
             text = stringResource(Res.string.last_update),
             color = MaterialTheme.colorScheme.onSurfaceVariant,
             style = MaterialTheme.typography.labelLarge,
+            modifier = Modifier.testTag(AboutScreenTestTags.LAST_UPDATE_LABEL),
         )
         Text(
             text = KmtStrings.lastUpdate,
             style = MaterialTheme.typography.bodyLarge,
             color = MaterialTheme.colorScheme.onSurface,
-            modifier = Modifier.testTag("about:last_update_value"),
+            modifier = Modifier.testTag(AboutScreenTestTags.LAST_UPDATE_VALUE),
         )
 
+        Spacer(Modifier.height(16.dp))
         Text(
             text = stringResource(Res.string.developed_by),
             color = MaterialTheme.colorScheme.onSurfaceVariant,
             style = MaterialTheme.typography.labelLarge,
+            modifier = Modifier.testTag(AboutScreenTestTags.DEVELOPED_BY_LABEL),
         )
-
         Text(
             text = stringResource(Res.string.developer),
             style = MaterialTheme.typography.bodyLarge,
             color = MaterialTheme.colorScheme.onSurface,
-            modifier = Modifier.testTag("about:last_update_value"),
+            modifier = Modifier.testTag(AboutScreenTestTags.DEVELOPER_NAME),
         )
 
+        Spacer(Modifier.height(16.dp))
         Text(
             text = stringResource(Res.string.contact_us),
             color = MaterialTheme.colorScheme.onSurfaceVariant,
             style = MaterialTheme.typography.labelLarge,
+            modifier = Modifier.testTag(AboutScreenTestTags.CONTACT_US_LABEL),
         )
+
+        Text(
+            text = "mshdabiola@gmail.com",
+            style = MaterialTheme.typography.bodyLarge.copy(
+                color = MaterialTheme.colorScheme.primary,
+                fontWeight = FontWeight.Medium,
+                textDecoration = TextDecoration.Underline,
+            ),
+            modifier = Modifier
+                .clickable {
+                    openEmail()
+                }
+                .padding(top = 4.dp, bottom = 16.dp) // Added bottom padding
+                .testTag(AboutScreenTestTags.EMAIL_LINK),
+        )
+
         KmtTextButton(
-            onClick = { contactUs() },
-            contentPadding = PaddingValues(0.dp),
-        ) {
-            Text("mshdabiola@gmail.com")
-        }
-        KmtTextButton(
-            onClick = {},
-            contentPadding = PaddingValues(0.dp),
+            onClick = openPrivacyPolicy,
+            contentPadding = PaddingValues(vertical = 4.dp),
+            modifier = Modifier.testTag(AboutScreenTestTags.PRIVACY_POLICY_BUTTON),
         ) {
             Text(stringResource(Res.string.privacy_policy))
         }
+
         KmtTextButton(
-            onClick = { contactUs() },
-            contentPadding = PaddingValues(0.dp),
+            onClick = openTermsAndConditions,
+            contentPadding = PaddingValues(vertical = 4.dp),
+            modifier = Modifier.testTag(AboutScreenTestTags.TERMS_AND_CONDITIONS_BUTTON),
         ) {
             Text(stringResource(Res.string.terms_and_condition))
         }
+        Spacer(Modifier.height(16.dp))
     }
 }
 

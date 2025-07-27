@@ -23,6 +23,7 @@ import androidx.compose.material3.adaptive.navigation.rememberListDetailPaneScaf
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import com.mshdabiola.model.DarkThemeConfig
 import com.mshdabiola.setting.detailscreen.openUrl
 import com.mshdabiola.ui.SharedTransitionContainer
@@ -42,21 +43,21 @@ fun SettingScreen(
     val navigator = rememberListDetailPaneScaffoldNavigator<SettingNav>()
     val coroutineScope = rememberCoroutineScope()
 
-    val seeMap = SettingNav
+    val settingsBySegment = SettingNav
         .entries
         .groupBy { it.segment }
 
     val openUri = openUrl("https://github.com/mshdabiola/KotlinMultiplatformTemplate/issues")
 
     ListDetailPaneScaffold(
-        modifier = Modifier,
+        modifier = modifier.testTag(SettingScreenTestTags.SCREEN_ROOT), // Apply the tag here
         directive = navigator.scaffoldDirective,
         value = navigator.scaffoldValue,
         listPane = {
             AnimatedPane {
                 SettingListScreen(
-                    modifier = modifier,
-                    settingsMap = seeMap,
+                    modifier = Modifier, // Pass modifier if needed from here
+                    settingsMap = settingsBySegment,
                     onDrawer = onDrawer,
                     onSettingClick = {
                         if (it == SettingNav.Issue) {
@@ -76,7 +77,7 @@ fun SettingScreen(
         detailPane = {
             AnimatedPane {
                 SettingDetailScreen(
-                    modifier = modifier,
+                    modifier = Modifier, // Pass modifier if needed from here
                     onBack = if (navigator.canNavigateBack()) {
                         {
                             coroutineScope.launch {
@@ -110,4 +111,8 @@ internal fun SettingScreenPreview() {
             settingState = settingState,
         )
     }
+}
+
+object SettingScreenTestTags {
+    const val SCREEN_ROOT = "setting:screen_root" // For the ListDetailPaneScaffold or main root
 }
