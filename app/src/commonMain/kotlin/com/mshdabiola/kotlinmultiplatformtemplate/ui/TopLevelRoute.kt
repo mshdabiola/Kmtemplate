@@ -16,9 +16,6 @@
 package com.mshdabiola.kotlinmultiplatformtemplate.ui
 
 import androidx.compose.ui.graphics.vector.ImageVector
-import com.mshdabiola.designsystem.drawable.KmtIcons
-import com.mshdabiola.main.navigation.Main
-import com.mshdabiola.setting.navigation.Setting
 
 data class TopLevelRoute<T : Any>(
     val route: T,
@@ -26,20 +23,3 @@ data class TopLevelRoute<T : Any>(
     val unSelectedIcon: ImageVector,
     val label: String,
 )
-
-val TOP_LEVEL_ROUTES =
-    setOf(
-        TopLevelRoute(
-            route = Main,
-            selectedIcon = KmtIcons.Home,
-            unSelectedIcon = KmtIcons.HomeOutlined,
-            label = "Home",
-        ),
-        TopLevelRoute(
-            route = Setting,
-            selectedIcon = KmtIcons.Settings,
-            unSelectedIcon = KmtIcons.SettingsOutlined,
-            label = "Settings",
-        ),
-
-    )

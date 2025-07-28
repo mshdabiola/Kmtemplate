@@ -25,10 +25,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.navigation.NavDestination
 import androidx.navigation.NavDestination.Companion.hasRoute
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.window.core.layout.WindowSizeClass
 import androidx.window.core.layout.WindowWidthSizeClass
@@ -68,25 +66,6 @@ sealed class KmtAppState(
 
     abstract val onDrawer: (() -> Unit)?
 
-    val currentDestination: NavDestination?
-        @Composable get() =
-            navController
-                .currentBackStackEntryAsState().value?.destination
-
-    val isMain: Boolean
-        @Composable get() =
-            currentDestination?.hasRoute(Main::class) == true
-
-    val isTopRoute
-        @Composable get() = remember(currentDestination) {
-            TOP_LEVEL_ROUTES.any {
-                TOP_LEVEL_ROUTES.any {
-                    navController.currentDestination?.hasRoute(it.route::class)
-                        ?: false
-                }
-            }
-        }
-
     open fun navigateTopRoute(any: Any) {
         when (any) {
             is Main -> navController.navigateToMain()
@@ -95,9 +74,8 @@ sealed class KmtAppState(
         }
     }
 
-    @Composable
     fun isInCurrentRoute(any: Any): Boolean {
-        return currentDestination?.hasRoute(any::class) == true
+        return navController.currentDestination?.hasRoute(any::class) == true
     }
 }
 

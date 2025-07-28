@@ -50,11 +50,12 @@ import androidx.compose.material3.WideNavigationRail
 import androidx.compose.material3.WideNavigationRailDefaults
 import androidx.compose.material3.WideNavigationRailItem
 import androidx.compose.material3.WideNavigationRailValue
-import androidx.compose.material3.adaptive.currentWindowAdaptiveInfo
 import androidx.compose.material3.contentColorFor
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.material3.rememberWideNavigationRailState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -62,7 +63,9 @@ import androidx.compose.ui.platform.testTag // Ensure this import is present
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavDestination.Companion.hasRoute
 import androidx.navigation.compose.composable
+import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.createGraph
 import com.mshdabiola.designsystem.drawable.KmtDrawable
@@ -73,6 +76,7 @@ import com.mshdabiola.detail.navigation.navigateToDetail
 import com.mshdabiola.main.navigation.Main
 import com.mshdabiola.setting.navigation.Setting
 import com.mshdabiola.ui.LocalSharedTransitionScope
+import com.mshdabiola.ui.SharedTransitionContainer
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 // Test Tags for KmtScaffold and its inner components
@@ -118,6 +122,36 @@ fun KmtScaffold(
 ) {
     val sharedScope = LocalSharedTransitionScope.current
 
+    val topDestination = remember {
+        setOf(
+            TopLevelRoute(
+                route = Main,
+                selectedIcon = KmtIcons.Home,
+                unSelectedIcon = KmtIcons.HomeOutlined,
+                label = "Home",
+            ),
+            TopLevelRoute(
+                route = Setting,
+                selectedIcon = KmtIcons.Settings,
+                unSelectedIcon = KmtIcons.SettingsOutlined,
+                label = "Settings",
+            ),
+
+        )
+    }
+    val currentDestination = appState.navController
+        .currentBackStackEntryAsState().value?.destination
+    val isMain = remember(currentDestination) {
+        currentDestination?.hasRoute(Main::class) == true
+    }
+    val isTopDestination = remember(currentDestination) {
+        topDestination.any {
+            currentDestination
+                ?.hasRoute(it.route::class)
+                ?: false
+        }
+    }
+
     with(sharedScope) {
         if (appState is Compact) {
             ModalNavigationDrawer(
@@ -132,11 +166,13 @@ fun KmtScaffold(
                         DrawerContent(
                             modifier = Modifier.padding(16.dp),
                             appState = appState,
+                            isMain = isMain,
+                            topDestination = topDestination,
                         )
                     }
                 },
                 drawerState = appState.drawerState,
-                gesturesEnabled = appState.isTopRoute,
+                gesturesEnabled = isTopDestination,
             ) {
                 Scaffold(
                     modifier = Modifier.testTag(KmtScaffoldTestTags.SCAFFOLD_CONTENT_AREA + "_compact"),
@@ -147,7 +183,7 @@ fun KmtScaffold(
                     bottomBar = bottomBar,
                     snackbarHost = snackbarHost,
                     floatingActionButton = {
-                        AnimatedVisibility(appState.isMain) {
+                        AnimatedVisibility(isMain) {
                             Fab(
                                 appState = appState,
                                 modifier = Modifier
@@ -166,7 +202,7 @@ fun KmtScaffold(
             PermanentNavigationDrawer(
                 modifier = modifier.testTag(KmtScaffoldTestTags.PERMANENT_NAVIGATION_DRAWER),
                 drawerContent = {
-                    if (appState.isTopRoute) {
+                    if (isTopDestination) {
                         if (appState is Medium) {
                             WideNavigationRail(
                                 modifier = Modifier
@@ -211,6 +247,8 @@ fun KmtScaffold(
                             ) {
                                 DrawerContent(
                                     appState = appState,
+                                    isMain = isMain,
+                                    topDestination = topDestination,
                                 )
                             }
                         }
@@ -224,6 +262,8 @@ fun KmtScaffold(
                                 DrawerContent(
                                     modifier = Modifier.padding(16.dp),
                                     appState = appState,
+                                    isMain = isMain,
+                                    topDestination = topDestination,
                                 )
                             }
                         }
@@ -250,8 +290,6 @@ fun KmtScaffold(
 @Preview
 @Composable
 fun KmtScaffoldPreview() {
-    val windowAdaptiveInfo = currentWindowAdaptiveInfo()
-    val windowSizeClass = windowAdaptiveInfo.windowSizeClass
     val navController = rememberNavController().apply {
         graph =
             createGraph(startDestination = Main) {
@@ -261,29 +299,30 @@ fun KmtScaffoldPreview() {
             }
     }
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Open)
-    val appState = rememberKmtAppState(
-        windowSizeClass = windowSizeClass,
+    val appState = Medium(
         navController = navController,
-        drawerState = drawerState,
-        wideNavigationRailState = rememberWideNavigationRailState(initialValue = WideNavigationRailValue.Collapsed),
+        coroutineScope = rememberCoroutineScope(),
+        wideNavigationRailState = rememberWideNavigationRailState(),
     )
 //    appState.navController.navigateToMain(Main)
 
-    KmtScaffold(appState = appState) {
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(it),
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally,
-        ) {
-            Text(
-                modifier = Modifier.padding(16.dp),
-                text =
-                "Note: This demo is best shown in portrait mode, as landscape mode" +
-                    " may result in a compact height in certain devices. For any" +
-                    " compact screen dimensions, use a Navigation Bar instead.",
-            )
+    SharedTransitionContainer {
+        KmtScaffold(appState = appState) {
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(it),
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally,
+            ) {
+                Text(
+                    modifier = Modifier.padding(16.dp),
+                    text =
+                    "Note: This demo is best shown in portrait mode, as landscape mode" +
+                        " may result in a compact height in certain devices. For any" +
+                        " compact screen dimensions, use a Navigation Bar instead.",
+                )
+            }
         }
     }
 }
@@ -293,6 +332,8 @@ fun KmtScaffoldPreview() {
 fun DrawerContent(
     modifier: Modifier = Modifier,
     appState: KmtAppState,
+    isMain: Boolean,
+    topDestination: Set<TopLevelRoute<out Any>>,
 ) {
     Column(
         modifier = modifier.testTag(DrawerContentTestTags.DRAWER_CONTENT_COLUMN),
@@ -319,7 +360,7 @@ fun DrawerContent(
             }
             Spacer(modifier = Modifier.height(64.dp))
         }
-        AnimatedVisibility(appState !is Compact && appState.isMain) {
+        AnimatedVisibility(appState !is Compact && isMain) {
             val fabModifier = if (appState is Medium) {
                 Modifier.padding(start = 24.dp)
             } else {
@@ -332,7 +373,7 @@ fun DrawerContent(
 
             Spacer(modifier = Modifier.height(64.dp))
         }
-        TOP_LEVEL_ROUTES.forEach { item ->
+        topDestination.forEach { item ->
 
             if (appState is Medium) {
                 WideNavigationRailItem(

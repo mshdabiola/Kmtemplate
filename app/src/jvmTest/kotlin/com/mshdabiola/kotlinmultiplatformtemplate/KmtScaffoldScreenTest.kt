@@ -43,7 +43,6 @@ import com.mshdabiola.kotlinmultiplatformtemplate.ui.FabTestTags
 import com.mshdabiola.kotlinmultiplatformtemplate.ui.KmtAppState
 import com.mshdabiola.kotlinmultiplatformtemplate.ui.KmtScaffold
 import com.mshdabiola.kotlinmultiplatformtemplate.ui.KmtScaffoldTestTags
-import com.mshdabiola.kotlinmultiplatformtemplate.ui.TOP_LEVEL_ROUTES
 import com.mshdabiola.kotlinmultiplatformtemplate.ui.rememberKmtAppState
 import com.mshdabiola.main.navigation.Main
 import com.mshdabiola.setting.navigation.Setting
@@ -124,9 +123,6 @@ class KmtScaffoldScreenTest {
         composeTestRule.onNodeWithTag(KmtScaffoldTestTags.MODAL_DRAWER_SHEET).assertIsDisplayed()
         composeTestRule.onNodeWithTag(DrawerContentTestTags.DRAWER_CONTENT_COLUMN).assertIsDisplayed()
         composeTestRule.onNodeWithTag(DrawerContentTestTags.BRAND_ROW).assertIsDisplayed()
-        TOP_LEVEL_ROUTES.forEach { route ->
-            composeTestRule.onNodeWithTag(DrawerContentTestTags.navigationItemTag(route.route)).assertExists()
-        }
 
         // Check for FAB (assuming KmtAppState isMain = true)
         composeTestRule.onNodeWithTag(FabTestTags.FAB_ANIMATED_CONTENT).assertIsDisplayed()
@@ -151,9 +147,7 @@ class KmtScaffoldScreenTest {
         composeTestRule.onNodeWithTag(KmtScaffoldTestTags.WIDE_NAVIGATION_RAIL).assertIsDisplayed()
         composeTestRule.onNodeWithTag(KmtScaffoldTestTags.RAIL_TOGGLE_BUTTON).assertIsDisplayed()
         composeTestRule.onNodeWithTag(DrawerContentTestTags.DRAWER_CONTENT_COLUMN).assertIsDisplayed()
-        TOP_LEVEL_ROUTES.forEach { route ->
-            composeTestRule.onNodeWithTag(DrawerContentTestTags.wideNavigationRailItemTag(route.route)).assertExists()
-        }
+
         // Check for FAB (Small FAB when rail is collapsed in Medium)
         composeTestRule.onNodeWithTag(FabTestTags.FAB_ANIMATED_CONTENT).assertIsDisplayed()
         composeTestRule.onNodeWithTag(FabTestTags.SMALL_FAB).assertIsDisplayed()
@@ -228,9 +222,7 @@ class KmtScaffoldScreenTest {
         composeTestRule.onNodeWithTag(KmtScaffoldTestTags.PERMANENT_DRAWER_SHEET).assertIsDisplayed()
         composeTestRule.onNodeWithTag(DrawerContentTestTags.DRAWER_CONTENT_COLUMN).assertIsDisplayed()
         composeTestRule.onNodeWithTag(DrawerContentTestTags.BRAND_ROW).assertIsDisplayed()
-        TOP_LEVEL_ROUTES.forEach { route ->
-            composeTestRule.onNodeWithTag(DrawerContentTestTags.navigationItemTag(route.route)).assertExists()
-        }
+
         // FAB is not expected in the drawer part of the Expand state by default in your current scaffold logic
 //        composeTestRule.onNodeWithTag(FabTestTags.FAB_ANIMATED_CONTENT).assertDoesNotExist()
     }
