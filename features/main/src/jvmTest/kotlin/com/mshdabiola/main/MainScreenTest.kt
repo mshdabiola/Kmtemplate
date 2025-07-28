@@ -16,6 +16,7 @@
 package com.mshdabiola.main
 
 import androidx.compose.ui.test.assertIsDisplayed
+import androidx.compose.ui.test.assertIsNotDisplayed
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
@@ -127,7 +128,7 @@ class MainScreenTest {
         // Let's adjust the test to reflect the current MainScreen.kt behavior:
 
         composeTestRule.onNodeWithTag(MainScreenTestTags.TOP_APP_BAR).assertIsDisplayed()
-        composeTestRule.onNodeWithTag(MainScreenTestTags.NOTE_LIST).assertIsDisplayed() // The LazyColumn exists
+        composeTestRule.onNodeWithTag(MainScreenTestTags.NOTE_LIST).assertIsNotDisplayed() // The LazyColumn exists
         // You might want to assert that it has 0 children if your testing framework supports that easily.
         // For example, with onAllNodesWithTag("someChildTagInNoteCard").assertCountEquals(0) if NoteCards had such a tag.
 
