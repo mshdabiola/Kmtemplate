@@ -85,8 +85,6 @@ fun AboutScreen(
     openUrl: (String) -> Unit = {},
     openEmail: (String, String, String) -> Unit = { _, _, _ -> },
 ) {
-
-
     Column(
         modifier = modifier
             .fillMaxSize()

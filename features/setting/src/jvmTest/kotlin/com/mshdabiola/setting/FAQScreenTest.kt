@@ -16,7 +16,6 @@
 package com.mshdabiola.setting
 
 import androidx.compose.ui.test.assertIsDisplayed
-import androidx.compose.ui.test.assertIsNotDisplayed
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onAllNodesWithContentDescription
 import androidx.compose.ui.test.onFirst
@@ -24,7 +23,6 @@ import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
-import androidx.compose.ui.test.printToLog
 import com.mshdabiola.designsystem.theme.KmtTheme
 import com.mshdabiola.setting.detailscreen.FaqItem // Assuming FaqItem is accessible
 import com.mshdabiola.setting.detailscreen.FaqListItemTestTags
@@ -122,7 +120,10 @@ class FAQScreenTest {
         // If you *really* need to test the empty state with the current FaqScreen,
         // it would require significant mocking or a different test setup not typical for composable unit tests.
         // It's better to make the composable testable by allowing data to be passed in.
-        println("SKIPPING: faqScreen_whenFaqsAreEmpty_displaysEmptyState - FaqScreen needs refactoring to accept an empty list for this test.")
+        println(
+            "SKIPPING: faqScreen_whenFaqsAreEmpty_displaysEmptyState - " +
+                "FaqScreen needs refactoring to accept an empty list for this test.",
+        )
     }
 
     @Test
@@ -136,17 +137,29 @@ class FAQScreenTest {
         val firstFaq = sampleFaqs[0]
 
         // Question should be visible
-        composeTestRule.onNodeWithTag("${FaqListItemTestTags.QUESTION_TEXT_PREFIX}${firstFaq.id}",useUnmergedTree = true)
+        composeTestRule.onNodeWithTag(
+            "${FaqListItemTestTags.QUESTION_TEXT_PREFIX}${firstFaq.id}",
+            useUnmergedTree = true,
+        )
             .assertIsDisplayed()
 
         // Answer should initially NOT be visible
-        composeTestRule.onNodeWithTag("${FaqListItemTestTags.ANSWER_TEXT_PREFIX}${firstFaq.id}",useUnmergedTree = true)
+        composeTestRule.onNodeWithTag(
+            "${FaqListItemTestTags.ANSWER_TEXT_PREFIX}${firstFaq.id}",
+            useUnmergedTree = true,
+        )
             .assertDoesNotExist() // AnimatedVisibility makes it not exist if not visible
 
         // Expand icon should be displayed
-        composeTestRule.onNodeWithTag("${FaqListItemTestTags.EXPAND_ICON_PREFIX}${firstFaq.id}",useUnmergedTree = true)
+        composeTestRule.onNodeWithTag(
+            "${FaqListItemTestTags.EXPAND_ICON_PREFIX}${firstFaq.id}",
+            useUnmergedTree = true,
+        )
             .assertIsDisplayed()
-        composeTestRule.onAllNodesWithContentDescription("Expand", useUnmergedTree = true).onFirst().assertIsDisplayed() // Check by content description
+        composeTestRule.onAllNodesWithContentDescription(
+            "Expand",
+            useUnmergedTree = true,
+        ).onFirst().assertIsDisplayed() // Check by content description
     }
 
     @Test
@@ -158,23 +171,33 @@ class FAQScreenTest {
         }
 
         val firstFaq = sampleFaqs[0]
-        val listItemNode = composeTestRule.onNodeWithTag("${FaqListItemTestTags.LIST_ITEM_ROOT_PREFIX}${firstFaq.id}",useUnmergedTree = true)
+        val listItemNode = composeTestRule.onNodeWithTag(
+            "${FaqListItemTestTags.LIST_ITEM_ROOT_PREFIX}${firstFaq.id}",
+            useUnmergedTree = true,
+        )
 
         // Initially answer is not visible, icon is "Expand"
         composeTestRule.onNodeWithTag(
-            "${FaqListItemTestTags.ANSWER_TEXT_PREFIX}${firstFaq.id}",useUnmergedTree = true)
+            "${FaqListItemTestTags.ANSWER_TEXT_PREFIX}${firstFaq.id}",
+            useUnmergedTree = true,
+        )
             .assertDoesNotExist()
         composeTestRule.onNodeWithTag(
-            "${FaqListItemTestTags.EXPAND_ICON_PREFIX}${firstFaq.id}",useUnmergedTree = true)
+            "${FaqListItemTestTags.EXPAND_ICON_PREFIX}${firstFaq.id}",
+            useUnmergedTree = true,
+        )
             .assertIsDisplayed()
         composeTestRule.onAllNodesWithContentDescription("Expand").onFirst().assertIsDisplayed()
-
 
         // Click the item to expand
         listItemNode.performClick()
 
         // Answer should now be visible
-        composeTestRule.onNodeWithTag("${FaqListItemTestTags.ANSWER_TEXT_PREFIX}${firstFaq.id}",useUnmergedTree = true).assertIsDisplayed()
+        composeTestRule.onNodeWithTag(
+            "${FaqListItemTestTags.ANSWER_TEXT_PREFIX}${firstFaq.id}",
+            useUnmergedTree = true,
+        )
+            .assertIsDisplayed()
         // Icon should now be "Collapse"
         composeTestRule.onNodeWithContentDescription("Collapse").assertIsDisplayed()
     }
@@ -188,11 +211,18 @@ class FAQScreenTest {
         }
 
         val firstFaq = sampleFaqs[0]
-        val listItemNode = composeTestRule.onNodeWithTag("${FaqListItemTestTags.LIST_ITEM_ROOT_PREFIX}${firstFaq.id}",useUnmergedTree = true)
+        val listItemNode = composeTestRule.onNodeWithTag(
+            "${FaqListItemTestTags.LIST_ITEM_ROOT_PREFIX}${firstFaq.id}",
+            useUnmergedTree = true,
+        )
 
         // Click once to expand
         listItemNode.performClick()
-        composeTestRule.onNodeWithTag("${FaqListItemTestTags.ANSWER_TEXT_PREFIX}${firstFaq.id}",useUnmergedTree = true).assertIsDisplayed()
+        composeTestRule.onNodeWithTag(
+            "${FaqListItemTestTags.ANSWER_TEXT_PREFIX}${firstFaq.id}",
+            useUnmergedTree = true,
+        )
+            .assertIsDisplayed()
         composeTestRule.onNodeWithContentDescription("Collapse").assertIsDisplayed()
 
         // Click again to collapse
@@ -200,7 +230,9 @@ class FAQScreenTest {
 
         // Answer should be hidden again
         composeTestRule.onNodeWithTag(
-            "${FaqListItemTestTags.ANSWER_TEXT_PREFIX}${firstFaq.id}",useUnmergedTree = true)
+            "${FaqListItemTestTags.ANSWER_TEXT_PREFIX}${firstFaq.id}",
+            useUnmergedTree = true,
+        )
             .assertDoesNotExist()
         // Icon should be "Expand" again
         composeTestRule.onAllNodesWithContentDescription("Expand").onFirst().assertIsDisplayed()
@@ -216,7 +248,7 @@ class FAQScreenTest {
             "How does this template help with KMP development?",
             "Can I share UI code with KMP?",
             "What are the benefits of using KMP?",
-            "Where can I find the shared code in this template?"
+            "Where can I find the shared code in this template?",
         )
 
         composeTestRule.setContent {
@@ -239,7 +271,10 @@ class FAQScreenTest {
                 .assertIsDisplayed()
 
             // Check that the answer is initially not displayed (it might not exist in the tree yet)
-            composeTestRule.onNodeWithTag("${FaqListItemTestTags.ANSWER_TEXT_PREFIX}$faqId",useUnmergedTree = true)
+            composeTestRule.onNodeWithTag(
+                "${FaqListItemTestTags.ANSWER_TEXT_PREFIX}$faqId",
+                useUnmergedTree = true,
+            )
                 .assertDoesNotExist() // Or assertDoesNotExist() if not in composition
         }
     }

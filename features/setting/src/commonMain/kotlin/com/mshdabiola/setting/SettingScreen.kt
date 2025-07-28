@@ -48,7 +48,6 @@ fun SettingScreen(
         .entries
         .groupBy { it.segment }
 
-
     ListDetailPaneScaffold(
         modifier = modifier.testTag(SettingScreenTestTags.SCREEN_ROOT), // Apply the tag here
         directive = navigator.scaffoldDirective,

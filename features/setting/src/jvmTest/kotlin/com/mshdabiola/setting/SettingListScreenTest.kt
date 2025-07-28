@@ -43,10 +43,10 @@ class SettingListScreenTest {
 
     // Expected titles from resources - adjust these if your string resources produce different text
     // In a full KMP test setup, you'd aim for stringResource() to work directly.
-    private lateinit var expectedScreenTitle : String
-    private lateinit var  expectedSegmentTitles : List<String>
-    private lateinit var expectedGeneralItemTitles : List<String>
-    private lateinit var expectedSupportItemTitles  : List<String>
+    private lateinit var expectedScreenTitle: String
+    private lateinit var expectedSegmentTitles: List<String>
+    private lateinit var expectedGeneralItemTitles: List<String>
+    private lateinit var expectedSupportItemTitles: List<String>
 
     @Test
     fun settingListScreen_topBar_displaysCorrectly_withDrawer() {
@@ -126,34 +126,57 @@ class SettingListScreenTest {
         composeRule.onNodeWithTag("${SettingScreenListTestTags.LIST_ITEM_CARD_PREFIX}${appearanceNav.name}")
             .assertIsDisplayed()
         composeRule.onNodeWithTag(
-            "${SettingScreenListTestTags.LIST_ITEM_ICON_PREFIX}${appearanceNav.name}",useUnmergedTree = true)
+            "${SettingScreenListTestTags.LIST_ITEM_ICON_PREFIX}${appearanceNav.name}",
+            useUnmergedTree = true,
+        )
             .assertIsDisplayed()
         composeRule.onNodeWithTag(
             "${SettingScreenListTestTags.LIST_ITEM_TITLE_TEXT_PREFIX}${appearanceNav.name}",
-            useUnmergedTree = true)
+            useUnmergedTree = true,
+        )
             .assertIsDisplayed()
         composeRule.onNodeWithText(expectedGeneralItemTitles[0]).assertIsDisplayed() // "Appearance"
 
         // Verify Section 1: Support
-        composeRule.onNodeWithTag("${SettingScreenListTestTags.SECTION_HEADER_TEXT_PREFIX}1",useUnmergedTree = true)
+        composeRule.onNodeWithTag(
+            "${SettingScreenListTestTags.SECTION_HEADER_TEXT_PREFIX}1",
+            useUnmergedTree = true,
+        )
             .assertIsDisplayed()
-        composeRule.onNodeWithText(expectedSegmentTitles[1],useUnmergedTree = true).assertIsDisplayed() // "Support & Feedback"
+        composeRule.onNodeWithText(expectedSegmentTitles[1], useUnmergedTree = true).assertIsDisplayed()
+        // "Support & Feedback"
 
         // Verify items in Support section
         val issueNav = SettingNav.Issue
-        composeRule.onNodeWithTag("${SettingScreenListTestTags.LIST_ITEM_CARD_PREFIX}${issueNav.name}",useUnmergedTree = true)
+        composeRule.onNodeWithTag(
+            "${SettingScreenListTestTags.LIST_ITEM_CARD_PREFIX}${issueNav.name}",
+            useUnmergedTree = true,
+        )
             .assertIsDisplayed()
-        composeRule.onNodeWithText(expectedSupportItemTitles[0],useUnmergedTree = true).assertIsDisplayed() // "Report an Issue"
+        composeRule.onNodeWithText(
+            expectedSupportItemTitles[0],
+            useUnmergedTree = true,
+        ).assertIsDisplayed() // "Report an Issue"
 
         val faqNav = SettingNav.Faq
-        composeRule.onNodeWithTag("${SettingScreenListTestTags.LIST_ITEM_CARD_PREFIX}${faqNav.name}",useUnmergedTree = true)
+        composeRule.onNodeWithTag(
+            "${SettingScreenListTestTags.LIST_ITEM_CARD_PREFIX}${faqNav.name}",
+            useUnmergedTree = true,
+        )
             .assertIsDisplayed()
-        composeRule.onNodeWithText(expectedSupportItemTitles[1],useUnmergedTree = true).assertIsDisplayed() // "FAQ"
+        composeRule.onNodeWithText(
+            expectedSupportItemTitles[1],
+            useUnmergedTree = true,
+        ).assertIsDisplayed() // "FAQ"
 
         val aboutNav = SettingNav.About
-        composeRule.onNodeWithTag("${SettingScreenListTestTags.LIST_ITEM_CARD_PREFIX}${aboutNav.name}",useUnmergedTree = true)
+        composeRule.onNodeWithTag(
+            "${SettingScreenListTestTags.LIST_ITEM_CARD_PREFIX}${aboutNav.name}",
+            useUnmergedTree = true,
+        )
             .assertIsDisplayed()
-        composeRule.onNodeWithText(expectedSupportItemTitles[2],useUnmergedTree = true).assertIsDisplayed() // "About"
+        composeRule.onNodeWithText(expectedSupportItemTitles[2], useUnmergedTree = true).assertIsDisplayed()
+        // "About"
     }
 
     @Test

@@ -20,7 +20,6 @@ import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onAllNodesWithText
 import androidx.compose.ui.test.onFirst
 import androidx.compose.ui.test.onNodeWithTag
-import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import com.mshdabiola.designsystem.theme.KmtTheme
 import com.mshdabiola.model.DarkThemeConfig
@@ -64,7 +63,6 @@ class SettingScreenTest {
         // Verify SettingListScreen is present (list pane)
         composeRule.onNodeWithTag(SettingScreenListTestTags.SCREEN_ROOT).assertIsDisplayed()
         composeRule.onNodeWithTag(SettingScreenListTestTags.SETTINGS_LAZY_COLUMN).assertIsDisplayed()
-
     }
 
     @Test
@@ -96,7 +94,6 @@ class SettingScreenTest {
         // Check title in detail screen. Using onAllNodesWithText and onFirst()
         // in case the title appears elsewhere (e.g., list item still in composition for dual pane)
         composeRule.onAllNodesWithText(expectedAppearanceTitle).onFirst().assertIsDisplayed()
-
 
         // 3. Verify callbacks are passed and work (optional, but good for integration)
         val targetContrastOptionId = 1 // Example, ensure this ID exists in your ContrastTimeline
@@ -140,7 +137,6 @@ class SettingScreenTest {
         // Verify we are back to the List Pane
         composeRule.onNodeWithTag(SettingScreenListTestTags.SCREEN_ROOT).assertIsDisplayed()
         composeRule.onNodeWithTag(SettingScreenListTestTags.SETTINGS_LAZY_COLUMN).assertIsDisplayed()
-
     }
 
     @Test
@@ -177,7 +173,6 @@ class SettingScreenTest {
         composeRule.onNodeWithTag(SettingScreenListTestTags.MENU_ICON_BUTTON).assertDoesNotExist()
     }
 
-
     @Test
     fun settingScreen_clickReportIssue_doesNotNavigateToDetailAndAttemptsOpenUri() {
         // As noted, verifying openUri directly is hard in pure JVM tests without mocking.
@@ -198,7 +193,6 @@ class SettingScreenTest {
         composeRule.onNodeWithTag(issueItemTag).performClick()
 
         // composeRule.mainClock.advanceTimeUntilIdle() // Good practice if any async ops were triggered
-
 
         // List pane should still be the one primarily visible
         composeRule.onNodeWithTag(SettingScreenListTestTags.SCREEN_ROOT).assertIsDisplayed()

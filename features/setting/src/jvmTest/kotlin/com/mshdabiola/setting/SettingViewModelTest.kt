@@ -82,9 +82,8 @@ class SettingViewModelTest {
             // Let's assume FakeUserDataRepository.userData immediately provides the set data
             // or the default SettingState() is acceptable as the first item before real data
             val firstItem = awaitItem()
-             // This means the mapped initialUserData was emitted directly
-                assertEquals(expectedInitialState, firstItem)
-
+            // This means the mapped initialUserData was emitted directly
+            assertEquals(expectedInitialState, firstItem)
 
             cancelAndConsumeRemainingEvents()
         }
@@ -136,7 +135,6 @@ class SettingViewModelTest {
         viewModel.settingState.test {
             // Consume the current state before the update
             awaitItem()
-
 
             viewModel.setDarkThemeConfig(newDarkThemeConfig)
 
