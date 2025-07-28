@@ -16,37 +16,35 @@
 package com.mshdabiola.kotlinmultiplatformtemplate
 
 import android.app.Application
+import co.touchlab.kermit.DefaultFormatter
 import co.touchlab.kermit.Logger
+import co.touchlab.kermit.Severity
 import co.touchlab.kermit.koin.KermitKoinLogger
+import co.touchlab.kermit.koin.kermitLoggerModule
 import co.touchlab.kermit.loggerConfigInit
 import co.touchlab.kermit.platformLogWriter
 import com.mshdabiola.kotlinmultiplatformtemplate.di.appModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
-import org.koin.dsl.module
 
-class KotlinMultiplatformTemplateApplication : Application() {
+class KmtApplication : Application() {
     override fun onCreate() {
         super.onCreate()
 
         val logger =
             Logger(
-                loggerConfigInit(platformLogWriter()),
-                "AndroidLogger",
+                loggerConfigInit(
+                    minSeverity = Severity.Error,
+                    logWriters = arrayOf(platformLogWriter(DefaultFormatter)),
+                ),
             )
-        val logModule =
-            module {
-                single {
-                    logger
-                }
-            }
 
         startKoin {
             logger(
                 KermitKoinLogger(Logger.withTag("koin")),
             )
-            androidContext(this@KotlinMultiplatformTemplateApplication)
-            modules(appModule, logModule)
+            androidContext(this@KmtApplication)
+            modules(appModule, kermitLoggerModule(logger))
         }
 
 //        if (packageName.contains("debug")) {
