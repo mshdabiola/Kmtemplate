@@ -16,11 +16,13 @@
 package com.mshdabiola.kotlinmultiplatformtemplate
 
 import app.cash.turbine.test
+import co.touchlab.kermit.Logger
 import com.mshdabiola.kotlinmultiplatformtemplate.MainActivityUiState.Loading
 import com.mshdabiola.kotlinmultiplatformtemplate.MainActivityUiState.Success
 import com.mshdabiola.model.DarkThemeConfig
 import com.mshdabiola.model.UserData
 import com.mshdabiola.testing.fake.repository.FakeUserDataRepository // Import the shared fake
+import com.mshdabiola.testing.util.testLogger
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.StandardTestDispatcher
@@ -42,12 +44,14 @@ class MainAppViewModelTest {
     // Use the FakeUserDataRepository from the :testing module
     private lateinit var userDataRepository: FakeUserDataRepository
     private lateinit var viewModel: MainAppViewModel
+    private lateinit var logger: Logger
 
     @Before
     fun setUp() {
         Dispatchers.setMain(testDispatcher)
         userDataRepository = FakeUserDataRepository() // Initialize the shared fake
-        viewModel = MainAppViewModel(userDataRepository = userDataRepository)
+        logger = testLogger
+        viewModel = MainAppViewModel(userDataRepository = userDataRepository, logger)
     }
 
     @After

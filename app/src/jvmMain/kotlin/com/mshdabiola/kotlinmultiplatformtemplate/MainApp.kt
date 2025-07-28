@@ -29,8 +29,11 @@ import androidx.compose.ui.window.WindowPlacement
 import androidx.compose.ui.window.WindowPosition
 import androidx.compose.ui.window.application
 import androidx.compose.ui.window.rememberWindowState
+import co.touchlab.kermit.DefaultFormatter
 import co.touchlab.kermit.Logger
+import co.touchlab.kermit.Severity
 import co.touchlab.kermit.koin.KermitKoinLogger
+import co.touchlab.kermit.koin.kermitLoggerModule
 import co.touchlab.kermit.loggerConfigInit
 import co.touchlab.kermit.platformLogWriter
 import com.mshdabiola.designsystem.drawable.KmtDrawable
@@ -38,10 +41,9 @@ import com.mshdabiola.designsystem.strings.KmtStrings
 import com.mshdabiola.kotlinmultiplatformtemplate.di.appModule
 import com.mshdabiola.kotlinmultiplatformtemplate.ui.KmtApp
 import com.mshdabiola.kotlinmultiplatformtemplate.ui.SplashScreen
+import com.mshdabiola.model.CustomLogWriter
 import kotlinx.coroutines.delay
 import org.koin.core.context.GlobalContext.startKoin
-import org.koin.dsl.module
-import java.io.File
 
 fun mainApp() {
     application {
@@ -75,29 +77,22 @@ fun mainApp() {
 }
 
 fun main() {
-    val path = File("${System.getProperty("user.home")}/AppData/Local/kotlinmultiplatformtemplate")
-    if (path.exists().not()) {
-        path.mkdirs()
-    }
     val logger =
         Logger(
-            loggerConfigInit(platformLogWriter(), Writer(path)),
-            "DesktopLogger,",
+            loggerConfigInit(
+                minSeverity = Severity.Verbose,
+                logWriters = arrayOf(platformLogWriter(DefaultFormatter), CustomLogWriter()),
+            ),
         )
-    val logModule =
-        module {
-            single {
-                logger
-            }
-        }
 
     startKoin {
         logger(
             KermitKoinLogger(Logger.withTag("koin")),
         )
+
         modules(
             appModule,
-            logModule,
+            kermitLoggerModule(logger),
         )
     }
 

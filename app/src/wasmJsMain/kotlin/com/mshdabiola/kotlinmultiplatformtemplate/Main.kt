@@ -23,25 +23,22 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.window.ComposeViewport
+import co.touchlab.kermit.DefaultFormatter
 import co.touchlab.kermit.Logger
+import co.touchlab.kermit.Severity
 import co.touchlab.kermit.loggerConfigInit
 import co.touchlab.kermit.platformLogWriter
-import com.mshdabiola.kotlinmultiplatformtemplate.app.generated.resources.Res
-import com.mshdabiola.kotlinmultiplatformtemplate.app.generated.resources.app_name
 import com.mshdabiola.kotlinmultiplatformtemplate.di.appModule
 import com.mshdabiola.kotlinmultiplatformtemplate.ui.KmtApp
 import com.mshdabiola.kotlinmultiplatformtemplate.ui.SplashScreen
 import kotlinx.browser.document
 import kotlinx.coroutines.delay
-import org.jetbrains.compose.resources.stringResource
 import org.koin.core.context.GlobalContext.startKoin
 import org.koin.dsl.module
 
 @OptIn(ExperimentalComposeUiApi::class)
 fun mainApp() {
     ComposeViewport(document.body!!) {
-        val version = "1.2.2"
-
         val show = remember { mutableStateOf(true) }
         LaunchedEffect(Unit) {
             delay(2000)
@@ -50,9 +47,7 @@ fun mainApp() {
         Box(Modifier.fillMaxSize()) {
             KmtApp()
             if (show.value) {
-                SplashScreen(
-                    appName = stringResource(Res.string.app_name),
-                )
+                SplashScreen()
             }
         }
     }
@@ -62,9 +57,12 @@ fun mainApp() {
 fun main() {
     val logger =
         Logger(
-            loggerConfigInit(platformLogWriter(), Writer()),
-            "DesktopLogger,",
+            loggerConfigInit(
+                minSeverity = Severity.Error,
+                logWriters = arrayOf(platformLogWriter(DefaultFormatter)),
+            ),
         )
+
     val logModule =
         module {
             single {
@@ -73,9 +71,6 @@ fun main() {
         }
     try {
         startKoin {
-//            logger(
-//                KermitKoinLogger(Logger.withTag("koin")),
-//            )
             modules(
                 appModule,
                 logModule,
