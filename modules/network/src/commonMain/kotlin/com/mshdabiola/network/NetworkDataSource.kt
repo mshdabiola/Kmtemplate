@@ -17,14 +17,19 @@ package com.mshdabiola.network
 
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
+import io.ktor.client.plugins.ClientRequestException
 import io.ktor.client.request.get
-import io.ktor.http.plus
+import io.ktor.client.statement.HttpResponse
+import io.ktor.http.isSuccess
 
 internal class NetworkDataSource(
-    private val client: HttpClient,
+    private val httpClient: HttpClient,
 ) : INetworkDataSource {
     override suspend fun goToGoogle(): String {
-        return client.get("http://google.com")
-            .body<String>()
+        val response: HttpResponse = httpClient.get("http://google.com")
+        if (!response.status.isSuccess()) {
+            throw ClientRequestException(response, "HTTP Error: ${response.status.value}")
+        }
+        return response.body()
     }
 }

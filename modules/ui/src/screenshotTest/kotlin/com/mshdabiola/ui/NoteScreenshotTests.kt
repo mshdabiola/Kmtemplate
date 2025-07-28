@@ -19,7 +19,6 @@ import androidx.compose.animation.ExperimentalSharedTransitionApi
 import androidx.compose.runtime.Composable
 import com.mshdabiola.designsystem.DevicePreviews
 import com.mshdabiola.model.Note
-import com.mshdabiola.ui.SharedContentPreview
 
 class NoteScreenshotTests {
 
