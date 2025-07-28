@@ -19,8 +19,8 @@ import androidx.compose.foundation.text.input.TextFieldState
 import com.mshdabiola.model.Note
 
 data class DetailState(
-    val note: Note=Note(),
+    val note: Note = Note(),
     val title: TextFieldState = TextFieldState(),
     val detail: TextFieldState = TextFieldState(),
 
-    )
+)

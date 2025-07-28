@@ -86,8 +86,6 @@ class DetailViewModelTest {
             // Wait for the state to reflect the loaded note
             val loadedState = awaitItem() // Initial state
             val finalState = awaitItem()
-
-
         }
     }
 
@@ -139,8 +137,6 @@ class DetailViewModelTest {
 
         viewModel = DetailViewModel(initId = 1L, noteRepository = noteRepository)
         viewModel.detailState.first() // Wait for initial load
-
-
 
         viewModel.detailState.test {
             skipItems(1)

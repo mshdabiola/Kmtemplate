@@ -16,16 +16,12 @@
 package com.mshdabiola.detail
 
 import androidx.compose.animation.ExperimentalSharedTransitionApi
-import androidx.compose.foundation.text.input.TextFieldState
 import androidx.compose.foundation.text.input.rememberTextFieldState
 import androidx.compose.ui.test.assertIsDisplayed
-import androidx.compose.ui.test.assertTextEquals
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
-import androidx.compose.ui.test.onRoot
 import androidx.compose.ui.test.performClick
-import androidx.compose.ui.test.printToLog
 import com.mshdabiola.model.Note
 import com.mshdabiola.ui.SharedTransitionContainer
 import org.junit.Rule
@@ -87,7 +83,7 @@ class DetailScreenTest {
             SharedTransitionContainer {
                 // Use empty TextFieldStates for simplicity as their content isn't the focus here
                 val mockDetailState = DetailState(
-                    note = Note(id =1),
+                    note = Note(id = 1),
                     title = rememberTextFieldState(),
                     detail = rememberTextFieldState(),
                 )
@@ -115,7 +111,7 @@ class DetailScreenTest {
         composeRule.setContent {
             SharedTransitionContainer {
                 val mockDetailState = DetailState(
-                    note = Note(id =1),
+                    note = Note(id = 1),
                     title = rememberTextFieldState(),
                     detail = rememberTextFieldState(),
                 )
@@ -148,7 +144,7 @@ class DetailScreenTest {
                 val emptyTitleState = rememberTextFieldState("") // Empty initial value
                 val emptyContentState = rememberTextFieldState("") // Empty initial value
                 val mockDetailState = DetailState(
-                    note = Note(id =1),
+                    note = Note(id = 1),
                     title = emptyTitleState,
                     detail = emptyContentState,
                 )
