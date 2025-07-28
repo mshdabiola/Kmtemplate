@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.mshdabiola.kotlinmultiplatformtemplate
+package com.mshdabiola.model
 
 import co.touchlab.kermit.DefaultFormatter
 import co.touchlab.kermit.LogWriter
@@ -28,7 +28,8 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
-class Writer(private val path: File) : LogWriter() {
+class CustomLogWriter() : LogWriter() {
+    private val path = File(generalPath)
     private val filePath: File by lazy {
         val formatter = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
         val date = formatter.format(Date())

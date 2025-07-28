@@ -13,22 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.mshdabiola.kotlinmultiplatformtemplate
+package com.mshdabiola.model
 
-import co.touchlab.kermit.DefaultFormatter
-import co.touchlab.kermit.LogWriter
-import co.touchlab.kermit.Message
-import co.touchlab.kermit.Severity
-import co.touchlab.kermit.Tag
+import co.touchlab.kermit.Logger
+import org.koin.core.scope.Scope
 
-class Writer() : LogWriter() {
-    override fun log(
-        severity: Severity,
-        message: String,
-        tag: String,
-        throwable: Throwable?,
-    ) {
-        val messageStr = DefaultFormatter.formatMessage(severity, Tag(tag), Message(message))
-        println(messageStr)
-    }
-}
+expect inline fun <reified L : Logger> Scope.getLoggerWithTag(tag: String): L
