@@ -54,7 +54,6 @@ fun mainApp() {
                 position = WindowPosition.Aligned(Alignment.Center),
             )
 
-        val version = "1.2.9"
         Window(
             onCloseRequest = ::exitApplication,
             title = "${KmtStrings.brand} v${KmtStrings.version}",
