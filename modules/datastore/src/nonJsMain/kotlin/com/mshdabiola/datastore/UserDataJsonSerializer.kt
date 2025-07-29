@@ -27,8 +27,6 @@ import okio.BufferedSource
 import okio.FileSystem
 import okio.Path.Companion.toPath
 
-internal const val PREFERENCES_DATA_STORE_FILE_NAME = "meetings.preferences_pb"
-
 fun createDataStoreUserData(producePath: () -> String): DataStore<UserData> =
     DataStoreFactory.create(
         storage =
@@ -58,11 +56,11 @@ object UserDataJsonSerializer : OkioSerializer<UserData> {
     }
 
     override suspend fun writeTo(
-        t: UserData,
+        userData: UserData,
         sink: BufferedSink,
     ) {
         sink.use {
-            it.writeUtf8(json.encodeToString(UserData.serializer(), t))
+            it.writeUtf8(json.encodeToString(UserData.serializer(), userData))
         }
     }
 }
