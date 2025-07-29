@@ -34,6 +34,7 @@ import com.mshdabiola.designsystem.component.KmtIconButton
 import com.mshdabiola.designsystem.component.KmtTextField
 import com.mshdabiola.designsystem.component.KmtTopAppBar
 import com.mshdabiola.designsystem.drawable.KmtIcons
+import com.mshdabiola.detail.navigation.Detail
 import com.mshdabiola.ui.LocalNavAnimatedContentScope
 import com.mshdabiola.ui.LocalSharedTransitionScope
 
@@ -52,6 +53,7 @@ internal object DetailScreenTestTags {
 internal fun DetailScreen(
     modifier: Modifier = Modifier,
     state: DetailState,
+    detail: Detail = Detail(id = -1L),
     onBack: () -> Unit = {},
     onDelete: () -> Unit = {},
 ) {
@@ -61,7 +63,7 @@ internal fun DetailScreen(
         Scaffold(
             modifier = modifier
                 .sharedBounds(
-                    sharedContentState = rememberSharedContentState("note_${state.note.id}"),
+                    sharedContentState = rememberSharedContentState("note_${detail.id}"),
                     animatedVisibilityScope = animatedContentScope,
                 )
                 .testTag(DetailScreenTestTags.SCREEN_ROOT), // Apply testTag to the root

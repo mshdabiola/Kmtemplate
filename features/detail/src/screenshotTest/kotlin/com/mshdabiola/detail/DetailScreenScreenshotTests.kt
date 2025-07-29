@@ -35,7 +35,7 @@ class DetailScreenScreenshotTests {
     @Composable
     fun DetailScreen_WithContent_LightMode() {
         val detailStateWithContent = DetailState(
-            id = 1L,
+            note = Note(id = 1L),
             title = TextFieldState("Sample Note Title"),
             detail = TextFieldState("This is the detailed content of the sample note."),
         )

@@ -19,6 +19,7 @@ import app.cash.turbine.test
 import com.mshdabiola.model.Note
 import com.mshdabiola.testing.fake.repository.FakeNoteRepository
 import com.mshdabiola.testing.util.MainDispatcherRule
+import com.mshdabiola.testing.util.testLogger
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.first
@@ -45,6 +46,8 @@ class DetailViewModelTest {
 
     private lateinit var viewModel: DetailViewModel
 
+    private val logger = testLogger
+
     @Before
     fun setUp() {
         noteRepository = FakeNoteRepository()
@@ -52,7 +55,7 @@ class DetailViewModelTest {
 
     @Test
     fun `init with new note id (-1) creates a new note and updates id`() = runTest {
-        viewModel = DetailViewModel(initId = -1L, noteRepository = noteRepository)
+        viewModel = DetailViewModel(initId = -1L, noteRepository = noteRepository, testLogger)
 
         viewModel.detailState.test {
             var emittedItem = awaitItem() // Initial state
@@ -61,15 +64,15 @@ class DetailViewModelTest {
             // and then update its internal idFlow, which triggers a new emission.
             emittedItem = awaitItem()
 
-            assertNotNull(emittedItem.note.id, "ID should be updated after new note creation")
-            assertTrue(emittedItem.note.id != -1L, "ID should be a new valid ID")
+            assertNotNull(emittedItem.id, "ID should be updated after new note creation")
+            assertTrue(emittedItem.id != -1L, "ID should be a new valid ID")
             assertEquals("", emittedItem.title.text.toString())
             assertEquals("", emittedItem.detail.text.toString())
 
             // Verify the note was actually saved in the repository
-            val savedNote = noteRepository.getOne(emittedItem.note.id).first()
+            val savedNote = noteRepository.getOne(emittedItem.id).first()
             assertNotNull(savedNote)
-            assertEquals(emittedItem.note.id, savedNote.id)
+            assertEquals(emittedItem.id, savedNote.id)
 
             cancelAndIgnoreRemainingEvents()
         }
@@ -80,7 +83,7 @@ class DetailViewModelTest {
         val existingNote = Note(id = 1L, title = "Existing Title", content = "Existing Content")
         noteRepository.setNotes(listOf(existingNote)) // Pre-populate the fake repo
 
-        viewModel = DetailViewModel(initId = 1L, noteRepository = noteRepository)
+        viewModel = DetailViewModel(initId = 1L, noteRepository = noteRepository, testLogger)
 
         viewModel.detailState.test {
             // Wait for the state to reflect the loaded note
@@ -94,7 +97,7 @@ class DetailViewModelTest {
         val initialNote = Note(id = 1L, title = "Initial", content = "Content")
         noteRepository.setNotes(listOf(initialNote))
 
-        viewModel = DetailViewModel(initId = 1L, noteRepository = noteRepository)
+        viewModel = DetailViewModel(initId = 1L, noteRepository = noteRepository, testLogger)
 
         // Wait for initial load
         viewModel.detailState.first()
@@ -135,12 +138,12 @@ class DetailViewModelTest {
         val initialNote = Note(id = 1L, title = "Title", content = "Initial")
         noteRepository.setNotes(listOf(initialNote))
 
-        viewModel = DetailViewModel(initId = 1L, noteRepository = noteRepository)
-        viewModel.detailState.first() // Wait for initial load
+        viewModel = DetailViewModel(initId = 1L, noteRepository = noteRepository, testLogger)
 
         viewModel.detailState.test {
             skipItems(1)
             val currentState = awaitItem()
+            logger.i { "Current State: $currentState" }
             assertEquals("Initial", currentState.detail.text.toString())
 
             val updatedNoteInRepo = noteRepository.getOne(1L).firstOrNull()
@@ -149,12 +152,12 @@ class DetailViewModelTest {
             assertEquals("Initial", updatedNoteInRepo.content)
             cancelAndIgnoreRemainingEvents()
         }
+
         viewModel.initDetailState.detail.edit { append(" Updated") }
-        advanceUntilIdle()
-        delay(350) // Wait for debounce
 
         viewModel.detailState.test {
             val currentState = awaitItem()
+            logger.i { "Current State: $currentState" }
             assertEquals("Initial Updated", currentState.detail.text.toString())
 
             val updatedNoteInRepo = noteRepository.getOne(1L).firstOrNull()
@@ -170,7 +173,7 @@ class DetailViewModelTest {
         val noteToDelete = Note(id = 1L, title = "To Delete", content = "Content")
         noteRepository.setNotes(listOf(noteToDelete))
 
-        viewModel = DetailViewModel(initId = 1L, noteRepository = noteRepository)
+        viewModel = DetailViewModel(initId = 1L, noteRepository = noteRepository, testLogger)
         viewModel.detailState.first() // Ensure VM is initialized and note is loaded
 
         assertNotNull(noteRepository.getOne(1L).firstOrNull(), "Note should exist before delete")
@@ -193,7 +196,7 @@ class DetailViewModelTest {
         // For this, we can initialize with -1, let it create a note, then call delete.
         // The *created* note will be deleted, but the point is the direct call to `noteRepository.delete(-1)` is avoided.
 
-        viewModel = DetailViewModel(initId = -1L, noteRepository = noteRepository)
+        viewModel = DetailViewModel(initId = -1L, noteRepository = noteRepository, testLogger)
         viewModel.detailState.first() // Let it create the new note
 
         // Now, if we were to directly call `viewModel.onDelete()` AFTER it has a valid ID,
@@ -217,7 +220,7 @@ class DetailViewModelTest {
         // Reset the repository for a clean state for this specific check.
         (noteRepository as FakeNoteRepository).setNotes(emptyList())
 
-        viewModel = DetailViewModel(initId = -1L, noteRepository = noteRepository)
+        viewModel = DetailViewModel(initId = -1L, noteRepository = noteRepository, testLogger)
         // At this point, `idFlow` in the VM might be -1L initially, but it immediately tries to create a note.
         // The `onDelete` function reads `idFlow.first()`.
 

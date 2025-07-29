@@ -22,7 +22,6 @@ import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
-import com.mshdabiola.model.Note
 import com.mshdabiola.ui.SharedTransitionContainer
 import org.junit.Rule
 import org.junit.Test
@@ -46,7 +45,7 @@ class DetailScreenTest {
                 val titleState = rememberTextFieldState(testTitle)
                 val contentState = rememberTextFieldState(testContent)
                 // DetailState now includes id, title, and detail
-                val mockDetailState = DetailState(note = Note(id = testId), title = titleState, detail = contentState)
+                val mockDetailState = DetailState(id = testId, title = titleState, detail = contentState)
 
                 DetailScreen(
                     state = mockDetailState,
@@ -83,7 +82,7 @@ class DetailScreenTest {
             SharedTransitionContainer {
                 // Use empty TextFieldStates for simplicity as their content isn't the focus here
                 val mockDetailState = DetailState(
-                    note = Note(id = 1),
+                    id = 1,
                     title = rememberTextFieldState(),
                     detail = rememberTextFieldState(),
                 )
@@ -111,7 +110,7 @@ class DetailScreenTest {
         composeRule.setContent {
             SharedTransitionContainer {
                 val mockDetailState = DetailState(
-                    note = Note(id = 1),
+                    id = 1,
                     title = rememberTextFieldState(),
                     detail = rememberTextFieldState(),
                 )
@@ -144,7 +143,7 @@ class DetailScreenTest {
                 val emptyTitleState = rememberTextFieldState("") // Empty initial value
                 val emptyContentState = rememberTextFieldState("") // Empty initial value
                 val mockDetailState = DetailState(
-                    note = Note(id = 1),
+                    id = 1,
                     title = emptyTitleState,
                     detail = emptyContentState,
                 )

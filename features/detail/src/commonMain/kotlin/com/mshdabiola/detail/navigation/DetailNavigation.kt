@@ -63,6 +63,7 @@ fun NavGraphBuilder.detailScreen(
             DetailScreen(
                 modifier = modifier,
                 state = detailState.value,
+                detail = detail,
                 onBack = onBack,
                 onDelete = {
                     viewModel.onDelete()
