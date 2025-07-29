@@ -15,48 +15,47 @@
  */
 package com.mshdabiola.kotlinmultiplatformtemplate
 
-
 import androidx.compose.foundation.layout.Box
- import androidx.compose.foundation.layout.fillMaxSize
- import androidx.compose.runtime.Composable
- import androidx.compose.runtime.LaunchedEffect
- import androidx.compose.runtime.mutableStateOf
- import androidx.compose.runtime.remember
- import androidx.compose.ui.Alignment
- import androidx.compose.ui.Modifier
- import androidx.compose.ui.test.assertIsDisplayed
- import androidx.compose.ui.test.junit4.createComposeRule
- import androidx.compose.ui.test.onNodeWithTag
- import androidx.compose.ui.unit.DpSize
- import androidx.compose.ui.unit.dp
- import androidx.compose.ui.window.Window
- import androidx.compose.ui.window.WindowPlacement
- import androidx.compose.ui.window.WindowPosition
- import androidx.compose.ui.window.WindowState
- import androidx.compose.ui.window.rememberWindowState
- import co.touchlab.kermit.Logger
- import co.touchlab.kermit.koin.KermitKoinLogger
- import co.touchlab.kermit.koin.kermitLoggerModule
- import com.mshdabiola.designsystem.drawable.KmtDrawable
- import com.mshdabiola.designsystem.strings.KmtStrings
- import com.mshdabiola.detail.detailModule
- import com.mshdabiola.kotlinmultiplatformtemplate.ui.KmtAppTestTags
- import com.mshdabiola.kotlinmultiplatformtemplate.ui.SplashScreen
- import com.mshdabiola.main.mainModule
- import com.mshdabiola.model.getLoggerWithTag
- import com.mshdabiola.setting.settingModule
- import com.mshdabiola.testing.fake.testDataModule
- import com.mshdabiola.testing.util.testLogger
- import kotlinx.coroutines.delay
- import org.junit.After
- import org.junit.Before
- import org.junit.Rule
- import org.junit.Test
- import org.koin.core.context.startKoin
- import org.koin.core.context.stopKoin
- import org.koin.core.module.dsl.viewModel
- import org.koin.dsl.module
- import org.koin.test.KoinTest
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.test.assertIsDisplayed
+import androidx.compose.ui.test.junit4.createComposeRule
+import androidx.compose.ui.test.onNodeWithTag
+import androidx.compose.ui.unit.DpSize
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.window.Window
+import androidx.compose.ui.window.WindowPlacement
+import androidx.compose.ui.window.WindowPosition
+import androidx.compose.ui.window.WindowState
+import androidx.compose.ui.window.rememberWindowState
+import co.touchlab.kermit.Logger
+import co.touchlab.kermit.koin.KermitKoinLogger
+import co.touchlab.kermit.koin.kermitLoggerModule
+import com.mshdabiola.designsystem.drawable.KmtDrawable
+import com.mshdabiola.designsystem.strings.KmtStrings
+import com.mshdabiola.detail.detailModule
+import com.mshdabiola.kotlinmultiplatformtemplate.ui.KmtAppTestTags
+import com.mshdabiola.kotlinmultiplatformtemplate.ui.SplashScreen
+import com.mshdabiola.main.mainModule
+import com.mshdabiola.model.getLoggerWithTag
+import com.mshdabiola.setting.settingModule
+import com.mshdabiola.testing.fake.testDataModule
+import com.mshdabiola.testing.util.testLogger
+import kotlinx.coroutines.delay
+import org.junit.After
+import org.junit.Before
+import org.junit.Rule
+import org.junit.Test
+import org.koin.core.context.startKoin
+import org.koin.core.context.stopKoin
+import org.koin.core.module.dsl.viewModel
+import org.koin.dsl.module
+import org.koin.test.KoinTest
 
 class KmtAppTest : KoinTest {
 
