@@ -14,8 +14,6 @@
  * limitations under the License.
  */
 import com.android.build.gradle.LibraryExtension
-import com.android.build.gradle.internal.ScreenshotTestTaskManager
-import com.android.build.gradle.internal.test.report.ScreenshotTestImages
 import com.mshdabiola.app.configureAndroidCompose
 import com.mshdabiola.app.libs
 import org.gradle.api.Plugin
@@ -33,11 +31,9 @@ class AndroidLibraryComposeConventionPlugin : Plugin<Project> {
             pluginManager.apply("com.android.compose.screenshot")
 
             extensions.configure<LibraryExtension> {
+                configureAndroidCompose(this)
 
-                    configureAndroidCompose(this)
-
-                    experimentalProperties["android.experimental.enableScreenshotTest"] = true
-
+                experimentalProperties["android.experimental.enableScreenshotTest"] = true
             }
 
             dependencies {
