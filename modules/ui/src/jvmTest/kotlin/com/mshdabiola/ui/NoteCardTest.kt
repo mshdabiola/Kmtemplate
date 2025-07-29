@@ -45,12 +45,12 @@ class NoteCardTest {
         }
 
         // Verify title is displayed with correct text using test tag
-        composeTestRule.onNodeWithTag(NoteCardTestTags.TITLE)
+        composeTestRule.onNodeWithTag(NoteCardTestTags.TITLE, useUnmergedTree = true)
             .assertIsDisplayed()
             .assertTextEquals(testNote.title) // androidx.compose.ui.test.assertTextEquals
 
         // Verify content is displayed with correct text using test tag
-        composeTestRule.onNodeWithTag(NoteCardTestTags.CONTENT)
+        composeTestRule.onNodeWithTag(NoteCardTestTags.CONTENT, useUnmergedTree = true)
             .assertIsDisplayed()
             .assertTextEquals(testNote.content)
 
