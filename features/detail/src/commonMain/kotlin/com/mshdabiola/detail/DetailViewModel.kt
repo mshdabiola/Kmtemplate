@@ -15,88 +15,94 @@
  */
 package com.mshdabiola.detail
 
-import androidx.compose.foundation.text.input.TextFieldState
 import androidx.compose.runtime.snapshotFlow
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import co.touchlab.kermit.Logger
 import com.mshdabiola.data.repository.NoteRepository
 import com.mshdabiola.model.Note
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 @OptIn(FlowPreview::class)
 class DetailViewModel(
-    // savedStateHandle: SavedStateHandle,
-    id: Long,
+    initId: Long,
     private val noteRepository: NoteRepository,
+    private val logger: Logger,
 ) : ViewModel() {
-    private val note = MutableStateFlow<Note?>(Note())
 
-    val title = TextFieldState()
-    val content = TextFieldState()
+    private val idFlow = MutableStateFlow(initId)
 
-    private val _state = MutableStateFlow<DetailState>(DetailState.Loading())
-    val state = _state.asStateFlow()
+    val initDetailState = DetailState(id = -1)
 
-    init {
-        viewModelScope.launch {
-            if (id > 0) {
-                val initNOte =
-                    noteRepository.getOne(id)
-                        .first()
-                note.update { initNOte }
+    private val titleFlow = snapshotFlow { initDetailState.title.text }
+        .debounce(300)
 
-                if (initNOte != null) {
-                    title.edit {
-                        this.append(initNOte.title)
-                    }
-                    content.edit {
-                        append(initNOte.content)
-                    }
-                }
+    private val detailFlow = snapshotFlow { initDetailState.detail.text }
+        .debounce(300)
+
+    private var isInit = true
+
+    val detailState = combine(
+        idFlow,
+        titleFlow,
+        detailFlow,
+    ) { id, title, detail ->
+
+        logger.i { "detailState: $id, $title, $detail" }
+        when {
+            id == -1L && isInit -> {
+                val newId = noteRepository.upsert(Note())
+                idFlow.update { newId }
+
+                isInit = false
+                initDetailState.copy(id = newId)
             }
-            _state.update { DetailState.Success(id) }
 
-            note
-                .collectLatest {
-                    onContentChange(it)
-                }
-        }
+            isInit -> {
+                initDetailState.copy(id = id)
+                val note = noteRepository.getOne(id).first() ?: Note(id = id)
+                isInit = false
 
-        viewModelScope.launch {
-            snapshotFlow { title.text }
-                .debounce(500)
-                .collectLatest { text ->
-                    note.update { it?.copy(title = text.toString()) }
+                initDetailState.title.edit {
+                    append(note.title)
                 }
-        }
-        viewModelScope.launch {
-            snapshotFlow { content.text }
-                .debounce(500)
-                .collectLatest { text ->
-                    note.update { it?.copy(content = text.toString()) }
+                initDetailState.detail.edit {
+                    append(note.content)
                 }
-        }
-    }
+                initDetailState.copy(id = id)
+            }
 
-    private suspend fun onContentChange(note: Note?) {
-        if (note?.title?.isNotBlank() == true || note?.content?.isNotBlank() == true) {
-            val id = noteRepository.upsert(note)
-            if (note.id == -1L) {
-                this@DetailViewModel.note.update { note.copy(id = id) }
+            else -> {
+                val note = noteRepository.getOne(id).first() ?: Note(id = id)
+
+                val newNote = note.copy(title = title.toString(), content = detail.toString())
+                if (newNote != note) {
+                    noteRepository.upsert(newNote)
+                }
+                initDetailState.copy(id)
             }
         }
     }
+        .stateIn(
+            scope = viewModelScope,
+            started = SharingStarted.WhileSubscribed(),
+            initialValue = initDetailState,
+        )
 
     fun onDelete() {
         viewModelScope.launch {
-            note.value?.id?.let { noteRepository.delete(it) }
+            val id = idFlow.first()
+            if (id != -1L) {
+                noteRepository.delete(id)
+            }
         }
     }
 }

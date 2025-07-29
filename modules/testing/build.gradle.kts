@@ -47,6 +47,7 @@ kotlin {
                 api(libs.kotlinx.coroutines.test)
                 api(libs.turbine)
                 api(libs.koin.test)
+                api(libs.kermit.test)
             }
         }
         val nonJsMain by getting {

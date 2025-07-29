@@ -19,10 +19,10 @@ import com.mshdabiola.analytics.di.analyticsModule
 import com.mshdabiola.data.repository.INetworkRepository
 import com.mshdabiola.data.repository.NoteRepository
 import com.mshdabiola.data.repository.UserDataRepository
-import com.mshdabiola.testing.di.testDispatcherModule
 import com.mshdabiola.testing.fake.repository.FakeNetworkRepository
 import com.mshdabiola.testing.fake.repository.FakeNoteRepository
 import com.mshdabiola.testing.fake.repository.FakeUserDataRepository
+import com.mshdabiola.testing.fake.repository.testDispatcherModule
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.bind
 import org.koin.dsl.module

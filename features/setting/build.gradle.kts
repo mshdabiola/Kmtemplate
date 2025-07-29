@@ -27,6 +27,9 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 api(compose.components.resources)
+                implementation(libs.androidx.compose.material3.adaptive)
+                implementation(libs.androidx.compose.material3.adaptive.layout)
+                implementation(libs.androidx.compose.material3.adaptive.navigation)
             }
         }
 

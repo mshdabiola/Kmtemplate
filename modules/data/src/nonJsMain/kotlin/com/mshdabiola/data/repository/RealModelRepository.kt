@@ -32,12 +32,13 @@ internal class RealModelRepository(
     override suspend fun upsert(note: Note): Long {
         return withContext(ioDispatcher) {
             val entity = note.asNoteEntity()
-            if (entity.id == null) {
-                noteDao.insert(entity)
-            } else {
-                noteDao.update(entity)
-                note.id
-            }
+            return@withContext noteDao.upsert(entity)
+//            if (entity.id == null) {
+//                noteDao.insert(entity)
+//            } else {
+//                noteDao.update(entity)
+//                note.id
+//            }
         }
     }
 
@@ -64,28 +65,4 @@ internal class RealModelRepository(
             noteDao.delete(id)
         }
     }
-
-//    @OptIn(ExperimentalPagingApi::class)
-//    override fun imagePagingData(): Flow<PagingData<Image>> {
-//
-//        return Pager(
-//            PagingConfig(4),
-//            remoteMediator = ModeRemoteMediator(iNetworkDataSource,imageDao)
-//        ){
-//            imageDao.pagingSource()
-//        }
-//            .flow
-//            .map { pagingData -> pagingData.map { it.asImage() } }
-//
-//
-//    }
-//
-//    override fun notePagingData(): Flow<PagingData<Note>>{
-//        return Pager(PagingConfig(20)){
-//            noteDao.pagingSource()
-//        }
-//            .flow
-//            .map { pagingData -> pagingData.map { it.asNote() } }
-//
-//    }
 }

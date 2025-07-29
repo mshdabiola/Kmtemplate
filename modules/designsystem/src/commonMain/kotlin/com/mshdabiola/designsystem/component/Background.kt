@@ -45,6 +45,7 @@ import kotlin.math.tan
  * @param modifier Modifier to be applied to the background.
  * @param content The background content.
  */
+
 @Composable
 fun KmtBackground(
     modifier: Modifier = Modifier,
@@ -164,7 +165,7 @@ fun BackgroundDynamic() {
 @Preview
 @Composable
 fun BackgroundAndroid() {
-    KmtTheme(androidTheme = true) {
+    KmtTheme {
         KmtBackground(Modifier.size(100.dp), content = {})
     }
 }
@@ -188,7 +189,7 @@ fun GradientBackgroundDynamic() {
 @Preview
 @Composable
 fun GradientBackgroundAndroid() {
-    KmtTheme(androidTheme = true) {
+    KmtTheme {
         KmtGradientBackground(Modifier.size(100.dp), content = {})
     }
 }

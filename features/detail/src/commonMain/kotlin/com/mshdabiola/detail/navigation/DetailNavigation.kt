@@ -16,14 +16,17 @@
 package com.mshdabiola.detail.navigation
 
 import androidx.compose.animation.ExperimentalSharedTransitionApi
-import androidx.compose.animation.SharedTransitionScope
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Modifier
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import androidx.navigation.toRoute
-import com.mshdabiola.detail.DetailRoute
+import com.mshdabiola.detail.DetailScreen
 import com.mshdabiola.detail.DetailViewModel
+import com.mshdabiola.ui.LocalNavAnimatedContentScope
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.annotation.KoinExperimentalAPI
 import org.koin.core.parameter.parameterSetOf
@@ -38,14 +41,13 @@ fun NavController.navigateToDetail(detail: Detail) {
 @OptIn(KoinExperimentalAPI::class, ExperimentalSharedTransitionApi::class)
 fun NavGraphBuilder.detailScreen(
     modifier: Modifier = Modifier,
-    sharedTransitionScope: SharedTransitionScope,
-    onShowSnack: suspend (String, String?) -> Boolean,
     onBack: () -> Unit,
 ) {
     composable<Detail> { backStack ->
 
         val detail: Detail = backStack.toRoute()
 
+//        val viewModel= koinViewModel<DetailViewModel>{ parametersOf(id)}
         val viewModel: DetailViewModel =
             koinViewModel(
                 parameters = {
@@ -54,14 +56,21 @@ fun NavGraphBuilder.detailScreen(
                     )
                 },
             )
+        val detailState = viewModel.detailState.collectAsStateWithLifecycle()
+        CompositionLocalProvider(
+            LocalNavAnimatedContentScope provides this,
+        ) {
+            DetailScreen(
+                modifier = modifier,
+                state = detailState.value,
+                detail = detail,
+                onBack = onBack,
+                onDelete = {
+                    viewModel.onDelete()
+                    onBack()
+                },
 
-        DetailRoute(
-            modifier = modifier,
-            sharedTransitionScope = sharedTransitionScope,
-            animatedContentScope = this,
-            onShowSnackbar = onShowSnack,
-            onBack = onBack,
-            viewModel = viewModel,
-        )
+            )
+        }
     }
 }

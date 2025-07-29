@@ -15,20 +15,11 @@
  */
 package com.mshdabiola.detail
 
-sealed class DetailState {
-    data class Loading(val isLoading: Boolean = false) : DetailState()
+import androidx.compose.foundation.text.input.TextFieldState
 
-    data class Success(
-        val id: Long,
-    ) : DetailState()
+data class DetailState(
+    val id: Long = -1,
+    val title: TextFieldState = TextFieldState(),
+    val detail: TextFieldState = TextFieldState(),
 
-    data class Error(val exception: Throwable) : DetailState()
-}
-
-fun DetailState.getSuccess(value: (DetailState.Success) -> DetailState.Success): DetailState {
-    return if (this is DetailState.Success) {
-        value(this)
-    } else {
-        this
-    }
-}
+)

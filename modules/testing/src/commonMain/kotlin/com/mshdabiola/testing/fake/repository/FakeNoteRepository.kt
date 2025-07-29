@@ -17,45 +17,82 @@ package com.mshdabiola.testing.fake.repository
 
 import com.mshdabiola.data.repository.NoteRepository
 import com.mshdabiola.model.Note
-import com.mshdabiola.testing.fake.notes
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.update
 
 class FakeNoteRepository : NoteRepository {
-    private val data = MutableStateFlow(notes)
+
+    private val notesFlow = MutableStateFlow<List<Note>>(emptyList())
+    private var nextId = 1L // Start generating actual IDs from 1
+
+    // Define the default ID constant
+    companion object {
+        const val DEFAULT_ID = -1L
+    }
 
     override suspend fun upsert(note: Note): Long {
-        data.update {
-            if (note.id == -1L) {
-                it.toMutableList().apply {
-                    add(note)
-                }
+        val currentNotes = notesFlow.value.toMutableList()
+        val newNoteId: Long
+
+        // Check against the DEFAULT_ID for a new note
+        if (note.id == DEFAULT_ID) { // New note (added null check for robustness)
+            newNoteId = nextId++
+            val newNote = note.copy(id = newNoteId)
+            currentNotes.add(newNote)
+            notesFlow.update { currentNotes }
+        } else { // Existing note
+            newNoteId = note.id // Assume ID is non-null and not DEFAULT_ID if it's an existing note
+            val index = currentNotes.indexOfFirst { it.id == newNoteId }
+            if (index != -1) {
+                currentNotes[index] = note
             } else {
-                val idx = it.indexOfFirst { it.id == note.id }
-                it.toMutableList().apply {
-                    add(idx, note)
+                // If an existing note (not DEFAULT_ID) isn't found, add it.
+                // This could happen if a note was created with a specific ID elsewhere
+                // and is now being upserted into this repository for the first time.
+                currentNotes.add(note)
+                // Ensure nextId is correctly positioned if this note's ID is high
+                if (note.id >= nextId) {
+                    nextId = note.id + 1
                 }
             }
+            notesFlow.update { currentNotes }
         }
-
-        return 1
+        return newNoteId
     }
 
     override fun getAll(): Flow<List<Note>> {
-        return data
+        return notesFlow
     }
 
     override fun getOne(id: Long): Flow<Note?> {
-        return data.map { it.firstOrNull { it.id == id } }
+        // No change needed here, it searches by the provided ID.
+        // Ensure you don't try to fetch a note with DEFAULT_ID and expect it to be a valid stored ID.
+        if (id == DEFAULT_ID) return kotlinx.coroutines.flow.flowOf(null) // Or handle as an error/empty flow
+        return notesFlow.map { notes ->
+            notes.find { it.id == id }
+        }
     }
 
     override suspend fun delete(id: Long) {
-        data.update {
-            it.toMutableList().apply {
-                removeIf { it.id == id }
-            }
+        // No change needed here, it deletes by the provided ID.
+        // Ensure you don't try to delete by DEFAULT_ID unless it's a specific state you want to handle.
+        if (id == DEFAULT_ID) return // Or handle as an error
+        notesFlow.update { currentNotes ->
+            currentNotes.filterNot { it.id == id }
         }
+    }
+
+    fun setNotes(notes: List<Note>) {
+        notesFlow.value = notes
+        // Filter out DEFAULT_ID before finding max, as it's not a "real" persisted ID
+        val maxId = notes.mapNotNull { it.id }.filter { it != DEFAULT_ID }.maxOrNull() ?: 0L
+        nextId = maxId + 1
+    }
+
+    fun clearNotes() {
+        notesFlow.value = emptyList()
+        nextId = 1L // Reset nextId to start from 1
     }
 }

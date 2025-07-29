@@ -15,17 +15,27 @@
  */
 package com.mshdabiola.setting.navigation
 
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavOptions
-import androidx.navigation.compose.dialog
-import com.mshdabiola.setting.SettingRoute
+import androidx.navigation.compose.composable
+import androidx.navigation.navOptions
+import com.mshdabiola.setting.SettingScreen
 import com.mshdabiola.setting.SettingViewModel
+import com.mshdabiola.setting.WindowRepository
+import com.mshdabiola.ui.LocalNavAnimatedContentScope
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.annotation.KoinExperimentalAPI
 
-fun NavController.navigateToSetting(navOptions: NavOptions = androidx.navigation.navOptions { }) =
+fun NavController.navigateToSetting(
+    navOptions: NavOptions = navOptions { launchSingleTop = true },
+) =
     navigate(
         Setting,
         navOptions,
@@ -34,17 +44,29 @@ fun NavController.navigateToSetting(navOptions: NavOptions = androidx.navigation
 @OptIn(KoinExperimentalAPI::class)
 fun NavGraphBuilder.settingScreen(
     modifier: Modifier,
-    onShowSnack: suspend (String, String?) -> Boolean,
-    onBack: () -> Unit,
+    onDrawer: (() -> Unit)?,
 ) {
-    dialog<Setting> {
+    composable<Setting> {
         val viewModel: SettingViewModel = koinViewModel()
+        val settingState = viewModel.settingState.collectAsStateWithLifecycle()
+        val windowRepository: WindowRepository = getWindowRepository()
 
-        SettingRoute(
-            modifier = modifier,
-            onShowSnack = onShowSnack,
-            viewModel = viewModel,
-            onBack = onBack,
-        )
+        CompositionLocalProvider(
+            LocalNavAnimatedContentScope provides this,
+        ) {
+            SettingScreen(
+//                settingState = settingState.value,
+                modifier = modifier,
+//                setContrast = { viewModel.setContrast(it) },
+//                onDarkClick = { showDarkThemeConfig = true },
+                onDrawer = onDrawer,
+                settingState = settingState.value,
+                onContrastChange = { viewModel.setContrast(it) },
+                onDarkModeChange = { viewModel.setDarkThemeConfig(it) },
+            )
+        }
     }
 }
+
+@Composable
+expect fun getWindowRepository(): WindowRepository

@@ -16,14 +16,13 @@
 package com.mshdabiola.kotlinmultiplatformtemplate.navigation
 
 import androidx.compose.animation.ExperimentalSharedTransitionApi
-import androidx.compose.animation.SharedTransitionLayout
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import com.mshdabiola.detail.navigation.Detail
 import com.mshdabiola.detail.navigation.detailScreen
 import com.mshdabiola.detail.navigation.navigateToDetail
-import com.mshdabiola.kotlinmultiplatformtemplate.ui.KotlinMultiplatformTemplateAppState
+import com.mshdabiola.kotlinmultiplatformtemplate.ui.KmtAppState
 import com.mshdabiola.main.navigation.Main
 import com.mshdabiola.main.navigation.mainScreen
 import com.mshdabiola.setting.navigation.settingScreen
@@ -31,33 +30,28 @@ import com.mshdabiola.setting.navigation.settingScreen
 @OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
 fun KotlinMultiplatformTemplateAppNavHost(
-    appState: KotlinMultiplatformTemplateAppState,
-    onShowSnackbar: suspend (String, String?) -> Boolean = { _, _ -> false },
+    appState: KmtAppState,
     modifier: Modifier = Modifier,
 ) {
     val navController = appState.navController
-    SharedTransitionLayout(modifier = modifier) {
-        NavHost(
-            navController = navController,
-            startDestination = Main,
-        ) {
-            mainScreen(
-                modifier = Modifier,
-                sharedTransitionScope = this@SharedTransitionLayout,
-                onShowSnack = onShowSnackbar,
-                navigateToDetail = { navController.navigateToDetail(Detail(it)) },
-            )
-            detailScreen(
-                modifier = Modifier,
-                sharedTransitionScope = this@SharedTransitionLayout,
-                onShowSnack = onShowSnackbar,
-                onBack = navController::popBackStack,
-            )
-            settingScreen(
-                modifier = Modifier,
-                onShowSnack = onShowSnackbar,
-                onBack = navController::popBackStack,
-            )
-        }
+
+    NavHost(
+        modifier = modifier,
+        navController = navController,
+        startDestination = Main,
+    ) {
+        mainScreen(
+            modifier = Modifier,
+            onDrawer = appState.onDrawer,
+            navigateToDetail = { navController.navigateToDetail(Detail(it)) },
+        )
+        detailScreen(
+            modifier = Modifier,
+            onBack = navController::popBackStack,
+        )
+        settingScreen(
+            modifier = Modifier,
+            onDrawer = appState.onDrawer,
+        )
     }
 }

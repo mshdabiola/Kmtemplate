@@ -17,6 +17,7 @@ package com.mshdabiola.kotlinmultiplatformtemplate
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import co.touchlab.kermit.Logger
 import com.mshdabiola.data.repository.UserDataRepository
 import com.mshdabiola.kotlinmultiplatformtemplate.MainActivityUiState.Loading
 import com.mshdabiola.kotlinmultiplatformtemplate.MainActivityUiState.Success
@@ -28,6 +29,7 @@ import kotlinx.coroutines.flow.stateIn
 
 class MainAppViewModel(
     userDataRepository: UserDataRepository,
+    private val logger: Logger,
 ) : ViewModel() {
     val uiState: StateFlow<MainActivityUiState> =
         userDataRepository.userData.map {

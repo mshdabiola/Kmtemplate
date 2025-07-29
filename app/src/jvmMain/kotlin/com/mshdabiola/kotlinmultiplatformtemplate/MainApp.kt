@@ -29,21 +29,21 @@ import androidx.compose.ui.window.WindowPlacement
 import androidx.compose.ui.window.WindowPosition
 import androidx.compose.ui.window.application
 import androidx.compose.ui.window.rememberWindowState
+import co.touchlab.kermit.DefaultFormatter
 import co.touchlab.kermit.Logger
+import co.touchlab.kermit.Severity
 import co.touchlab.kermit.koin.KermitKoinLogger
+import co.touchlab.kermit.koin.kermitLoggerModule
 import co.touchlab.kermit.loggerConfigInit
 import co.touchlab.kermit.platformLogWriter
-import com.mshdabiola.designsystem.drawable.defaultAppIcon
-import com.mshdabiola.kotlinmultiplatformtemplate.app.generated.resources.Res
-import com.mshdabiola.kotlinmultiplatformtemplate.app.generated.resources.app_name
+import com.mshdabiola.designsystem.drawable.KmtDrawable
+import com.mshdabiola.designsystem.strings.KmtStrings
 import com.mshdabiola.kotlinmultiplatformtemplate.di.appModule
-import com.mshdabiola.kotlinmultiplatformtemplate.ui.KotlinMultiplatformTemplateApp
-import com.mshdabiola.ui.SplashScreen
+import com.mshdabiola.kotlinmultiplatformtemplate.ui.KmtApp
+import com.mshdabiola.kotlinmultiplatformtemplate.ui.SplashScreen
+import com.mshdabiola.model.CustomLogWriter
 import kotlinx.coroutines.delay
-import org.jetbrains.compose.resources.stringResource
 import org.koin.core.context.GlobalContext.startKoin
-import org.koin.dsl.module
-import java.io.File
 
 fun mainApp() {
     application {
@@ -54,11 +54,10 @@ fun mainApp() {
                 position = WindowPosition.Aligned(Alignment.Center),
             )
 
-        val version = "1.2.9"
         Window(
             onCloseRequest = ::exitApplication,
-            title = "${stringResource(Res.string.app_name)} v$version",
-            icon = defaultAppIcon,
+            title = "${KmtStrings.brand} v${KmtStrings.version}",
+            icon = KmtDrawable.brandImage,
             state = windowState,
         ) {
             val show = remember { mutableStateOf(true) }
@@ -67,11 +66,9 @@ fun mainApp() {
                 show.value = false
             }
             Box(Modifier.fillMaxSize()) {
-                KotlinMultiplatformTemplateApp()
+                KmtApp()
                 if (show.value) {
-                    SplashScreen(
-                        appName = stringResource(Res.string.app_name),
-                    )
+                    SplashScreen()
                 }
             }
         }
@@ -79,29 +76,22 @@ fun mainApp() {
 }
 
 fun main() {
-    val path = File("${System.getProperty("user.home")}/AppData/Local/kotlinmultiplatformtemplate")
-    if (path.exists().not()) {
-        path.mkdirs()
-    }
     val logger =
         Logger(
-            loggerConfigInit(platformLogWriter(), Writer(path)),
-            "DesktopLogger,",
+            loggerConfigInit(
+                minSeverity = Severity.Verbose,
+                logWriters = arrayOf(platformLogWriter(DefaultFormatter), CustomLogWriter()),
+            ),
         )
-    val logModule =
-        module {
-            single {
-                logger
-            }
-        }
 
     startKoin {
         logger(
             KermitKoinLogger(Logger.withTag("koin")),
         )
+
         modules(
             appModule,
-            logModule,
+            kermitLoggerModule(logger),
         )
     }
 

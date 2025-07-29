@@ -15,169 +15,105 @@
  */
 package com.mshdabiola.setting
 
-import androidx.compose.animation.AnimatedContent
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.heightIn
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material.icons.outlined.Cancel
-import androidx.compose.material3.Card
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.ListItem
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
+import androidx.compose.material3.adaptive.ExperimentalMaterial3AdaptiveApi
+import androidx.compose.material3.adaptive.layout.AnimatedPane
+import androidx.compose.material3.adaptive.layout.ListDetailPaneScaffold
+import androidx.compose.material3.adaptive.layout.ListDetailPaneScaffoldRole
+import androidx.compose.material3.adaptive.navigation.rememberListDetailPaneScaffoldNavigator
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
-import androidx.compose.ui.unit.dp
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.mshdabiola.designsystem.icon.KmtIcons
 import com.mshdabiola.model.DarkThemeConfig
-import com.mshdabiola.model.ThemeBrand
-import com.mshdabiola.ui.Waiting
-import kotlinmultiplatformtemplate.features.setting.generated.resources.Res
-import kotlinmultiplatformtemplate.features.setting.generated.resources.daynight
-import kotlinmultiplatformtemplate.features.setting.generated.resources.theme
+import com.mshdabiola.ui.SharedTransitionContainer
 import kotlinx.coroutines.launch
-import org.jetbrains.compose.resources.stringArrayResource
+import org.jetbrains.compose.ui.tooling.preview.Preview
 
-// import org.koin.androidx.compose.koinViewModel
-
+@OptIn(ExperimentalMaterial3AdaptiveApi::class)
 @Composable
-internal fun SettingRoute(
+fun SettingScreen(
     modifier: Modifier = Modifier,
-    onShowSnack: suspend (String, String?) -> Boolean,
-    onBack: () -> Unit,
-    viewModel: SettingViewModel,
-) {
-    val settingState = viewModel.settingState.collectAsStateWithLifecycle()
+    onDrawer: (() -> Unit)?,
+    settingState: SettingState,
+    onContrastChange: (Int) -> Unit = {},
+    onDarkModeChange: (DarkThemeConfig) -> Unit = {},
+    openUrl: (String) -> Unit = {},
+    openEmail: (String, String, String) -> Unit = { _, _, _ -> },
 
-    SettingScreen(
-        modifier = modifier.heightIn(min = 300.dp),
-        settingState = settingState.value,
-        setTheme = viewModel::setThemeBrand,
-        setDarkMode = viewModel::setDarkThemeConfig,
-        onBack = onBack,
-        onShowSnack = onShowSnack,
+) {
+    val navigator = rememberListDetailPaneScaffoldNavigator<SettingNav>()
+    val coroutineScope = rememberCoroutineScope()
+
+    val settingsBySegment = SettingNav
+        .entries
+        .groupBy { it.segment }
+
+    ListDetailPaneScaffold(
+        modifier = modifier.testTag(SettingScreenTestTags.SCREEN_ROOT), // Apply the tag here
+        directive = navigator.scaffoldDirective,
+        value = navigator.scaffoldValue,
+        listPane = {
+            AnimatedPane {
+                SettingListScreen(
+                    modifier = Modifier, // Pass modifier if needed from here
+                    settingsMap = settingsBySegment,
+                    onDrawer = onDrawer,
+                    onSettingClick = {
+                        if (it == SettingNav.Issue) {
+                            openUrl("https://github.com/mshdabiola/KotlinMultiplatformTemplate/issues")
+                        } else {
+                            coroutineScope.launch {
+                                navigator.navigateTo(
+                                    pane = ListDetailPaneScaffoldRole.Detail,
+                                    contentKey = it,
+                                )
+                            }
+                        }
+                    },
+                )
+            }
+        },
+        detailPane = {
+            AnimatedPane {
+                SettingDetailScreen(
+                    modifier = Modifier, // Pass modifier if needed from here
+                    onBack = if (navigator.canNavigateBack()) {
+                        {
+                            coroutineScope.launch {
+                                navigator.navigateBack()
+                            }
+                        }
+                    } else {
+                        null
+                    },
+                    settingNav = navigator.currentDestination?.contentKey ?: SettingNav.Appearance,
+                    settingState = settingState,
+                    onContrastChange = onContrastChange,
+                    onDarkModeChange = onDarkModeChange,
+                    openUrl = openUrl,
+                    openEmail = openEmail,
+                )
+            }
+        },
     )
 }
 
+@Preview()
 @Composable
-internal fun SettingScreen(
-    settingState: SettingState,
-    modifier: Modifier = Modifier,
-    setTheme: (ThemeBrand) -> Unit = {},
-    setDarkMode: (DarkThemeConfig) -> Unit = {},
-    onBack: () -> Unit = {},
-    onShowSnack: suspend (String, String?) -> Boolean = { _, _ -> false },
-) {
-    Card(modifier = modifier.testTag("setting:screen")) {
-        AnimatedContent(settingState) {
-            when (it) {
-                is SettingState.Loading -> Waiting(modifier)
-                is SettingState.Success ->
-                    MainContent(
-                        modifier = modifier,
-                        settingState = it,
-                        setTheme = setTheme,
-                        setDarkMode = setDarkMode,
-                        onBack = onBack,
-                        onShowSnack = onShowSnack,
-                    )
-
-                else -> {}
-            }
-        }
+internal fun SettingScreenPreview() {
+    val settingState = SettingState(
+        contrast = 0,
+        darkThemeConfig = DarkThemeConfig.DARK,
+    )
+    SharedTransitionContainer {
+        SettingScreen(
+            modifier = Modifier,
+            onDrawer = {},
+            settingState = settingState,
+        )
     }
 }
 
-@Composable
-internal fun MainContent(
-    modifier: Modifier = Modifier,
-    settingState: SettingState.Success,
-    setTheme: (ThemeBrand) -> Unit = {},
-    setDarkMode: (DarkThemeConfig) -> Unit = {},
-    onBack: () -> Unit = {},
-    onShowSnack: suspend (String, String?) -> Boolean = { _, _ -> false },
-) {
-    var dark by remember { mutableStateOf(false) }
-    var theme by remember { mutableStateOf(false) }
-    val themeArray = stringArrayResource(Res.array.theme)
-    val dayLightArray = stringArrayResource(Res.array.daynight)
-    val couroutine = rememberCoroutineScope()
-
-    Column(
-        modifier.padding(16.dp),
-        verticalArrangement = Arrangement.spacedBy(4.dp),
-    ) {
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically,
-        ) {
-            Text(text = "Settings", style = MaterialTheme.typography.titleLarge)
-            IconButton(
-                onClick = onBack,
-            ) {
-                Icon(imageVector = KmtIcons.Cancel, "cancel")
-            }
-        }
-
-        Spacer(Modifier.height(8.dp))
-
-        ListItem(
-            modifier =
-            Modifier.testTag("setting:theme")
-                .clickable {
-                    theme = true
-                    couroutine.launch {
-                        onShowSnack("Theme", "Clicked")
-                    }
-                },
-            headlineContent = { Text("Theme") },
-            supportingContent = {
-                Text(themeArray.getOrNull(settingState.themeBrand.ordinal) ?: "")
-            },
-        )
-
-        ListItem(
-            modifier = Modifier.testTag("setting:mode").clickable { dark = true },
-            headlineContent = { Text("DayNight mode") },
-            supportingContent = {
-                Text(dayLightArray.getOrNull(settingState.darkThemeConfig.ordinal) ?: "")
-            },
-        )
-    }
-
-    AnimatedVisibility(theme) {
-        OptionsDialog(
-            modifier = Modifier,
-            options = themeArray,
-            current = settingState.themeBrand.ordinal,
-            onDismiss = { theme = false },
-            onSelect = { setTheme(ThemeBrand.entries[it]) },
-        )
-    }
-    AnimatedVisibility(dark) {
-        OptionsDialog(
-            modifier = Modifier,
-            options = dayLightArray,
-            current = settingState.darkThemeConfig.ordinal,
-            onDismiss = { dark = false },
-            onSelect = { setDarkMode(DarkThemeConfig.entries[it]) },
-        )
-    }
+object SettingScreenTestTags {
+    const val SCREEN_ROOT = "setting:screen_root" // For the ListDetailPaneScaffold or main root
 }

@@ -16,33 +16,41 @@
 package com.mshdabiola.main.navigation
 
 import androidx.compose.animation.ExperimentalSharedTransitionApi
-import androidx.compose.animation.SharedTransitionScope
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Modifier
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavOptions
 import androidx.navigation.compose.composable
-import com.mshdabiola.main.MainRoute
+import androidx.navigation.navOptions
+import com.mshdabiola.main.MainScreen
+import com.mshdabiola.main.MainViewModel
+import com.mshdabiola.ui.LocalNavAnimatedContentScope
+import org.koin.compose.viewmodel.koinViewModel
 
 fun NavController.navigateToMain(
-    main: Main,
-    navOptions: NavOptions,
-) = navigate(main, navOptions)
+    navOptions: NavOptions = navOptions { launchSingleTop = true },
+) = navigate(Main, navOptions)
 
 @OptIn(ExperimentalSharedTransitionApi::class)
 fun NavGraphBuilder.mainScreen(
     modifier: Modifier = Modifier,
-    sharedTransitionScope: SharedTransitionScope,
-    onShowSnack: suspend (String, String?) -> Boolean,
+    onDrawer: (() -> Unit)?,
     navigateToDetail: (Long) -> Unit,
 ) {
     composable<Main> {
-        MainRoute(
-            modifier = modifier,
-            sharedTransitionScope = sharedTransitionScope,
-            animatedContentScope = this,
-            showSnackbar = onShowSnack,
-            navigateToDetail = navigateToDetail,
-        )
+        val viewModel = koinViewModel<MainViewModel>()
+        val mainState = viewModel.mainState.collectAsStateWithLifecycle()
+        CompositionLocalProvider(
+            LocalNavAnimatedContentScope provides this,
+        ) {
+            MainScreen(
+                modifier = modifier,
+                mainState = mainState.value,
+                onDrawer = onDrawer,
+                navigateToDetail = navigateToDetail,
+            )
+        }
     }
 }

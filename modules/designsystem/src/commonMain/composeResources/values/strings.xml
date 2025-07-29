@@ -15,54 +15,10 @@
      limitations under the License.
 -->
 <resources>
-
-
-    <string name="app_name">KotlinMultiplatformTemplate</string>
-    <string name="add_image">Add New Images</string>
-    <string name="main">Main</string>
-
-    <string name="hello">😊 Hello world!</string>
-    <string name="multi_line">Lorem ipsum dolor sit amet,
-        consectetur adipiscing elit.
-        Donec eget turpis ac sem ultricies consequat.</string>
-    <string name="str_template">Hello, %1$s! You have %2$d new messages.</string>
-
-    <string-array name="str_arr">
-        <item>Home</item>
-        <item>Profile</item>
-        <item>Ranks</item>
-    </string-array>
-
-    <string-array name="main_navigator">
-        <item>Contributions</item>
-        <item>NearBy</item>
-        <item>Explore</item>
-        <item>Bookmarks</item>
-        <item>Review</item>
-    </string-array>
-
-    <string-array name="setting_navigator">
-        <item>Setting</item>
-        <item>Feedback</item>
-        <item>About</item>
-    </string-array>
-
-
-    <string-array name="modules_ui_cbt_exam_part">
-        <item>Obj &amp; Theory</item>
-        <item>Objective</item>
-        <item>Theory</item>
-
-    </string-array>
-
-    <string-array name="modules_ui_cbt_sections">
-        <item>Objective</item>
-        <item>Theory</item>
-    </string-array>
-
-    <string name="modules_ui_cbt_type">Waec Series</string>
-    <string name="modules_ui_cbt_subject">Physics</string>
-    <string name="modules_ui_cbt_leaderboard_ranks">CgkI_8Pjz6gXEAIQAg</string>
-
+    <string name="undefined">Undefined</string>">
+    <string name="brand">KMTemplate</string>">
+    <string name="version_name">1.2.5</string>
+    <string name="version">1.2.5</string>
+    <string name="last_update">12, October 2023</string>"
 
 </resources>

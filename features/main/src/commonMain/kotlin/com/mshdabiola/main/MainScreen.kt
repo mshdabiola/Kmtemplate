@@ -15,217 +15,160 @@
  */
 package com.mshdabiola.main
 
-import androidx.compose.animation.AnimatedVisibilityScope
 import androidx.compose.animation.ExperimentalSharedTransitionApi
-import androidx.compose.animation.SharedTransitionScope
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.gestures.Orientation
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.safeDrawing
-import androidx.compose.foundation.layout.systemBars
-import androidx.compose.foundation.layout.windowInsetsBottomHeight
-import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
-import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.platform.testTag // Import testTag
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.mshdabiola.data.model.Result
-import com.mshdabiola.designsystem.component.KmtLoadingWheel
-import com.mshdabiola.designsystem.component.scrollbar.DraggableScrollbar
-import com.mshdabiola.designsystem.component.scrollbar.rememberDraggableScroller
-import com.mshdabiola.designsystem.component.scrollbar.scrollbarState
-import com.mshdabiola.designsystem.theme.KmtTheme
+import com.mshdabiola.designsystem.component.KmtIconButton
+import com.mshdabiola.designsystem.component.KmtLoading
+import com.mshdabiola.designsystem.component.KmtTopAppBar
+import com.mshdabiola.designsystem.drawable.KmtIcons
+import com.mshdabiola.designsystem.strings.KmtStrings
 import com.mshdabiola.designsystem.theme.LocalTintTheme
-import com.mshdabiola.model.Note
-import com.mshdabiola.ui.SharedContentPreview
-import com.mshdabiola.ui.noteItems
+import com.mshdabiola.ui.NoteCard
 import kotlinmultiplatformtemplate.features.main.generated.resources.Res
 import kotlinmultiplatformtemplate.features.main.generated.resources.features_main_empty_description
 import kotlinmultiplatformtemplate.features.main.generated.resources.features_main_empty_error
 import kotlinmultiplatformtemplate.features.main.generated.resources.features_main_img_empty_bookmarks
-import kotlinmultiplatformtemplate.features.main.generated.resources.features_main_loading
-import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
-import org.jetbrains.compose.ui.tooling.preview.Preview
-import org.koin.compose.viewmodel.koinViewModel
-import org.koin.core.annotation.KoinExperimentalAPI
 
-// import org.koin.androidx.compose.koinViewModel
-
-@OptIn(KoinExperimentalAPI::class, ExperimentalSharedTransitionApi::class)
-@Composable
-internal fun MainRoute(
-    modifier: Modifier = Modifier,
-    sharedTransitionScope: SharedTransitionScope,
-    animatedContentScope: AnimatedVisibilityScope,
-    navigateToDetail: (Long) -> Unit,
-    showSnackbar: suspend (String, String?) -> Boolean,
-//    viewModel: MainViewModel,
-) {
-    val viewModel: MainViewModel = koinViewModel()
-
-    val feedNote = viewModel.notes.collectAsStateWithLifecycle()
-
-    MainScreen(
-        sharedTransitionScope = sharedTransitionScope,
-        animatedContentScope = animatedContentScope,
-        modifier = modifier,
-        mainState = feedNote.value,
-        navigateToDetail = navigateToDetail,
-        showSnackbar = showSnackbar,
-        //   items = timeline,
-    )
+// Define a TestTags object for MainScreen
+internal object MainScreenTestTags {
+    const val SCREEN_ROOT = "MainScreenRoot"
+    const val TOP_APP_BAR = "MainScreenTopAppBar"
+    const val LOADING_INDICATOR = "MainScreenLoadingIndicator"
+    const val EMPTY_STATE_COLUMN = "MainScreenEmptyStateColumn"
+    const val EMPTY_STATE_IMAGE = "MainScreenEmptyStateImage"
+    const val EMPTY_STATE_TITLE = "MainScreenEmptyStateTitle"
+    const val EMPTY_STATE_DESCRIPTION = "MainScreenEmptyStateDescription"
+    const val NOTE_LIST = "MainScreenNoteList"
+    // You might want a way to tag individual NoteCard items if needed for specific tests,
+    // e.g., by appending the note ID: fun noteCardTag(id: Long) = "MainScreenNoteCard_$id"
 }
 
 @OptIn(
     ExperimentalSharedTransitionApi::class,
+    ExperimentalMaterial3Api::class,
 )
 @Composable
 internal fun MainScreen(
     modifier: Modifier = Modifier,
-    sharedTransitionScope: SharedTransitionScope,
-    animatedContentScope: AnimatedVisibilityScope,
-    mainState: Result<List<Note>>,
+    mainState: MainState,
     navigateToDetail: (Long) -> Unit = {},
-    showSnackbar: suspend (String, String?) -> Boolean = { _, _ -> false },
+    onDrawer: (() -> Unit)? = null,
 ) {
-    val coroutineScope = rememberCoroutineScope()
-    val state = rememberLazyListState()
-    with(sharedTransitionScope) {
-        Box(
-            modifier =
-            modifier
-                .testTag("main:screen")
-                .sharedBounds(
-                    sharedContentState = rememberSharedContentState("container"),
-                    animatedVisibilityScope = animatedContentScope,
-                ),
-        ) {
-            LazyColumn(
-                state = state,
-                contentPadding = PaddingValues(16.dp),
-                verticalArrangement = Arrangement.spacedBy(16.dp),
-                modifier =
-                Modifier
-                    .testTag("main:list"),
-            ) {
-                item {
-                    // Spacer(Modifier.windowInsetsTopHeight(WindowInsets.safeDrawing))
-                }
-                when (mainState) {
-                    is Result.Loading ->
-                        item {
-                            LoadingState()
-                        }
-
-                    is Result.Error -> TODO()
-                    is Result.Success -> {
-                        if (mainState.data.isEmpty()) {
-                            item {
-                                EmptyState()
-                            }
-                        } else {
-                            noteItems(
-                                modifier = Modifier,
-                                sharedTransitionScope = sharedTransitionScope,
-                                animatedContentScope = animatedContentScope,
-                                items = mainState.data,
-                                onNoteClick = {
-                                    navigateToDetail(it)
-                                    coroutineScope.launch {
-                                        showSnackbar("Note Opened", null)
-                                    }
-                                },
-                            )
+    Scaffold(
+        modifier = modifier.testTag(MainScreenTestTags.SCREEN_ROOT), // Apply testTag to the root
+        topBar = {
+            KmtTopAppBar(
+                modifier = Modifier.testTag(MainScreenTestTags.TOP_APP_BAR),
+                title = {
+                    Text(if (onDrawer != null) KmtStrings.brand else "Main")
+                }, // Consider adding a test tag if the title becomes dynamic
+                titleHorizontalAlignment = Alignment.Start,
+                navigationIcon = {
+                    if (onDrawer != null) {
+                        KmtIconButton(onClick = onDrawer) {
+                            Icon(KmtIcons.Menu, "menu")
                         }
                     }
-                }
-                item {
-                    Spacer(Modifier.windowInsetsBottomHeight(WindowInsets.safeDrawing))
+                },
+            )
+        },
+        containerColor = Color.Transparent,
+    ) { paddingValues ->
+        when (mainState) {
+            is MainState.Loading -> {
+                Box(
+                    modifier = Modifier
+                        .padding(paddingValues)
+                        .fillMaxSize()
+                        .testTag(MainScreenTestTags.LOADING_INDICATOR), // Tag for loading state
+                    contentAlignment = Alignment.Center,
+                ) {
+                    KmtLoading() // If KmtLoading is a simple composable, this tag might be on the Box.
+                    // If KmtLoading is complex, it might need its own internal tags.
                 }
             }
-            val itemsAvailable = noteUiStateItemsSize(mainState)
-            val scrollbarState =
-                state.scrollbarState(
-                    itemsAvailable = itemsAvailable,
+            is MainState.Empty -> {
+                EmptyState(
+                    modifier = Modifier.padding(paddingValues),
+                    // Pass padding if EmptyState should be inside Scaffold's content area
                 )
-            state.DraggableScrollbar(
-                modifier =
-                Modifier
-                    .fillMaxHeight()
-                    .windowInsetsPadding(WindowInsets.systemBars)
-                    .padding(horizontal = 2.dp)
-                    .align(Alignment.CenterEnd),
-                state = scrollbarState,
-                orientation = Orientation.Vertical,
-                onThumbMoved =
-                state.rememberDraggableScroller(
-                    itemsAvailable = itemsAvailable,
-                ),
-            )
+            }
+            is MainState.Success -> {
+                LazyColumn(
+                    modifier = Modifier
+                        .padding(paddingValues)
+                        .padding(horizontal = 16.dp)
+                        .testTag(MainScreenTestTags.NOTE_LIST), // Tag for the list of notes
+                    verticalArrangement = Arrangement.spacedBy(8.dp),
+                ) {
+                    items(items = mainState.notes, key = { note -> note.id }) { note ->
+                        // Assuming NoteUiState has an id
+                        NoteCard(
+                            noteUiState = note,
+                            onClick = navigateToDetail,
+                            // If you need to test individual cards, apply a dynamic tag here:
+                            // modifier = Modifier.testTag(MainScreenTestTags.noteCardTag(note.id))
+                        )
+                    }
+                }
+            }
         }
-    }
-}
-
-@Composable
-private fun LoadingState(modifier: Modifier = Modifier) {
-    Box(
-        modifier = modifier.fillMaxSize().testTag("main:loading"),
-        contentAlignment = Alignment.Center,
-    ) {
-        KmtLoadingWheel(
-            contentDesc = stringResource(Res.string.features_main_loading),
-        )
     }
 }
 
 @Composable
 private fun EmptyState(modifier: Modifier = Modifier) {
     Column(
-        modifier =
-        modifier
+        modifier = modifier
             .padding(16.dp)
             .fillMaxSize()
-            .testTag("main:empty"),
+            .testTag(MainScreenTestTags.EMPTY_STATE_COLUMN), // Tag for the empty state container
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         val iconTint = LocalTintTheme.current.iconTint
         Image(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .fillMaxWidth()
+                .testTag(MainScreenTestTags.EMPTY_STATE_IMAGE),
             painter = painterResource(Res.drawable.features_main_img_empty_bookmarks),
             colorFilter = if (iconTint != Color.Unspecified) ColorFilter.tint(iconTint) else null,
-            contentDescription = null,
+            contentDescription = null, // Consider adding a content description for accessibility and testing
         )
 
         Spacer(modifier = Modifier.height(48.dp))
 
         Text(
             text = stringResource(Res.string.features_main_empty_error),
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .fillMaxWidth()
+                .testTag(MainScreenTestTags.EMPTY_STATE_TITLE),
             textAlign = TextAlign.Center,
             style = MaterialTheme.typography.titleMedium,
             fontWeight = FontWeight.Bold,
@@ -235,37 +178,11 @@ private fun EmptyState(modifier: Modifier = Modifier) {
 
         Text(
             text = stringResource(Res.string.features_main_empty_description),
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .fillMaxWidth()
+                .testTag(MainScreenTestTags.EMPTY_STATE_DESCRIPTION),
             textAlign = TextAlign.Center,
             style = MaterialTheme.typography.bodyMedium,
         )
-    }
-}
-
-private fun noteUiStateItemsSize(topicUiState: Result<List<Note>>) =
-    when (topicUiState) {
-        is Result.Error -> 0 // Nothing
-        is Result.Loading -> 1 // Loading bar
-        is Result.Success -> topicUiState.data.size + 2
-    }
-
-@OptIn(ExperimentalSharedTransitionApi::class)
-@Preview
-@Composable
-fun MainLight() {
-    KmtTheme(darkTheme = false) {
-        Surface {
-            SharedContentPreview { sharedTransitionScope, animatedContentScope ->
-                MainScreen(
-                    modifier = Modifier.fillMaxSize(),
-                    mainState =
-                    Result.Success(
-                        listOf(Note(title = "abiola", content = "what is your name")),
-                    ),
-                    sharedTransitionScope = sharedTransitionScope,
-                    animatedContentScope = animatedContentScope,
-                )
-            }
-        }
     }
 }

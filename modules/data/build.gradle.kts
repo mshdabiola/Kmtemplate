@@ -35,7 +35,6 @@ kotlin {
                 api(project(":modules:database"))
                 api(project(":modules:datastore"))
                 api(project(":modules:network"))
-                implementation(libs.kotlinx.coroutines.core)
               //  implementation(libs.paging.common)
             }
         }

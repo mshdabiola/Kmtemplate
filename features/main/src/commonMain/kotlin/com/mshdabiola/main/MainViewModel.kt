@@ -17,23 +17,26 @@ package com.mshdabiola.main
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.mshdabiola.data.model.Result
-import com.mshdabiola.data.model.asResult
 import com.mshdabiola.data.repository.NoteRepository
-import com.mshdabiola.model.Note
 import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 
 class MainViewModel(
     modelRepository: NoteRepository,
 ) : ViewModel() {
-    val notes: StateFlow<Result<List<Note>>> =
-        modelRepository.getAll()
-            .asResult()
-            .stateIn(
-                scope = viewModelScope,
-                started = SharingStarted.WhileSubscribed(5_000),
-                initialValue = Result.Loading,
-            )
+    val mainState = modelRepository
+        .getAll()
+        .map { notes ->
+            if (notes.isEmpty()) {
+                MainState.Empty
+            } else {
+                MainState.Success(notes)
+            }
+        }
+        .stateIn(
+            scope = viewModelScope,
+            started = SharingStarted.WhileSubscribed(5_000),
+            initialValue = MainState.Loading,
+        )
 }
