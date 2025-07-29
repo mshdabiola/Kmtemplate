@@ -25,6 +25,7 @@ import androidx.compose.material3.rememberDrawerState
 import androidx.compose.material3.rememberWideNavigationRailState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithTag
@@ -91,7 +92,7 @@ class KmtScaffoldScreenTest {
             navController = mockNavController,
             drawerState = rememberDrawerState(initialValue = drawerInitialValue),
             wideNavigationRailState = rememberWideNavigationRailState(initialValue = railInitialValue),
-            coroutineScope = testCoroutineScope,
+            coroutineScope = rememberCoroutineScope(),
         )
     }
 
@@ -196,8 +197,8 @@ class KmtScaffoldScreenTest {
         composeTestRule.waitForIdle() // Allow recomposition
 
         // Now Extended FAB should be visible
-        composeTestRule.onNodeWithTag(FabTestTags.EXTENDED_FAB).assertDoesNotExist()
-        composeTestRule.onNodeWithTag(FabTestTags.SMALL_FAB).assertIsDisplayed()
+        composeTestRule.onNodeWithTag(FabTestTags.EXTENDED_FAB).assertIsDisplayed()
+        composeTestRule.onNodeWithTag(FabTestTags.SMALL_FAB).assertDoesNotExist()
 
         // Click to collapse
         composeTestRule.onNodeWithTag(KmtScaffoldTestTags.RAIL_TOGGLE_BUTTON).performClick()
