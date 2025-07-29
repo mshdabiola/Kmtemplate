@@ -27,6 +27,7 @@ plugins {
     alias(libs.plugins.conveyor)
     alias(libs.plugins.baselineprofile)
     alias(libs.plugins.composehot)
+    alias(libs.plugins.screenshot)
 
 }
 
@@ -77,6 +78,10 @@ dependencies {
     googlePlayImplementation(libs.play.update.kts)
     googlePlayImplementation(libs.play.review)
     googlePlayImplementation(libs.play.review.kts)
+
+    screenshotTestImplementation(libs.screenshot.validation.api)
+    screenshotTestImplementation(libs.androidx.compose.ui.tooling)
+
 }
 
 kotlin {
@@ -175,7 +180,7 @@ android {
     sourceSets["main"].resources.srcDirs("src/commonMain/composeResources")
 
     namespace = "com.mshdabiola.kotlinmultiplatformtemplate"
-
+    experimentalProperties["android.experimental.enableScreenshotTest"] = true
     defaultConfig {
         applicationId = "com.mshdabiola.kotlinmultiplatformtemplate"
         versionCode = libs.versions.versionCode.get().toIntOrNull()
