@@ -85,7 +85,6 @@ fun AppearanceScreen(
     Column(
         modifier = modifier
             .fillMaxWidth()
-            .background(MaterialTheme.colorScheme.surface)
             .padding(16.dp)
             .testTag(AppearanceScreenTestTags.SCREEN_ROOT), // Tag for the root
     ) {
