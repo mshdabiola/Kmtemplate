@@ -26,23 +26,17 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.isNotDisplayed
-import androidx.compose.ui.test.junit4.ComposeContentTestRule
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onAllNodesWithTag
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.performTextInput
-import androidx.compose.ui.test.printToLog
 import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.LifecycleRegistry
 import androidx.lifecycle.ViewModelStore
 import androidx.lifecycle.ViewModelStoreOwner
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.viewmodel.compose.LocalViewModelStoreOwner
 import androidx.window.core.layout.WindowSizeClass
 import androidx.window.core.layout.WindowWidthSizeClass
-import co.touchlab.kermit.Logger
-import co.touchlab.kermit.koin.KermitKoinLogger
 import co.touchlab.kermit.koin.kermitLoggerModule
 import com.mshdabiola.detail.DetailScreenTestTags
 import com.mshdabiola.detail.detailModule
@@ -53,6 +47,8 @@ import com.mshdabiola.kotlinmultiplatformtemplate.ui.KmtAppTestTags
 import com.mshdabiola.kotlinmultiplatformtemplate.ui.SplashScreen
 import com.mshdabiola.kotlinmultiplatformtemplate.ui.SplashScreenTestTags
 import com.mshdabiola.kotlinmultiplatformtemplate.ui.rememberKmtAppState
+import com.mshdabiola.kotlinmultiplatformtemplate.util.KoinTestRule
+import com.mshdabiola.kotlinmultiplatformtemplate.util.TestLifecycleOwner
 import com.mshdabiola.main.MainScreenTestTags
 import com.mshdabiola.main.mainModule
 import com.mshdabiola.main.navigation.Main
@@ -69,38 +65,9 @@ import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-import org.junit.rules.TestWatcher
-import org.junit.runner.Description
-import org.koin.core.context.GlobalContext.getKoinApplicationOrNull
-import org.koin.core.context.GlobalContext.unloadKoinModules
-import org.koin.core.context.loadKoinModules
-import org.koin.core.context.startKoin
-import org.koin.core.module.Module
 import org.koin.core.module.dsl.viewModel
 import org.koin.dsl.module
 import org.koin.test.KoinTest
-
-private val testViewModelStoreOwner = object : ViewModelStoreOwner {
-    override val viewModelStore = ViewModelStore()
-}
-private class TestLifecycleOwner(val composeTestRule: ComposeContentTestRule) : LifecycleOwner {
-    private val lifecycleRegistry = LifecycleRegistry(this)
-
-    init {
-        // Initialize the lifecycle state.
-        // For many tests, CREATED or STARTED is enough.
-        // If you're testing things that react to RESUMED, you might need to advance it further.
-        composeTestRule.runOnUiThread { lifecycleRegistry.currentState = Lifecycle.State.STARTED }
-    }
-
-    // Helper methods to control lifecycle if needed for specific tests
-    fun handleLifecycleEvent(event: Lifecycle.Event) {
-        composeTestRule.runOnUiThread { lifecycleRegistry.handleLifecycleEvent(event) }
-    }
-
-    override val lifecycle: Lifecycle
-        get() = lifecycleRegistry
-}
 
 class KmtAppTest : KoinTest {
 
@@ -171,7 +138,9 @@ class KmtAppTest : KoinTest {
         appState = rememberKmtAppState(windowSizeClass, testCoroutineScope)
 
         CompositionLocalProvider(
-            LocalViewModelStoreOwner provides testViewModelStoreOwner,
+            LocalViewModelStoreOwner provides object : ViewModelStoreOwner {
+                override val viewModelStore = ViewModelStore()
+            },
             LocalLifecycleOwner provides testLifecycleOwner,
         ) {
             val show = remember { mutableStateOf(true) }
@@ -268,21 +237,11 @@ class KmtAppTest : KoinTest {
         }
         composeTestRule.onAllNodesWithTag(SplashScreenTestTags.SCREEN_ROOT).fetchSemanticsNodes().isEmpty()
 
-        composeTestRule.onNodeWithTag(
-            KmtAppTestTags.APP_ROOT_LAYOUT,
-        )
-            .printToLog("ScaffoldContentArea")
-
         composeTestRule.runOnUiThread {
             appState.navigateTopRoute(Setting)
         }
 
         composeTestRule.waitForIdle()
-
-        composeTestRule.onNodeWithTag(
-            KmtAppTestTags.APP_ROOT_LAYOUT,
-        )
-            .printToLog("ScaffoldContentArea")
 
         composeTestRule.onNodeWithTag(SettingScreenTestTags.SCREEN_ROOT, useUnmergedTree = true)
             .assertIsDisplayed()
@@ -331,24 +290,5 @@ class KmtAppTest : KoinTest {
 
         composeTestRule.onNodeWithTag(MainScreenTestTags.SCREEN_ROOT).assertIsDisplayed()
         composeTestRule.onNodeWithTag(SettingScreenTestTags.SCREEN_ROOT).assertDoesNotExist() // Or IsNotDisplayed
-    }
-} class KoinTestRule(
-    private val modules: List<Module>,
-) : TestWatcher() {
-    override fun starting(description: Description) {
-        if (getKoinApplicationOrNull() == null) {
-            startKoin {
-                logger(
-                    KermitKoinLogger(Logger.withTag("koin")),
-                )
-                modules(modules)
-            }
-        } else {
-            loadKoinModules(modules)
-        }
-    }
-
-    override fun finished(description: Description) {
-        unloadKoinModules(modules)
     }
 }
