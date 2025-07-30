@@ -39,7 +39,7 @@ import com.mshdabiola.ui.LocalNavAnimatedContentScope
 import com.mshdabiola.ui.LocalSharedTransitionScope
 
 // Define a TestTags object
-internal object DetailScreenTestTags {
+object DetailScreenTestTags {
     const val SCREEN_ROOT = "DetailScreenRoot"
     const val TITLE_TEXT_FIELD = "DetailScreenTitleTextField"
     const val CONTENT_TEXT_FIELD = "DetailScreenContentTextField"
