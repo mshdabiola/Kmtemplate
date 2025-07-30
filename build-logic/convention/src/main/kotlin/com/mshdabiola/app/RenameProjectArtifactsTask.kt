@@ -1,7 +1,6 @@
 // build-logic/convention/src/main/kotlin/com/mshdabiola/app/RenameProjectArtifactsTask.kt
 package com.mshdabiola.app // Or your preferred package for build logic
 
-import androidx.compose.ui.graphics.vector.group
 import org.gradle.api.DefaultTask
 import org.gradle.api.Project
 import org.gradle.api.file.ConfigurableFileTree
@@ -239,8 +238,8 @@ abstract class RenameProjectArtifactsTask : DefaultTask() {
                     project.logger.lifecycle("Updating content in: ${file.path}")
                     // ### ACTUAL MODIFICATION - UNCOMMENT WITH CAUTION ###
                     try {
-                        // file.writeText(content)
-                        // project.logger.lifecycle("SUCCESS: Updated content in ${file.name} in project ${proj.path}")
+                         file.writeText(content)
+                         project.logger.lifecycle("SUCCESS: Updated content in ${file.name} in project ${proj.path}")
                         project.logger.info("MODIFIED (dry run): ${file.path}\n--- OLD ---\n${originalContent.take(200)}\n--- NEW ---\n${content.take(200)}\n----------")
 
                     } catch (e: Exception) {
@@ -264,13 +263,13 @@ abstract class RenameProjectArtifactsTask : DefaultTask() {
                         val newFile = File(file.parentFile, newFileName)
                         project.logger.lifecycle("Attempting to rename file: ${file.path} to ${newFile.path}")
                         // ### ACTUAL MODIFICATION - UNCOMMENT WITH CAUTION ###
-                        // if (file.renameTo(newFile)) {
-                        //    project.logger.lifecycle("SUCCESS: Renamed file in ${proj.path}: ${file.name} to ${newFile.name}")
-                        //    // If further operations needed on this renamed file, update the 'file' variable
-                        //    // or handle carefully as the original 'file' object points to the old path.
-                        // } else {
-                        //    project.logger.error("ERROR: Failed to rename file ${file.path} to ${newFile.path} in project ${proj.path}")
-                        // }
+                         if (file.renameTo(newFile)) {
+                            project.logger.lifecycle("SUCCESS: Renamed file in ${proj.path}: ${file.name} to ${newFile.name}")
+                            // If further operations needed on this renamed file, update the 'file' variable
+                            // or handle carefully as the original 'file' object points to the old path.
+                         } else {
+                            project.logger.error("ERROR: Failed to rename file ${file.path} to ${newFile.path} in project ${proj.path}")
+                         }
                         project.logger.info("RENAMED (dry run): ${file.path} -> ${newFile.path}")
                     }
                 }
@@ -384,19 +383,19 @@ abstract class RenameProjectArtifactsTask : DefaultTask() {
 
         if (appKotlinDir.exists() && appKotlinDir.isDirectory) {
             // Look for a file ending with "Application.kt"
-            // Example: KmtApplication.kt -> Kmt
+            // Example: NdaApplication.kt -> Nda
             // Example: MyCoolApplication.kt -> MyCool
             val appFile = appKotlinDir.listFiles { _, name -> name.endsWith("Application.kt") }?.firstOrNull()
 
             if (appFile != null) {
-                val filenameWithoutExtension = appFile.nameWithoutExtension // E.g., "KmtApplication"
+                val filenameWithoutExtension = appFile.nameWithoutExtension // E.g., "NdaApplication"
                 if (filenameWithoutExtension.endsWith("Application")) {
                     val potentialPrefix = filenameWithoutExtension.removeSuffix("Application")
                     if (potentialPrefix.isNotBlank()) {
                         rootProject.logger.info("CiTaskPlugin: Extracted oldPrefix '$potentialPrefix' from ${appFile.name}")
                         // You might want to return it as lowercase: potentialPrefix.toLowerCase()
-                        // depending on how you use the "prefix" (e.g., kmt vs Kmt)
-                        return potentialPrefix // Returning "Kmt"
+                        // depending on how you use the "prefix" (e.g., kmt vs Nda)
+                        return potentialPrefix // Returning "Nda"
                     }
                 }
             } else {
