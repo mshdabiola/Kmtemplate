@@ -33,7 +33,6 @@ android {
 }
 
 dependencies {
-//    lintPublish(projects.lint)
 
     debugApi(compose.uiTooling)
 }
@@ -52,7 +51,6 @@ kotlin {
                 api(libs.kotlinx.collection.immutable)
                 api(libs.lifecycle.runtime.compose)
 
-//                implementation("org.jetbrains.compose.material:material-icons-core:1.7.3")
                 implementation(project(":modules:model"))
                 api(libs.androidx.navigation.compose.get())
 
