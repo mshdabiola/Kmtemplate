@@ -31,7 +31,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -51,7 +50,6 @@ import androidx.compose.material3.WideNavigationRailDefaults
 import androidx.compose.material3.WideNavigationRailItem
 import androidx.compose.material3.WideNavigationRailValue
 import androidx.compose.material3.contentColorFor
-import androidx.compose.material3.rememberDrawerState
 import androidx.compose.material3.rememberWideNavigationRailState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
@@ -298,13 +296,11 @@ fun KmtScaffoldPreview() {
                 composable<Setting> { }
             }
     }
-    val drawerState = rememberDrawerState(initialValue = DrawerValue.Open)
     val appState = Medium(
         navController = navController,
         coroutineScope = rememberCoroutineScope(),
         wideNavigationRailState = rememberWideNavigationRailState(),
     )
-//    appState.navController.navigateToMain(Main)
 
     SharedTransitionContainer {
         KmtScaffold(appState = appState) {
@@ -386,7 +382,7 @@ fun DrawerContent(
                             } else {
                                 item.unSelectedIcon
                             }
-                        Icon(imageVector = imageVector, contentDescription = null)
+                        Icon(imageVector = imageVector, contentDescription = item.label)
                     },
                     label = { Text(item.label) },
                     selected = appState.isInCurrentRoute(item.route),
@@ -404,7 +400,7 @@ fun DrawerContent(
                             } else {
                                 item.unSelectedIcon
                             }
-                        Icon(imageVector = imageVector, contentDescription = null)
+                        Icon(imageVector = imageVector, contentDescription = item.label)
                     },
                     label = { Text(item.label) },
                     selected = appState.isInCurrentRoute(item.route),
