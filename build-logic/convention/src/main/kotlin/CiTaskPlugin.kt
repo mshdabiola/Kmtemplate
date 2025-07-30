@@ -16,6 +16,7 @@
 import com.mshdabiola.app.BumpConveyorRevisionTask
 import com.mshdabiola.app.BumpVersionTask
 import com.mshdabiola.app.RemoveFirebaseReferencesTask
+import com.mshdabiola.app.RenameProjectArtifactsTask // <<< ADD THIS IMPORT
 import com.mshdabiola.app.SetVersionFromTagTask
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -26,66 +27,42 @@ class CiTaskPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         target.tasks.register<BumpConveyorRevisionTask>("bumpConveyorRevision") {
             description = "Reads, increments, and updates the Conveyor revision number in files."
+            group = "CI Utilities" // Good practice to group tasks
 
-            // Point the task to the necessary files
             revisionFile.set(target.rootProject.file(".github/workflows/.revision-version"))
             outputRevisionFile.set(target.rootProject.file(".github/workflows/.revision-version"))
-            // Same file for output
             conveyorConfigFile.set(target.rootProject.file("ci.conveyor.conf"))
-
-            // Ensure the task always runs if needed, useful for tasks that modify files.
-            // However, if you want Gradle to track inputs and outputs for caching,
-            // you might define specific output files and let Gradle determine up-to-dateness.
-            // For this kind of file manipulation, making it always run or careful input/output declaration is key.
             outputs.upToDateWhen { false }
         }
 
         target.tasks.register<BumpVersionTask>("bumpVersionCode") {
-            description = "Updates the versionName and " +
-                "increments the versionCode in gradle/libs.versions.toml."
+            description = "Updates the versionName and increments the versionCode in gradle/libs.versions.toml."
+            group = "CI Utilities"
 
             revisionFile.set(target.rootProject.file(".github/workflows/.revision-version"))
-            // Provide a default for local testing, will be overridden by -P
-
             libsVersionsTomlFile.set(target.rootProject.file("gradle/libs.versions.toml"))
             outputLibsVersionsTomlFile.set(target.rootProject.file("gradle/libs.versions.toml"))
-            // Same file
-
-            // For tasks that modify files and are part of a CI/CD pipeline,
-            // it's often practical to make them always run.
             outputs.upToDateWhen { false }
         }
 
         target.tasks.register<SetVersionFromTagTask>("setVersionFromTag") {
-            description = "Sets the versionName and versionCode in " +
-                "gradle/libs.versions.toml based on provided tag values."
+            description = "Sets the versionName and versionCode in gradle/libs.versions.toml based on provided tag values."
+            group = "CI Utilities"
 
-            // These properties must be set when the task is called, e.g.,
-            // via -PnewVersionName=... -PnewVersionCode=...
-            // Provide convention values for local testing/default, but expect them to be overridden.
             newVersionName.set(project.providers.gradleProperty("newVersionName").orElse("0.0.1"))
-
+            // newVersionCode is derived from newVersionName in the task if not explicitly set via property
             libsVersionsTomlFile.set(target.rootProject.file("gradle/libs.versions.toml"))
             outputLibsVersionsTomlFile.set(target.rootProject.file("gradle/libs.versions.toml"))
-            // Same file
             outputRevisionFile.set(target.rootProject.file(".github/workflows/.revision-version"))
-
-            // For tasks that modify files and are part of a CI/CD pipeline,
-            // it's often practical to make them always run.
             outputs.upToDateWhen { false }
         }
-        // In your root build.gradle.kts
-
-// ... (other plugins, dependencies, etc.)
 
         target.tasks.register<RemoveFirebaseReferencesTask>("removeFirebaseReferences") {
             description = "Removes all known Firebase-related declarations from various Gradle files."
+            group = "CI Utilities"
 
-            // Set up input and output files
-            // Make sure these paths are correct relative to your project root!
             settingsGradleKtsFile.set(target.rootProject.file("settings.gradle.kts"))
-            outputSettingsGradleKtsFile.set(target.rootProject.file("settings.gradle.kts")) // Modify in place
-
+            outputSettingsGradleKtsFile.set(target.rootProject.file("settings.gradle.kts"))
             firebaseConventionPluginFile.set(
                 target.rootProject.file(
                     "build-logic/convention/src/main/kotlin/AndroidApplicationFirebaseConventionPlugin.kt",
@@ -95,20 +72,28 @@ class CiTaskPlugin : Plugin<Project> {
                 target.rootProject.file(
                     "build-logic/convention/src/main/kotlin/AndroidApplicationFirebaseConventionPlugin.kt",
                 ),
-            ) // Modify in place
-
+            )
             buildLogicConventionBuildGradleKtsFile.set(
                 target.rootProject.file("build-logic/convention/build.gradle.kts"),
             )
             outputBuildLogicConventionBuildGradleKtsFile.set(
                 target.rootProject.file("build-logic/convention/build.gradle.kts"),
-            ) // Modify in place
-
+            )
             rootBuildGradleKtsFile.set(target.rootProject.file("build.gradle.kts"))
-            outputRootBuildGradleKtsFile.set(target.rootProject.file("build.gradle.kts")) // Modify in place
-
-            // This task modifies files, so it should almost always run.
+            outputRootBuildGradleKtsFile.set(target.rootProject.file("build.gradle.kts"))
             outputs.upToDateWhen { false }
         }
+
+        // VVV REGISTERING RenameProjectArtifactsTask VVV
+        target.tasks.register<RenameProjectArtifactsTask>("renameProjectArtifacts") {
+            description = "Renames package, app name, and file prefixes across the project."
+            group = "Project Refactoring"
+
+            newPackageName.convention(target.providers.gradleProperty("newPackageName").orElse("com.example.newapp"))
+            newAppName.convention(target.providers.gradleProperty("newAppName").orElse("NewDefaultApp"))
+            newPrefix.convention(target.providers.gradleProperty("newPrefix").orElse("nda"))
+
+        }
+
     }
 }
