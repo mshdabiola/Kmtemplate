@@ -17,51 +17,97 @@ package com.mshdabiola.kotlinmultiplatformtemplate
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.test.assertIsDisplayed
+import androidx.compose.ui.test.isNotDisplayed
+import androidx.compose.ui.test.junit4.ComposeContentTestRule
 import androidx.compose.ui.test.junit4.createComposeRule
+import androidx.compose.ui.test.onAllNodesWithTag
 import androidx.compose.ui.test.onNodeWithTag
-import androidx.compose.ui.unit.DpSize
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.window.Window
-import androidx.compose.ui.window.WindowPlacement
-import androidx.compose.ui.window.WindowPosition
-import androidx.compose.ui.window.WindowState
-import androidx.compose.ui.window.rememberWindowState
+import androidx.compose.ui.test.performTextInput
+import androidx.compose.ui.test.printToLog
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.LifecycleRegistry
+import androidx.lifecycle.ViewModelStore
+import androidx.lifecycle.ViewModelStoreOwner
+import androidx.lifecycle.compose.LocalLifecycleOwner
+import androidx.lifecycle.viewmodel.compose.LocalViewModelStoreOwner
+import androidx.window.core.layout.WindowSizeClass
+import androidx.window.core.layout.WindowWidthSizeClass
 import co.touchlab.kermit.Logger
 import co.touchlab.kermit.koin.KermitKoinLogger
 import co.touchlab.kermit.koin.kermitLoggerModule
-import com.mshdabiola.designsystem.drawable.KmtDrawable
-import com.mshdabiola.designsystem.strings.KmtStrings
+import com.mshdabiola.detail.DetailScreenTestTags
 import com.mshdabiola.detail.detailModule
+import com.mshdabiola.detail.navigation.Detail
+import com.mshdabiola.detail.navigation.navigateToDetail
+import com.mshdabiola.kotlinmultiplatformtemplate.ui.KmtAppState
 import com.mshdabiola.kotlinmultiplatformtemplate.ui.KmtAppTestTags
 import com.mshdabiola.kotlinmultiplatformtemplate.ui.SplashScreen
+import com.mshdabiola.kotlinmultiplatformtemplate.ui.SplashScreenTestTags
+import com.mshdabiola.kotlinmultiplatformtemplate.ui.rememberKmtAppState
+import com.mshdabiola.main.MainScreenTestTags
 import com.mshdabiola.main.mainModule
+import com.mshdabiola.main.navigation.Main
 import com.mshdabiola.model.getLoggerWithTag
+import com.mshdabiola.setting.SettingScreenTestTags
+import com.mshdabiola.setting.navigation.Setting
 import com.mshdabiola.setting.settingModule
 import com.mshdabiola.testing.fake.testDataModule
 import com.mshdabiola.testing.util.testLogger
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.test.StandardTestDispatcher
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
+import org.junit.rules.TestWatcher
+import org.junit.runner.Description
+import org.koin.core.context.GlobalContext.getKoinApplicationOrNull
+import org.koin.core.context.GlobalContext.unloadKoinModules
+import org.koin.core.context.loadKoinModules
 import org.koin.core.context.startKoin
-import org.koin.core.context.stopKoin
+import org.koin.core.module.Module
 import org.koin.core.module.dsl.viewModel
 import org.koin.dsl.module
 import org.koin.test.KoinTest
+
+private val testViewModelStoreOwner = object : ViewModelStoreOwner {
+    override val viewModelStore = ViewModelStore()
+}
+private class TestLifecycleOwner(val composeTestRule: ComposeContentTestRule) : LifecycleOwner {
+    private val lifecycleRegistry = LifecycleRegistry(this)
+
+    init {
+        // Initialize the lifecycle state.
+        // For many tests, CREATED or STARTED is enough.
+        // If you're testing things that react to RESUMED, you might need to advance it further.
+        composeTestRule.runOnUiThread { lifecycleRegistry.currentState = Lifecycle.State.STARTED }
+    }
+
+    // Helper methods to control lifecycle if needed for specific tests
+    fun handleLifecycleEvent(event: Lifecycle.Event) {
+        composeTestRule.runOnUiThread { lifecycleRegistry.handleLifecycleEvent(event) }
+    }
+
+    override val lifecycle: Lifecycle
+        get() = lifecycleRegistry
+}
 
 class KmtAppTest : KoinTest {
 
     @get:Rule
     val composeTestRule = createComposeRule()
-
+    private lateinit var testLifecycleOwner: TestLifecycleOwner
+    private lateinit var appState: KmtAppState
     val appModule =
         module {
             includes(testDataModule, detailModule, mainModule, settingModule)
@@ -73,32 +119,60 @@ class KmtAppTest : KoinTest {
             }
         }
 
+    @get:Rule
+    val koinTestRule = KoinTestRule(
+        modules = listOf(
+            appModule,
+            kermitLoggerModule(testLogger),
+        ),
+    )
+
     @Before
     fun init() {
-        startKoin {
-            logger(
-                KermitKoinLogger(Logger.withTag("koin")),
-            )
-
-            modules(
-                appModule,
-                kermitLoggerModule(testLogger),
-            )
-        }
+        testLifecycleOwner = TestLifecycleOwner(composeTestRule)
+        testLifecycleOwner.handleLifecycleEvent(Lifecycle.Event.ON_CREATE)
+        // You might want to move it to RESUMED before setContent if your UI expects it
+        testLifecycleOwner.handleLifecycleEvent(Lifecycle.Event.ON_START)
+        testLifecycleOwner.handleLifecycleEvent(Lifecycle.Event.ON_RESUME)
     }
 
     @After
     fun tearDown() {
-        stopKoin() // Stop Koin after each test
+        println("tearDown")
+        // Allow Compose and Navigation to settle before tearing down lifecycle
+        composeTestRule.waitForIdle()
+
+        // Bring lifecycle down gracefully
+        testLifecycleOwner.handleLifecycleEvent(Lifecycle.Event.ON_PAUSE)
+        composeTestRule.waitForIdle() // Allow observers to react
+        testLifecycleOwner.handleLifecycleEvent(Lifecycle.Event.ON_STOP)
+        composeTestRule.waitForIdle() // Allow observers to react
+
+        // At this point, NavBackStackEntry lifecycles should have also transitioned down if they were active.
+        // Destroy the main lifecycle owner
+        testLifecycleOwner.handleLifecycleEvent(Lifecycle.Event.ON_DESTROY)
+        composeTestRule.waitForIdle() // Final settle
     }
 
+    @OptIn(ExperimentalMaterial3ExpressiveApi::class)
     @Composable
-    fun KmtApp(windowState: WindowState) {
-        Window(
-            onCloseRequest = {},
-            title = "${KmtStrings.brand} v${KmtStrings.version}",
-            icon = KmtDrawable.brandImage,
-            state = windowState,
+    fun KmtApp(windowWidthSizeClass: WindowWidthSizeClass = WindowWidthSizeClass.COMPACT) {
+        val testCoroutineScope = CoroutineScope(StandardTestDispatcher())
+
+        val windowSizeClass = WindowSizeClass.compute(
+            when (windowWidthSizeClass) {
+                WindowWidthSizeClass.COMPACT -> 300f // dpWidth
+                WindowWidthSizeClass.MEDIUM -> 700f
+                WindowWidthSizeClass.EXPANDED -> 900f
+                else -> 300f
+            },
+            800f, // dpHeight, less critical for these tests
+        )
+        appState = rememberKmtAppState(windowSizeClass, testCoroutineScope)
+
+        CompositionLocalProvider(
+            LocalViewModelStoreOwner provides testViewModelStoreOwner,
+            LocalLifecycleOwner provides testLifecycleOwner,
         ) {
             val show = remember { mutableStateOf(true) }
             LaunchedEffect(Unit) {
@@ -106,7 +180,7 @@ class KmtAppTest : KoinTest {
                 show.value = false
             }
             Box(Modifier.fillMaxSize()) {
-                com.mshdabiola.kotlinmultiplatformtemplate.ui.KmtApp()
+                com.mshdabiola.kotlinmultiplatformtemplate.ui.KmtApp(appState = appState)
                 if (show.value) {
                     SplashScreen()
                 }
@@ -117,13 +191,7 @@ class KmtAppTest : KoinTest {
     @Test
     fun kmtApp_initialStructure_isDisplayed_compact() {
         composeTestRule.setContent {
-            val windowState =
-                rememberWindowState(
-                    size = DpSize(width = 1100.dp, height = 600.dp),
-                    placement = WindowPlacement.Maximized,
-                    position = WindowPosition.Aligned(Alignment.Center),
-                )
-            KmtApp(windowState)
+            KmtApp()
         }
 
         // Check for the root layout
@@ -145,5 +213,142 @@ class KmtAppTest : KoinTest {
         composeTestRule.onNodeWithTag(KmtAppTestTags.NAV_HOST)
             .assertExists("NavHost should exist")
             .assertIsDisplayed()
+    }
+
+    @Test
+    fun kmtApp_initialStructure_isDisplayed_compact2() {
+        composeTestRule.setContent {
+            KmtApp()
+        }
+
+        // Wait for splash screen to disappear if it blocks initial UI
+//        composeTestRule.waitUntil(timeoutMillis = 3000) {
+        composeTestRule.onNodeWithTag(SplashScreenTestTags.SCREEN_ROOT) // Assuming SplashScreen has this tag
+            .isNotDisplayed()
+//        }
+
+        // Check for the root layout
+        composeTestRule.onNodeWithTag(KmtAppTestTags.APP_ROOT_LAYOUT)
+            .assertExists("App root layout should exist")
+            .assertIsDisplayed()
+
+        // Check for the gradient background
+        composeTestRule.onNodeWithTag(KmtAppTestTags.GRADIENT_BACKGROUND)
+            .assertExists("Gradient background should exist")
+            .assertIsDisplayed()
+
+        // Check for the main scaffold
+        composeTestRule.onNodeWithTag(KmtAppTestTags.MAIN_SCAFFOLD)
+            .assertExists("Main scaffold should exist")
+            .assertIsDisplayed()
+
+        // Check for the NavHost
+        composeTestRule.onNodeWithTag(KmtAppTestTags.NAV_HOST)
+            .assertExists("NavHost should exist")
+            .assertIsDisplayed()
+    }
+
+    @Test
+    fun kmtApp_verifyInitialScreen_isMainScreen() {
+        composeTestRule.setContent {
+            KmtApp()
+        }
+        // Wait for splash screen to potentially disappear
+        composeTestRule.onAllNodesWithTag(SplashScreenTestTags.SCREEN_ROOT).fetchSemanticsNodes().isEmpty()
+
+        // This tag should be on a unique element within your main screen.
+        composeTestRule.onNodeWithTag(MainScreenTestTags.SCREEN_ROOT)
+            .assertIsDisplayed()
+    }
+
+    @Test
+    fun kmtApp_navigateToSettingsScreen_andVerify() {
+        composeTestRule.setContent {
+            KmtApp(windowWidthSizeClass = WindowWidthSizeClass.EXPANDED)
+        }
+        composeTestRule.onAllNodesWithTag(SplashScreenTestTags.SCREEN_ROOT).fetchSemanticsNodes().isEmpty()
+
+        composeTestRule.onNodeWithTag(
+            KmtAppTestTags.APP_ROOT_LAYOUT,
+        )
+            .printToLog("ScaffoldContentArea")
+
+        composeTestRule.runOnUiThread {
+            appState.navigateTopRoute(Setting)
+        }
+
+        composeTestRule.waitForIdle()
+
+        composeTestRule.onNodeWithTag(
+            KmtAppTestTags.APP_ROOT_LAYOUT,
+        )
+            .printToLog("ScaffoldContentArea")
+
+        composeTestRule.onNodeWithTag(SettingScreenTestTags.SCREEN_ROOT, useUnmergedTree = true)
+            .assertIsDisplayed()
+
+        // Verify that the main screen is no longer visible (or not the primary one)
+        composeTestRule.onNodeWithTag(MainScreenTestTags.SCREEN_ROOT)
+            .assertDoesNotExist() // Or .assertIsNotDisplayed() if it's still in composition but hidden
+    }
+
+    @Test
+    fun kmtApp_navigateToDetailScreen_fromMainScreen_andNavigateBack() {
+        composeTestRule.setContent {
+            KmtApp()
+        }
+        composeTestRule.onAllNodesWithTag(SplashScreenTestTags.SCREEN_ROOT).fetchSemanticsNodes().isEmpty()
+
+        // 1. Ensure we are on the Main Screen
+        composeTestRule.onNodeWithTag(MainScreenTestTags.SCREEN_ROOT).assertIsDisplayed()
+
+        // This could be clicking a list item. You'll need a test tag for that item.
+        // For example:
+        composeTestRule.runOnUiThread {
+            appState.navController.navigateToDetail(Detail(-1))
+        }
+
+        composeTestRule.onNodeWithTag(DetailScreenTestTags.SCREEN_ROOT).assertIsDisplayed()
+
+        composeTestRule.onNodeWithTag(DetailScreenTestTags.TITLE_TEXT_FIELD)
+            .performTextInput("Title")
+
+        composeTestRule.onNodeWithTag(DetailScreenTestTags.CONTENT_TEXT_FIELD)
+            .performTextInput("content")
+
+        // Navigate to Settings
+
+        composeTestRule.runOnUiThread {
+            appState.navigateTopRoute(Setting)
+        }
+        composeTestRule.onNodeWithTag(SettingScreenTestTags.SCREEN_ROOT).assertIsDisplayed()
+
+        // If you have a bottom nav item for "Main":
+
+        composeTestRule.runOnUiThread {
+            appState.navigateTopRoute(Main)
+        }
+
+        composeTestRule.onNodeWithTag(MainScreenTestTags.SCREEN_ROOT).assertIsDisplayed()
+        composeTestRule.onNodeWithTag(SettingScreenTestTags.SCREEN_ROOT).assertDoesNotExist() // Or IsNotDisplayed
+    }
+} class KoinTestRule(
+    private val modules: List<Module>,
+) : TestWatcher() {
+    override fun starting(description: Description) {
+        if (getKoinApplicationOrNull() == null) {
+            startKoin {
+                logger(
+                    KermitKoinLogger(Logger.withTag("koin")),
+                )
+                modules(modules)
+            }
+        } else {
+            loadKoinModules(modules)
+        }
+    }
+
+    override fun finished(description: Description) {
+        unloadKoinModules(modules)
     }
 }
