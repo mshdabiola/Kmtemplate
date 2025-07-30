@@ -16,5 +16,5 @@
 package com.mshdabiola.model
 
 actual val generalPath: String
-    get() = System.getProperty("java.io.tmpdir") + "/kotlinmultiplatformtemplate"
-// "${System.getProperty("user.home")}/AppData/Local/kotlinmultiplatformtemplate"
+    get() = System.getProperty("java.io.tmpdir") + "/kmtemplate"
+// "${System.getProperty("user.home")}/AppData/Local/kmtemplate"

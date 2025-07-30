@@ -1,4 +1,4 @@
-# Code of Conduct for KotlinMultiplatformTemplate
+# Code of Conduct for Kmtemplate
 
 ## Our Pledge
 

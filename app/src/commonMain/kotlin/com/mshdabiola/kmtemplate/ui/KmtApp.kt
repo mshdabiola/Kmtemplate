@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.mshdabiola.kotlinmultiplatformtemplate.ui
+package com.mshdabiola.kmtemplate.ui
 
 import androidx.compose.animation.ExperimentalSharedTransitionApi
 import androidx.compose.animation.SharedTransitionLayout
@@ -45,9 +45,9 @@ import com.mshdabiola.designsystem.component.KmtGradientBackground
 import com.mshdabiola.designsystem.theme.GradientColors
 import com.mshdabiola.designsystem.theme.KmtTheme
 import com.mshdabiola.designsystem.theme.LocalGradientColors
-import com.mshdabiola.kotlinmultiplatformtemplate.MainActivityUiState
-import com.mshdabiola.kotlinmultiplatformtemplate.MainAppViewModel
-import com.mshdabiola.kotlinmultiplatformtemplate.navigation.KotlinMultiplatformTemplateAppNavHost
+import com.mshdabiola.kmtemplate.MainActivityUiState
+import com.mshdabiola.kmtemplate.MainAppViewModel
+import com.mshdabiola.kmtemplate.navigation.KotlinMultiplatformTemplateAppNavHost
 import com.mshdabiola.model.DarkThemeConfig
 import com.mshdabiola.ui.LocalSharedTransitionScope
 import com.mshdabiola.ui.semanticsCommon

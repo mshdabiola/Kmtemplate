@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.mshdabiola.kotlinmultiplatformtemplate
+package com.mshdabiola.kmtemplate
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -42,13 +42,13 @@ import com.mshdabiola.detail.DetailScreenTestTags
 import com.mshdabiola.detail.detailModule
 import com.mshdabiola.detail.navigation.Detail
 import com.mshdabiola.detail.navigation.navigateToDetail
-import com.mshdabiola.kotlinmultiplatformtemplate.ui.KmtAppState
-import com.mshdabiola.kotlinmultiplatformtemplate.ui.KmtAppTestTags
-import com.mshdabiola.kotlinmultiplatformtemplate.ui.SplashScreen
-import com.mshdabiola.kotlinmultiplatformtemplate.ui.SplashScreenTestTags
-import com.mshdabiola.kotlinmultiplatformtemplate.ui.rememberKmtAppState
-import com.mshdabiola.kotlinmultiplatformtemplate.util.KoinTestRule
-import com.mshdabiola.kotlinmultiplatformtemplate.util.TestLifecycleOwner
+import com.mshdabiola.kmtemplate.ui.KmtAppState
+import com.mshdabiola.kmtemplate.ui.KmtAppTestTags
+import com.mshdabiola.kmtemplate.ui.SplashScreen
+import com.mshdabiola.kmtemplate.ui.SplashScreenTestTags
+import com.mshdabiola.kmtemplate.ui.rememberKmtAppState
+import com.mshdabiola.kmtemplate.util.KoinTestRule
+import com.mshdabiola.kmtemplate.util.TestLifecycleOwner
 import com.mshdabiola.main.MainScreenTestTags
 import com.mshdabiola.main.mainModule
 import com.mshdabiola.main.navigation.Main
@@ -149,7 +149,7 @@ class KmtAppTest : KoinTest {
                 show.value = false
             }
             Box(Modifier.fillMaxSize()) {
-                com.mshdabiola.kotlinmultiplatformtemplate.ui.KmtApp(appState = appState)
+                com.mshdabiola.kmtemplate.ui.KmtApp(appState = appState)
                 if (show.value) {
                     SplashScreen()
                 }

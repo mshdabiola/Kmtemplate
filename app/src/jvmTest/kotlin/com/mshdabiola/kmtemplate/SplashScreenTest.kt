@@ -13,14 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.mshdabiola.kotlinmultiplatformtemplate
+package com.mshdabiola.kmtemplate
 
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithTag
 import com.mshdabiola.designsystem.theme.KmtTheme // Assuming your theme is needed for proper rendering
-import com.mshdabiola.kotlinmultiplatformtemplate.ui.SplashScreen
-import com.mshdabiola.kotlinmultiplatformtemplate.ui.SplashScreenTestTags // Import the test tags
+import com.mshdabiola.kmtemplate.ui.SplashScreen
+import com.mshdabiola.kmtemplate.ui.SplashScreenTestTags // Import the test tags
 import org.junit.Rule
 import org.junit.Test
 

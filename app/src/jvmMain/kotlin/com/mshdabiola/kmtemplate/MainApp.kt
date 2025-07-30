@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.mshdabiola.kotlinmultiplatformtemplate
+package com.mshdabiola.kmtemplate
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -38,9 +38,9 @@ import co.touchlab.kermit.loggerConfigInit
 import co.touchlab.kermit.platformLogWriter
 import com.mshdabiola.designsystem.drawable.KmtDrawable
 import com.mshdabiola.designsystem.strings.KmtStrings
-import com.mshdabiola.kotlinmultiplatformtemplate.di.appModule
-import com.mshdabiola.kotlinmultiplatformtemplate.ui.KmtApp
-import com.mshdabiola.kotlinmultiplatformtemplate.ui.SplashScreen
+import com.mshdabiola.kmtemplate.di.appModule
+import com.mshdabiola.kmtemplate.ui.KmtApp
+import com.mshdabiola.kmtemplate.ui.SplashScreen
 import com.mshdabiola.model.CustomLogWriter
 import kotlinx.coroutines.delay
 import org.koin.core.context.GlobalContext.startKoin

@@ -18,8 +18,8 @@ export TOKEN="your_actual_token"
     conveyor make site
     ./gradlew run
 
-./gradlew app:jvmRunHot -PmainClass=com.mshdabiola.kotlinmultiplatformtemplate.MainAppKt
-./gradlew app:jvmRun -PmainClass=com.mshdabiola.kotlinmultiplatformtemplate.MainAppKt
+./gradlew app:jvmRunHot -PmainClass=com.mshdabiola.kmtemplate.MainAppKt
+./gradlew app:jvmRun -PmainClass=com.mshdabiola.kmtemplate.MainAppKt
 Use `./gradlew reload` to hot reload the application
 | Use `./gradlew :app:hotReloadJvmMain` to hot reload the application (alternative)
 | Use `./gradlew :app:jvmRunHot --auto` to automatically reload the application on source changes

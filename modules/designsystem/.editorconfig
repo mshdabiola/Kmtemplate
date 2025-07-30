@@ -1,7 +1,7 @@
 
 
 [*.{kt,kts}]
-ktlint_kotlinmultiplatformtemplate_prefer-method-name=disabled
+ktlint_Kmtemplate_prefer-method-name=disabled
 
 [*.{kt,kts}]
-ktlint_kotlinmultiplatformtemplate_prefer-receiver-name=disabled
+ktlint_Kmtemplate_prefer-receiver-name=disabled

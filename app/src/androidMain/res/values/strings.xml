@@ -15,7 +15,7 @@
      limitations under the License.
 -->
 <resources>
-    <string name="app_name">KotlinMultiplatformTemplate</string>
+    <string name="app_name">Kmtemplate</string>
     <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
 
 </resources>

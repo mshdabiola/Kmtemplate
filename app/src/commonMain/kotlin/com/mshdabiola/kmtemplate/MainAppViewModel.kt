@@ -13,14 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.mshdabiola.kotlinmultiplatformtemplate
+package com.mshdabiola.kmtemplate
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import co.touchlab.kermit.Logger
 import com.mshdabiola.data.repository.UserDataRepository
-import com.mshdabiola.kotlinmultiplatformtemplate.MainActivityUiState.Loading
-import com.mshdabiola.kotlinmultiplatformtemplate.MainActivityUiState.Success
+import com.mshdabiola.kmtemplate.MainActivityUiState.Loading
+import com.mshdabiola.kmtemplate.MainActivityUiState.Success
 import com.mshdabiola.model.UserData
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow

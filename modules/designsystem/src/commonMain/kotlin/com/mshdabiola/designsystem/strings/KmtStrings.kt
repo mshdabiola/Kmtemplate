@@ -16,11 +16,11 @@
 package com.mshdabiola.designsystem.strings
 
 import androidx.compose.runtime.Composable
-import kotlinmultiplatformtemplate.modules.designsystem.generated.resources.Res
-import kotlinmultiplatformtemplate.modules.designsystem.generated.resources.brand
-import kotlinmultiplatformtemplate.modules.designsystem.generated.resources.last_update
-import kotlinmultiplatformtemplate.modules.designsystem.generated.resources.version
-import kotlinmultiplatformtemplate.modules.designsystem.generated.resources.version_name
+import kmtemplate.modules.designsystem.generated.resources.Res
+import kmtemplate.modules.designsystem.generated.resources.brand
+import kmtemplate.modules.designsystem.generated.resources.last_update
+import kmtemplate.modules.designsystem.generated.resources.version
+import kmtemplate.modules.designsystem.generated.resources.version_name
 import org.jetbrains.compose.resources.stringResource
 
 object KmtStrings {

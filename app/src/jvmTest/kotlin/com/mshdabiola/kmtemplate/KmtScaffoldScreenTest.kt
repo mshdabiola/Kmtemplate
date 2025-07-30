@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.mshdabiola.kotlinmultiplatformtemplate
+package com.mshdabiola.kmtemplate
 
 import androidx.compose.animation.ExperimentalSharedTransitionApi
 import androidx.compose.animation.SharedTransitionLayout
@@ -39,12 +39,12 @@ import androidx.window.core.layout.WindowWidthSizeClass
 import com.mshdabiola.designsystem.theme.KmtTheme
 import com.mshdabiola.detail.navigation.Detail
 import com.mshdabiola.detail.navigation.navigateToDetail
-import com.mshdabiola.kotlinmultiplatformtemplate.ui.DrawerContentTestTags
-import com.mshdabiola.kotlinmultiplatformtemplate.ui.FabTestTags
-import com.mshdabiola.kotlinmultiplatformtemplate.ui.KmtAppState
-import com.mshdabiola.kotlinmultiplatformtemplate.ui.KmtScaffold
-import com.mshdabiola.kotlinmultiplatformtemplate.ui.KmtScaffoldTestTags
-import com.mshdabiola.kotlinmultiplatformtemplate.ui.rememberKmtAppState
+import com.mshdabiola.kmtemplate.ui.DrawerContentTestTags
+import com.mshdabiola.kmtemplate.ui.FabTestTags
+import com.mshdabiola.kmtemplate.ui.KmtAppState
+import com.mshdabiola.kmtemplate.ui.KmtScaffold
+import com.mshdabiola.kmtemplate.ui.KmtScaffoldTestTags
+import com.mshdabiola.kmtemplate.ui.rememberKmtAppState
 import com.mshdabiola.main.navigation.Main
 import com.mshdabiola.setting.navigation.Setting
 import com.mshdabiola.ui.LocalSharedTransitionScope

@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.mshdabiola.kotlinmultiplatformtemplate
+package com.mshdabiola.kmtemplate
 
 import android.graphics.Color
 import android.os.Bundle
@@ -29,8 +29,8 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import com.mshdabiola.kotlinmultiplatformtemplate.ui.KmtApp
-import com.mshdabiola.kotlinmultiplatformtemplate.ui.shouldUseDarkTheme
+import com.mshdabiola.kmtemplate.ui.KmtApp
+import com.mshdabiola.kmtemplate.ui.shouldUseDarkTheme
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch

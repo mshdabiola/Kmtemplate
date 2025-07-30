@@ -13,11 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.mshdabiola.kotlinmultiplatformtemplate.di
+package com.mshdabiola.kmtemplate.di
 
 import com.mshdabiola.data.di.dataModule
 import com.mshdabiola.detail.detailModule
-import com.mshdabiola.kotlinmultiplatformtemplate.MainAppViewModel
+import com.mshdabiola.kmtemplate.MainAppViewModel
 import com.mshdabiola.main.mainModule
 import com.mshdabiola.model.getLoggerWithTag
 import com.mshdabiola.setting.settingModule

@@ -13,12 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.mshdabiola.kotlinmultiplatformtemplate
+package com.mshdabiola.kmtemplate
 
 import app.cash.turbine.test
 import co.touchlab.kermit.Logger
-import com.mshdabiola.kotlinmultiplatformtemplate.MainActivityUiState.Loading
-import com.mshdabiola.kotlinmultiplatformtemplate.MainActivityUiState.Success
+import com.mshdabiola.kmtemplate.MainActivityUiState.Loading
+import com.mshdabiola.kmtemplate.MainActivityUiState.Success
 import com.mshdabiola.model.DarkThemeConfig
 import com.mshdabiola.model.UserData
 import com.mshdabiola.testing.fake.repository.FakeUserDataRepository // Import the shared fake

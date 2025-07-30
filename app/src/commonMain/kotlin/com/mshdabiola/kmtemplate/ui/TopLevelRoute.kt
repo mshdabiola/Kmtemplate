@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.mshdabiola.kotlinmultiplatformtemplate.ui
+package com.mshdabiola.kmtemplate.ui
 
 import androidx.compose.ui.graphics.vector.ImageVector
 

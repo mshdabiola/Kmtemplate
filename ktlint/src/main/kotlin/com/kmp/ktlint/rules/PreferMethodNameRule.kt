@@ -23,12 +23,12 @@ import org.jetbrains.kotlin.com.intellij.lang.ASTNode
 import org.jetbrains.kotlin.psi.KtCallExpression
 
 class PreferMethodNameRule : Rule(
-    RuleId("kotlinmultiplatformtemplate:prefer-method-name"),
+    RuleId("kmtemplate:prefer-method-name"),
     about =
     Rule.About(
         maintainer = "Your Name",
-        repositoryUrl = "https://github.com/mshdabiola/kotlinmultiplatformtemplate",
-        issueTrackerUrl = "https://github.com/mshdabiola/kotlinmultiplatformtemplate",
+        repositoryUrl = "https://github.com/mshdabiola/kmtemplate",
+        issueTrackerUrl = "https://github.com/mshdabiola/kmtemplate",
     ),
 ) {
     // Define the mapping of deprecated method names to preferred method names

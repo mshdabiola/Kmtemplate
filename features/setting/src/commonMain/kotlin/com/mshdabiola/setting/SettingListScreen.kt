@@ -43,11 +43,11 @@ import androidx.compose.ui.unit.dp
 import com.mshdabiola.designsystem.component.KmtIconButton
 import com.mshdabiola.designsystem.component.KmtTopAppBar
 import com.mshdabiola.designsystem.drawable.KmtIcons
-import kotlinmultiplatformtemplate.features.setting.generated.resources.Res
-import kotlinmultiplatformtemplate.features.setting.generated.resources.general
-import kotlinmultiplatformtemplate.features.setting.generated.resources.screen_name
-import kotlinmultiplatformtemplate.features.setting.generated.resources.segment
-import kotlinmultiplatformtemplate.features.setting.generated.resources.support
+import kmtemplate.features.setting.generated.resources.Res
+import kmtemplate.features.setting.generated.resources.general
+import kmtemplate.features.setting.generated.resources.screen_name
+import kmtemplate.features.setting.generated.resources.segment
+import kmtemplate.features.setting.generated.resources.support
 import org.jetbrains.compose.resources.stringArrayResource
 import org.jetbrains.compose.resources.stringResource
 

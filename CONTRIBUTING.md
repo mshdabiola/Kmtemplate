@@ -1,6 +1,6 @@
-# Contributing to KotlinMultiplatformTemplate
+# Contributing to Kmtemplate
 
-Thank you for your interest in contributing to the KotlinMultiplatformTemplate project! We appreciate your willingness to help improve and expand our application. By contributing, you help us make this project better for everyone.
+Thank you for your interest in contributing to the Kmtemplate project! We appreciate your willingness to help improve and expand our application. By contributing, you help us make this project better for everyone.
 
 Please take a moment to review these guidelines before making a contribution. Following these guidelines will help us ensure a smooth and efficient contribution process.
 
@@ -23,18 +23,18 @@ Please take a moment to review these guidelines before making a contribution. Fo
 
 ## 1. Getting Started
 
-*   **Fork the Repository:** Start by forking the main KotlinMultiplatformTemplate repository to your GitHub account.
+*   **Fork the Repository:** Start by forking the main Kmtemplate repository to your GitHub account.
 *   **Clone Your Fork:** Clone your forked repository to your local machine.
-*   *   **Set Up Upstream Remote:** Add the original KotlinMultiplatformTemplate repository as an "upstream" remote. This allows you to sync your fork with the latest changes from the main project.
+*   *   **Set Up Upstream Remote:** Add the original Kmtemplate repository as an "upstream" remote. This allows you to sync your fork with the latest changes from the main project.
     *   (Replace `PROJECT_ORGANIZATION` with the actual organization or username of the main repository).
 *   **Sync Your Fork:** Before starting any work, sync your fork with the upstream repository to ensure you have the latest code.
 
 *   ## 2. How to Contribute
 
-There are several ways you can contribute to KotlinMultiplatformTemplate:
+There are several ways you can contribute to Kmtemplate:
 
-*   **Reporting Bugs:** If you find a bug, please report it by opening a new [issue](https://github.com/PROJECT_ORGANIZATION/KotlinMultiplatformTemplate/issues/new?assignees=&labels=&projects=&template=bug_report.md&title=) on the GitHub repository. Provide as much detail as possible, including steps to reproduce the bug, expected behavior, and the environment in which the bug occurred. (Consider creating a `bug_report.md` issue template).
-*   **Suggesting Features:** Have an idea for a new feature or improvement? Open a new [issue](https://github.com/PROJECT_ORGANIZATION/KotlinMultiplatformTemplate/issues/new?assignees=&labels=&projects=&template=feature_request.md&title=) to discuss your suggestion. Explain the feature, its potential benefits, and how it might be implemented. (Consider creating a `feature_request.md` issue template).
+*   **Reporting Bugs:** If you find a bug, please report it by opening a new [issue](https://github.com/PROJECT_ORGANIZATION/Kmtemplate/issues/new?assignees=&labels=&projects=&template=bug_report.md&title=) on the GitHub repository. Provide as much detail as possible, including steps to reproduce the bug, expected behavior, and the environment in which the bug occurred. (Consider creating a `bug_report.md` issue template).
+*   **Suggesting Features:** Have an idea for a new feature or improvement? Open a new [issue](https://github.com/PROJECT_ORGANIZATION/Kmtemplate/issues/new?assignees=&labels=&projects=&template=feature_request.md&title=) to discuss your suggestion. Explain the feature, its potential benefits, and how it might be implemented. (Consider creating a `feature_request.md` issue template).
 *   **Making Code Contributions:** This is the most common way to contribute. It involves writing code to fix bugs, implement features, or improve existing code. Please follow the guidelines below for making code contributions.
 
 ## 3. Development Setup
@@ -89,7 +89,7 @@ A commit message should have the following structure:
 *   **Run Static Analysis:** Run Detekt and other static analysis tools to check for code style and potential issues.
 *   *   **Write Clear Commit Messages:** Follow the commit message guidelines.
 *   **Push Your Branch:** Push your branch to your fork on GitHub.
-*   *   **Create a Pull Request:** Go to the KotlinMultiplatformTemplate repository on GitHub and create a new pull request from your branch.
+*   *   **Create a Pull Request:** Go to the Kmtemplate repository on GitHub and create a new pull request from your branch.
 *   **Provide Details:** In the pull request description, explain your changes, the problem they solve, or the feature they implement. Reference the relevant issue number using `#<issue_number>` (e.g., "This PR addresses #123").
 *   **Address Feedback:** Be prepared to address feedback from maintainers and other contributors.
 
@@ -107,7 +107,7 @@ We strive to create a welcoming and inclusive community. Please adhere to our [C
 
 If you have questions, need help, or want to discuss anything related to contributing, you can:
 
-*   Open a [GitHub issue](https://github.com/PROJECT_ORGANIZATION/KotlinMultiplatformTemplate/issues/new) with your question.
+*   Open a [GitHub issue](https://github.com/PROJECT_ORGANIZATION/Kmtemplate/issues/new) with your question.
 *   [Mention other communication channels if available, e.g., a project Slack channel, Discord server, etc.]
 
 Thank you again for your contribution! We look forward to your pull requests.
