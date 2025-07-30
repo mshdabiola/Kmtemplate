@@ -37,6 +37,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.testTag // Ensure this is imported
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.window.core.layout.WindowSizeClass
 import com.mshdabiola.analytics.AnalyticsHelper
 import com.mshdabiola.analytics.LocalAnalyticsHelper
 import com.mshdabiola.designsystem.component.KmtBackground
@@ -69,13 +70,12 @@ object KmtAppTestTags {
     ExperimentalMaterial3ExpressiveApi::class,
 )
 @Composable
-fun KmtApp() {
-    val windowAdaptiveInfo = currentWindowAdaptiveInfo()
-
-    val appState =
-        rememberKmtAppState(
-            windowSizeClass = windowAdaptiveInfo.windowSizeClass,
-        )
+fun KmtApp(
+    windowSizeClass: WindowSizeClass = currentWindowAdaptiveInfo().windowSizeClass,
+    appState: KmtAppState = rememberKmtAppState(
+        windowSizeClass = windowSizeClass,
+    ),
+) {
     val shouldShowGradientBackground = true
 
     val viewModel: MainAppViewModel = koinViewModel()
