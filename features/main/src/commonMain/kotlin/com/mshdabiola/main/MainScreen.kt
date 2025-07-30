@@ -56,7 +56,7 @@ import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
 // Define a TestTags object for MainScreen
-internal object MainScreenTestTags {
+object MainScreenTestTags {
     const val SCREEN_ROOT = "MainScreenRoot"
     const val TOP_APP_BAR = "MainScreenTopAppBar"
     const val LOADING_INDICATOR = "MainScreenLoadingIndicator"
