@@ -343,7 +343,63 @@ abstract class RenameProjectArtifactsTask : DefaultTask() {
     }
 
     private fun extractPrefixFromApplicationKt(rootProject: Project, currentPackageName: String): String? {
-      return  "nda"
+        if (currentPackageName.isEmpty()) {
+            logger.warn("Cannot extract prefix: current package name is unknown.")
+            return null
+        }
+
+        val appModule = rootProject.allprojects.find { it.name == "app" } // Assuming your app module is named 'app'
+        if (appModule == null) {
+            logger.warn("Cannot extract prefix: 'app' module not found.")
+            return null
+        }
+
+        // Construct the expected path to the Application class
+        // Adjust "androidMain" if your KMP structure for the Application class is different
+        // Adjust "NdaApplication.kt" if your Application class has a different common name pattern
+        val packageAsPath = currentPackageName.replace('.', File.separatorChar)
+        val expectedAppFilePathParts = listOf(
+            "src", "androidMain", "kotlin", packageAsPath, "NdaApplication.kt" // Specific to your example
+            // Add more common Application class names if needed:
+            // "src", "androidMain", "kotlin", packageAsPath, "MainApplication.kt"
+            // "src", "androidMain", "kotlin", packageAsPath, "App.kt"
+        )
+        // Resolve the file path within the app module
+        val applicationFile = appModule.projectDir.resolve(expectedAppFilePathParts.joinToString(File.separator))
+
+        if (applicationFile.exists() && applicationFile.isFile) {
+            try {
+                val content = applicationFile.readText()
+                // Regex to find "class NdaApplication" (or similar) and capture "Nda"
+                // This regex assumes:
+                // - The class name starts with an uppercase prefix (e.g., "Nda").
+                // - The prefix is followed by "Application".
+                // - It captures the part before "Application".
+                // \b ensures word boundaries to avoid partial matches.
+                val classNamePattern = Regex("""\bclass\s+([A-Z][a-zA-Z0-9_]*?)Application\b""")
+                val match = classNamePattern.find(content)
+
+                if (match != null && match.groupValues.size > 1) {
+                    val potentialPrefix = match.groupValues[1] // The captured group
+                    if (potentialPrefix.isNotBlank()) {
+                        logger.lifecycle("Extracted prefix '$potentialPrefix' from ${applicationFile.path}")
+                        return potentialPrefix.toLowerCase() // Conventionally, prefixes are often lowercase
+                    }
+                } else {
+                    logger.warn("Could not find a class name matching the pattern 'PrefixApplication' in ${applicationFile.path}")
+                }
+            } catch (e: Exception) {
+                logger.error("Error reading or parsing ${applicationFile.path}: ${e.message}")
+            }
+        } else {
+            logger.warn("Application file not found at expected path: ${applicationFile.path}")
+            // Fallback: You could try searching more broadly if the specific path fails,
+            // but that makes the logic more complex and potentially less reliable.
+            // For now, we'll stick to the expected path.
+        }
+
+        logger.warn("Could not automatically determine old class prefix from Application class.")
+        return null // Or a default/fallback if appropriate
     }
 }
 
