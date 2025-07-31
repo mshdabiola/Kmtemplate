@@ -1,5 +1,4 @@
-// build-logic/convention/src/main/kotlin/com/mshdabiola/app/RenameProjectArtifactsTask.kt
-package com.mshdabiola.app // Or your preferred package for build logic
+package com.mshdabiola.app
 
 import org.gradle.api.DefaultTask
 import org.gradle.api.Project
@@ -62,14 +61,18 @@ abstract class RenameProjectArtifactsTask : DefaultTask() {
                         val newPackageDir = baseSrcDir.resolve(newPkgPath)
                         if (oldPackageDir.path != newPackageDir.path) {
                             if (newPackageDir.exists()) {
-                                logger.warn("WARNING: Target package directory ${newPackageDir.path} already exists. Manual merge might be needed.")
+                                logger.warn("WARNING: Target package directory ${newPackageDir.path} " +
+                                    "already exists. Manual merge might be needed.")
                             } else {
                                 newPackageDir.parentFile.mkdirs()
-                                logger.lifecycle("Attempting to rename directory: ${oldPackageDir.path} to ${newPackageDir.path}")
+                                logger.lifecycle("Attempting to rename directory: ${oldPackageDir.path} " +
+                                    "to ${newPackageDir.path}")
                                 if (oldPackageDir.renameTo(newPackageDir)) {
-                                    logger.lifecycle("SUCCESS: Renamed directory ${oldPackageDir.name} to ${newPackageDir.name} in ${proj.path}")
+                                    logger.lifecycle("SUCCESS: Renamed directory ${oldPackageDir.name} " +
+                                        "to ${newPackageDir.name} in ${proj.path}")
                                 } else {
-                                    logger.error("ERROR: Failed to rename directory ${oldPackageDir.path} in ${proj.path}")
+                                    logger.error("ERROR: Failed to rename" +
+                                        " directory ${oldPackageDir.path} in ${proj.path}")
                                 }
                             }
                         }
@@ -234,7 +237,8 @@ abstract class RenameProjectArtifactsTask : DefaultTask() {
         logger.lifecycle("--------------------------------------------------------------------")
         logger.lifecycle("IMPORTANT MANUAL STEPS REQUIRED:")
         logger.lifecycle("- Review ALL changes carefully using your version control (git diff).")
-        logger.lifecycle("- If module names were changed in settings.gradle.kts (and their corresponding include statements), RENAME THE ACTUAL MODULE DIRECTORIES accordingly.")
+        logger.lifecycle("- If module names were changed in settings.gradle.kts " +
+            "(and their corresponding include statements), RENAME THE ACTUAL MODULE DIRECTORIES accordingly.")
         logger.lifecycle("- In Android Studio/IntelliJ: File -> Invalidate Caches / Restart.")
         logger.lifecycle("- Perform a clean build: ./gradlew clean build")
         logger.lifecycle("--------------------------------------------------------------------")
@@ -263,7 +267,8 @@ abstract class RenameProjectArtifactsTask : DefaultTask() {
             rootProject.allprojects.find { it.name == "app" }?.file("src/main/res/values/strings.xml"),
             rootProject.allprojects.find { it.name == "app" }
                 ?.file("src/androidMain/res/values/strings.xml"), // KMP Android
-            rootProject.projectDir.resolve("app/src/main/res/values/strings.xml"), // If task is run from root
+            rootProject.projectDir.resolve("app/src/main/res/values/strings.xml"),
+            // If task is run from root
         )
         val stringsFile = possibleStringsFiles.find { it.exists() }
 
@@ -299,7 +304,8 @@ abstract class RenameProjectArtifactsTask : DefaultTask() {
             // "src", "androidMain", "kotlin", packageAsPath, "App.kt"
         )
         // Resolve the file path within the app module
-        val applicationFile = appModule.projectDir.resolve(expectedAppFilePathParts.joinToString(File.separator))
+        val applicationFile = appModule.projectDir
+            .resolve(expectedAppFilePathParts.joinToString(File.separator))
 
         if (applicationFile.exists() && applicationFile.isFile) {
             try {
@@ -320,7 +326,8 @@ abstract class RenameProjectArtifactsTask : DefaultTask() {
                         return potentialPrefix.lowercase()
                     }
                 } else {
-                    logger.warn("Could not find a class name matching the pattern 'PrefixApplication' in ${applicationFile.path}")
+                    logger.warn("Could not find a class name matching the pattern " +
+                        "'PrefixApplication' in ${applicationFile.path}")
                 }
             } catch (e: Exception) {
                 logger.error("Error reading or parsing ${applicationFile.path}: ${e.message}")
