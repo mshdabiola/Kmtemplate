@@ -29,3 +29,5 @@ Use `./gradlew reload` to hot reload the application
 ./gradlew build-logic:convention:spotlessApply
 https://randombits.dev/articles/android/fdroid
 
+
+ ./gradlew renameProjectArtifacts -PnewPackageName=com.abiola.notepad -PnewPrefix=NtP
