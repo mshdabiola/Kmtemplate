@@ -84,13 +84,11 @@ class CiTaskPlugin : Plugin<Project> {
             outputs.upToDateWhen { false }
         }
 
-        // VVV REGISTERING RenameProjectArtifactsTask VVV
         target.tasks.register<RenameProjectArtifactsTask>("renameProjectArtifacts") {
             description = "Renames package, app name, and file prefixes across the project."
             group = "Project Refactoring"
 
             newPackageName.convention(target.providers.gradleProperty("newPackageName").orElse("com.example.newapp"))
-            newAppName.convention(target.providers.gradleProperty("newAppName").orElse("NewDefaultApp"))
             newPrefix.convention(target.providers.gradleProperty("newPrefix").orElse("nda"))
 
         }

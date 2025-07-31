@@ -16,23 +16,18 @@ abstract class RenameProjectArtifactsTask : DefaultTask() {
     @get:Option(option = "newPackageName", description = "The new package name (e.g., com.example.newapp)")
     abstract val newPackageName: Property<String>
 
-    @get:Input
-    @get:Option(option = "newAppName", description = "The new application name (e.g., NewCoolApp)")
-    abstract val newAppName: Property<String>
+
 
     @get:Input
     @get:Option(option = "newPrefix", description = "The new file/class prefix (e.g., nca)")
     abstract val newPrefix: Property<String>
 
 
-    // Optional: If you want to configure specific modules to process
-    // @get:Input
-    // abstract val targetModules: ListProperty<String>
 
     @TaskAction
     fun execute() {
         val newPkg = newPackageName.get()
-        val newApp = newAppName.get()
+        val newApp = newPkg.split(".").last()
         val newPfx = newPrefix.get()
         // Ensure these functions correctly handle the case where they might not find the values
         val oldPkg = extractPackageFromAppBuildGradle(rootProject = project.rootProject) ?: ""
@@ -97,18 +92,6 @@ abstract class RenameProjectArtifactsTask : DefaultTask() {
             logger.lifecycle("Scanning for file updates/renames in $logPrefix directory: ${projectDir.path}")
 
             val filesToProcess: ConfigurableFileTree = project.fileTree(projectDir) {
-                // For root project, we might want different include/exclude logic
-//                if (currentProject == project.rootProject) {
-                // Only include specific files at the root, and don't go into sub-project directories again
-//                    include(
-//                        "README.md",
-//                        "LICENSE", // Example
-//                        "settings.gradle.kts", // Already handled later, but can be here too
-//                        "build.gradle.kts", // Root build.gradle.kts if you need to change anything there
-//                        "*.properties" // e.g. gradle.properties
-//                        // Add other specific root file patterns
-//                    )
-                // Exclude common directories that are not subprojects or that you don't want to touch
                 exclude(
                     "**/build/**",
                     "**/.gradle/**",
@@ -117,18 +100,7 @@ abstract class RenameProjectArtifactsTask : DefaultTask() {
                     ".github/**", // Example: GitHub Actions workflows
                     "gradle/**", // Gradle wrapper files
                     "**/*.bin", "**/*.jar", // etc.
-                    // CRITICAL: Exclude all subproject directories to avoid double processing
-                    // project.rootProject.subprojects.map { it.name + "/**" } // This can be tricky if names change
                 )
-
-//
-//                } else { // For sub-projects (modules)
-//                    include(
-//                        "**/*.kt", "**/*.java", "**/*.xml", "**/*.gradle.kts",
-//                        "**/Info.plist", "**/project.pbxproj", "**/Project.swift"
-//                        // No settings.gradle.kts here typically
-//                    )
-//                }
 
                 // Common Excludes for both root (if not already excluded) and modules
                 exclude(
@@ -145,29 +117,24 @@ abstract class RenameProjectArtifactsTask : DefaultTask() {
                 )
             }
 
-            filesToProcess.forEach { file ->
-                // Check if the file is directly in the projectDir (for root project case with depth = 1)
-                // or if it's in a sub-directory (for modules)
+            filesToProcess.forEach fileProcess@ { file ->
 
 
                 var content: String
                 try {
                     if (file.length() > 20 * 1024 * 1024) {
                         logger.debug("Skipping potentially large/binary file: ${file.path}")
-                        return@forEach
+                        return@fileProcess
                     }
                     content = file.readText()
                 } catch (e: Exception) {
                     logger.debug("Skipping non-text or unreadable file: ${file.path} (Reason: ${e.message})")
-                    return@forEach
+                    return@fileProcess
                 }
 
                 var modified = false
                 val originalContent = content
 
-                // --- Apply Replacements ---
-                // (Your existing replacement logic: package, app name, prefix, AndroidManifest, build.gradle.kts)
-                // Ensure this logic is safe to run on all matched file types.
 
                 // 1. Package Name (Kotlin/Java files primarily, also check build files)
                 // Package declarations
@@ -197,9 +164,11 @@ abstract class RenameProjectArtifactsTask : DefaultTask() {
                 if (oldPfx.isNotEmpty()) {
 
 
-                    val oldClassNamePattern = Regex("\\b${Regex.escape(oldPfx.capitalize())}")
+                    val oldClassNamePattern = Regex("\\b${Regex.escape(
+                        oldPfx.replaceFirstChar { it.uppercase() })}")
                     if (content.contains(oldClassNamePattern)) {
-                        content = content.replace(oldClassNamePattern, newPfx.capitalize())
+                        content = content.replace(oldClassNamePattern,
+                            newPfx.replaceFirstChar { it.uppercase() })
                         modified = true
                     }
                     val oldLowerPrefixPattern = Regex("\\b${Regex.escape(oldPfx)}")
@@ -230,15 +199,18 @@ abstract class RenameProjectArtifactsTask : DefaultTask() {
 
                 // --- Rename files based on prefix (only for modules, not typically root files) ---
                 if (currentProject != project.rootProject && oldPfx.isNotEmpty() &&
-                    (file.nameWithoutExtension.startsWith(oldPfx.capitalize()) || file.nameWithoutExtension.startsWith(
+                    (file.nameWithoutExtension.startsWith(
+                        oldPfx.replaceFirstChar { it.uppercase() }) || file.nameWithoutExtension.startsWith(
                         oldPfx,
                     ))
                 ) {
                     val oldFileName = file.name
                     var newFileName = oldFileName
 
-                    if (oldFileName.startsWith(oldPfx.capitalize())) {
-                        newFileName = newFileName.replaceFirst(oldPfx.capitalize(), newPfx.capitalize())
+                    if (oldFileName.startsWith(oldPfx.replaceFirstChar { it.uppercase() })) {
+                        newFileName = newFileName.replaceFirst(
+                            oldPfx.replaceFirstChar { it.uppercase() },
+                            newPfx.replaceFirstChar { it.uppercase() })
                     } else if (oldFileName.startsWith(oldPfx)) {
                         newFileName = newFileName.replaceFirst(oldPfx, newPfx)
                     }
@@ -257,44 +229,6 @@ abstract class RenameProjectArtifactsTask : DefaultTask() {
             }
         }
 
-
-        // --- Update settings.gradle.kts for module names ---
-//        val settingsFile = project.rootProject.file("settings.gradle.kts")
-//        if (settingsFile.exists()) {
-//            var settingsContent = settingsFile.readText()
-//            var modifiedSettings = false
-//            // Example: if your module names are like ':oldPfx-featureA'
-//            if (oldPfx.isNotEmpty()) {
-//                val oldModulePattern = Regex("include\\s*\\(\\s*\"(.*)${Regex.escape(oldPfx)}(.*)\"\\s*\\)")
-//                // This is a simplified regex, adjust if your module names have more complex structures
-//                // and ensure the replacement correctly reconstructs the module path.
-//                // It's safer to target very specific module name patterns.
-//                settingsContent = settingsContent.replace(oldModulePattern) { matchResult ->
-//                    val before = matchResult.groupValues[1]
-//                    val after = matchResult.groupValues[2]
-//                    modifiedSettings = true
-//                    "include(\"$before$newPfx$after\")"
-//                }
-//            }
-//            // If app module itself uses oldPfx or oldAppName in its registered name
-//            // e.g. from include(":app") to include (":MyNewApp") if oldAppName was "app"
-//            // This requires careful handling of directory renames too.
-//            // Example for specific module name changes (safer):
-//            // val oldSpecificModuleName = ":${oldPfx}app"
-//            // val newSpecificModuleName = ":${newPfx}app"
-//            // if (settingsContent.contains("'$oldSpecificModuleName'")) {
-//            //    settingsContent = settingsContent.replace("'$oldSpecificModuleName'", "'$newSpecificModuleName'")
-//            //    modifiedSettings = true
-//            // }
-//
-//
-//            if (modifiedSettings) {
-//                logger.lifecycle("Updating module names in settings.gradle.kts.")
-//                 settingsFile.writeText(settingsContent) // UNCOMMENT FOR ACTUAL MODIFICATION
-//                logger.info("MODIFIED (dry run): ${settingsFile.path} with new module name patterns.")
-//                logger.lifecycle("IMPORTANT: Manual directory rename for affected modules might be needed.")
-//            }
-//        }
 
         logger.lifecycle("Renaming process finished.")
         logger.lifecycle("--------------------------------------------------------------------")
@@ -359,7 +293,7 @@ abstract class RenameProjectArtifactsTask : DefaultTask() {
         // Adjust "NdaApplication.kt" if your Application class has a different common name pattern
         val packageAsPath = currentPackageName.replace('.', File.separatorChar)
         val expectedAppFilePathParts = listOf(
-            "src", "androidMain", "kotlin", packageAsPath, "NdaApplication.kt" // Specific to your example
+            "src", "androidMain", "kotlin", packageAsPath, "KmtApplication.kt" // Specific to your example
             // Add more common Application class names if needed:
             // "src", "androidMain", "kotlin", packageAsPath, "MainApplication.kt"
             // "src", "androidMain", "kotlin", packageAsPath, "App.kt"
@@ -383,7 +317,7 @@ abstract class RenameProjectArtifactsTask : DefaultTask() {
                     val potentialPrefix = match.groupValues[1] // The captured group
                     if (potentialPrefix.isNotBlank()) {
                         logger.lifecycle("Extracted prefix '$potentialPrefix' from ${applicationFile.path}")
-                        return potentialPrefix.toLowerCase() // Conventionally, prefixes are often lowercase
+                        return potentialPrefix.lowercase()
                     }
                 } else {
                     logger.warn("Could not find a class name matching the pattern 'PrefixApplication' in ${applicationFile.path}")
@@ -403,12 +337,3 @@ abstract class RenameProjectArtifactsTask : DefaultTask() {
     }
 }
 
-// Helper extension for the prefix extraction logic
-private fun String.removePrefixMatches(regex: Regex): String {
-    var current = this
-    while (regex.matchesAt(current, 0)) {
-        val match = regex.find(current) ?: break
-        current = current.substring(match.range.last + 1)
-    }
-    return current
-}
