@@ -50,7 +50,8 @@ class CiTaskPlugin : Plugin<Project> {
         }
 
         target.tasks.register<SetVersionFromTagTask>("setVersionFromTag") {
-            description = "Sets the versionName and versionCode in gradle/libs.versions.toml based on provided tag values."
+            description =
+                "Sets the versionName and versionCode in gradle/libs.versions.toml based on provided tag values."
             group = "CI Utilities"
 
             newVersionName.set(project.providers.gradleProperty("newVersionName").orElse("0.0.1"))
@@ -94,8 +95,6 @@ class CiTaskPlugin : Plugin<Project> {
 
             newPackageName.convention(target.providers.gradleProperty("newPackageName").orElse("com.example.newapp"))
             newPrefix.convention(target.providers.gradleProperty("newPrefix").orElse("nda"))
-
         }
-
     }
 }

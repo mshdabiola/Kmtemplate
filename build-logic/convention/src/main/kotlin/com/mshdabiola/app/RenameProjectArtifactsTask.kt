@@ -1,3 +1,18 @@
+/*
+ * Designed and developed by 2024 mshdabiola (lawal abiola)
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.mshdabiola.app
 
 import org.gradle.api.DefaultTask
@@ -15,13 +30,9 @@ abstract class RenameProjectArtifactsTask : DefaultTask() {
     @get:Option(option = "newPackageName", description = "The new package name (e.g., com.example.newapp)")
     abstract val newPackageName: Property<String>
 
-
-
     @get:Input
     @get:Option(option = "newPrefix", description = "The new file/class prefix (e.g., nca)")
     abstract val newPrefix: Property<String>
-
-
 
     @TaskAction
     fun execute() {
@@ -61,18 +72,26 @@ abstract class RenameProjectArtifactsTask : DefaultTask() {
                         val newPackageDir = baseSrcDir.resolve(newPkgPath)
                         if (oldPackageDir.path != newPackageDir.path) {
                             if (newPackageDir.exists()) {
-                                logger.warn("WARNING: Target package directory ${newPackageDir.path} " +
-                                    "already exists. Manual merge might be needed.")
+                                logger.warn(
+                                    "WARNING: Target package directory ${newPackageDir.path} " +
+                                        "already exists. Manual merge might be needed.",
+                                )
                             } else {
                                 newPackageDir.parentFile.mkdirs()
-                                logger.lifecycle("Attempting to rename directory: ${oldPackageDir.path} " +
-                                    "to ${newPackageDir.path}")
+                                logger.lifecycle(
+                                    "Attempting to rename directory: ${oldPackageDir.path} " +
+                                        "to ${newPackageDir.path}",
+                                )
                                 if (oldPackageDir.renameTo(newPackageDir)) {
-                                    logger.lifecycle("SUCCESS: Renamed directory ${oldPackageDir.name} " +
-                                        "to ${newPackageDir.name} in ${proj.path}")
+                                    logger.lifecycle(
+                                        "SUCCESS: Renamed directory ${oldPackageDir.name} " +
+                                            "to ${newPackageDir.name} in ${proj.path}",
+                                    )
                                 } else {
-                                    logger.error("ERROR: Failed to rename" +
-                                        " directory ${oldPackageDir.path} in ${proj.path}")
+                                    logger.error(
+                                        "ERROR: Failed to rename" +
+                                            " directory ${oldPackageDir.path} in ${proj.path}",
+                                    )
                                 }
                             }
                         }
@@ -87,7 +106,8 @@ abstract class RenameProjectArtifactsTask : DefaultTask() {
         // Combine module processing and root directory processing
         val projectsToScan = project.rootProject.allprojects + project.rootProject // Add rootProject itself
 
-        projectsToScan.forEach { currentProject -> // currentProject can be a sub-project or the rootProject
+        projectsToScan.forEach { currentProject ->
+            // currentProject can be a sub-project or the rootProject
             val projectDir = currentProject.projectDir
             val logPrefix =
                 if (currentProject == project.rootProject) "root project" else "project ${currentProject.path}"
@@ -102,7 +122,8 @@ abstract class RenameProjectArtifactsTask : DefaultTask() {
                     "**/.git/**",
                     ".github/**", // Example: GitHub Actions workflows
                     "gradle/**", // Gradle wrapper files
-                    "**/*.bin", "**/*.jar", // etc.
+                    "**/*.bin",
+                    "**/*.jar", // etc.
                 )
 
                 // Common Excludes for both root (if not already excluded) and modules
@@ -120,8 +141,7 @@ abstract class RenameProjectArtifactsTask : DefaultTask() {
                 )
             }
 
-            filesToProcess.forEach fileProcess@ { file ->
-
+            filesToProcess.forEach fileProcess@{ file ->
 
                 var content: String
                 try {
@@ -138,16 +158,12 @@ abstract class RenameProjectArtifactsTask : DefaultTask() {
                 var modified = false
                 val originalContent = content
 
-
                 // 1. Package Name (Kotlin/Java files primarily, also check build files)
                 // Package declarations
                 if (content.contains(oldPkg)) {
                     content = content.replace(oldPkg, newPkg)
                     modified = true
                 }
-
-
-
 
                 // 2. App Name
                 if (content.contains(oldApp)) {
@@ -158,20 +174,23 @@ abstract class RenameProjectArtifactsTask : DefaultTask() {
                 if (content.contains(oldApp.lowercase())) {
                     content = content.replace(
                         oldApp.lowercase(),
-                        newApp.lowercase())
+                        newApp.lowercase(),
+                    )
                     modified = true
                 }
 
-
                 // 3. Prefix (Class names, file names - file renaming is separate, this is for content)
                 if (oldPfx.isNotEmpty()) {
-
-
-                    val oldClassNamePattern = Regex("\\b${Regex.escape(
-                        oldPfx.replaceFirstChar { it.uppercase() })}")
+                    val oldClassNamePattern = Regex(
+                        "\\b${Regex.escape(
+                            oldPfx.replaceFirstChar { it.uppercase() },
+                        )}",
+                    )
                     if (content.contains(oldClassNamePattern)) {
-                        content = content.replace(oldClassNamePattern,
-                            newPfx.replaceFirstChar { it.uppercase() })
+                        content = content.replace(
+                            oldClassNamePattern,
+                            newPfx.replaceFirstChar { it.uppercase() },
+                        )
                         modified = true
                     }
                     val oldLowerPrefixPattern = Regex("\\b${Regex.escape(oldPfx)}")
@@ -179,9 +198,7 @@ abstract class RenameProjectArtifactsTask : DefaultTask() {
                         content = content.replace(oldLowerPrefixPattern, newPfx)
                         modified = true
                     }
-
                 }
-
 
                 if (modified) {
                     logger.lifecycle("Updating content in: ${file.path} (from $logPrefix)")
@@ -201,11 +218,16 @@ abstract class RenameProjectArtifactsTask : DefaultTask() {
                 }
 
                 // --- Rename files based on prefix (only for modules, not typically root files) ---
-                if (currentProject != project.rootProject && oldPfx.isNotEmpty() &&
-                    (file.nameWithoutExtension.startsWith(
-                        oldPfx.replaceFirstChar { it.uppercase() }) || file.nameWithoutExtension.startsWith(
-                        oldPfx,
-                    ))
+                if (currentProject != project.rootProject &&
+                    oldPfx.isNotEmpty() &&
+                    (
+                        file.nameWithoutExtension.startsWith(
+                            oldPfx.replaceFirstChar { it.uppercase() },
+                        ) ||
+                            file.nameWithoutExtension.startsWith(
+                                oldPfx,
+                            )
+                        )
                 ) {
                     val oldFileName = file.name
                     var newFileName = oldFileName
@@ -213,7 +235,8 @@ abstract class RenameProjectArtifactsTask : DefaultTask() {
                     if (oldFileName.startsWith(oldPfx.replaceFirstChar { it.uppercase() })) {
                         newFileName = newFileName.replaceFirst(
                             oldPfx.replaceFirstChar { it.uppercase() },
-                            newPfx.replaceFirstChar { it.uppercase() })
+                            newPfx.replaceFirstChar { it.uppercase() },
+                        )
                     } else if (oldFileName.startsWith(oldPfx)) {
                         newFileName = newFileName.replaceFirst(oldPfx, newPfx)
                     }
@@ -232,13 +255,14 @@ abstract class RenameProjectArtifactsTask : DefaultTask() {
             }
         }
 
-
         logger.lifecycle("Renaming process finished.")
         logger.lifecycle("--------------------------------------------------------------------")
         logger.lifecycle("IMPORTANT MANUAL STEPS REQUIRED:")
         logger.lifecycle("- Review ALL changes carefully using your version control (git diff).")
-        logger.lifecycle("- If module names were changed in settings.gradle.kts " +
-            "(and their corresponding include statements), RENAME THE ACTUAL MODULE DIRECTORIES accordingly.")
+        logger.lifecycle(
+            "- If module names were changed in settings.gradle.kts " +
+                "(and their corresponding include statements), RENAME THE ACTUAL MODULE DIRECTORIES accordingly.",
+        )
         logger.lifecycle("- In Android Studio/IntelliJ: File -> Invalidate Caches / Restart.")
         logger.lifecycle("- Perform a clean build: ./gradlew clean build")
         logger.lifecycle("--------------------------------------------------------------------")
@@ -298,7 +322,11 @@ abstract class RenameProjectArtifactsTask : DefaultTask() {
         // Adjust "NdaApplication.kt" if your Application class has a different common name pattern
         val packageAsPath = currentPackageName.replace('.', File.separatorChar)
         val expectedAppFilePathParts = listOf(
-            "src", "androidMain", "kotlin", packageAsPath, "KmtApplication.kt" // Specific to your example
+            "src",
+            "androidMain",
+            "kotlin",
+            packageAsPath,
+            "KmtApplication.kt", // Specific to your example
             // Add more common Application class names if needed:
             // "src", "androidMain", "kotlin", packageAsPath, "MainApplication.kt"
             // "src", "androidMain", "kotlin", packageAsPath, "App.kt"
@@ -326,8 +354,10 @@ abstract class RenameProjectArtifactsTask : DefaultTask() {
                         return potentialPrefix.lowercase()
                     }
                 } else {
-                    logger.warn("Could not find a class name matching the pattern " +
-                        "'PrefixApplication' in ${applicationFile.path}")
+                    logger.warn(
+                        "Could not find a class name matching the pattern " +
+                            "'PrefixApplication' in ${applicationFile.path}",
+                    )
                 }
             } catch (e: Exception) {
                 logger.error("Error reading or parsing ${applicationFile.path}: ${e.message}")
@@ -343,4 +373,3 @@ abstract class RenameProjectArtifactsTask : DefaultTask() {
         return null // Or a default/fallback if appropriate
     }
 }
-

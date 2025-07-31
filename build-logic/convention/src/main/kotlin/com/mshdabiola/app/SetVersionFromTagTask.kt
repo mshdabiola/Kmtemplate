@@ -22,7 +22,6 @@ import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.InputFile
 import org.gradle.api.tasks.OutputFile
 import org.gradle.api.tasks.TaskAction
-import org.gradle.api.tasks.options.Option
 import java.io.File
 
 /**
@@ -42,12 +41,11 @@ abstract class SetVersionFromTagTask : DefaultTask() {
     @get:OutputFile
     abstract val outputLibsVersionsTomlFile: RegularFileProperty // Typically the same file for in-place updates
 
-
-
-
     @get:OutputFile
     val stringsXmlFile: File by lazy {
-        project.rootProject.projectDir.resolve("modules/designsystem/src/commonMain/composeResources/values/strings.xml")
+        project.rootProject.projectDir.resolve(
+            "modules/designsystem/src/commonMain/composeResources/values/strings.xml",
+        )
     }
 
     @TaskAction
@@ -102,7 +100,7 @@ abstract class SetVersionFromTagTask : DefaultTask() {
             newVersionCode = versionCodeToSet.toString(),
             newVersionName = versionNameToSet,
             stringsXmlFile = stringsXmlFile,
-            logger = logger
+            logger = logger,
         )
 
         // Write the updated lines back to the file

@@ -39,14 +39,15 @@ abstract class BumpVersionTask : DefaultTask() {
     @get:OutputFile
     abstract val outputLibsVersionsTomlFile: RegularFileProperty // Typically the same file for in-place updates
 
-
     @get:Input
     @get:Option(option = "newVersionName", description = "The new version name (e.g., 1.2.6)")
     abstract val newVersionName: Property<String>
 
     @get:OutputFile
     val stringsXmlFile: File by lazy {
-        project.rootProject.projectDir.resolve("modules/designsystem/src/commonMain/composeResources/values/strings.xml")
+        project.rootProject.projectDir.resolve(
+            "modules/designsystem/src/commonMain/composeResources/values/strings.xml",
+        )
     }
 
     @TaskAction
@@ -66,7 +67,7 @@ abstract class BumpVersionTask : DefaultTask() {
         val updatedLines = mutableListOf<String>()
         var versionCodeFound = false
         var currentVersionCode: Int
-        var newVersionCode=1
+        var newVersionCode = 1
 
         // Process lines to update versionName and versionCode
         for (line in lines) {
@@ -80,19 +81,19 @@ abstract class BumpVersionTask : DefaultTask() {
                 modifiedLine = versionCodeRegex.replace(modifiedLine) { matchResult ->
                     val (prefix, quote, codeStr) = matchResult.destructured
                     currentVersionCode = codeStr.toInt()
-                     newVersionCode = currentVersionCode + 1 + currentRevision
+                    newVersionCode = currentVersionCode + 1 + currentRevision
                     println("Incrementing versionCode: $currentVersionCode -> $newVersionCode")
                     "$prefix$quote$newVersionCode$quote"
                 }
             }
             updatedLines.add(modifiedLine)
         }
-        val versionNameToSet =newVersionName.get()
+        val versionNameToSet = newVersionName.get()
         updateVersionInfoInStringsXml(
             newVersionCode = newVersionCode.toString(),
             newVersionName = versionNameToSet,
             stringsXmlFile = stringsXmlFile,
-            logger = logger
+            logger = logger,
         )
 
         if (!versionCodeFound) {

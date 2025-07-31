@@ -40,14 +40,15 @@ abstract class BumpConveyorRevisionTask : DefaultTask() {
     @get:InputFile
     abstract val conveyorConfigFile: RegularFileProperty
 
-
     @get:Input
     @get:Option(option = "newVersionName", description = "The new version name (e.g., 1.2.6)")
     abstract val newVersionName: Property<String>
 
     @get:OutputFile
     val stringsXmlFile: File by lazy {
-        project.rootProject.projectDir.resolve("modules/designsystem/src/commonMain/composeResources/values/strings.xml")
+        project.rootProject.projectDir.resolve(
+            "modules/designsystem/src/commonMain/composeResources/values/strings.xml",
+        )
     }
 
     @TaskAction
@@ -90,13 +91,13 @@ abstract class BumpConveyorRevisionTask : DefaultTask() {
             }
         }
         conveyorConf.writeText(updatedLines.joinToString("\n"))
-        val versionNameToSet =newVersionName.get()
-        val versionCodeToSet=extractMainVersion(versionNameToSet)+".$newRevision"
+        val versionNameToSet = newVersionName.get()
+        val versionCodeToSet = extractMainVersion(versionNameToSet) + ".$newRevision"
         updateVersionInfoInStringsXml(
             newVersionCode = versionCodeToSet,
             newVersionName = versionNameToSet,
             stringsXmlFile = stringsXmlFile,
-            logger = logger
+            logger = logger,
         )
         println("Updated revision in ${conveyorConf.name} to $newRevision")
 
@@ -105,12 +106,13 @@ abstract class BumpConveyorRevisionTask : DefaultTask() {
         // project.setProperty("conveyor.revision", newRevision.toString())
     }
 
-    fun extractMainVersion(versionString: String): String{
+    fun extractMainVersion(versionString: String): String {
         // Regex to match the standard version part (e.g., X.Y.Z)
         // It looks for one or more digits, followed by a dot, one or more digits,
         // followed by a dot, and one or more digits.
         val regex = """^(\d+\.\d+\.\d+)""".toRegex()
         val matchResult = regex.find(versionString)
-        return matchResult?.groupValues?.get(1)?:"0.0.1" // groupValues[0] is the full match, [1] is the first captured group
+        return matchResult?.groupValues?.get(1) ?: "0.0.1"
+        // groupValues[0] is the full match, [1] is the first captured group
     }
 }
