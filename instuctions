@@ -14,7 +14,7 @@
     ./gradlew wasmJsBrowserDistribution
 
 export TOKEN="your_actual_token"
- conveyor make rendered-icons
+ conveyor make rendered-icons --overwrite
     conveyor make site
     ./gradlew run
 
