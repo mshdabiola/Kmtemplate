@@ -17,9 +17,13 @@ package com.mshdabiola.app
 
 import org.gradle.api.DefaultTask
 import org.gradle.api.file.RegularFileProperty
+import org.gradle.api.provider.Property
+import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.InputFile
 import org.gradle.api.tasks.OutputFile
 import org.gradle.api.tasks.TaskAction
+import org.gradle.api.tasks.options.Option
+import java.io.File
 
 /**
  * A Gradle task to update versionName and increment versionCode in gradle/libs.versions.toml.
@@ -34,6 +38,16 @@ abstract class BumpVersionTask : DefaultTask() {
 
     @get:OutputFile
     abstract val outputLibsVersionsTomlFile: RegularFileProperty // Typically the same file for in-place updates
+
+
+    @get:Input
+    @get:Option(option = "newVersionName", description = "The new version name (e.g., 1.2.6)")
+    abstract val newVersionName: Property<String>
+
+    @get:OutputFile
+    val stringsXmlFile: File by lazy {
+        project.rootProject.projectDir.resolve("modules/designsystem/src/commonMain/composeResources/values/strings.xml")
+    }
 
     @TaskAction
     fun bumpVersion() {
@@ -51,7 +65,8 @@ abstract class BumpVersionTask : DefaultTask() {
         val lines = tomlFile.readLines()
         val updatedLines = mutableListOf<String>()
         var versionCodeFound = false
-        var currentVersionCode = 0
+        var currentVersionCode: Int
+        var newVersionCode=1
 
         // Process lines to update versionName and versionCode
         for (line in lines) {
@@ -65,13 +80,20 @@ abstract class BumpVersionTask : DefaultTask() {
                 modifiedLine = versionCodeRegex.replace(modifiedLine) { matchResult ->
                     val (prefix, quote, codeStr) = matchResult.destructured
                     currentVersionCode = codeStr.toInt()
-                    val newCode = currentVersionCode + 1 + currentRevision
-                    println("Incrementing versionCode: $currentVersionCode -> $newCode")
-                    "$prefix$quote$newCode$quote"
+                     newVersionCode = currentVersionCode + 1 + currentRevision
+                    println("Incrementing versionCode: $currentVersionCode -> $newVersionCode")
+                    "$prefix$quote$newVersionCode$quote"
                 }
             }
             updatedLines.add(modifiedLine)
         }
+        val versionNameToSet =newVersionName.get()
+        updateVersionInfoInStringsXml(
+            newVersionCode = newVersionCode.toString(),
+            newVersionName = versionNameToSet,
+            stringsXmlFile = stringsXmlFile,
+            logger = logger
+        )
 
         if (!versionCodeFound) {
             logger.warn("Warning: 'versionCode' definition not found in ${tomlFile.name}.")

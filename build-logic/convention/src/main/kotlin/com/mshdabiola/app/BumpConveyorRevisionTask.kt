@@ -17,9 +17,13 @@ package com.mshdabiola.app
 
 import org.gradle.api.DefaultTask
 import org.gradle.api.file.RegularFileProperty
+import org.gradle.api.provider.Property
+import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.InputFile
 import org.gradle.api.tasks.OutputFile
 import org.gradle.api.tasks.TaskAction
+import org.gradle.api.tasks.options.Option
+import java.io.File
 
 /**
  * A Gradle task to read, increment, and update the Conveyor revision.
@@ -35,6 +39,16 @@ abstract class BumpConveyorRevisionTask : DefaultTask() {
 
     @get:InputFile
     abstract val conveyorConfigFile: RegularFileProperty
+
+
+    @get:Input
+    @get:Option(option = "newVersionName", description = "The new version name (e.g., 1.2.6)")
+    abstract val newVersionName: Property<String>
+
+    @get:OutputFile
+    val stringsXmlFile: File by lazy {
+        project.rootProject.projectDir.resolve("modules/designsystem/src/commonMain/composeResources/values/strings.xml")
+    }
 
     @TaskAction
     fun bumpRevision() {
@@ -76,10 +90,27 @@ abstract class BumpConveyorRevisionTask : DefaultTask() {
             }
         }
         conveyorConf.writeText(updatedLines.joinToString("\n"))
+        val versionNameToSet =newVersionName.get()
+        val versionCodeToSet=extractMainVersion(versionNameToSet)+".$newRevision"
+        updateVersionInfoInStringsXml(
+            newVersionCode = versionCodeToSet,
+            newVersionName = versionNameToSet,
+            stringsXmlFile = stringsXmlFile,
+            logger = logger
+        )
         println("Updated revision in ${conveyorConf.name} to $newRevision")
 
         // You could also output the new revision for use in other tasks/workflows
         // For example, if you wanted to pass it back to GitHub Actions:
         // project.setProperty("conveyor.revision", newRevision.toString())
+    }
+
+    fun extractMainVersion(versionString: String): String{
+        // Regex to match the standard version part (e.g., X.Y.Z)
+        // It looks for one or more digits, followed by a dot, one or more digits,
+        // followed by a dot, and one or more digits.
+        val regex = """^(\d+\.\d+\.\d+)""".toRegex()
+        val matchResult = regex.find(versionString)
+        return matchResult?.groupValues?.get(1)?:"0.0.1" // groupValues[0] is the full match, [1] is the first captured group
     }
 }
