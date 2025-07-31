@@ -47,7 +47,7 @@ import com.mshdabiola.designsystem.theme.KmtTheme
 import com.mshdabiola.designsystem.theme.LocalGradientColors
 import com.mshdabiola.kmtemplate.MainActivityUiState
 import com.mshdabiola.kmtemplate.MainAppViewModel
-import com.mshdabiola.kmtemplate.navigation.KotlinMultiplatformTemplateAppNavHost
+import com.mshdabiola.kmtemplate.navigation.KmtNavHost
 import com.mshdabiola.model.DarkThemeConfig
 import com.mshdabiola.ui.LocalSharedTransitionScope
 import com.mshdabiola.ui.semanticsCommon
@@ -123,7 +123,7 @@ fun KmtApp(
                                         WindowInsets.safeDrawing.only(WindowInsetsSides.Horizontal),
                                     ),
                             ) {
-                                KotlinMultiplatformTemplateAppNavHost(
+                                KmtNavHost(
                                     appState = appState,
                                     modifier = Modifier.testTag(KmtAppTestTags.NAV_HOST), // Tagging the NavHost
                                 )

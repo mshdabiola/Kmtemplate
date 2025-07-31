@@ -29,7 +29,7 @@ import com.mshdabiola.setting.navigation.settingScreen
 
 @OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
-fun KotlinMultiplatformTemplateAppNavHost(
+fun KmtNavHost(
     appState: KmtAppState,
     modifier: Modifier = Modifier,
 ) {
