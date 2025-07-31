@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+
 /*
  * Designed and developed by 2024 mshdabiola (lawal abiola)
  *
@@ -20,14 +22,13 @@ plugins {
 
 group = "com.mshdabiola.buildlogic"
 
-java {
-    sourceCompatibility = JavaVersion.VERSION_17
-    targetCompatibility = JavaVersion.VERSION_17
-}
 
-//kotlin {
-//    jvmToolchain(21)
-//}
+kotlin {
+    compilerOptions {
+        jvmTarget.set(JvmTarget.JVM_17)
+    }
+    jvmToolchain(21)
+}
 
 // Configuration should be synced with [/build-logic/src/main/kotlin/mihon/gradle/configurations/spotless.kt]
 spotless {
@@ -147,9 +148,4 @@ gradlePlugin {
 
     }
 }
-//
-//tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
-//    kotlinOptions {
-//        jvmTarget = "17"
-//    }
-//}
+
