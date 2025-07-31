@@ -32,6 +32,8 @@ class CiTaskPlugin : Plugin<Project> {
             revisionFile.set(target.rootProject.file(".github/workflows/.revision-version"))
             outputRevisionFile.set(target.rootProject.file(".github/workflows/.revision-version"))
             conveyorConfigFile.set(target.rootProject.file("ci.conveyor.conf"))
+            newVersionName.set(project.providers.gradleProperty("newVersionName").orElse("0.0.1"))
+
             outputs.upToDateWhen { false }
         }
 
@@ -42,6 +44,8 @@ class CiTaskPlugin : Plugin<Project> {
             revisionFile.set(target.rootProject.file(".github/workflows/.revision-version"))
             libsVersionsTomlFile.set(target.rootProject.file("gradle/libs.versions.toml"))
             outputLibsVersionsTomlFile.set(target.rootProject.file("gradle/libs.versions.toml"))
+            newVersionName.set(project.providers.gradleProperty("newVersionName").orElse("0.0.1"))
+
             outputs.upToDateWhen { false }
         }
 
