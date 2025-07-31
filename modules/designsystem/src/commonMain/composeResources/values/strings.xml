@@ -15,8 +15,8 @@
      limitations under the License.
 -->
 <resources>
-    <string name="undefined">Undefined</string>">
-    <string name="brand">Kmtemplate</string>">
+    <string name="undefined">Undefined</string>
+    <string name="brand">Kmtemplate</string>
     <string name="version_name">1.2.5</string>
     <string name="version">1.2.5</string>
     <string name="last_update">12, October 2023</string>"
