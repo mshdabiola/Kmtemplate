@@ -244,7 +244,7 @@ abstract class RenameProjectArtifactsTask : DefaultTask() {
                     if (oldFileName != newFileName) {
                         val newFile = File(file.parentFile, newFileName)
                         logger.lifecycle("Attempting to rename file in $logPrefix: ${file.path} to ${newFile.path}")
-                        if (file.renameTo(newFile)) { // UNCOMMENT FOR ACTUAL MODIFICATION
+                        if (file.renameTo(newFile)) {
                             logger.lifecycle("SUCCESS: Renamed file ${file.name} to ${newFile.name} in $logPrefix")
                         } else {
                             logger.error("ERROR: Failed to rename file ${file.path} in $logPrefix")

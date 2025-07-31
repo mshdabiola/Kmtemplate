@@ -16,7 +16,7 @@
 import com.mshdabiola.app.BumpConveyorRevisionTask
 import com.mshdabiola.app.BumpVersionTask
 import com.mshdabiola.app.RemoveFirebaseReferencesTask
-import com.mshdabiola.app.RenameProjectArtifactsTask // <<< ADD THIS IMPORT
+import com.mshdabiola.app.RenameProjectArtifactsTask
 import com.mshdabiola.app.SetVersionFromTagTask
 import org.gradle.api.Plugin
 import org.gradle.api.Project
