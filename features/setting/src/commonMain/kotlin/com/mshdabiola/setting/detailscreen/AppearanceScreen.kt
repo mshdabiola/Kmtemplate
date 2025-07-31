@@ -48,8 +48,8 @@ import com.mshdabiola.designsystem.drawable.KmtIcons
 import com.mshdabiola.designsystem.theme.KmtTheme // For Preview
 import com.mshdabiola.model.DarkThemeConfig
 import com.mshdabiola.setting.SettingState
-import kotlinmultiplatformtemplate.features.setting.generated.resources.Res
-import kotlinmultiplatformtemplate.features.setting.generated.resources.daynight
+import kmtemplate.features.setting.generated.resources.Res
+import kmtemplate.features.setting.generated.resources.daynight
 import org.jetbrains.compose.resources.stringArrayResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 

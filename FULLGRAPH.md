@@ -1,4 +1,4 @@
-###  KotlinMultiplatformTemplate Module Graph
+###  Kmtemplate Module Graph
 
 ```mermaid
 %%{

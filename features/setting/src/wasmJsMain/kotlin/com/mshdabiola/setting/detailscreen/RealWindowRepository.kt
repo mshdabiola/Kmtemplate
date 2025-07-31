@@ -18,6 +18,9 @@ package com.mshdabiola.setting.detailscreen
 import com.mshdabiola.setting.WindowRepository
 import kotlinx.browser.window
 
+// Top-level function for encoding URI components using JavaScript
+fun encodeURIComponentJs(str: String): JsString = js("encodeURIComponent(str)")
+
 class RealWindowRepository : WindowRepository {
     override fun openUrl(url: String) {
         window.open(url, "_blank")
@@ -26,8 +29,8 @@ class RealWindowRepository : WindowRepository {
     override fun openEmail(emailAddress: String, subject: String, body: String) {
         // Simple mailto link for Wasm/JS.
         // Encoding subject and body is important for special characters.
-        val encodedSubject = kotlin.js.js("encodeURIComponent(subject)") as String
-        val encodedBody = kotlin.js.js("encodeURIComponent(body)") as String
+        val encodedSubject = encodeURIComponentJs(subject) // Use the top-level function
+        val encodedBody = encodeURIComponentJs(body) // Use the top-level function
         window.open("mailto:$emailAddress?subject=$encodedSubject&body=$encodedBody", "_self")
     }
 }

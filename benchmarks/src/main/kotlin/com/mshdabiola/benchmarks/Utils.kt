@@ -29,7 +29,7 @@ import java.io.ByteArrayOutputStream
  */
 val PACKAGE_NAME =
     buildString {
-        append("com.mshdabiola.kotlinmultiplatformtemplate")
+        append("com.mshdabiola.kmtemplate")
         append(BuildConfig.APP_FLAVOR_SUFFIX)
         append(BuildConfig.APP_BUILD_TYPE_SUFFIX)
     }

@@ -35,9 +35,9 @@ import com.mshdabiola.model.DarkThemeConfig
 import com.mshdabiola.setting.detailscreen.AboutScreen
 import com.mshdabiola.setting.detailscreen.AppearanceScreen
 import com.mshdabiola.setting.detailscreen.FaqScreen
-import kotlinmultiplatformtemplate.features.setting.generated.resources.Res
-import kotlinmultiplatformtemplate.features.setting.generated.resources.general
-import kotlinmultiplatformtemplate.features.setting.generated.resources.support
+import kmtemplate.features.setting.generated.resources.Res
+import kmtemplate.features.setting.generated.resources.general
+import kmtemplate.features.setting.generated.resources.support
 import org.jetbrains.compose.resources.stringArrayResource
 
 @OptIn(ExperimentalMaterial3Api::class)

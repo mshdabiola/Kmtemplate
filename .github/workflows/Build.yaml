@@ -107,7 +107,7 @@ jobs:
           ./gradlew updateFossReliantDebugScreenshotTest
 
       - name: Generate coverage reports for Jvm
-        run: xvfb-run ./gradlew koverHtmlReportJvm koverXmlReportJvm
+        run: ./gradlew koverHtmlReportJvm koverXmlReportJvm
 
       - name: Upload JVM local results (HTML)
         if: always()
@@ -125,6 +125,12 @@ jobs:
             ignore_runs: false
             files: ./**/build/test-results/**/*.xml
 
+      - name: Upload test results to Codecov
+        uses: codecov/test-results-action@v1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: ./**/build/test-results/**/*.xml
+
       - name: Upload local coverage reports (XML + HTML) (only API 30)
         uses: actions/upload-artifact@v4
         with:
@@ -140,6 +146,8 @@ jobs:
           token: ${{ secrets.CODECOV_TOKEN }}
           files: "app/build/reports/kover/reportJvm.xml"
           verbose: true
+
+
 
       - name: Check lint
         run: ./gradlew lintFossReliantRelease

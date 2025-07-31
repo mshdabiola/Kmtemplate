@@ -22,6 +22,7 @@ import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.InputFile
 import org.gradle.api.tasks.OutputFile
 import org.gradle.api.tasks.TaskAction
+import java.io.File
 
 /**
  * A Gradle task to set versionName and versionCode in gradle/libs.versions.toml directly from provided values.
@@ -39,6 +40,13 @@ abstract class SetVersionFromTagTask : DefaultTask() {
 
     @get:OutputFile
     abstract val outputLibsVersionsTomlFile: RegularFileProperty // Typically the same file for in-place updates
+
+    @get:OutputFile
+    val stringsXmlFile: File by lazy {
+        project.rootProject.projectDir.resolve(
+            "modules/designsystem/src/commonMain/composeResources/values/strings.xml",
+        )
+    }
 
     @TaskAction
     fun setVersion() {
@@ -87,6 +95,13 @@ abstract class SetVersionFromTagTask : DefaultTask() {
             }
             updatedLines.add(modifiedLine)
         }
+
+        updateVersionInfoInStringsXml(
+            newVersionCode = versionCodeToSet.toString(),
+            newVersionName = versionNameToSet,
+            stringsXmlFile = stringsXmlFile,
+            logger = logger,
+        )
 
         // Write the updated lines back to the file
         tomlFile.writeText(updatedLines.joinToString("\n"))

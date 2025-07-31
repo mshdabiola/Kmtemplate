@@ -60,7 +60,7 @@ fun SettingScreen(
                     onDrawer = onDrawer,
                     onSettingClick = {
                         if (it == SettingNav.Issue) {
-                            openUrl("https://github.com/mshdabiola/KotlinMultiplatformTemplate/issues")
+                            openUrl("https://github.com/mshdabiola/Kmtemplate/issues")
                         } else {
                             coroutineScope.launch {
                                 navigator.navigateTo(

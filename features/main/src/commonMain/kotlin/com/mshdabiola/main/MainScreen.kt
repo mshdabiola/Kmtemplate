@@ -48,10 +48,10 @@ import com.mshdabiola.designsystem.drawable.KmtIcons
 import com.mshdabiola.designsystem.strings.KmtStrings
 import com.mshdabiola.designsystem.theme.LocalTintTheme
 import com.mshdabiola.ui.NoteCard
-import kotlinmultiplatformtemplate.features.main.generated.resources.Res
-import kotlinmultiplatformtemplate.features.main.generated.resources.features_main_empty_description
-import kotlinmultiplatformtemplate.features.main.generated.resources.features_main_empty_error
-import kotlinmultiplatformtemplate.features.main.generated.resources.features_main_img_empty_bookmarks
+import kmtemplate.features.main.generated.resources.Res
+import kmtemplate.features.main.generated.resources.features_main_empty_description
+import kmtemplate.features.main.generated.resources.features_main_empty_error
+import kmtemplate.features.main.generated.resources.features_main_img_empty_bookmarks
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 

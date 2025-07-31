@@ -16,9 +16,9 @@
 package com.mshdabiola.designsystem.drawable
 
 import androidx.compose.runtime.Composable
-import kotlinmultiplatformtemplate.modules.designsystem.generated.resources.Res
-import kotlinmultiplatformtemplate.modules.designsystem.generated.resources.brand_png
-import kotlinmultiplatformtemplate.modules.designsystem.generated.resources.brand_vector
+import kmtemplate.modules.designsystem.generated.resources.Res
+import kmtemplate.modules.designsystem.generated.resources.brand_png
+import kmtemplate.modules.designsystem.generated.resources.brand_vector
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.vectorResource
 

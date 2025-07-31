@@ -41,15 +41,15 @@ import com.mshdabiola.designsystem.component.KmtTextButton
 import com.mshdabiola.designsystem.drawable.KmtDrawable
 import com.mshdabiola.designsystem.strings.KmtStrings
 import com.mshdabiola.designsystem.theme.KmtTheme
-import kotlinmultiplatformtemplate.features.setting.generated.resources.Res
-import kotlinmultiplatformtemplate.features.setting.generated.resources.about
-import kotlinmultiplatformtemplate.features.setting.generated.resources.contact_us
-import kotlinmultiplatformtemplate.features.setting.generated.resources.developed_by
-import kotlinmultiplatformtemplate.features.setting.generated.resources.developer
-import kotlinmultiplatformtemplate.features.setting.generated.resources.last_update
-import kotlinmultiplatformtemplate.features.setting.generated.resources.privacy_policy
-import kotlinmultiplatformtemplate.features.setting.generated.resources.terms_and_condition
-import kotlinmultiplatformtemplate.features.setting.generated.resources.version
+import kmtemplate.features.setting.generated.resources.Res
+import kmtemplate.features.setting.generated.resources.about
+import kmtemplate.features.setting.generated.resources.contact_us
+import kmtemplate.features.setting.generated.resources.developed_by
+import kmtemplate.features.setting.generated.resources.developer
+import kmtemplate.features.setting.generated.resources.last_update
+import kmtemplate.features.setting.generated.resources.privacy_policy
+import kmtemplate.features.setting.generated.resources.terms_and_condition
+import kmtemplate.features.setting.generated.resources.version
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
@@ -192,7 +192,7 @@ fun AboutScreen(
                 .clickable {
                     openEmail(
                         "mshdabiola@gmail.com",
-                        "Feedback for KMTemplate",
+                        "Feedback for Kmtemplate",
                         "",
                     )
                 }
