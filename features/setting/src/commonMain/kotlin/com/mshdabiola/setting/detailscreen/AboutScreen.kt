@@ -192,7 +192,7 @@ fun AboutScreen(
                 .clickable {
                     openEmail(
                         "mshdabiola@gmail.com",
-                        "Feedback for KMTemplate",
+                        "Feedback for Kmtemplate",
                         "",
                     )
                 }
