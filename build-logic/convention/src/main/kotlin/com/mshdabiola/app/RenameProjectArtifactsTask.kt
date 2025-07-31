@@ -9,8 +9,6 @@ import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.TaskAction
 import org.gradle.api.tasks.options.Option
 import java.io.File
-import java.util.regex.Pattern
-import javax.xml.parsers.DocumentBuilderFactory
 
 abstract class RenameProjectArtifactsTask : DefaultTask() {
 
@@ -36,55 +34,46 @@ abstract class RenameProjectArtifactsTask : DefaultTask() {
         val newPkg = newPackageName.get()
         val newApp = newAppName.get()
         val newPfx = newPrefix.get()
-        val oldPkg = extractPackageFromAppBuildGradle(rootProject = project.rootProject)?:""
-        val oldApp = extractAppNameFromStringsXml(rootProject = project.rootProject)?:""
-        val oldPfx = extractPrefixFromApplicationKt(rootProject = project.rootProject, currentPackageName = oldPkg)?:""
+        // Ensure these functions correctly handle the case where they might not find the values
+        val oldPkg = extractPackageFromAppBuildGradle(rootProject = project.rootProject) ?: ""
+        val oldApp = extractAppNameFromStringsXml(rootProject = project.rootProject) ?: ""
+        val oldPfx = extractPrefixFromApplicationKt(rootProject = project.rootProject, currentPackageName = oldPkg) ?: ""
 
         logger.lifecycle("Starting project artifact renaming...")
         logger.lifecycle("Old Package: $oldPkg -> New Package: $newPkg")
         logger.lifecycle("Old App Name: $oldApp -> New App Name: $newApp")
         logger.lifecycle("Old Prefix: $oldPfx -> New Prefix: $newPfx")
 
-
-        // --- Helper for path conversion ---
         val oldPkgPath = oldPkg.replace('.', File.separatorChar)
         val newPkgPath = newPkg.replace('.', File.separatorChar)
 
-
         val packageRelevantSourceRoots = listOf(
-            "src/commonMain/kotlin",
-            "src/androidMain/kotlin", "src/androidTest/kotlin", "src/androidUnitTest/kotlin",
-            "src/iosMain/kotlin", "src/iosTest/kotlin",
-            "src/desktopMain/kotlin", // If applicable
-            "src/jvmMain/kotlin", "src/jvmTest/kotlin",
-            "src/main/kotlin", "src/main/java", // Standard JVM/Android
-            "src/test/kotlin", "src/test/java",
-            "src", // Catch-all for simple structures like android app's direct src
+            "src/commonMain/kotlin", "src/androidMain/kotlin", "src/androidTest/kotlin",
+            "src/androidUnitTest/kotlin", "src/iosMain/kotlin", "src/iosTest/kotlin",
+            "src/desktopMain/kotlin", "src/jvmMain/kotlin", "src/jvmTest/kotlin",
+            "src/main/kotlin", "src/main/java", "src/test/kotlin", "src/test/java", "src"
         )
-
 
         // --- 1. Rename Directories (Package Structure) ---
         logger.lifecycle("Phase 1: Renaming Directories")
-        project.logger.lifecycle("--- Phase 1: Renaming Directories ---")
-        (project.rootProject.allprojects).forEach { proj -> // proj is of type Project
-            project.logger.lifecycle("Checking for directory renames in project: ${proj.path}")
+        project.allprojects.forEach { proj ->
+            logger.lifecycle("Checking for directory renames in project: ${proj.path}")
             packageRelevantSourceRoots.forEach { srcRootRelativePath ->
                 val baseSrcDir = proj.projectDir.resolve(srcRootRelativePath)
                 if (baseSrcDir.exists() && baseSrcDir.isDirectory) {
                     val oldPackageDir = baseSrcDir.resolve(oldPkgPath)
-                    if (oldPackageDir.exists() && oldPackageDir.isDirectory && oldPkgPath.isNotEmpty()) { // Ensure oldPkgPath is not empty
+                    if (oldPkgPath.isNotEmpty() && oldPackageDir.exists() && oldPackageDir.isDirectory) {
                         val newPackageDir = baseSrcDir.resolve(newPkgPath)
-                        if (oldPackageDir.path != newPackageDir.path) { // Avoid renaming to itself
+                        if (oldPackageDir.path != newPackageDir.path) {
                             if (newPackageDir.exists()) {
-                                project.logger.warn("WARNING: Target package directory ${newPackageDir.path} already exists in project ${proj.path}. Manual merge might be needed.")
+                                logger.warn("WARNING: Target package directory ${newPackageDir.path} already exists. Manual merge might be needed.")
                             } else {
-                                newPackageDir.parentFile.mkdirs() // Ensure parent directories exist
-                                project.logger.lifecycle("Attempting to rename directory: ${oldPackageDir.path} to ${newPackageDir.path}")
-                                // ### ACTUAL MODIFICATION - UNCOMMENT WITH CAUTION ###
+                                newPackageDir.parentFile.mkdirs()
+                                logger.lifecycle("Attempting to rename directory: ${oldPackageDir.path} to ${newPackageDir.path}")
                                 if (oldPackageDir.renameTo(newPackageDir)) {
-                                    project.logger.lifecycle("SUCCESS: Renamed directory in ${proj.path}: ${oldPackageDir.name} to ${newPackageDir.name}")
+                                    logger.lifecycle("SUCCESS: Renamed directory ${oldPackageDir.name} to ${newPackageDir.name} in ${proj.path}")
                                 } else {
-                                    project.logger.error("ERROR: Failed to rename directory ${oldPackageDir.path} to ${newPackageDir.path} in project ${proj.path}. Check permissions or if files are in use.")
+                                    logger.error("ERROR: Failed to rename directory ${oldPackageDir.path} in ${proj.path}")
                                 }
                             }
                         }
@@ -92,164 +81,203 @@ abstract class RenameProjectArtifactsTask : DefaultTask() {
                 }
             }
         }
-        // Cleanup empty parent directories if the old package structure was deeper
-        // This requires careful implementation to avoid deleting wanted files.
+
+        // --- Process files in all modules AND in the root project directory ---
+        logger.lifecycle("Phase 2 & 3: Updating File Contents and Renaming Files (Modules & Root)")
+
+        // Combine module processing and root directory processing
+        val projectsToScan = project.rootProject.allprojects + project.rootProject // Add rootProject itself
+
+        projectsToScan.forEach { currentProject -> // currentProject can be a sub-project or the rootProject
+            val projectDir = currentProject.projectDir
+            val logPrefix = if (currentProject == project.rootProject) "root project" else "project ${currentProject.path}"
+
+            logger.lifecycle("Scanning for file updates/renames in $logPrefix directory: ${projectDir.path}")
+
+            val filesToProcess: ConfigurableFileTree = project.fileTree(projectDir) {
+                // For root project, we might want different include/exclude logic
+                if (currentProject == project.rootProject) {
+                    // Only include specific files at the root, and don't go into sub-project directories again
+                    include(
+                        "README.md",
+                        "LICENSE", // Example
+                        "settings.gradle.kts", // Already handled later, but can be here too
+                        "build.gradle.kts", // Root build.gradle.kts if you need to change anything there
+                        "*.properties" // e.g. gradle.properties
+                        // Add other specific root file patterns
+                    )
+                    // Exclude common directories that are not subprojects or that you don't want to touch
+                    exclude(
+                        "**/build/**",
+                        "**/.gradle/**",
+                        "**/.idea/**",
+                        "**/.git/**",
+                        ".github/**", // Example: GitHub Actions workflows
+                        "gradle/**", // Gradle wrapper files
+                        "**/*.bin", "**/*.jar", // etc.
+                        // CRITICAL: Exclude all subproject directories to avoid double processing
+                        // project.rootProject.subprojects.map { it.name + "/**" } // This can be tricky if names change
+                    )
 
 
-        // --- 2. Update File Contents & 3. Rename Files ---
-        logger.lifecycle("Phase 2 & 3: Updating File Contents and Renaming Files")
-        logger.lifecycle("Phase 2 & 3: Updating File Contents and Renaming Files")
-        (project.rootProject.allprojects).forEach { proj -> // proj is of type Project
-            project.logger.lifecycle("Scanning for file updates/renames in project: ${proj.path}")
+                } else { // For sub-projects (modules)
+                    include(
+                        "**/*.kt", "**/*.java", "**/*.xml", "**/*.gradle.kts",
+                        "**/Info.plist", "**/project.pbxproj", "**/Project.swift"
+                        // No settings.gradle.kts here typically
+                    )
+                }
 
-            val filesToProcess: ConfigurableFileTree = project.fileTree(proj.projectDir) {
-                include(
-                    "**/*.kt", "**/*.java",
-                    "**/*.xml",
-                    "**/*.gradle.kts",
-                    "**/Info.plist",
-                    "**/project.pbxproj", // iOS Xcode project file (handle with EXTREME caution)
-                    "**/Project.swift",   // Swift Package Manager config
-                    "**/settings.gradle.kts", // Should only exist in root, but include is harmless
-                    // Add other text-based file patterns you need to process
-                )
+                // Common Excludes for both root (if not already excluded) and modules
                 exclude(
-                    // CRITICAL: Prevent processing unwanted/binary files and directories
-                    "**/build/**",
-                    "**/.gradle/**",
-                    "**/.idea/**",
-                    "**/.git/**",
-                    "**/.vs/**", // Visual Studio
-                    "**/.vscode/**", // VS Code
-                    "**/.DS_Store",
-                    "**/*.iml", // IntelliJ module files
+                    // These are generally good excludes for any directory scan
+                    "**/build/**", "**/.gradle/**", "**/.idea/**", "**/.git/**",
+                    "**/.vs/**", "**/.vscode/**", "**/.DS_Store", "**/*.iml",
                     "**/local.properties",
-                    "**/*.a", "**/*.so", "**/*.dylib", "**/*.framework/**", // Native binaries
-                    "**/*.jar", "**/*.aar", "**/*.class", "**/*.dex",      // JVM/Android binaries
-                    "**/*.zip", "**/*.gz", "**/*.tar", "**/*.rar",         // Archives
-                    "**/*.png", "**/*.jpg", "**/*.jpeg", "**/*.gif", "**/*.svg", // Images
-                    "**/*.mp3", "**/*.mp4", "**/*.wav", "**/*.ogg",       // Media files
-                    "**/Pods/**", // Cocoapods directory
-                    "**/Carthage/**", // Carthage directory
-                    "**/node_modules/**", // Node.js dependencies
-                    // Add more specific exclusions for your project if needed
+                    "**/*.a", "**/*.so", "**/*.dylib", "**/*.framework/**",
+                    "**/*.jar", "**/*.aar", "**/*.class", "**/*.dex",
+                    "**/*.zip", "**/*.gz", "**/*.tar", "**/*.rar",
+                    "**/*.png", "**/*.jpg", "**/*.jpeg", "**/*.gif", "**/*.svg",
+                    "**/*.mp3", "**/*.mp4", "**/*.wav", "**/*.ogg",
+                    "**/Pods/**", "**/Carthage/**", "**/node_modules/**"
                 )
             }
 
             filesToProcess.forEach { file ->
+                // Check if the file is directly in the projectDir (for root project case with depth = 1)
+                // or if it's in a sub-directory (for modules)
+                if (currentProject == project.rootProject && file.parentFile != projectDir && projectDir.resolve(file.name) != file) {
+                    // This check ensures we only process files directly in root when depth is used,
+                    // and not files from subprojects that might slip through exclude patterns.
+                    // However, with explicit includes for root like "README.md", this might be too restrictive.
+                    // The `depth = 1` for the root fileTree is a more direct way to handle this.
+                    // logger.debug("Skipping ${file.path}, as it's not directly in the root project dir for root processing.")
+                    // return@forEach
+                }
+
+
                 var content: String
                 try {
-                    // Basic check to avoid reading huge binary files that might have slipped through excludes
-                    if (file.length() > 20 * 1024 * 1024) { // Skip files larger than 20MB
-                        project.logger.debug("Skipping potentially large/binary file: ${file.path}")
+                    if (file.length() > 20 * 1024 * 1024) {
+                        logger.debug("Skipping potentially large/binary file: ${file.path}")
                         return@forEach
                     }
                     content = file.readText()
                 } catch (e: Exception) {
-                    project.logger.debug("Skipping non-text or unreadable file: ${file.path} (Reason: ${e.message})")
-                    return@forEach // Skip to next file
+                    logger.debug("Skipping non-text or unreadable file: ${file.path} (Reason: ${e.message})")
+                    return@forEach
                 }
 
                 var modified = false
-                val originalContent = content // For comparison if logging changes
+                val originalContent = content
 
-                // 1. Replace package statements and imports (Only for .kt and .java files)
-                if (file.extension == "kt" || file.extension == "java") {
-                    if (oldPkg.isNotEmpty() && content.contains("package $oldPkg")) {
-                        content = content.replace("package $oldPkg", "package $newPkg")
-                        modified = true
-                    }
-                    if (oldPkg.isNotEmpty() && content.contains("import $oldPkg")) {
-                        // Regex to handle imports like 'import oldPkg.Class', 'import oldPkg.*', 'import oldPkg.sub.Class'
+                // --- Apply Replacements ---
+                // (Your existing replacement logic: package, app name, prefix, AndroidManifest, build.gradle.kts)
+                // Ensure this logic is safe to run on all matched file types.
+
+                // 1. Package Name (Kotlin/Java files primarily, also check build files)
+                if (file.extension == "kt" || file.extension == "java" || file.name.endsWith(".gradle.kts")) {
+                    if (oldPkg.isNotEmpty() && content.contains(oldPkg)) { // Make this more specific if needed
+                        // Package declarations
+                        if (content.contains("package $oldPkg")) {
+                            content = content.replace("package $oldPkg", "package $newPkg")
+                            modified = true
+                        }
+                        // Imports
                         content = content.replace(Regex("import\\s+${Regex.escape(oldPkg)}(\\.\\*|\\.[A-Za-z0-9_]+(?:\\.[A-Za-z0-9_]+)*(\\.\\*)?)"), "import $newPkg$1")
-                        modified = true
+                        // Namespace/ApplicationId in build.gradle.kts
+                        if (file.name.endsWith(".gradle.kts")) {
+                            if (content.contains("namespace = \"$oldPkg\"")) {
+                                content = content.replace("namespace = \"$oldPkg\"", "namespace = \"$newPkg\"")
+                                modified = true
+                            }
+                            if (content.contains("applicationId = \"$oldPkg\"")) {
+                                content = content.replace("applicationId = \"$oldPkg\"", "applicationId = \"$newPkg\"")
+                                modified = true
+                            }
+                            if (content.contains("bundleId = \"$oldPkg\"")) {
+                                content = content.replace("bundleId = \"$oldPkg\"", "bundleId = \"$newPkg\"")
+                                modified = true
+                            }
+                            if (content.contains("baseName = \"$oldPkg\"")) {
+                                content = content.replace("baseName = \"$oldPkg\"", "baseName = \"$newPkg\"")
+                                modified = true
+                            }
+                        }
+                        // Package name in other text files like README.md (if it was included)
+                        else if (file.name == "README.md" && currentProject == project.rootProject) {
+                            // Example: Replace fully qualified names if they appear
+                            content = content.replace(oldPkg, newPkg) // General, be careful
+                            modified = true
+                        }
+                        if (modified && content == originalContent) modified = false // check if regex actually changed something
                     }
                 }
 
-                // 2. Replace App Name
-                // Example for strings.xml (Android)
-                if (file.name == "strings.xml" && content.contains(">$oldApp<")) {
-                    content = content.replace(">$oldApp<", ">$newApp<")
-                    modified = true
-                }
-                // Example for Info.plist (iOS) - CFBundleName, CFBundleDisplayName
-                if (file.name == "Info.plist") { // Typically in iosApp or shared framework resources
-                    if (content.contains("<string>$oldApp</string>")) { // Simple match first
-                        content = content.replace("<string>$oldApp</string>", "<string>$newApp</string>")
+
+                // 2. App Name (strings.xml, Info.plist, README.md, etc.)
+                if (oldApp.isNotEmpty()) {
+                    if (file.name == "strings.xml" && content.contains(">$oldApp<")) {
+                        content = content.replace(">$oldApp<", ">$newApp<")
                         modified = true
+                    } else if (file.name == "Info.plist") {
+                        val cfBundleNamePattern = Regex("(<key>CFBundleName</key>\\s*<string>)${Regex.escape(oldApp)}(</string>)")
+                        val cfBundleDisplayNamePattern = Regex("(<key>CFBundleDisplayName</key>\\s*<string>)${Regex.escape(oldApp)}(</string>)")
+                        var tempContent = content.replace(cfBundleNamePattern, "$1$newApp$2")
+                        tempContent = tempContent.replace(cfBundleDisplayNamePattern, "$1$newApp$2")
+                        if (tempContent != content) {
+                            content = tempContent
+                            modified = true
+                        }
+                    } else if (file.name == "README.md" && currentProject == project.rootProject) { // For root README
+                        // Make this replacement more robust if needed (e.g., case insensitive, whole word)
+                        if (content.contains(oldApp)) {
+                            content = content.replace(oldApp, newApp)
+                            modified = true
+                        }
                     }
-                    // More specific for CFBundleName and CFBundleDisplayName if simple replace is too broad
-                    val cfBundleNamePattern = Regex("(<key>CFBundleName</key>\\s*<string>)${Regex.escape(oldApp)}(</string>)")
-                    val cfBundleDisplayNamePattern = Regex("(<key>CFBundleDisplayName</key>\\s*<string>)${Regex.escape(oldApp)}(</string>)")
-                    content = content.replace(cfBundleNamePattern, "$1$newApp$2")
-                    content = content.replace(cfBundleDisplayNamePattern, "$1$newApp$2")
-                    if (content != originalContent && !modified) modified = true // If regex changed it
                 }
 
-                // 3. Replace Prefix in class names, variable names, etc. (Use with EXTREME caution)
+                // 3. Prefix (Class names, file names - file renaming is separate, this is for content)
                 if (oldPfx.isNotEmpty()) {
-                    val oldClassNamePattern = Regex("\\b${Regex.escape(oldPfx.capitalize())}")
-                    if (content.contains(oldClassNamePattern)) {
-                        content = content.replace(oldClassNamePattern, newPfx.capitalize())
-                        modified = true
-                    }
-                    val oldLowerPrefixPattern = Regex("\\b${Regex.escape(oldPfx)}") // For variables, XML IDs, etc.
-                    if (content.contains(oldLowerPrefixPattern)) {
-                        content = content.replace(oldLowerPrefixPattern, newPfx)
-                        modified = true
+                    // Only apply to relevant file types like .kt, .java, .xml
+                    if (file.extension in listOf("kt", "java", "xml")) {
+                        val oldClassNamePattern = Regex("\\b${Regex.escape(oldPfx.capitalize())}")
+                        if (content.contains(oldClassNamePattern)) {
+                            content = content.replace(oldClassNamePattern, newPfx.capitalize())
+                            modified = true
+                        }
+                        val oldLowerPrefixPattern = Regex("\\b${Regex.escape(oldPfx)}")
+                        if (content.contains(oldLowerPrefixPattern)) {
+                            content = content.replace(oldLowerPrefixPattern, newPfx)
+                            modified = true
+                        }
                     }
                 }
 
-                // 4. Update AndroidManifest.xml package attribute (if not using namespace from build.gradle)
-                if (file.name == "AndroidManifest.xml" && proj.path.contains("app")) { // Be specific
+                // 4. AndroidManifest.xml package attribute (specific to Android app module)
+                if (file.name == "AndroidManifest.xml" && currentProject.path.contains("app")) { // Or a more reliable check for Android app module
                     if (oldPkg.isNotEmpty() && content.contains("package=\"$oldPkg\"")) {
                         content = content.replace("package=\"$oldPkg\"", "package=\"$newPkg\"")
                         modified = true
                     }
                 }
 
-                // 5. Update build.gradle.kts (applicationId, bundleId, namespace)
-                if (file.name.endsWith(".gradle.kts")) {
-                    // Namespace (Common for Android library modules and app modules)
-                    if (oldPkg.isNotEmpty() && content.contains("namespace = \"$oldPkg\"")) {
-                        content = content.replace("namespace = \"$oldPkg\"", "namespace = \"$newPkg\"")
-                        modified = true
-                    }
-                    // ApplicationId (Typically in app module's build.gradle.kts)
-                    if (proj.name.contains("app") || proj.plugins.hasPlugin("com.android.application")) { // Heuristic for app module
-                        if (oldPkg.isNotEmpty() && content.contains("applicationId = \"$oldPkg\"")) {
-                            content = content.replace("applicationId = \"$oldPkg\"", "applicationId = \"$newPkg\"")
-                            modified = true
-                        }
-                    }
-                    // BundleId (Common for iOS KMP framework or direct bundleId declaration)
-                    // This is very project-specific. Adjust pattern as needed.
-                    if (oldPkg.isNotEmpty() && content.contains("bundleId = \"$oldPkg\"")) {
-                        content = content.replace("bundleId = \"$oldPkg\"", "bundleId = \"$newPkg\"")
-                        modified = true
-                    } else if (oldPkg.isNotEmpty() && content.contains("baseName = \"$oldPkg\"")) { // e.g. framework { baseName = ... }
-                        content = content.replace("baseName = \"$oldPkg\"", "baseName = \"$newPkg\"")
-                        modified = true
-                    }
-                }
 
-                // --- Write content if modified ---
                 if (modified) {
-                    project.logger.lifecycle("Updating content in: ${file.path}")
-                    // ### ACTUAL MODIFICATION - UNCOMMENT WITH CAUTION ###
+                    logger.lifecycle("Updating content in: ${file.path} (from $logPrefix)")
                     try {
-                         file.writeText(content)
-                         project.logger.lifecycle("SUCCESS: Updated content in ${file.name} in project ${proj.path}")
-                        project.logger.info("MODIFIED (dry run): ${file.path}\n--- OLD ---\n${originalContent.take(200)}\n--- NEW ---\n${content.take(200)}\n----------")
-
+                         file.writeText(content) // UNCOMMENT FOR ACTUAL MODIFICATION
+                        logger.lifecycle("SUCCESS: Updated content in ${file.name} (from $logPrefix)")
+                        logger.info("MODIFIED (dry run) $logPrefix: ${file.path}\n--- OLD ---\n${originalContent.take(200)}\n--- NEW ---\n${content.take(200)}\n----------")
                     } catch (e: Exception) {
-                        project.logger.error("ERROR writing file content ${file.path}: ${e.message}")
+                        logger.error("ERROR writing file content ${file.path}: ${e.message}")
                     }
                 }
 
-                // --- Rename files based on prefix ---
-                // Process 'file' which is the original file from fileTree
-                if (oldPfx.isNotEmpty() && (file.nameWithoutExtension.startsWith(oldPfx.capitalize()) || file.nameWithoutExtension.startsWith(oldPfx))) {
+                // --- Rename files based on prefix (only for modules, not typically root files) ---
+                if (currentProject != project.rootProject && oldPfx.isNotEmpty() &&
+                    (file.nameWithoutExtension.startsWith(oldPfx.capitalize()) || file.nameWithoutExtension.startsWith(oldPfx))) {
                     val oldFileName = file.name
                     var newFileName = oldFileName
 
@@ -261,149 +289,149 @@ abstract class RenameProjectArtifactsTask : DefaultTask() {
 
                     if (oldFileName != newFileName) {
                         val newFile = File(file.parentFile, newFileName)
-                        project.logger.lifecycle("Attempting to rename file: ${file.path} to ${newFile.path}")
-                        // ### ACTUAL MODIFICATION - UNCOMMENT WITH CAUTION ###
-                         if (file.renameTo(newFile)) {
-                            project.logger.lifecycle("SUCCESS: Renamed file in ${proj.path}: ${file.name} to ${newFile.name}")
-                            // If further operations needed on this renamed file, update the 'file' variable
-                            // or handle carefully as the original 'file' object points to the old path.
+                        logger.lifecycle("Attempting to rename file in $logPrefix: ${file.path} to ${newFile.path}")
+                         if (file.renameTo(newFile)) { // UNCOMMENT FOR ACTUAL MODIFICATION
+                             logger.lifecycle("SUCCESS: Renamed file ${file.name} to ${newFile.name} in $logPrefix")
                          } else {
-                            project.logger.error("ERROR: Failed to rename file ${file.path} to ${newFile.path} in project ${proj.path}")
+                             logger.error("ERROR: Failed to rename file ${file.path} in $logPrefix")
                          }
-                        project.logger.info("RENAMED (dry run): ${file.path} -> ${newFile.path}")
+                        logger.info("RENAMED (dry run) $logPrefix: ${file.path} -> ${newFile.path}")
                     }
                 }
             }
         }
 
 
-        // --- 4. Update settings.gradle.kts for module names (if applicable) ---
-        // This is more complex and depends on how your modules are named.
-        // If module names contain the oldPrefix or oldAppName.
-        // Example: include(":${oldPfx}App") -> include(":${newPfx}App")
+        // --- Update settings.gradle.kts for module names ---
         val settingsFile = project.rootProject.file("settings.gradle.kts")
         if (settingsFile.exists()) {
             var settingsContent = settingsFile.readText()
-            val oldModuleName = ":${oldPfx}app" // Adjust based on your module naming
-            val newModuleName = ":${newPfx}app" // Adjust
-
-            if (settingsContent.contains("'$oldModuleName'")) {
-                settingsContent = settingsContent.replace("'$oldModuleName'", "'$newModuleName'")
-                settingsFile.writeText(settingsContent)
-                logger.lifecycle("Updated module name in settings.gradle.kts from $oldModuleName to $newModuleName. Manual directory rename might be needed for $oldModuleName.")
+            var modifiedSettings = false
+            // Example: if your module names are like ':oldPfx-featureA'
+            if (oldPfx.isNotEmpty()) {
+                val oldModulePattern = Regex("include\\s*\\(\\s*\"(.*)${Regex.escape(oldPfx)}(.*)\"\\s*\\)")
+                // This is a simplified regex, adjust if your module names have more complex structures
+                // and ensure the replacement correctly reconstructs the module path.
+                // It's safer to target very specific module name patterns.
+                settingsContent = settingsContent.replace(oldModulePattern) { matchResult ->
+                    val before = matchResult.groupValues[1]
+                    val after = matchResult.groupValues[2]
+                    modifiedSettings = true
+                    "include(\"$before$newPfx$after\")"
+                }
             }
-            // Also check for module names like ':app' if you intend to rename the main app module itself
-            // This would also require renaming the actual directory 'app/' to 'newAppName/'
-        }
+            // If app module itself uses oldPfx or oldAppName in its registered name
+            // e.g. from include(":app") to include (":MyNewApp") if oldAppName was "app"
+            // This requires careful handling of directory renames too.
+            // Example for specific module name changes (safer):
+            // val oldSpecificModuleName = ":${oldPfx}app"
+            // val newSpecificModuleName = ":${newPfx}app"
+            // if (settingsContent.contains("'$oldSpecificModuleName'")) {
+            //    settingsContent = settingsContent.replace("'$oldSpecificModuleName'", "'$newSpecificModuleName'")
+            //    modifiedSettings = true
+            // }
 
+
+            if (modifiedSettings) {
+                logger.lifecycle("Updating module names in settings.gradle.kts.")
+                 settingsFile.writeText(settingsContent) // UNCOMMENT FOR ACTUAL MODIFICATION
+                logger.info("MODIFIED (dry run): ${settingsFile.path} with new module name patterns.")
+                logger.lifecycle("IMPORTANT: Manual directory rename for affected modules might be needed.")
+            }
+        }
 
         logger.lifecycle("Renaming process finished.")
         logger.lifecycle("--------------------------------------------------------------------")
         logger.lifecycle("IMPORTANT MANUAL STEPS REQUIRED:")
         logger.lifecycle("- Review ALL changes carefully using your version control (git diff).")
-        logger.lifecycle("- If module names were changed in settings.gradle.kts, RENAME THE ACTUAL MODULE DIRECTORIES accordingly.")
+        logger.lifecycle("- If module names were changed in settings.gradle.kts (and their corresponding include statements), RENAME THE ACTUAL MODULE DIRECTORIES accordingly.")
         logger.lifecycle("- In Android Studio/IntelliJ: File -> Invalidate Caches / Restart.")
-        logger.lifecycle("- Perform a clean build: ./gradlew clean build (or assemble)")
-        logger.lifecycle("- Manually double-check AndroidManifest.xml (especially if 'package' attribute was used directly).")
-        logger.lifecycle("- Manually double-check Info.plist (iOS) for CFBundleIdentifier, CFBundleName, CFBundleDisplayName.")
-        logger.lifecycle("- Thoroughly TEST your application on all platforms.")
+        logger.lifecycle("- Perform a clean build: ./gradlew clean build")
         logger.lifecycle("--------------------------------------------------------------------")
-
     }
-    /**
-     * Attempts to parse the group from the app/build.gradle.kts file.
-     * This is a fallback and can be brittle.
-     */
+
+    // --- Helper functions to extract old values (implement these robustly) ---
     private fun extractPackageFromAppBuildGradle(rootProject: Project): String? {
-        val appBuildFile = rootProject.file("app/build.gradle.kts")
-        if (appBuildFile.exists()) {
-            try {
-                val content = appBuildFile.readText()
-                // Regex to find: group = "your.package.name"
-                // It handles potential spaces around '=' and quotes.
-                val pattern = Pattern.compile("""^\s*group\s*=\s*["']([^"']+)["']""", Pattern.MULTILINE)
-                val matcher = pattern.matcher(content)
-                if (matcher.find()) {
-                    val foundGroup = matcher.group(1)
-                    if (foundGroup.isNotBlank()) {
-                        rootProject.logger.info("CiTaskPlugin: Extracted oldPackageName '$foundGroup' from app/build.gradle.kts")
-                        return foundGroup
-                    }
-                }
-            } catch (e: Exception) {
-                rootProject.logger.warn("CiTaskPlugin: Could not read or parse app/build.gradle.kts for group: ${e.message}")
-            }
-        } else {
-            rootProject.logger.warn("CiTaskPlugin: app/build.gradle.kts not found for extracting default oldPackageName.")
+        val appProject = rootProject.allprojects.find { it.name == "app" } // Or your main app module name
+        val buildFile = appProject?.file("build.gradle.kts")
+        if (buildFile?.exists() == true) {
+            val content = buildFile.readText()
+            // Try namespace first, then applicationId
+            val namespacePattern = Regex("""namespace\s*=\s*"([^"]+)"""")
+            namespacePattern.find(content)?.groupValues?.get(1)?.let { return it }
+
+            val appIdPattern = Regex("""applicationId\s*=\s*"([^"]+)"""")
+            appIdPattern.find(content)?.groupValues?.get(1)?.let { return it }
         }
-        return null // Return null if not found or error, so orElse can take over
+        logger.warn("Could not automatically determine old package name from app's build.gradle.kts.")
+        return null // Or a default/fallback if appropriate
     }
 
     private fun extractAppNameFromStringsXml(rootProject: Project): String? {
-        // Correct the path to strings.xml based on your project structure
-        val stringsXmlFile = rootProject.file("app/src/androidMain/res/values/strings.xml") // Path based on your context
-        if (stringsXmlFile.exists()) {
-            try {
-                val dbFactory = DocumentBuilderFactory.newInstance()
-                val dBuilder = dbFactory.newDocumentBuilder()
-                val doc = dBuilder.parse(stringsXmlFile)
-                doc.documentElement.normalize()
+        // Search in common places for strings.xml
+        val possibleStringsFiles = listOfNotNull(
+            rootProject.allprojects.find { it.name == "app" }?.file("src/main/res/values/strings.xml"),
+            rootProject.allprojects.find { it.name == "app" }?.file("src/androidMain/res/values/strings.xml"), // KMP Android
+            rootProject.projectDir.resolve("app/src/main/res/values/strings.xml") // If task is run from root
+        )
+        val stringsFile = possibleStringsFiles.find { it.exists() }
 
-                val nodeList = doc.getElementsByTagName("string")
-                for (i in 0 until nodeList.length) {
-                    val node = nodeList.item(i)
-                    if (node.getNodeType() == org.w3c.dom.Node.ELEMENT_NODE) {
-                        val element = node as org.w3c.dom.Element
-                        if (element.getAttribute("name") == "app_name") {
-                            val appName = element.textContent
-                            if (appName.isNotBlank()) {
-                                rootProject.logger.info("CiTaskPlugin: Extracted oldAppName '$appName' from strings.xml")
-                                return appName
+        if (stringsFile?.exists() == true) {
+            val content = stringsFile.readText()
+            val appNamePattern = Regex("""<string name="app_name">([^<]+)</string>""")
+            return appNamePattern.find(content)?.groupValues?.get(1)
+        }
+        logger.warn("Could not automatically determine old app name from strings.xml.")
+        return null
+    }
+
+    private fun extractPrefixFromApplicationKt(rootProject: Project, currentPackageName: String): String? {
+        if (currentPackageName.isEmpty()) {
+            logger.warn("Cannot extract prefix because current package name is unknown.")
+            return null
+        }
+        val packagePath = currentPackageName.replace('.', File.separatorChar)
+
+        // Search for a common Application class pattern
+        // Example: KmpApplication.kt, App.kt, MainApplication.kt
+        // This is highly heuristic and needs to be adapted to your project structure.
+        val commonAppClassNames = listOf("App", "Application", "MainApplication", "KmpApplication", currentPackageName.substringAfterLast('.').capitalize()+"App")
+
+        for (proj in rootProject.allprojects) {
+            val kotlinSrcDirs = listOf(
+                "src/main/kotlin", "src/commonMain/kotlin", "src/androidMain/kotlin",
+                "src/iosMain/kotlin", "src/desktopMain/kotlin", "src/jvmMain/kotlin"
+            ).map { proj.projectDir.resolve(it).resolve(packagePath) }
+
+            for (srcDir in kotlinSrcDirs) {
+                if (srcDir.exists() && srcDir.isDirectory) {
+                    for (appClassNameBase in commonAppClassNames) {
+                        val appFile = srcDir.resolve("$appClassNameBase.kt")
+                        if (appFile.exists()) {
+                            val content = appFile.readText()
+                            // Heuristic: if class name starts with 2-4 uppercase letters followed by "App" or "Application"
+                            // e.g., KMTApp, NCAApplication. This is very basic.
+                            val prefixPattern = Regex("""class\s+([A-Z]{2,4})(${appClassNameBase.removePrefixMatches(Regex("[A-Z]{2,4}"))})\s*\(""")
+                            prefixPattern.find(content)?.groupValues?.get(1)?.toLowerCase()?.let {
+                                logger.lifecycle("Deduced old prefix '$it' from class ${appFile.name}")
+                                return it
                             }
                         }
                     }
                 }
-            } catch (e: Exception) {
-                rootProject.logger.warn("CiTaskPlugin: Could not read or parse strings.xml for app_name: ${e.message}")
-                // Log the full stack trace for debugging if needed, e.g., e.printStackTrace()
             }
-        } else {
-            rootProject.logger.warn("CiTaskPlugin: app/src/androidMain/res/values/strings.xml not found for extracting default oldAppName.")
         }
-        return null
+        logger.warn("Could not automatically determine old class prefix. This is often project-specific.")
+        return null // Or a default/fallback
     }
-    private fun extractPrefixFromApplicationKt(rootProject: Project, currentPackageName: String): String? {
-        if (currentPackageName.isBlank()) {
-            rootProject.logger.warn("CiTaskPlugin: Cannot extract prefix from Application.kt without a valid oldPackageName.")
-            return null
-        }
+}
 
-        val packagePath = currentPackageName.replace('.', File.separatorChar)
-        val appKotlinDir = rootProject.file("app/src/androidMain/kotlin/$packagePath")
-
-        if (appKotlinDir.exists() && appKotlinDir.isDirectory) {
-            // Look for a file ending with "Application.kt"
-            // Example: NdaApplication.kt -> Nda
-            // Example: MyCoolApplication.kt -> MyCool
-            val appFile = appKotlinDir.listFiles { _, name -> name.endsWith("Application.kt") }?.firstOrNull()
-
-            if (appFile != null) {
-                val filenameWithoutExtension = appFile.nameWithoutExtension // E.g., "NdaApplication"
-                if (filenameWithoutExtension.endsWith("Application")) {
-                    val potentialPrefix = filenameWithoutExtension.removeSuffix("Application")
-                    if (potentialPrefix.isNotBlank()) {
-                        rootProject.logger.info("CiTaskPlugin: Extracted oldPrefix '$potentialPrefix' from ${appFile.name}")
-                        // You might want to return it as lowercase: potentialPrefix.toLowerCase()
-                        // depending on how you use the "prefix" (e.g., kmt vs Nda)
-                        return potentialPrefix // Returning "Nda"
-                    }
-                }
-            } else {
-                rootProject.logger.info("CiTaskPlugin: No '*Application.kt' file found in $appKotlinDir to infer oldPrefix.")
-            }
-        } else {
-            rootProject.logger.warn("CiTaskPlugin: Application Kotlin directory not found at $appKotlinDir for extracting prefix.")
-        }
-        return null
+// Helper extension for the prefix extraction logic
+private fun String.removePrefixMatches(regex: Regex): String {
+    var current = this
+    while (regex.matchesAt(current, 0)) {
+        val match = regex.find(current) ?: break
+        current = current.substring(match.range.last + 1)
     }
+    return current
 }
