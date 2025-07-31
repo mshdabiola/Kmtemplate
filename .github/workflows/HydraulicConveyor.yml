@@ -25,7 +25,7 @@ jobs:
           build-scan-terms-of-use-agree: "yes"
 
       - name: Run setVersionFromTag
-        run: setVersionFromTag -PnewVersionName=${{ github.ref_name }}
+        run: ./gradlew setVersionFromTag -PnewVersionName=${{ github.ref_name }}
 
       - name: Build jar
         run: ./gradlew createReleaseDistributable

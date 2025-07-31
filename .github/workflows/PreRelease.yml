@@ -41,7 +41,7 @@ jobs:
       - name: Bump version code
         id: bump_version_code
         run: |
-          ./gradlew bumpVersionCode
+          ./gradlew bumpVersionCode -PnewVersionName=${{ github.ref_name }}
 
       - name: Build  google play release variant apk
         run: ./gradlew assembleGooglePlayRelease
@@ -106,7 +106,7 @@ jobs:
       - name: Read and increment revision
         id: bump_conveyor_revision
         run: |
-          ./gradlew bumpConveyorRevision
+          ./gradlew bumpConveyorRevision -PnewVersionName=${{ github.ref_name }}
 
       - name: Build jar
         run: ./gradlew createReleaseDistributable
@@ -149,6 +149,11 @@ jobs:
 
       - name: kotlinUpgradeYarnLock
         run: ./gradlew kotlinUpgradeYarnLock
+
+      - name: Bump version code
+        id: bump_version_code
+        run: |
+          ./gradlew bumpVersionCode -PnewVersionName=${{ github.ref_name }}
 
       - name: Build web app
         run: ./gradlew wasmJsBrowserDistribution
