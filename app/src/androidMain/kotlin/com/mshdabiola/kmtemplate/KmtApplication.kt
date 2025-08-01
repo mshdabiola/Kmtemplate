@@ -57,7 +57,7 @@ class KmtApplication : Application() {
 //            Timber.e("log on app create")
 //        }
     }
-    private fun newThread(){
+    private fun setupCrashReporter(){
         Thread {
 //            if (true) {
                 initAcra {
