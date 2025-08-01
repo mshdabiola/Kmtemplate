@@ -79,6 +79,8 @@ dependencies {
     googlePlayImplementation(libs.play.review)
     googlePlayImplementation(libs.play.review.kts)
 
+    implementation("ch.acra:acra-mail:5.12.0")
+
     screenshotTestImplementation(libs.screenshot.validation.api)
     screenshotTestImplementation(libs.androidx.compose.ui.tooling)
 
@@ -163,7 +165,6 @@ kotlin {
         jvmMain.dependencies {
             implementation(compose.desktop.currentOs)
             implementation(libs.kotlinx.coroutines.swing)
-// https://mvnrepository.com/artifact/io.sentry/sentry-kotlin-multiplatform-jvm
             implementation("io.sentry:sentry-kotlin-multiplatform-jvm:0.18.0")
         }
         jvmTest.dependencies {
