@@ -1,3 +1,7 @@
+@file:OptIn(ExperimentalKotlinGradlePluginApi::class)
+
+import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
+
 /*
  * Designed and developed by 2024 mshdabiola (lawal abiola)
  *
@@ -40,6 +44,15 @@ dependencies {
 
 }
 kotlin {
+    applyDefaultHierarchyTemplate {
+        common {
+            group("nonJs") {
+                withAndroidTarget()
+                // withIos()
+                withJvm()
+            }
+        }
+    }
     sourceSets {
         all {
             languageSettings.optIn("kotlin.experimental.ExperimentalObjCName")
@@ -47,8 +60,7 @@ kotlin {
         commonMain.dependencies {
             implementation(projects.modules.model)
         }
-        wasmJsMain.dependencies{
-        }
+
         jvmTest.dependencies {
             implementation(projects.modules.testing)
         }
@@ -62,6 +74,3 @@ kotlin {
         }
     }
 }
-//configurations.commonMainApi {
-//            exclude(group = "org.jetbrains.kotlinx", module = "kotlinx-coroutines-android")
-//        }
