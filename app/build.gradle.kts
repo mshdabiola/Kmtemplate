@@ -61,6 +61,7 @@ dependencies {
     androidTestImplementation(libs.androidx.navigation.testing)
 
     baselineProfile(projects.benchmarks)
+    implementation(libs.kermit.koin)
 
 
     googlePlayImplementation(platform(libs.firebase.bom))
@@ -92,34 +93,24 @@ kotlin {
     jvmToolchain(21)
 
     @OptIn(org.jetbrains.kotlin.gradle.ExperimentalWasmDsl::class)
-    wasmJs {
-        outputModuleName = "composeApp"
-        browser {
-            val rootDirPath = project.rootDir.path
-            val projectDirPath = project.projectDir.path
-            commonWebpackConfig {
-                outputFileName = "composeApp.js"
-                devServer = (devServer ?: KotlinWebpackConfig.DevServer()).apply {
-                    static = (static ?: mutableListOf()).apply {
-                        // Serve sources to debug inside browser
-                        add(rootDirPath)
-                        add(projectDirPath)
-                    }
-                }
-            }
-        }
-        binaries.executable()
-    }
-    @OptIn(ExperimentalKotlinGradlePluginApi::class)
-    applyDefaultHierarchyTemplate {
-        common {
-            group("nonJs") {
-                withAndroidTarget()
-                // withIos()
-                withJvm()
-            }
-        }
-    }
+//    wasmJs {
+//        outputModuleName.set("composeApp")
+//        browser {
+//            val rootDirPath = project.rootDir.path
+//            val projectDirPath = project.projectDir.path
+//            commonWebpackConfig {
+//                outputFileName = "composeApp.js"
+//                devServer = (devServer ?: KotlinWebpackConfig.DevServer()).apply {
+//                    static = (static ?: mutableListOf()).apply {
+//                        // Serve sources to debug inside browser
+//                        add(rootDirPath)
+//                        add(projectDirPath)
+//                    }
+//                }
+//            }
+//        }
+//        binaries.executable()
+//    }
 
     sourceSets {
         val jvmMain by getting
@@ -146,7 +137,6 @@ kotlin {
 
             // Logger
             implementation(libs.kermit)
-//            implementation(libs.kermit.koin)
 
             implementation(libs.androidx.compose.material3.adaptive)
             implementation(libs.androidx.compose.material3.adaptive.layout)
@@ -155,14 +145,10 @@ kotlin {
 
 
         }
-        val nonJsMain by getting{
-            dependencies {
-                implementation(libs.kermit.koin)
 
-            }
-        }
 
         jvmMain.dependencies {
+            implementation(libs.kermit.koin)
             implementation(compose.desktop.currentOs)
             implementation(libs.kotlinx.coroutines.swing)
         }
