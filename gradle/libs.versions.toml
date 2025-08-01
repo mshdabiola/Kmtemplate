@@ -46,8 +46,12 @@ ksp = "2.2.0-2.0.2"
 kotlinxCoroutines = "1.10.2"
 kotlinxDatetime = "0.7.1-0.6.x-compat"
 kotlinxSerializationJson = "1.9.0"
+ktlintRuleEngine = "1.6.0"
+ktlintRulesetStandard = "1.6.0"
+ktlintTest = "1.6.0"
 lifecycleRuntimeCompose = "2.9.10-alpha01"
 androidx-lifecycle = "2.9.1"
+material3 = "1.9.0-alpha04"
 protobuf = "4.26.0"
 protobufPlugin = "0.9.4"
 moduleGraph = "0.12.0"
@@ -171,9 +175,13 @@ kotlinx-datetime = { group = "org.jetbrains.kotlinx", name = "kotlinx-datetime",
 kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }
 kstore-storage = { module = "io.github.xxfast:kstore-storage", version.ref = "kstore" }
 kstore = { module = "io.github.xxfast:kstore", version.ref = "kstore" }
+ktlint-rule-engine = { module = "com.pinterest.ktlint:ktlint-rule-engine", version.ref = "ktlintRuleEngine" }
+ktlint-ruleset-standard = { module = "com.pinterest.ktlint:ktlint-ruleset-standard", version.ref = "ktlintRulesetStandard" }
+ktlint-test = { module = "com.pinterest.ktlint:ktlint-test", version.ref = "ktlintTest" }
 lint-api = { group = "com.android.tools.lint", name = "lint-api", version.ref = "androidTools" }
 lint-checks = { group = "com.android.tools.lint", name = "lint-checks", version.ref = "androidTools" }
 lint-tests = { group = "com.android.tools.lint", name = "lint-tests", version.ref = "androidTools" }
+material3 = { module = "org.jetbrains.compose.material3:material3", version.ref = "material3" }
 poi = { module = "org.apache.poi:poi-ooxml", version.ref = "poi" }
 room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
 room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
