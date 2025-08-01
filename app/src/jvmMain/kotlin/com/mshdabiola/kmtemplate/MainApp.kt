@@ -42,6 +42,7 @@ import com.mshdabiola.kmtemplate.di.appModule
 import com.mshdabiola.kmtemplate.ui.KmtApp
 import com.mshdabiola.kmtemplate.ui.SplashScreen
 import com.mshdabiola.model.CustomLogWriter
+import io.sentry.kotlin.multiplatform.Sentry
 import kotlinx.coroutines.delay
 import org.koin.core.context.GlobalContext.startKoin
 
@@ -76,6 +77,17 @@ fun mainApp() {
 }
 
 fun main() {
+    Sentry.init { options ->
+        options.dsn = "https://dd17ed84e0e47aeeab4291bda5810135@o4509634623504384.ingest.de.sentry.io/4509634671673424"
+        // When first trying Sentry it's good to see what the SDK is doing:
+        options.debug = true
+    }
+
+    try {
+        throw Exception("This is a test.")
+    } catch (e: Exception) {
+        Sentry.captureException(e)
+    }
     val logger =
         Logger(
             loggerConfigInit(
