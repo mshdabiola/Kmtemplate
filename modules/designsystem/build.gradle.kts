@@ -42,6 +42,7 @@ kotlin {
             dependencies {
                 api(compose.runtime)
                 api(compose.foundation)
+                api(compose.ui)
 //                api(compose.material3)
                 api("org.jetbrains.compose.material3:material3:1.9.0-alpha04")
                 api(compose.materialIconsExtended)
@@ -49,8 +50,8 @@ kotlin {
                 api(compose.material3AdaptiveNavigationSuite)
                 api(compose.components.uiToolingPreview)
                 api(libs.kotlinx.collection.immutable)
-                api(libs.lifecycle.runtime.compose)
-
+                api(libs.androidx.lifecycle.viewmodelCompose)
+                api(libs.androidx.lifecycle.runtimeCompose)
                 implementation(project(":modules:model"))
                 api(libs.androidx.navigation.compose.get())
 
@@ -61,9 +62,7 @@ kotlin {
         }
         val androidMain by getting {
             dependencies {
-                api(compose.preview)
-                api(libs.androidx.lifecycle.runtimeCompose)
-                api(libs.androidx.lifecycle.viewModelCompose)
+
                 implementation(libs.androidx.ui.text.google.fonts)
 
             }
@@ -71,7 +70,6 @@ kotlin {
 
         val jvmMain by getting {
             dependencies {
-                api(compose.preview)
                 api(libs.kotlinx.coroutines.swing)
             }
         }
