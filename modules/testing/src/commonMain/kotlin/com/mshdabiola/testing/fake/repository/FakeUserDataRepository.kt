@@ -81,7 +81,7 @@ class FakeUserDataRepository : UserDataRepository {
         }
     }
 
-    override suspend fun setLanguage(language: Int) {
+    override suspend fun setLanguage(language: String) {
         _userData.update { currentUserData ->
             currentUserData.copy(language = language)
         }
