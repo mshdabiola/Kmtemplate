@@ -36,6 +36,7 @@ import co.touchlab.kermit.koin.KermitKoinLogger
 import co.touchlab.kermit.koin.kermitLoggerModule
 import co.touchlab.kermit.loggerConfigInit
 import co.touchlab.kermit.platformLogWriter
+import com.bugsnag.Bugsnag
 import com.mshdabiola.designsystem.drawable.KmtDrawable
 import com.mshdabiola.designsystem.strings.KmtStrings
 import com.mshdabiola.kmtemplate.di.appModule
@@ -76,6 +77,8 @@ fun mainApp() {
 }
 
 fun main() {
+    val bugsnag = Bugsnag("5af3586b6547f3e4844773daedaee4f5");
+
     val logger =
         Logger(
             loggerConfigInit(
@@ -94,6 +97,11 @@ fun main() {
             kermitLoggerModule(logger),
         )
     }
+//    bugsnag.setAppVersion(KmtStrings.version)
+    try {
 
-    mainApp()
+        mainApp()
+    } catch (e: Exception) {
+        bugsnag.notify(e)
+    }
 }
