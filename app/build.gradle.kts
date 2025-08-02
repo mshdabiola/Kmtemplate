@@ -119,6 +119,7 @@ kotlin {
 
 
         jvmMain.dependencies {
+            implementation(libs.bugsnag)
             implementation(libs.kermit.koin)
             implementation(compose.desktop.currentOs)
             implementation(libs.kotlinx.coroutines.swing)
