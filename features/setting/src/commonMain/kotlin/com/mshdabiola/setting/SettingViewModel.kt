@@ -61,7 +61,7 @@ class SettingViewModel constructor(
         }
     }
 
-    fun setLanguage(language: Int) {
+    fun setLanguage(language: String) {
         viewModelScope.launch {
             userDataRepository.setLanguage(language)
         }

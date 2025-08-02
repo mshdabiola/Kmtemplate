@@ -38,11 +38,11 @@ fun SettingScreen(
     onContrastChange: (Int) -> Unit = {},
     onDarkModeChange: (DarkThemeConfig) -> Unit = {},
     onGradientBackgroundChange: (Boolean) -> Unit={},
-    onLanguageChange: (Int) -> Unit = {},
+    onLanguageChange: (String) -> Unit = {},
     openUrl: (String) -> Unit = {},
     openEmail: (String, String, String) -> Unit = { _, _, _ -> },
 
-) {
+    ) {
     val navigator = rememberListDetailPaneScaffoldNavigator<SettingNav>()
     val coroutineScope = rememberCoroutineScope()
 
@@ -93,6 +93,7 @@ fun SettingScreen(
                     onContrastChange = onContrastChange,
                     onDarkModeChange = onDarkModeChange,
                     onGradientBackgroundChange = onGradientBackgroundChange,
+                    onLanguageChange = onLanguageChange,
                     openUrl = openUrl,
                     openEmail = openEmail,
                 )

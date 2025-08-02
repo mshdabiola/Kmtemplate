@@ -60,6 +60,10 @@ fun NavGraphBuilder.settingScreen(
                 settingState = settingState.value,
                 onContrastChange = { viewModel.setContrast(it) },
                 onDarkModeChange = { viewModel.setDarkThemeConfig(it) },
+                onGradientBackgroundChange = { viewModel.setGradientBackground(it) },
+                onLanguageChange = { viewModel.setLanguage(it) },
+                openUrl = { windowRepository.openUrl(it) },
+                openEmail = { email, subject, body -> windowRepository.openEmail(email, subject, body) },
             )
         }
     }

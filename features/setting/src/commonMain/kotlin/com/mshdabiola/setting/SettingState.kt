@@ -21,5 +21,5 @@ data class SettingState(
     val contrast: Int = 0,
     val darkThemeConfig: DarkThemeConfig = DarkThemeConfig.DARK,
     val gradientBackground: Boolean = false,
-    val language: Int = 0,
+    val language: String = "en-Us",
 )

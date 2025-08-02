@@ -35,6 +35,7 @@ import com.mshdabiola.model.DarkThemeConfig
 import com.mshdabiola.setting.detailscreen.AboutScreen
 import com.mshdabiola.setting.detailscreen.AppearanceScreen
 import com.mshdabiola.setting.detailscreen.FaqScreen
+import com.mshdabiola.setting.detailscreen.LanguageScreen
 import kmtemplate.features.setting.generated.resources.Res
 import kmtemplate.features.setting.generated.resources.general
 import kmtemplate.features.setting.generated.resources.support
@@ -50,7 +51,7 @@ internal fun SettingDetailScreen(
     onContrastChange: (Int) -> Unit = {},
     onDarkModeChange: (DarkThemeConfig) -> Unit = {},
     onGradientBackgroundChange: (Boolean) -> Unit={},
-    onLanguageChange: (Int) -> Unit = {},
+    onLanguageChange: (String) -> Unit = {},
     openUrl: (String) -> Unit = {},
     openEmail: (String, String, String) -> Unit = { _, _, _ -> },
 ) {
@@ -105,6 +106,13 @@ internal fun SettingDetailScreen(
                         onContrastChange = onContrastChange,
                         onDarkModeChange = onDarkModeChange,
                         onGradientBackgroundChange = onGradientBackgroundChange,
+                    )
+                }
+                SettingNav.Language -> {
+                    LanguageScreen(
+                        modifier = Modifier.fillMaxSize(),
+                        currentLanguageCode = settingState.language,
+                        onLanguageSelected = onLanguageChange,
                     )
                 }
                 SettingNav.Issue -> { /* TODO: Implement Issue Screen */ }

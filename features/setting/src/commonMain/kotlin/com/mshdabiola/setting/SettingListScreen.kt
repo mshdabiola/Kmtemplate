@@ -53,6 +53,7 @@ import org.jetbrains.compose.resources.stringResource
 
 enum class SettingNav(val segment: Int, val index: Int) {
     Appearance(0, 0),
+    Language(0, 1),
     Issue(1, 0),
     Faq(1, 1),
     About(1, 2),
@@ -67,7 +68,7 @@ internal fun SettingListScreen(
     onSettingClick: (SettingNav) -> Unit = {},
 ) {
     val segmentArrayString = stringArrayResource(Res.array.segment)
-    val generalIcon = listOf(KmtIcons.Appearance)
+    val generalIcon = listOf(KmtIcons.Appearance, KmtIcons.Language)
     val generalArrayString = stringArrayResource(Res.array.general)
     val supportIcon = listOf(KmtIcons.BugReport, KmtIcons.Faq, KmtIcons.About)
     val supportArrayString = stringArrayResource(Res.array.support)
