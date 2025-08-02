@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Diseñado y desarrollado por 2024 mshdabiola (lawal abiola)
+
+     Licenciado bajo la Licencia Apache, Versión 2.0 (la "Licencia");
+     no puede usar este archivo excepto en cumplimiento con la Licencia.
+     Puede obtener una copia de la Licencia en
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     A menos que lo exija la ley aplicable o se acuerde por escrito, el software
+     distribuido bajo la Licencia se distribuye "TAL CUAL",
+     SIN GARANTÍAS NI CONDICIONES DE NINGÚN TIPO, ya sean expresas o implícitas.
+     Consulte la Licencia para conocer el idioma específico que rige los permisos y
+     limitaciones bajo la Licencia.
+-->
+<resources>
+
+    <string name="screen_name">Configuración</string>
+    <string name="version">Versión</string>
+    <string name="last_update">Última Actualización</string>
+    <string name="about">"Kmtemplate: Un punto de partida para tus proyectos Kotlin Multiplatform, proporcionando una base sólida y mejores prácticas."</string>
+    <string name="developed_by">Desarrollado por</string>
+    <string name="developer">Mshdabiola</string>
+    <string name="contact_us">Contáctanos</string>
+    <string name="privacy_policy">Política de Privacidad</string>
+    <string name="terms_and_condition">Términos y Condiciones</string>
+
+    <string-array name="segment">
+        <item>General</item>
+        <item>Soporte</item>
+    </string-array>
+
+    <string-array name="general">
+        <item>Apariencia</item>
+        <item>Idioma</item>
+    </string-array>
+
+    <string-array name="support">
+        <item>Reportar un Problema</item>
+        <item>Preguntas Frecuentes</item>
+        <item>Acerca de</item>
+    </string-array>
+
+    <string-array name="theme">
+        <item>Predeterminado</item>
+        <item>Verde</item>
+    </string-array>
+
+    <string-array name="daynight">
+        <item>Seguir sistema</item>
+        <item>Claro</item>
+        <item>Oscuro</item>
+    </string-array>
+
+</resources>

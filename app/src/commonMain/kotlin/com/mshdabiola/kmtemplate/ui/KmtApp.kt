@@ -32,10 +32,16 @@ import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.adaptive.currentWindowAdaptiveInfo
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.testTag // Ensure this is imported
+import androidx.compose.ui.text.intl.Locale
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.window.core.layout.WindowSizeClass
 import com.mshdabiola.analytics.AnalyticsHelper
@@ -47,6 +53,7 @@ import com.mshdabiola.designsystem.theme.KmtTheme
 import com.mshdabiola.designsystem.theme.LocalGradientColors
 import com.mshdabiola.kmtemplate.MainActivityUiState
 import com.mshdabiola.kmtemplate.MainAppViewModel
+import com.mshdabiola.kmtemplate.changeLanguage
 import com.mshdabiola.kmtemplate.navigation.KmtNavHost
 import com.mshdabiola.model.DarkThemeConfig
 import com.mshdabiola.ui.LocalSharedTransitionScope
@@ -81,13 +88,26 @@ fun KmtApp(
     val analyticsHelper = koinInject<AnalyticsHelper>()
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     val darkTheme = shouldUseDarkTheme(uiState)
+    val localLocalization = staticCompositionLocalOf { "en" }
+    var languageCode by remember { mutableStateOf("en") }
 
+    LaunchedEffect(uiState) {
+        if (uiState is MainActivityUiState.Success) {
+
+            val language = (uiState as MainActivityUiState.Success).userData.language
+            languageCode=language
+            changeLanguage(language)
+        }
+
+    }
     SharedTransitionLayout(
         modifier = Modifier.testTag(KmtAppTestTags.APP_ROOT_LAYOUT), // Tagging the outer layout
     ) {
         CompositionLocalProvider(
             LocalAnalyticsHelper provides analyticsHelper,
             LocalSharedTransitionScope provides this,
+            localLocalization provides languageCode
+
         ) {
             KmtTheme(
                 contrast = chooseContrast(uiState),
