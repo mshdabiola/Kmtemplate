@@ -75,6 +75,18 @@ class FakeUserDataRepository : UserDataRepository {
         }
     }
 
+    override suspend fun setShouldShowGradientBackground(shouldShowGradientBackground: Boolean) {
+        _userData.update { currentUserData ->
+            currentUserData.copy(shouldShowGradientBackground = shouldShowGradientBackground)
+        }
+    }
+
+    override suspend fun setLanguage(language: Int) {
+        _userData.update { currentUserData ->
+            currentUserData.copy(language = language)
+        }
+    }
+
     /**
      * Helper function to directly set the entire UserData object, useful for test setup.
      */
