@@ -101,15 +101,17 @@ fun AboutScreen(
                 .align(Alignment.CenterHorizontally)
                 .padding(bottom = 16.dp)
                 .testTag(AboutScreenTestTags.APP_ICON),
+            tint = MaterialTheme.colorScheme.primary,
         )
 
         Text(
             text = KmtStrings.brand,
             style = MaterialTheme.typography.headlineMedium,
-            color = MaterialTheme.colorScheme.onBackground,
+            color = MaterialTheme.colorScheme.primary,
             modifier = Modifier
                 .align(Alignment.CenterHorizontally)
                 .testTag(AboutScreenTestTags.APP_NAME),
+
         )
 
         Text(

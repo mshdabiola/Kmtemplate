@@ -349,11 +349,13 @@ fun DrawerContent(
                         .testTag(DrawerContentTestTags.BRAND_ICON),
                     imageVector = KmtDrawable.brand,
                     contentDescription = "brand",
+                    tint = MaterialTheme.colorScheme.primary,
                 )
                 Text(
                     KmtStrings.brand,
                     style = MaterialTheme.typography.titleLarge,
                     modifier = Modifier.testTag(DrawerContentTestTags.BRAND_TEXT),
+                    color = MaterialTheme.colorScheme.primary,
                 )
             }
             Spacer(modifier = Modifier.height(64.dp))
