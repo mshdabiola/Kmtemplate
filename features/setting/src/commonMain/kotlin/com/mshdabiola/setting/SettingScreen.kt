@@ -37,6 +37,8 @@ fun SettingScreen(
     settingState: SettingState,
     onContrastChange: (Int) -> Unit = {},
     onDarkModeChange: (DarkThemeConfig) -> Unit = {},
+    onGradientBackgroundChange: (Boolean) -> Unit={},
+    onLanguageChange: (Int) -> Unit = {},
     openUrl: (String) -> Unit = {},
     openEmail: (String, String, String) -> Unit = { _, _, _ -> },
 
@@ -90,6 +92,7 @@ fun SettingScreen(
                     settingState = settingState,
                     onContrastChange = onContrastChange,
                     onDarkModeChange = onDarkModeChange,
+                    onGradientBackgroundChange = onGradientBackgroundChange,
                     openUrl = openUrl,
                     openEmail = openEmail,
                 )

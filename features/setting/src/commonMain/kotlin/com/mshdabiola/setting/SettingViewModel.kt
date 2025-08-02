@@ -33,6 +33,8 @@ class SettingViewModel constructor(
             SettingState(
                 contrast = userData.contrast,
                 darkThemeConfig = userData.darkThemeConfig,
+                gradientBackground = userData.shouldShowGradientBackground,
+                language = userData.language,
             )
         }
         .stateIn(
@@ -50,6 +52,18 @@ class SettingViewModel constructor(
     fun setDarkThemeConfig(darkThemeConfig: DarkThemeConfig) {
         viewModelScope.launch {
             userDataRepository.setDarkThemeConfig(darkThemeConfig)
+        }
+    }
+
+    fun setGradientBackground(gradientBackground: Boolean) {
+        viewModelScope.launch {
+            userDataRepository.setShouldShowGradientBackground(gradientBackground)
+        }
+    }
+
+    fun setLanguage(language: Int) {
+        viewModelScope.launch {
+            userDataRepository.setLanguage(language)
         }
     }
 }

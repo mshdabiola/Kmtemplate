@@ -49,6 +49,8 @@ internal fun SettingDetailScreen(
     settingState: SettingState,
     onContrastChange: (Int) -> Unit = {},
     onDarkModeChange: (DarkThemeConfig) -> Unit = {},
+    onGradientBackgroundChange: (Boolean) -> Unit={},
+    onLanguageChange: (Int) -> Unit = {},
     openUrl: (String) -> Unit = {},
     openEmail: (String, String, String) -> Unit = { _, _, _ -> },
 ) {
@@ -102,6 +104,7 @@ internal fun SettingDetailScreen(
                         settingsState = settingState,
                         onContrastChange = onContrastChange,
                         onDarkModeChange = onDarkModeChange,
+                        onGradientBackgroundChange = onGradientBackgroundChange,
                     )
                 }
                 SettingNav.Issue -> { /* TODO: Implement Issue Screen */ }

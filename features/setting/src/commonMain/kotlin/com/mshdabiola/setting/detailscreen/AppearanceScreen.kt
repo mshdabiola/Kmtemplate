@@ -33,6 +33,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.RadioButtonDefaults
+import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -59,6 +60,7 @@ fun AppearanceScreen(
     settingsState: SettingState,
     onContrastChange: (Int) -> Unit,
     onDarkModeChange: (DarkThemeConfig) -> Unit,
+    onGradientBackgroundChange: (Boolean) -> Unit,
 ) {
     val contrastOptions = listOf(
         ContrastOption(
@@ -106,6 +108,34 @@ fun AppearanceScreen(
         Spacer(modifier = Modifier.height(24.dp))
 
         Text(
+            text = "Background",
+            style = MaterialTheme.typography.titleLarge,
+            color = MaterialTheme.colorScheme.onSurface,
+            modifier = Modifier
+                .padding(bottom = 8.dp)
+        )
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .clickable { onGradientBackgroundChange(!settingsState.gradientBackground) }
+                .padding(vertical = 12.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            ) {
+            Text(
+
+                "Show Gradient Background",
+                modifier = Modifier.weight(1f),
+                style = MaterialTheme.typography.bodyLarge,
+                color = MaterialTheme.colorScheme.onSurface,)
+            Switch(
+                checked = settingsState.gradientBackground,
+                onCheckedChange = { onGradientBackgroundChange(it) },
+            )
+        }
+
+        Spacer(modifier = Modifier.height(24.dp))
+
+        Text(
             text = "Dark Mode",
             style = MaterialTheme.typography.titleLarge,
             color = MaterialTheme.colorScheme.onSurface,
@@ -148,6 +178,7 @@ fun AppearanceScreen(
                 )
             }
         }
+
     }
 }
 
@@ -252,7 +283,7 @@ fun ContrastTimeline(
     }
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
 fun AppearanceScreenPreview() {
     KmtTheme {
@@ -260,6 +291,8 @@ fun AppearanceScreenPreview() {
             settingsState = SettingState(contrast = 0, darkThemeConfig = DarkThemeConfig.DARK),
             onContrastChange = {},
             onDarkModeChange = {},
+            onGradientBackgroundChange = {},
+
         )
     }
 }
