@@ -32,12 +32,7 @@ class FakeUserDataRepository : UserDataRepository {
 
     // Internal MutableStateFlow to hold and update UserData
     private val _userData = MutableStateFlow(
-        UserData( // Default values for UserData
-            contrast = 0, // Example default
-            darkThemeConfig = DarkThemeConfig.FOLLOW_SYSTEM, // Example default
-            useDynamicColor = false, // Example default
-            shouldHideOnboarding = false, // Example default
-        ),
+        UserData(),
     )
 
     /**
