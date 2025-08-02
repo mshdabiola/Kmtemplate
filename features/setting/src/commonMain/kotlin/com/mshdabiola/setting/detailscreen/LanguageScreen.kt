@@ -20,12 +20,16 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.mshdabiola.designsystem.strings.KmtStrings
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
-
+object LanguageScreenTestTags {
+    const val LANGUAGE_LIST = "languageList"
+    fun languageItem(languageCode: String) = "languageItem_$languageCode"
+}
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun LanguageScreen(
@@ -37,12 +41,14 @@ fun LanguageScreen(
     LazyColumn(
         modifier = modifier
             .fillMaxWidth()
-            .padding(horizontal = 8.dp, vertical = 8.dp),
+            .padding(horizontal = 8.dp, vertical = 8.dp)
+            .testTag(LanguageScreenTestTags.LANGUAGE_LIST),
         verticalArrangement = Arrangement.spacedBy(8.dp),
     ) {
         items(supportedLanguages, key = { it.second }) { language ->
             LanguageItem(
                 languageName = language.first,
+                languageCode = language.second,
                 isSelected = language.second == currentLanguageCode,
                 onClick = { onLanguageSelected(language.second) },
             )
@@ -62,6 +68,7 @@ fun LanguageScreenPreview() {
 @Composable
 private fun LanguageItem(
     languageName: String,
+    languageCode: String,
     isSelected: Boolean,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
@@ -69,7 +76,8 @@ private fun LanguageItem(
     Card(
         modifier = modifier
             .fillMaxWidth()
-            .clickable { onClick()},
+            .clickable { onClick() }
+            .testTag(LanguageScreenTestTags.languageItem(languageCode)),
         elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant),
     ) {
