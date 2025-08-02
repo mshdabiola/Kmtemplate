@@ -19,16 +19,19 @@ import com.android.build.gradle.BaseExtension
 import com.mshdabiola.app.configureBadgingTasks
 import com.mshdabiola.app.configureGradleManagedDevices
 import com.mshdabiola.app.configureKotlinAndroid
+import com.mshdabiola.app.configureKotlinMultiplatform
 import com.mshdabiola.app.configurePrintApksTask
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure
 import org.gradle.kotlin.dsl.getByType
+import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 
 class AndroidApplicationConventionPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         with(target) {
             with(pluginManager) {
+                apply("kotlin-multiplatform")
                 apply("com.android.application")
                 apply("mshdabiola.kover")
                 apply("mshdabiola.android.lint")
@@ -45,6 +48,9 @@ class AndroidApplicationConventionPlugin : Plugin<Project> {
             extensions.configure<ApplicationAndroidComponentsExtension> {
                 configurePrintApksTask(this)
                 configureBadgingTasks(extensions.getByType<BaseExtension>(), this)
+            }
+            extensions.configure<KotlinMultiplatformExtension>{
+                configureKotlinMultiplatform(this)
             }
         }
     }

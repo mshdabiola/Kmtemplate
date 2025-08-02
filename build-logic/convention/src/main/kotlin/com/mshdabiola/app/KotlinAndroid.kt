@@ -22,7 +22,52 @@ import org.gradle.kotlin.dsl.configure
 import org.gradle.kotlin.dsl.dependencies
 import org.gradle.kotlin.dsl.provideDelegate
 import org.gradle.kotlin.dsl.withType
+import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
+import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
+import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
+import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
+@OptIn(ExperimentalKotlinGradlePluginApi::class)
+internal fun Project.configureKotlinMultiplatform(
+    kotlinMultiplatformExtension: KotlinMultiplatformExtension,
+) {
+    with(kotlinMultiplatformExtension) {
+        jvmToolchain(21)
+
+        androidTarget()
+        // jvm("desktop")
+        jvm()
+
+        @OptIn(ExperimentalWasmDsl::class)
+        wasmJs {
+            browser {
+                val rootDirPath = project.rootDir.path
+                val projectDirPath = project.projectDir.path
+                commonWebpackConfig {
+                    devServer = (devServer ?: KotlinWebpackConfig.DevServer()).apply {
+                        static = (static ?: mutableListOf()).apply {
+                            // Serve sources to debug inside browser
+                            add(rootDirPath)
+                            add(projectDirPath)
+                        }
+                    }
+                }
+            }
+        }
+        applyDefaultHierarchyTemplate {
+            common {
+                group("nonJs") {
+                    withAndroidTarget()
+                    // withIos()
+                    withJvm()
+                }
+            }
+        }
+
+    }
+}
+
 
 /**
  * Configure base Kotlin with Android options
