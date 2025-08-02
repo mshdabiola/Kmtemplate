@@ -31,11 +31,13 @@ import androidx.compose.material.icons.rounded.ExpandLess
 import androidx.compose.material.icons.rounded.ExpandMore
 import androidx.compose.material.icons.rounded.Home
 import androidx.compose.material.icons.rounded.Info
+import androidx.compose.material.icons.rounded.Language
 import androidx.compose.material.icons.rounded.LightMode
 import androidx.compose.material.icons.rounded.Menu
 import androidx.compose.material.icons.rounded.Settings
 
 object KmtIcons {
+    val Language= Icons.Rounded.Language
     val ExpandLess = Icons.Rounded.ExpandLess
     val ExpandMore = Icons.Rounded.ExpandMore
     val LightMode = Icons.Rounded.LightMode
