@@ -84,7 +84,7 @@ Kotlin Multiplatform Template is a robust project starter designed with a modern
 This project follows Clean Architecture principles, ensuring a scalable, maintainable, and testable codebase. The architecture separates concerns into distinct layers, promoting clear boundaries between business logic, data handling, and presentation. Shared logic is implemented in common modules, while platform-specific code is isolated for Android, JVM, and WASM targets.
 
 <p align="center">
-  <img src="./fastlane/metadata/android/en-US/images/buttons/Architecture - overall.png" width="800" />
+  <img src="./fastlane/metadata/android/en-US/images/buttons/Architecture - overall.png" width="800" alt="Overall Architecture Diagram" />
 </p>
 
 - Presentation Layer: UI and user interaction, built with Compose Multiplatform.
