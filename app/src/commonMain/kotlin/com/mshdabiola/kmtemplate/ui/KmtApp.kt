@@ -76,7 +76,6 @@ fun KmtApp(
         windowSizeClass = windowSizeClass,
     ),
 ) {
-    val shouldShowGradientBackground = true
 
     val viewModel: MainAppViewModel = koinViewModel()
     val analyticsHelper = koinInject<AnalyticsHelper>()
@@ -100,7 +99,7 @@ fun KmtApp(
                     KmtGradientBackground(
                         modifier = Modifier.testTag(KmtAppTestTags.GRADIENT_BACKGROUND),
                         gradientColors =
-                        if (shouldShowGradientBackground) {
+                        if (shouldShowGradientBackground(uiState)) {
                             LocalGradientColors.current
                         } else {
                             GradientColors()
@@ -160,4 +159,13 @@ fun shouldUseDarkTheme(uiState: MainActivityUiState): Boolean =
                 DarkThemeConfig.LIGHT -> false
                 DarkThemeConfig.DARK -> true
             }
+    }
+
+
+@Composable
+fun shouldShowGradientBackground(uiState: MainActivityUiState): Boolean =
+    when (uiState) {
+        MainActivityUiState.Loading -> false
+        is MainActivityUiState.Success ->
+            uiState.userData.shouldShowGradientBackground
     }
