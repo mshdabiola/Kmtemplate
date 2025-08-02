@@ -38,43 +38,47 @@ dependencies {
 }
 kotlin {
     sourceSets {
-        val commonMain by getting {
-            dependencies {
+         commonMain.dependencies {
                 api(compose.runtime)
                 api(compose.foundation)
-//                api(compose.material3)
-                api("org.jetbrains.compose.material3:material3:1.9.0-alpha04")
+                api(compose.ui)
                 api(compose.materialIconsExtended)
                 api(compose.components.resources)
                 api(compose.material3AdaptiveNavigationSuite)
                 api(compose.components.uiToolingPreview)
-                api(libs.kotlinx.collection.immutable)
-                api(libs.lifecycle.runtime.compose)
+//                api(compose.material3)
+
 
                 implementation(project(":modules:model"))
                 api(libs.androidx.navigation.compose.get())
+                api(libs.kotlinx.collection.immutable)
+                api(libs.androidx.lifecycle.viewmodelCompose)
+                api(libs.androidx.lifecycle.runtimeCompose)
+                api(libs.material3)
+
 
                 api(libs.koin.compose)
                 api(libs.koin.composeVM)
 
+                api(libs.coil.kt)
+                api(libs.coil.kt.compose)
+                api(libs.coil.kt.svg)
+                api(libs.coil.kt.network)
+                api(compose.components.resources)
+
             }
-        }
-        val androidMain by getting {
-            dependencies {
-                api(compose.preview)
-                api(libs.androidx.lifecycle.runtimeCompose)
-                api(libs.androidx.lifecycle.viewModelCompose)
+
+        androidMain.dependencies {
+
                 implementation(libs.androidx.ui.text.google.fonts)
 
             }
-        }
 
-        val jvmMain by getting {
-            dependencies {
-                api(compose.preview)
-                api(libs.kotlinx.coroutines.swing)
-            }
-        }
+
+//         jvmMain.dependencies {
+//                api(libs.kotlinx.coroutines.swing)
+//            }
+
 
 
     }

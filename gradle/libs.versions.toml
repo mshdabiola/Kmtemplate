@@ -1,8 +1,9 @@
 [versions]
 accompanist = "0.37.3"
+acraMail = "5.12.0"
 androidDesugarJdkLibs = "2.1.5"
-androidGradlePlugin = "8.11.1"
-androidTools = "31.11.0"
+androidGradlePlugin = "8.12.0"
+androidTools = "31.12.0"
 androidxActivity = "1.10.1"
 androidxAppCompat = "1.7.1"
 androidxBrowser = "1.8.0"
@@ -16,37 +17,43 @@ androidxComposeMaterial3AdaptiveNavigationSuite = "1.3.2"
 androidxCore = "1.16.0"
 androidxCoreSplashscreen = "1.0.1"
 androidxDataStore = "1.1.7"
-androidxEspresso = "3.6.1"
+androidxEspresso = "3.7.0"
 androidxHiltNavigationCompose = "1.2.0"
-androidxLifecycle = "2.9.1"
-androidxMacroBenchmark = "1.3.4"
+androidxMacroBenchmark = "1.4.0"
 androidxMetrics = "1.0.0-beta02"
 androidxProfileinstaller = "1.4.1"
-androidxTestCore = "1.6.1"
-androidxTestExt = "1.2.1"
-androidxTestRules = "1.6.1"
-androidxTestRunner = "1.6.2"
+androidxTestCore = "1.7.0"
+androidxTestExt = "1.3.0"
+androidxTestRules = "1.7.0"
+androidxTestRunner = "1.7.0"
 androidxTracing = "1.3.0"
 androidxUiAutomator = "2.3.0"
 androidxWindowManager = "1.4.0"
-androidxWork = "2.10.2"
-coil = "3.2.0"
+androidxWork = "2.10.3"
+bugsnag = "3.8.0"
+coil = "3.3.0"
 dependencyGuard = "0.5.0"
 firebaseBom = "33.16.0"
 firebaseCrashlyticsPlugin = "3.0.4"
 firebasePerfPlugin = "1.4.2"
 gmsPlugin = "4.4.3"
-googleOss = "17.2.0"
+googleOss = "17.2.1"
 googleOssPlugin = "0.10.6"
 junit4 = "4.13.2"
 #kotlin = "2.2.0"
 #ksp = "2.2.0-2.0.2"
 kotlin = "2.2.0"
+kotlinxBrowser = "0.3"
 ksp = "2.2.0-2.0.2"
 kotlinxCoroutines = "1.10.2"
 kotlinxDatetime = "0.7.1-0.6.x-compat"
 kotlinxSerializationJson = "1.9.0"
+ktlintRuleEngine = "1.6.0"
+ktlintRulesetStandard = "1.6.0"
+ktlintTest = "1.6.0"
 lifecycleRuntimeCompose = "2.9.10-alpha01"
+androidx-lifecycle = "2.9.1"
+material3 = "1.9.0-alpha04"
 protobuf = "4.26.0"
 protobufPlugin = "0.9.4"
 moduleGraph = "0.12.0"
@@ -58,10 +65,10 @@ turbine = "1.2.1"
 kstore ="1.0.0"
 
 compose-plugin = "1.9.0-beta01"
-composeNavigation="2.9.0-beta02"
-androidxNavigationTest = "2.9.1" #for nav test
+composeNavigation="2.9.0-beta04"
+androidxNavigationTest = "2.9.3" #for nav test
 compose = "1.8.3"
-composehot="1.0.0-beta03"
+composehot="1.0.0-beta04"
 foojay="0.10.0"
 
 playGame = "21.0.0"
@@ -73,7 +80,7 @@ firebaseCrashlyticsKts = "18.3.6"
 firebaseCrashylyticsPlugins = "2.9.9"
 playServicesMlkitTextRecognition = "19.0.0"
 
-ktor = "3.2.1"
+ktor = "3.2.2"
 uiTextGoogleFonts = "1.8.3"
 
 koin = "4.1.0"
@@ -96,7 +103,7 @@ detekt = "1.23.8"
 detektCompose = "0.1.6"
 
 ktlint2 = "1.5.0"
-spotless = "7.1.0"
+spotless = "7.2.1"
 
 series = "0.0.19"
 calf = "0.8.0"
@@ -110,6 +117,7 @@ versionName = "1.2.9"
 
 [libraries]
 accompanist-permissions = { group = "com.google.accompanist", name = "accompanist-permissions", version.ref = "accompanist" }
+acra-mail = { module = "ch.acra:acra-mail", version.ref = "acraMail" }
 android-desugarJdkLibs = { group = "com.android.tools", name = "desugar_jdk_libs", version.ref = "androidDesugarJdkLibs" }
 androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "androidxActivity" }
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "androidxAppCompat" }
@@ -131,8 +139,8 @@ androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = 
 androidx-core-splashscreen = { group = "androidx.core", name = "core-splashscreen", version.ref = "androidxCoreSplashscreen" }
 androidx-dataStore-core = { module = "androidx.datastore:datastore-preferences-core", version.ref = "androidxDataStore" }
 androidx-datastore-core-okio = { group = "androidx.datastore", name = "datastore-core-okio", version.ref = "androidxDataStore" }
-androidx-lifecycle-runtimeCompose = { group = "androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "androidxLifecycle" }
-androidx-lifecycle-viewModelCompose = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-compose", version.ref = "androidxLifecycle" }
+#androidx-lifecycle-runtimeCompose = { group = "androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "androidxLifecycle" }
+#androidx-lifecycle-viewModelCompose = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-compose", version.ref = "androidxLifecycle" }
 androidx-metrics = { group = "androidx.metrics", name = "metrics-performance", version.ref = "androidxMetrics" }
 androidx-navigation-compose = { module = "org.jetbrains.androidx.navigation:navigation-compose", version.ref = "composeNavigation" }
 androidx-navigation-testing = { group = "androidx.navigation", name = "navigation-testing", version.ref = "androidxNavigationTest" }
@@ -145,8 +153,12 @@ androidx-test-runner = { group = "androidx.test", name = "runner", version.ref =
 androidx-test-uiautomator = { group = "androidx.test.uiautomator", name = "uiautomator", version.ref = "androidxUiAutomator" }
 androidx-tracing-ktx = { group = "androidx.tracing", name = "tracing-ktx", version.ref = "androidxTracing" }
 androidx-window-core = { group = "androidx.window", name = "window-core", version.ref = "androidxWindowManager" }
+
+androidx-lifecycle-viewmodelCompose = { module = "org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "androidx-lifecycle" }
+androidx-lifecycle-runtimeCompose = { module = "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose", version.ref = "androidx-lifecycle" }
 androidx-work-ktx = { group = "androidx.work", name = "work-runtime-ktx", version.ref = "androidxWork" }
 androidx-work-testing = { group = "androidx.work", name = "work-testing", version.ref = "androidxWork" }
+bugsnag = { module = "com.bugsnag:bugsnag", version.ref = "bugsnag" }
 coil-kt = { module = "io.coil-kt.coil3:coil", version.ref = "coil" }
 coil-kt-compose = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coil" }
 coil-kt-svg = { module = "io.coil-kt.coil3:coil-svg", version.ref = "coil" }
@@ -160,16 +172,20 @@ google-oss-licenses = { group = "com.google.android.gms", name = "play-services-
 google-oss-licenses-plugin = { group = "com.google.android.gms", name = "oss-licenses-plugin", version.ref = "googleOssPlugin" }
 kotlin-stdlib = { group = "org.jetbrains.kotlin", name = "kotlin-stdlib-jdk8", version.ref = "kotlin" }
 kotlin-test = { group = "org.jetbrains.kotlin", name = "kotlin-test", version.ref = "kotlin" }
+kotlinx-browser = { module = "org.jetbrains.kotlinx:kotlinx-browser", version.ref = "kotlinxBrowser" }
 kotlinx-coroutines-guava = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-guava", version.ref = "kotlinxCoroutines" }
 kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "kotlinxCoroutines" }
 kotlinx-datetime = { group = "org.jetbrains.kotlinx", name = "kotlinx-datetime", version.ref = "kotlinxDatetime" }
 kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }
 kstore-storage = { module = "io.github.xxfast:kstore-storage", version.ref = "kstore" }
 kstore = { module = "io.github.xxfast:kstore", version.ref = "kstore" }
-lifecycle-runtime-compose = { module = "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose", version.ref = "lifecycleRuntimeCompose" }
+ktlint-rule-engine = { module = "com.pinterest.ktlint:ktlint-rule-engine", version.ref = "ktlintRuleEngine" }
+ktlint-ruleset-standard = { module = "com.pinterest.ktlint:ktlint-ruleset-standard", version.ref = "ktlintRulesetStandard" }
+ktlint-test = { module = "com.pinterest.ktlint:ktlint-test", version.ref = "ktlintTest" }
 lint-api = { group = "com.android.tools.lint", name = "lint-api", version.ref = "androidTools" }
 lint-checks = { group = "com.android.tools.lint", name = "lint-checks", version.ref = "androidTools" }
 lint-tests = { group = "com.android.tools.lint", name = "lint-tests", version.ref = "androidTools" }
+material3 = { module = "org.jetbrains.compose.material3:material3", version.ref = "material3" }
 poi = { module = "org.apache.poi:poi-ooxml", version.ref = "poi" }
 room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
 room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }

@@ -22,12 +22,9 @@ android {
     namespace = "com.mshdabiola.data"
 }
 
-
-
 kotlin {
     sourceSets {
-        val commonMain by getting {
-            dependencies {
+            commonMain.dependencies {
                 implementation(project(":modules:model"))
                 implementation(project(":modules:analytics"))
                 implementation(libs.koin.core)
@@ -37,7 +34,6 @@ kotlin {
                 api(project(":modules:network"))
               //  implementation(libs.paging.common)
             }
-        }
 
     }
 }

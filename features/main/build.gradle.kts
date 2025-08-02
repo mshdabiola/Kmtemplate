@@ -24,12 +24,8 @@ android {
 }
 kotlin {
     sourceSets {
-        val commonMain by getting {
-            dependencies {
+         commonMain.dependencies {
                 api(compose.components.resources)
             }
-        }
-
-
     }
 }

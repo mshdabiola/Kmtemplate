@@ -24,6 +24,10 @@ import co.touchlab.kermit.koin.kermitLoggerModule
 import co.touchlab.kermit.loggerConfigInit
 import co.touchlab.kermit.platformLogWriter
 import com.mshdabiola.kmtemplate.di.appModule
+import org.acra.ReportField
+import org.acra.config.mailSender
+import org.acra.data.StringFormat
+import org.acra.ktx.initAcra
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 
@@ -46,10 +50,35 @@ class KmtApplication : Application() {
             androidContext(this@KmtApplication)
             modules(appModule, kermitLoggerModule(logger))
         }
+        setupCrashReporter()
 
 //        if (packageName.contains("debug")) {
 //            Timber.plant(Timber.DebugTree())
 //            Timber.e("log on app create")
 //        }
+    }
+    private fun setupCrashReporter() {
+        Thread {
+//            if (true) {
+            initAcra {
+                reportFormat = StringFormat.KEY_VALUE_LIST
+                reportContent = listOf(
+                    ReportField.REPORT_ID, ReportField.APP_VERSION_NAME,
+                    ReportField.PHONE_MODEL, ReportField.BRAND, ReportField.PRODUCT, ReportField.ANDROID_VERSION,
+                    ReportField.BUILD_CONFIG, ReportField.STACK_TRACE, ReportField.LOGCAT,
+                )
+                mailSender {
+                    reportAsFile = true
+                    mailTo = getString(R.string.email)
+                    subject = getString(R.string.crash_title)
+                    body = getString(R.string.crash_body)
+                    reportFileName = "Kmtemplate_Bug_Report.txt"
+                }
+            }
+//            } else {
+//                System.setProperty(DEBUG_PROPERTY_NAME, DEBUG_PROPERTY_VALUE_ON)
+// //                Timber.plant(Timber.DebugTree())
+//            }
+        }.start()
     }
 }

@@ -25,21 +25,13 @@ android {
 }
 
 dependencies {
-    implementation(compose.runtime)
     googlePlayImplementation(platform(libs.firebase.bom))
     googlePlayImplementation(libs.firebase.analytics)
 }
 kotlin {
-
     sourceSets {
-
-
-        val commonMain by getting {
-            dependencies {
+        commonMain.dependencies {
                 implementation(compose.runtime)
-
-
             }
-        }
     }
 }

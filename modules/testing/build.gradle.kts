@@ -27,16 +27,13 @@ android {
     namespace = "com.mshdabiola.testing"
 }
 dependencies {
-//
-//
     debugApi(libs.androidx.compose.ui.testManifest)
-//
 }
 kotlin {
 
     sourceSets {
-        @OptIn(ExperimentalComposeLibrary::class) val commonMain by getting {
-            dependencies {
+        @OptIn(ExperimentalComposeLibrary::class)
+        commonMain.dependencies {
                 api(kotlin("test"))
 //                api(compose.uiTest)
                 api(projects.modules.analytics)
@@ -49,24 +46,18 @@ kotlin {
                 api(libs.koin.test)
                 api(libs.kermit.test)
             }
-        }
-        val nonJsMain by getting {
-            dependencies {
-                api(libs.koin.test.junit)
-            }
-        }
 
-        val jvmMain by getting {
-            dependencies {
-                api(compose.desktop.currentOs)
+         jvmMain.dependencies {
+             api(libs.koin.test.junit)
+
+             api(compose.desktop.currentOs)
 
                 api(compose.desktop.uiTestJUnit4)
             }
-        }
 
 
-        val androidMain by getting {
-            dependencies {
+
+         androidMain.dependencies {
                 api(libs.androidx.test.core)
                // api(libs.androidx.test.espresso.core)
                 //api(libs.androidx.test.runner)
@@ -74,6 +65,6 @@ kotlin {
                 api(libs.androidx.compose.ui.test)
                 api(libs.koin.android.test)
             }
-        }
+
     }
 }

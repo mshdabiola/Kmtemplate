@@ -33,41 +33,30 @@ android {
 
 kotlin {
     sourceSets {
-        val commonMain by getting {
-            dependencies {
+        commonMain.dependencies {
                 implementation(libs.ktor.client.content.negotiation)
                 implementation(libs.ktor.client.core)
                 implementation(libs.ktor.client.serialization)
                 implementation(libs.ktor.client.resources)
             }
-        }
-        val nonJsMain by getting {
-            dependencies {
 
-            }
-            }
-
-        val commonTest by getting {
-            dependencies {
+        jvmTest.dependencies {
                 implementation(libs.ktor.client.mock)
             }
-        }
 
-        val androidMain by getting {
-            dependencies {
+
+
+        androidMain.dependencies {
                 implementation(libs.ktor.client.android)
                 implementation(libs.ktor.client.logging)
             }
-        }
 
-
-        val jvmMain by getting {
-            dependencies {
+        jvmMain.dependencies {
                 implementation(libs.ktor.client.logging)
 
                 implementation(libs.ktor.client.cio)
             }
-        }
+
     }
 }
 

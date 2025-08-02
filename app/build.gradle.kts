@@ -14,16 +14,12 @@
  * limitations under the License.
  */
 import com.mshdabiola.app.BuildType
-import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
-import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig
 
 plugins {
-    alias(libs.plugins.kotlinMultiplatform)
-    alias(libs.plugins.jetbrainsCompose)
-
     id("mshdabiola.android.application")
     id("mshdabiola.android.application.compose")
     id("mshdabiola.android.application.flavor")
+    alias(libs.plugins.jetbrainsCompose)
     alias(libs.plugins.conveyor)
     alias(libs.plugins.baselineprofile)
     alias(libs.plugins.composehot)
@@ -61,6 +57,7 @@ dependencies {
     androidTestImplementation(libs.androidx.navigation.testing)
 
     baselineProfile(projects.benchmarks)
+    implementation(libs.kermit.koin)
 
 
     googlePlayImplementation(platform(libs.firebase.bom))
@@ -79,48 +76,15 @@ dependencies {
     googlePlayImplementation(libs.play.review)
     googlePlayImplementation(libs.play.review.kts)
 
+    implementation(libs.acra.mail)
+
     screenshotTestImplementation(libs.screenshot.validation.api)
     screenshotTestImplementation(libs.androidx.compose.ui.tooling)
 
 }
 
 kotlin {
-    androidTarget()
-    jvm()
-    jvmToolchain(21)
-
-    @OptIn(org.jetbrains.kotlin.gradle.ExperimentalWasmDsl::class)
-    wasmJs {
-        outputModuleName = "composeApp"
-        browser {
-            val rootDirPath = project.rootDir.path
-            val projectDirPath = project.projectDir.path
-            commonWebpackConfig {
-                outputFileName = "composeApp.js"
-                devServer = (devServer ?: KotlinWebpackConfig.DevServer()).apply {
-                    static = (static ?: mutableListOf()).apply {
-                        // Serve sources to debug inside browser
-                        add(rootDirPath)
-                        add(projectDirPath)
-                    }
-                }
-            }
-        }
-        binaries.executable()
-    }
-    @OptIn(ExperimentalKotlinGradlePluginApi::class)
-    applyDefaultHierarchyTemplate {
-        common {
-            group("nonJs") {
-                withAndroidTarget()
-                // withIos()
-                withJvm()
-            }
-        }
-    }
-
     sourceSets {
-        val jvmMain by getting
 
         androidMain.dependencies {
             implementation(libs.androidx.activity.compose)
@@ -144,7 +108,6 @@ kotlin {
 
             // Logger
             implementation(libs.kermit)
-//            implementation(libs.kermit.koin)
 
             implementation(libs.androidx.compose.material3.adaptive)
             implementation(libs.androidx.compose.material3.adaptive.layout)
@@ -153,17 +116,13 @@ kotlin {
 
 
         }
-        val nonJsMain by getting{
-            dependencies {
-                implementation(libs.kermit.koin)
 
-            }
-        }
 
         jvmMain.dependencies {
+            implementation(libs.bugsnag)
+            implementation(libs.kermit.koin)
             implementation(compose.desktop.currentOs)
             implementation(libs.kotlinx.coroutines.swing)
-
         }
         jvmTest.dependencies {
             implementation(projects.modules.testing)
