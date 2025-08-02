@@ -30,24 +30,20 @@ import kotlin.test.assertEquals
 
 class RealUserPreferencesRepositoryTest {
 
-    private val initialUserData = UserData(
-        contrast = 0,
-        darkThemeConfig = DarkThemeConfig.LIGHT,
-        useDynamicColor = false,
-        shouldHideOnboarding = false,
-        shouldShowGradientBackground = false,
-        language = 0,
-
-        )
+    private val initialUserData = UserData()
 
     private fun getDataStore(name: String): RealUserPreferencesRepository {
+        val path = File(FileSystem.SYSTEM_TEMPORARY_DIRECTORY.toFile(), "$name.json")
+        if (path.exists()){
+            path.delete()
+        }
         val testDataStore = DataStoreFactory.create(
             storage =
                 OkioStorage(
                     fileSystem = FileSystem.SYSTEM,
                     serializer = UserDataJsonSerializer,
                     producePath = {
-                        val path = File(FileSystem.SYSTEM_TEMPORARY_DIRECTORY.toFile(), "$name.json")
+
                         if (!path.parentFile.exists()) {
                             path.mkdirs()
                         }
@@ -154,8 +150,8 @@ class RealUserPreferencesRepositoryTest {
 
     @Test
     fun `setLanguage updates DataStore and flow emits new language`() = runTest {
-        val newLanguage = 1 // Assuming 0 is default, 1 is another language
-        val expectedUserData = initialUserData.copy(shouldShowGradientBackground = false,language = newLanguage)
+        val newLanguage = "en Us"
+        val expectedUserData = initialUserData.copy(language = newLanguage)
         val repository = getDataStore("userdata_setLanguage")
 
         repository.setLanguage(newLanguage)

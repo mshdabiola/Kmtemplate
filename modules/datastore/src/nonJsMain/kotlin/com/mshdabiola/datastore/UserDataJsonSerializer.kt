@@ -44,14 +44,7 @@ val json = Json
 object UserDataJsonSerializer : OkioSerializer<UserData> {
     override val defaultValue: UserData
         get() =
-            UserData(
-                contrast = 0,
-                darkThemeConfig = DarkThemeConfig.LIGHT,
-                useDynamicColor = false,
-                shouldHideOnboarding = false,
-                shouldShowGradientBackground = false,
-                language = 0
-            )
+            UserData()
 
     override suspend fun readFrom(source: BufferedSource): UserData {
         return json.decodeFromString<UserData>(source.readUtf8())

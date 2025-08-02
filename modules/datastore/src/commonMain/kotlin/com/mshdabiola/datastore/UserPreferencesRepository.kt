@@ -41,5 +41,5 @@ interface UserPreferencesRepository {
 
     suspend fun setShouldShowGradientBackground(shouldShowGradientBackground: Boolean)
 
-    suspend fun setLanguage(language: Int)
+    suspend fun setLanguage(language: String)
 }

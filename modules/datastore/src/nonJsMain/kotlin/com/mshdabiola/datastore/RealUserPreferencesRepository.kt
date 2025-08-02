@@ -50,7 +50,7 @@ class RealUserPreferencesRepository(
         userdata.updateData { it.copy(shouldShowGradientBackground = shouldShowGradientBackground) }
     }
 
-    override suspend fun setLanguage(language: Int) {
+    override suspend fun setLanguage(language: String) {
         userdata.updateData { it.copy(language = language) }
     }
 }

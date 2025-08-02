@@ -47,7 +47,7 @@ internal class RealUserPreferencesRepository : UserPreferencesRepository {
         store.update { it?.copy(shouldShowGradientBackground = shouldShowGradientBackground) }
     }
 
-    override suspend fun setLanguage(language: Int) {
+    override suspend fun setLanguage(language: String) {
         store.update { it?.copy(language = language) }
     }
 }
