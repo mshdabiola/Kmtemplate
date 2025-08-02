@@ -35,6 +35,7 @@
 
     <string-array name="general">
         <item>Appearance</item>
+        <item>Language</item>
     </string-array>
 
     <string-array name="support">
