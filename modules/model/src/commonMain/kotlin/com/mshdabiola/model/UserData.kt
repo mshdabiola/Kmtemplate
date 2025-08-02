@@ -23,9 +23,9 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class UserData(
     val contrast: Int = 0,
-    val darkThemeConfig: DarkThemeConfig = DarkThemeConfig.DARK,
-    val useDynamicColor: Boolean = true,
+    val darkThemeConfig: DarkThemeConfig = DarkThemeConfig.LIGHT,
+    val useDynamicColor: Boolean = false,
     val shouldHideOnboarding: Boolean = false,
     val shouldShowGradientBackground: Boolean = false,
-    val language: Int = 0
+    val language: String = "en-US",
 )
