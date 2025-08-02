@@ -48,7 +48,7 @@
   <img src="./fastlane/metadata/android/en-US/images/icon.png" width="200" />
 </p>
 <p align="center">
-  <img src="./fastlane/metadata/android/en-US/images/buttons/screenshot.png" width="800" />
+  <img src="./fastlane/metadata/android/en-US/images/buttons/screenshot.png" width="800" alt="Application Screenshot" />
 </p>
 
 <div align="center">
