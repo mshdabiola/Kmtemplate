@@ -19,8 +19,11 @@ import androidx.compose.runtime.Composable
 import kmtemplate.modules.designsystem.generated.resources.Res
 import kmtemplate.modules.designsystem.generated.resources.brand
 import kmtemplate.modules.designsystem.generated.resources.last_update
+import kmtemplate.modules.designsystem.generated.resources.supported_languages_codes
+import kmtemplate.modules.designsystem.generated.resources.supported_languages_display_names
 import kmtemplate.modules.designsystem.generated.resources.version
 import kmtemplate.modules.designsystem.generated.resources.version_name
+import org.jetbrains.compose.resources.stringArrayResource
 import org.jetbrains.compose.resources.stringResource
 
 object KmtStrings {
@@ -35,4 +38,10 @@ object KmtStrings {
 
     val lastUpdate
         @Composable get() = stringResource(Res.string.last_update)
+
+    val supportedLanguageCode
+        @Composable get() = stringArrayResource(Res.array.supported_languages_display_names)
+
+    val supportedLanguageName
+        @Composable get() = stringArrayResource(Res.array.supported_languages_codes)
 }
