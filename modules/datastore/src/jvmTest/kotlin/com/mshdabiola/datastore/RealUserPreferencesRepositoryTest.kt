@@ -34,22 +34,21 @@ class RealUserPreferencesRepositoryTest {
 
     private fun getDataStore(name: String): RealUserPreferencesRepository {
         val path = File(FileSystem.SYSTEM_TEMPORARY_DIRECTORY.toFile(), "$name.json")
-        if (path.exists()){
+        if (path.exists()) {
             path.delete()
         }
         val testDataStore = DataStoreFactory.create(
             storage =
-                OkioStorage(
-                    fileSystem = FileSystem.SYSTEM,
-                    serializer = UserDataJsonSerializer,
-                    producePath = {
-
-                        if (!path.parentFile.exists()) {
-                            path.mkdirs()
-                        }
-                        path.toOkioPath()
-                    },
-                ),
+            OkioStorage(
+                fileSystem = FileSystem.SYSTEM,
+                serializer = UserDataJsonSerializer,
+                producePath = {
+                    if (!path.parentFile.exists()) {
+                        path.mkdirs()
+                    }
+                    path.toOkioPath()
+                },
+            ),
         )
         return RealUserPreferencesRepository(testDataStore)
     }

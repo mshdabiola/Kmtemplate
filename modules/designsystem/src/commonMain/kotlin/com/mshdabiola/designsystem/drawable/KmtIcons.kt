@@ -36,11 +36,10 @@ import androidx.compose.material.icons.rounded.Language
 import androidx.compose.material.icons.rounded.LightMode
 import androidx.compose.material.icons.rounded.Menu
 import androidx.compose.material.icons.rounded.Settings
-import androidx.compose.ui.graphics.vector.ImageVector
 
 object KmtIcons {
-    val Check=Icons.Rounded.Check
-    val Language= Icons.Rounded.Language
+    val Check = Icons.Rounded.Check
+    val Language = Icons.Rounded.Language
     val ExpandLess = Icons.Rounded.ExpandLess
     val ExpandMore = Icons.Rounded.ExpandMore
     val LightMode = Icons.Rounded.LightMode

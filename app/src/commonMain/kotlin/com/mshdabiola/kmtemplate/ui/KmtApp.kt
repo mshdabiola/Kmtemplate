@@ -41,7 +41,6 @@ import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.testTag // Ensure this is imported
-import androidx.compose.ui.text.intl.Locale
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.window.core.layout.WindowSizeClass
 import com.mshdabiola.analytics.AnalyticsHelper
@@ -83,7 +82,6 @@ fun KmtApp(
         windowSizeClass = windowSizeClass,
     ),
 ) {
-
     val viewModel: MainAppViewModel = koinViewModel()
     val analyticsHelper = koinInject<AnalyticsHelper>()
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
@@ -93,12 +91,10 @@ fun KmtApp(
 
     LaunchedEffect(uiState) {
         if (uiState is MainActivityUiState.Success) {
-
             val language = (uiState as MainActivityUiState.Success).userData.language
-            languageCode=language
+            languageCode = language
             changeLanguage(language)
         }
-
     }
     SharedTransitionLayout(
         modifier = Modifier.testTag(KmtAppTestTags.APP_ROOT_LAYOUT), // Tagging the outer layout
@@ -106,7 +102,7 @@ fun KmtApp(
         CompositionLocalProvider(
             LocalAnalyticsHelper provides analyticsHelper,
             LocalSharedTransitionScope provides this,
-            localLocalization provides languageCode
+            localLocalization provides languageCode,
 
         ) {
             KmtTheme(
@@ -180,7 +176,6 @@ fun shouldUseDarkTheme(uiState: MainActivityUiState): Boolean =
                 DarkThemeConfig.DARK -> true
             }
     }
-
 
 @Composable
 fun shouldShowGradientBackground(uiState: MainActivityUiState): Boolean =

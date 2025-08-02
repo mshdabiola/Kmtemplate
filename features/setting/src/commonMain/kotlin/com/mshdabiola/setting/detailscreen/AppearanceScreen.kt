@@ -137,7 +137,7 @@ fun AppearanceScreen(
             color = MaterialTheme.colorScheme.onSurface,
             modifier = Modifier
                 .padding(bottom = 8.dp)
-                .testTag(AppearanceScreenTestTags.BACKGROUND_TITLE)
+                .testTag(AppearanceScreenTestTags.BACKGROUND_TITLE),
         )
         Row(
             modifier = Modifier
@@ -146,7 +146,7 @@ fun AppearanceScreen(
                 .padding(vertical = 12.dp)
                 .testTag(AppearanceScreenTestTags.GRADIENT_BACKGROUND_ROW),
             verticalAlignment = Alignment.CenterVertically,
-            ) {
+        ) {
             Text(
                 text = "Show Gradient Background",
                 modifier = Modifier.weight(1f)
@@ -157,7 +157,7 @@ fun AppearanceScreen(
             Switch(
                 checked = settingsState.gradientBackground,
                 onCheckedChange = { onGradientBackgroundChange(it) },
-                modifier = Modifier.testTag(AppearanceScreenTestTags.GRADIENT_BACKGROUND_SWITCH)
+                modifier = Modifier.testTag(AppearanceScreenTestTags.GRADIENT_BACKGROUND_SWITCH),
             )
         }
 
@@ -200,7 +200,7 @@ fun AppearanceScreen(
                     modifier = Modifier
                         .padding(start = 16.dp)
                         .testTag(
-                           AppearanceScreenTestTags.darkModeOptionText(darkThemeConfigEntry.name),
+                            AppearanceScreenTestTags.darkModeOptionText(darkThemeConfigEntry.name),
                         ),
                 )
             }
@@ -311,7 +311,11 @@ fun ContrastTimeline(
 fun AppearanceScreenPreview() {
     KmtTheme {
         AppearanceScreen(
-            settingsState = SettingState(contrast = 0, darkThemeConfig = DarkThemeConfig.DARK, gradientBackground = true),
+            settingsState = SettingState(
+                contrast = 0,
+                darkThemeConfig = DarkThemeConfig.DARK,
+                gradientBackground = true,
+            ),
             onContrastChange = {},
             onDarkModeChange = {},
             onGradientBackgroundChange = {},

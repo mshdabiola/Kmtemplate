@@ -53,8 +53,10 @@ internal class RealUserDataRepository(
     }
 
     override suspend fun setShouldShowGradientBackground(shouldShowGradientBackground: Boolean) {
-        withContext(ioDispatcher) { userPreferencesRepository
-            .setShouldShowGradientBackground(shouldShowGradientBackground) }
+        withContext(ioDispatcher) {
+            userPreferencesRepository
+                .setShouldShowGradientBackground(shouldShowGradientBackground)
+        }
     }
 
     override suspend fun setLanguage(language: String) {

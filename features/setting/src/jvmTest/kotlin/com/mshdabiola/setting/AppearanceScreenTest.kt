@@ -1,3 +1,18 @@
+/*
+ * Designed and developed by 2024 mshdabiola (lawal abiola)
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.mshdabiola.setting
 
 import androidx.compose.runtime.getValue
@@ -5,9 +20,9 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.test.assertIsDisplayed
+import androidx.compose.ui.test.assertIsNotSelected
 import androidx.compose.ui.test.assertIsOff
 import androidx.compose.ui.test.assertIsOn
-import androidx.compose.ui.test.assertIsNotSelected
 import androidx.compose.ui.test.assertIsSelected
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithTag
@@ -61,7 +76,7 @@ class AppearanceScreenTest {
         // Verify Background Section
         composeRule.onNodeWithTag(AppearanceScreenTestTags.BACKGROUND_TITLE).assertIsDisplayed()
         composeRule.onNodeWithTag(AppearanceScreenTestTags.GRADIENT_BACKGROUND_ROW).assertIsDisplayed()
-        composeRule.onNodeWithTag(AppearanceScreenTestTags.GRADIENT_BACKGROUND_TEXT,useUnmergedTree = true)
+        composeRule.onNodeWithTag(AppearanceScreenTestTags.GRADIENT_BACKGROUND_TEXT, useUnmergedTree = true)
             .assertIsDisplayed()
         composeRule.onNodeWithTag(AppearanceScreenTestTags.GRADIENT_BACKGROUND_SWITCH).assertIsDisplayed()
         if (initialSettingsState.gradientBackground) {
@@ -77,8 +92,10 @@ class AppearanceScreenTest {
                 .assertIsDisplayed()
             composeRule.onNodeWithTag(AppearanceScreenTestTags.darkModeRadioButton(config.name))
                 .assertIsDisplayed()
-            composeRule.onNodeWithTag(AppearanceScreenTestTags.darkModeOptionText(config.name),
-                useUnmergedTree = true)
+            composeRule.onNodeWithTag(
+                AppearanceScreenTestTags.darkModeOptionText(config.name),
+                useUnmergedTree = true,
+            )
                 .assertIsDisplayed()
 
             if (config == initialSettingsState.darkThemeConfig) {
@@ -111,16 +128,22 @@ class AppearanceScreenTest {
             }
         }
 
-        composeRule.onNodeWithTag(ContrastTimelineTestTags.optionItem(targetContrastId),
-            useUnmergedTree = true)
+        composeRule.onNodeWithTag(
+            ContrastTimelineTestTags.optionItem(targetContrastId),
+            useUnmergedTree = true,
+        )
             .performClick()
 
         assertEquals(targetContrastId, callbackContrast)
         // Verify UI updates (the new option item should now be visually selected)
-        composeRule.onNodeWithTag(ContrastTimelineTestTags.optionBackground(targetContrastId),
-            useUnmergedTree = true).assertIsDisplayed()
-        composeRule.onNodeWithTag(ContrastTimelineTestTags.optionIcon(targetContrastId),
-            useUnmergedTree = true).assertIsDisplayed()
+        composeRule.onNodeWithTag(
+            ContrastTimelineTestTags.optionBackground(targetContrastId),
+            useUnmergedTree = true,
+        ).assertIsDisplayed()
+        composeRule.onNodeWithTag(
+            ContrastTimelineTestTags.optionIcon(targetContrastId),
+            useUnmergedTree = true,
+        ).assertIsDisplayed()
     }
 
     @Test
@@ -146,7 +169,6 @@ class AppearanceScreenTest {
         // Click the row to toggle, or directly on the switch if preferred
         composeRule.onNodeWithTag(AppearanceScreenTestTags.GRADIENT_BACKGROUND_ROW).performClick()
         // Or, if clicking the switch directly: composeRule.onNodeWithTag(AppearanceScreenTestTags.GRADIENT_BACKGROUND_SWITCH).performClick()
-
 
         assertEquals(expectedGradientValue, callbackGradient)
         if (expectedGradientValue) {
@@ -189,6 +211,4 @@ class AppearanceScreenTest {
                 .assertIsNotSelected()
         }
     }
-
-
 }

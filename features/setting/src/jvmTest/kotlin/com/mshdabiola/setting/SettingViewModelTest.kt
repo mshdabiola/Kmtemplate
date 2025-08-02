@@ -94,7 +94,6 @@ class SettingViewModelTest {
         viewModel.settingState.test {
             skipItems(1)
 
-
             assertEquals(expectedStateAfterUpdate, awaitItem())
             assertEquals(newDarkThemeConfig, userDataRepository.userData.first().darkThemeConfig)
 
@@ -113,7 +112,6 @@ class SettingViewModelTest {
         )
 
         viewModel.settingState.test {
-
             viewModel.setGradientBackground(newGradientBackground)
 
             assertEquals(newGradientBackground, userDataRepository.userData.first().shouldShowGradientBackground)
@@ -135,8 +133,6 @@ class SettingViewModelTest {
 
         viewModel.settingState.test {
             skipItems(1)
-
-
 
             assertEquals(expectedStateAfterUpdate, awaitItem())
             assertEquals(newLanguage, userDataRepository.userData.first().language)

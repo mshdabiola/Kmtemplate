@@ -39,11 +39,10 @@ object KmtStrings {
     val lastUpdate
         @Composable get() = stringResource(Res.string.last_update)
 
-
     val supportedLanguage
-        @Composable get():List<Pair<String, String>> {
-         val name=   stringArrayResource(Res.array.supported_languages_display_names)
-            val code =stringArrayResource(Res.array.supported_languages_codes)
-           return name.zip(code)
+        @Composable get(): List<Pair<String, String>> {
+            val name = stringArrayResource(Res.array.supported_languages_display_names)
+            val code = stringArrayResource(Res.array.supported_languages_codes)
+            return name.zip(code)
         }
 }
