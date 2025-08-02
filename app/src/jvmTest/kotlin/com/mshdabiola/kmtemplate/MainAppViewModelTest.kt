@@ -121,7 +121,7 @@ class MainAppViewModelTest {
         val updatedUserData1 = UserData(
             contrast = 0,
             darkThemeConfig = DarkThemeConfig.LIGHT,
-            useDynamicColor = false,
+            useDynamicColor = true,
             shouldHideOnboarding = false,
         )
         val updatedUserData2 = UserData(
@@ -131,7 +131,7 @@ class MainAppViewModelTest {
             shouldHideOnboarding = true,
         )
 
-        viewModel.uiState.test(timeout = 3.seconds) {
+        viewModel.uiState.test() {
             assertEquals(Loading, awaitItem())
 
             testDispatcher.scheduler.advanceUntilIdle()
