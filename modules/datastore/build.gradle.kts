@@ -29,27 +29,19 @@ android {
 }
 
 kotlin {
-    applyDefaultHierarchyTemplate {
-        common {
-            group("nonJs") {
-                withAndroidTarget()
-                // withIos()
-                withJvm()
-            }
-        }
-    }
+
     sourceSets {
         commonMain.dependencies {
             implementation(project(":modules:model"))
             implementation(libs.kotlinx.serialization.json)
         }
 
-//        wasmJsMain.dependencies{
-//            api(libs.kstore.storage)
-//            api(libs.kstore)
-//            api("org.jetbrains.kotlinx:kotlinx-browser:0.3")
-//
-//        }
+        wasmJsMain.dependencies{
+            api(libs.kstore.storage)
+            api(libs.kstore)
+            api(libs.kotlinx.browser)
+
+        }
         val nonJsMain by getting {
             dependencies {
                 api(libs.androidx.dataStore.core)
