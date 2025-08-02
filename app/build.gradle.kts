@@ -14,16 +14,12 @@
  * limitations under the License.
  */
 import com.mshdabiola.app.BuildType
-import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
-import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig
 
 plugins {
-    alias(libs.plugins.kotlinMultiplatform)
-    alias(libs.plugins.jetbrainsCompose)
-
     id("mshdabiola.android.application")
     id("mshdabiola.android.application.compose")
     id("mshdabiola.android.application.flavor")
+    alias(libs.plugins.jetbrainsCompose)
     alias(libs.plugins.conveyor)
     alias(libs.plugins.baselineprofile)
     alias(libs.plugins.composehot)
@@ -88,32 +84,7 @@ dependencies {
 }
 
 kotlin {
-    androidTarget()
-    jvm()
-    jvmToolchain(21)
-
-    @OptIn(org.jetbrains.kotlin.gradle.ExperimentalWasmDsl::class)
-//    wasmJs {
-//        outputModuleName.set("composeApp")
-//        browser {
-//            val rootDirPath = project.rootDir.path
-//            val projectDirPath = project.projectDir.path
-//            commonWebpackConfig {
-//                outputFileName = "composeApp.js"
-//                devServer = (devServer ?: KotlinWebpackConfig.DevServer()).apply {
-//                    static = (static ?: mutableListOf()).apply {
-//                        // Serve sources to debug inside browser
-//                        add(rootDirPath)
-//                        add(projectDirPath)
-//                    }
-//                }
-//            }
-//        }
-//        binaries.executable()
-//    }
-
     sourceSets {
-        val jvmMain by getting
 
         androidMain.dependencies {
             implementation(libs.androidx.activity.compose)
