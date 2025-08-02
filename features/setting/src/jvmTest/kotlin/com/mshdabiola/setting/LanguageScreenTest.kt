@@ -1,3 +1,18 @@
+/*
+ * Designed and developed by 2024 mshdabiola (lawal abiola)
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.mshdabiola.setting
 
 import androidx.compose.runtime.getValue
@@ -20,15 +35,14 @@ class LanguageScreenTest {
 
     @get:Rule
     val composeRule = createComposeRule()
-    private lateinit var languages :List<Pair<String, String>>
+    private lateinit var languages: List<Pair<String, String>>
 
     @Test
     fun languageScreen_initialState_displaysCorrectlyAndSelectsCurrentLanguage() {
         val initialLanguageCode = "en-US" // A known supported language code
 
-
         composeRule.setContent {
-            languages =KmtStrings.supportedLanguage
+            languages = KmtStrings.supportedLanguage
             KmtTheme {
                 LanguageScreen(
                     currentLanguageCode = initialLanguageCode,
@@ -42,24 +56,22 @@ class LanguageScreenTest {
 
         // 2. Verify all supported languages are displayed as items
         languages.take(3).forEach { (name, code) ->
-            composeRule.onNodeWithTag(LanguageScreenTestTags.languageItem(code),useUnmergedTree = true)
+            composeRule.onNodeWithTag(LanguageScreenTestTags.languageItem(code), useUnmergedTree = true)
                 .assertIsDisplayed()
             // Optional: could also check if the text (name) is displayed within the item
         }
         composeRule.onNodeWithTag(LanguageScreenTestTags.languageItem(initialLanguageCode))
             .assertIsDisplayed() // The item itself should be displayed
-
     }
 
     @Test
     fun languageScreen_clickOnLanguageItem_invokesCallbackAndChangesSelection() {
         val initialLanguageCode = "en-US"
 
-
         var onLanguageSelectedCalledWith: String? = null
 
         composeRule.setContent {
-            languages =KmtStrings.supportedLanguage
+            languages = KmtStrings.supportedLanguage
 
             var currentLanguage by remember { mutableStateOf(initialLanguageCode) }
             KmtTheme {

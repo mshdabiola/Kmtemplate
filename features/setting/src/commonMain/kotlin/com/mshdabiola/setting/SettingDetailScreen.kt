@@ -50,7 +50,7 @@ internal fun SettingDetailScreen(
     settingState: SettingState,
     onContrastChange: (Int) -> Unit = {},
     onDarkModeChange: (DarkThemeConfig) -> Unit = {},
-    onGradientBackgroundChange: (Boolean) -> Unit={},
+    onGradientBackgroundChange: (Boolean) -> Unit = {},
     onLanguageChange: (String) -> Unit = {},
     openUrl: (String) -> Unit = {},
     openEmail: (String, String, String) -> Unit = { _, _, _ -> },

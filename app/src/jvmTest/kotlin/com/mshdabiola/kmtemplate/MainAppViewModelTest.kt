@@ -131,7 +131,7 @@ class MainAppViewModelTest {
             shouldHideOnboarding = true,
         )
 
-        viewModel.uiState.test() {
+        viewModel.uiState.test {
             assertEquals(Loading, awaitItem())
 
             testDispatcher.scheduler.advanceUntilIdle()

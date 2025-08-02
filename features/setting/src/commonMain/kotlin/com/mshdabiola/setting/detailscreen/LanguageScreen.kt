@@ -1,3 +1,18 @@
+/*
+ * Designed and developed by 2024 mshdabiola (lawal abiola)
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.mshdabiola.setting.detailscreen
 
 import androidx.compose.foundation.clickable
@@ -30,6 +45,7 @@ object LanguageScreenTestTags {
     const val LANGUAGE_LIST = "languageList"
     fun languageItem(languageCode: String) = "languageItem_$languageCode"
 }
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun LanguageScreen(
@@ -61,7 +77,7 @@ fun LanguageScreen(
 fun LanguageScreenPreview() {
     LanguageScreen(
         currentLanguageCode = "en-US",
-        onLanguageSelected = {}
+        onLanguageSelected = {},
     )
 }
 
@@ -81,27 +97,25 @@ private fun LanguageItem(
         elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant),
     ) {
-
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier.padding(16.dp).fillMaxWidth(),
-            ) {
-                Text(
-                    text = languageName,
-                    style = MaterialTheme.typography.titleMedium,
-                    fontWeight = FontWeight.SemiBold,
-                    modifier = Modifier
-                        .weight(1f)
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier.padding(16.dp).fillMaxWidth(),
+        ) {
+            Text(
+                text = languageName,
+                style = MaterialTheme.typography.titleMedium,
+                fontWeight = FontWeight.SemiBold,
+                modifier = Modifier
+                    .weight(1f),
+            )
+            Spacer(modifier = Modifier.width(8.dp))
+            if (isSelected) {
+                Icon(
+                    imageVector = KmtIcons.Check,
+                    contentDescription = "Selected language", // stringResource
+                    tint = MaterialTheme.colorScheme.primary,
                 )
-                Spacer(modifier = Modifier.width(8.dp))
-                if (isSelected) {
-                    Icon(
-                        imageVector = KmtIcons.Check,
-                        contentDescription = "Selected language", // stringResource
-                        tint = MaterialTheme.colorScheme.primary,
-                    )
-                }
             }
-
+        }
     }
 }

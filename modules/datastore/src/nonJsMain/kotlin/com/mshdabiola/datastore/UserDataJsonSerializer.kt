@@ -19,7 +19,6 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.core.DataStoreFactory
 import androidx.datastore.core.okio.OkioSerializer
 import androidx.datastore.core.okio.OkioStorage
-import com.mshdabiola.model.DarkThemeConfig
 import com.mshdabiola.model.UserData
 import kotlinx.serialization.json.Json
 import okio.BufferedSink
