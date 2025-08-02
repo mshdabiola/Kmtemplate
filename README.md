@@ -47,6 +47,9 @@
 <p align="center">
   <img src="./fastlane/metadata/android/en-US/images/icon.png" width="200" />
 </p>
+<p align="center">
+  <img src="./fastlane/metadata/android/en-US/images/buttons/screenshot.png" width="800" alt="Application Screenshot" />
+</p>
 
 <div align="center">
 <!-- <a href="https://apt.izzysoft.de/packages/com.mshdabiola.kmttemplate/"><img src="https://gitlab.com/IzzyOnDroid/repo/-/raw/master/assets/IzzyOnDroid.png" height="80"></a> -->
@@ -80,12 +83,26 @@ Kotlin Multiplatform Template is a robust project starter designed with a modern
 ## 🏗️ Architecture
 This project follows Clean Architecture principles, ensuring a scalable, maintainable, and testable codebase. The architecture separates concerns into distinct layers, promoting clear boundaries between business logic, data handling, and presentation. Shared logic is implemented in common modules, while platform-specific code is isolated for Android, JVM, and WASM targets.
 
+<p align="center">
+  <img src="./fastlane/metadata/android/en-US/images/buttons/Architecture - overall.png" width="800" alt="Overall Architecture Diagram" />
+</p>
+
 - Presentation Layer: UI and user interaction, built with Compose Multiplatform.
-- Domain Layer: Business logic, use cases, and interfaces.
+<p align="center">
+  <img src="./fastlane/metadata/android/en-US/images/buttons/Architecture - ui.png" width="800" alt="UI Layer Architecture Diagram" />
+</p>
+<!-- - Domain Layer: Business logic, use cases, and interfaces. -->
 - Data Layer: Repositories, data sources, and models for local (Room, DataStore) and remote (Ktor) data.
+<p align="center">
+  <img src="./fastlane/metadata/android/en-US/images/buttons/Architecture - data.png" width="800" alt="Data Layer Architecture Diagram" />
+</p>
 
 ## 🧩 Modularization
 The codebase is organized into multiple Gradle modules to improve maintainability, scalability, and reusability:
+
+<p align="center">
+  <img src="./fastlane/metadata/android/en-US/images/buttons/Modularization.png" width="800" alt="Modularization Diagram" />
+</p>
 
 - :app – Main application module for Android, JVM, and WASM.
 - :modules: – Core features and shared logic, such as analytics, data, database, datastore, designsystem, domain, model, network, testing, and ui.
