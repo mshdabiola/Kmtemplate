@@ -64,10 +64,8 @@ internal fun Project.configureKotlinMultiplatform(
                 }
             }
         }
-
     }
 }
-
 
 /**
  * Configure base Kotlin with Android options

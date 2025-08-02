@@ -57,28 +57,30 @@ class KmtApplication : Application() {
 //            Timber.e("log on app create")
 //        }
     }
-    private fun setupCrashReporter(){
+    private fun setupCrashReporter() {
         Thread {
 //            if (true) {
-                initAcra {
-                    reportFormat = StringFormat.KEY_VALUE_LIST
-                    reportContent = listOf(ReportField.REPORT_ID, ReportField.APP_VERSION_NAME,
-                        ReportField.PHONE_MODEL, ReportField.BRAND, ReportField.PRODUCT, ReportField.ANDROID_VERSION,
-                        ReportField.BUILD_CONFIG, ReportField.STACK_TRACE, ReportField.LOGCAT)
-                    mailSender {
-                        reportAsFile = true
-                        mailTo = "mshdabiola@gmail.com"
-                        subject  = "PLEASE POST THE ATTACHED STACK TRACE ON GITHUB IF POSSIBLE"
-                        body = "Hello! I am sorry that the application crashed. " +
-                            "Please review the attached log file and post it on" +
-                            " Github https://github.com/mshdabiola/kmtemplate/issues/new. I will " +
-                            "try to respond as soon as possible. Thank you!"
-                        reportFileName = "Kmtemplate_Bug_Report.txt"
-                    }
+            initAcra {
+                reportFormat = StringFormat.KEY_VALUE_LIST
+                reportContent = listOf(
+                    ReportField.REPORT_ID, ReportField.APP_VERSION_NAME,
+                    ReportField.PHONE_MODEL, ReportField.BRAND, ReportField.PRODUCT, ReportField.ANDROID_VERSION,
+                    ReportField.BUILD_CONFIG, ReportField.STACK_TRACE, ReportField.LOGCAT,
+                )
+                mailSender {
+                    reportAsFile = true
+                    mailTo = "mshdabiola@gmail.com"
+                    subject = "PLEASE POST THE ATTACHED STACK TRACE ON GITHUB IF POSSIBLE"
+                    body = "Hello! I am sorry that the application crashed. " +
+                        "Please review the attached log file and post it on" +
+                        " Github https://github.com/mshdabiola/kmtemplate/issues/new. I will " +
+                        "try to respond as soon as possible. Thank you!"
+                    reportFileName = "Kmtemplate_Bug_Report.txt"
                 }
+            }
 //            } else {
 //                System.setProperty(DEBUG_PROPERTY_NAME, DEBUG_PROPERTY_VALUE_ON)
-////                Timber.plant(Timber.DebugTree())
+// //                Timber.plant(Timber.DebugTree())
 //            }
         }.start()
     }
