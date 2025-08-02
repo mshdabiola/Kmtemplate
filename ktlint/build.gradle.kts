@@ -22,9 +22,12 @@ plugins {
 
 dependencies {
     implementation(libs.slf4j.simple)
-    compileOnly(libs.kotlin.stdlib)
+    compileOnly(libs.kotlin.stdlib) // Keep this as compileOnly if it's provided by the Kotlin plugin
     testImplementation(libs.kotlin.test)
-    compileOnly(libs.ktlint.rule.engine)
-    compileOnly(libs.ktlint.ruleset.standard)
+    compileOnly(libs.ktlint.rule.engine) // If your main code also implements rules
+    compileOnly(libs.ktlint.ruleset.standard) // If your main code also implements rules
+    testImplementation(libs.ktlint.rule.engine)
+    testImplementation(libs.ktlint.ruleset.standard)
+
     testImplementation(libs.ktlint.test)
 }
