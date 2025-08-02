@@ -69,12 +69,9 @@ class KmtApplication : Application() {
                 )
                 mailSender {
                     reportAsFile = true
-                    mailTo = "mshdabiola@gmail.com"
-                    subject = "PLEASE POST THE ATTACHED STACK TRACE ON GITHUB IF POSSIBLE"
-                    body = "Hello! I am sorry that the application crashed. " +
-                        "Please review the attached log file and post it on" +
-                        " Github https://github.com/mshdabiola/kmtemplate/issues/new. I will " +
-                        "try to respond as soon as possible. Thank you!"
+                    mailTo = getString(R.string.email)
+                    subject = getString(R.string.crash_title)
+                    body = getString(R.string.crash_body)
                     reportFileName = "Kmtemplate_Bug_Report.txt"
                 }
             }
