@@ -26,9 +26,7 @@ import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
-import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
-import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig
 import org.jetbrains.kotlin.powerassert.gradle.PowerAssertGradleExtension
 
 class AndroidLibraryConventionPlugin : Plugin<Project> {
@@ -72,10 +70,9 @@ class AndroidLibraryConventionPlugin : Plugin<Project> {
             }
 
             extensions.configure<KotlinMultiplatformExtension> {
-               configureKotlinMultiplatform(this)
+                configureKotlinMultiplatform(this)
 
                 with(sourceSets) {
-
                     commonMain.dependencies {
                         implementation(libs.findLibrary("koin.core").get())
                         implementation(libs.findLibrary("kermit").get())

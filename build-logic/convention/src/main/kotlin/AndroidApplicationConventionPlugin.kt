@@ -49,7 +49,7 @@ class AndroidApplicationConventionPlugin : Plugin<Project> {
                 configurePrintApksTask(this)
                 configureBadgingTasks(extensions.getByType<BaseExtension>(), this)
             }
-            extensions.configure<KotlinMultiplatformExtension>{
+            extensions.configure<KotlinMultiplatformExtension> {
                 configureKotlinMultiplatform(this)
             }
         }

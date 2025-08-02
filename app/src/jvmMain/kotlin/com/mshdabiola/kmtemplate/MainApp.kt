@@ -76,7 +76,6 @@ fun mainApp() {
 }
 
 fun main() {
-
     val logger =
         Logger(
             loggerConfigInit(
