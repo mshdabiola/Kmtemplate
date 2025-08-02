@@ -89,7 +89,7 @@ This project follows Clean Architecture principles, ensuring a scalable, maintai
 
 - Presentation Layer: UI and user interaction, built with Compose Multiplatform.
 <p align="center">
-  <img src="./fastlane/metadata/android/en-US/images/buttons/Architecture - ui.png" width="800" />
+  <img src="./fastlane/metadata/android/en-US/images/buttons/Architecture - ui.png" width="800" alt="UI Layer Architecture Diagram" />
 </p>
 <!-- - Domain Layer: Business logic, use cases, and interfaces. -->
 - Data Layer: Repositories, data sources, and models for local (Room, DataStore) and remote (Ktor) data.
