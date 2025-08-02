@@ -94,7 +94,7 @@ This project follows Clean Architecture principles, ensuring a scalable, maintai
 <!-- - Domain Layer: Business logic, use cases, and interfaces. -->
 - Data Layer: Repositories, data sources, and models for local (Room, DataStore) and remote (Ktor) data.
 <p align="center">
-  <img src="./fastlane/metadata/android/en-US/images/buttons/Architecture - data.png" width="800" />
+  <img src="./fastlane/metadata/android/en-US/images/buttons/Architecture - data.png" width="800" alt="Data Layer Architecture Diagram" />
 </p>
 
 ## 🧩 Modularization
