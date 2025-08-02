@@ -50,7 +50,7 @@ class KmtApplication : Application() {
             androidContext(this@KmtApplication)
             modules(appModule, kermitLoggerModule(logger))
         }
-        newThread()
+        setupCrashReporter()
 
 //        if (packageName.contains("debug")) {
 //            Timber.plant(Timber.DebugTree())
