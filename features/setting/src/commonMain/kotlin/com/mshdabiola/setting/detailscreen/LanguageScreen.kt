@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -23,6 +22,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import com.mshdabiola.designsystem.drawable.KmtIcons
 import com.mshdabiola.designsystem.strings.KmtStrings
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
@@ -96,7 +96,7 @@ private fun LanguageItem(
                 Spacer(modifier = Modifier.width(8.dp))
                 if (isSelected) {
                     Icon(
-                        imageVector = Icons.Filled.Check,
+                        imageVector = KmtIcons.Check,
                         contentDescription = "Selected language", // stringResource
                         tint = MaterialTheme.colorScheme.primary,
                     )
