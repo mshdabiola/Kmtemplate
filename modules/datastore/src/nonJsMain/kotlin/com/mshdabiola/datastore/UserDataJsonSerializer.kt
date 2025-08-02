@@ -49,6 +49,8 @@ object UserDataJsonSerializer : OkioSerializer<UserData> {
                 darkThemeConfig = DarkThemeConfig.LIGHT,
                 useDynamicColor = false,
                 shouldHideOnboarding = false,
+                shouldShowGradientBackground = false,
+                language = 0
             )
 
     override suspend fun readFrom(source: BufferedSource): UserData {

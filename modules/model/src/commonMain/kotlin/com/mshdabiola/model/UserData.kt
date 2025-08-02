@@ -26,4 +26,6 @@ data class UserData(
     val darkThemeConfig: DarkThemeConfig = DarkThemeConfig.DARK,
     val useDynamicColor: Boolean = true,
     val shouldHideOnboarding: Boolean = false,
+    val shouldShowGradientBackground: Boolean = false,
+    val language: Int = 0
 )

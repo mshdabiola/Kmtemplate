@@ -35,22 +35,25 @@ class RealUserPreferencesRepositoryTest {
         darkThemeConfig = DarkThemeConfig.LIGHT,
         useDynamicColor = false,
         shouldHideOnboarding = false,
-    )
+        shouldShowGradientBackground = false,
+        language = 0,
+
+        )
 
     private fun getDataStore(name: String): RealUserPreferencesRepository {
         val testDataStore = DataStoreFactory.create(
             storage =
-            OkioStorage(
-                fileSystem = FileSystem.SYSTEM,
-                serializer = UserDataJsonSerializer,
-                producePath = {
-                    val path = File(FileSystem.SYSTEM_TEMPORARY_DIRECTORY.toFile(), "$name.json")
-                    if (!path.parentFile.exists()) {
-                        path.mkdirs()
-                    }
-                    path.toOkioPath()
-                },
-            ),
+                OkioStorage(
+                    fileSystem = FileSystem.SYSTEM,
+                    serializer = UserDataJsonSerializer,
+                    producePath = {
+                        val path = File(FileSystem.SYSTEM_TEMPORARY_DIRECTORY.toFile(), "$name.json")
+                        if (!path.parentFile.exists()) {
+                            path.mkdirs()
+                        }
+                        path.toOkioPath()
+                    },
+                ),
         )
         return RealUserPreferencesRepository(testDataStore)
     }
@@ -137,5 +140,27 @@ class RealUserPreferencesRepositoryTest {
             shouldHideOnboarding = false,
         )
         assertEquals(expectedUserData, repository.userData.first())
+    }
+
+    @Test
+    fun `setShouldShowGradientBackground updates DataStore and flow emits new value`() = runTest {
+        val newShouldShowGradient = false
+        val expectedUserData = initialUserData.copy(shouldShowGradientBackground = newShouldShowGradient)
+        val repository = getDataStore("userdata_setShouldShowGradientBackground")
+        repository.setShouldShowGradientBackground(newShouldShowGradient)
+        val updatedUserData = repository.userData.first()
+        assertEquals(expectedUserData, updatedUserData)
+    }
+
+    @Test
+    fun `setLanguage updates DataStore and flow emits new language`() = runTest {
+        val newLanguage = 1 // Assuming 0 is default, 1 is another language
+        val expectedUserData = initialUserData.copy(shouldShowGradientBackground = false,language = newLanguage)
+        val repository = getDataStore("userdata_setLanguage")
+
+        repository.setLanguage(newLanguage)
+
+        val updatedUserData = repository.userData.first()
+        assertEquals(expectedUserData, updatedUserData)
     }
 }

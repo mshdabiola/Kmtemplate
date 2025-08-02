@@ -45,4 +45,12 @@ class RealUserPreferencesRepository(
     override suspend fun setShouldHideOnboarding(shouldHideOnboarding: Boolean) {
         userdata.updateData { it.copy(shouldHideOnboarding = shouldHideOnboarding) }
     }
+
+    override suspend fun setShouldShowGradientBackground(shouldShowGradientBackground: Boolean) {
+        userdata.updateData { it.copy(shouldShowGradientBackground = shouldShowGradientBackground) }
+    }
+
+    override suspend fun setLanguage(language: Int) {
+        userdata.updateData { it.copy(language = language) }
+    }
 }

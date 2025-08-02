@@ -42,4 +42,12 @@ internal class RealUserPreferencesRepository : UserPreferencesRepository {
     override suspend fun setShouldHideOnboarding(shouldHideOnboarding: Boolean) {
         store.update { it?.copy(shouldHideOnboarding = shouldHideOnboarding) }
     }
+
+    override suspend fun setShouldShowGradientBackground(shouldShowGradientBackground: Boolean) {
+        store.update { it?.copy(shouldShowGradientBackground = shouldShowGradientBackground) }
+    }
+
+    override suspend fun setLanguage(language: Int) {
+        store.update { it?.copy(language = language) }
+    }
 }
