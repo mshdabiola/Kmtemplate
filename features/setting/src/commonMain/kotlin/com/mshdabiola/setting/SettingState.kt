@@ -16,10 +16,12 @@
 package com.mshdabiola.setting
 
 import com.mshdabiola.model.DarkThemeConfig
+import com.mshdabiola.model.UserData
 
+val userData = UserData()
 data class SettingState(
-    val contrast: Int = 0,
-    val darkThemeConfig: DarkThemeConfig = DarkThemeConfig.DARK,
-    val gradientBackground: Boolean = false,
-    val language: String = "en-Us",
+    val contrast: Int = userData.contrast,
+    val darkThemeConfig: DarkThemeConfig = userData.darkThemeConfig,
+    val gradientBackground: Boolean = userData.shouldShowGradientBackground,
+    val language: String = userData.language,
 )

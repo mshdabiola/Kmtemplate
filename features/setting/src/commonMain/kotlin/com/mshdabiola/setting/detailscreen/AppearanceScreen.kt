@@ -54,6 +54,30 @@ import kmtemplate.features.setting.generated.resources.daynight
 import org.jetbrains.compose.resources.stringArrayResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
+object AppearanceScreenTestTags {
+    const val SCREEN_ROOT = "appearance:screen_root"
+
+    const val CONTRAST_TITLE = "appearance:contrast_title"
+    // ContrastTimeline itself will have its own root tag under ContrastTimelineTestTags
+
+    const val BACKGROUND_TITLE = "appearance:background_title"
+    const val GRADIENT_BACKGROUND_ROW = "appearance:gradient_background_row"
+    const val GRADIENT_BACKGROUND_TEXT = "appearance:gradient_background_text"
+    const val GRADIENT_BACKGROUND_SWITCH = "appearance:gradient_background_switch"
+
+    const val DARK_MODE_TITLE = "appearance:dark_mode_title"
+    fun darkModeOptionRow(name: String) = "appearance:dark_mode_option_row_$name"
+    fun darkModeRadioButton(name: String) = "appearance:dark_mode_radio_button_$name"
+    fun darkModeOptionText(name: String) = "appearance:dark_mode_option_text_$name"
+}
+
+object ContrastTimelineTestTags {
+    const val TIMELINE_ROOT = "contrast_timeline:root"
+    fun optionItem(id: Int) = "contrast_timeline:option_item_$id"
+    fun optionIcon(id: Int) = "contrast_timeline:option_icon_$id"
+    fun optionBackground(id: Int) = "contrast_timeline:option_background_$id"
+}
+
 @Composable
 fun AppearanceScreen(
     modifier: Modifier = Modifier,
@@ -88,7 +112,7 @@ fun AppearanceScreen(
         modifier = modifier
             .fillMaxWidth()
             .padding(16.dp)
-            .testTag(AppearanceScreenTestTags.SCREEN_ROOT), // Tag for the root
+            .testTag(AppearanceScreenTestTags.SCREEN_ROOT),
     ) {
         Text(
             text = "Contrast",
@@ -99,7 +123,7 @@ fun AppearanceScreen(
                 .testTag(AppearanceScreenTestTags.CONTRAST_TITLE),
         )
         ContrastTimeline(
-            modifier = Modifier, // .testTag(AppearanceScreenTestTags.CONTRAST_TIMELINE),
+            // modifier is passed, root tag is inside ContrastTimeline
             options = contrastOptions,
             selectedOptionId = settingsState.contrast,
             onOptionSelected = { onContrastChange(it) },
@@ -113,23 +137,27 @@ fun AppearanceScreen(
             color = MaterialTheme.colorScheme.onSurface,
             modifier = Modifier
                 .padding(bottom = 8.dp)
+                .testTag(AppearanceScreenTestTags.BACKGROUND_TITLE)
         )
         Row(
             modifier = Modifier
                 .fillMaxWidth()
                 .clickable { onGradientBackgroundChange(!settingsState.gradientBackground) }
-                .padding(vertical = 12.dp),
+                .padding(vertical = 12.dp)
+                .testTag(AppearanceScreenTestTags.GRADIENT_BACKGROUND_ROW),
             verticalAlignment = Alignment.CenterVertically,
             ) {
             Text(
-
-                "Show Gradient Background",
-                modifier = Modifier.weight(1f),
+                text = "Show Gradient Background",
+                modifier = Modifier.weight(1f)
+                    .testTag(AppearanceScreenTestTags.GRADIENT_BACKGROUND_TEXT),
                 style = MaterialTheme.typography.bodyLarge,
-                color = MaterialTheme.colorScheme.onSurface,)
+                color = MaterialTheme.colorScheme.onSurface,
+            )
             Switch(
                 checked = settingsState.gradientBackground,
                 onCheckedChange = { onGradientBackgroundChange(it) },
+                modifier = Modifier.testTag(AppearanceScreenTestTags.GRADIENT_BACKGROUND_SWITCH)
             )
         }
 
@@ -149,8 +177,7 @@ fun AppearanceScreen(
                     .fillMaxWidth()
                     .clickable { onDarkModeChange(darkThemeConfigEntry) }
                     .padding(vertical = 12.dp)
-                    // Dynamic test tag for the row, including the entry name for uniqueness
-                    .testTag("${AppearanceScreenTestTags.DARK_MODE_OPTION_ROW_PREFIX}${darkThemeConfigEntry.name}"),
+                    .testTag(AppearanceScreenTestTags.darkModeOptionRow(darkThemeConfigEntry.name)),
                 verticalAlignment = Alignment.CenterVertically,
             ) {
                 RadioButton(
@@ -163,7 +190,7 @@ fun AppearanceScreen(
                         disabledUnselectedColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.38f),
                     ),
                     modifier = Modifier.testTag(
-                        "${AppearanceScreenTestTags.DARK_MODE_RADIO_BUTTON_PREFIX}${darkThemeConfigEntry.name}",
+                        AppearanceScreenTestTags.darkModeRadioButton(darkThemeConfigEntry.name),
                     ),
                 )
                 Text(
@@ -173,12 +200,11 @@ fun AppearanceScreen(
                     modifier = Modifier
                         .padding(start = 16.dp)
                         .testTag(
-                            "${AppearanceScreenTestTags.DARK_MODE_OPTION_TEXT_PREFIX}${darkThemeConfigEntry.name}",
+                           AppearanceScreenTestTags.darkModeOptionText(darkThemeConfigEntry.name),
                         ),
                 )
             }
         }
-
     }
 }
 
@@ -191,7 +217,7 @@ data class ContrastOption(
 
 @Composable
 fun ContrastTimeline(
-    modifier: Modifier = Modifier,
+    modifier: Modifier = Modifier, // Allow modifier to be passed
     options: List<ContrastOption>,
     selectedOptionId: Int,
     onOptionSelected: (Int) -> Unit,
@@ -206,10 +232,10 @@ fun ContrastTimeline(
     unselectedBackgroundColor: Color = MaterialTheme.colorScheme.surfaceVariant,
 ) {
     Row(
-        modifier = modifier // The root tag for ContrastTimeline is applied where it's used
+        modifier = modifier // Apply the passed modifier here
             .fillMaxWidth()
             .padding(vertical = 16.dp)
-            .testTag(ContrastTimelineTestTags.TIMELINE_ROOT), // Tag for the timeline root
+            .testTag(ContrastTimelineTestTags.TIMELINE_ROOT),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceEvenly,
     ) {
@@ -227,8 +253,7 @@ fun ContrastTimeline(
                         onClickLabel = "Select ${option.label}",
                     )
                     .padding(horizontal = 4.dp)
-                    // Dynamic tag for each clickable option item in the timeline
-                    .testTag("${ContrastTimelineTestTags.OPTION_ITEM_PREFIX}${option.id}"),
+                    .testTag(ContrastTimelineTestTags.optionItem(option.id)),
             ) {
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     if (index > 0) {
@@ -252,17 +277,15 @@ fun ContrastTimeline(
                                 color = if (isSelected) selectedIconColor else Color.Transparent,
                                 shape = CircleShape,
                             )
-                            // Dynamic tag for the background/indicator of each option
-                            .testTag("${ContrastTimelineTestTags.OPTION_BACKGROUND_PREFIX}${option.id}"),
+                            .testTag(ContrastTimelineTestTags.optionBackground(option.id)),
                         contentAlignment = Alignment.Center,
                     ) {
                         Icon(
                             imageVector = option.icon,
-                            contentDescription = option.contentDescription, // Could be used for semantics-based finding
+                            contentDescription = option.contentDescription,
                             modifier = Modifier
                                 .size(iconSize)
-                                // Dynamic tag for each icon
-                                .testTag("${ContrastTimelineTestTags.OPTION_ICON_PREFIX}${option.id}"),
+                                .testTag(ContrastTimelineTestTags.optionIcon(option.id)),
                             tint = if (isSelected) selectedIconColor else unselectedIconColor,
                         )
                     }
@@ -288,11 +311,10 @@ fun ContrastTimeline(
 fun AppearanceScreenPreview() {
     KmtTheme {
         AppearanceScreen(
-            settingsState = SettingState(contrast = 0, darkThemeConfig = DarkThemeConfig.DARK),
+            settingsState = SettingState(contrast = 0, darkThemeConfig = DarkThemeConfig.DARK, gradientBackground = true),
             onContrastChange = {},
             onDarkModeChange = {},
             onGradientBackgroundChange = {},
-
         )
     }
 }
@@ -327,32 +349,4 @@ fun ContrastTimelinePreview() {
             onOptionSelected = { },
         )
     }
-}
-
-object AppearanceScreenTestTags {
-    const val SCREEN_ROOT = "appearance:screen_root"
-
-    const val CONTRAST_TITLE = "appearance:contrast_title"
-    const val CONTRAST_TIMELINE = "appearance:contrast_timeline"
-    // For individual contrast options, dynamic tags are often better,
-    // but you can define a prefix if needed for finding options by a common pattern.
-    // Example: const val CONTRAST_OPTION_PREFIX = "appearance:contrast_option_"
-
-    const val DARK_MODE_TITLE = "appearance:dark_mode_title"
-
-    // For individual dark mode options (RadioButton + Text row)
-    // It's common to tag the Row or the RadioButton itself.
-    // We'll use a dynamic approach in the example below by appending the config name.
-    const val DARK_MODE_OPTION_ROW_PREFIX = "appearance:dark_mode_option_row_"
-    const val DARK_MODE_RADIO_BUTTON_PREFIX = "appearance:dark_mode_radio_button_"
-    const val DARK_MODE_OPTION_TEXT_PREFIX = "appearance:dark_mode_option_text_"
-}
-
-// Test tags for the ContrastTimeline component if it's complex enough
-// or if you test it in isolation.
-object ContrastTimelineTestTags {
-    const val TIMELINE_ROOT = "contrast_timeline:root"
-    const val OPTION_ITEM_PREFIX = "contrast_timeline:option_item_" // e.g., option_item_0, option_item_1
-    const val OPTION_ICON_PREFIX = "contrast_timeline:option_icon_"
-    const val OPTION_BACKGROUND_PREFIX = "contrast_timeline:option_background_"
 }
