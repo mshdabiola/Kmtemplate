@@ -97,7 +97,7 @@ class SettingScreenTest {
 
         // 3. Verify callbacks are passed and work (optional, but good for integration)
         val targetContrastOptionId = 1 // Example, ensure this ID exists in your ContrastTimeline
-        composeRule.onNodeWithTag("${ContrastTimelineTestTags.OPTION_ITEM_PREFIX}$targetContrastOptionId")
+        composeRule.onNodeWithTag(ContrastTimelineTestTags.optionItem(targetContrastOptionId))
             .performClick()
         assertEquals(targetContrastOptionId, onContrastChangedCalledWith)
 

@@ -52,6 +52,7 @@ class SettingDetailScreenTest {
             SettingNav.Faq -> "FAQ" // Expected from supportArrayString[0]
             SettingNav.About -> "About" // Expected from supportArrayString[1]
             SettingNav.Issue -> "Report an Issue" // Expected from supportArrayString[2]
+            SettingNav.Language -> "Language" // Expected from generalArrayString[1]
             // Add other cases as needed
         }
     }
@@ -170,14 +171,14 @@ class SettingDetailScreenTest {
         // For example, click a contrast option within AppearanceScreen:
         // This assumes ContrastTimelineTestTags.OPTION_ITEM_PREFIX1 is a valid tag in AppearanceScreen
         val targetContrastOptionId = 1 // Example: Standard Contrast
-        composeRule.onNodeWithTag("${ContrastTimelineTestTags.OPTION_ITEM_PREFIX}$targetContrastOptionId")
+        composeRule.onNodeWithTag(ContrastTimelineTestTags.optionItem(targetContrastOptionId))
             .performClick()
         assertEquals(targetContrastOptionId, contrastChangedValue)
 
         // Similarly for dark mode:
         val targetDarkModeConfig = DarkThemeConfig.DARK
         composeRule.onNodeWithTag(
-            "${AppearanceScreenTestTags.DARK_MODE_OPTION_ROW_PREFIX}${targetDarkModeConfig.name}",
+            AppearanceScreenTestTags.darkModeOptionRow(targetDarkModeConfig.name),
         )
             .performClick()
         assertEquals(targetDarkModeConfig, darkModeChangedValue)

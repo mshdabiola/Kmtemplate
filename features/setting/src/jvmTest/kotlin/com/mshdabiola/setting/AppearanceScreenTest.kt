@@ -1,18 +1,3 @@
-/*
- * Designed and developed by 2024 mshdabiola (lawal abiola)
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package com.mshdabiola.setting
 
 import androidx.compose.runtime.getValue
@@ -20,11 +5,13 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.test.assertIsDisplayed
+import androidx.compose.ui.test.assertIsOff
+import androidx.compose.ui.test.assertIsOn
+import androidx.compose.ui.test.assertIsNotSelected
 import androidx.compose.ui.test.assertIsSelected
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.performClick
-import androidx.compose.ui.test.printToLog
 import com.mshdabiola.designsystem.theme.KmtTheme
 import com.mshdabiola.model.DarkThemeConfig
 import com.mshdabiola.setting.detailscreen.AppearanceScreen
@@ -40,8 +27,9 @@ class AppearanceScreenTest {
     val composeRule = createComposeRule()
 
     private val initialSettingsState = SettingState(
-        contrast = 0, // Low contrast
-        darkThemeConfig = DarkThemeConfig.DARK,
+        contrast = 0, // Low contrast (id=0)
+        darkThemeConfig = DarkThemeConfig.FOLLOW_SYSTEM,
+        gradientBackground = true,
     )
 
     @Test
@@ -52,6 +40,7 @@ class AppearanceScreenTest {
                     settingsState = initialSettingsState,
                     onContrastChange = {},
                     onDarkModeChange = {},
+                    onGradientBackgroundChange = {},
                 )
             }
         }
@@ -61,92 +50,115 @@ class AppearanceScreenTest {
 
         // Verify Contrast Section
         composeRule.onNodeWithTag(AppearanceScreenTestTags.CONTRAST_TITLE).assertIsDisplayed()
-        composeRule.onNodeWithTag(
-            AppearanceScreenTestTags.SCREEN_ROOT,
-            useUnmergedTree = true,
-        ).printToLog("AppearanceScreen")
-        composeRule.onNodeWithTag(ContrastTimelineTestTags.TIMELINE_ROOT, useUnmergedTree = true).assertIsDisplayed()
+        composeRule.onNodeWithTag(ContrastTimelineTestTags.TIMELINE_ROOT, useUnmergedTree = true)
+            .assertIsDisplayed()
+        // Check initial contrast selection (id = 0 for Low)
+        composeRule.onNodeWithTag(ContrastTimelineTestTags.optionBackground(0), useUnmergedTree = true)
+            .assertIsDisplayed()
+        composeRule.onNodeWithTag(ContrastTimelineTestTags.optionIcon(0), useUnmergedTree = true)
+            .assertIsDisplayed()
 
-        // Verify initial contrast selection (id = 0 for Low)
-        // Check background/indicator of the selected option
-        composeRule.onNodeWithTag(
-            "${ContrastTimelineTestTags.OPTION_BACKGROUND_PREFIX}0",
-            useUnmergedTree = true,
-        ).assertIsDisplayed()
-        // Check icon of the selected option
-        composeRule.onNodeWithTag(
-            "${ContrastTimelineTestTags.OPTION_ICON_PREFIX}0",
-            useUnmergedTree = true,
-        ).assertIsDisplayed()
+        // Verify Background Section
+        composeRule.onNodeWithTag(AppearanceScreenTestTags.BACKGROUND_TITLE).assertIsDisplayed()
+        composeRule.onNodeWithTag(AppearanceScreenTestTags.GRADIENT_BACKGROUND_ROW).assertIsDisplayed()
+        composeRule.onNodeWithTag(AppearanceScreenTestTags.GRADIENT_BACKGROUND_TEXT,useUnmergedTree = true)
+            .assertIsDisplayed()
+        composeRule.onNodeWithTag(AppearanceScreenTestTags.GRADIENT_BACKGROUND_SWITCH).assertIsDisplayed()
+        if (initialSettingsState.gradientBackground) {
+            composeRule.onNodeWithTag(AppearanceScreenTestTags.GRADIENT_BACKGROUND_SWITCH).assertIsOn()
+        } else {
+            composeRule.onNodeWithTag(AppearanceScreenTestTags.GRADIENT_BACKGROUND_SWITCH).assertIsOff()
+        }
 
         // Verify Dark Mode Section
         composeRule.onNodeWithTag(AppearanceScreenTestTags.DARK_MODE_TITLE).assertIsDisplayed()
-
         DarkThemeConfig.entries.forEach { config ->
-            val expectedText = getDarkModeOptionText(config.ordinal)
-            // Helper to get text like "System", "Light", "Dark"
-            composeRule.onNodeWithTag(
-                "${AppearanceScreenTestTags.DARK_MODE_OPTION_ROW_PREFIX}${config.name}",
-            )
+            composeRule.onNodeWithTag(AppearanceScreenTestTags.darkModeOptionRow(config.name))
                 .assertIsDisplayed()
-            composeRule.onNodeWithTag(
-                "${AppearanceScreenTestTags.DARK_MODE_RADIO_BUTTON_PREFIX}${config.name}",
-            )
+            composeRule.onNodeWithTag(AppearanceScreenTestTags.darkModeRadioButton(config.name))
+                .assertIsDisplayed()
+            composeRule.onNodeWithTag(AppearanceScreenTestTags.darkModeOptionText(config.name),
+                useUnmergedTree = true)
                 .assertIsDisplayed()
 
             if (config == initialSettingsState.darkThemeConfig) {
-                composeRule.onNodeWithTag(
-                    "${AppearanceScreenTestTags.DARK_MODE_RADIO_BUTTON_PREFIX}${config.name}",
-                )
+                composeRule.onNodeWithTag(AppearanceScreenTestTags.darkModeRadioButton(config.name))
                     .assertIsSelected()
+            } else {
+                composeRule.onNodeWithTag(AppearanceScreenTestTags.darkModeRadioButton(config.name))
+                    .assertIsNotSelected()
             }
         }
     }
 
     @Test
     fun appearanceScreen_selectContrastOption_invokesCallbackAndUpdatesSelection() {
-        var selectedContrast by mutableStateOf(initialSettingsState.contrast)
-        val targetContrastOptionId = 1 // Standard Contrast
+        var callbackContrast: Int? = null
+        val targetContrastId = 1 // Standard Contrast
 
         composeRule.setContent {
-            // Use a mutable state that the test can update to reflect UI changes
-            // and verify callbacks.
             var currentSettings by remember { mutableStateOf(initialSettingsState) }
-
             KmtTheme {
                 AppearanceScreen(
                     settingsState = currentSettings,
                     onContrastChange = { newContrast ->
-                        selectedContrast = newContrast
+                        callbackContrast = newContrast
                         currentSettings = currentSettings.copy(contrast = newContrast)
                     },
                     onDarkModeChange = {},
+                    onGradientBackgroundChange = {},
                 )
             }
         }
 
-        // Click on the "Standard" contrast option (id = 1)
-        composeRule.onNodeWithTag("${ContrastTimelineTestTags.OPTION_ITEM_PREFIX}$targetContrastOptionId")
+        composeRule.onNodeWithTag(ContrastTimelineTestTags.optionItem(targetContrastId),
+            useUnmergedTree = true)
             .performClick()
 
-        // Verify callback was invoked with the correct ID
-        assertEquals(targetContrastOptionId, selectedContrast)
+        assertEquals(targetContrastId, callbackContrast)
+        // Verify UI updates (the new option item should now be visually selected)
+        composeRule.onNodeWithTag(ContrastTimelineTestTags.optionBackground(targetContrastId),
+            useUnmergedTree = true).assertIsDisplayed()
+        composeRule.onNodeWithTag(ContrastTimelineTestTags.optionIcon(targetContrastId),
+            useUnmergedTree = true).assertIsDisplayed()
+    }
 
-        // Verify UI updates to show the new selection
-        // (This assumes your composable recomposes correctly based on the updated state)
-        composeRule.onNodeWithTag(
-            "${ContrastTimelineTestTags.OPTION_BACKGROUND_PREFIX}$targetContrastOptionId",
-            useUnmergedTree = true,
-        )
-            .assertIsDisplayed() // Check for visual change like background
-//        composeRule.onNodeWithTag(
-//            "${ContrastTimelineTestTags.OPTION_ICON_PREFIX}$targetContrastOptionId",
-//        ).assertIsDisplayed()
+    @Test
+    fun appearanceScreen_toggleGradientBackground_invokesCallbackAndUpdatesSwitch() {
+        var callbackGradient: Boolean? = null
+        val expectedGradientValue = !initialSettingsState.gradientBackground
+
+        composeRule.setContent {
+            var currentSettings by remember { mutableStateOf(initialSettingsState) }
+            KmtTheme {
+                AppearanceScreen(
+                    settingsState = currentSettings,
+                    onContrastChange = {},
+                    onDarkModeChange = {},
+                    onGradientBackgroundChange = { newGradientState ->
+                        callbackGradient = newGradientState
+                        currentSettings = currentSettings.copy(gradientBackground = newGradientState)
+                    },
+                )
+            }
+        }
+
+        // Click the row to toggle, or directly on the switch if preferred
+        composeRule.onNodeWithTag(AppearanceScreenTestTags.GRADIENT_BACKGROUND_ROW).performClick()
+        // Or, if clicking the switch directly: composeRule.onNodeWithTag(AppearanceScreenTestTags.GRADIENT_BACKGROUND_SWITCH).performClick()
+
+
+        assertEquals(expectedGradientValue, callbackGradient)
+        if (expectedGradientValue) {
+            composeRule.onNodeWithTag(AppearanceScreenTestTags.GRADIENT_BACKGROUND_SWITCH).assertIsOn()
+        } else {
+            composeRule.onNodeWithTag(AppearanceScreenTestTags.GRADIENT_BACKGROUND_SWITCH).assertIsOff()
+        }
     }
 
     @Test
     fun appearanceScreen_selectDarkModeOption_invokesCallbackAndUpdatesSelection() {
-        var selectedDarkMode by mutableStateOf(initialSettingsState.darkThemeConfig)
+        var callbackDarkMode: DarkThemeConfig? = null
         val targetDarkModeConfig = DarkThemeConfig.DARK
 
         composeRule.setContent {
@@ -156,62 +168,27 @@ class AppearanceScreenTest {
                     settingsState = currentSettings,
                     onContrastChange = {},
                     onDarkModeChange = { newConfig ->
-                        selectedDarkMode = newConfig
+                        callbackDarkMode = newConfig
                         currentSettings = currentSettings.copy(darkThemeConfig = newConfig)
                     },
+                    onGradientBackgroundChange = {},
                 )
             }
         }
 
-        // Click on the "Dark" mode option row
-        composeRule.onNodeWithTag(
-            "${AppearanceScreenTestTags.DARK_MODE_OPTION_ROW_PREFIX}${targetDarkModeConfig.name}",
-        )
+        composeRule.onNodeWithTag(AppearanceScreenTestTags.darkModeOptionRow(targetDarkModeConfig.name))
             .performClick()
 
-        // Verify callback was invoked with the correct config
-        assertEquals(targetDarkModeConfig, selectedDarkMode)
-
-        // Verify the radio button for "Dark" is now selected
-        composeRule.onNodeWithTag(
-            "${AppearanceScreenTestTags.DARK_MODE_RADIO_BUTTON_PREFIX}${targetDarkModeConfig.name}",
-        )
+        assertEquals(targetDarkModeConfig, callbackDarkMode)
+        composeRule.onNodeWithTag(AppearanceScreenTestTags.darkModeRadioButton(targetDarkModeConfig.name))
             .assertIsSelected()
 
-        // Verify other radio buttons are not selected (optional, but good for robustness)
+        // Verify other radio buttons are not selected
         DarkThemeConfig.entries.filter { it != targetDarkModeConfig }.forEach { otherConfig ->
-            composeRule.onNodeWithTag(
-                "${AppearanceScreenTestTags.DARK_MODE_RADIO_BUTTON_PREFIX}${otherConfig.name}",
-            )
-                .assertIsNotSelected() // You might need to add this extension if not available
+            composeRule.onNodeWithTag(AppearanceScreenTestTags.darkModeRadioButton(otherConfig.name))
+                .assertIsNotSelected()
         }
     }
 
-    // Helper function to simulate string resource loading for dark mode options
-    // In a real KMP test, you'd want resource loading to work correctly
-    // or pass the strings directly if testing in a pure JVM environment without proper resource setup.
-    private fun getDarkModeOptionText(ordinal: Int): String {
-        return when (ordinal) {
-            DarkThemeConfig.FOLLOW_SYSTEM.ordinal -> "System" // Replace with actual string from Res.array.daynight[0]
-            DarkThemeConfig.LIGHT.ordinal -> "Light" // Replace with actual string from Res.array.daynight[1]
-            DarkThemeConfig.DARK.ordinal -> "Dark" // Replace with actual string from Res.array.daynight[2]
-            else -> ""
-        }
-    }
 
-    // You might need this extension if it's not part of your test framework version
-    private fun androidx.compose.ui.test.SemanticsNodeInteraction.assertIsNotSelected() {
-        // A common way to check if a RadioButton is not selected is to check its stateDescription
-        // or a similar property.
-        // Or, more simply, ensure it doesn't meet the criteria for assertIsSelected().
-        // For RadioButton, assertIsSelected() checks if SemanticsProperties.Selected is true.
-        // So, we can check if it's false.
-        // This is a simplified check. A more robust way might involve checking specific semantics properties.
-        try {
-            assertIsSelected()
-            throw AssertionError("Node is selected, but expected not to be.")
-        } catch (e: AssertionError) {
-            // Expected path: if it's not selected, assertIsSelected() will throw AssertionError
-        }
-    }
 }
