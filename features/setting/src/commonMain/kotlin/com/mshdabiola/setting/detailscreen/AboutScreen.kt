@@ -50,24 +50,25 @@ import kmtemplate.features.setting.generated.resources.last_update
 import kmtemplate.features.setting.generated.resources.privacy_policy
 import kmtemplate.features.setting.generated.resources.terms_and_condition
 import kmtemplate.features.setting.generated.resources.version
+import kmtemplate.features.setting.generated.resources.version_code
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 object AboutScreenTestTags {
-    const val SCREEN_ROOT = "about:screen_root" // For the main Column
+    const val SCREEN_ROOT = "about:screen_root"
 
     const val APP_ICON = "about:app_icon"
     const val APP_NAME = "about:app_name"
-    const val APP_DESCRIPTION = "about:app_description" // From our previous discussion
+    const val APP_DESCRIPTION = "about:app_description"
 
-    const val VERSION_LABEL = "about:version_label"
-    const val VERSION_VALUE = "about:version_value"
+    const val VERSION_NAME_LABEL = "about:version_name_label"
+    const val VERSION_NAME_VALUE = "about:version_name_value"
+
+    const val VERSION_CODE_LABEL = "about:version_code_label"
+    const val VERSION_CODE_VALUE = "about:version_code_value"
 
     const val LAST_UPDATE_LABEL = "about:last_update_label"
     const val LAST_UPDATE_VALUE = "about:last_update_value"
-
-    // Assuming "about_me" from Res.string.about_me is the main text block
-    const val ABOUT_ME_TEXT = "about:about_me_text"
 
     const val DEVELOPED_BY_LABEL = "about:developed_by_label"
     const val DEVELOPER_NAME = "about:developer_name"
@@ -138,13 +139,27 @@ fun AboutScreen(
             text = stringResource(Res.string.version),
             color = MaterialTheme.colorScheme.onSurfaceVariant,
             style = MaterialTheme.typography.labelLarge,
-            modifier = Modifier.testTag(AboutScreenTestTags.VERSION_LABEL),
+            modifier = Modifier.testTag(AboutScreenTestTags.VERSION_NAME_LABEL),
         )
         Text(
             text = KmtStrings.version,
             style = MaterialTheme.typography.bodyLarge,
             color = MaterialTheme.colorScheme.onSurface,
-            modifier = Modifier.testTag(AboutScreenTestTags.VERSION_VALUE),
+            modifier = Modifier.testTag(AboutScreenTestTags.VERSION_NAME_VALUE),
+        )
+
+        Spacer(Modifier.height(16.dp))
+        Text(
+            text = stringResource(Res.string.version_code),
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
+            style = MaterialTheme.typography.labelLarge,
+            modifier = Modifier.testTag(AboutScreenTestTags.VERSION_CODE_LABEL),
+        )
+        Text(
+            text = KmtStrings.versionCode,
+            style = MaterialTheme.typography.bodyLarge,
+            color = MaterialTheme.colorScheme.onSurface,
+            modifier = Modifier.testTag(AboutScreenTestTags.VERSION_CODE_VALUE),
         )
 
         Spacer(Modifier.height(16.dp))

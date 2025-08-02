@@ -30,10 +30,10 @@ object KmtStrings {
     val brand
         @Composable get() = stringResource(Res.string.brand)
 
-    val version
+    val versionCode
         @Composable get() = stringResource(Res.string.version)
 
-    val versionName
+    val version
         @Composable get() = stringResource(Res.string.version_name)
 
     val lastUpdate
