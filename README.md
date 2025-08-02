@@ -101,7 +101,7 @@ This project follows Clean Architecture principles, ensuring a scalable, maintai
 The codebase is organized into multiple Gradle modules to improve maintainability, scalability, and reusability:
 
 <p align="center">
-  <img src="./fastlane/metadata/android/en-US/images/buttons/Modularization.png" width="800" />
+  <img src="./fastlane/metadata/android/en-US/images/buttons/Modularization.png" width="800" alt="Modularization Diagram" />
 </p>
 
 - :app – Main application module for Android, JVM, and WASM.
