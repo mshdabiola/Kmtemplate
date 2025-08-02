@@ -57,7 +57,7 @@ internal class RealUserDataRepository(
             .setShouldShowGradientBackground(shouldShowGradientBackground) }
     }
 
-    override suspend fun setLanguage(language: Int) {
+    override suspend fun setLanguage(language: String) {
         withContext(ioDispatcher) { userPreferencesRepository.setLanguage(language) }
     }
 }
