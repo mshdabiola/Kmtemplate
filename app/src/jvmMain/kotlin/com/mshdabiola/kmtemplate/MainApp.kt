@@ -77,7 +77,7 @@ fun mainApp() {
 }
 
 fun main() {
-    val bugsnag = Bugsnag("5af3586b6547f3e4844773daedaee4f5");
+    val bugsnag = Bugsnag("5af3586b6547f3e4844773daedaee4f5")
 
     val logger =
         Logger(
@@ -99,7 +99,6 @@ fun main() {
     }
 //    bugsnag.setAppVersion(KmtStrings.version)
     try {
-
         mainApp()
     } catch (e: Exception) {
         bugsnag.notify(e)
