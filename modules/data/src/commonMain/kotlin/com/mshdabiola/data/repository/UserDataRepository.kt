@@ -41,4 +41,8 @@ interface UserDataRepository {
      * Sets whether the user has completed the onboarding process.
      */
     suspend fun setShouldHideOnboarding(shouldHideOnboarding: Boolean)
+
+    suspend fun setShouldShowGradientBackground(shouldShowGradientBackground: Boolean)
+
+    suspend fun setLanguage(language: Int)
 }

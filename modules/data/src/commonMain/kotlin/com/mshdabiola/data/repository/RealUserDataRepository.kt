@@ -51,4 +51,13 @@ internal class RealUserDataRepository(
     override suspend fun setShouldHideOnboarding(shouldHideOnboarding: Boolean) {
         withContext(ioDispatcher) { userPreferencesRepository.setShouldHideOnboarding(shouldHideOnboarding) }
     }
+
+    override suspend fun setShouldShowGradientBackground(shouldShowGradientBackground: Boolean) {
+        withContext(ioDispatcher) { userPreferencesRepository
+            .setShouldShowGradientBackground(shouldShowGradientBackground) }
+    }
+
+    override suspend fun setLanguage(language: Int) {
+        withContext(ioDispatcher) { userPreferencesRepository.setLanguage(language) }
+    }
 }
