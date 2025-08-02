@@ -2,7 +2,7 @@
 accompanist = "0.37.3"
 acraMail = "5.12.0"
 androidDesugarJdkLibs = "2.1.5"
-androidGradlePlugin = "8.11.1"
+androidGradlePlugin = "8.12.0"
 androidTools = "31.12.0"
 androidxActivity = "1.10.1"
 androidxAppCompat = "1.7.1"
