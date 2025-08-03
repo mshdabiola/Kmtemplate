@@ -25,7 +25,10 @@
   </a>
   <br>
   <a href="https://github.com/mshdabiola/kmtemplate/releases/latest">
-      <img src="https://img.shields.io/github/v/release/mshdabiola/kmtemplate?color=purple&include_prereleases&logo=github&style=for-the-badge"/>
+      <img src="https://img.shields.io/github/v/release/mshdabiola/kmtemplate?color=green&logo=github&style=for-the-badge"/>
+  </a>
+  <a href="https://github.com/mshdabiola/kmtemplate/releases/latest">
+      <img src="https://img.shields.io/github/v/release/mshdabiola/kmtemplate?color=purple&logo=github&style=for-the-badge&include_prereleases&label=Pre%20Release%20"/>
   </a>
 
 </p>
