@@ -18,33 +18,45 @@ package com.mshdabiola.data.doubles
 import com.mshdabiola.datastore.UserPreferencesDataSource
 import com.mshdabiola.datastore.model.UserPreferences
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 
-class TestUserPreferenceDataSource : UserPreferencesDataSource{
-    override val userPreferences: Flow<UserPreferences>
-        get() = TODO("Not yet implemented")
+class TestUserPreferenceDataSource : UserPreferencesDataSource {
 
-    override suspend fun setContrast(contrast: Int) {
-        TODO("Not yet implemented")
-    }
+    private val _userPreferences = MutableStateFlow(
+        UserPreferences(
+            darkThemeConfig = 0,
+            useDynamicColor = false,
+            shouldHideOnboarding = false,
+            contrast = 0,
+            shouldShowGradientBackground = true,
+            language = "en",
+        ),
+    )
+    override val userPreferences: Flow<UserPreferences> = _userPreferences.asStateFlow()
 
     override suspend fun setDarkThemeConfig(darkThemeConfig: Int) {
-        TODO("Not yet implemented")
+        _userPreferences.update { it.copy(darkThemeConfig = darkThemeConfig) }
     }
 
     override suspend fun setDynamicColorPreference(useDynamicColor: Boolean) {
-        TODO("Not yet implemented")
+        _userPreferences.update { it.copy(useDynamicColor = useDynamicColor) }
     }
 
     override suspend fun setShouldHideOnboarding(shouldHideOnboarding: Boolean) {
-        TODO("Not yet implemented")
+        _userPreferences.update { it.copy(shouldHideOnboarding = shouldHideOnboarding) }
+    }
+
+    override suspend fun setContrast(contrast: Int) {
+        _userPreferences.update { it.copy(contrast = contrast) }
     }
 
     override suspend fun setShouldShowGradientBackground(shouldShowGradientBackground: Boolean) {
-        TODO("Not yet implemented")
+        _userPreferences.update { it.copy(shouldShowGradientBackground = shouldShowGradientBackground) }
     }
 
     override suspend fun setLanguage(language: String) {
-        TODO("Not yet implemented")
+        _userPreferences.update { it.copy(language = language) }
     }
-
 }
