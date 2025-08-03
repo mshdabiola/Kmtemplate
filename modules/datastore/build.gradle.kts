@@ -44,6 +44,15 @@ android {
 }
 
 kotlin {
+    applyDefaultHierarchyTemplate {
+        common {
+            group("nonJs") {
+                withAndroidTarget()
+                // withIos()
+                withJvm()
+            }
+        }
+    }
 
     sourceSets {
         commonMain.dependencies {

@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.mshdabiola.model
+package com.mshdabiola.ui
 
 import co.touchlab.kermit.Logger
 import org.koin.core.scope.Scope

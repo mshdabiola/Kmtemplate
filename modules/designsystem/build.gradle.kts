@@ -13,7 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+@file:OptIn(ExperimentalKotlinGradlePluginApi::class)
+
 import org.gradle.kotlin.dsl.implementation
+import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 
 /*
  *abiola 2024
@@ -37,6 +40,16 @@ dependencies {
     debugApi(compose.uiTooling)
 }
 kotlin {
+    applyDefaultHierarchyTemplate {
+        common {
+            group("nonJs") {
+                withAndroidTarget()
+                // withIos()
+                withJvm()
+            }
+        }
+    }
+
     sourceSets {
          commonMain.dependencies {
                 api(compose.runtime)

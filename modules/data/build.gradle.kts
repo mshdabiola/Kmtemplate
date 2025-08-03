@@ -1,3 +1,7 @@
+@file:OptIn(ExperimentalKotlinGradlePluginApi::class)
+
+import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
+
 /*
  * Designed and developed by 2024 mshdabiola (lawal abiola)
  *
@@ -23,6 +27,16 @@ android {
 }
 
 kotlin {
+    applyDefaultHierarchyTemplate {
+        common {
+            group("nonJs") {
+                withAndroidTarget()
+                // withIos()
+                withJvm()
+            }
+        }
+    }
+
     sourceSets {
             commonMain.dependencies {
                 implementation(project(":modules:model"))
