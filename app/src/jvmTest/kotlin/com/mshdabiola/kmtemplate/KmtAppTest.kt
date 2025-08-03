@@ -52,7 +52,7 @@ import com.mshdabiola.kmtemplate.util.TestLifecycleOwner
 import com.mshdabiola.main.MainScreenTestTags
 import com.mshdabiola.main.mainModule
 import com.mshdabiola.main.navigation.Main
-import com.mshdabiola.model.getLoggerWithTag
+import com.mshdabiola.ui.getLoggerWithTag
 import com.mshdabiola.setting.SettingScreenTestTags
 import com.mshdabiola.setting.navigation.Setting
 import com.mshdabiola.setting.settingModule
