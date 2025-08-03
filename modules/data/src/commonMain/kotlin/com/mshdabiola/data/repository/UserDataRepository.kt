@@ -16,14 +16,14 @@
 package com.mshdabiola.data.repository
 
 import com.mshdabiola.model.DarkThemeConfig
-import com.mshdabiola.model.UserData
+import com.mshdabiola.model.UserSettings
 import kotlinx.coroutines.flow.Flow
 
 interface UserDataRepository {
     /**
-     * Stream of [UserData]
+     * Stream of [UserSettings]
      */
-    val userData: Flow<UserData>
+    val userSettings: Flow<UserSettings>
 
     suspend fun setContrast(contrast: Int)
 

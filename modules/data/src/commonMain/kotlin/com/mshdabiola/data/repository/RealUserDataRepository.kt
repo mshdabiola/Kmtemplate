@@ -15,11 +15,13 @@
  */
 package com.mshdabiola.data.repository
 
+import com.mshdabiola.data.asUserSettings
 import com.mshdabiola.datastore.UserPreferencesRepository
 import com.mshdabiola.model.DarkThemeConfig
-import com.mshdabiola.model.UserData
+import com.mshdabiola.model.UserSettings
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 
 internal class RealUserDataRepository(
@@ -30,9 +32,10 @@ internal class RealUserDataRepository(
 //    private val logger: Logger,
 ) : UserDataRepository {
 
-    override val userData: Flow<UserData> =
+    override val userSettings: Flow<UserSettings> =
         userPreferencesRepository
-            .userData
+            .userPreferences
+            .map { it.asUserSettings() }
 
     override suspend fun setContrast(contrast: Int) {
         withContext(ioDispatcher) {
@@ -41,7 +44,7 @@ internal class RealUserDataRepository(
     }
 
     override suspend fun setDarkThemeConfig(darkThemeConfig: DarkThemeConfig) {
-        withContext(ioDispatcher) { userPreferencesRepository.setDarkThemeConfig(darkThemeConfig) }
+        withContext(ioDispatcher) { userPreferencesRepository.setDarkThemeConfig(darkThemeConfig.ordinal) }
     }
 
     override suspend fun setDynamicColorPreference(useDynamicColor: Boolean) {

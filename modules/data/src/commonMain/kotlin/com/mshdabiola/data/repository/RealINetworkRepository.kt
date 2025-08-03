@@ -15,12 +15,25 @@
  */
 package com.mshdabiola.data.repository
 
+import com.mshdabiola.model.ReleaseInfo
 import com.mshdabiola.network.INetworkDataSource
 
 internal class RealINetworkRepository(
     private val networkSource: INetworkDataSource,
 ) : INetworkRepository {
     override suspend fun gotoGoogle(): String {
-        return ""
+        return "" // Placeholder, actual implementation would call networkSource
+    }
+
+    override suspend fun getLatestReleaseInfo(): ReleaseInfo {
+        val gitHubReleaseInfo = networkSource.getLatestKmtemplateRelease()
+        return ReleaseInfo(
+            tagName = gitHubReleaseInfo.tagName ?: "",
+            releaseName = gitHubReleaseInfo.releaseName ?: "",
+            body = gitHubReleaseInfo.body ?: "",
+            assets = gitHubReleaseInfo.assets
+                ?.map { it?.browserDownloadUrl ?: "" }
+                ?: emptyList(),
+        )
     }
 }

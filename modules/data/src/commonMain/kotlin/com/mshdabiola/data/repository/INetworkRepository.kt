@@ -15,7 +15,11 @@
  */
 package com.mshdabiola.data.repository
 
+import com.mshdabiola.model.ReleaseInfo
+
+
 interface INetworkRepository {
 
     suspend fun gotoGoogle(): String
+    suspend fun getLatestReleaseInfo(): ReleaseInfo
 }
