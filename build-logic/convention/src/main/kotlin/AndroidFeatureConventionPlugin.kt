@@ -51,8 +51,8 @@ class AndroidFeatureConventionPlugin : Plugin<Project> {
 
             extensions.configure<KotlinMultiplatformExtension> {
                 with(sourceSets) {
-                    getByName("commonMain") {
-                        this.dependencies {
+
+                        commonMain.dependencies {
                             implementation(project(":modules:data"))
 
                             implementation(project(":modules:model"))
@@ -62,6 +62,9 @@ class AndroidFeatureConventionPlugin : Plugin<Project> {
                             implementation(project(":modules:analytics"))
                             implementation(libs.findLibrary("kotlinx.serialization.json").get())
                         }
+
+                    jvmTest.dependencies {
+                        implementation(project(":modules:testing"))
                     }
                 }
             }

@@ -88,7 +88,8 @@ class AndroidLibraryConventionPlugin : Plugin<Project> {
 
                     jvmTest.dependencies {
                         implementation(kotlin("test"))
-                        implementation(project(":modules:testing"))
+                        implementation(libs.findLibrary("kotlinx.coroutines.test").get())
+
                     }
                 }
             }
