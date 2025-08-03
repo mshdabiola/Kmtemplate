@@ -42,7 +42,6 @@ import com.mshdabiola.designsystem.strings.KmtStrings
 import com.mshdabiola.kmtemplate.di.appModule
 import com.mshdabiola.kmtemplate.ui.KmtApp
 import com.mshdabiola.kmtemplate.ui.SplashScreen
-import com.mshdabiola.model.CustomLogWriter
 import kotlinx.coroutines.delay
 import org.koin.core.context.GlobalContext.startKoin
 
