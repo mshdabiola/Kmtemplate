@@ -15,7 +15,7 @@
  */
 package com.mshdabiola.detail
 
-import com.mshdabiola.model.getLoggerWithTag
+import com.mshdabiola.ui.getLoggerWithTag
 import org.koin.core.module.dsl.viewModel
 import org.koin.dsl.module
 
