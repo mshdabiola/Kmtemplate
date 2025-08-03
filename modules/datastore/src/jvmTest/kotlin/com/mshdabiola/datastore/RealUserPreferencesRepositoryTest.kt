@@ -31,7 +31,7 @@ class RealUserPreferencesRepositoryTest {
 
     private val initialUserSettings = UserPreferences()
 
-    private fun getDataStore(name: String): RealUserPreferencesRepository {
+    private fun getDataStore(name: String): RealUserPreferencesDataSource {
         val path = File(FileSystem.SYSTEM_TEMPORARY_DIRECTORY.toFile(), "$name.json")
         if (path.exists()) {
             path.delete()
@@ -49,7 +49,7 @@ class RealUserPreferencesRepositoryTest {
                 },
             ),
         )
-        return RealUserPreferencesRepository(testDataStore)
+        return RealUserPreferencesDataSource(testDataStore)
     }
 
     @Test

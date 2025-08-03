@@ -15,38 +15,41 @@
  */
 package com.mshdabiola.datastore
 
+import androidx.datastore.core.DataStore
 import com.mshdabiola.datastore.model.UserPreferences
-import io.github.xxfast.kstore.KStore
-import io.github.xxfast.kstore.storage.storeOf
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.map
 
-internal class RealUserPreferencesRepository : UserPreferencesRepository {
-    private val store: KStore<UserPreferences> = storeOf(key = "userdata", default = UserPreferences())
+class RealUserPreferencesDataSource(
+    private val userdata: DataStore<UserPreferences>,
+) : UserPreferencesDataSource {
     override val userPreferences: Flow<UserPreferences>
-        get() = store.updates.map { it ?: UserPreferences() }
+        get() =
+            userdata
+                .data
 
     override suspend fun setContrast(contrast: Int) {
-        store.update { it?.copy(contrast = contrast) }
+        userdata.updateData {
+            it.copy(contrast = contrast)
+        }
     }
 
     override suspend fun setDarkThemeConfig(darkThemeConfig: Int) {
-        store.update { it?.copy(darkThemeConfig = darkThemeConfig) }
+        userdata.updateData { it.copy(darkThemeConfig = darkThemeConfig) }
     }
 
     override suspend fun setDynamicColorPreference(useDynamicColor: Boolean) {
-        store.update { it?.copy(useDynamicColor = useDynamicColor) }
+        userdata.updateData { it.copy(useDynamicColor = useDynamicColor) }
     }
 
     override suspend fun setShouldHideOnboarding(shouldHideOnboarding: Boolean) {
-        store.update { it?.copy(shouldHideOnboarding = shouldHideOnboarding) }
+        userdata.updateData { it.copy(shouldHideOnboarding = shouldHideOnboarding) }
     }
 
     override suspend fun setShouldShowGradientBackground(shouldShowGradientBackground: Boolean) {
-        store.update { it?.copy(shouldShowGradientBackground = shouldShowGradientBackground) }
+        userdata.updateData { it.copy(shouldShowGradientBackground = shouldShowGradientBackground) }
     }
 
     override suspend fun setLanguage(language: String) {
-        store.update { it?.copy(language = language) }
+        userdata.updateData { it.copy(language = language) }
     }
 }

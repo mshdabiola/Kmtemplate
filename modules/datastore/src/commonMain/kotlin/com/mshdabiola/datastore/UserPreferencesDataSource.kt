@@ -19,7 +19,7 @@ package com.mshdabiola.datastore
 import com.mshdabiola.datastore.model.UserPreferences
 import kotlinx.coroutines.flow.Flow
 
-interface UserPreferencesRepository {
+interface UserPreferencesDataSource {
     val userPreferences: Flow<UserPreferences>
 
     suspend fun setContrast(contrast: Int)

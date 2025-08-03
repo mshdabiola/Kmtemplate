@@ -15,8 +15,8 @@
  */
 package com.mshdabiola.datastore.di
 
-import com.mshdabiola.datastore.RealUserPreferencesRepository
-import com.mshdabiola.datastore.UserPreferencesRepository
+import com.mshdabiola.datastore.RealUserPreferencesDataSource
+import com.mshdabiola.datastore.UserPreferencesDataSource
 import org.koin.core.module.Module
 import org.koin.dsl.bind
 import org.koin.dsl.module
@@ -25,6 +25,6 @@ actual val datastoreModule: Module
     get() =
         module {
             single {
-                RealUserPreferencesRepository()
-            } bind UserPreferencesRepository::class
+                RealUserPreferencesDataSource()
+            } bind UserPreferencesDataSource::class
         }
