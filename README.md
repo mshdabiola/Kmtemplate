@@ -48,14 +48,14 @@
   <img src="./fastlane/metadata/android/en-US/images/icon.png" width="200" />
 </p>
 <p align="center">
-  <img src="./fastlane/metadata/android/en-US/images/buttons/screenshot.png" width="800" alt="Application Screenshot" />
+  <img src="./icons/screenshot.png" width="800" alt="Application Screenshot" />
 </p>
 
 <div align="center">
 <!-- <a href="https://apt.izzysoft.de/packages/com.mshdabiola.kmttemplate/"><img src="https://gitlab.com/IzzyOnDroid/repo/-/raw/master/assets/IzzyOnDroid.png" height="80"></a> -->
 <a href="https://f-droid.org/en/packages/com.mshdabiola.kmttemplate"><img src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png" height="80" alt="Get it on F-Droid"></a>
-  <a href="https://github.com/mshdabiola/Kmtemplate/releases"><img src="./fastlane/metadata/android/en-US/images/buttons/desktop-icon.png" height="80" alt="Download for Desktop"></a>
-   <a href="https://github.com/mshdabiola/Kmtemplate/releases"><img src="./fastlane/metadata/android/en-US/images/buttons/web-icon.png" height="80" alt="Try it on Web"></a>
+  <a href="https://github.com/mshdabiola/Kmtemplate/releases"><img src="./icons/desktop-icon.png" height="80" alt="Download for Desktop"></a>
+   <a href="https://github.com/mshdabiola/Kmtemplate/releases"><img src="./icons/web-icon.png" height="80" alt="Try it on Web"></a>
     <a href="https://github.com/mshdabiola/Kmtemplate/releases"><img src="https://raw.githubusercontent.com/NeoApplications/Neo-Backup/034b226cea5c1b30eb4f6a6f313e4dadcbb0ece4/badge_github.png" height="80" alt="Get it on Github"></a>
 
 </div>
@@ -84,24 +84,24 @@ Kotlin Multiplatform Template is a robust project starter designed with a modern
 This project follows Clean Architecture principles, ensuring a scalable, maintainable, and testable codebase. The architecture separates concerns into distinct layers, promoting clear boundaries between business logic, data handling, and presentation. Shared logic is implemented in common modules, while platform-specific code is isolated for Android, JVM, and WASM targets.
 
 <p align="center">
-  <img src="./fastlane/metadata/android/en-US/images/buttons/Architecture - overall.png" width="800" alt="Overall Architecture Diagram" />
+  <img src="./icons/Architecture - overall.png" width="800" alt="Overall Architecture Diagram" />
 </p>
 
 - Presentation Layer: UI and user interaction, built with Compose Multiplatform.
 <p align="center">
-  <img src="./fastlane/metadata/android/en-US/images/buttons/Architecture - ui.png" width="800" alt="UI Layer Architecture Diagram" />
+  <img src="./icons/Architecture - ui.png" width="800" alt="UI Layer Architecture Diagram" />
 </p>
 <!-- - Domain Layer: Business logic, use cases, and interfaces. -->
 - Data Layer: Repositories, data sources, and models for local (Room, DataStore) and remote (Ktor) data.
 <p align="center">
-  <img src="./fastlane/metadata/android/en-US/images/buttons/Architecture - data.png" width="800" alt="Data Layer Architecture Diagram" />
+  <img src="./icons/Architecture - data.png" width="800" alt="Data Layer Architecture Diagram" />
 </p>
 
 ## 🧩 Modularization
 The codebase is organized into multiple Gradle modules to improve maintainability, scalability, and reusability:
 
 <p align="center">
-  <img src="./fastlane/metadata/android/en-US/images/buttons/Modularization.png" width="800" alt="Modularization Diagram" />
+  <img src="./icons/Modularization.png" width="800" alt="Modularization Diagram" />
 </p>
 
 - :app – Main application module for Android, JVM, and WASM.
