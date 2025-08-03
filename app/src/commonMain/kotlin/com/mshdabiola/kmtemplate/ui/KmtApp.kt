@@ -91,7 +91,7 @@ fun KmtApp(
 
     LaunchedEffect(uiState) {
         if (uiState is MainActivityUiState.Success) {
-            val language = (uiState as MainActivityUiState.Success).userData.language
+            val language = (uiState as MainActivityUiState.Success).userSettings.language
             languageCode = language
             changeLanguage(language)
         }
@@ -155,14 +155,14 @@ fun KmtApp(
 private fun chooseContrast(uiState: MainActivityUiState): Int =
     when (uiState) {
         MainActivityUiState.Loading -> 0
-        is MainActivityUiState.Success -> uiState.userData.contrast
+        is MainActivityUiState.Success -> uiState.userSettings.contrast
     }
 
 @Composable
 private fun shouldDisableDynamicTheming(uiState: MainActivityUiState): Boolean =
     when (uiState) {
         MainActivityUiState.Loading -> false
-        is MainActivityUiState.Success -> !uiState.userData.useDynamicColor
+        is MainActivityUiState.Success -> !uiState.userSettings.useDynamicColor
     }
 
 @Composable
@@ -170,7 +170,7 @@ fun shouldUseDarkTheme(uiState: MainActivityUiState): Boolean =
     when (uiState) {
         MainActivityUiState.Loading -> isSystemInDarkTheme()
         is MainActivityUiState.Success ->
-            when (uiState.userData.darkThemeConfig) {
+            when (uiState.userSettings.darkThemeConfig) {
                 DarkThemeConfig.FOLLOW_SYSTEM -> isSystemInDarkTheme()
                 DarkThemeConfig.LIGHT -> false
                 DarkThemeConfig.DARK -> true
@@ -182,5 +182,5 @@ fun shouldShowGradientBackground(uiState: MainActivityUiState): Boolean =
     when (uiState) {
         MainActivityUiState.Loading -> false
         is MainActivityUiState.Success ->
-            uiState.userData.shouldShowGradientBackground
+            uiState.userSettings.shouldShowGradientBackground
     }
