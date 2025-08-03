@@ -16,8 +16,6 @@
 package com.mshdabiola.network
 
 import com.mshdabiola.network.model.GitHubReleaseInfo
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
 
 interface INetworkDataSource {
     suspend fun goToGoogle(): String
