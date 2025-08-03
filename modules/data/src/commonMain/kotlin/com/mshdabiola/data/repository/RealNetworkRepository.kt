@@ -17,10 +17,10 @@ package com.mshdabiola.data.repository
 
 import com.mshdabiola.data.getPlatform
 import com.mshdabiola.model.ReleaseInfo
-import com.mshdabiola.network.INetworkDataSource
+import com.mshdabiola.network.NetworkDataSource
 
 internal class RealNetworkRepository(
-    private val networkSource: INetworkDataSource,
+    private val networkSource: NetworkDataSource,
 ) : NetworkRepository {
     override suspend fun gotoGoogle(): String {
         return "" // Placeholder, actual implementation would call networkSource

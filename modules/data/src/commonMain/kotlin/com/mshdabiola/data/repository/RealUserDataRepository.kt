@@ -16,7 +16,7 @@
 package com.mshdabiola.data.repository
 
 import com.mshdabiola.data.asUserSettings
-import com.mshdabiola.datastore.UserPreferencesRepository
+import com.mshdabiola.datastore.UserPreferencesDataSource
 import com.mshdabiola.model.DarkThemeConfig
 import com.mshdabiola.model.UserSettings
 import kotlinx.coroutines.CoroutineDispatcher
@@ -25,7 +25,7 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 
 internal class RealUserDataRepository(
-    private val userPreferencesRepository: UserPreferencesRepository,
+    private val userPreferencesRepository: UserPreferencesDataSource,
     private val ioDispatcher: CoroutineDispatcher,
 
 //    private val analyticsHelper: AnalyticsHelper,
