@@ -16,7 +16,7 @@
 package com.mshdabiola.testing.fake
 
 import com.mshdabiola.analytics.di.analyticsModule
-import com.mshdabiola.data.repository.INetworkRepository
+import com.mshdabiola.data.repository.NetworkRepository
 import com.mshdabiola.data.repository.NoteRepository
 import com.mshdabiola.data.repository.UserDataRepository
 import com.mshdabiola.testing.fake.repository.FakeNetworkRepository
@@ -30,7 +30,7 @@ import org.koin.dsl.module
 val testDataModule =
     module {
         includes(testDispatcherModule, analyticsModule)
-        singleOf(::FakeNetworkRepository) bind INetworkRepository::class
+        singleOf(::FakeNetworkRepository) bind NetworkRepository::class
         singleOf(::FakeNoteRepository) bind NoteRepository::class
         singleOf(::FakeUserDataRepository) bind UserDataRepository::class
     }
