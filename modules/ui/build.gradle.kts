@@ -45,5 +45,11 @@ kotlin {
                 implementation(project(":modules:model"))
             }
 
+        jvmMain.dependencies {
+            implementation(compose.desktop.currentOs)
+
+            implementation(compose.desktop.uiTestJUnit4)
+        }
+
     }
 }
