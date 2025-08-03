@@ -28,7 +28,7 @@ class SettingViewModel constructor(
     private val userDataRepository: UserDataRepository,
 ) : ViewModel() {
     val settingState = userDataRepository
-        .userData
+        .userSettings
         .map { userData ->
             SettingState(
                 contrast = userData.contrast,

@@ -17,7 +17,7 @@ package com.mshdabiola.setting
 
 import app.cash.turbine.test
 import com.mshdabiola.model.DarkThemeConfig
-import com.mshdabiola.model.UserData
+import com.mshdabiola.model.UserSettings
 import com.mshdabiola.testing.fake.repository.FakeUserDataRepository
 import com.mshdabiola.testing.util.MainDispatcherRule
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -37,22 +37,22 @@ class SettingViewModelTest {
     private lateinit var viewModel: SettingViewModel
     private lateinit var userDataRepository: FakeUserDataRepository
 
-    private val initialUserData = UserData()
+    private val initialUserSettings = UserSettings()
 
     @Before
     fun setUp() {
         userDataRepository = FakeUserDataRepository()
-        userDataRepository.setFakeUserData(initialUserData)
+        userDataRepository.setFakeUserData(initialUserSettings)
         viewModel = SettingViewModel(userDataRepository)
     }
 
     @Test
     fun `initial state is correct`() = runTest(mainDispatcherRule.testDispatcher) {
         val expectedInitialState = SettingState(
-            contrast = initialUserData.contrast,
-            darkThemeConfig = initialUserData.darkThemeConfig,
-            gradientBackground = initialUserData.shouldShowGradientBackground,
-            language = initialUserData.language,
+            contrast = initialUserSettings.contrast,
+            darkThemeConfig = initialUserSettings.darkThemeConfig,
+            gradientBackground = initialUserSettings.shouldShowGradientBackground,
+            language = initialUserSettings.language,
         )
 
         viewModel.settingState.test {
@@ -66,16 +66,16 @@ class SettingViewModelTest {
         val newContrast = 1
         val expectedStateAfterUpdate = SettingState(
             contrast = newContrast,
-            darkThemeConfig = initialUserData.darkThemeConfig,
-            gradientBackground = initialUserData.shouldShowGradientBackground,
-            language = initialUserData.language,
+            darkThemeConfig = initialUserSettings.darkThemeConfig,
+            gradientBackground = initialUserSettings.shouldShowGradientBackground,
+            language = initialUserSettings.language,
         )
         viewModel.setContrast(newContrast)
 
         viewModel.settingState.test {
             skipItems(1)
             assertEquals(expectedStateAfterUpdate, awaitItem())
-            assertEquals(newContrast, userDataRepository.userData.first().contrast)
+            assertEquals(newContrast, userDataRepository.userSettings.first().contrast)
 
             cancelAndConsumeRemainingEvents()
         }
@@ -85,17 +85,17 @@ class SettingViewModelTest {
     fun `setDarkThemeConfig updates repository and state`() = runTest(mainDispatcherRule.testDispatcher) {
         val newDarkThemeConfig = DarkThemeConfig.DARK
         val expectedStateAfterUpdate = SettingState(
-            contrast = initialUserData.contrast,
+            contrast = initialUserSettings.contrast,
             darkThemeConfig = newDarkThemeConfig,
-            gradientBackground = initialUserData.shouldShowGradientBackground,
-            language = initialUserData.language,
+            gradientBackground = initialUserSettings.shouldShowGradientBackground,
+            language = initialUserSettings.language,
         )
         viewModel.setDarkThemeConfig(newDarkThemeConfig)
         viewModel.settingState.test {
             skipItems(1)
 
             assertEquals(expectedStateAfterUpdate, awaitItem())
-            assertEquals(newDarkThemeConfig, userDataRepository.userData.first().darkThemeConfig)
+            assertEquals(newDarkThemeConfig, userDataRepository.userSettings.first().darkThemeConfig)
 
             cancelAndConsumeRemainingEvents()
         }
@@ -105,16 +105,16 @@ class SettingViewModelTest {
     fun `setGradientBackground updates repository and state`() = runTest(mainDispatcherRule.testDispatcher) {
         val newGradientBackground = false
         val expectedStateAfterUpdate = SettingState(
-            contrast = initialUserData.contrast,
-            darkThemeConfig = initialUserData.darkThemeConfig,
+            contrast = initialUserSettings.contrast,
+            darkThemeConfig = initialUserSettings.darkThemeConfig,
             gradientBackground = newGradientBackground,
-            language = initialUserData.language,
+            language = initialUserSettings.language,
         )
 
         viewModel.settingState.test {
             viewModel.setGradientBackground(newGradientBackground)
 
-            assertEquals(newGradientBackground, userDataRepository.userData.first().shouldShowGradientBackground)
+            assertEquals(newGradientBackground, userDataRepository.userSettings.first().shouldShowGradientBackground)
             assertEquals(expectedStateAfterUpdate, awaitItem())
             cancelAndConsumeRemainingEvents()
         }
@@ -124,9 +124,9 @@ class SettingViewModelTest {
     fun `setLanguage updates repository and state`() = runTest(mainDispatcherRule.testDispatcher) {
         val newLanguage = "fr-FR"
         val expectedStateAfterUpdate = SettingState(
-            contrast = initialUserData.contrast,
-            darkThemeConfig = initialUserData.darkThemeConfig,
-            gradientBackground = initialUserData.shouldShowGradientBackground,
+            contrast = initialUserSettings.contrast,
+            darkThemeConfig = initialUserSettings.darkThemeConfig,
+            gradientBackground = initialUserSettings.shouldShowGradientBackground,
             language = newLanguage,
         )
         viewModel.setLanguage(newLanguage)
@@ -135,7 +135,7 @@ class SettingViewModelTest {
             skipItems(1)
 
             assertEquals(expectedStateAfterUpdate, awaitItem())
-            assertEquals(newLanguage, userDataRepository.userData.first().language)
+            assertEquals(newLanguage, userDataRepository.userSettings.first().language)
 
             cancelAndConsumeRemainingEvents()
         }
