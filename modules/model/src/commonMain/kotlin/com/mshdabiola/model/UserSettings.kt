@@ -15,9 +15,11 @@
  */
 package com.mshdabiola.model
 
-
-data class Note(
-    val id: Long = -1,
-    val title: String = "",
-    val content: String = "",
+data class UserSettings(
+    val contrast: Int = 0,
+    val darkThemeConfig: DarkThemeConfig = DarkThemeConfig.LIGHT,
+    val useDynamicColor: Boolean = false,
+    val shouldHideOnboarding: Boolean = false,
+    val shouldShowGradientBackground: Boolean = false,
+    val language: String = "en-US",
 )
