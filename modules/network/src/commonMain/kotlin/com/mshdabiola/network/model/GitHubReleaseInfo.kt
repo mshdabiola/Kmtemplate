@@ -13,4 +13,6 @@ data class GitHubReleaseInfo(
     val body: String? = null,
     @SerialName("html_url")
     val htmlUrl: String? = null,
+    @SerialName("assets")
+    val assets: List<Asset?>?=null,
 )

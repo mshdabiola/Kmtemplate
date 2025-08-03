@@ -15,6 +15,7 @@
  */
 package com.mshdabiola.network
 
+import com.mshdabiola.network.model.Asset // Import Asset if it's in a different package and needed for direct use in test, though not strictly necessary for this update
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.mock.MockEngine
 import io.ktor.client.engine.mock.respond
@@ -107,12 +108,22 @@ class NetworkDataSourceTest {
     }
 
     @Test
-    fun `getLatestKmtemplateRelease successfully returns release info`() = runTest {
+    fun `getLatestKmtemplateRelease successfully returns release info including assets`() = runTest {
         val expectedReleaseJson = """{
             "tag_name": "v1.0.0",
             "name": "Initial Release",
             "body": "This is the first release.",
-            "html_url": "https://github.com/mshdabiola/kmtemplate/releases/tag/v1.0.0"
+            "html_url": "https://github.com/mshdabiola/kmtemplate/releases/tag/v1.0.0",
+            "assets": [
+                {
+                    "browser_download_url": "https://github.com/mshdabiola/kmtemplate/releases/download/v1.0.0/kmtemplate.apk",
+                    "size": 1234567
+                },
+                {
+                    "browser_download_url": "https://github.com/mshdabiola/kmtemplate/releases/download/v1.0.0/source.zip",
+                    "size": 7654321
+                }
+            ]
         }"""
         val mockEngine = MockEngine { request ->
             assertEquals("https://api.github.com/repos/mshdabiola/kmtemplate/releases/latest", request.url.toString())
@@ -137,6 +148,20 @@ class NetworkDataSourceTest {
         assertEquals("Initial Release", result.releaseName)
         assertEquals("This is the first release.", result.body)
         assertEquals("https://github.com/mshdabiola/kmtemplate/releases/tag/v1.0.0", result.htmlUrl)
+
+        assertNotNull(result.assets)
+        assertEquals(2, result.assets.size)
+
+        val firstAsset = result.assets[0]
+        assertNotNull(firstAsset)
+        assertEquals("https://github.com/mshdabiola/kmtemplate/releases/download/v1.0.0/kmtemplate.apk", firstAsset?.browserDownloadUrl)
+        assertEquals(1234567, firstAsset.size)
+
+        val secondAsset = result.assets.get(1)
+        assertNotNull(secondAsset)
+        assertEquals("https://github.com/mshdabiola/kmtemplate/releases/download/v1.0.0/source.zip", secondAsset?.browserDownloadUrl)
+        assertEquals(7654321, secondAsset.size)
+
         mockEngine.close()
     }
 
