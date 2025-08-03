@@ -29,8 +29,9 @@ val appModule =
         includes(dataModule, detailModule, mainModule, settingModule)
         viewModel {
             MainAppViewModel(
-                get(),
-                getLoggerWithTag("MainAppViewModel"),
+                userDataRepository = get(),
+                networkRepository = get(),
+                logger = getLoggerWithTag("MainAppViewModel"),
             )
         }
     }
