@@ -17,7 +17,7 @@ package com.mshdabiola.testing.fake.repository
 
 import com.mshdabiola.data.repository.UserDataRepository
 import com.mshdabiola.model.DarkThemeConfig
-import com.mshdabiola.model.UserData
+import com.mshdabiola.model.UserSettings
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -31,53 +31,53 @@ import kotlinx.coroutines.flow.update
 class FakeUserDataRepository : UserDataRepository {
 
     // Internal MutableStateFlow to hold and update UserData
-    private val _userData = MutableStateFlow(
-        UserData(),
+    private val _userSettings = MutableStateFlow(
+        UserSettings(),
     )
 
     /**
-     * The Flow of [UserData] that can be collected by consumers.
+     * The Flow of [UserSettings] that can be collected by consumers.
      */
-    override val userData: Flow<UserData> = _userData.asStateFlow()
+    override val userSettings: Flow<UserSettings> = _userSettings.asStateFlow()
 
     /**
      * A backing [MutableStateFlow] that can be used to manually emit new UserData
      * values in tests.
      */
-    val userDataSource: MutableStateFlow<UserData> = _userData
+    val userSettingsSource: MutableStateFlow<UserSettings> = _userSettings
 
     override suspend fun setContrast(contrast: Int) {
-        _userData.update { currentUserData ->
+        _userSettings.update { currentUserData ->
             currentUserData.copy(contrast = contrast)
         }
     }
 
     override suspend fun setDarkThemeConfig(darkThemeConfig: DarkThemeConfig) {
-        _userData.update { currentUserData ->
+        _userSettings.update { currentUserData ->
             currentUserData.copy(darkThemeConfig = darkThemeConfig)
         }
     }
 
     override suspend fun setDynamicColorPreference(useDynamicColor: Boolean) {
-        _userData.update { currentUserData ->
+        _userSettings.update { currentUserData ->
             currentUserData.copy(useDynamicColor = useDynamicColor)
         }
     }
 
     override suspend fun setShouldHideOnboarding(shouldHideOnboarding: Boolean) {
-        _userData.update { currentUserData ->
+        _userSettings.update { currentUserData ->
             currentUserData.copy(shouldHideOnboarding = shouldHideOnboarding)
         }
     }
 
     override suspend fun setShouldShowGradientBackground(shouldShowGradientBackground: Boolean) {
-        _userData.update { currentUserData ->
+        _userSettings.update { currentUserData ->
             currentUserData.copy(shouldShowGradientBackground = shouldShowGradientBackground)
         }
     }
 
     override suspend fun setLanguage(language: String) {
-        _userData.update { currentUserData ->
+        _userSettings.update { currentUserData ->
             currentUserData.copy(language = language)
         }
     }
@@ -85,7 +85,7 @@ class FakeUserDataRepository : UserDataRepository {
     /**
      * Helper function to directly set the entire UserData object, useful for test setup.
      */
-    fun setFakeUserData(newUserData: UserData) {
-        _userData.value = newUserData
+    fun setFakeUserData(newUserSettings: UserSettings) {
+        _userSettings.value = newUserSettings
     }
 }
