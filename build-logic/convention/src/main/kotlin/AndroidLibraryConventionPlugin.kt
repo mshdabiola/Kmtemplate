@@ -76,6 +76,7 @@ class AndroidLibraryConventionPlugin : Plugin<Project> {
                     commonMain.dependencies {
                         implementation(libs.findLibrary("koin.core").get())
                         implementation(libs.findLibrary("kermit").get())
+                        implementation(libs.findLibrary("kotlinx.coroutines.core").get())
                     }
 
                     androidMain.dependencies {
