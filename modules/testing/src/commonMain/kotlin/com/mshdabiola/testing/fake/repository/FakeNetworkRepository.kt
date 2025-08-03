@@ -15,18 +15,18 @@
  */
 package com.mshdabiola.testing.fake.repository
 
-import com.mshdabiola.data.repository.INetworkRepository
+import com.mshdabiola.data.repository.NetworkRepository
 import com.mshdabiola.model.ReleaseInfo
 
-class FakeNetworkRepository : INetworkRepository {
+class FakeNetworkRepository : NetworkRepository {
 
     override suspend fun gotoGoogle(): String {
         return "got to google"
     }
 
-    override suspend fun getLatestReleaseInfo(): ReleaseInfo {
-        return ReleaseInfo(
-            assets = emptyList(),
+    override suspend fun getLatestReleaseInfo(currentVersion: String): ReleaseInfo {
+        return ReleaseInfo.Success(
+            asset ="",
             body = "body",
             releaseName = "releaseName",
             tagName = "tagName"
