@@ -18,8 +18,7 @@ package com.mshdabiola.datastore
 // Removed MockK imports
 import androidx.datastore.core.DataStoreFactory
 import androidx.datastore.core.okio.OkioStorage
-import com.mshdabiola.model.DarkThemeConfig
-import com.mshdabiola.model.UserSettings
+import com.mshdabiola.datastore.model.UserPreferences
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.runTest
 import okio.FileSystem
@@ -30,7 +29,7 @@ import kotlin.test.assertEquals
 
 class RealUserPreferencesRepositoryTest {
 
-    private val initialUserSettings = UserSettings()
+    private val initialUserSettings = UserPreferences()
 
     private fun getDataStore(name: String): RealUserPreferencesRepository {
         val path = File(FileSystem.SYSTEM_TEMPORARY_DIRECTORY.toFile(), "$name.json")
@@ -75,7 +74,7 @@ class RealUserPreferencesRepositoryTest {
 
     @Test
     fun `setDarkThemeConfig updates DataStore and flow emits new config`() = runTest {
-        val newConfig = DarkThemeConfig.DARK
+        val newConfig = 1
         val expectedUserData = initialUserSettings.copy(darkThemeConfig = newConfig)
 
         val repository = getDataStore("userdata_setDarkThemeConfig")
@@ -116,21 +115,21 @@ class RealUserPreferencesRepositoryTest {
         val repository = getDataStore("userdata_multiple_updates")
 
         // Initial state check
-        assertEquals(DarkThemeConfig.LIGHT, repository.userPreferences.first().darkThemeConfig)
+        assertEquals(0, repository.userPreferences.first().darkThemeConfig)
 
         // First update
-        repository.setDarkThemeConfig(DarkThemeConfig.LIGHT)
-        assertEquals(DarkThemeConfig.LIGHT, repository.userPreferences.first().darkThemeConfig)
+        repository.setDarkThemeConfig(1)
+        assertEquals(1, repository.userPreferences.first().darkThemeConfig)
 
         // Second update
         repository.setContrast(10)
         assertEquals(10, repository.userPreferences.first().contrast)
-        assertEquals(DarkThemeConfig.LIGHT, repository.userPreferences.first().darkThemeConfig)
+        assertEquals(1, repository.userPreferences.first().darkThemeConfig)
         // Ensure previous update persists
 
-        val expectedUserSettings = UserSettings(
+        val expectedUserSettings = UserPreferences(
             contrast = 10,
-            darkThemeConfig = DarkThemeConfig.LIGHT,
+            darkThemeConfig = 1,
             useDynamicColor = false,
             shouldHideOnboarding = false,
         )
