@@ -17,6 +17,7 @@ package com.mshdabiola.data
 
 interface Platform {
     val name: String
+    val buildType: String
 }
 
 expect fun getPlatform(): Platform

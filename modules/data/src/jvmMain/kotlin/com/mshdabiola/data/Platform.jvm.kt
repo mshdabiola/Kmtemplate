@@ -22,6 +22,8 @@ class JVMPlatform : Platform {
 
             return "$os $javaVersion"
         }
+    override val buildType: String
+        get() = "Desktop"
 }
 
 actual fun getPlatform(): Platform = JVMPlatform()
