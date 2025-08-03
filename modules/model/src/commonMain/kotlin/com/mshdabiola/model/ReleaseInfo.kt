@@ -1,8 +1,13 @@
 package com.mshdabiola.model
 
- data class ReleaseInfo(
-    val tagName: String,
-    val releaseName: String,
-    val body: String,
-    val assets: List<String>,
-)
+sealed class ReleaseInfo {
+    data class Error(val message: String) : ReleaseInfo()
+    data class Success(
+        val tagName: String,
+        val releaseName: String,
+        val body: String,
+        val asset: String,
+    ) :
+        ReleaseInfo()
+
+}
