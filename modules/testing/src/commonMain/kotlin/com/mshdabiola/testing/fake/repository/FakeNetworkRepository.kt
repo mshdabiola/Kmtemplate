@@ -16,10 +16,20 @@
 package com.mshdabiola.testing.fake.repository
 
 import com.mshdabiola.data.repository.INetworkRepository
+import com.mshdabiola.model.ReleaseInfo
 
 class FakeNetworkRepository : INetworkRepository {
 
     override suspend fun gotoGoogle(): String {
         return "got to google"
+    }
+
+    override suspend fun getLatestReleaseInfo(): ReleaseInfo {
+        return ReleaseInfo(
+            assets = emptyList(),
+            body = "body",
+            releaseName = "releaseName",
+            tagName = "tagName"
+        )
     }
 }
