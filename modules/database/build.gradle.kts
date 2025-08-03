@@ -72,13 +72,11 @@ kotlin {
         all {
             languageSettings.optIn("kotlin.experimental.ExperimentalObjCName")
         }
-        commonMain.dependencies {
-            implementation(projects.modules.model)
-        }
 
-        jvmTest.dependencies {
-            implementation(projects.modules.testing)
-        }
+
+//        jvmTest.dependencies {
+//            implementation(projects.modules.testing)
+//        }
 
         val nonJsMain by getting {
             dependencies {

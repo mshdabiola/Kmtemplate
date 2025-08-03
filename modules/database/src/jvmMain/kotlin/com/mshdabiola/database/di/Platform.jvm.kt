@@ -19,11 +19,11 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.mshdabiola.database.KmtDatabase
 import com.mshdabiola.database.util.Constant.DATABASE_NAME
-import com.mshdabiola.model.generalPath
 import org.koin.core.module.Module
 import org.koin.dsl.module
 import java.io.File
 
+val databasePath=System.getProperty("java.io.tmpdir") + "/kmtemplate"
 actual val databaseModule: Module
     get() =
         module {
@@ -34,7 +34,7 @@ actual val databaseModule: Module
         }
 
 fun getDatabaseBuilder(): RoomDatabase.Builder<KmtDatabase> {
-    val path = File(generalPath, DATABASE_NAME)
+    val path = File(databasePath, DATABASE_NAME)
     return Room.databaseBuilder<KmtDatabase>(
         name = path.absolutePath,
     )
