@@ -16,14 +16,13 @@
 package com.mshdabiola.datastore
 
 import androidx.datastore.core.DataStore
-import com.mshdabiola.model.DarkThemeConfig
-import com.mshdabiola.model.UserData
+import com.mshdabiola.datastore.model.UserPreferences
 import kotlinx.coroutines.flow.Flow
 
 class RealUserPreferencesRepository(
-    private val userdata: DataStore<UserData>,
+    private val userdata: DataStore<UserPreferences>,
 ) : UserPreferencesRepository {
-    override val userData: Flow<UserData>
+    override val userPreferences: Flow<UserPreferences>
         get() =
             userdata
                 .data
@@ -34,7 +33,7 @@ class RealUserPreferencesRepository(
         }
     }
 
-    override suspend fun setDarkThemeConfig(darkThemeConfig: DarkThemeConfig) {
+    override suspend fun setDarkThemeConfig(darkThemeConfig: Int) {
         userdata.updateData { it.copy(darkThemeConfig = darkThemeConfig) }
     }
 

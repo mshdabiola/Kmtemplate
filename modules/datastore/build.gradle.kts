@@ -47,7 +47,6 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
-            implementation(project(":modules:model"))
             implementation(libs.kotlinx.serialization.json)
         }
 

@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.mshdabiola.model
+package com.mshdabiola.datastore.model
 
 import kotlinx.serialization.Serializable
 
@@ -21,9 +21,9 @@ import kotlinx.serialization.Serializable
  * Class summarizing user interest data
  */
 @Serializable
-data class UserData(
+ data class UserPreferences(
     val contrast: Int = 0,
-    val darkThemeConfig: DarkThemeConfig = DarkThemeConfig.LIGHT,
+    val darkThemeConfig: Int=0,
     val useDynamicColor: Boolean = false,
     val shouldHideOnboarding: Boolean = false,
     val shouldShowGradientBackground: Boolean = false,

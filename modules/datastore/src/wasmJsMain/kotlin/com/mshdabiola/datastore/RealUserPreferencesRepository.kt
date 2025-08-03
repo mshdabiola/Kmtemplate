@@ -15,23 +15,22 @@
  */
 package com.mshdabiola.datastore
 
-import com.mshdabiola.model.DarkThemeConfig
-import com.mshdabiola.model.UserData
+import com.mshdabiola.datastore.model.UserPreferences
 import io.github.xxfast.kstore.KStore
 import io.github.xxfast.kstore.storage.storeOf
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
 internal class RealUserPreferencesRepository : UserPreferencesRepository {
-    private val store: KStore<UserData> = storeOf(key = "userdata", default = UserData())
-    override val userData: Flow<UserData>
-        get() = store.updates.map { it ?: UserData() }
+    private val store: KStore<UserPreferences> = storeOf(key = "userdata", default = UserPreferences())
+    override val userPreferences: Flow<UserPreferences>
+        get() = store.updates.map { it ?: UserPreferences() }
 
     override suspend fun setContrast(contrast: Int) {
         store.update { it?.copy(contrast = contrast) }
     }
 
-    override suspend fun setDarkThemeConfig(darkThemeConfig: DarkThemeConfig) {
+    override suspend fun setDarkThemeConfig(darkThemeConfig: Int) {
         store.update { it?.copy(darkThemeConfig = darkThemeConfig) }
     }
 

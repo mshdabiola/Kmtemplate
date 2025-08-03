@@ -15,19 +15,19 @@
  */
 package com.mshdabiola.datastore
 
-import com.mshdabiola.model.DarkThemeConfig
-import com.mshdabiola.model.UserData
+
+import com.mshdabiola.datastore.model.UserPreferences
 import kotlinx.coroutines.flow.Flow
 
 interface UserPreferencesRepository {
-    val userData: Flow<UserData>
+    val userPreferences: Flow<UserPreferences>
 
     suspend fun setContrast(contrast: Int)
 
     /**
      * Sets the desired dark theme config.
      */
-    suspend fun setDarkThemeConfig(darkThemeConfig: DarkThemeConfig)
+    suspend fun setDarkThemeConfig(darkThemeConfig: Int)
 
     /**
      * Sets the preferred dynamic color config.

@@ -19,14 +19,14 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.core.DataStoreFactory
 import androidx.datastore.core.okio.OkioSerializer
 import androidx.datastore.core.okio.OkioStorage
-import com.mshdabiola.model.UserData
+import com.mshdabiola.datastore.model.UserPreferences
 import kotlinx.serialization.json.Json
 import okio.BufferedSink
 import okio.BufferedSource
 import okio.FileSystem
 import okio.Path.Companion.toPath
 
-fun createDataStoreUserData(producePath: () -> String): DataStore<UserData> =
+fun createDataStoreUserData(producePath: () -> String): DataStore<UserPreferences> =
     DataStoreFactory.create(
         storage =
         OkioStorage(
@@ -40,21 +40,21 @@ fun createDataStoreUserData(producePath: () -> String): DataStore<UserData> =
 
 val json = Json
 
-object UserDataJsonSerializer : OkioSerializer<UserData> {
-    override val defaultValue: UserData
+object UserDataJsonSerializer : OkioSerializer<UserPreferences> {
+    override val defaultValue: UserPreferences
         get() =
-            UserData()
+            UserPreferences()
 
-    override suspend fun readFrom(source: BufferedSource): UserData {
-        return json.decodeFromString<UserData>(source.readUtf8())
+    override suspend fun readFrom(source: BufferedSource): UserPreferences {
+        return json.decodeFromString<UserPreferences>(source.readUtf8())
     }
 
     override suspend fun writeTo(
-        userData: UserData,
+        userPreferences: UserPreferences,
         sink: BufferedSink,
     ) {
         sink.use {
-            it.writeUtf8(json.encodeToString(UserData.serializer(), userData))
+            it.writeUtf8(json.encodeToString(UserPreferences.serializer(), userPreferences))
         }
     }
 }

@@ -19,7 +19,7 @@ package com.mshdabiola.datastore
 import androidx.datastore.core.DataStoreFactory
 import androidx.datastore.core.okio.OkioStorage
 import com.mshdabiola.model.DarkThemeConfig
-import com.mshdabiola.model.UserData
+import com.mshdabiola.model.UserSettings
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.runTest
 import okio.FileSystem
@@ -30,7 +30,7 @@ import kotlin.test.assertEquals
 
 class RealUserPreferencesRepositoryTest {
 
-    private val initialUserData = UserData()
+    private val initialUserSettings = UserSettings()
 
     private fun getDataStore(name: String): RealUserPreferencesRepository {
         val path = File(FileSystem.SYSTEM_TEMPORARY_DIRECTORY.toFile(), "$name.json")
@@ -57,57 +57,57 @@ class RealUserPreferencesRepositoryTest {
     fun `userData flow initially emits current DataStore data`() = runTest {
         val repository = getDataStore("userdata_flow")
 
-        val currentUserData = repository.userData.first()
-        assertEquals(initialUserData, currentUserData)
+        val currentUserData = repository.userPreferences.first()
+        assertEquals(initialUserSettings, currentUserData)
     }
 
     @Test
     fun `setContrast updates DataStore and flow emits new contrast`() = runTest {
         val newContrast = 50
-        val expectedUserData = initialUserData.copy(contrast = newContrast)
+        val expectedUserData = initialUserSettings.copy(contrast = newContrast)
         val repository = getDataStore("userdata_setContrast")
 
         repository.setContrast(newContrast)
 
-        val updatedUserData = repository.userData.first() // Or fakeUserDataStore.data.first()
+        val updatedUserData = repository.userPreferences.first() // Or fakeUserDataStore.data.first()
         assertEquals(expectedUserData, updatedUserData)
     }
 
     @Test
     fun `setDarkThemeConfig updates DataStore and flow emits new config`() = runTest {
         val newConfig = DarkThemeConfig.DARK
-        val expectedUserData = initialUserData.copy(darkThemeConfig = newConfig)
+        val expectedUserData = initialUserSettings.copy(darkThemeConfig = newConfig)
 
         val repository = getDataStore("userdata_setDarkThemeConfig")
 
         repository.setDarkThemeConfig(newConfig)
 
-        val updatedUserData = repository.userData.first()
+        val updatedUserData = repository.userPreferences.first()
         assertEquals(expectedUserData, updatedUserData)
     }
 
     @Test
     fun `setDynamicColorPreference updates DataStore and flow emits new preference`() = runTest {
         val newDynamicColor = true
-        val expectedUserData = initialUserData.copy(useDynamicColor = newDynamicColor)
+        val expectedUserData = initialUserSettings.copy(useDynamicColor = newDynamicColor)
 
         val repository = getDataStore("userdata_setDynamicColorPreference")
 
         repository.setDynamicColorPreference(newDynamicColor)
 
-        val updatedUserData = repository.userData.first()
+        val updatedUserData = repository.userPreferences.first()
         assertEquals(expectedUserData, updatedUserData)
     }
 
     @Test
     fun `setShouldHideOnboarding updates DataStore and flow emits new value`() = runTest {
         val newShouldHide = true
-        val expectedUserData = initialUserData.copy(shouldHideOnboarding = newShouldHide)
+        val expectedUserData = initialUserSettings.copy(shouldHideOnboarding = newShouldHide)
         val repository = getDataStore("userdata_setShouldHideOnboarding")
 
         repository.setShouldHideOnboarding(newShouldHide)
 
-        val updatedUserData = repository.userData.first()
+        val updatedUserData = repository.userPreferences.first()
         assertEquals(expectedUserData, updatedUserData)
     }
 
@@ -116,46 +116,46 @@ class RealUserPreferencesRepositoryTest {
         val repository = getDataStore("userdata_multiple_updates")
 
         // Initial state check
-        assertEquals(DarkThemeConfig.LIGHT, repository.userData.first().darkThemeConfig)
+        assertEquals(DarkThemeConfig.LIGHT, repository.userPreferences.first().darkThemeConfig)
 
         // First update
         repository.setDarkThemeConfig(DarkThemeConfig.LIGHT)
-        assertEquals(DarkThemeConfig.LIGHT, repository.userData.first().darkThemeConfig)
+        assertEquals(DarkThemeConfig.LIGHT, repository.userPreferences.first().darkThemeConfig)
 
         // Second update
         repository.setContrast(10)
-        assertEquals(10, repository.userData.first().contrast)
-        assertEquals(DarkThemeConfig.LIGHT, repository.userData.first().darkThemeConfig)
+        assertEquals(10, repository.userPreferences.first().contrast)
+        assertEquals(DarkThemeConfig.LIGHT, repository.userPreferences.first().darkThemeConfig)
         // Ensure previous update persists
 
-        val expectedUserData = UserData(
+        val expectedUserSettings = UserSettings(
             contrast = 10,
             darkThemeConfig = DarkThemeConfig.LIGHT,
             useDynamicColor = false,
             shouldHideOnboarding = false,
         )
-        assertEquals(expectedUserData, repository.userData.first())
+        assertEquals(expectedUserSettings, repository.userPreferences.first())
     }
 
     @Test
     fun `setShouldShowGradientBackground updates DataStore and flow emits new value`() = runTest {
         val newShouldShowGradient = false
-        val expectedUserData = initialUserData.copy(shouldShowGradientBackground = newShouldShowGradient)
+        val expectedUserData = initialUserSettings.copy(shouldShowGradientBackground = newShouldShowGradient)
         val repository = getDataStore("userdata_setShouldShowGradientBackground")
         repository.setShouldShowGradientBackground(newShouldShowGradient)
-        val updatedUserData = repository.userData.first()
+        val updatedUserData = repository.userPreferences.first()
         assertEquals(expectedUserData, updatedUserData)
     }
 
     @Test
     fun `setLanguage updates DataStore and flow emits new language`() = runTest {
         val newLanguage = "en Us"
-        val expectedUserData = initialUserData.copy(language = newLanguage)
+        val expectedUserData = initialUserSettings.copy(language = newLanguage)
         val repository = getDataStore("userdata_setLanguage")
 
         repository.setLanguage(newLanguage)
 
-        val updatedUserData = repository.userData.first()
+        val updatedUserData = repository.userPreferences.first()
         assertEquals(expectedUserData, updatedUserData)
     }
 }
