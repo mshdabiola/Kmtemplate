@@ -23,27 +23,8 @@ import io.ktor.client.request.get
 import io.ktor.client.statement.HttpResponse
 import io.ktor.http.isSuccess
 
-internal class NetworkDataSource(
-    private val httpClient: HttpClient,
-) : INetworkDataSource {
-    override suspend fun goToGoogle(): String {
-        val response: HttpResponse = httpClient.get("http://google.com")
-        if (!response.status.isSuccess()) {
-            throw ClientRequestException(response, "HTTP Error: ${response.status.value}")
-        }
-        return response.body()
-    }
 
-    override suspend fun getLatestKmtemplateRelease(): GitHubReleaseInfo {
-        val response: HttpResponse = httpClient.get(
-            "https://api.github.com/repos/mshdabiola/kmtemplate/releases/latest")
-        if (!response.status.isSuccess()) {
-            // You might want to throw a more specific exception or return a sealed result type
-            // to handle different error cases (e.g., 404 Not Found if no releases exist)
-            throw ClientRequestException(response,
-                "Failed to fetch latest release: ${response.status.value}")
-        }
-        // Assumes your HttpClient is configured with ContentNegotiation and Json { ignoreUnknownKeys = true }
-        return response.body()
-    }
+ interface  NetworkDataSource {
+     suspend fun goToGoogle(): String
+     suspend fun getLatestKmtemplateRelease(): GitHubReleaseInfo
 }

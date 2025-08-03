@@ -13,11 +13,4 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.mshdabiola.network
-
-import com.mshdabiola.network.model.GitHubReleaseInfo
-
-interface INetworkDataSource {
-    suspend fun goToGoogle(): String
-    suspend fun getLatestKmtemplateRelease(): GitHubReleaseInfo
-}
+package com.mshdabiola.data

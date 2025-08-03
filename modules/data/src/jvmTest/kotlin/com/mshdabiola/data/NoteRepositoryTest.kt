@@ -13,17 +13,4 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.mshdabiola.network.di
-
-import com.mshdabiola.network.NetworkDataSource
-import com.mshdabiola.network.RealNetworkDataSource
-import org.koin.core.module.dsl.singleOf
-import org.koin.dsl.bind
-import org.koin.dsl.module
-
-val networkModule =
-    module {
-
-        singleOf(::httpClient)
-        singleOf(::RealNetworkDataSource) bind NetworkDataSource::class
-    }
+package com.mshdabiola.data
