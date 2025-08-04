@@ -26,6 +26,8 @@ kotlin {
     sourceSets {
          commonMain.dependencies {
                 api(compose.components.resources)
+             implementation(libs.compottie)
+             implementation(libs.compottie.resources)
             }
     }
 }
