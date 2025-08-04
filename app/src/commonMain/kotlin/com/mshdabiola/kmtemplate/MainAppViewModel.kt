@@ -51,8 +51,8 @@ class MainAppViewModel(
         }
     }
 
-    fun log(message: String){
-        logger.i (message)
+    fun log(message: String) {
+        logger.i(message)
     }
 }
 

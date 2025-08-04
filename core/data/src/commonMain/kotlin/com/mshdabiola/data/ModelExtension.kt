@@ -25,8 +25,7 @@ fun UserPreferences.asUserSettings() = UserSettings(
     shouldShowGradientBackground = shouldShowGradientBackground,
     language = language,
     darkThemeConfig = DarkThemeConfig.entries
-        .getOrElse(darkThemeConfig)
-        { DarkThemeConfig.FOLLOW_SYSTEM },
+        .getOrElse(darkThemeConfig) { DarkThemeConfig.FOLLOW_SYSTEM },
     contrast = contrast,
 )
 
