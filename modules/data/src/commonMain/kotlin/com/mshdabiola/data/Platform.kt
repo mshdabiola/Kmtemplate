@@ -15,9 +15,23 @@
  */
 package com.mshdabiola.data
 
-interface Platform {
-    val name: String
-    val buildType: String
+
+sealed class Platform(val identifier: String) {
+    object Ios : Platform(identifier = "Ios")
+    object Web : Platform(identifier ="Web")
+    data class Desktop(val os: String,val javaVersion: String) : Platform("Desktop")
+    sealed class Android(open val name: String, open val sdk: Int) : Platform(identifier ="Android") {
+        data class FossReliant(
+            override val name: String,
+            override val sdk: Int,
+        ) : Android(name, sdk)
+
+        data class GooglePlay(
+            override val name: String,
+            override val sdk: Int,
+            ) : Android(name, sdk)
+
+    }
 }
 
 expect fun getPlatform(): Platform
