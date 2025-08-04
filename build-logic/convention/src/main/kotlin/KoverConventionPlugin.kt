@@ -72,6 +72,8 @@ class KoverConventionPlugin : Plugin<Project> {
                                 "*.database.*Database*",
                                 // Serializers
                                 "*UserDataJsonSerializer*",
+                                // Extension functions/classes
+                                "*Extension*",
                             )
                             packages(
                                 // Dependency injection
