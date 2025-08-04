@@ -53,7 +53,7 @@ class NetworkDataSourceTest {
         }
 
         val httpClient = HttpClient(mockEngine)
-        val networkDataSource = NetworkDataSource(httpClient)
+        val networkDataSource = RealNetworkDataSource(httpClient)
         val result = networkDataSource.goToGoogle()
 
         assertEquals(expectedResponseContent, result)
@@ -72,7 +72,7 @@ class NetworkDataSourceTest {
         }
 
         val httpClient = HttpClient(mockEngine)
-        val networkDataSource = NetworkDataSource(httpClient)
+        val networkDataSource = RealNetworkDataSource(httpClient)
 
         try {
             networkDataSource.goToGoogle()
@@ -93,7 +93,7 @@ class NetworkDataSourceTest {
         }
 
         val httpClient = HttpClient(mockEngine)
-        val networkDataSource = NetworkDataSource(httpClient)
+        val networkDataSource = RealNetworkDataSource(httpClient)
 
         try {
             networkDataSource.goToGoogle()
@@ -140,7 +140,7 @@ class NetworkDataSourceTest {
             }
         }
 
-        val networkDataSource = NetworkDataSource(httpClient)
+        val networkDataSource = RealNetworkDataSource(httpClient)
         val result = networkDataSource.getLatestKmtemplateRelease()
 
         assertNotNull(result)
@@ -181,7 +181,7 @@ class NetworkDataSourceTest {
                 json(testJson)
             }
         }
-        val networkDataSource = NetworkDataSource(httpClient)
+        val networkDataSource = RealNetworkDataSource(httpClient)
 
         try {
             networkDataSource.getLatestKmtemplateRelease()
@@ -206,7 +206,7 @@ class NetworkDataSourceTest {
                 json(testJson)
             }
         }
-        val networkDataSource = NetworkDataSource(httpClient)
+        val networkDataSource = RealNetworkDataSource(httpClient)
 
         try {
             networkDataSource.getLatestKmtemplateRelease()
