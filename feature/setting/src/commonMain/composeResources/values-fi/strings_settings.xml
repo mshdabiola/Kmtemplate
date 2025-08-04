@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Designed and developed by 2024 mshdabiola (lawal abiola)
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources>
+    <string name="screen_name">Asetukset</string>
+    <string name="version">Versio</string>
+    <string name="version_code">Version koodi</string>
+    <string name="last_update">Viimeisin päivitys</string>
+    <string name="about">Kmtemplate: Kotlin Multiplatform -projekteillesi tarkoitettu aloituspiste, joka tarjoaa vankan perustan ja parhaat käytännöt.</string>
+    <string name="developed_by">Kehittäjä</string>
+    <string name="developer">Mshdabiola</string>
+    <string name="contact_us">Ota yhteyttä</string>
+    <string name="privacy_policy">Tietosuojakäytäntö</string>
+    <string name="terms_and_condition">Käyttöehdot</string>
+    <string name="appearance_contrast_title">Kontrasti</string>
+    <string name="appearance_contrast_option_low_cd">Matala kontrasti</string>
+    <string name="appearance_contrast_option_low_label">Matala</string>
+    <string name="appearance_contrast_option_standard_cd">Standardikontrasti</string>
+    <string name="appearance_contrast_option_standard_label">Standardi</string>
+    <string name="appearance_contrast_option_high_cd">Korkea kontrasti</string>
+    <string name="appearance_contrast_option_high_label">Korkea</string>
+    <string name="appearance_background_title">Tausta</string>
+    <string name="appearance_gradient_background_text">Näytä liukuväritausta</string>
+    <string name="appearance_dark_mode_title">Tumma tila</string>
+    <string name="appearance_select_contrast_low">Valitse matala</string>
+    <string name="appearance_select_contrast_standard">Valitse standardi</string>
+    <string name="appearance_select_contrast_high">Valitse korkea</string>
+    <string name="faq_kmp_question">Mikä on Kotlin Multiplatform (KMP)?</string>
+    <string name="faq_kmp_answer">Kotlin Multiplatformin avulla voit jakaa koodia (kuten liiketoimintalogiikkaa, datakerroksia ja muuta) eri alustojen välillä, kuten Android, iOS, Web, Desktop ja palvelinpuoli, samalla kun kirjoitat alustakohtaista koodia vain tarvittaessa (esim. käyttöliittymää tai alustakohtaisia API:ita varten).</string>
+    <string name="faq_template_help_question">Miten tämä malli auttaa KMP-kehityksessä?</string>
+    <string name="faq_template_help_answer">Tämä malli tarjoaa esikonfiguroidun projektirakenteen jaetuilla moduuleilla, alustakohtaisilla moduuleilla ja esimerkeillä siitä, miten toteuttaa yleisiä malleja, kuten jaettuja ViewModel-malleja, datarepositorioita ja Compose Multiplatformia käyttöliittymää varten.</string>
+    <string name="faq_share_ui_question">Voinko jakaa käyttöliittymäkoodia KMP:llä?</string>
+    <string name="faq_share_ui_answer">Kyllä, Compose Multiplatformin avulla voit kirjoittaa käyttöliittymäsi kerran Jetpack Composea käyttäen ja ottaa sen käyttöön Androidissa, Desktopissa (Windows, macOS, Linux), iOS:ssä (Alpha) ja Webissä (Kokeellinen). Tämä malli käyttää Compose Multiplatformia.</string>
+    <string name="faq_benefits_question">Mitkä ovat KMP:n käytön edut?</string>
+    <string name="faq_benefits_answer">Tärkeimmät edut ovat: \n- Koodin uudelleenkäyttö: Kirjoita yhteinen logiikka kerran ja jaa se.\n- Johdonmukaisuus: Varmista johdonmukainen toiminta kaikilla alustoilla.\n- Nopeampi kehitys: Vähennä päällekkäistä työtä.\n- Natiivi suorituskyky: Jaettu Kotlin-koodi kääntyy natiiviksi koodiksi kullekin alustalle.\n- Joustavuus: Valitse, kuinka paljon koodia jaat.</string>
+    <string name="faq_find_shared_code_question">Mistä löydän jaetun koodin tästä mallista?</string>
+    <string name="faq_find_shared_code_answer">Jaettu koodi sijaitsee tyypillisesti `commonMain`-nimisissä moduuleissa jaetuissa lähdejoukoissa (esim. `shared/src/commonMain`, `features/featureName/src/commonMain`). Alustakohtainen koodi sijaitsee vastaavissa alustan lähdejoukoissa, kuten `androidMain` tai `iosMain`.</string>
+    <string name="faq_empty_state">UKK-osio on tällä hetkellä tyhjä.</string>
+    <string name="faq_icon_cd_collapse">Kutista</string>
+    <string name="faq_icon_cd_expand">Laajenna</string>
+    <string name="faq_preview_shared_code_question">Mistä löydän jaetun koodin tästä mallista?</string>
+    <string name="faq_preview_shared_code_answer_collapsed">Jaettu koodi sijaitsee tyypillisesti nimetyissä moduuleissa...</string>
+    <string name="faq_preview_shared_code_answer_expanded">Jaettu koodi sijaitsee tyypillisesti `commonMain`-nimisissä moduuleissa...</string>
+
+    <string-array name="segment">
+        <item>Yleistä</item>
+        <item>Tuki</item>
+    </string-array>
+
+    <string-array name="general">
+        <item>Ulkoasu</item>
+        <item>Kieli</item>
+    </string-array>
+
+    <string-array name="support">
+        <item>Ilmoita ongelmasta</item>
+        <item>UKK</item>
+        <item>Tietoja</item>
+    </string-array>
+
+    <string-array name="theme">
+        <item>Oletus</item>
+        <item>Vihreä</item>
+    </string-array>
+
+    <string-array name="daynight">
+        <item>Seuraa järjestelmää</item>
+        <item>Vaalea</item>
+        <item>Tumma</item>
+    </string-array>
+</resources>

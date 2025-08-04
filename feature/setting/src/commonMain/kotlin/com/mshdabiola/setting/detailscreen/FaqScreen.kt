@@ -44,6 +44,24 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.mshdabiola.designsystem.drawable.KmtIcons
 import com.mshdabiola.designsystem.theme.KmtTheme
+import kmtemplate.feature.setting.generated.resources.Res
+import kmtemplate.feature.setting.generated.resources.faq_benefits_answer
+import kmtemplate.feature.setting.generated.resources.faq_benefits_question
+import kmtemplate.feature.setting.generated.resources.faq_empty_state
+import kmtemplate.feature.setting.generated.resources.faq_find_shared_code_answer
+import kmtemplate.feature.setting.generated.resources.faq_find_shared_code_question
+import kmtemplate.feature.setting.generated.resources.faq_icon_cd_collapse
+import kmtemplate.feature.setting.generated.resources.faq_icon_cd_expand
+import kmtemplate.feature.setting.generated.resources.faq_kmp_answer
+import kmtemplate.feature.setting.generated.resources.faq_kmp_question
+import kmtemplate.feature.setting.generated.resources.faq_preview_shared_code_answer_collapsed
+import kmtemplate.feature.setting.generated.resources.faq_preview_shared_code_answer_expanded
+import kmtemplate.feature.setting.generated.resources.faq_preview_shared_code_question
+import kmtemplate.feature.setting.generated.resources.faq_share_ui_answer
+import kmtemplate.feature.setting.generated.resources.faq_share_ui_question
+import kmtemplate.feature.setting.generated.resources.faq_template_help_answer
+import kmtemplate.feature.setting.generated.resources.faq_template_help_question
+import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 data class FaqItem(
@@ -59,43 +77,28 @@ fun FaqScreen(
     val questions = listOf(
         FaqItem(
             id = 1,
-            question = "What is Kotlin Multiplatform (KMP)?",
-            answer = "Kotlin Multiplatform allows you to share code " +
-                "(like business logic, data layers, and more) across different platforms such as" +
-                " Android, iOS, Web, Desktop, and Server-side, all while writing platform-specific " +
-                "code only where necessary (e.g., for UI or platform-specific APIs).",
+            question = stringResource(Res.string.faq_kmp_question),
+            answer = stringResource(Res.string.faq_kmp_answer),
         ),
         FaqItem(
             id = 2,
-            question = "How does this template help with KMP development?",
-            answer = "This template provides a pre-configured project structure" +
-                " with shared modules, platform-specific modules, and examples of how to implement" +
-                " common patterns like shared ViewModels, data repositories, and Compose Multiplatform for UI.",
+            question = stringResource(Res.string.faq_template_help_question),
+            answer = stringResource(Res.string.faq_template_help_answer),
         ),
         FaqItem(
             id = 3,
-            question = "Can I share UI code with KMP?",
-            answer = "Yes, with Compose Multiplatform, you can write your UI" +
-                " once using Jetpack Compose and deploy it on Android, Desktop (Windows, macOS, Linux)," +
-                " iOS (Alpha), and Web (Experimental). This template utilizes Compose Multiplatform.",
+            question = stringResource(Res.string.faq_share_ui_question),
+            answer = stringResource(Res.string.faq_share_ui_answer),
         ),
         FaqItem(
             id = 4,
-            question = "What are the benefits of using KMP?",
-            answer = "Key benefits include: \n" +
-                "- Code Reuse: Write common logic once and share it.\n" +
-                "- Consistency: Ensure consistent behavior across platforms.\n" +
-                "- Faster Development: Reduce redundant work.\n" +
-                "- Native Performance: Shared Kotlin code compiles to native code for each platform.\n" +
-                "- Flexibility: Choose how much code to share.",
+            question = stringResource(Res.string.faq_benefits_question),
+            answer = stringResource(Res.string.faq_benefits_answer),
         ),
         FaqItem(
             id = 5,
-            question = "Where can I find the shared code in this template?",
-            answer = "Shared code is typically located in modules named " +
-                "`commonMain` within shared source sets (e.g., `shared/src/commonMain`," +
-                " `features/featureName/src/commonMain`). Platform-specific code resides " +
-                "in corresponding platform source sets like `androidMain` or `iosMain`.",
+            question = stringResource(Res.string.faq_find_shared_code_question),
+            answer = stringResource(Res.string.faq_find_shared_code_answer),
         ),
     )
 
@@ -108,7 +111,7 @@ fun FaqScreen(
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             Text(
-                text = "No FAQs available at the moment.",
+                text = stringResource(Res.string.faq_empty_state),
                 style = MaterialTheme.typography.bodyLarge,
                 modifier = Modifier.testTag(FaqScreenTestTags.EMPTY_STATE_TEXT),
             )
@@ -164,7 +167,11 @@ fun FaqListItem(
                 Spacer(modifier = Modifier.width(8.dp))
                 Icon(
                     imageVector = if (expanded) KmtIcons.ExpandLess else KmtIcons.ExpandMore,
-                    contentDescription = if (expanded) "Collapse" else "Expand",
+                    contentDescription = if (expanded) {
+                        stringResource(Res.string.faq_icon_cd_collapse)
+                    } else {
+                        stringResource(Res.string.faq_icon_cd_expand)
+                    },
                     modifier = Modifier.testTag("${FaqListItemTestTags.EXPAND_ICON_PREFIX}${faqItem.id}"),
                 )
             }
@@ -199,8 +206,8 @@ fun FaqListItemCollapsedPreview() {
         FaqListItem(
             faqItem = FaqItem(
                 id = 5,
-                question = "Where can I find the shared code in this template?",
-                answer = "Shared code is typically located in modules named...",
+                question = stringResource(Res.string.faq_preview_shared_code_question),
+                answer = stringResource(Res.string.faq_preview_shared_code_answer_collapsed),
             ),
         )
     }
@@ -212,8 +219,8 @@ fun FaqListItemExpandedPreview() {
     KmtTheme {
         val item = FaqItem(
             id = 5,
-            question = "Where can I find the shared code in this template?",
-            answer = "Shared code is typically located in modules named `commonMain`...",
+            question = stringResource(Res.string.faq_preview_shared_code_question),
+            answer = stringResource(Res.string.faq_preview_shared_code_answer_expanded),
         )
         FaqListItem(faqItem = item)
     }

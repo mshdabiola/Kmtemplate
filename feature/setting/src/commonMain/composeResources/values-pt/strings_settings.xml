@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Designed and developed by 2024 mshdabiola (lawal abiola)
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources>
+    <string name="screen_name">Configurações</string>
+    <string name="version">Versão</string>
+    <string name="version_code">Código da versão</string>
+    <string name="last_update">Última atualização</string>
+    <string name="about">Kmtemplate: Um ponto de partida para seus projetos Kotlin Multiplatform, oferecendo uma base sólida e as melhores práticas.</string>
+    <string name="developed_by">Desenvolvido por</string>
+    <string name="developer">Mshdabiola</string>
+    <string name="contact_us">Fale Conosco</string>
+    <string name="privacy_policy">Política de Privacidade</string>
+    <string name="terms_and_condition">Termos e Condições</string>
+    <string name="appearance_contrast_title">Contraste</string>
+    <string name="appearance_contrast_option_low_cd">Baixo contraste</string>
+    <string name="appearance_contrast_option_low_label">Baixo</string>
+    <string name="appearance_contrast_option_standard_cd">Contraste padrão</string>
+    <string name="appearance_contrast_option_standard_label">Padrão</string>
+    <string name="appearance_contrast_option_high_cd">Alto contraste</string>
+    <string name="appearance_contrast_option_high_label">Alto</string>
+    <string name="appearance_background_title">Plano de Fundo</string>
+    <string name="appearance_gradient_background_text">Mostrar Plano de Fundo Gradiente</string>
+    <string name="appearance_dark_mode_title">Modo Escuro</string>
+    <string name="appearance_select_contrast_low">Selecionar Baixo</string>
+    <string name="appearance_select_contrast_standard">Selecionar Padrão</string>
+    <string name="appearance_select_contrast_high">Selecionar Alto</string>
+    <string name="faq_kmp_question">O que é Kotlin Multiplatform (KMP)?</string>
+    <string name="faq_kmp_answer">Kotlin Multiplatform permite que você compartilhe código (como lógica de negócios, camadas de dados e mais) entre diferentes plataformas, como Android, iOS, Web, Desktop e Server-side, enquanto escreve código específico da plataforma apenas onde for necessário (por exemplo, para a interface do usuário ou APIs específicas da plataforma).</string>
+    <string name="faq_template_help_question">Como este modelo ajuda no desenvolvimento de KMP?</string>
+    <string name="faq_template_help_answer">Este modelo fornece uma estrutura de projeto pré-configurada com módulos compartilhados, módulos específicos da plataforma e exemplos de como implementar padrões comuns como ViewModels compartilhados, repositórios de dados e Compose Multiplatform para a interface do usuário.</string>
+    <string name="faq_share_ui_question">Posso compartilhar código de UI com KMP?</string>
+    <string name="faq_share_ui_answer">Sim, com o Compose Multiplatform, você pode escrever sua interface do usuário uma vez usando o Jetpack Compose e implantá-la em Android, Desktop (Windows, macOS, Linux), iOS (Alpha) e Web (Experimental). Este modelo utiliza o Compose Multiplatform.</string>
+    <string name="faq_benefits_question">Quais são os benefícios de usar KMP?</string>
+    <string name="faq_benefits_answer">Os principais benefícios incluem: \n- Reutilização de Código: Escreva a lógica comum uma vez e compartilhe-a.\n- Consistência: Garanta um comportamento consistente entre as plataformas.\n- Desenvolvimento Mais Rápido: Reduza o trabalho redundante.\n- Desempenho Nativo: O código Kotlin compartilhado é compilado para código nativo para cada plataforma.\n- Flexibilidade: Escolha quanto código compartilhar.</string>
+    <string name="faq_find_shared_code_question">Onde posso encontrar o código compartilhado neste modelo?</string>
+    <string name="faq_find_shared_code_answer">O código compartilhado geralmente está localizado em módulos chamados `commonMain` dentro de conjuntos de fontes compartilhados (por exemplo, `shared/src/commonMain`, `features/featureName/src/commonMain`). O código específico da plataforma reside em conjuntos de fontes de plataforma correspondentes, como `androidMain` ou `iosMain`.</string>
+    <string name="faq_empty_state">Nenhuma FAQ disponível no momento.</string>
+    <string name="faq_icon_cd_collapse">Recolher</string>
+    <string name="faq_icon_cd_expand">Expandir</string>
+    <string name="faq_preview_shared_code_question">Onde posso encontrar o código compartilhado neste modelo?</string>
+    <string name="faq_preview_shared_code_answer_collapsed">O código compartilhado geralmente está localizado em módulos chamados...</string>
+    <string name="faq_preview_shared_code_answer_expanded">O código compartilhado geralmente está localizado em módulos chamados `commonMain`...</string>
+
+    <string-array name="segment">
+        <item>Geral</item>
+        <item>Suporte</item>
+    </string-array>
+
+    <string-array name="general">
+        <item>Aparência</item>
+        <item>Idioma</item>
+    </string-array>
+
+    <string-array name="support">
+        <item>Reportar um problema</item>
+        <item>FAQ</item>
+        <item>Sobre</item>
+    </string-array>
+
+    <string-array name="theme">
+        <item>Padrão</item>
+        <item>Verde</item>
+    </string-array>
+
+    <string-array name="daynight">
+        <item>Seguir o sistema</item>
+        <item>Claro</item>
+        <item>Escuro</item>
+    </string-array>
+</resources>

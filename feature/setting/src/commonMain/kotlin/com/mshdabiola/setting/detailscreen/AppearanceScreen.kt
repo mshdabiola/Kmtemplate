@@ -50,8 +50,22 @@ import com.mshdabiola.designsystem.theme.KmtTheme // For Preview
 import com.mshdabiola.model.DarkThemeConfig
 import com.mshdabiola.setting.SettingState
 import kmtemplate.feature.setting.generated.resources.Res
+import kmtemplate.feature.setting.generated.resources.appearance_background_title
+import kmtemplate.feature.setting.generated.resources.appearance_contrast_option_high_cd
+import kmtemplate.feature.setting.generated.resources.appearance_contrast_option_high_label
+import kmtemplate.feature.setting.generated.resources.appearance_contrast_option_low_cd
+import kmtemplate.feature.setting.generated.resources.appearance_contrast_option_low_label
+import kmtemplate.feature.setting.generated.resources.appearance_contrast_option_standard_cd
+import kmtemplate.feature.setting.generated.resources.appearance_contrast_option_standard_label
+import kmtemplate.feature.setting.generated.resources.appearance_contrast_title
+import kmtemplate.feature.setting.generated.resources.appearance_dark_mode_title
+import kmtemplate.feature.setting.generated.resources.appearance_gradient_background_text
+import kmtemplate.feature.setting.generated.resources.appearance_select_contrast_high
+import kmtemplate.feature.setting.generated.resources.appearance_select_contrast_low
+import kmtemplate.feature.setting.generated.resources.appearance_select_contrast_standard
 import kmtemplate.feature.setting.generated.resources.daynight
 import org.jetbrains.compose.resources.stringArrayResource
+import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 object AppearanceScreenTestTags {
@@ -90,20 +104,23 @@ fun AppearanceScreen(
         ContrastOption(
             id = 0,
             icon = KmtIcons.LightMode,
-            contentDescription = "Low Contrast",
-            label = "Low",
+            contentDescription = stringResource(Res.string.appearance_contrast_option_low_cd),
+            label = stringResource(Res.string.appearance_contrast_option_low_label),
+            clickLabel = stringResource(Res.string.appearance_select_contrast_low),
         ),
         ContrastOption(
             id = 1,
             icon = KmtIcons.Contrast,
-            contentDescription = "Standard Contrast",
-            label = "Standard",
+            contentDescription = stringResource(Res.string.appearance_contrast_option_standard_cd),
+            label = stringResource(Res.string.appearance_contrast_option_standard_label),
+            clickLabel = stringResource(Res.string.appearance_select_contrast_standard),
         ),
         ContrastOption(
             id = 2,
             icon = KmtIcons.DarkMode,
-            contentDescription = "High Contrast",
-            label = "High",
+            contentDescription = stringResource(Res.string.appearance_contrast_option_high_cd),
+            label = stringResource(Res.string.appearance_contrast_option_high_label),
+            clickLabel = stringResource(Res.string.appearance_select_contrast_high),
         ),
     )
     val dayNightOptions = stringArrayResource(Res.array.daynight)
@@ -115,7 +132,7 @@ fun AppearanceScreen(
             .testTag(AppearanceScreenTestTags.SCREEN_ROOT),
     ) {
         Text(
-            text = "Contrast",
+            text = stringResource(Res.string.appearance_contrast_title),
             style = MaterialTheme.typography.titleLarge,
             color = MaterialTheme.colorScheme.onSurface,
             modifier = Modifier
@@ -132,7 +149,7 @@ fun AppearanceScreen(
         Spacer(modifier = Modifier.height(24.dp))
 
         Text(
-            text = "Background",
+            text = stringResource(Res.string.appearance_background_title),
             style = MaterialTheme.typography.titleLarge,
             color = MaterialTheme.colorScheme.onSurface,
             modifier = Modifier
@@ -148,7 +165,7 @@ fun AppearanceScreen(
             verticalAlignment = Alignment.CenterVertically,
         ) {
             Text(
-                text = "Show Gradient Background",
+                text = stringResource(Res.string.appearance_gradient_background_text),
                 modifier = Modifier.weight(1f)
                     .testTag(AppearanceScreenTestTags.GRADIENT_BACKGROUND_TEXT),
                 style = MaterialTheme.typography.bodyLarge,
@@ -164,7 +181,7 @@ fun AppearanceScreen(
         Spacer(modifier = Modifier.height(24.dp))
 
         Text(
-            text = "Dark Mode",
+            text = stringResource(Res.string.appearance_dark_mode_title),
             style = MaterialTheme.typography.titleLarge,
             color = MaterialTheme.colorScheme.onSurface,
             modifier = Modifier
@@ -213,6 +230,7 @@ data class ContrastOption(
     val icon: ImageVector,
     val contentDescription: String,
     val label: String,
+    val clickLabel: String,
 )
 
 @Composable
@@ -250,7 +268,7 @@ fun ContrastTimeline(
                     .clickable(
                         onClick = { onOptionSelected(option.id) },
                         role = Role.RadioButton,
-                        onClickLabel = "Select ${option.label}",
+                        onClickLabel = option.clickLabel,
                     )
                     .padding(horizontal = 4.dp)
                     .testTag(ContrastTimelineTestTags.optionItem(option.id)),
@@ -332,18 +350,21 @@ fun ContrastTimelinePreview() {
             icon = KmtIcons.LightMode,
             contentDescription = "Low Contrast",
             label = "Low",
+            clickLabel = "Select Low",
         ),
         ContrastOption(
             id = 1,
             icon = KmtIcons.Contrast,
             contentDescription = "Standard Contrast",
             label = "Standard",
+            clickLabel = "Select Standard",
         ),
         ContrastOption(
             id = 2,
             icon = KmtIcons.DarkMode,
             contentDescription = "High Contrast",
             label = "High",
+            clickLabel = "Select High",
         ),
     )
     KmtTheme {
