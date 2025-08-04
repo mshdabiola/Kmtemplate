@@ -19,8 +19,8 @@
     <string name="settings_label">Asetukset</string>
     <string name="rail_state_expanded">Laajennettu</string>
     <string name="rail_state_collapsed">Kutistettu</string>
-    <string name="rail_action_collapse">Kutista rail</string>
-    <string name="rail_action_expand">Laajenna rail</string>
+    <string name="rail_action_collapse">Kutista sivupalkki</string>
+    <string name="rail_action_expand">Laajenna sivupalkki</string>
     <string name="brand_content_description">Brändi</string>
     <string name="add_content_description">Lisää</string>
     <string name="fab_add_note_text">Lisää muistiinpano</string>
