@@ -37,6 +37,8 @@ import com.mshdabiola.designsystem.drawable.KmtIcons
 import com.mshdabiola.detail.navigation.Detail
 import com.mshdabiola.ui.LocalNavAnimatedContentScope
 import com.mshdabiola.ui.LocalSharedTransitionScope
+import kmtemplate.feature.detail.generated.resources.Res
+import org.jetbrains.compose.resources.stringResource
 
 // Define a TestTags object
 object DetailScreenTestTags {
@@ -70,13 +72,13 @@ internal fun DetailScreen(
             topBar = {
                 KmtTopAppBar(
                     modifier = Modifier.testTag(DetailScreenTestTags.TOP_APP_BAR),
-                    title = { Text("Note") },
+                    title = { Text(stringResource(Res.string.detail_screen_title)) },
                     actions = {
                         KmtIconButton(
                             onClick = onDelete,
                             modifier = Modifier.testTag(DetailScreenTestTags.DELETE_BUTTON),
                         ) {
-                            Icon(imageVector = KmtIcons.Delete, contentDescription = "delete")
+                            Icon(imageVector = KmtIcons.Delete, contentDescription = stringResource(Res.string.detail_delete_icon_content_description))
                         }
                     },
                     navigationIcon = {
@@ -84,7 +86,7 @@ internal fun DetailScreen(
                             onClick = onBack,
                             modifier = Modifier.testTag(DetailScreenTestTags.BACK_BUTTON),
                         ) {
-                            Icon(imageVector = KmtIcons.ArrowBack, contentDescription = "back")
+                            Icon(imageVector = KmtIcons.ArrowBack, contentDescription = stringResource(Res.string.detail_back_icon_content_description))
                         }
                     },
                 )
@@ -101,7 +103,7 @@ internal fun DetailScreen(
                         .fillMaxWidth()
                         .testTag(DetailScreenTestTags.TITLE_TEXT_FIELD),
                     state = state.title,
-                    placeholder = "Title",
+                    placeholder = stringResource(Res.string.detail_title_placeholder),
                     maxNum = TextFieldLineLimits.SingleLine,
                     imeAction = ImeAction.Next,
                 )
@@ -111,7 +113,7 @@ internal fun DetailScreen(
                         .weight(1f)
                         .testTag(DetailScreenTestTags.CONTENT_TEXT_FIELD),
                     state = state.detail,
-                    placeholder = "content",
+                    placeholder = stringResource(Res.string.detail_content_placeholder),
                 )
             }
         }
