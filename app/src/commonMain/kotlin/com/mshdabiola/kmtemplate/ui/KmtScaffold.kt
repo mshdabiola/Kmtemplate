@@ -76,6 +76,18 @@ import com.mshdabiola.main.navigation.Main
 import com.mshdabiola.setting.navigation.Setting
 import com.mshdabiola.ui.LocalSharedTransitionScope
 import com.mshdabiola.ui.SharedTransitionContainer
+import kmtemplate.app.generated.resources.Res
+import kmtemplate.app.generated.resources.add_content_description
+import kmtemplate.app.generated.resources.brand_content_description
+import kmtemplate.app.generated.resources.fab_add_note_text
+import kmtemplate.app.generated.resources.home_label
+import kmtemplate.app.generated.resources.preview_note_portrait_mode
+import kmtemplate.app.generated.resources.rail_action_collapse
+import kmtemplate.app.generated.resources.rail_action_expand
+import kmtemplate.app.generated.resources.rail_state_collapsed
+import kmtemplate.app.generated.resources.rail_state_expanded
+import kmtemplate.app.generated.resources.settings_label
+import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 // Test Tags for KmtScaffold and its inner components
@@ -127,13 +139,13 @@ fun KmtScaffold(
                 route = Main,
                 selectedIcon = KmtIcons.Home,
                 unSelectedIcon = KmtIcons.HomeOutlined,
-                label = "Home",
+                label = stringResource(Res.string.home_label),
             ),
             TopLevelRoute(
                 route = Setting,
                 selectedIcon = KmtIcons.Settings,
                 unSelectedIcon = KmtIcons.SettingsOutlined,
-                label = "Settings",
+                label = stringResource(Res.string.settings_label),
             ),
 
         )
@@ -219,9 +231,9 @@ fun KmtScaffold(
                                                     if (appState.wideNavigationRailState.currentValue ==
                                                         WideNavigationRailValue.Expanded
                                                     ) {
-                                                        "Expanded"
+                                                        stringResource(Res.string.rail_state_expanded)
                                                     } else {
-                                                        "Collapsed"
+                                                        stringResource(Res.string.rail_state_collapsed)
                                                     }
                                             }
                                             .testTag(KmtScaffoldTestTags.RAIL_TOGGLE_BUTTON),
@@ -238,9 +250,9 @@ fun KmtScaffold(
                                         if (appState.wideNavigationRailState.targetValue ==
                                             WideNavigationRailValue.Expanded
                                         ) {
-                                            Icon(KmtIcons.MenuOpen, "Collapse rail")
+                                            Icon(KmtIcons.MenuOpen, stringResource(Res.string.rail_action_collapse))
                                         } else {
-                                            Icon(KmtIcons.Menu, "Expand rail")
+                                            Icon(KmtIcons.Menu, stringResource(Res.string.rail_action_expand))
                                         }
                                     }
                                 },
@@ -348,11 +360,11 @@ fun DrawerContent(
                         .size(24.dp)
                         .testTag(DrawerContentTestTags.BRAND_ICON),
                     imageVector = KmtDrawable.brand,
-                    contentDescription = "brand",
+                    contentDescription = stringResource(Res.string.brand_content_description),
                     tint = MaterialTheme.colorScheme.primary,
                 )
                 Text(
-                    KmtStrings.brand,
+                    KmtStrings.brand, // Assuming KmtStrings.brand is already a resource or intended to be so.
                     style = MaterialTheme.typography.titleLarge,
                     modifier = Modifier.testTag(DrawerContentTestTags.BRAND_TEXT),
                     color = MaterialTheme.colorScheme.primary,
@@ -435,7 +447,7 @@ fun Fab(
             ) {
                 Icon(
                     imageVector = KmtIcons.Add,
-                    contentDescription = "add",
+                    contentDescription = stringResource(Res.string.add_content_description),
                     modifier = Modifier.testTag(FabTestTags.FAB_ADD_ICON),
                 )
             }
@@ -446,12 +458,12 @@ fun Fab(
             ) {
                 Icon(
                     imageVector = KmtIcons.Add,
-                    contentDescription = "add",
+                    contentDescription = stringResource(Res.string.add_content_description),
                     modifier = Modifier.testTag(FabTestTags.FAB_ADD_ICON),
                 )
                 Spacer(modifier = Modifier.width(ButtonDefaults.IconSpacing))
                 Text(
-                    "Add Note",
+                    stringResource(Res.string.fab_add_note_text),
                     modifier = Modifier.testTag(FabTestTags.FAB_ADD_TEXT),
                 )
             }
