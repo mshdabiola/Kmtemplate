@@ -62,10 +62,10 @@ internal class RealNetworkRepository(
     }
 
     private fun versionStringToNumber(versionString: String): Long {
-        // Remove all non-digit characters (like dots)
-        val numericString = versionString.replace(".", "")
+        // Remove all non-digit characters
+        val numericString = versionString.filter { it.isDigit() }
 
         // Convert the resulting string to an integer
-        return numericString.toLongOrNull() ?: 1
+        return numericString.toLongOrNull() ?: 0L
     }
 }
