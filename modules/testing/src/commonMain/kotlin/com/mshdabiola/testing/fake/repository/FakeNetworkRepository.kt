@@ -19,17 +19,36 @@ import com.mshdabiola.data.repository.NetworkRepository
 import com.mshdabiola.model.ReleaseInfo
 
 class FakeNetworkRepository : NetworkRepository {
+    private var nextReleaseInfo: ReleaseInfo = ReleaseInfo.Success(
+        asset ="",
+        body = "body",
+        releaseName = "releaseName",
+        tagName = "tagName"
+    )
+    private var shouldThrowError: Boolean = false
+    private var errorMessage: String = "Default error message"
 
     override suspend fun gotoGoogle(): String {
         return "got to google"
     }
 
     override suspend fun getLatestReleaseInfo(currentVersion: String): ReleaseInfo {
-        return ReleaseInfo.Success(
-            asset ="",
-            body = "body",
-            releaseName = "releaseName",
-            tagName = "tagName"
-        )
+        return if (shouldThrowError) {
+            ReleaseInfo.Error(errorMessage)
+        } else {
+            nextReleaseInfo
+        }
+    }
+
+    fun setNextReleaseInfo(expectedReleaseInfo: ReleaseInfo.Success) {
+        this.nextReleaseInfo = expectedReleaseInfo
+        this.shouldThrowError = false
+    }
+
+    fun setShouldThrowError(shouldThrow: Boolean, message: String) {
+        this.shouldThrowError = shouldThrow
+        this.errorMessage = message
+        // Optionally, clear the successful release info if an error is to be thrown
+        // this.nextReleaseInfo = ReleaseInfo.Error("Not set, will throw error")
     }
 }
