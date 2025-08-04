@@ -16,10 +16,11 @@
 package com.mshdabiola.kmtemplate.ui
 
 import androidx.compose.ui.graphics.vector.ImageVector
+import org.jetbrains.compose.resources.StringResource
 
 data class TopLevelRoute<T : Any>(
     val route: T,
     val selectedIcon: ImageVector,
     val unSelectedIcon: ImageVector,
-    val label: String,
+    val label: StringResource,
 )
