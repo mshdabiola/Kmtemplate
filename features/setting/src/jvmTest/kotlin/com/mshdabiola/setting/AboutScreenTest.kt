@@ -23,9 +23,9 @@ import androidx.compose.ui.test.performClick
 import com.mshdabiola.designsystem.theme.KmtTheme
 import com.mshdabiola.setting.detailscreen.AboutScreen
 import com.mshdabiola.setting.detailscreen.AboutScreenTestTags
+import org.junit.Assert.assertTrue // For assertTrue
 import org.junit.Rule
 import org.junit.Test
-import org.junit.Assert.assertTrue // For assertTrue
 
 class AboutScreenTest {
 
@@ -113,7 +113,7 @@ class AboutScreenTest {
                     // this test will only verify it's clickable and displayed.
                     // To truly test the openUrl, AboutScreen needs to be modified:
                     // onClick = { openUrl(privacyPolicyUrl) } in KmtTextButton for privacy policy
-                    openUrl = { url -> urlOpened = url }
+                    openUrl = { url -> urlOpened = url },
                 )
             }
         }
@@ -138,7 +138,7 @@ class AboutScreenTest {
                     // Similar to the privacy policy button, this test currently checks display and clickability.
                     // For action verification, AboutScreen needs to call openUrl from KmtTextButton's onClick.
                     // onClick = { openUrl(termsUrl) } in KmtTextButton for terms
-                    openUrl = { url -> urlOpened = url }
+                    openUrl = { url -> urlOpened = url },
                 )
             }
         }
