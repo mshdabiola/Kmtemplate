@@ -25,8 +25,8 @@ class KoverConventionPlugin : Plugin<Project> {
             pluginManager.apply(koverPlugin)
             val exclude = listOf(
                 "app",
-                "features",
-                "modules",
+                "feature",
+                "core",
                 "benchmarks",
                 "analytics",
                 "model",

@@ -13,10 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.mshdabiola.kmtemplate
+package com.mshdabiola.designsystem.drawable
 
-import java.util.Locale
+import androidx.compose.runtime.Composable
+import kmtemplate.core.designsystem.generated.resources.Res
+import kmtemplate.core.designsystem.generated.resources.brand_png
+import kmtemplate.core.designsystem.generated.resources.brand_vector
+import org.jetbrains.compose.resources.painterResource
+import org.jetbrains.compose.resources.vectorResource
 
-actual fun changeLanguage(language: String) {
-    Locale.setDefault(Locale.forLanguageTag(language))
+object KmtDrawable {
+    val brand
+        @Composable get() = vectorResource(Res.drawable.brand_vector)
+
+    val brandImage
+        @Composable get() = painterResource(Res.drawable.brand_png)
 }
