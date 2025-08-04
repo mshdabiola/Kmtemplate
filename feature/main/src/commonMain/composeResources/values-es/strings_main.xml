@@ -15,10 +15,10 @@
      limitations under the License.
 -->
 <resources>
-    <string name="features_main_title">Guardados</string>
-    <string name="features_main_loading">Cargando guardados…</string>
-    <string name="features_main_empty_error">No hay actualizaciones guardadas</string>
-    <string name="features_main_empty_description">Las actualizaciones que guardes se almacenarán aquí\npara leerlas más tarde</string>
+    <string name="features_main_title">Guardado</string>
+    <string name="features_main_loading">Cargando elementos guardados…</string>
+    <string name="features_main_empty_title">Nada que ver aquí</string>
+    <string name="features_main_empty_body">Cuando añadas elementos, aparecerán aquí.</string>
     <string name="features_main_removed">Marcador eliminado</string>
     <string name="features_main_undo">DESHACER</string>
     <string name="features_main_screen_title_home">Inicio</string>

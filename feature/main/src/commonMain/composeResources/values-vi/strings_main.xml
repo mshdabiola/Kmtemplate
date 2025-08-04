@@ -16,9 +16,9 @@
 -->
 <resources>
     <string name="features_main_title">Đã lưu</string>
-    <string name="features_main_loading">Đang tải mục đã lưu…</string>
-    <string name="features_main_empty_error">Không có cập nhật nào đã lưu</string>
-    <string name="features_main_empty_description">Các cập nhật bạn lưu sẽ được lưu trữ tại đây\nđể đọc sau</string>
+    <string name="features_main_loading">Đang tải các mục đã lưu…</string>
+    <string name="features_main_empty_title">Không có gì ở đây</string>
+    <string name="features_main_empty_body">Khi bạn thêm các mục, chúng sẽ xuất hiện ở đây.</string>
     <string name="features_main_removed">Đã xóa dấu trang</string>
     <string name="features_main_undo">HOÀN TÁC</string>
     <string name="features_main_screen_title_home">Trang chủ</string>

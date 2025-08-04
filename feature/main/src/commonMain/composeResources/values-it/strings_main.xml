@@ -16,9 +16,9 @@
 -->
 <resources>
     <string name="features_main_title">Salvati</string>
-    <string name="features_main_loading">Caricamento salvati…</string>
+    <string name="features_main_loading">Caricamento degli elementi salvati…</string>
     <string name="features_main_empty_title">Niente da vedere qui</string>
-    <string name="features_main_empty_body">Quando aggiungi elementi, appariranno qui.</string>
+    <string name="features_main_empty_body">Quando aggiungi elementi, verranno visualizzati qui.</string>
     <string name="features_main_removed">Segnalibro rimosso</string>
     <string name="features_main_undo">ANNULLA</string>
     <string name="features_main_screen_title_home">Home</string>

@@ -16,7 +16,7 @@
 -->
 <resources>
     <string name="features_main_title">Tallennetut</string>
-    <string name="features_main_loading">Ladataan tallennettuja…</string>
+    <string name="features_main_loading">Ladataan tallennettuja kohteita…</string>
     <string name="features_main_empty_title">Täällä ei ole mitään nähtävää</string>
     <string name="features_main_empty_body">Kun lisäät kohteita, ne näkyvät täällä.</string>
     <string name="features_main_removed">Kirjanmerkki poistettu</string>

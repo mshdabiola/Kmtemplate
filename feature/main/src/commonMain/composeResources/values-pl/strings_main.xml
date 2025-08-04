@@ -16,10 +16,10 @@
 -->
 <resources>
     <string name="features_main_title">Zapisane</string>
-    <string name="features_main_loading">Ładowanie zapisanych…</string>
+    <string name="features_main_loading">Ładowanie zapisanych elementów…</string>
     <string name="features_main_empty_title">Nic tu nie ma</string>
     <string name="features_main_empty_body">Gdy dodasz elementy, pojawią się tutaj.</string>
-    <string name="features_main_removed">Zakładka usunięta</string>
+    <string name="features_main_removed">Usunięto zakładkę</string>
     <string name="features_main_undo">COFNIJ</string>
-    <string name="features_main_screen_title_home">Strona główna</string>
+    <string name="features_main_screen_title_home">Główna</string>
 </resources>

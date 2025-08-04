@@ -15,11 +15,11 @@
      limitations under the License.
 -->
 <resources>
-    <string name="features_main_title">Enregistrés</string>
-    <string name="features_main_loading">Chargement des enregistrements…</string>
-    <string name="features_main_empty_error">Aucune mise à jour enregistrée</string>
-    <string name="features_main_empty_description">Les mises à jour que vous enregistrez seront stockées ici\npour les lire plus tard</string>
-    <string name="features_main_removed">Marque-page supprimé</string>
+    <string name="features_main_title">Enregistré</string>
+    <string name="features_main_loading">Chargement des éléments enregistrés…</string>
+    <string name="features_main_empty_title">Rien à voir ici</string>
+    <string name="features_main_empty_body">Lorsque vous ajoutez des éléments, ils apparaîtront ici.</string>
+    <string name="features_main_removed">Favori supprimé</string>
     <string name="features_main_undo">ANNULER</string>
     <string name="features_main_screen_title_home">Accueil</string>
 </resources>
