@@ -25,7 +25,7 @@ import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 
-internal class RealModelRepository(
+internal class RealNoteRepository(
     private val noteDao: NoteDao,
     private val ioDispatcher: CoroutineDispatcher,
 ) : NoteRepository {

@@ -16,7 +16,7 @@
 package com.mshdabiola.data.di
 
 import com.mshdabiola.data.repository.NoteRepository
-import com.mshdabiola.data.repository.RealModelRepository
+import com.mshdabiola.data.repository.RealNoteRepository
 import com.mshdabiola.database.di.databaseModule
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
@@ -30,5 +30,5 @@ actual val dataModule: Module
         module {
             includes(commonModule, databaseModule)
             single { Dispatchers.IO } bind CoroutineDispatcher::class
-            singleOf(::RealModelRepository) bind NoteRepository::class
+            singleOf(::RealNoteRepository) bind NoteRepository::class
         }

@@ -16,7 +16,7 @@
 package com.mshdabiola.data
 
 import com.mshdabiola.data.doubles.TestNoteDao
-import com.mshdabiola.data.repository.RealModelRepository
+import com.mshdabiola.data.repository.RealNoteRepository
 import com.mshdabiola.model.Note
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.first
@@ -33,13 +33,13 @@ import org.junit.Test
 class NoteRepositoryTest {
 
     private lateinit var noteDao: TestNoteDao
-    private lateinit var repository: RealModelRepository
+    private lateinit var repository: RealNoteRepository
     private val testDispatcher = StandardTestDispatcher()
 
     @Before
     fun setUp() {
         noteDao = TestNoteDao()
-        repository = RealModelRepository(noteDao, testDispatcher)
+        repository = RealNoteRepository(noteDao, testDispatcher)
     }
 
     @Test
