@@ -44,7 +44,7 @@ interface NoteDao {
     suspend fun delete(id: Long)
 
     @Upsert
-    suspend fun insertAll(users: List<NoteEntity>)
+    suspend fun insertAll(notes: List<NoteEntity>)
 
 //    @Query("SELECT * FROM note_table")
 //   suspend fun pagingSource(): PagingSource<Int, NoteEntity>

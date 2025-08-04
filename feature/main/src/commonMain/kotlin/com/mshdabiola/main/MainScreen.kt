@@ -25,6 +25,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -38,7 +39,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
-import androidx.compose.ui.platform.testTag // Import testTag
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -54,8 +55,9 @@ import io.github.alexzhirkevich.compottie.LottieCompositionSpec
 import io.github.alexzhirkevich.compottie.rememberLottieComposition
 import io.github.alexzhirkevich.compottie.rememberLottiePainter
 import kmtemplate.feature.main.generated.resources.Res
-import kmtemplate.feature.main.generated.resources.features_main_empty_description
-import kmtemplate.feature.main.generated.resources.features_main_empty_error
+import kmtemplate.feature.main.generated.resources.features_main_empty_body
+import kmtemplate.feature.main.generated.resources.features_main_empty_title
+import kmtemplate.feature.main.generated.resources.features_main_screen_title_home
 import org.jetbrains.compose.resources.stringResource
 
 // Define a TestTags object for MainScreen
@@ -89,7 +91,15 @@ internal fun MainScreen(
             KmtTopAppBar(
                 modifier = Modifier.testTag(MainScreenTestTags.TOP_APP_BAR),
                 title = {
-                    Text(if (onDrawer != null) KmtStrings.brand else "Main")
+                    Text(
+                        if (onDrawer !=
+                            null
+                        ) {
+                            KmtStrings.brand
+                        } else {
+                            stringResource(Res.string.features_main_screen_title_home)
+                        },
+                    )
                 }, // Consider adding a test tag if the title becomes dynamic
                 titleHorizontalAlignment = Alignment.Start,
                 navigationIcon = {
@@ -164,12 +174,11 @@ private fun EmptyState(modifier: Modifier = Modifier) {
         val iconTint = LocalTintTheme.current.iconTint
         Image(
             modifier = Modifier
-                .fillMaxWidth()
+                .size(200.dp)
                 .testTag(MainScreenTestTags.EMPTY_STATE_IMAGE),
             painter = rememberLottiePainter(
                 composition = composition,
                 iterations = Compottie.IterateForever,
-
             ),
             colorFilter = if (iconTint != Color.Unspecified) ColorFilter.tint(iconTint) else null,
             contentDescription = null, // Consider adding a content description for accessibility and testing
@@ -178,7 +187,7 @@ private fun EmptyState(modifier: Modifier = Modifier) {
         Spacer(modifier = Modifier.height(48.dp))
 
         Text(
-            text = stringResource(Res.string.features_main_empty_error),
+            text = stringResource(Res.string.features_main_empty_title),
             modifier = Modifier
                 .fillMaxWidth()
                 .testTag(MainScreenTestTags.EMPTY_STATE_TITLE),
@@ -190,7 +199,7 @@ private fun EmptyState(modifier: Modifier = Modifier) {
         Spacer(modifier = Modifier.height(8.dp))
 
         Text(
-            text = stringResource(Res.string.features_main_empty_description),
+            text = stringResource(Res.string.features_main_empty_body),
             modifier = Modifier
                 .fillMaxWidth()
                 .testTag(MainScreenTestTags.EMPTY_STATE_DESCRIPTION),

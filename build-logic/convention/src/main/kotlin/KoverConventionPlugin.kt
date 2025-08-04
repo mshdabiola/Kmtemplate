@@ -50,12 +50,15 @@ class KoverConventionPlugin : Plugin<Project> {
                 reports {
                     filters {
                         excludes {
-                            androidGeneratedClasses()
+//                            androidGeneratedClasses()
                             annotatedBy(
                                 // Compose previews
-                                "androidx.compose.ui.tooling.preview.Preview",
+                                "org.jetbrains.compose.ui.tooling.preview.Preview",
+                                "Preview",
                                 "androidx.compose.ui.tooling.preview.PreviewScreenSizes",
+                                "PreviewScreenSizes",
                                 "kotlinx.serialization.Serializable",
+                                "Serializable",
                             )
                             files(
                                 // Navigation helpers

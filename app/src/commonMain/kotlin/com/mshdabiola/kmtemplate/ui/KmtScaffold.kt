@@ -72,10 +72,20 @@ import com.mshdabiola.designsystem.drawable.KmtIcons
 import com.mshdabiola.designsystem.strings.KmtStrings
 import com.mshdabiola.detail.navigation.Detail
 import com.mshdabiola.detail.navigation.navigateToDetail
+import com.mshdabiola.kmtemplate.app.generated.resources.Res
+import com.mshdabiola.kmtemplate.app.generated.resources.add_content_description
+import com.mshdabiola.kmtemplate.app.generated.resources.brand_content_description
+import com.mshdabiola.kmtemplate.app.generated.resources.fab_add_note_text
+import com.mshdabiola.kmtemplate.app.generated.resources.home_label
+import com.mshdabiola.kmtemplate.app.generated.resources.rail_action_collapse
+import com.mshdabiola.kmtemplate.app.generated.resources.rail_action_expand
+import com.mshdabiola.kmtemplate.app.generated.resources.rail_state_collapsed
+import com.mshdabiola.kmtemplate.app.generated.resources.settings_label
 import com.mshdabiola.main.navigation.Main
 import com.mshdabiola.setting.navigation.Setting
 import com.mshdabiola.ui.LocalSharedTransitionScope
 import com.mshdabiola.ui.SharedTransitionContainer
+import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 // Test Tags for KmtScaffold and its inner components
@@ -127,13 +137,13 @@ fun KmtScaffold(
                 route = Main,
                 selectedIcon = KmtIcons.Home,
                 unSelectedIcon = KmtIcons.HomeOutlined,
-                label = "Home",
+                label = Res.string.home_label,
             ),
             TopLevelRoute(
                 route = Setting,
                 selectedIcon = KmtIcons.Settings,
                 unSelectedIcon = KmtIcons.SettingsOutlined,
-                label = "Settings",
+                label = Res.string.settings_label,
             ),
 
         )
@@ -211,6 +221,8 @@ fun KmtScaffold(
                                 state = appState.wideNavigationRailState,
                                 colors = WideNavigationRailDefaults.colors(containerColor = containerColor),
                                 header = {
+                                    val expand = stringResource(Res.string.settings_label)
+                                    val collapse = stringResource(Res.string.rail_state_collapsed)
                                     IconButton(
                                         modifier = Modifier
                                             .padding(start = 24.dp)
@@ -219,9 +231,9 @@ fun KmtScaffold(
                                                     if (appState.wideNavigationRailState.currentValue ==
                                                         WideNavigationRailValue.Expanded
                                                     ) {
-                                                        "Expanded"
+                                                        expand
                                                     } else {
-                                                        "Collapsed"
+                                                        collapse
                                                     }
                                             }
                                             .testTag(KmtScaffoldTestTags.RAIL_TOGGLE_BUTTON),
@@ -238,9 +250,9 @@ fun KmtScaffold(
                                         if (appState.wideNavigationRailState.targetValue ==
                                             WideNavigationRailValue.Expanded
                                         ) {
-                                            Icon(KmtIcons.MenuOpen, "Collapse rail")
+                                            Icon(KmtIcons.MenuOpen, stringResource(Res.string.rail_action_collapse))
                                         } else {
-                                            Icon(KmtIcons.Menu, "Expand rail")
+                                            Icon(KmtIcons.Menu, stringResource(Res.string.rail_action_expand))
                                         }
                                     }
                                 },
@@ -348,11 +360,11 @@ fun DrawerContent(
                         .size(24.dp)
                         .testTag(DrawerContentTestTags.BRAND_ICON),
                     imageVector = KmtDrawable.brand,
-                    contentDescription = "brand",
+                    contentDescription = stringResource(Res.string.brand_content_description),
                     tint = MaterialTheme.colorScheme.primary,
                 )
                 Text(
-                    KmtStrings.brand,
+                    KmtStrings.brand, // Assuming KmtStrings.brand is already a resource or intended to be so.
                     style = MaterialTheme.typography.titleLarge,
                     modifier = Modifier.testTag(DrawerContentTestTags.BRAND_TEXT),
                     color = MaterialTheme.colorScheme.primary,
@@ -377,7 +389,9 @@ fun DrawerContent(
 
             if (appState is Medium) {
                 WideNavigationRailItem(
-                    modifier = Modifier.testTag(DrawerContentTestTags.wideNavigationRailItemTag(item.route)),
+                    modifier = Modifier.testTag(
+                        DrawerContentTestTags.wideNavigationRailItemTag(item.route),
+                    ),
                     railExpanded = appState.wideNavigationRailState.targetValue == WideNavigationRailValue.Expanded,
                     icon = {
                         val imageVector =
@@ -386,9 +400,9 @@ fun DrawerContent(
                             } else {
                                 item.unSelectedIcon
                             }
-                        Icon(imageVector = imageVector, contentDescription = item.label)
+                        Icon(imageVector = imageVector, contentDescription = stringResource(item.label))
                     },
-                    label = { Text(item.label) },
+                    label = { Text(stringResource(item.label)) },
                     selected = appState.isInCurrentRoute(item.route),
                     onClick = {
                         appState.navigateTopRoute(item.route)
@@ -404,9 +418,9 @@ fun DrawerContent(
                             } else {
                                 item.unSelectedIcon
                             }
-                        Icon(imageVector = imageVector, contentDescription = item.label)
+                        Icon(imageVector = imageVector, contentDescription = stringResource(item.label))
                     },
-                    label = { Text(item.label) },
+                    label = { Text(stringResource(item.label)) },
                     selected = appState.isInCurrentRoute(item.route),
                     onClick = {
                         appState.navigateTopRoute(item.route)
@@ -435,7 +449,7 @@ fun Fab(
             ) {
                 Icon(
                     imageVector = KmtIcons.Add,
-                    contentDescription = "add",
+                    contentDescription = stringResource(Res.string.add_content_description),
                     modifier = Modifier.testTag(FabTestTags.FAB_ADD_ICON),
                 )
             }
@@ -446,12 +460,12 @@ fun Fab(
             ) {
                 Icon(
                     imageVector = KmtIcons.Add,
-                    contentDescription = "add",
+                    contentDescription = stringResource(Res.string.add_content_description),
                     modifier = Modifier.testTag(FabTestTags.FAB_ADD_ICON),
                 )
                 Spacer(modifier = Modifier.width(ButtonDefaults.IconSpacing))
                 Text(
-                    "Add Note",
+                    stringResource(Res.string.fab_add_note_text),
                     modifier = Modifier.testTag(FabTestTags.FAB_ADD_TEXT),
                 )
             }
