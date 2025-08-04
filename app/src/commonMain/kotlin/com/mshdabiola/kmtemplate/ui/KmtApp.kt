@@ -18,6 +18,7 @@ package com.mshdabiola.kmtemplate.ui
 import androidx.compose.animation.ExperimentalSharedTransitionApi
 import androidx.compose.animation.SharedTransitionLayout
 import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.WindowInsetsSides
@@ -32,7 +33,12 @@ import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.adaptive.currentWindowAdaptiveInfo
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.testTag // Ensure this is imported
@@ -42,14 +48,19 @@ import com.mshdabiola.analytics.AnalyticsHelper
 import com.mshdabiola.analytics.LocalAnalyticsHelper
 import com.mshdabiola.designsystem.component.KmtBackground
 import com.mshdabiola.designsystem.component.KmtGradientBackground
+import com.mshdabiola.designsystem.strings.KmtStrings
 import com.mshdabiola.designsystem.theme.GradientColors
 import com.mshdabiola.designsystem.theme.KmtTheme
 import com.mshdabiola.designsystem.theme.LocalGradientColors
 import com.mshdabiola.kmtemplate.MainActivityUiState
 import com.mshdabiola.kmtemplate.MainAppViewModel
+import com.mshdabiola.kmtemplate.changeLanguage
 import com.mshdabiola.kmtemplate.navigation.KmtNavHost
 import com.mshdabiola.model.DarkThemeConfig
+import com.mshdabiola.model.ReleaseInfo
+import com.mshdabiola.setting.navigation.getWindowRepository
 import com.mshdabiola.ui.LocalSharedTransitionScope
+import com.mshdabiola.ui.ReleaseUpdateDialog
 import com.mshdabiola.ui.semanticsCommon
 import org.koin.compose.koinInject
 import org.koin.compose.viewmodel.koinViewModel
@@ -76,19 +87,39 @@ fun KmtApp(
         windowSizeClass = windowSizeClass,
     ),
 ) {
-    val shouldShowGradientBackground = true
-
     val viewModel: MainAppViewModel = koinViewModel()
     val analyticsHelper = koinInject<AnalyticsHelper>()
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     val darkTheme = shouldUseDarkTheme(uiState)
+    val localLocalization = staticCompositionLocalOf { "en" }
+    var languageCode by remember { mutableStateOf("en") }
+    var releaseInfo by remember { mutableStateOf<ReleaseInfo.Success?>(null) }
+    val windowRepository = getWindowRepository()
+    val currentVersion = KmtStrings.versionCode
 
+    LaunchedEffect(uiState) {
+        if (uiState is MainActivityUiState.Success) {
+            val language = (uiState as MainActivityUiState.Success).userSettings.language
+            languageCode = language
+            changeLanguage(language)
+        }
+    }
+    LaunchedEffect(Unit) {
+        val info = viewModel.getLatestReleaseInfo(currentVersion).await()
+        if (info is ReleaseInfo.Success) {
+            releaseInfo = info
+        } else {
+            viewModel.log((info as ReleaseInfo.Error).message)
+        }
+    }
     SharedTransitionLayout(
         modifier = Modifier.testTag(KmtAppTestTags.APP_ROOT_LAYOUT), // Tagging the outer layout
     ) {
         CompositionLocalProvider(
             LocalAnalyticsHelper provides analyticsHelper,
             LocalSharedTransitionScope provides this,
+            localLocalization provides languageCode,
+
         ) {
             KmtTheme(
                 contrast = chooseContrast(uiState),
@@ -100,32 +131,43 @@ fun KmtApp(
                     KmtGradientBackground(
                         modifier = Modifier.testTag(KmtAppTestTags.GRADIENT_BACKGROUND),
                         gradientColors =
-                        if (shouldShowGradientBackground) {
+                        if (shouldShowGradientBackground(uiState)) {
                             LocalGradientColors.current
                         } else {
                             GradientColors()
                         },
                     ) {
-                        KmtScaffold(
-                            modifier = Modifier
-                                .semanticsCommon {}
-                                .testTag(KmtAppTestTags.MAIN_SCAFFOLD), // Tagging the KmtScaffold instance
-                            containerColor = Color.Transparent,
-                            contentWindowInsets = WindowInsets(0, 0, 0, 0),
-                            appState = appState,
-                        ) { padding ->
-                            Column(
-                                Modifier
-                                    .fillMaxSize()
-                                    .padding(padding)
-                                    .consumeWindowInsets(padding)
-                                    .windowInsetsPadding(
-                                        WindowInsets.safeDrawing.only(WindowInsetsSides.Horizontal),
-                                    ),
-                            ) {
-                                KmtNavHost(
-                                    appState = appState,
-                                    modifier = Modifier.testTag(KmtAppTestTags.NAV_HOST), // Tagging the NavHost
+                        Box {
+                            KmtScaffold(
+                                modifier = Modifier
+                                    .semanticsCommon {}
+                                    .testTag(KmtAppTestTags.MAIN_SCAFFOLD), // Tagging the KmtScaffold instance
+                                containerColor = Color.Transparent,
+                                contentWindowInsets = WindowInsets(0, 0, 0, 0),
+                                appState = appState,
+                            ) { padding ->
+                                Column(
+                                    Modifier
+                                        .fillMaxSize()
+                                        .padding(padding)
+                                        .consumeWindowInsets(padding)
+                                        .windowInsetsPadding(
+                                            WindowInsets.safeDrawing.only(WindowInsetsSides.Horizontal),
+                                        ),
+                                ) {
+                                    KmtNavHost(
+                                        appState = appState,
+                                        modifier = Modifier.testTag(KmtAppTestTags.NAV_HOST), // Tagging the NavHost
+                                    )
+                                }
+                            }
+
+                            if (releaseInfo != null) {
+                                val info = releaseInfo!!
+                                ReleaseUpdateDialog(
+                                    releaseInfo = info,
+                                    onDownloadClick = { windowRepository.openUrl(info.asset) },
+                                    onDismissRequest = { releaseInfo = null },
                                 )
                             }
                         }
@@ -140,14 +182,14 @@ fun KmtApp(
 private fun chooseContrast(uiState: MainActivityUiState): Int =
     when (uiState) {
         MainActivityUiState.Loading -> 0
-        is MainActivityUiState.Success -> uiState.userData.contrast
+        is MainActivityUiState.Success -> uiState.userSettings.contrast
     }
 
 @Composable
 private fun shouldDisableDynamicTheming(uiState: MainActivityUiState): Boolean =
     when (uiState) {
         MainActivityUiState.Loading -> false
-        is MainActivityUiState.Success -> !uiState.userData.useDynamicColor
+        is MainActivityUiState.Success -> !uiState.userSettings.useDynamicColor
     }
 
 @Composable
@@ -155,9 +197,17 @@ fun shouldUseDarkTheme(uiState: MainActivityUiState): Boolean =
     when (uiState) {
         MainActivityUiState.Loading -> isSystemInDarkTheme()
         is MainActivityUiState.Success ->
-            when (uiState.userData.darkThemeConfig) {
+            when (uiState.userSettings.darkThemeConfig) {
                 DarkThemeConfig.FOLLOW_SYSTEM -> isSystemInDarkTheme()
                 DarkThemeConfig.LIGHT -> false
                 DarkThemeConfig.DARK -> true
             }
+    }
+
+@Composable
+fun shouldShowGradientBackground(uiState: MainActivityUiState): Boolean =
+    when (uiState) {
+        MainActivityUiState.Loading -> false
+        is MainActivityUiState.Success ->
+            uiState.userSettings.shouldShowGradientBackground
     }

@@ -76,6 +76,7 @@ class AndroidLibraryConventionPlugin : Plugin<Project> {
                     commonMain.dependencies {
                         implementation(libs.findLibrary("koin.core").get())
                         implementation(libs.findLibrary("kermit").get())
+                        implementation(libs.findLibrary("kotlinx.coroutines.core").get())
                     }
 
                     androidMain.dependencies {
@@ -87,7 +88,7 @@ class AndroidLibraryConventionPlugin : Plugin<Project> {
 
                     jvmTest.dependencies {
                         implementation(kotlin("test"))
-                        implementation(project(":modules:testing"))
+                        implementation(libs.findLibrary("kotlinx.coroutines.test").get())
                     }
                 }
             }

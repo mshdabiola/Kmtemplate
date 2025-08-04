@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Designed and developed by 2024 mshdabiola (lawal abiola)
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources>
+
+    <string name="screen_name">Configuración</string>
+    <string name="version">Versión</string>
+    <string name="last_update">Última Actualización</string>
+    <string name="about">"Kmtemplate: Un punto de partida para tus proyectos Kotlin Multiplatform, proporcionando una base sólida y mejores prácticas."</string>
+    <string name="developed_by">Desarrollado por</string>
+    <string name="developer">Mshdabiola</string>
+    <string name="contact_us">Contáctanos</string>
+    <string name="privacy_policy">Política de Privacidad</string>
+    <string name="terms_and_condition">Términos y Condiciones</string>
+
+    <string-array name="segment">
+        <item>General</item>
+        <item>Soporte</item>
+    </string-array>
+
+    <string-array name="general">
+        <item>Apariencia</item>
+        <item>Idioma</item>
+    </string-array>
+
+    <string-array name="support">
+        <item>Reportar un Problema</item>
+        <item>Preguntas Frecuentes</item>
+        <item>Acerca de</item>
+    </string-array>
+
+    <string-array name="theme">
+        <item>Predeterminado</item>
+        <item>Verde</item>
+    </string-array>
+
+    <string-array name="daynight">
+        <item>Seguir sistema</item>
+        <item>Claro</item>
+        <item>Oscuro</item>
+    </string-array>
+
+</resources>

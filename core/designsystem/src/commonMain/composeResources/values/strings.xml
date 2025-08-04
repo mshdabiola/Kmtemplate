@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Designed and developed by 2024 mshdabiola (lawal abiola)
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources>
+    <string name="undefined">Undefined</string>
+    <string name="brand">Kmtemplate</string>
+    <string name="version_name">1.4.5</string>
+    <string name="version">1.4.5</string>
+    <string name="last_update">12, October 2023</string>
+    <string-array name="supported_languages_display_names">
+        <item>English</item>
+        <item>Tiếng Việt</item>
+        <item>Italiano</item>
+        <item>Deutsch</item>
+        <item>Русский</item>
+        <item>Türkçe</item>
+        <item>Suomi</item>
+        <item>Polski</item>
+        <item>Português</item>
+        <item>Français</item>
+        <item>Español</item>
+        <item>简体中文</item>
+        <item>Bahasa Indonesia</item>
+        <item>اللغة العربية</item>
+        <item>日本語</item>
+        <item>繁體中文</item>
+        <item>Українська</item>
+        <item>עברית</item>
+        <item>Azerbaijani</item>
+        <item>हिन्दी</item>
+        <item>ภาษาไทย</item>
+        <item>Nederlands</item>
+        <item>한국어</item>
+        <item>Català</item>
+        <item>فارسی</item>
+        <item>български</item>
+    </string-array>
+
+    <!-- Corresponding language codes (BCP 47 format) -->
+    <string-array name="supported_languages_codes">
+        <item>en-US</item>       <!-- English -->
+        <item>vi-VN</item>       <!-- Tiếng Việt -->
+        <item>it-IT</item>       <!-- Italiano -->
+        <item>de-DE</item>       <!-- Deutsch -->
+        <item>ru-RU</item>       <!-- Русский -->
+        <item>tr-TR</item>       <!-- Türkçe -->
+        <item>fi-FI</item>       <!-- Suomi -->
+        <item>pl-PL</item>       <!-- Polski -->
+        <item>pt-PT</item>       <!-- Português -->
+        <item>fr-FR</item>       <!-- Français -->
+        <item>es-ES</item>       <!-- Español -->
+        <item>zh-CN</item>       <!-- 简体中文 -->
+        <item>id-ID</item>       <!-- Bahasa Indonesia -->
+        <item>ar-SA</item>       <!-- اللغة العربية -->
+        <item>ja-JP</item>       <!-- 日本語 -->
+        <item>zh-Hant-TW</item>  <!-- 繁體中文 -->
+        <item>uk-UA</item>       <!-- Українська -->
+        <item>iw-IL</item>       <!-- עברית (Note: 'iw' is the old code for Hebrew, 'he' is modern but 'iw' is often used for compatibility) -->
+        <item>az-AZ</item>       <!-- Azerbaijani -->
+        <item>hi-IN</item>       <!-- हिन्दी -->
+        <item>th-TH</item>       <!-- ภาษาไทย -->
+        <item>nl-NL</item>       <!-- Nederlands -->
+        <item>ko-KR</item>       <!-- 한국어 -->
+        <item>ca-ES</item>       <!-- Català -->
+        <item>fa-AF</item>       <!-- فارسی (Persian - Afghanistan, use fa-IR for Iran if more appropriate) -->
+        <item>bg-BG</item>       <!-- български -->
+    </string-array>
+
+</resources>

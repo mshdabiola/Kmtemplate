@@ -39,21 +39,21 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "Kmtemplate"
-include(":modules:database")
-include(":modules:designsystem")
-include(":modules:model")
-include(":modules:network")
-include(":modules:data")
-include(":modules:testing")
-include(":modules:ui")
-include(":modules:analytics")
-include(":modules:datastore")
+include(":core:database")
+include(":core:designsystem")
+include(":core:model")
+include(":core:network")
+include(":core:data")
+include(":core:testing")
+include(":core:ui")
+include(":core:analytics")
+include(":core:datastore")
 
 include(":benchmarks")
 include(":app")
 
-include(":features:main")
-include(":features:detail")
-include(":features:setting")
+include(":feature:main")
+include(":feature:detail")
+include(":feature:setting")
 // include(":lint")
 include(":ktlint")

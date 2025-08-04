@@ -18,10 +18,14 @@ package com.mshdabiola.kmtemplate
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import co.touchlab.kermit.Logger
+import com.mshdabiola.data.repository.NetworkRepository
 import com.mshdabiola.data.repository.UserDataRepository
 import com.mshdabiola.kmtemplate.MainActivityUiState.Loading
 import com.mshdabiola.kmtemplate.MainActivityUiState.Success
-import com.mshdabiola.model.UserData
+import com.mshdabiola.model.ReleaseInfo
+import com.mshdabiola.model.UserSettings
+import kotlinx.coroutines.Deferred
+import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.map
@@ -29,20 +33,31 @@ import kotlinx.coroutines.flow.stateIn
 
 class MainAppViewModel(
     userDataRepository: UserDataRepository,
+    private val networkRepository: NetworkRepository,
     private val logger: Logger,
 ) : ViewModel() {
     val uiState: StateFlow<MainActivityUiState> =
-        userDataRepository.userData.map {
+        userDataRepository.userSettings.map {
             Success(it)
         }.stateIn(
             scope = viewModelScope,
             initialValue = Loading,
             started = SharingStarted.WhileSubscribed(5_000),
         )
+
+    fun getLatestReleaseInfo(currentVersion: String): Deferred<ReleaseInfo> {
+        return viewModelScope.async {
+            networkRepository.getLatestReleaseInfo(currentVersion)
+        }
+    }
+
+    fun log(message: String) {
+        logger.i(message)
+    }
 }
 
 sealed interface MainActivityUiState {
     data object Loading : MainActivityUiState
 
-    data class Success(val userData: UserData) : MainActivityUiState
+    data class Success(val userSettings: UserSettings) : MainActivityUiState
 }

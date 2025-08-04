@@ -53,7 +53,7 @@ dependencies {
     debugImplementation(libs.androidx.compose.ui.testManifest)
 
 
-    androidTestImplementation(projects.modules.testing)
+    androidTestImplementation(projects.core.testing)
     androidTestImplementation(libs.androidx.navigation.testing)
 
     baselineProfile(projects.benchmarks)
@@ -95,16 +95,16 @@ kotlin {
 //
             implementation(libs.koin.core)
 
-            implementation(projects.modules.designsystem)
-            implementation(projects.modules.data)
-            implementation(projects.modules.ui)
-            implementation(projects.modules.model)
-            implementation(projects.modules.analytics)
+            implementation(projects.core.designsystem)
+            implementation(projects.core.data)
+            implementation(projects.core.ui)
+            implementation(projects.core.model)
+            implementation(projects.core.analytics)
 
 
-            implementation(projects.features.main)
-            implementation(projects.features.detail)
-            implementation(projects.features.setting)
+            implementation(projects.feature.main)
+            implementation(projects.feature.detail)
+            implementation(projects.feature.setting)
 
             // Logger
             implementation(libs.kermit)
@@ -125,7 +125,7 @@ kotlin {
             implementation(libs.kotlinx.coroutines.swing)
         }
         jvmTest.dependencies {
-            implementation(projects.modules.testing)
+            implementation(projects.core.testing)
         }
 
     }

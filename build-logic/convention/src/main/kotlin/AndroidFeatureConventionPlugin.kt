@@ -29,7 +29,6 @@ class AndroidFeatureConventionPlugin : Plugin<Project> {
             pluginManager.apply {
                 apply("mshdabiola.android.library")
                 apply("mshdabiola.android.library.compose")
-                // apply("mshdabiola.android.library.jacoco")
                 apply("org.jetbrains.kotlin.plugin.serialization")
             }
             extensions.configure<LibraryExtension> {
@@ -41,27 +40,19 @@ class AndroidFeatureConventionPlugin : Plugin<Project> {
                 configureGradleManagedDevices(this)
             }
 
-            dependencies {
-//                add("implementation", libs.findLibrary("androidx.lifecycle.runtimeCompose").get())
-//                add("implementation", libs.findLibrary("androidx.tracing.ktx").get())
-                //   add("testImplementation", project(":modules:testing"))
-
-                add("androidTestImplementation", project(":modules:testing"))
-            }
-
             extensions.configure<KotlinMultiplatformExtension> {
                 with(sourceSets) {
-                    getByName("commonMain") {
-                        this.dependencies {
-                            implementation(project(":modules:data"))
+                    commonMain.dependencies {
+                        implementation(project(":core:data"))
+                        implementation(project(":core:ui"))
+                        implementation(project(":core:analytics"))
+                        implementation(project(":core:model"))
+                        implementation(project(":core:designsystem"))
+                        implementation(libs.findLibrary("kotlinx.serialization.json").get())
+                    }
 
-                            implementation(project(":modules:model"))
-                            implementation(project(":modules:ui"))
-
-                            implementation(project(":modules:designsystem"))
-                            implementation(project(":modules:analytics"))
-                            implementation(libs.findLibrary("kotlinx.serialization.json").get())
-                        }
+                    jvmTest.dependencies {
+                        implementation(project(":core:testing"))
                     }
                 }
             }

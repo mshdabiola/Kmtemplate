@@ -55,15 +55,6 @@ internal fun Project.configureKotlinMultiplatform(
                 }
             }
         }
-        applyDefaultHierarchyTemplate {
-            common {
-                group("nonJs") {
-                    withAndroidTarget()
-                    // withIos()
-                    withJvm()
-                }
-            }
-        }
     }
 }
 

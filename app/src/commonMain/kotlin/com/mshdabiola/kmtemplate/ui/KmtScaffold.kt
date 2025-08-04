@@ -27,6 +27,7 @@ import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -185,6 +186,7 @@ fun KmtScaffold(
                             Fab(
                                 appState = appState,
                                 modifier = Modifier
+                                    .navigationBarsPadding()
                                     .sharedBounds(
                                         sharedContentState = rememberSharedContentState("note_-1"),
                                         animatedVisibilityScope = this,
@@ -347,11 +349,13 @@ fun DrawerContent(
                         .testTag(DrawerContentTestTags.BRAND_ICON),
                     imageVector = KmtDrawable.brand,
                     contentDescription = "brand",
+                    tint = MaterialTheme.colorScheme.primary,
                 )
                 Text(
                     KmtStrings.brand,
                     style = MaterialTheme.typography.titleLarge,
                     modifier = Modifier.testTag(DrawerContentTestTags.BRAND_TEXT),
+                    color = MaterialTheme.colorScheme.primary,
                 )
             }
             Spacer(modifier = Modifier.height(64.dp))
