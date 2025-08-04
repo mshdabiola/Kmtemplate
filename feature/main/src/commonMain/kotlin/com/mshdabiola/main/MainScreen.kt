@@ -33,6 +33,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -48,11 +49,13 @@ import com.mshdabiola.designsystem.drawable.KmtIcons
 import com.mshdabiola.designsystem.strings.KmtStrings
 import com.mshdabiola.designsystem.theme.LocalTintTheme
 import com.mshdabiola.ui.NoteCard
+import io.github.alexzhirkevich.compottie.Compottie
+import io.github.alexzhirkevich.compottie.LottieCompositionSpec
+import io.github.alexzhirkevich.compottie.rememberLottieComposition
+import io.github.alexzhirkevich.compottie.rememberLottiePainter
 import kmtemplate.feature.main.generated.resources.Res
 import kmtemplate.feature.main.generated.resources.features_main_empty_description
 import kmtemplate.feature.main.generated.resources.features_main_empty_error
-import kmtemplate.feature.main.generated.resources.features_main_img_empty_bookmarks
-import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
 // Define a TestTags object for MainScreen
@@ -144,6 +147,12 @@ internal fun MainScreen(
 
 @Composable
 private fun EmptyState(modifier: Modifier = Modifier) {
+    val composition by rememberLottieComposition {
+        LottieCompositionSpec.JsonString(
+            Res.readBytes("files/empty_state.json").decodeToString(),
+        )
+    }
+
     Column(
         modifier = modifier
             .padding(16.dp)
@@ -157,7 +166,11 @@ private fun EmptyState(modifier: Modifier = Modifier) {
             modifier = Modifier
                 .fillMaxWidth()
                 .testTag(MainScreenTestTags.EMPTY_STATE_IMAGE),
-            painter = painterResource(Res.drawable.features_main_img_empty_bookmarks),
+            painter = rememberLottiePainter(
+                composition = composition,
+                iterations = Compottie.IterateForever,
+
+            ),
             colorFilter = if (iconTint != Color.Unspecified) ColorFilter.tint(iconTint) else null,
             contentDescription = null, // Consider adding a content description for accessibility and testing
         )

@@ -181,6 +181,10 @@ io.coil-kt.coil3:coil-network-ktor3:3.3.0
 io.coil-kt.coil3:coil-svg-android:3.3.0
 io.coil-kt.coil3:coil-svg:3.3.0
 io.coil-kt.coil3:coil:3.3.0
+io.github.alexzhirkevich:compottie-android:2.0.0-rc04
+io.github.alexzhirkevich:compottie-resources-android:2.0.0-rc04
+io.github.alexzhirkevich:compottie-resources:2.0.0-rc04
+io.github.alexzhirkevich:compottie:2.0.0-rc04
 io.insert-koin:koin-android:4.1.0
 io.insert-koin:koin-compose-android:4.1.0
 io.insert-koin:koin-compose-viewmodel-android:4.1.0
