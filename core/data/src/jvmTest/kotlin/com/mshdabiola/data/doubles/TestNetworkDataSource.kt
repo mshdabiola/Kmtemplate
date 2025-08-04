@@ -48,14 +48,16 @@ class TestNetworkDataSource : NetworkDataSource {
             assets = listOf(
                 Asset(
                     size = 123456,
-                    browserDownloadUrl = "https://github.com/mshdabiola/Kmtemplate/releases/download/v0.0.1/app-debug-release-unsigned-signed.apk"
+                    browserDownloadUrl = "https://github.com/mshdabiola/Kmtemplate/" +
+                        "releases/download/v0.0.1/app-debug-release-unsigned-signed.apk",
                 ),
-                 Asset(
+                Asset(
                     size = 123456,
-                    browserDownloadUrl = "https://github.com/mshdabiola/Kmtemplate/releases/download/v0.0.1/app-release-release-unsigned-signed.apk"
-                )
+                    browserDownloadUrl = "https://github.com/mshdabiola/Kmtemplate/" +
+                        "releases/download/v0.0.1/app-release-release-unsigned-signed.apk",
+                ),
             ),
-            body = "This is the initial release of Kmtemplate."
+            body = "This is the initial release of Kmtemplate.",
         )
     }
 }

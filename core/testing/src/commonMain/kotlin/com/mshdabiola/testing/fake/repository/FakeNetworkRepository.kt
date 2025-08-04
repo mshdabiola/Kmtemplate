@@ -20,10 +20,10 @@ import com.mshdabiola.model.ReleaseInfo
 
 class FakeNetworkRepository : NetworkRepository {
     private var nextReleaseInfo: ReleaseInfo = ReleaseInfo.Success(
-        asset ="",
+        asset = "",
         body = "body",
         releaseName = "releaseName",
-        tagName = "tagName"
+        tagName = "tagName",
     )
     private var shouldThrowError: Boolean = false
     private var errorMessage: String = "Default error message"

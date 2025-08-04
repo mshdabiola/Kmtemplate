@@ -111,7 +111,6 @@ fun KmtApp(
         } else {
             println(info)
         }
-
     }
     SharedTransitionLayout(
         modifier = Modifier.testTag(KmtAppTestTags.APP_ROOT_LAYOUT), // Tagging the outer layout
@@ -121,7 +120,7 @@ fun KmtApp(
             LocalSharedTransitionScope provides this,
             localLocalization provides languageCode,
 
-            ) {
+        ) {
             KmtTheme(
                 contrast = chooseContrast(uiState),
                 darkTheme = darkTheme,
@@ -132,11 +131,11 @@ fun KmtApp(
                     KmtGradientBackground(
                         modifier = Modifier.testTag(KmtAppTestTags.GRADIENT_BACKGROUND),
                         gradientColors =
-                            if (shouldShowGradientBackground(uiState)) {
-                                LocalGradientColors.current
-                            } else {
-                                GradientColors()
-                            },
+                        if (shouldShowGradientBackground(uiState)) {
+                            LocalGradientColors.current
+                        } else {
+                            GradientColors()
+                        },
                     ) {
                         Box {
                             KmtScaffold(
@@ -171,7 +170,6 @@ fun KmtApp(
                                 )
                             }
                         }
-
                     }
                 }
             }

@@ -17,7 +17,6 @@ package com.mshdabiola.data.repository
 
 import com.mshdabiola.model.ReleaseInfo
 
-
 interface NetworkRepository {
 
     suspend fun gotoGoogle(): String

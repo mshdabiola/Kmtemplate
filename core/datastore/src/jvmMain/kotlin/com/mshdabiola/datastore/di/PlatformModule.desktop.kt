@@ -20,7 +20,7 @@ import org.koin.core.module.Module
 import org.koin.core.qualifier.qualifier
 import org.koin.dsl.module
 
- val datastorePath = System.getProperty("java.io.tmpdir") + "/kmtemplate"
+val datastorePath = System.getProperty("java.io.tmpdir") + "/kmtemplate"
 actual val datastoreModule: Module
     get() =
         module {

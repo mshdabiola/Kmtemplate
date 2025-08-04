@@ -21,9 +21,9 @@ import kotlinx.serialization.Serializable
  * Class summarizing user interest data
  */
 @Serializable
- data class UserPreferences(
+data class UserPreferences(
     val contrast: Int = 0,
-    val darkThemeConfig: Int=0,
+    val darkThemeConfig: Int = 0,
     val useDynamicColor: Boolean = false,
     val shouldHideOnboarding: Boolean = false,
     val shouldShowGradientBackground: Boolean = false,

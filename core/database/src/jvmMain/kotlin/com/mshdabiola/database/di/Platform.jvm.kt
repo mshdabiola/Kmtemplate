@@ -23,7 +23,7 @@ import org.koin.core.module.Module
 import org.koin.dsl.module
 import java.io.File
 
-val databasePath=System.getProperty("java.io.tmpdir") + "/kmtemplate"
+val databasePath = System.getProperty("java.io.tmpdir") + "/kmtemplate"
 actual val databaseModule: Module
     get() =
         module {

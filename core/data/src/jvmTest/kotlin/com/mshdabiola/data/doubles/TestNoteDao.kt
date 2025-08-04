@@ -2,7 +2,8 @@
  * Designed and developed by 2024 mshdabiola (lawal abiola)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License. * You may obtain a copy of the License at
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
  * http://www.apache.org/licenses/LICENSE-2.
  *
@@ -27,30 +28,29 @@ class TestNoteDao : NoteDao {
 
     override suspend fun upsert(noteEntity: NoteEntity): Long {
         val currentNotes = notesFlow.value.toMutableList()
-        val newEntity = if (noteEntity.id ==null) noteEntity.copy(id = nextId++) else noteEntity
-        if(noteEntity.id == null) {
+        val newEntity = if (noteEntity.id == null) noteEntity.copy(id = nextId++) else noteEntity
+        if (noteEntity.id == null) {
             currentNotes.add(newEntity)
             notesFlow.value = currentNotes
-        }else{
+        } else {
             val index = currentNotes.indexOfFirst { it.id == newEntity.id }
             if (index != -1) {
                 currentNotes[index] = newEntity
-            }else{
-                currentNotes.add(index,newEntity)
+            } else {
+                currentNotes.add(index, newEntity)
             }
             notesFlow.value = currentNotes
         }
 
         return newEntity.id ?: 0L
-
     }
 
     override suspend fun insert(noteEntity: NoteEntity): Long {
-      return upsert(noteEntity)
+        return upsert(noteEntity)
     }
 
     override suspend fun update(noteEntity: NoteEntity) {
-       upsert(noteEntity)
+        upsert(noteEntity)
     }
 
     override fun getAll(): Flow<List<NoteEntity>> {

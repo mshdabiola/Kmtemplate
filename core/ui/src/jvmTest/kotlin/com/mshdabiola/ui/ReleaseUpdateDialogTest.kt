@@ -35,7 +35,7 @@ class ReleaseUpdateDialogTest {
         tagName = "v1.0.0",
         releaseName = "Test Release",
         body = "This is a test release body.",
-        asset = "test.zip"
+        asset = "test.zip",
     )
 
     @Test
@@ -44,7 +44,7 @@ class ReleaseUpdateDialogTest {
             ReleaseUpdateDialog(
                 releaseInfo = testReleaseInfo,
                 onDismissRequest = {},
-                onDownloadClick = {}
+                onDownloadClick = {},
             )
         }
 
@@ -60,7 +60,7 @@ class ReleaseUpdateDialogTest {
         // .assertTextEquals("Download") // KmtButton does not directly expose text for assertion
         composeTestRule.onNodeWithTag(RELEASE_UPDATE_DIALOG_DISMISS_BUTTON_TAG)
             .assertIsDisplayed()
-            // .assertTextEquals("Cancel") // TextButton's child Text is not directly accessible by tag here
+        // .assertTextEquals("Cancel") // TextButton's child Text is not directly accessible by tag here
     }
 
     @Test
@@ -70,7 +70,7 @@ class ReleaseUpdateDialogTest {
             ReleaseUpdateDialog(
                 releaseInfo = testReleaseInfo,
                 onDismissRequest = {},
-                onDownloadClick = { downloadClicked = true }
+                onDownloadClick = { downloadClicked = true },
             )
         }
 
@@ -85,7 +85,7 @@ class ReleaseUpdateDialogTest {
             ReleaseUpdateDialog(
                 releaseInfo = testReleaseInfo,
                 onDismissRequest = { dismissClicked = true },
-                onDownloadClick = {}
+                onDownloadClick = {},
             )
         }
 

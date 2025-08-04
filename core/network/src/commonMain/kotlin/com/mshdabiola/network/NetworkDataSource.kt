@@ -16,15 +16,9 @@
 package com.mshdabiola.network
 
 import com.mshdabiola.network.model.GitHubReleaseInfo
-import io.ktor.client.HttpClient
-import io.ktor.client.call.body
-import io.ktor.client.plugins.ClientRequestException
 import io.ktor.client.request.get
-import io.ktor.client.statement.HttpResponse
-import io.ktor.http.isSuccess
 
-
- interface  NetworkDataSource {
-     suspend fun goToGoogle(): String
-     suspend fun getLatestKmtemplateRelease(): GitHubReleaseInfo
+interface NetworkDataSource {
+    suspend fun goToGoogle(): String
+    suspend fun getLatestKmtemplateRelease(): GitHubReleaseInfo
 }

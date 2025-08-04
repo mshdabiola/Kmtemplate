@@ -21,18 +21,18 @@ import com.mshdabiola.network.NetworkDataSource
 
 internal class RealNetworkRepository(
     private val networkSource: NetworkDataSource,
-    private val platform: Platform
+    private val platform: Platform,
 ) : NetworkRepository {
     override suspend fun gotoGoogle(): String {
         return "" // Placeholder, actual implementation would call networkSource
     }
 
     override suspend fun getLatestReleaseInfo(currentVersion: String): ReleaseInfo {
-        if (platform !is Platform.Android)
+        if (platform !is Platform.Android) {
             return ReleaseInfo.Error("Device not supported")
+        }
 
         val name = "app-${platform.name}-release-unsigned-signed.apk"
-
 
         return try {
             val gitHubReleaseInfo = networkSource.getLatestKmtemplateRelease()
@@ -50,7 +50,6 @@ internal class RealNetworkRepository(
                 throw Exception("Current version is greater than latest version")
             }
 
-
             ReleaseInfo.Success(
                 tagName = gitHubReleaseInfo.tagName ?: "",
                 releaseName = gitHubReleaseInfo.releaseName ?: "",
@@ -60,7 +59,6 @@ internal class RealNetworkRepository(
         } catch (e: Exception) {
             ReleaseInfo.Error(e.message ?: "Unknown error")
         }
-
     }
 
     private fun versionStringToNumber(versionString: String): Long {

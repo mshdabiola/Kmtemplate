@@ -19,21 +19,20 @@ import com.mshdabiola.datastore.model.UserPreferences
 import com.mshdabiola.model.DarkThemeConfig
 import com.mshdabiola.model.UserSettings
 
-
-fun UserPreferences.asUserSettings()=UserSettings(
+fun UserPreferences.asUserSettings() = UserSettings(
     useDynamicColor = useDynamicColor,
     shouldHideOnboarding = shouldHideOnboarding,
     shouldShowGradientBackground = shouldShowGradientBackground,
     language = language,
     darkThemeConfig = DarkThemeConfig.entries[darkThemeConfig],
-    contrast = contrast
+    contrast = contrast,
 )
 
-fun UserSettings.asUserPreferences()= UserPreferences(
+fun UserSettings.asUserPreferences() = UserPreferences(
     useDynamicColor = useDynamicColor,
     shouldHideOnboarding = shouldHideOnboarding,
     shouldShowGradientBackground = shouldShowGradientBackground,
     language = language,
     darkThemeConfig = darkThemeConfig.ordinal,
-    contrast = contrast
+    contrast = contrast,
 )

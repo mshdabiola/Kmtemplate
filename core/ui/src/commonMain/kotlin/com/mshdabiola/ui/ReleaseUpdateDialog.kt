@@ -1,3 +1,18 @@
+/*
+ * Designed and developed by 2024 mshdabiola (lawal abiola)
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.mshdabiola.ui
 
 import androidx.compose.material3.AlertDialog
@@ -28,20 +43,20 @@ fun ReleaseUpdateDialog(
         title = {
             Text(
                 text = "New Update Available",
-                modifier = Modifier.testTag(RELEASE_UPDATE_DIALOG_TITLE_TAG)
+                modifier = Modifier.testTag(RELEASE_UPDATE_DIALOG_TITLE_TAG),
             )
         },
         text = {
             Text(
                 text = releaseInfo.body,
                 maxLines = 10,
-                modifier = Modifier.testTag(RELEASE_UPDATE_DIALOG_BODY_TAG)
+                modifier = Modifier.testTag(RELEASE_UPDATE_DIALOG_BODY_TAG),
             )
         },
         confirmButton = {
             KmtButton(
                 onClick = onDownloadClick,
-                modifier = Modifier.testTag(RELEASE_UPDATE_DIALOG_CONFIRM_BUTTON_TAG)
+                modifier = Modifier.testTag(RELEASE_UPDATE_DIALOG_CONFIRM_BUTTON_TAG),
             ) {
                 Text("Download")
             }
@@ -49,11 +64,11 @@ fun ReleaseUpdateDialog(
         dismissButton = {
             TextButton(
                 onClick = onDismissRequest,
-                modifier = Modifier.testTag(RELEASE_UPDATE_DIALOG_DISMISS_BUTTON_TAG)
+                modifier = Modifier.testTag(RELEASE_UPDATE_DIALOG_DISMISS_BUTTON_TAG),
             ) {
                 Text("Cancel")
             }
-        }
+        },
 
     )
 }
@@ -65,11 +80,11 @@ fun ReleaseUpdateDialogPreview() {
         tagName = "v1.0.0",
         releaseName = "Initial Release",
         body = "This is the first release of the application.",
-        asset = "asset2.tar.gz"
+        asset = "asset2.tar.gz",
     )
     ReleaseUpdateDialog(
         releaseInfo = releaseInfo,
         onDismissRequest = {},
-        onDownloadClick = {}
+        onDownloadClick = {},
     )
 }

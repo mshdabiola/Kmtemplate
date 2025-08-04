@@ -55,7 +55,6 @@ internal fun Project.configureKotlinMultiplatform(
                 }
             }
         }
-
     }
 }
 

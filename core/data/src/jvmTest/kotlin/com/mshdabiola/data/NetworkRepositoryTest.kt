@@ -87,7 +87,7 @@ class NetworkRepositoryTest {
     @Test
     fun `getLatestReleaseInfo returns Error when current version is greater than latest version`() = runTest {
         repository = RealNetworkRepository(networkDataSource, androidPlatform)
-         val expectedReleaseInfo = GitHubReleaseInfo(
+        val expectedReleaseInfo = GitHubReleaseInfo(
             tagName = "v1.0.0", // latest version
             assets = listOf(Asset(browserDownloadUrl = "app-fossReliant-release-unsigned-signed.apk", size = 100)),
         )
@@ -96,9 +96,11 @@ class NetworkRepositoryTest {
         val result = repository.getLatestReleaseInfo("2.0.0") // current version
 
         assertTrue(result is ReleaseInfo.Error)
-        assertEquals("Current version is greater than latest version", (result as ReleaseInfo.Error).message)
+        assertEquals(
+            "Current version is greater than latest version",
+            (result as ReleaseInfo.Error).message,
+        )
     }
-
 
     @Test
     fun `getLatestReleaseInfo returns Error when network call fails`() = runTest {

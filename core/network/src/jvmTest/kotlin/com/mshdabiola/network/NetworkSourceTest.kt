@@ -15,7 +15,6 @@
  */
 package com.mshdabiola.network
 
-import com.mshdabiola.network.model.Asset // Import Asset if it's in a different package and needed for direct use in test, though not strictly necessary for this update
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.mock.MockEngine
 import io.ktor.client.engine.mock.respond
@@ -30,7 +29,6 @@ import kotlinx.serialization.json.Json
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertNotNull
-import kotlin.test.assertTrue
 import kotlin.test.fail
 
 class NetworkDataSourceTest {
@@ -154,12 +152,18 @@ class NetworkDataSourceTest {
 
         val firstAsset = result.assets[0]
         assertNotNull(firstAsset)
-        assertEquals("https://github.com/mshdabiola/kmtemplate/releases/download/v1.0.0/kmtemplate.apk", firstAsset?.browserDownloadUrl)
+        assertEquals(
+            "https://github.com/mshdabiola/kmtemplate/releases/download/v1.0.0/kmtemplate.apk",
+            firstAsset?.browserDownloadUrl,
+        )
         assertEquals(1234567, firstAsset.size)
 
         val secondAsset = result.assets.get(1)
         assertNotNull(secondAsset)
-        assertEquals("https://github.com/mshdabiola/kmtemplate/releases/download/v1.0.0/source.zip", secondAsset?.browserDownloadUrl)
+        assertEquals(
+            "https://github.com/mshdabiola/kmtemplate/releases/download/v1.0.0/source.zip",
+            secondAsset?.browserDownloadUrl,
+        )
         assertEquals(7654321, secondAsset.size)
 
         mockEngine.close()

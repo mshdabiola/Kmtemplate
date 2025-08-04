@@ -15,7 +15,6 @@
  */
 package com.mshdabiola.datastore
 
-
 import com.mshdabiola.datastore.model.UserPreferences
 import kotlinx.coroutines.flow.Flow
 

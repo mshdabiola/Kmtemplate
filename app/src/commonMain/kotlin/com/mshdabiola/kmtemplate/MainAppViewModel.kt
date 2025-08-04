@@ -45,8 +45,8 @@ class MainAppViewModel(
             started = SharingStarted.WhileSubscribed(5_000),
         )
 
-    fun getLatestReleaseInfo(currentVersion: String) : Deferred<ReleaseInfo> {
-       return viewModelScope.async {
+    fun getLatestReleaseInfo(currentVersion: String): Deferred<ReleaseInfo> {
+        return viewModelScope.async {
             networkRepository.getLatestReleaseInfo(currentVersion)
         }
     }

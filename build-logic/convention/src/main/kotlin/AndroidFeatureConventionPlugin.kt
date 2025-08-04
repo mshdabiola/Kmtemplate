@@ -40,18 +40,16 @@ class AndroidFeatureConventionPlugin : Plugin<Project> {
                 configureGradleManagedDevices(this)
             }
 
-
             extensions.configure<KotlinMultiplatformExtension> {
                 with(sourceSets) {
-
-                        commonMain.dependencies {
-                            implementation(project(":core:data"))
-                            implementation(project(":core:ui"))
-                            implementation(project(":core:analytics"))
-                            implementation(project(":core:model"))
-                            implementation(project(":core:designsystem"))
-                            implementation(libs.findLibrary("kotlinx.serialization.json").get())
-                        }
+                    commonMain.dependencies {
+                        implementation(project(":core:data"))
+                        implementation(project(":core:ui"))
+                        implementation(project(":core:analytics"))
+                        implementation(project(":core:model"))
+                        implementation(project(":core:designsystem"))
+                        implementation(libs.findLibrary("kotlinx.serialization.json").get())
+                    }
 
                     jvmTest.dependencies {
                         implementation(project(":core:testing"))
