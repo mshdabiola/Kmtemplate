@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Designed and developed by 2024 mshdabiola (lawal abiola)
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources>
+    <string name="screen_name">Ayarlar</string>
+    <string name="version">Sürüm</string>
+    <string name="version_code">Sürüm Kodu</string>
+    <string name="last_update">Son Güncelleme</string>
+    <string name="about">Kmtemplate: Kotlin Multiplatform projeleriniz için sağlam bir temel ve en iyi uygulamalar sunan bir başlangıç noktası.</string>
+    <string name="developed_by">Geliştirici</string>
+    <string name="developer">Mshdabiola</string>
+    <string name="contact_us">Bize Ulaşın</string>
+    <string name="privacy_policy">Gizlilik Politikası</string>
+    <string name="terms_and_condition">Şartlar ve Koşullar</string>
+    <string name="appearance_contrast_title">Kontrast</string>
+    <string name="appearance_contrast_option_low_cd">Düşük Kontrast</string>
+    <string name="appearance_contrast_option_low_label">Düşük</string>
+    <string name="appearance_contrast_option_standard_cd">Standart Kontrast</string>
+    <string name="appearance_contrast_option_standard_label">Standart</string>
+    <string name="appearance_contrast_option_high_cd">Yüksek Kontrast</string>
+    <string name="appearance_contrast_option_high_label">Yüksek</string>
+    <string name="appearance_background_title">Arka Plan</string>
+    <string name="appearance_gradient_background_text">Gradyan Arka Planı Göster</string>
+    <string name="appearance_dark_mode_title">Karanlık Mod</string>
+    <string name="appearance_select_contrast_low">Düşük'ü Seç</string>
+    <string name="appearance_select_contrast_standard">Standart'ı Seç</string>
+    <string name="appearance_select_contrast_high">Yüksek'i Seç</string>
+    <string name="faq_kmp_question">Kotlin Multiplatform (KMP) nedir?</string>
+    <string name="faq_kmp_answer">Kotlin Multiplatform, Android, iOS, Web, Masaüstü ve Sunucu tarafı gibi farklı platformlarda kod (iş mantığı, veri katmanları ve daha fazlası gibi) paylaşmanıza olanak tanır. Bunu yaparken, yalnızca gerektiğinde (örneğin, kullanıcı arayüzü veya platforma özgü API'ler için) platforma özgü kod yazarsınız.</string>
+    <string name="faq_template_help_question">Bu şablon KMP geliştirmesine nasıl yardımcı olur?</string>
+    <string name="faq_template_help_answer">Bu şablon, paylaşılan modüller, platforma özgü modüller ve paylaşılan ViewModel'ler, veri depoları ve UI için Compose Multiplatform gibi yaygın kalıpların nasıl uygulanacağına dair örneklerle önceden yapılandırılmış bir proje yapısı sunar.</string>
+    <string name="faq_share_ui_question">KMP ile kullanıcı arayüzü kodunu paylaşabilir miyim?</string>
+    <string name="faq_share_ui_answer">Evet, Compose Multiplatform ile kullanıcı arayüzünüzü Jetpack Compose kullanarak bir kez yazabilir ve Android, Masaüstü (Windows, macOS, Linux), iOS (Alfa) ve Web'de (Deneysel) dağıtabilirsiniz. Bu şablon Compose Multiplatform'u kullanır.</string>
+    <string name="faq_benefits_question">KMP kullanmanın faydaları nelerdir?</string>
+    <string name="faq_benefits_answer">Başlıca faydalar şunlardır: \n- Kod Yeniden Kullanımı: Ortak mantığı bir kez yazın ve paylaşın.\n- Tutarlılık: Platformlar arasında tutarlı davranış sağlayın.\n- Daha Hızlı Geliştirme: Gereksiz işleri azaltın.\n- Yerel Performans: Paylaşılan Kotlin kodu, her platform için yerel koda derlenir.\n- Esneklik: Ne kadar kod paylaşacağınızı seçin.</string>
+    <string name="faq_find_shared_code_question">Bu şablondaki paylaşılan kodu nerede bulabilirim?</string>
+    <string name="faq_find_shared_code_answer">Paylaşılan kod genellikle paylaşılan kaynak kümelerinde (örneğin, `shared/src/commonMain`, `features/featureName/src/commonMain`) `commonMain` adlı modüllerde bulunur. Platforma özgü kod ise `androidMain` veya `iosMain` gibi ilgili platform kaynak kümelerinde yer alır.</string>
+    <string name="faq_empty_state">Şu anda SSS mevcut değil.</string>
+    <string name="faq_icon_cd_collapse">Daralt</string>
+    <string name="faq_icon_cd_expand">Genişlet</string>
+    <string name="faq_preview_shared_code_question">Bu şablondaki paylaşılan kodu nerede bulabilirim?</string>
+    <string name="faq_preview_shared_code_answer_collapsed">Paylaşılan kod genellikle şu adlı modüllerde bulunur...</string>
+    <string name="faq_preview_shared_code_answer_expanded">Paylaşılan kod genellikle `commonMain` adlı modüllerde bulunur...</string>
+
+    <string-array name="segment">
+        <item>Genel</item>
+        <item>Destek</item>
+    </string-array>
+
+    <string-array name="general">
+        <item>Görünüm</item>
+        <item>Dil</item>
+    </string-array>
+
+    <string-array name="support">
+        <item>Sorun Bildir</item>
+        <item>SSS</item>
+        <item>Hakkında</item>
+    </string-array>
+
+    <string-array name="theme">
+        <item>Varsayılan</item>
+        <item>Yeşil</item>
+    </string-array>
+
+    <string-array name="daynight">
+        <item>Sistemi takip et</item>
+        <item>Açık</item>
+        <item>Koyu</item>
+    </string-array>
+</resources>

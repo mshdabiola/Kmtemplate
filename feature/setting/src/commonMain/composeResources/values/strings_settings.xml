@@ -27,6 +27,36 @@
     <string name="privacy_policy">Privacy Policy</string>
     <string name="terms_and_condition">Terms and Condition</string>
 
+    <string name="appearance_contrast_title">Contrast</string>
+    <string name="appearance_contrast_option_low_cd">Low Contrast</string>
+    <string name="appearance_contrast_option_low_label">Low</string>
+    <string name="appearance_contrast_option_standard_cd">Standard Contrast</string>
+    <string name="appearance_contrast_option_standard_label">Standard</string>
+    <string name="appearance_contrast_option_high_cd">High Contrast</string>
+    <string name="appearance_contrast_option_high_label">High</string>
+    <string name="appearance_background_title">Background</string>
+    <string name="appearance_gradient_background_text">Show Gradient Background</string>
+    <string name="appearance_dark_mode_title">Dark Mode</string>
+    <string name="appearance_select_contrast_low">Select Low</string>
+    <string name="appearance_select_contrast_standard">Select Standard</string>
+    <string name="appearance_select_contrast_high">Select High</string>
+
+    <string name="faq_kmp_question">What is Kotlin Multiplatform (KMP)?</string>
+    <string name="faq_kmp_answer">Kotlin Multiplatform allows you to share code (like business logic, data layers, and more) across different platforms such as Android, iOS, Web, Desktop, and Server-side, all while writing platform-specific code only where necessary (e.g., for UI or platform-specific APIs).</string>
+    <string name="faq_template_help_question">How does this template help with KMP development?</string>
+    <string name="faq_template_help_answer">This template provides a pre-configured project structure with shared modules, platform-specific modules, and examples of how to implement common patterns like shared ViewModels, data repositories, and Compose Multiplatform for UI.</string>
+    <string name="faq_share_ui_question">Can I share UI code with KMP?</string>
+    <string name="faq_share_ui_answer">Yes, with Compose Multiplatform, you can write your UI once using Jetpack Compose and deploy it on Android, Desktop (Windows, macOS, Linux), iOS (Alpha), and Web (Experimental). This template utilizes Compose Multiplatform.</string>
+    <string name="faq_benefits_question">What are the benefits of using KMP?</string>
+    <string name="faq_benefits_answer">Key benefits include: \n- Code Reuse: Write common logic once and share it.\n- Consistency: Ensure consistent behavior across platforms.\n- Faster Development: Reduce redundant work.\n- Native Performance: Shared Kotlin code compiles to native code for each platform.\n- Flexibility: Choose how much code to share.</string>
+    <string name="faq_find_shared_code_question">Where can I find the shared code in this template?</string>
+    <string name="faq_find_shared_code_answer">Shared code is typically located in modules named `commonMain` within shared source sets (e.g., `shared/src/commonMain`, `features/featureName/src/commonMain`). Platform-specific code resides in corresponding platform source sets like `androidMain` or `iosMain`.</string>
+    <string name="faq_empty_state">No FAQs available at the moment.</string>
+    <string name="faq_icon_cd_collapse">Collapse</string>
+    <string name="faq_icon_cd_expand">Expand</string>
+    <string name="faq_preview_shared_code_question">Where can I find the shared code in this template?</string>
+    <string name="faq_preview_shared_code_answer_collapsed">Shared code is typically located in modules named...</string>
+    <string name="faq_preview_shared_code_answer_expanded">Shared code is typically located in modules named `commonMain`...</string>
 
 
     <string-array name="segment">
