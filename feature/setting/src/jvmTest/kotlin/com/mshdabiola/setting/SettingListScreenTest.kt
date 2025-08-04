@@ -21,11 +21,11 @@ import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import com.mshdabiola.designsystem.theme.KmtTheme
-import kmtemplate.features.setting.generated.resources.Res
-import kmtemplate.features.setting.generated.resources.general
-import kmtemplate.features.setting.generated.resources.screen_name
-import kmtemplate.features.setting.generated.resources.segment
-import kmtemplate.features.setting.generated.resources.support
+import kmtemplate.feature.setting.generated.resources.Res
+import kmtemplate.feature.setting.generated.resources.general
+import kmtemplate.feature.setting.generated.resources.screen_name
+import kmtemplate.feature.setting.generated.resources.segment
+import kmtemplate.feature.setting.generated.resources.support
 import org.jetbrains.compose.resources.stringArrayResource
 import org.jetbrains.compose.resources.stringResource
 import org.junit.Assert.assertEquals

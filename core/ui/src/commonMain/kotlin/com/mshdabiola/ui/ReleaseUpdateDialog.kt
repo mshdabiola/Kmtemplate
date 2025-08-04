@@ -22,6 +22,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import com.mshdabiola.designsystem.component.KmtButton
+import com.mshdabiola.designsystem.component.KmtTextButton
 import com.mshdabiola.model.ReleaseInfo
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
@@ -62,7 +63,7 @@ fun ReleaseUpdateDialog(
             }
         },
         dismissButton = {
-            TextButton(
+            KmtTextButton(
                 onClick = onDismissRequest,
                 modifier = Modifier.testTag(RELEASE_UPDATE_DIALOG_DISMISS_BUTTON_TAG),
             ) {
