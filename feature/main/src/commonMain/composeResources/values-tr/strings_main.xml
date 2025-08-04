@@ -17,8 +17,8 @@
 <resources>
     <string name="features_main_title">Kaydedilenler</string>
     <string name="features_main_loading">Kaydedilenler yükleniyor…</string>
-    <string name="features_main_empty_error">Kaydedilmiş güncelleme yok</string>
-    <string name="features_main_empty_description">Kaydettiğiniz güncellemeler daha sonra\nokumak için burada saklanacaktır</string>
+    <string name="features_main_empty_title">Burada görecek bir şey yok</string>
+    <string name="features_main_empty_body">Öğe eklediğinizde burada görünürler.</string>
     <string name="features_main_removed">Yer işareti kaldırıldı</string>
     <string name="features_main_undo">GERİ AL</string>
     <string name="features_main_screen_title_home">Ana Sayfa</string>

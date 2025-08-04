@@ -17,8 +17,8 @@
 <resources>
     <string name="features_main_title">Tallennetut</string>
     <string name="features_main_loading">Ladataan tallennettuja…</string>
-    <string name="features_main_empty_error">Ei tallennettuja päivityksiä</string>
-    <string name="features_main_empty_description">Tallennetut päivitykset säilytetään täällä,\nvoidaksesi lukea ne myöhemmin</string>
+    <string name="features_main_empty_title">Täällä ei ole mitään nähtävää</string>
+    <string name="features_main_empty_body">Kun lisäät kohteita, ne näkyvät täällä.</string>
     <string name="features_main_removed">Kirjanmerkki poistettu</string>
     <string name="features_main_undo">KUMOA</string>
     <string name="features_main_screen_title_home">Koti</string>

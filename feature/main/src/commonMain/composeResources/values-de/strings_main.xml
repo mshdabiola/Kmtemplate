@@ -16,9 +16,9 @@
 -->
 <resources>
     <string name="features_main_title">Gespeichert</string>
-    <string name="features_main_loading">Gespeicherte Updates werden geladen…</string>
-    <string name="features_main_empty_error">Keine gespeicherten Updates</string>
-    <string name="features_main_empty_description">Updates, die Sie speichern, werden hier abgelegt,\num sie später zu lesen</string>
+    <string name="features_main_loading">Gespeicherte werden geladen…</string>
+    <string name="features_main_empty_title">Hier gibt es nichts zu sehen</string>
+    <string name="features_main_empty_body">Wenn du Elemente hinzufügst, erscheinen sie hier.</string>
     <string name="features_main_removed">Lesezeichen entfernt</string>
     <string name="features_main_undo">RÜCKGÄNGIG</string>
     <string name="features_main_screen_title_home">Startseite</string>
