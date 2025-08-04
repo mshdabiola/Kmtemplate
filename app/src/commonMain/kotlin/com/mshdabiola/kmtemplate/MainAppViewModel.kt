@@ -50,6 +50,10 @@ class MainAppViewModel(
             networkRepository.getLatestReleaseInfo(currentVersion)
         }
     }
+
+    fun log(message: String){
+        logger.i (message)
+    }
 }
 
 sealed interface MainActivityUiState {

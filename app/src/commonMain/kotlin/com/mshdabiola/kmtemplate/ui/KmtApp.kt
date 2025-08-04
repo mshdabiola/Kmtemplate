@@ -109,7 +109,7 @@ fun KmtApp(
         if (info is ReleaseInfo.Success) {
             releaseInfo = info
         } else {
-            println(info)
+            viewModel.log((info as ReleaseInfo.Error).message)
         }
     }
     SharedTransitionLayout(
@@ -163,9 +163,10 @@ fun KmtApp(
                             }
 
                             if (releaseInfo != null) {
+                                val info = releaseInfo!!
                                 ReleaseUpdateDialog(
-                                    releaseInfo = releaseInfo!!,
-                                    onDownloadClick = { windowRepository.openUrl(releaseInfo!!.asset) },
+                                    releaseInfo = info,
+                                    onDownloadClick = { windowRepository.openUrl(info.asset) },
                                     onDismissRequest = { releaseInfo = null },
                                 )
                             }

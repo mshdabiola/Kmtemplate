@@ -29,7 +29,7 @@ import java.util.Date
 import java.util.Locale
 
 class CustomLogWriter() : LogWriter() {
-    private val path = File("")
+    private val path = File(System.getProperty("java.io.tmpdir"), "kmtemplate")
     private val filePath: File by lazy {
         val formatter = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
         val date = formatter.format(Date())
