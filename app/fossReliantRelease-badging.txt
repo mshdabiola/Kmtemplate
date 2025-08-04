@@ -1,6 +1,7 @@
 package: name='com.mshdabiola.kmtemplate.foss' versionCode='129' versionName='1.2.9' platformBuildVersionName='15' platformBuildVersionCode='35' compileSdkVersion='35' compileSdkVersionCodename='15'
 minSdkVersion:'26'
 targetSdkVersion:'35'
+uses-permission: name='android.permission.INTERNET'
 uses-permission: name='com.mshdabiola.kmtemplate.foss.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION'
 application-label:'Kmtemplate'
 application-label-af:'Kmtemplate'
