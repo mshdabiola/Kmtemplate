@@ -21,4 +21,5 @@
     <string name="features_main_empty_description">Zapisane aktualizacje będą przechowywane tutaj,\naby można było je przeczytać później</string>
     <string name="features_main_removed">Usunięto zakładkę</string>
     <string name="features_main_undo">COFNIJ</string>
+    <string name="features_main_screen_title_home">Dom</string>
 </resources>

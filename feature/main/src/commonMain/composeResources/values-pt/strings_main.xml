@@ -21,4 +21,5 @@
     <string name="features_main_empty_description">As atualizações que você salvar serão armazenadas aqui\npara ler mais tarde</string>
     <string name="features_main_removed">Favorito removido</string>
     <string name="features_main_undo">DESFAZER</string>
+    <string name="features_main_screen_title_home">Início</string>
 </resources>

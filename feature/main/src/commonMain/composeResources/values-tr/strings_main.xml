@@ -21,4 +21,5 @@
     <string name="features_main_empty_description">Kaydettiğiniz güncellemeler daha sonra\nokumak için burada saklanacaktır</string>
     <string name="features_main_removed">Yer işareti kaldırıldı</string>
     <string name="features_main_undo">GERİ AL</string>
+    <string name="features_main_screen_title_home">Ana Sayfa</string>
 </resources>

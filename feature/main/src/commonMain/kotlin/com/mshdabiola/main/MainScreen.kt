@@ -52,6 +52,7 @@ import kmtemplate.feature.main.generated.resources.Res
 import kmtemplate.feature.main.generated.resources.features_main_empty_description
 import kmtemplate.feature.main.generated.resources.features_main_empty_error
 import kmtemplate.feature.main.generated.resources.features_main_img_empty_bookmarks
+import kmtemplate.feature.main.generated.resources.features_main_screen_title_home
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
@@ -86,7 +87,7 @@ internal fun MainScreen(
             KmtTopAppBar(
                 modifier = Modifier.testTag(MainScreenTestTags.TOP_APP_BAR),
                 title = {
-                    Text(if (onDrawer != null) KmtStrings.brand else "Main")
+                    Text(if (onDrawer != null) KmtStrings.brand else stringResource(Res.string.features_main_screen_title_home))
                 }, // Consider adding a test tag if the title becomes dynamic
                 titleHorizontalAlignment = Alignment.Start,
                 navigationIcon = {

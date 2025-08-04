@@ -21,4 +21,5 @@
     <string name="features_main_empty_description">Updates, die Sie speichern, werden hier abgelegt,\num sie später zu lesen</string>
     <string name="features_main_removed">Lesezeichen entfernt</string>
     <string name="features_main_undo">RÜCKGÄNGIG</string>
+    <string name="features_main_screen_title_home">Startseite</string>
 </resources>
