@@ -21,4 +21,5 @@
     <string name="features_main_empty_description">Các cập nhật bạn lưu sẽ được lưu trữ tại đây\nđể đọc sau</string>
     <string name="features_main_removed">Đã xóa dấu trang</string>
     <string name="features_main_undo">HOÀN TÁC</string>
+    <string name="features_main_screen_title_home">Trang chủ</string>
 </resources>
