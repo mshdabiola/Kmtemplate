@@ -48,10 +48,6 @@ import com.mshdabiola.designsystem.drawable.KmtIcons
 import com.mshdabiola.designsystem.strings.KmtStrings
 import com.mshdabiola.designsystem.theme.LocalTintTheme
 import com.mshdabiola.ui.NoteCard
-import io.github.alexzhirkevich.compottie.Compottie
-import io.github.alexzhirkevich.compottie.LottieCompositionSpec
-import io.github.alexzhirkevich.compottie.rememberLottieComposition
-import io.github.alexzhirkevich.compottie.rememberLottiePainter
 import kmtemplate.feature.main.generated.resources.Res
 import kmtemplate.feature.main.generated.resources.features_main_empty_description
 import kmtemplate.feature.main.generated.resources.features_main_empty_error
@@ -91,7 +87,15 @@ internal fun MainScreen(
             KmtTopAppBar(
                 modifier = Modifier.testTag(MainScreenTestTags.TOP_APP_BAR),
                 title = {
-                    Text(if (onDrawer != null) KmtStrings.brand else "Main")
+                    Text(
+                        if (onDrawer !=
+                            null
+                        ) {
+                            KmtStrings.brand
+                        } else {
+                            stringResource(Res.string.features_main_screen_title_home)
+                        },
+                    )
                 }, // Consider adding a test tag if the title becomes dynamic
                 titleHorizontalAlignment = Alignment.Start,
                 navigationIcon = {

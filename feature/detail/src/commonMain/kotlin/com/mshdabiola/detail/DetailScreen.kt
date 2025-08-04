@@ -83,8 +83,12 @@ internal fun DetailScreen(
                             onClick = onDelete,
                             modifier = Modifier.testTag(DetailScreenTestTags.DELETE_BUTTON),
                         ) {
-                            Icon(imageVector = KmtIcons.Delete, contentDescription = stringResource(
-                                Res.string.detail_delete_icon_content_description))
+                            Icon(
+                                imageVector = KmtIcons.Delete,
+                                contentDescription = stringResource(
+                                    Res.string.detail_delete_icon_content_description,
+                                ),
+                            )
                         }
                     },
                     navigationIcon = {
@@ -92,8 +96,12 @@ internal fun DetailScreen(
                             onClick = onBack,
                             modifier = Modifier.testTag(DetailScreenTestTags.BACK_BUTTON),
                         ) {
-                            Icon(imageVector = KmtIcons.ArrowBack, contentDescription = stringResource(
-                                Res.string.detail_back_icon_content_description))
+                            Icon(
+                                imageVector = KmtIcons.ArrowBack,
+                                contentDescription = stringResource(
+                                    Res.string.detail_back_icon_content_description,
+                                ),
+                            )
                         }
                     },
                 )
