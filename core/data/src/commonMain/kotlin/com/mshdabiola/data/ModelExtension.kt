@@ -24,7 +24,9 @@ fun UserPreferences.asUserSettings() = UserSettings(
     shouldHideOnboarding = shouldHideOnboarding,
     shouldShowGradientBackground = shouldShowGradientBackground,
     language = language,
-    darkThemeConfig = DarkThemeConfig.entries[darkThemeConfig],
+    darkThemeConfig = DarkThemeConfig.entries
+        .getOrElse(darkThemeConfig)
+        { DarkThemeConfig.FOLLOW_SYSTEM },
     contrast = contrast,
 )
 
