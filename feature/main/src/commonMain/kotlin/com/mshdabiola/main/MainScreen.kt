@@ -51,14 +51,11 @@ import com.mshdabiola.designsystem.theme.LocalTintTheme
 import com.mshdabiola.ui.NoteCard
 import io.github.alexzhirkevich.compottie.Compottie
 import io.github.alexzhirkevich.compottie.LottieCompositionSpec
-import io.github.alexzhirkevich.compottie.animateLottieCompositionAsState
 import io.github.alexzhirkevich.compottie.rememberLottieComposition
 import io.github.alexzhirkevich.compottie.rememberLottiePainter
 import kmtemplate.feature.main.generated.resources.Res
 import kmtemplate.feature.main.generated.resources.features_main_empty_description
 import kmtemplate.feature.main.generated.resources.features_main_empty_error
-import kmtemplate.feature.main.generated.resources.features_main_img_empty_bookmarks
-import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
 // Define a TestTags object for MainScreen
@@ -152,7 +149,7 @@ internal fun MainScreen(
 private fun EmptyState(modifier: Modifier = Modifier) {
     val composition by rememberLottieComposition {
         LottieCompositionSpec.JsonString(
-            Res.readBytes("files/empty_state.json").decodeToString()
+            Res.readBytes("files/empty_state.json").decodeToString(),
         )
     }
 
@@ -171,7 +168,7 @@ private fun EmptyState(modifier: Modifier = Modifier) {
                 .testTag(MainScreenTestTags.EMPTY_STATE_IMAGE),
             painter = rememberLottiePainter(
                 composition = composition,
-                iterations = Compottie.IterateForever
+                iterations = Compottie.IterateForever,
 
             ),
             colorFilter = if (iconTint != Color.Unspecified) ColorFilter.tint(iconTint) else null,
