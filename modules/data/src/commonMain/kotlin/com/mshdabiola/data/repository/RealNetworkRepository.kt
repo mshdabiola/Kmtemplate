@@ -15,22 +15,23 @@
  */
 package com.mshdabiola.data.repository
 
-import com.mshdabiola.data.getPlatform
+import com.mshdabiola.data.Platform
 import com.mshdabiola.model.ReleaseInfo
 import com.mshdabiola.network.NetworkDataSource
 
 internal class RealNetworkRepository(
     private val networkSource: NetworkDataSource,
+    private val platform: Platform
 ) : NetworkRepository {
     override suspend fun gotoGoogle(): String {
         return "" // Placeholder, actual implementation would call networkSource
     }
 
     override suspend fun getLatestReleaseInfo(currentVersion: String): ReleaseInfo {
-        val platform = getPlatform()
-        if (!platform.name.contains("Android"))
+        if (platform !is Platform.Android)
             return ReleaseInfo.Error("Device not supported")
-        val name = "app-${platform.buildType}-release-unsigned-signed.apk"
+
+        val name = "app-${platform.name}-release-unsigned-signed.apk"
 
 
         return try {
