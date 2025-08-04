@@ -87,7 +87,15 @@ internal fun MainScreen(
             KmtTopAppBar(
                 modifier = Modifier.testTag(MainScreenTestTags.TOP_APP_BAR),
                 title = {
-                    Text(if (onDrawer != null) KmtStrings.brand else stringResource(Res.string.features_main_screen_title_home))
+                    Text(
+                        if (onDrawer !=
+                            null
+                        ) {
+                            KmtStrings.brand
+                        } else {
+                            stringResource(Res.string.features_main_screen_title_home)
+                        },
+                    )
                 }, // Consider adding a test tag if the title becomes dynamic
                 titleHorizontalAlignment = Alignment.Start,
                 navigationIcon = {

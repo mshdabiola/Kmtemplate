@@ -72,10 +72,6 @@ import com.mshdabiola.designsystem.drawable.KmtIcons
 import com.mshdabiola.designsystem.strings.KmtStrings
 import com.mshdabiola.detail.navigation.Detail
 import com.mshdabiola.detail.navigation.navigateToDetail
-import com.mshdabiola.main.navigation.Main
-import com.mshdabiola.setting.navigation.Setting
-import com.mshdabiola.ui.LocalSharedTransitionScope
-import com.mshdabiola.ui.SharedTransitionContainer
 import com.mshdabiola.kmtemplate.app.generated.resources.Res
 import com.mshdabiola.kmtemplate.app.generated.resources.add_content_description
 import com.mshdabiola.kmtemplate.app.generated.resources.brand_content_description
@@ -84,8 +80,11 @@ import com.mshdabiola.kmtemplate.app.generated.resources.home_label
 import com.mshdabiola.kmtemplate.app.generated.resources.rail_action_collapse
 import com.mshdabiola.kmtemplate.app.generated.resources.rail_action_expand
 import com.mshdabiola.kmtemplate.app.generated.resources.rail_state_collapsed
-import com.mshdabiola.kmtemplate.app.generated.resources.rail_state_expanded
 import com.mshdabiola.kmtemplate.app.generated.resources.settings_label
+import com.mshdabiola.main.navigation.Main
+import com.mshdabiola.setting.navigation.Setting
+import com.mshdabiola.ui.LocalSharedTransitionScope
+import com.mshdabiola.ui.SharedTransitionContainer
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
@@ -138,7 +137,7 @@ fun KmtScaffold(
                 route = Main,
                 selectedIcon = KmtIcons.Home,
                 unSelectedIcon = KmtIcons.HomeOutlined,
-                label =Res.string.home_label ,
+                label = Res.string.home_label,
             ),
             TopLevelRoute(
                 route = Setting,
@@ -222,8 +221,8 @@ fun KmtScaffold(
                                 state = appState.wideNavigationRailState,
                                 colors = WideNavigationRailDefaults.colors(containerColor = containerColor),
                                 header = {
-                                    val expand=stringResource(Res.string.settings_label)
-                                    val collapse=stringResource(Res.string.rail_state_collapsed)
+                                    val expand = stringResource(Res.string.settings_label)
+                                    val collapse = stringResource(Res.string.rail_state_collapsed)
                                     IconButton(
                                         modifier = Modifier
                                             .padding(start = 24.dp)
@@ -391,7 +390,8 @@ fun DrawerContent(
             if (appState is Medium) {
                 WideNavigationRailItem(
                     modifier = Modifier.testTag(
-                        DrawerContentTestTags.wideNavigationRailItemTag(item.route)),
+                        DrawerContentTestTags.wideNavigationRailItemTag(item.route),
+                    ),
                     railExpanded = appState.wideNavigationRailState.targetValue == WideNavigationRailValue.Expanded,
                     icon = {
                         val imageVector =
