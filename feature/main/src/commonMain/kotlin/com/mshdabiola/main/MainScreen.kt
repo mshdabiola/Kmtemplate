@@ -159,7 +159,7 @@ internal fun MainScreen(
 private fun EmptyState(modifier: Modifier = Modifier) {
     val composition by rememberLottieComposition {
         LottieCompositionSpec.JsonString(
-            Res.readBytes("files/empty_state.json").decodeToString()
+            Res.readBytes("files/empty_state.json").decodeToString(),
         )
     }
 
@@ -178,7 +178,7 @@ private fun EmptyState(modifier: Modifier = Modifier) {
                 .testTag(MainScreenTestTags.EMPTY_STATE_IMAGE),
             painter = rememberLottiePainter(
                 composition = composition,
-                iterations = Compottie.IterateForever
+                iterations = Compottie.IterateForever,
             ),
             colorFilter = if (iconTint != Color.Unspecified) ColorFilter.tint(iconTint) else null,
             contentDescription = null, // Consider adding a content description for accessibility and testing
