@@ -80,8 +80,9 @@ class KmtAppTest : KoinTest {
             includes(testDataModule, detailModule, mainModule, settingModule)
             viewModel {
                 MainAppViewModel(
-                    get(),
-                    getLoggerWithTag("MainAppViewModel"),
+                    userDataRepository = get(),
+                    networkRepository = get(),
+                    logger = getLoggerWithTag("MainAppViewModel"),
                 )
             }
         }

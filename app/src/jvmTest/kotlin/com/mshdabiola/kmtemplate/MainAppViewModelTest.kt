@@ -20,7 +20,9 @@ import co.touchlab.kermit.Logger
 import com.mshdabiola.kmtemplate.MainActivityUiState.Loading
 import com.mshdabiola.kmtemplate.MainActivityUiState.Success
 import com.mshdabiola.model.DarkThemeConfig
+import com.mshdabiola.model.ReleaseInfo
 import com.mshdabiola.model.UserSettings
+import com.mshdabiola.testing.fake.repository.FakeNetworkRepository // Import the shared fake
 import com.mshdabiola.testing.fake.repository.FakeUserDataRepository // Import the shared fake
 import com.mshdabiola.testing.util.testLogger
 import kotlinx.coroutines.Dispatchers
@@ -41,17 +43,22 @@ class MainAppViewModelTest {
 
     private val testDispatcher = StandardTestDispatcher()
 
-    // Use the FakeUserDataRepository from the :testing module
     private lateinit var userDataRepository: FakeUserDataRepository
+    private lateinit var networkRepository: FakeNetworkRepository // Added FakeNetworkRepository
     private lateinit var viewModel: MainAppViewModel
     private lateinit var logger: Logger
 
     @Before
     fun setUp() {
         Dispatchers.setMain(testDispatcher)
-        userDataRepository = FakeUserDataRepository() // Initialize the shared fake
+        userDataRepository = FakeUserDataRepository()
+        networkRepository = FakeNetworkRepository() // Initialize FakeNetworkRepository
         logger = testLogger
-        viewModel = MainAppViewModel(userDataRepository = userDataRepository, logger)
+        viewModel = MainAppViewModel(
+            userDataRepository = userDataRepository,
+            networkRepository = networkRepository, // Pass FakeNetworkRepository
+            logger = logger,
+        )
     }
 
     @After
@@ -61,13 +68,12 @@ class MainAppViewModelTest {
 
     @Test
     fun `uiState is Loading initially then Success with initial repo data`() = runTest(testDispatcher) {
-        // Get the initial data that FakeUserDataRepository will emit
-        val initialRepoData = userDataRepository.userSettingsSource.value // Access the initial state
+        val initialRepoData = userDataRepository.userSettingsSource.value
 
         viewModel.uiState.test(timeout = 3.seconds) {
             assertEquals(Loading, awaitItem())
 
-            testDispatcher.scheduler.advanceUntilIdle() // Allow collection and map to run
+            testDispatcher.scheduler.advanceUntilIdle()
 
             val successState = awaitItem()
             assertTrue(
@@ -89,20 +95,15 @@ class MainAppViewModelTest {
         )
 
         viewModel.uiState.test(timeout = 3.seconds) {
-            // 1. Consume the initial Loading state
             assertEquals(Loading, awaitItem())
 
-            // 2. Consume the initial Success state from repository's default emission
             testDispatcher.scheduler.advanceUntilIdle()
             val initialSuccessState = awaitItem()
             assertTrue(initialSuccessState is Success)
-            // Can assert (initialSuccessState as Success).userData == userDataRepository.userDataSource.value
 
-            // 3. Emit new UserData using the FakeUserDataRepository's method
-            userDataRepository.setFakeUserData(newTestUserSettings) // Use the method from your fake
+            userDataRepository.setFakeUserData(newTestUserSettings)
             testDispatcher.scheduler.advanceUntilIdle()
 
-            // 4. Verify the uiState is now Success with the new data
             val newSuccessState = awaitItem()
             assertTrue(
                 "UI state should be Success with new data, but was $newSuccessState",
@@ -147,5 +148,31 @@ class MainAppViewModelTest {
 
             cancelAndIgnoreRemainingEvents()
         }
+    }
+
+    @Test
+    fun `getLatestReleaseInfo returns Success when network call is successful`() = runTest(testDispatcher) {
+        val expectedReleaseInfo = ReleaseInfo.Success(
+            tagName = "v1.0.0",
+            releaseName = "Test Release",
+            body = "This is a test release.",
+            asset = "test.apk",
+        )
+        networkRepository.setNextReleaseInfo(expectedReleaseInfo)
+
+        val result = viewModel.getLatestReleaseInfo("0.0.1").await()
+
+        assertEquals(expectedReleaseInfo, result)
+    }
+
+    @Test
+    fun `getLatestReleaseInfo returns Error when network call fails`() = runTest(testDispatcher) {
+        val errorMessage = "Network error"
+        networkRepository.setShouldThrowError(true, errorMessage)
+
+        val result = viewModel.getLatestReleaseInfo("0.0.1").await()
+
+        assertTrue(result is ReleaseInfo.Error)
+        assertEquals(errorMessage, (result as ReleaseInfo.Error).message)
     }
 }
