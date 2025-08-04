@@ -21,4 +21,5 @@
     <string name="features_main_empty_description">Gli aggiornamenti che salvi verranno archiviati qui\nper leggerli in seguito</string>
     <string name="features_main_removed">Segnalibro rimosso</string>
     <string name="features_main_undo">ANNULLA</string>
+    <string name="features_main_screen_title_home">Home</string>
 </resources>
