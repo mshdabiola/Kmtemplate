@@ -393,5 +393,5 @@ A huge thank you to all the amazing people who have contributed to this project:
 
 ## 📝 License
 
-Kmtemplate is distributed under the terms of the Apache License, Version 2.0. See the [LICENSE](https://www.google.com/search?q=LICENSE) file for details.
+Kmtemplate is distributed under the terms of the Apache License, Version 2.0. See the [LICENSE](LICENSE) file for details.
 

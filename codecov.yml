@@ -1,0 +1,28 @@
+coverage_settings:
+  range: 60..80
+  round: down
+  precision: 2
+
+component_management:
+  components:
+    - id: "app"
+      paths:
+        - "app/"
+    - id: "core"
+      paths:
+        - "core/"
+    - id: "feature"
+      paths:
+        - "feature/"
+    
+
+comment_configuration:
+  layout: "header, diff, flags, components"
+
+coverage_status_checks:
+  project:
+    default:
+      target_coverage: 70.33%
+  patch:
+    default:
+      target_coverage: 60%
