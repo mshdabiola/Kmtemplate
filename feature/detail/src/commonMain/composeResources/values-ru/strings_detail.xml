@@ -15,9 +15,9 @@
      limitations under the License.
 -->
 <resources>
-    <string name="detail_screen_title">Detail</string>
-    <string name="detail_delete_icon_content_description">delete</string>
-    <string name="detail_back_icon_content_description">back</string>
-    <string name="detail_title_placeholder">Title</string>
-    <string name="detail_content_placeholder">content</string>
+    <string name="detail_screen_title">Подробнее</string>
+    <string name="detail_delete_icon_content_description">удалить</string>
+    <string name="detail_back_icon_content_description">назад</string>
+    <string name="detail_title_placeholder">Заголовок</string>
+    <string name="detail_content_placeholder">содержание</string>
 </resources>

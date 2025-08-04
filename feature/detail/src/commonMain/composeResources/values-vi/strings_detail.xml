@@ -15,9 +15,9 @@
      limitations under the License.
 -->
 <resources>
-    <string name="detail_screen_title">Detail</string>
-    <string name="detail_delete_icon_content_description">delete</string>
-    <string name="detail_back_icon_content_description">back</string>
-    <string name="detail_title_placeholder">Title</string>
-    <string name="detail_content_placeholder">content</string>
+    <string name="detail_screen_title">Chi tiết</string>
+    <string name="detail_delete_icon_content_description">xóa</string>
+    <string name="detail_back_icon_content_description">quay lại</string>
+    <string name="detail_title_placeholder">Tiêu đề</string>
+    <string name="detail_content_placeholder">nội dung</string>
 </resources>

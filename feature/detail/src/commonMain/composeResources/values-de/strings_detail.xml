@@ -16,8 +16,8 @@
 -->
 <resources>
     <string name="detail_screen_title">Detail</string>
-    <string name="detail_delete_icon_content_description">delete</string>
-    <string name="detail_back_icon_content_description">back</string>
-    <string name="detail_title_placeholder">Title</string>
-    <string name="detail_content_placeholder">content</string>
+    <string name="detail_delete_icon_content_description">löschen</string>
+    <string name="detail_back_icon_content_description">zurück</string>
+    <string name="detail_title_placeholder">Titel</string>
+    <string name="detail_content_placeholder">Inhalt</string>
 </resources>
