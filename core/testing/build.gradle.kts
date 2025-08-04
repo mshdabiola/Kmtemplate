@@ -35,7 +35,8 @@ kotlin {
         @OptIn(ExperimentalComposeLibrary::class)
         commonMain.dependencies {
                 api(kotlin("test"))
-//                api(compose.uiTest)
+                implementation(projects.core.model)
+            implementation(projects.core.analytics)
                 api(projects.core.data)
                 api(projects.core.designsystem)
 
