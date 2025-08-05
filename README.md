@@ -150,7 +150,7 @@ This project leverages a modern, production-ready tech stack and a curated set o
 
 ## 📸 Screenshots
 
-See the app in action across all supported platforms:
+See the app in action across all supported screens:
 
 ### 🤖 Android
 <p align="center">
@@ -159,19 +159,19 @@ See the app in action across all supported platforms:
   <img src="./fastlane/metadata/android/en-US/images/phoneScreenshots/3.png" width="200" />
 </p>
 
-### 💻 JVM (Desktop)
+### 💻 Large Screen
 <p align="center">
-  <img src="./fastlane/metadata/android/en-US/images/desktopScreenshots/1.png" width="200" />
-   <img src="./fastlane/metadata/android/en-US/images/desktopScreenshots/2.png" width="200" />
-    <img src="./fastlane/metadata/android/en-US/images/desktopScreenshots/3.png" width="200" />
+  <img src="./fastlane/metadata/android/en-US/images/tabletScreenshots/1.png" width="200" />
+   <img src="./fastlane/metadata/android/en-US/images/tabletScreenshots/2.png" width="200" />
+    <img src="./fastlane/metadata/android/en-US/images/tabletScreenshots/3.png" width="200" />
 </p>
-
+<!-- 
 ### 🌐 WASM (Web)
 <p align="center">
   <img src="./fastlane/metadata/android/en-US/images/webScreenshots/1.png" width="200" />
    <img src="./fastlane/metadata/android/en-US/images/webScreenshots/2.png" width="200" />
     <img src="./fastlane/metadata/android/en-US/images/webScreenshots/3.png" width="200" />
-</p>
+</p> -->
 
 ---
 
