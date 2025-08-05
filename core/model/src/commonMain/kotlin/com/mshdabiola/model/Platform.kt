@@ -13,23 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.mshdabiola.data
+package com.mshdabiola.model
 
 sealed class Platform(val identifier: String) {
     object Ios : Platform(identifier = "Ios")
     object Web : Platform(identifier = "Web")
     data class Desktop(val os: String, val javaVersion: String) : Platform("Desktop")
-    sealed class Android(open val name: String, open val sdk: Int) : Platform(identifier = "Android") {
-        data class FossReliant(
-            override val name: String,
-            override val sdk: Int,
-        ) : Android(name, sdk)
-
-        data class GooglePlay(
-            override val name: String,
-            override val sdk: Int,
-        ) : Android(name, sdk)
-    }
+    data class Android(val flavor: Flavor, val buildType: BuildType, val sdk: Int) : Platform(identifier = "Android")
 }
 
-expect fun getPlatform(): Platform
+enum class Flavor(val id: String) {
+    GooglePlay("googlePlay"),
+    FossReliant("fossReliant")
+}
+
+enum class BuildType(val id: String) {
+    Release("release"),
+    Debug("debug")
+}
