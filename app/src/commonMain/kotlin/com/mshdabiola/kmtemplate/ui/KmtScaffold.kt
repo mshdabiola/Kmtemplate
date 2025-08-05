@@ -31,6 +31,8 @@ import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.Icon
@@ -346,8 +348,12 @@ fun DrawerContent(
     isMain: Boolean,
     topDestination: Set<TopLevelRoute<out Any>>,
 ) {
+    val scrollState = rememberScrollState()
+
     Column(
-        modifier = modifier.testTag(DrawerContentTestTags.DRAWER_CONTENT_COLUMN),
+        modifier = modifier
+            .verticalScroll(scrollState)
+            .testTag(DrawerContentTestTags.DRAWER_CONTENT_COLUMN),
         verticalArrangement = Arrangement.spacedBy(8.dp),
     ) {
         AnimatedVisibility(appState !is Medium) {
