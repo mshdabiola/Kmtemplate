@@ -113,15 +113,15 @@ fun main() {
 
 private fun getPlatform(): Platform.Desktop {
     val operSys = System.getProperty("os.name").lowercase()
-     val os = when {  
-        operSys.contains("win") -> "Windows"  
-        operSys.contains("nix") || operSys.contains("nux") || operSys.contains("aix") -> "Linux"  
-        operSys.contains("mac") -> "MacOS"  
-        else -> {  
-            //  Logger.e("PlatformUtil.jvm") { "Unknown platform: $operSys" }  
-            "Linux"  
-        }  
-    } 
+    val os = when {
+        operSys.contains("win") -> "Windows"
+        operSys.contains("nix") || operSys.contains("nux") || operSys.contains("aix") -> "Linux"
+        operSys.contains("mac") -> "MacOS"
+        else -> {
+            //  Logger.e("PlatformUtil.jvm") { "Unknown platform: $operSys" }
+            "Linux"
+        }
+    }
     val javaVersion = System.getProperty("java.version")
     return Platform.Desktop(os, javaVersion)
 }
