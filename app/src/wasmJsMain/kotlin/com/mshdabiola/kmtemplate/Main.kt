@@ -31,9 +31,11 @@ import co.touchlab.kermit.platformLogWriter
 import com.mshdabiola.kmtemplate.di.appModule
 import com.mshdabiola.kmtemplate.ui.KmtApp
 import com.mshdabiola.kmtemplate.ui.SplashScreen
+import com.mshdabiola.model.Platform
 import kotlinx.browser.document
 import kotlinx.coroutines.delay
 import org.koin.core.context.GlobalContext.startKoin
+import org.koin.dsl.bind
 import org.koin.dsl.module
 
 @OptIn(ExperimentalComposeUiApi::class)
@@ -62,23 +64,19 @@ fun main() {
                 logWriters = arrayOf(platformLogWriter(DefaultFormatter)),
             ),
         )
-
-    val logModule =
-        module {
-            single {
-                logger
-            }
+    val applicationModule = module {
+        single { Platform.Web } bind Platform::class
+        single {
+            logger
         }
-    try {
-        startKoin {
-            modules(
-                appModule,
-                logModule,
-            )
-        }
-        mainApp()
-    } catch (e: Exception) {
-        logger.e("crash exceptions", e)
-        throw e
     }
+
+    startKoin {
+        modules(
+            appModule,
+            applicationModule,
+        )
+    }
+    mainApp()
+
 }

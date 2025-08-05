@@ -16,6 +16,7 @@
 package com.mshdabiola.kmtemplate
 
 import android.app.Application
+import android.os.Build
 import co.touchlab.kermit.DefaultFormatter
 import co.touchlab.kermit.Logger
 import co.touchlab.kermit.Severity
@@ -24,31 +25,47 @@ import co.touchlab.kermit.koin.kermitLoggerModule
 import co.touchlab.kermit.loggerConfigInit
 import co.touchlab.kermit.platformLogWriter
 import com.mshdabiola.kmtemplate.di.appModule
+import com.mshdabiola.model.BuildType
+import com.mshdabiola.model.Flavor
+import com.mshdabiola.model.Platform
 import org.acra.ReportField
 import org.acra.config.mailSender
 import org.acra.data.StringFormat
 import org.acra.ktx.initAcra
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
+import org.koin.dsl.bind
+import org.koin.dsl.module
 
 class KmtApplication : Application() {
     override fun onCreate() {
         super.onCreate()
 
+        val platform = getPlatform()
+
         val logger =
             Logger(
                 loggerConfigInit(
-                    minSeverity = Severity.Error,
+                    minSeverity = if (platform.buildType == BuildType.Debug)
+                        Severity.Verbose
+                    else
+                        Severity.Error,
                     logWriters = arrayOf(platformLogWriter(DefaultFormatter)),
                 ),
             )
-
+        val applicationModule = module {
+            single { platform } bind Platform::class
+        }
         startKoin {
             logger(
                 KermitKoinLogger(Logger.withTag("koin")),
             )
             androidContext(this@KmtApplication)
-            modules(appModule, kermitLoggerModule(logger))
+            modules(
+                appModule,
+                kermitLoggerModule(logger),
+                applicationModule,
+            )
         }
         setupCrashReporter()
 
@@ -57,6 +74,7 @@ class KmtApplication : Application() {
 //            Timber.e("log on app create")
 //        }
     }
+
     private fun setupCrashReporter() {
         Thread {
 //            if (true) {
@@ -80,5 +98,20 @@ class KmtApplication : Application() {
 // //                Timber.plant(Timber.DebugTree())
 //            }
         }.start()
+    }
+
+    private fun getPlatform(): Platform.Android {
+
+        val sdk = Build.VERSION.SDK_INT
+        val flavor = if (packageName.contains("foss"))
+            Flavor.FossReliant
+        else
+            Flavor.GooglePlay
+        val buildType = if (packageName.contains("debug"))
+            BuildType.Debug
+        else
+            BuildType.Release
+        return Platform.Android(flavor, buildType, sdk)
+
     }
 }
