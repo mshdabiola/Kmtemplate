@@ -15,11 +15,11 @@
  */
 package com.mshdabiola.model
 
-sealed class Platform(val identifier: String) {
-    object Ios : Platform(identifier = "Ios")
-    object Web : Platform(identifier = "Web")
-    data class Desktop(val os: String, val javaVersion: String) : Platform("Desktop")
-    data class Android(val flavor: Flavor, val buildType: BuildType, val sdk: Int) : Platform(identifier = "Android")
+sealed class Platform {
+//    object Ios : Platform()
+    object Web : Platform()
+    data class Desktop(val os: String, val javaVersion: String) : Platform()
+    data class Android(val flavor: Flavor, val buildType: BuildType, val sdk: Int) : Platform()
 }
 
 enum class Flavor(val id: String) {
