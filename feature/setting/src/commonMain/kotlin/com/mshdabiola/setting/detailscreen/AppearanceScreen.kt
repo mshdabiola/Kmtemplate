@@ -126,12 +126,13 @@ fun AppearanceScreen(
         ),
     )
     val dayNightOptions = stringArrayResource(Res.array.daynight)
+    val scrollState = rememberScrollState()
 
     Column(
         modifier = modifier
             .fillMaxWidth()
             .padding(16.dp)
-            .verticalScroll(rememberScrollState())
+            .verticalScroll(scrollState)
             .testTag(AppearanceScreenTestTags.SCREEN_ROOT),
     ) {
         Text(

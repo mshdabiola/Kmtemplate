@@ -348,9 +348,11 @@ fun DrawerContent(
     isMain: Boolean,
     topDestination: Set<TopLevelRoute<out Any>>,
 ) {
+    val scrollState = rememberScrollState()
+
     Column(
         modifier = modifier
-            .verticalScroll(rememberScrollState())
+            .verticalScroll(scrollState)
             .testTag(DrawerContentTestTags.DRAWER_CONTENT_COLUMN),
         verticalArrangement = Arrangement.spacedBy(8.dp),
     ) {
