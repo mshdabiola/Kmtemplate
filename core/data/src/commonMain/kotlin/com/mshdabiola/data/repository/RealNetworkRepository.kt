@@ -15,7 +15,7 @@
  */
 package com.mshdabiola.data.repository
 
-import com.mshdabiola.data.Platform
+import com.mshdabiola.model.Platform
 import com.mshdabiola.model.ReleaseInfo
 import com.mshdabiola.network.NetworkDataSource
 
@@ -32,7 +32,7 @@ internal class RealNetworkRepository(
             return ReleaseInfo.Error("Device not supported")
         }
 
-        val name = "app-${platform.name}-release-unsigned-signed.apk"
+        val name = "app-${platform.flavor.id}-${platform.buildType.id}-unsigned-signed.apk"
 
         return try {
             val gitHubReleaseInfo = networkSource.getLatestKmtemplateRelease()

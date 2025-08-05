@@ -16,7 +16,6 @@
 package com.mshdabiola.data.di
 
 import com.mshdabiola.analytics.di.analyticsModule
-import com.mshdabiola.data.getPlatform
 import com.mshdabiola.data.repository.NetworkRepository
 import com.mshdabiola.data.repository.RealNetworkRepository
 import com.mshdabiola.data.repository.RealUserDataRepository
@@ -35,5 +34,4 @@ val commonModule =
         includes(datastoreModule, networkModule, analyticsModule)
         singleOf(::RealNetworkRepository) bind NetworkRepository::class
         singleOf(::RealUserDataRepository) bind UserDataRepository::class
-        single { getPlatform() }
     }
