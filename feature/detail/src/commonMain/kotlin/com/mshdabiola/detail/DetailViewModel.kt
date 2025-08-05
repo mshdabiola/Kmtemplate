@@ -43,10 +43,10 @@ class DetailViewModel(
     val initDetailState = DetailState(id = -1)
 
     private val titleFlow = snapshotFlow { initDetailState.title.text }
-        .debounce(300)
+        .debounce(2000)
 
     private val detailFlow = snapshotFlow { initDetailState.detail.text }
-        .debounce(300)
+        .debounce(2000)
 
     private var isInit = true
 
@@ -59,11 +59,8 @@ class DetailViewModel(
         logger.i { "detailState: $id, $title, $detail" }
         when {
             id == -1L && isInit -> {
-                val newId = noteRepository.upsert(Note())
-                idFlow.update { newId }
-
                 isInit = false
-                initDetailState.copy(id = newId)
+                initDetailState.copy(id = -1)
             }
 
             isInit -> {
@@ -81,11 +78,11 @@ class DetailViewModel(
             }
 
             else -> {
-                val note = noteRepository.getOne(id).first() ?: Note(id = id)
+                val note = noteRepository.getOne(id).first() ?: Note()
 
                 val newNote = note.copy(title = title.toString(), content = detail.toString())
                 if (newNote != note) {
-                    noteRepository.upsert(newNote)
+                 noteRepository.upsert(newNote)
                 }
                 initDetailState.copy(id)
             }
