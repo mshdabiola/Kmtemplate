@@ -42,8 +42,6 @@ import com.mshdabiola.designsystem.strings.KmtStrings
 import com.mshdabiola.kmtemplate.di.appModule
 import com.mshdabiola.kmtemplate.ui.KmtApp
 import com.mshdabiola.kmtemplate.ui.SplashScreen
-import com.mshdabiola.model.BuildType
-import com.mshdabiola.model.Flavor
 import com.mshdabiola.model.Platform
 import kotlinx.coroutines.delay
 import org.koin.core.context.GlobalContext.startKoin
@@ -91,8 +89,7 @@ fun main() {
             ),
         )
     val applicationModule = module {
-        single { getPlatform() } bind Platform ::class
-
+        single { getPlatform() } bind Platform::class
     }
 
     startKoin {
@@ -103,7 +100,7 @@ fun main() {
         modules(
             appModule,
             kermitLoggerModule(logger),
-            applicationModule
+            applicationModule,
         )
     }
 //    bugsnag.setAppVersion(KmtStrings.version)
@@ -113,7 +110,6 @@ fun main() {
         bugsnag.notify(e)
     }
 }
-
 
 private fun getPlatform(): Platform.Desktop {
     val operSys = System.getProperty("os.name").lowercase()
@@ -133,5 +129,4 @@ private fun getPlatform(): Platform.Desktop {
         }
     val javaVersion = System.getProperty("java.version")
     return Platform.Desktop(os, javaVersion)
-
 }

@@ -24,10 +24,10 @@ sealed class Platform {
 
 enum class Flavor(val id: String) {
     GooglePlay("googlePlay"),
-    FossReliant("fossReliant")
+    FossReliant("fossReliant"),
 }
 
 enum class BuildType(val id: String) {
     Release("release"),
-    Debug("debug")
+    Debug("debug"),
 }

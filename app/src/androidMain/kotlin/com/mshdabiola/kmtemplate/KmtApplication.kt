@@ -46,10 +46,11 @@ class KmtApplication : Application() {
         val logger =
             Logger(
                 loggerConfigInit(
-                    minSeverity = if (platform.buildType == BuildType.Debug)
+                    minSeverity = if (platform.buildType == BuildType.Debug) {
                         Severity.Verbose
-                    else
-                        Severity.Error,
+                    } else {
+                        Severity.Error
+                    },
                     logWriters = arrayOf(platformLogWriter(DefaultFormatter)),
                 ),
             )
@@ -101,17 +102,17 @@ class KmtApplication : Application() {
     }
 
     private fun getPlatform(): Platform.Android {
-
         val sdk = Build.VERSION.SDK_INT
-        val flavor = if (packageName.contains("foss"))
+        val flavor = if (packageName.contains("foss")) {
             Flavor.FossReliant
-        else
+        } else {
             Flavor.GooglePlay
-        val buildType = if (packageName.contains("debug"))
+        }
+        val buildType = if (packageName.contains("debug")) {
             BuildType.Debug
-        else
+        } else {
             BuildType.Release
+        }
         return Platform.Android(flavor, buildType, sdk)
-
     }
 }
