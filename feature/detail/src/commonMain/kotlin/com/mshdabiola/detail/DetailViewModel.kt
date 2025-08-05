@@ -56,14 +56,17 @@ class DetailViewModel(
         detailFlow,
     ) { id, title, detail ->
 
-        logger.i { "detailState: $id, $title, $detail" }
+        logger.i { "detailState: $id, $title, $detail init " }
         when {
-            id == -1L && isInit -> {
-                isInit = false
-                initDetailState.copy(id = -1)
-            }
+//            id == -1L && isInit -> {
+//                logger.i { "1" }
+//
+//                isInit = false
+//                initDetailState.copy(id = -1)
+//            }
 
-            isInit -> {
+            id > 0 && isInit -> {
+
                 initDetailState.copy(id = id)
                 val note = noteRepository.getOne(id).first() ?: Note(id = id)
                 isInit = false
@@ -78,11 +81,17 @@ class DetailViewModel(
             }
 
             else -> {
+
                 val note = noteRepository.getOne(id).first() ?: Note()
 
                 val newNote = note.copy(title = title.toString(), content = detail.toString())
                 if (newNote != note) {
-                 noteRepository.upsert(newNote)
+                    val newId = noteRepository.upsert(newNote)
+                    if (id == -1L) {
+                        isInit = false
+
+                        idFlow.update { newId }
+                    }
                 }
                 initDetailState.copy(id)
             }
