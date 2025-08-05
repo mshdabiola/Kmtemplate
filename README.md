@@ -154,23 +154,23 @@ See the app in action across all supported screens:
 
 ### 🤖 Android
 <p align="center">
-  <img src="./fastlane/metadata/android/en-US/images/phoneScreenshots/1.png" width="200" />
-  <img src="./fastlane/metadata/android/en-US/images/phoneScreenshots/2.png" width="200" />
-  <img src="./fastlane/metadata/android/en-US/images/phoneScreenshots/3.png" width="200" />
+  <img src="./fastlane/metadata/android/en-US/images/phoneScreenshots/1.png" width="200" alt="Android Home Screen Screenshot" />
+  <img src="./fastlane/metadata/android/en-US/images/phoneScreenshots/2.png" width="200" alt="Android Settings Screen Screenshot" />
+  <img src="./fastlane/metadata/android/en-US/images/phoneScreenshots/3.png" width="200" alt="Android Detail Screen Screenshot" />
 </p>
 
 ### 💻 Large Screen
 <p align="center">
-  <img src="./fastlane/metadata/android/en-US/images/tabletScreenshots/1.png" width="200" />
-   <img src="./fastlane/metadata/android/en-US/images/tabletScreenshots/2.png" width="200" />
-    <img src="./fastlane/metadata/android/en-US/images/tabletScreenshots/3.png" width="200" />
+  <img src="./fastlane/metadata/android/en-US/images/tabletScreenshots/1.png" width="200" alt="Tablet Home Screen Screenshot" />
+  <img src="./fastlane/metadata/android/en-US/images/tabletScreenshots/2.png" width="200" alt="Tablet Settings Screen Screenshot" />
+  <img src="./fastlane/metadata/android/en-US/images/tabletScreenshots/3.png" width="200" alt="Tablet Detail Screen Screenshot" />
 </p>
 <!-- 
 ### 🌐 WASM (Web)
 <p align="center">
-  <img src="./fastlane/metadata/android/en-US/images/webScreenshots/1.png" width="200" />
-   <img src="./fastlane/metadata/android/en-US/images/webScreenshots/2.png" width="200" />
-    <img src="./fastlane/metadata/android/en-US/images/webScreenshots/3.png" width="200" />
+  <img src="./fastlane/metadata/android/en-US/images/webScreenshots/1.png" width="200" alt="Web Home Screen Screenshot" />
+  <img src="./fastlane/metadata/android/en-US/images/webScreenshots/2.png" width="200" alt="Web Feature Screen Screenshot" />
+  <img src="./fastlane/metadata/android/en-US/images/webScreenshots/3.png" width="200" alt="Web Settings Screen Screenshot" />
 </p> -->
 
 ---
