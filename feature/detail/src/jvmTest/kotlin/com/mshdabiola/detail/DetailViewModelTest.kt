@@ -21,10 +21,8 @@ import com.mshdabiola.testing.fake.repository.FakeNoteRepository
 import com.mshdabiola.testing.util.MainDispatcherRule
 import com.mshdabiola.testing.util.testLogger
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.delay // Keep this if other tests use it directly
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.firstOrNull
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.test.advanceTimeBy // Added import
 import kotlinx.coroutines.test.advanceUntilIdle
 import kotlinx.coroutines.test.runTest
@@ -72,7 +70,7 @@ class DetailViewModelTest {
             // Advance time past the debounce period (2000ms) plus a small buffer
             // and allow any coroutines to complete their work.
             advanceTimeBy(2100) // For debounce
-            advanceUntilIdle()  // For remaining coroutine work
+            advanceUntilIdle() // For remaining coroutine work
 
             // Expect a new emission after the title change and processing
             emittedItem = awaitItem()
@@ -106,7 +104,7 @@ class DetailViewModelTest {
 
             // If the first emission was the default, the second will have the loaded data
             if (loadedState.title.text.toString() != "Existing Title") {
-                 loadedState = awaitItem()
+                loadedState = awaitItem()
             }
 
             assertEquals(1L, loadedState.id)
@@ -130,11 +128,10 @@ class DetailViewModelTest {
             val loadedState = awaitItem() // Fully loaded or second state
             if (loadedState.title.text.toString() != "Initial") {
                 skipItems(1) // if it took 2 items to load
-            } else if (loadedState.id != 1L && loadedState.title.text.toString().isEmpty()){
+            } else if (loadedState.id != 1L && loadedState.title.text.toString().isEmpty()) {
                 skipItems(1) // if it took 2 items to load
             }
         }
-
 
         // Simulate text field update
         viewModel.initDetailState.title.edit { append(" Updated") }
@@ -164,17 +161,16 @@ class DetailViewModelTest {
 
         viewModel = DetailViewModel(initId = 1L, noteRepository = noteRepository, logger = logger)
 
-       // Wait for initial load to complete
+        // Wait for initial load to complete
         viewModel.detailState.test {
             awaitItem() // Initial or partially loaded
             val loadedState = awaitItem() // Fully loaded or second state
             if (loadedState.detail.text.toString() != "Initial") {
                 skipItems(1) // if it took 2 items to load
-            } else if (loadedState.id != 1L && loadedState.detail.text.toString().isEmpty()){
+            } else if (loadedState.id != 1L && loadedState.detail.text.toString().isEmpty()) {
                 skipItems(1) // if it took 2 items to load
             }
         }
-
 
         viewModel.initDetailState.detail.edit { append(" Updated") }
 
@@ -201,12 +197,11 @@ class DetailViewModelTest {
 
         viewModel = DetailViewModel(initId = 1L, noteRepository = noteRepository, logger = logger)
         // Ensure VM is initialized and note is loaded (consume initial states)
-        viewModel.detailState.test{
+        viewModel.detailState.test {
             awaitItem()
             val loadedState = awaitItem()
             if (loadedState.id != 1L) skipItems(1)
         }
-
 
         assertNotNull(noteRepository.getOne(1L).firstOrNull(), "Note should exist before delete")
 
@@ -249,7 +244,11 @@ class DetailViewModelTest {
         if (idBeforeDelete == -1L) {
             // If the ID was -1 when onDelete was called, no note with ID -1 should have been targeted.
             // And no existing note (like ID 5) should be affected.
-             assertEquals(initialRepoSize, noteRepository.getAll().first().size, "Repo size should be unchanged if ID was -1 and no new note was created and then deleted.")
+            assertEquals(
+                initialRepoSize,
+                noteRepository.getAll().first().size,
+                "Repo size should be unchanged if ID was -1 and no new note was created and then deleted.",
+            )
         } else {
             // If a new note (e.g. ID 0 or 1) was created due to edits and then deleted, the size might decrease by 1.
             // The important part is that the note with ID 5L is still there.
