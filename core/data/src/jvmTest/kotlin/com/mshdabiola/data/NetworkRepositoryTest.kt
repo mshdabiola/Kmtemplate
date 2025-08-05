@@ -17,6 +17,9 @@ package com.mshdabiola.data
 
 import com.mshdabiola.data.doubles.TestNetworkDataSource
 import com.mshdabiola.data.repository.RealNetworkRepository
+import com.mshdabiola.model.BuildType
+import com.mshdabiola.model.Flavor
+import com.mshdabiola.model.Platform
 import com.mshdabiola.model.ReleaseInfo
 import com.mshdabiola.network.model.Asset
 import com.mshdabiola.network.model.GitHubReleaseInfo
@@ -31,7 +34,7 @@ class NetworkRepositoryTest {
     private lateinit var networkDataSource: TestNetworkDataSource
     private lateinit var repository: RealNetworkRepository
 
-    private val androidPlatform = Platform.Android.FossReliant("fossReliant", 30)
+    private val androidPlatform = Platform.Android(Flavor.FossReliant, BuildType.Release, 30)
     private val nonAndroidPlatform = Platform.Desktop("desktop", "11")
 
     @Before
