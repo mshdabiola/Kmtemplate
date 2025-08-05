@@ -107,9 +107,10 @@ fun KmtApp(
     LaunchedEffect(Unit) {
         val info = viewModel.getLatestReleaseInfo(currentVersion).await()
         if (info is ReleaseInfo.Success) {
+            viewModel.log("$info")
             releaseInfo = info
         } else {
-            viewModel.log((info as ReleaseInfo.Error).message)
+            viewModel.log("${info as ReleaseInfo.Error}")
         }
     }
     SharedTransitionLayout(

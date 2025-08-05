@@ -80,6 +80,7 @@ import com.mshdabiola.kmtemplate.app.generated.resources.home_label
 import com.mshdabiola.kmtemplate.app.generated.resources.rail_action_collapse
 import com.mshdabiola.kmtemplate.app.generated.resources.rail_action_expand
 import com.mshdabiola.kmtemplate.app.generated.resources.rail_state_collapsed
+import com.mshdabiola.kmtemplate.app.generated.resources.rail_state_expanded
 import com.mshdabiola.kmtemplate.app.generated.resources.settings_label
 import com.mshdabiola.main.navigation.Main
 import com.mshdabiola.setting.navigation.Setting
@@ -221,7 +222,7 @@ fun KmtScaffold(
                                 state = appState.wideNavigationRailState,
                                 colors = WideNavigationRailDefaults.colors(containerColor = containerColor),
                                 header = {
-                                    val expand = stringResource(Res.string.settings_label)
+                                    val expand = stringResource(Res.string.rail_state_expanded)
                                     val collapse = stringResource(Res.string.rail_state_collapsed)
                                     IconButton(
                                         modifier = Modifier

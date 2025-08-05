@@ -42,8 +42,11 @@ import com.mshdabiola.designsystem.strings.KmtStrings
 import com.mshdabiola.kmtemplate.di.appModule
 import com.mshdabiola.kmtemplate.ui.KmtApp
 import com.mshdabiola.kmtemplate.ui.SplashScreen
+import com.mshdabiola.model.Platform
 import kotlinx.coroutines.delay
 import org.koin.core.context.GlobalContext.startKoin
+import org.koin.dsl.bind
+import org.koin.dsl.module
 
 fun mainApp() {
     application {
@@ -85,6 +88,9 @@ fun main() {
                 logWriters = arrayOf(platformLogWriter(DefaultFormatter), CustomLogWriter()),
             ),
         )
+    val applicationModule = module {
+        single { getPlatform() } bind Platform::class
+    }
 
     startKoin {
         logger(
@@ -94,6 +100,7 @@ fun main() {
         modules(
             appModule,
             kermitLoggerModule(logger),
+            applicationModule,
         )
     }
 //    bugsnag.setAppVersion(KmtStrings.version)
@@ -102,4 +109,19 @@ fun main() {
     } catch (e: Exception) {
         bugsnag.notify(e)
     }
+}
+
+private fun getPlatform(): Platform.Desktop {
+    val operSys = System.getProperty("os.name").lowercase()
+    val os = when {
+        operSys.contains("win") -> "Windows"
+        operSys.contains("nix") || operSys.contains("nux") || operSys.contains("aix") -> "Linux"
+        operSys.contains("mac") -> "MacOS"
+        else -> {
+            //  Logger.e("PlatformUtil.jvm") { "Unknown platform: $operSys" }
+            "Linux"
+        }
+    }
+    val javaVersion = System.getProperty("java.version")
+    return Platform.Desktop(os, javaVersion)
 }

@@ -13,13 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.mshdabiola.data
+package com.mshdabiola.model
 
-import android.os.Build
+sealed class Platform {
+//    object Ios : Platform()
+    object Web : Platform()
+    data class Desktop(val os: String, val javaVersion: String) : Platform()
+    data class Android(val flavor: Flavor, val buildType: BuildType, val sdk: Int) : Platform()
+}
 
-actual fun getPlatform(): Platform {
-    val buildType = "fossReliant"
-    val sdk = Build.VERSION.SDK_INT
+enum class Flavor(val id: String) {
+    GooglePlay("googlePlay"),
+    FossReliant("fossReliant"),
+}
 
-    return Platform.Android.FossReliant(buildType, sdk)
+enum class BuildType(val id: String) {
+    Release("release"),
+    Debug("debug"),
 }
