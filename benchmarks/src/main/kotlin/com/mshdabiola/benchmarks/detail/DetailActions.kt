@@ -45,8 +45,7 @@ fun MacrobenchmarkScope.addNote() {
     titleTextField.text = "title"
     contentTextField.text = "content"
 //    DetailScreenDeleteButton
-    device.wait({
-        device.hasObject(By.res("DetailScreenDeleteButton")) // Condition: an object with this text exists
-    }, 3000L) // Wait for up to 3 seconds
+    device.wait(Until.hasObject(By.res(
+        "DetailScreenDeleteButton")), 3000L)
     // Wait until saved title are shown on screen
 }
