@@ -12,7 +12,6 @@ androidxDataStore = "1.1.7"
 androidxEspresso = "3.7.0"
 androidx-lifecycle = "2.9.1"
 androidxMacroBenchmark = "1.4.0"
-androidxNavigationTest = "2.9.3"
 androidx-paging = "3.3.6"
 androidxProfileinstaller = "1.4.1"
 androidxTestCore = "1.7.0"
@@ -32,9 +31,7 @@ compottie = "2.0.0-rc04"
 conveyor = "1.12"
 dependencyGuard = "0.5.0"
 detekt = "1.23.8"
-firebaseAnalytics = "21.2.2"
 firebaseBom = "33.16.0"
-firebaseCrashlyticsKts = "18.3.6"
 firebaseCrashlyticsPlugin = "3.0.4"
 firebaseCrashylyticsPlugins = "2.9.9"
 firebasePerfPlugin = "1.4.2"
@@ -134,7 +131,6 @@ koin-composeVM = { module = "io.insert-koin:koin-compose-viewmodel", version.ref
 koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin" }
 koin-test = { module = "io.insert-koin:koin-test", version.ref = "koin" }
 koin-test-junit = { module = "io.insert-koin:koin-test-junit4", version.ref = "koin" }
-koin-test-junit5 = { module = "io.insert-koin:koin-test-junit5", version.ref = "koin" }
 kotlin-gradlePlugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
 kotlin-powerAssert = { module = "org.jetbrains.kotlin:kotlin-power-assert", version.ref = "kotlin" }
 kotlin-stdlib = { group = "org.jetbrains.kotlin", name = "kotlin-stdlib-jdk8", version.ref = "kotlin" }
