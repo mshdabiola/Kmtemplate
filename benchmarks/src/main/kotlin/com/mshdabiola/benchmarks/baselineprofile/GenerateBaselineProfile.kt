@@ -28,19 +28,17 @@ import org.junit.Rule
 import org.junit.Test
 
 class GenerateBaselineProfile {
-    @get:Rule val baselineProfileRule = BaselineProfileRule()
+    @get:Rule
+    val baselineProfileRule = BaselineProfileRule()
 
     @Test
     fun generate() =
         baselineProfileRule.collect(PACKAGE_NAME) {
             startActivity()
 
-            repeat(2) {
-                goToDetailScreen()
-                addNote()
-                goBack()
-            }
-
-            mainScrollNoteDownUp()
+            goToDetailScreen()
+            addNote()
+            goBack()
+//            mainScrollNoteDownUp()
         }
 }
