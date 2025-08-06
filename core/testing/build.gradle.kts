@@ -26,9 +26,9 @@ plugins {
 android {
     namespace = "com.mshdabiola.testing"
 }
-dependencies {
-    debugApi(libs.androidx.compose.ui.testManifest)
-}
+//dependencies {
+//    debugApi(libs.androidx.compose.ui.testManifest)
+//}
 kotlin {
 
     sourceSets {
@@ -56,14 +56,14 @@ kotlin {
 
 
 
-         androidMain.dependencies {
-                api(libs.androidx.test.core)
-               // api(libs.androidx.test.espresso.core)
-                //api(libs.androidx.test.runner)
-               // api(libs.androidx.test.rules)
-                api(libs.androidx.compose.ui.test)
-                api(libs.koin.android.test)
-            }
+//         androidMain.dependencies {
+//                api(libs.androidx.test.core)
+//               // api(libs.androidx.test.espresso.core)
+//                //api(libs.androidx.test.runner)
+//               // api(libs.androidx.test.rules)
+//                api(libs.androidx.compose.ui.test)
+//                api(libs.koin.android.test)
+//            }
 
     }
 }
