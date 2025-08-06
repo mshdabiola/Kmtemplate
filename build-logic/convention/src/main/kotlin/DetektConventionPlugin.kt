@@ -13,14 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import com.mshdabiola.app.libs
 import io.gitlab.arturbosch.detekt.Detekt
 import io.gitlab.arturbosch.detekt.extensions.DetektExtension
 import io.gitlab.arturbosch.detekt.report.ReportMergeTask
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure
-import org.gradle.kotlin.dsl.dependencies
 import org.gradle.kotlin.dsl.getValue
 import org.gradle.kotlin.dsl.provideDelegate
 import org.gradle.kotlin.dsl.registering
@@ -34,11 +32,10 @@ class DetektConventionPlugin : Plugin<Project> {
             val rootDetektConfig = target.rootProject.file("detekt.yml")
             val localDetektConfig = target.file("detekt.yml")
 
-            val rootDetektComposeConfig = target.rootProject.file("detekt-compose.yml")
             if (localDetektConfig.exists()) {
-                config.from(localDetektConfig, rootDetektConfig, rootDetektComposeConfig)
+                config.from(localDetektConfig, rootDetektConfig)
             } else {
-                config.from(rootDetektConfig, rootDetektComposeConfig)
+                config.from(rootDetektConfig)
             }
 //            config.setFrom(files("$rootDir/detekt.yml"))
             buildUponDefaultConfig = true
@@ -46,9 +43,7 @@ class DetektConventionPlugin : Plugin<Project> {
             ignoreFailures = true
             basePath = rootProject.projectDir.absolutePath
         }
-        dependencies {
-            add("detektPlugins", libs.findLibrary("detekt-compose").get())
-        }
+
         val reportMerge by tasks.registering(ReportMergeTask::class) {
             output.set(rootProject.layout.buildDirectory.file("reports/detekt/merge.sarif"))
         }

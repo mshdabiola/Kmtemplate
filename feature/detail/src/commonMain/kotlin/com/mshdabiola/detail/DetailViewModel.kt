@@ -43,10 +43,10 @@ class DetailViewModel(
     val initDetailState = DetailState(id = -1)
 
     private val titleFlow = snapshotFlow { initDetailState.title.text }
-        .debounce(2000)
+        .debounce(500)
 
     private val detailFlow = snapshotFlow { initDetailState.detail.text }
-        .debounce(2000)
+        .debounce(500)
 
     private var isInit = true
 
@@ -58,12 +58,6 @@ class DetailViewModel(
 
         logger.i { "detailState: $id, $title, $detail init " }
         when {
-//            id == -1L && isInit -> {
-//                logger.i { "1" }
-//
-//                isInit = false
-//                initDetailState.copy(id = -1)
-//            }
 
             id > 0 && isInit -> {
 

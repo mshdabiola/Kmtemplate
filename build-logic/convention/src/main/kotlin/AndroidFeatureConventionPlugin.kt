@@ -13,14 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import com.android.build.gradle.LibraryExtension
-import com.mshdabiola.app.configureGradleManagedDevices
 import com.mshdabiola.app.libs
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure
-import org.gradle.kotlin.dsl.dependencies
-import org.gradle.kotlin.dsl.project
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 
 class AndroidFeatureConventionPlugin : Plugin<Project> {
@@ -30,14 +26,6 @@ class AndroidFeatureConventionPlugin : Plugin<Project> {
                 apply("mshdabiola.android.library")
                 apply("mshdabiola.android.library.compose")
                 apply("org.jetbrains.kotlin.plugin.serialization")
-            }
-            extensions.configure<LibraryExtension> {
-                defaultConfig {
-                    testInstrumentationRunner =
-                        "androidx.test.runner.AndroidJUnitRunner"
-                }
-                testOptions.animationsDisabled = true
-                configureGradleManagedDevices(this)
             }
 
             extensions.configure<KotlinMultiplatformExtension> {

@@ -40,20 +40,7 @@ class AndroidApplicationFirebaseConventionPlugin : Plugin<Project> {
                         flavor.configure<CrashlyticsExtension> {
                             mappingFileUploadEnabled = isGoogle
                         }
-                        //   println("flavor ${flavor.name}")
                     }
-//                    it.buildTypes.forEach { buildType ->
-//                        // Disable the Crashlytics mapping file upload. This feature should only be
-//                        // enabled if a Firebase backend is available and configured in
-//                        // google-services.json.
-//                        buildType.configure<FirebasePerfExtension> {
-//                            setInstrumentationEnabled(false)
-//                        }
-//                        buildType.configure<CrashlyticsExtension> {
-//                            println("buildType $buildType")
-//                            mappingFileUploadEnabled = !buildType.isDebuggable
-//                        }
-//                    }
                 }
             }
         }
