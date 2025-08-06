@@ -50,12 +50,6 @@ dependencies {
     implementation(libs.androidx.window.core)
     implementation(libs.kotlinx.coroutines.guava)
 
-//    debugImplementation(libs.androidx.compose.ui.testManifest)
-
-
-//    androidTestImplementation(projects.core.testing)
-//    androidTestImplementation(libs.androidx.navigation.testing)
-
     baselineProfile(projects.benchmarks)
     implementation(libs.kermit.koin)
 
@@ -70,16 +64,11 @@ dependencies {
     googlePlayImplementation(libs.firebase.message)
     googlePlayImplementation(libs.firebase.auth)
 
-//    googlePlayImplementation(libs.play.game)
-//    googlePlayImplementation(libs.play.update)
-//    googlePlayImplementation(libs.play.update.kts)
-//    googlePlayImplementation(libs.play.review)
-//    googlePlayImplementation(libs.play.review.kts)
 
     implementation(libs.acra.mail)
 
     screenshotTestImplementation(libs.screenshot.validation.api)
-//    screenshotTestImplementation(libs.androidx.compose.ui.tooling)
+    screenshotTestImplementation(libs.androidx.compose.ui.tooling)
 
 }
 
@@ -92,7 +81,7 @@ kotlin {
 
         }
         commonMain.dependencies {
-//
+
             implementation(libs.koin.core)
 
             implementation(projects.core.designsystem)
