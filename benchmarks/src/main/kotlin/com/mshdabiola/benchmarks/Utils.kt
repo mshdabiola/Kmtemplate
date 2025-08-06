@@ -44,21 +44,6 @@ fun UiDevice.flingElementDownUp(element: UiObject2) {
 }
 
 /**
- * Waits until an object with [selector] if visible on screen and returns the object.
- * If the element is not available in [timeout], throws [AssertionError]
- */
-fun UiDevice.waitAndFindObject(
-    selector: BySelector,
-    timeout: Long,
-): UiObject2 {
-    if (!wait(Until.hasObject(selector), timeout)) {
-        throw AssertionError("Element not found on screen in ${timeout}ms (selector=$selector)")
-    }
-
-    return findObject(selector)
-}
-
-/**
  * Helper to dump window hierarchy into a string.
  */
 fun UiDevice.dumpWindowHierarchy(): String {
