@@ -79,17 +79,20 @@ internal fun DetailScreen(
                     modifier = Modifier.testTag(DetailScreenTestTags.TOP_APP_BAR),
                     title = { Text(stringResource(Res.string.detail_screen_title)) },
                     actions = {
-                        KmtIconButton(
-                            onClick = onDelete,
-                            modifier = Modifier.testTag(DetailScreenTestTags.DELETE_BUTTON),
-                        ) {
-                            Icon(
-                                imageVector = KmtIcons.Delete,
-                                contentDescription = stringResource(
-                                    Res.string.detail_delete_icon_content_description,
-                                ),
-                            )
+                        if (state.id > -1L){
+                            KmtIconButton(
+                                onClick = onDelete,
+                                modifier = Modifier.testTag(DetailScreenTestTags.DELETE_BUTTON),
+                            ) {
+                                Icon(
+                                    imageVector = KmtIcons.Delete,
+                                    contentDescription = stringResource(
+                                        Res.string.detail_delete_icon_content_description,
+                                    ),
+                                )
+                            }
                         }
+
                     },
                     navigationIcon = {
                         KmtIconButton(
