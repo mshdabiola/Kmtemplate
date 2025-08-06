@@ -16,7 +16,6 @@
 import com.android.build.api.variant.LibraryAndroidComponentsExtension
 import com.android.build.gradle.LibraryExtension
 import com.mshdabiola.app.configureFlavors
-import com.mshdabiola.app.configureGradleManagedDevices
 import com.mshdabiola.app.configureKotlinAndroid
 import com.mshdabiola.app.configureKotlinMultiplatform
 import com.mshdabiola.app.configurePrintApksTask
@@ -57,7 +56,6 @@ class AndroidLibraryConventionPlugin : Plugin<Project> {
 
                 configureFlavors(this)
 
-                configureGradleManagedDevices(this)
                 // The resource prefix is derived from the module name,
                 // so resources inside ":core:module1" must be prefixed with "core_module1_"
                 resourcePrefix =
