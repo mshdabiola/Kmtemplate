@@ -28,7 +28,6 @@ class AndroidFeatureConventionPlugin : Plugin<Project> {
                 apply("org.jetbrains.kotlin.plugin.serialization")
             }
 
-
             extensions.configure<KotlinMultiplatformExtension> {
                 with(sourceSets) {
                     commonMain.dependencies {

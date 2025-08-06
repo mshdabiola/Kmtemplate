@@ -79,7 +79,7 @@ internal fun DetailScreen(
                     modifier = Modifier.testTag(DetailScreenTestTags.TOP_APP_BAR),
                     title = { Text(stringResource(Res.string.detail_screen_title)) },
                     actions = {
-                        if (state.id > -1L){
+                        if (state.id > -1L) {
                             KmtIconButton(
                                 onClick = onDelete,
                                 modifier = Modifier.testTag(DetailScreenTestTags.DELETE_BUTTON),
@@ -92,7 +92,6 @@ internal fun DetailScreen(
                                 )
                             }
                         }
-
                     },
                     navigationIcon = {
                         KmtIconButton(
