@@ -20,7 +20,7 @@ import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithTag
 import com.mshdabiola.designsystem.theme.KmtTheme // Assuming your theme is needed for proper rendering
 import com.mshdabiola.kmtemplate.ui.SplashScreen
-import com.mshdabiola.kmtemplate.ui.SplashScreenTestTags // Import the test tags
+import com.mshdabiola.model.testtag.SplashScreenTestTags
 import org.junit.Rule
 import org.junit.Test
 

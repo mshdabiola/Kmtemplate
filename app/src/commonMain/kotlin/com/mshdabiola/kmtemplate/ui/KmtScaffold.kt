@@ -85,39 +85,13 @@ import com.mshdabiola.kmtemplate.app.generated.resources.rail_state_collapsed
 import com.mshdabiola.kmtemplate.app.generated.resources.rail_state_expanded
 import com.mshdabiola.kmtemplate.app.generated.resources.settings_label
 import com.mshdabiola.main.navigation.Main
+import com.mshdabiola.model.testtag.KmtScaffoldTestTags
 import com.mshdabiola.setting.navigation.Setting
 import com.mshdabiola.ui.LocalSharedTransitionScope
 import com.mshdabiola.ui.SharedTransitionContainer
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
-// Test Tags for KmtScaffold and its inner components
-object KmtScaffoldTestTags {
-    const val MODAL_NAVIGATION_DRAWER = "scaffold:modal_nav_drawer"
-    const val PERMANENT_NAVIGATION_DRAWER = "scaffold:permanent_nav_drawer"
-    const val MODAL_DRAWER_SHEET = "scaffold:modal_drawer_sheet"
-    const val WIDE_NAVIGATION_RAIL = "scaffold:wide_nav_rail"
-    const val PERMANENT_DRAWER_SHEET = "scaffold:permanent_drawer_sheet"
-    const val RAIL_TOGGLE_BUTTON = "scaffold:rail_toggle_button" // For expanding/collapsing rail
-    const val SCAFFOLD_CONTENT_AREA = "scaffold:content_area" // For the main Scaffold used inside drawers
-}
-
-object DrawerContentTestTags {
-    const val DRAWER_CONTENT_COLUMN = "drawer:content_column"
-    const val BRAND_ROW = "drawer:brand_row"
-    const val BRAND_ICON = "drawer:brand_icon"
-    const val BRAND_TEXT = "drawer:brand_text"
-    fun navigationItemTag(route: Any) = "drawer:nav_item_$route"
-    fun wideNavigationRailItemTag(route: Any) = "drawer:wide_nav_rail_item_$route"
-}
-
-object FabTestTags {
-    const val FAB_ANIMATED_CONTENT = "fab:animated_content"
-    const val SMALL_FAB = "fab:small_fab"
-    const val EXTENDED_FAB = "fab:extended_fab"
-    const val FAB_ADD_ICON = "fab:add_icon" // Common for both FAB types
-    const val FAB_ADD_TEXT = "fab:add_text" // Specific to Extended FAB
-}
 
 @OptIn(ExperimentalMaterial3ExpressiveApi::class, ExperimentalSharedTransitionApi::class)
 @Composable
@@ -353,19 +327,19 @@ fun DrawerContent(
     Column(
         modifier = modifier
             .verticalScroll(scrollState)
-            .testTag(DrawerContentTestTags.DRAWER_CONTENT_COLUMN),
+            .testTag(KmtScaffoldTestTags.DrawerContentTestTags.DRAWER_CONTENT_COLUMN),
         verticalArrangement = Arrangement.spacedBy(8.dp),
     ) {
         AnimatedVisibility(appState !is Medium) {
             Row(
-                modifier = Modifier.testTag(DrawerContentTestTags.BRAND_ROW),
+                modifier = Modifier.testTag(KmtScaffoldTestTags.DrawerContentTestTags.BRAND_ROW),
                 horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.CenterHorizontally),
                 verticalAlignment = Alignment.CenterVertically,
             ) {
                 Icon(
                     modifier = Modifier
                         .size(24.dp)
-                        .testTag(DrawerContentTestTags.BRAND_ICON),
+                        .testTag(KmtScaffoldTestTags.DrawerContentTestTags.BRAND_ICON),
                     imageVector = KmtDrawable.brand,
                     contentDescription = stringResource(Res.string.brand_content_description),
                     tint = MaterialTheme.colorScheme.primary,
@@ -373,7 +347,7 @@ fun DrawerContent(
                 Text(
                     KmtStrings.brand, // Assuming KmtStrings.brand is already a resource or intended to be so.
                     style = MaterialTheme.typography.titleLarge,
-                    modifier = Modifier.testTag(DrawerContentTestTags.BRAND_TEXT),
+                    modifier = Modifier.testTag(KmtScaffoldTestTags.DrawerContentTestTags.BRAND_TEXT),
                     color = MaterialTheme.colorScheme.primary,
                 )
             }
@@ -397,7 +371,7 @@ fun DrawerContent(
             if (appState is Medium) {
                 WideNavigationRailItem(
                     modifier = Modifier.testTag(
-                        DrawerContentTestTags.wideNavigationRailItemTag(item.route),
+                        KmtScaffoldTestTags.DrawerContentTestTags.wideNavigationRailItemTag(item.route),
                     ),
                     railExpanded = appState.wideNavigationRailState.targetValue == WideNavigationRailValue.Expanded,
                     icon = {
@@ -417,7 +391,8 @@ fun DrawerContent(
                 )
             } else {
                 NavigationDrawerItem(
-                    modifier = Modifier.testTag(DrawerContentTestTags.navigationItemTag(item.route)),
+                    modifier = Modifier.testTag(KmtScaffoldTestTags.
+                    DrawerContentTestTags.navigationItemTag(item.route)),
                     icon = {
                         val imageVector =
                             if (appState.isInCurrentRoute(item.route)) {
@@ -447,33 +422,35 @@ fun Fab(
     AnimatedContent(
         targetState = appState is Medium &&
             appState.wideNavigationRailState.targetValue == WideNavigationRailValue.Collapsed,
-        modifier = modifier.testTag(FabTestTags.FAB_ANIMATED_CONTENT), // Tag the AnimatedContent wrapper
+        modifier = modifier.testTag(KmtScaffoldTestTags.FabTestTags.FAB_ANIMATED_CONTENT),
+        // Tag the AnimatedContent wrapper
     ) { isCollapsedMediumFab ->
         if (isCollapsedMediumFab) {
             SmallFloatingActionButton(
-                modifier = Modifier.testTag(FabTestTags.SMALL_FAB), // Tag the specific FAB type
+                modifier = Modifier.testTag(KmtScaffoldTestTags.FabTestTags.SMALL_FAB), // Tag the specific FAB type
                 onClick = { appState.navController.navigateToDetail(Detail(-1)) },
             ) {
                 Icon(
                     imageVector = KmtIcons.Add,
                     contentDescription = stringResource(Res.string.add_content_description),
-                    modifier = Modifier.testTag(FabTestTags.FAB_ADD_ICON),
+                    modifier = Modifier.testTag(KmtScaffoldTestTags.FabTestTags.FAB_ADD_ICON),
                 )
             }
         } else {
             SmallExtendedFloatingActionButton(
-                modifier = Modifier.testTag(FabTestTags.EXTENDED_FAB), // Tag the specific FAB type
+                modifier = Modifier.testTag(KmtScaffoldTestTags.FabTestTags.EXTENDED_FAB),
+                // Tag the specific FAB type
                 onClick = { appState.navController.navigateToDetail(Detail(-1)) },
             ) {
                 Icon(
                     imageVector = KmtIcons.Add,
                     contentDescription = stringResource(Res.string.add_content_description),
-                    modifier = Modifier.testTag(FabTestTags.FAB_ADD_ICON),
+                    modifier = Modifier.testTag(KmtScaffoldTestTags.FabTestTags.FAB_ADD_ICON),
                 )
                 Spacer(modifier = Modifier.width(ButtonDefaults.IconSpacing))
                 Text(
                     stringResource(Res.string.fab_add_note_text),
-                    modifier = Modifier.testTag(FabTestTags.FAB_ADD_TEXT),
+                    modifier = Modifier.testTag(KmtScaffoldTestTags.FabTestTags.FAB_ADD_TEXT),
                 )
             }
         }

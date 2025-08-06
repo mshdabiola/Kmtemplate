@@ -34,14 +34,9 @@ import com.mshdabiola.designsystem.drawable.KmtDrawable
 import com.mshdabiola.designsystem.strings.KmtStrings
 import com.mshdabiola.designsystem.theme.onPrimaryLight
 import com.mshdabiola.designsystem.theme.primaryLight
+import com.mshdabiola.model.testtag.SplashScreenTestTags
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
-// Test Tags Object for SplashScreen
-object SplashScreenTestTags {
-    const val SCREEN_ROOT = "splash:screen_root" // Tag for the root Surface
-    const val BRAND_IMAGE = "splash:brand_image" // Tag for the brand Image
-    const val BRAND_TEXT = "splash:brand_text" // Tag for the brand Text
-}
 
 @Composable
 fun SplashScreen(
