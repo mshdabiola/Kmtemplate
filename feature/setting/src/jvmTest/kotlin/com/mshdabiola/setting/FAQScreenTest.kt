@@ -91,8 +91,10 @@ class FAQScreenTest {
         // Check if the first question is displayed
         composeTestRule.onNodeWithText(sampleFaqs[0].question).assertIsDisplayed()
         // Check if the root of the first FAQ item is displayed
-        composeTestRule.onNodeWithTag("${FaqScreenTestTags.
-        FaqListItemTestTags.LIST_ITEM_ROOT_PREFIX}${sampleFaqs[0].id}")
+        composeTestRule.onNodeWithTag(
+            "${FaqScreenTestTags
+                .FaqListItemTestTags.LIST_ITEM_ROOT_PREFIX}${sampleFaqs[0].id}",
+        )
             .assertIsDisplayed()
     }
 
@@ -138,24 +140,24 @@ class FAQScreenTest {
 
         // Question should be visible
         composeTestRule.onNodeWithTag(
-            "${FaqScreenTestTags.
-            FaqListItemTestTags.QUESTION_TEXT_PREFIX}${firstFaq.id}",
+            "${FaqScreenTestTags
+                .FaqListItemTestTags.QUESTION_TEXT_PREFIX}${firstFaq.id}",
             useUnmergedTree = true,
         )
             .assertIsDisplayed()
 
         // Answer should initially NOT be visible
         composeTestRule.onNodeWithTag(
-            "${FaqScreenTestTags.
-            FaqListItemTestTags.ANSWER_TEXT_PREFIX}${firstFaq.id}",
+            "${FaqScreenTestTags
+                .FaqListItemTestTags.ANSWER_TEXT_PREFIX}${firstFaq.id}",
             useUnmergedTree = true,
         )
             .assertDoesNotExist() // AnimatedVisibility makes it not exist if not visible
 
         // Expand icon should be displayed
         composeTestRule.onNodeWithTag(
-            "${FaqScreenTestTags.
-            FaqListItemTestTags.EXPAND_ICON_PREFIX}${firstFaq.id}",
+            "${FaqScreenTestTags
+                .FaqListItemTestTags.EXPAND_ICON_PREFIX}${firstFaq.id}",
             useUnmergedTree = true,
         )
             .assertIsDisplayed()

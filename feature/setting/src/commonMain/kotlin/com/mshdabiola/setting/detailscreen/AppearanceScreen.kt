@@ -276,8 +276,10 @@ fun ContrastTimeline(
                                 color = if (isSelected) selectedIconColor else Color.Transparent,
                                 shape = CircleShape,
                             )
-                            .testTag(AppearanceScreenTestTags
-                                .ContrastTimelineTestTags.optionBackground(option.id)),
+                            .testTag(
+                                AppearanceScreenTestTags
+                                    .ContrastTimelineTestTags.optionBackground(option.id),
+                            ),
                         contentAlignment = Alignment.Center,
                     ) {
                         Icon(
@@ -285,8 +287,10 @@ fun ContrastTimeline(
                             contentDescription = option.contentDescription,
                             modifier = Modifier
                                 .size(iconSize)
-                                .testTag(AppearanceScreenTestTags
-                                    .ContrastTimelineTestTags.optionIcon(option.id)),
+                                .testTag(
+                                    AppearanceScreenTestTags
+                                        .ContrastTimelineTestTags.optionIcon(option.id),
+                                ),
                             tint = if (isSelected) selectedIconColor else unselectedIconColor,
                         )
                     }

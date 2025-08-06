@@ -171,8 +171,10 @@ class SettingDetailScreenTest {
         // For example, click a contrast option within AppearanceScreen:
         // This assumes ContrastTimelineTestTags.OPTION_ITEM_PREFIX1 is a valid tag in AppearanceScreen
         val targetContrastOptionId = 1 // Example: Standard Contrast
-        composeRule.onNodeWithTag(AppearanceScreenTestTags.ContrastTimelineTestTags
-            .optionItem(targetContrastOptionId))
+        composeRule.onNodeWithTag(
+            AppearanceScreenTestTags.ContrastTimelineTestTags
+                .optionItem(targetContrastOptionId),
+        )
             .performClick()
         assertEquals(targetContrastOptionId, contrastChangedValue)
 

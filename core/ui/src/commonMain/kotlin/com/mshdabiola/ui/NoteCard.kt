@@ -35,7 +35,6 @@ import com.mshdabiola.model.Note
 import com.mshdabiola.model.testtag.NoteCardTestTags
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
-
 @OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
 fun NoteCard(

@@ -37,7 +37,6 @@ import com.mshdabiola.designsystem.theme.primaryLight
 import com.mshdabiola.model.testtag.SplashScreenTestTags
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
-
 @Composable
 fun SplashScreen(
     modifier: Modifier = Modifier,

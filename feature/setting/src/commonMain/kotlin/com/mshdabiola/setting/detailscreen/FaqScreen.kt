@@ -131,7 +131,8 @@ fun FaqScreen(
             FaqListItem(
                 faqItem = faqItem,
                 modifier = Modifier.testTag(
-                    "${FaqScreenTestTags.FaqListItemTestTags.LIST_ITEM_ROOT_PREFIX}${faqItem.id}"),
+                    "${FaqScreenTestTags.FaqListItemTestTags.LIST_ITEM_ROOT_PREFIX}${faqItem.id}",
+                ),
             )
         }
     }
@@ -165,7 +166,8 @@ fun FaqListItem(
                     modifier = Modifier
                         .weight(1f)
                         .testTag(
-                            "${FaqScreenTestTags.FaqListItemTestTags.QUESTION_TEXT_PREFIX}${faqItem.id}"),
+                            "${FaqScreenTestTags.FaqListItemTestTags.QUESTION_TEXT_PREFIX}${faqItem.id}",
+                        ),
                 )
                 Spacer(modifier = Modifier.width(8.dp))
                 Icon(
@@ -176,7 +178,8 @@ fun FaqListItem(
                         stringResource(Res.string.faq_icon_cd_expand)
                     },
                     modifier = Modifier.testTag(
-                        "${FaqScreenTestTags.FaqListItemTestTags.EXPAND_ICON_PREFIX}${faqItem.id}"),
+                        "${FaqScreenTestTags.FaqListItemTestTags.EXPAND_ICON_PREFIX}${faqItem.id}",
+                    ),
                 )
             }
 
@@ -188,7 +191,8 @@ fun FaqListItem(
                         style = MaterialTheme.typography.bodyMedium,
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                         modifier = Modifier.testTag(
-                            "${FaqScreenTestTags.FaqListItemTestTags.ANSWER_TEXT_PREFIX}${faqItem.id}"),
+                            "${FaqScreenTestTags.FaqListItemTestTags.ANSWER_TEXT_PREFIX}${faqItem.id}",
+                        ),
                     )
                 }
             }

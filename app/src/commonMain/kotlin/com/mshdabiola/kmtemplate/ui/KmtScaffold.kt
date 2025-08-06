@@ -92,7 +92,6 @@ import com.mshdabiola.ui.SharedTransitionContainer
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
-
 @OptIn(ExperimentalMaterial3ExpressiveApi::class, ExperimentalSharedTransitionApi::class)
 @Composable
 fun KmtScaffold(
@@ -391,8 +390,10 @@ fun DrawerContent(
                 )
             } else {
                 NavigationDrawerItem(
-                    modifier = Modifier.testTag(KmtScaffoldTestTags.
-                    DrawerContentTestTags.navigationItemTag(item.route)),
+                    modifier = Modifier.testTag(
+                        KmtScaffoldTestTags
+                            .DrawerContentTestTags.navigationItemTag(item.route),
+                    ),
                     icon = {
                         val imageVector =
                             if (appState.isInCurrentRoute(item.route)) {

@@ -56,8 +56,10 @@ class LanguageScreenTest {
 
         // 2. Verify all supported languages are displayed as items
         languages.take(3).forEach { (name, code) ->
-            composeRule.onNodeWithTag(LanguageScreenTestTags.languageItem(code),
-                useUnmergedTree = true)
+            composeRule.onNodeWithTag(
+                LanguageScreenTestTags.languageItem(code),
+                useUnmergedTree = true,
+            )
                 .assertIsDisplayed()
             // Optional: could also check if the text (name) is displayed within the item
         }

@@ -64,15 +64,24 @@ class AppearanceScreenTest {
 
         // Verify Contrast Section
         composeRule.onNodeWithTag(AppearanceScreenTestTags.CONTRAST_TITLE).assertIsDisplayed()
-        composeRule.onNodeWithTag(AppearanceScreenTestTags.
-        ContrastTimelineTestTags.TIMELINE_ROOT, useUnmergedTree = true)
+        composeRule.onNodeWithTag(
+            AppearanceScreenTestTags
+                .ContrastTimelineTestTags.TIMELINE_ROOT,
+            useUnmergedTree = true,
+        )
             .assertIsDisplayed()
         // Check initial contrast selection (id = 0 for Low)
-        composeRule.onNodeWithTag(AppearanceScreenTestTags.
-        ContrastTimelineTestTags.optionBackground(0), useUnmergedTree = true)
+        composeRule.onNodeWithTag(
+            AppearanceScreenTestTags
+                .ContrastTimelineTestTags.optionBackground(0),
+            useUnmergedTree = true,
+        )
             .assertIsDisplayed()
-        composeRule.onNodeWithTag(AppearanceScreenTestTags.
-        ContrastTimelineTestTags.optionIcon(0), useUnmergedTree = true)
+        composeRule.onNodeWithTag(
+            AppearanceScreenTestTags
+                .ContrastTimelineTestTags.optionIcon(0),
+            useUnmergedTree = true,
+        )
             .assertIsDisplayed()
 
         // Verify Background Section

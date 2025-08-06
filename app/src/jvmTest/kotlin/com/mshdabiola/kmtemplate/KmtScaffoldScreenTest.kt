@@ -95,8 +95,12 @@ class KmtScaffoldScreenTest {
     }
 
     @Composable
-    private fun TestAppScaffold(appState: KmtAppState, content: @Composable () -> Unit = {
-        Text("Screen Content") }) {
+    private fun TestAppScaffold(
+        appState: KmtAppState,
+        content: @Composable () -> Unit = {
+            Text("Screen Content")
+        },
+    ) {
         SharedTransitionLayout {
             CompositionLocalProvider(LocalSharedTransitionScope provides this) {
                 KmtTheme {
@@ -121,18 +125,26 @@ class KmtScaffoldScreenTest {
 
         composeTestRule.onNodeWithTag(KmtScaffoldTestTags.MODAL_NAVIGATION_DRAWER).assertIsDisplayed()
         composeTestRule.onNodeWithTag(KmtScaffoldTestTags.MODAL_DRAWER_SHEET).assertIsDisplayed()
-        composeTestRule.onNodeWithTag(KmtScaffoldTestTags
-            .DrawerContentTestTags.DRAWER_CONTENT_COLUMN).assertIsDisplayed()
-        composeTestRule.onNodeWithTag(KmtScaffoldTestTags
-            .DrawerContentTestTags.BRAND_ROW).assertIsDisplayed()
+        composeTestRule.onNodeWithTag(
+            KmtScaffoldTestTags
+                .DrawerContentTestTags.DRAWER_CONTENT_COLUMN,
+        ).assertIsDisplayed()
+        composeTestRule.onNodeWithTag(
+            KmtScaffoldTestTags
+                .DrawerContentTestTags.BRAND_ROW,
+        ).assertIsDisplayed()
 
         // Check for FAB (assuming KmtAppState isMain = true)
-        composeTestRule.onNodeWithTag(KmtScaffoldTestTags.FabTestTags
-            .FAB_ANIMATED_CONTENT).assertIsDisplayed()
+        composeTestRule.onNodeWithTag(
+            KmtScaffoldTestTags.FabTestTags
+                .FAB_ANIMATED_CONTENT,
+        ).assertIsDisplayed()
         // Check for either small or extended FAB based on how Fab composable behaves by default in compact
         // For instance, if it defaults to extended:
-        composeTestRule.onNodeWithTag(KmtScaffoldTestTags.FabTestTags
-            .EXTENDED_FAB).assertIsDisplayed()
+        composeTestRule.onNodeWithTag(
+            KmtScaffoldTestTags.FabTestTags
+                .EXTENDED_FAB,
+        ).assertIsDisplayed()
 //        composeTestRule.onNodeWithTag(FabTestTags.FAB_ADD_ICON).assertIsDisplayed()
     }
 
@@ -150,12 +162,16 @@ class KmtScaffoldScreenTest {
         composeTestRule.onNodeWithTag(KmtScaffoldTestTags.PERMANENT_NAVIGATION_DRAWER).assertIsDisplayed()
         composeTestRule.onNodeWithTag(KmtScaffoldTestTags.WIDE_NAVIGATION_RAIL).assertIsDisplayed()
         composeTestRule.onNodeWithTag(KmtScaffoldTestTags.RAIL_TOGGLE_BUTTON).assertIsDisplayed()
-        composeTestRule.onNodeWithTag(KmtScaffoldTestTags
-            .DrawerContentTestTags.DRAWER_CONTENT_COLUMN).assertIsDisplayed()
+        composeTestRule.onNodeWithTag(
+            KmtScaffoldTestTags
+                .DrawerContentTestTags.DRAWER_CONTENT_COLUMN,
+        ).assertIsDisplayed()
 
         // Check for FAB (Small FAB when rail is collapsed in Medium)
-        composeTestRule.onNodeWithTag(KmtScaffoldTestTags
-            .FabTestTags.FAB_ANIMATED_CONTENT).assertIsDisplayed()
+        composeTestRule.onNodeWithTag(
+            KmtScaffoldTestTags
+                .FabTestTags.FAB_ANIMATED_CONTENT,
+        ).assertIsDisplayed()
         composeTestRule.onNodeWithTag(KmtScaffoldTestTags.FabTestTags.SMALL_FAB).assertIsDisplayed()
 //        composeTestRule.onNodeWithTag(FabTestTags.FAB_ADD_ICON).assertIsDisplayed()
     }
@@ -174,11 +190,15 @@ class KmtScaffoldScreenTest {
         composeTestRule.onNodeWithTag(KmtScaffoldTestTags.PERMANENT_NAVIGATION_DRAWER).assertIsDisplayed()
         composeTestRule.onNodeWithTag(KmtScaffoldTestTags.WIDE_NAVIGATION_RAIL).assertIsDisplayed()
         composeTestRule.onNodeWithTag(KmtScaffoldTestTags.RAIL_TOGGLE_BUTTON).assertIsDisplayed()
-        composeTestRule.onNodeWithTag(KmtScaffoldTestTags
-            .DrawerContentTestTags.DRAWER_CONTENT_COLUMN).assertIsDisplayed()
+        composeTestRule.onNodeWithTag(
+            KmtScaffoldTestTags
+                .DrawerContentTestTags.DRAWER_CONTENT_COLUMN,
+        ).assertIsDisplayed()
         // Check for FAB (Extended FAB when rail is expanded in Medium)
-        composeTestRule.onNodeWithTag(KmtScaffoldTestTags
-            .FabTestTags.FAB_ANIMATED_CONTENT).assertIsDisplayed()
+        composeTestRule.onNodeWithTag(
+            KmtScaffoldTestTags
+                .FabTestTags.FAB_ANIMATED_CONTENT,
+        ).assertIsDisplayed()
         composeTestRule.onNodeWithTag(KmtScaffoldTestTags.FabTestTags.EXTENDED_FAB).assertIsDisplayed()
 //        composeTestRule.onNodeWithTag(FabTestTags.FAB_ADD_ICON).assertIsDisplayed()
     }
@@ -228,10 +248,14 @@ class KmtScaffoldScreenTest {
 
         composeTestRule.onNodeWithTag(KmtScaffoldTestTags.PERMANENT_NAVIGATION_DRAWER).assertIsDisplayed()
         composeTestRule.onNodeWithTag(KmtScaffoldTestTags.PERMANENT_DRAWER_SHEET).assertIsDisplayed()
-        composeTestRule.onNodeWithTag(KmtScaffoldTestTags
-            .DrawerContentTestTags.DRAWER_CONTENT_COLUMN).assertIsDisplayed()
-        composeTestRule.onNodeWithTag(KmtScaffoldTestTags
-            .DrawerContentTestTags.BRAND_ROW).assertIsDisplayed()
+        composeTestRule.onNodeWithTag(
+            KmtScaffoldTestTags
+                .DrawerContentTestTags.DRAWER_CONTENT_COLUMN,
+        ).assertIsDisplayed()
+        composeTestRule.onNodeWithTag(
+            KmtScaffoldTestTags
+                .DrawerContentTestTags.BRAND_ROW,
+        ).assertIsDisplayed()
 
         // FAB is not expected in the drawer part of the Expand state by default in your current scaffold logic
 //        composeTestRule.onNodeWithTag(FabTestTags.FAB_ANIMATED_CONTENT).assertDoesNotExist()
@@ -251,7 +275,9 @@ class KmtScaffoldScreenTest {
 
         composeTestRule.onNodeWithTag(KmtScaffoldTestTags.MODAL_NAVIGATION_DRAWER).assertIsDisplayed()
         // FAB should not be displayed
-        composeTestRule.onNodeWithTag(KmtScaffoldTestTags
-            .FabTestTags.FAB_ANIMATED_CONTENT).assertDoesNotExist()
+        composeTestRule.onNodeWithTag(
+            KmtScaffoldTestTags
+                .FabTestTags.FAB_ANIMATED_CONTENT,
+        ).assertDoesNotExist()
     }
 }

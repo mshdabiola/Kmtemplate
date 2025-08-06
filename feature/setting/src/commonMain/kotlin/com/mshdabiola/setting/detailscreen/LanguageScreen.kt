@@ -42,7 +42,6 @@ import com.mshdabiola.designsystem.strings.KmtStrings
 import com.mshdabiola.model.testtag.LanguageScreenTestTags
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun LanguageScreen(
