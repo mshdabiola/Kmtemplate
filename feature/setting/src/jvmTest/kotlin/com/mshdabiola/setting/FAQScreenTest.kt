@@ -24,10 +24,9 @@ import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import com.mshdabiola.designsystem.theme.KmtTheme
-import com.mshdabiola.setting.detailscreen.FaqItem // Assuming FaqItem is accessible
-import com.mshdabiola.setting.detailscreen.FaqListItemTestTags
+import com.mshdabiola.model.testtag.FaqScreenTestTags
+import com.mshdabiola.setting.detailscreen.FaqItem
 import com.mshdabiola.setting.detailscreen.FaqScreen
-import com.mshdabiola.setting.detailscreen.FaqScreenTestTags
 import org.junit.Rule
 import org.junit.Test
 
@@ -92,7 +91,8 @@ class FAQScreenTest {
         // Check if the first question is displayed
         composeTestRule.onNodeWithText(sampleFaqs[0].question).assertIsDisplayed()
         // Check if the root of the first FAQ item is displayed
-        composeTestRule.onNodeWithTag("${FaqListItemTestTags.LIST_ITEM_ROOT_PREFIX}${sampleFaqs[0].id}")
+        composeTestRule.onNodeWithTag("${FaqScreenTestTags.
+        FaqListItemTestTags.LIST_ITEM_ROOT_PREFIX}${sampleFaqs[0].id}")
             .assertIsDisplayed()
     }
 
@@ -138,21 +138,24 @@ class FAQScreenTest {
 
         // Question should be visible
         composeTestRule.onNodeWithTag(
-            "${FaqListItemTestTags.QUESTION_TEXT_PREFIX}${firstFaq.id}",
+            "${FaqScreenTestTags.
+            FaqListItemTestTags.QUESTION_TEXT_PREFIX}${firstFaq.id}",
             useUnmergedTree = true,
         )
             .assertIsDisplayed()
 
         // Answer should initially NOT be visible
         composeTestRule.onNodeWithTag(
-            "${FaqListItemTestTags.ANSWER_TEXT_PREFIX}${firstFaq.id}",
+            "${FaqScreenTestTags.
+            FaqListItemTestTags.ANSWER_TEXT_PREFIX}${firstFaq.id}",
             useUnmergedTree = true,
         )
             .assertDoesNotExist() // AnimatedVisibility makes it not exist if not visible
 
         // Expand icon should be displayed
         composeTestRule.onNodeWithTag(
-            "${FaqListItemTestTags.EXPAND_ICON_PREFIX}${firstFaq.id}",
+            "${FaqScreenTestTags.
+            FaqListItemTestTags.EXPAND_ICON_PREFIX}${firstFaq.id}",
             useUnmergedTree = true,
         )
             .assertIsDisplayed()
@@ -172,18 +175,18 @@ class FAQScreenTest {
 
         val firstFaq = sampleFaqs[0]
         val listItemNode = composeTestRule.onNodeWithTag(
-            "${FaqListItemTestTags.LIST_ITEM_ROOT_PREFIX}${firstFaq.id}",
+            "${FaqScreenTestTags.FaqListItemTestTags.LIST_ITEM_ROOT_PREFIX}${firstFaq.id}",
             useUnmergedTree = true,
         )
 
         // Initially answer is not visible, icon is "Expand"
         composeTestRule.onNodeWithTag(
-            "${FaqListItemTestTags.ANSWER_TEXT_PREFIX}${firstFaq.id}",
+            "${FaqScreenTestTags.FaqListItemTestTags.ANSWER_TEXT_PREFIX}${firstFaq.id}",
             useUnmergedTree = true,
         )
             .assertDoesNotExist()
         composeTestRule.onNodeWithTag(
-            "${FaqListItemTestTags.EXPAND_ICON_PREFIX}${firstFaq.id}",
+            "${FaqScreenTestTags.FaqListItemTestTags.EXPAND_ICON_PREFIX}${firstFaq.id}",
             useUnmergedTree = true,
         )
             .assertIsDisplayed()
@@ -194,7 +197,7 @@ class FAQScreenTest {
 
         // Answer should now be visible
         composeTestRule.onNodeWithTag(
-            "${FaqListItemTestTags.ANSWER_TEXT_PREFIX}${firstFaq.id}",
+            "${FaqScreenTestTags.FaqListItemTestTags.ANSWER_TEXT_PREFIX}${firstFaq.id}",
             useUnmergedTree = true,
         )
             .assertIsDisplayed()
@@ -212,14 +215,14 @@ class FAQScreenTest {
 
         val firstFaq = sampleFaqs[0]
         val listItemNode = composeTestRule.onNodeWithTag(
-            "${FaqListItemTestTags.LIST_ITEM_ROOT_PREFIX}${firstFaq.id}",
+            "${FaqScreenTestTags.FaqListItemTestTags.LIST_ITEM_ROOT_PREFIX}${firstFaq.id}",
             useUnmergedTree = true,
         )
 
         // Click once to expand
         listItemNode.performClick()
         composeTestRule.onNodeWithTag(
-            "${FaqListItemTestTags.ANSWER_TEXT_PREFIX}${firstFaq.id}",
+            "${FaqScreenTestTags.FaqListItemTestTags.ANSWER_TEXT_PREFIX}${firstFaq.id}",
             useUnmergedTree = true,
         )
             .assertIsDisplayed()
@@ -230,7 +233,7 @@ class FAQScreenTest {
 
         // Answer should be hidden again
         composeTestRule.onNodeWithTag(
-            "${FaqListItemTestTags.ANSWER_TEXT_PREFIX}${firstFaq.id}",
+            "${FaqScreenTestTags.FaqListItemTestTags.ANSWER_TEXT_PREFIX}${firstFaq.id}",
             useUnmergedTree = true,
         )
             .assertDoesNotExist()
@@ -272,7 +275,7 @@ class FAQScreenTest {
 
             // Check that the answer is initially not displayed (it might not exist in the tree yet)
             composeTestRule.onNodeWithTag(
-                "${FaqListItemTestTags.ANSWER_TEXT_PREFIX}$faqId",
+                "${FaqScreenTestTags.FaqListItemTestTags.ANSWER_TEXT_PREFIX}$faqId",
                 useUnmergedTree = true,
             )
                 .assertDoesNotExist() // Or assertDoesNotExist() if not in composition

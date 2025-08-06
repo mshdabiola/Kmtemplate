@@ -44,6 +44,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.mshdabiola.designsystem.drawable.KmtIcons
 import com.mshdabiola.designsystem.theme.KmtTheme
+import com.mshdabiola.model.testtag.FaqScreenTestTags
 import kmtemplate.feature.setting.generated.resources.Res
 import kmtemplate.feature.setting.generated.resources.faq_benefits_answer
 import kmtemplate.feature.setting.generated.resources.faq_benefits_question
@@ -129,7 +130,8 @@ fun FaqScreen(
         items(questions, key = { it.id }) { faqItem ->
             FaqListItem(
                 faqItem = faqItem,
-                modifier = Modifier.testTag("${FaqListItemTestTags.LIST_ITEM_ROOT_PREFIX}${faqItem.id}"),
+                modifier = Modifier.testTag(
+                    "${FaqScreenTestTags.FaqListItemTestTags.LIST_ITEM_ROOT_PREFIX}${faqItem.id}"),
             )
         }
     }
@@ -162,7 +164,8 @@ fun FaqListItem(
                     fontWeight = FontWeight.SemiBold,
                     modifier = Modifier
                         .weight(1f)
-                        .testTag("${FaqListItemTestTags.QUESTION_TEXT_PREFIX}${faqItem.id}"),
+                        .testTag(
+                            "${FaqScreenTestTags.FaqListItemTestTags.QUESTION_TEXT_PREFIX}${faqItem.id}"),
                 )
                 Spacer(modifier = Modifier.width(8.dp))
                 Icon(
@@ -172,7 +175,8 @@ fun FaqListItem(
                     } else {
                         stringResource(Res.string.faq_icon_cd_expand)
                     },
-                    modifier = Modifier.testTag("${FaqListItemTestTags.EXPAND_ICON_PREFIX}${faqItem.id}"),
+                    modifier = Modifier.testTag(
+                        "${FaqScreenTestTags.FaqListItemTestTags.EXPAND_ICON_PREFIX}${faqItem.id}"),
                 )
             }
 
@@ -183,7 +187,8 @@ fun FaqListItem(
                         text = faqItem.answer,
                         style = MaterialTheme.typography.bodyMedium,
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
-                        modifier = Modifier.testTag("${FaqListItemTestTags.ANSWER_TEXT_PREFIX}${faqItem.id}"),
+                        modifier = Modifier.testTag(
+                            "${FaqScreenTestTags.FaqListItemTestTags.ANSWER_TEXT_PREFIX}${faqItem.id}"),
                     )
                 }
             }
@@ -224,17 +229,4 @@ fun FaqListItemExpandedPreview() {
         )
         FaqListItem(faqItem = item)
     }
-}
-
-object FaqScreenTestTags {
-    const val SCREEN_ROOT = "faq:screen_root"
-    const val EMPTY_STATE_TEXT = "faq:empty_state_text"
-    const val FAQ_LIST = "faq:faq_list"
-}
-
-object FaqListItemTestTags {
-    const val LIST_ITEM_ROOT_PREFIX = "faq_item:root_"
-    const val QUESTION_TEXT_PREFIX = "faq_item:question_"
-    const val EXPAND_ICON_PREFIX = "faq_item:expand_icon_"
-    const val ANSWER_TEXT_PREFIX = "faq_item:answer_"
 }

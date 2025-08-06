@@ -22,10 +22,10 @@ import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import com.mshdabiola.designsystem.theme.KmtTheme
 import com.mshdabiola.model.DarkThemeConfig
-import com.mshdabiola.setting.detailscreen.AboutScreenTestTags
-import com.mshdabiola.setting.detailscreen.AppearanceScreenTestTags
-import com.mshdabiola.setting.detailscreen.ContrastTimelineTestTags
-import com.mshdabiola.setting.detailscreen.FaqScreenTestTags
+import com.mshdabiola.model.testtag.AboutScreenTestTags
+import com.mshdabiola.model.testtag.AppearanceScreenTestTags
+import com.mshdabiola.model.testtag.FaqScreenTestTags
+import com.mshdabiola.model.testtag.SettingDetailScreenTestTags
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Rule
@@ -171,7 +171,8 @@ class SettingDetailScreenTest {
         // For example, click a contrast option within AppearanceScreen:
         // This assumes ContrastTimelineTestTags.OPTION_ITEM_PREFIX1 is a valid tag in AppearanceScreen
         val targetContrastOptionId = 1 // Example: Standard Contrast
-        composeRule.onNodeWithTag(ContrastTimelineTestTags.optionItem(targetContrastOptionId))
+        composeRule.onNodeWithTag(AppearanceScreenTestTags.ContrastTimelineTestTags
+            .optionItem(targetContrastOptionId))
             .performClick()
         assertEquals(targetContrastOptionId, contrastChangedValue)
 

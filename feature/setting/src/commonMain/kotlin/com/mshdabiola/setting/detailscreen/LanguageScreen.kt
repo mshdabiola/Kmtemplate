@@ -39,12 +39,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.mshdabiola.designsystem.drawable.KmtIcons
 import com.mshdabiola.designsystem.strings.KmtStrings
+import com.mshdabiola.model.testtag.LanguageScreenTestTags
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
-object LanguageScreenTestTags {
-    const val LANGUAGE_LIST = "languageList"
-    fun languageItem(languageCode: String) = "languageItem_$languageCode"
-}
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

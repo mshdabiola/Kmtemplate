@@ -22,6 +22,7 @@ import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import com.mshdabiola.model.Note
+import com.mshdabiola.model.testtag.MainScreenTestTags
 import com.mshdabiola.ui.SharedTransitionContainer
 import org.junit.Rule
 import org.junit.Test

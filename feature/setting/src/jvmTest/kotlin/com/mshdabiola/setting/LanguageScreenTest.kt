@@ -25,8 +25,8 @@ import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.performClick
 import com.mshdabiola.designsystem.strings.KmtStrings
 import com.mshdabiola.designsystem.theme.KmtTheme
+import com.mshdabiola.model.testtag.LanguageScreenTestTags
 import com.mshdabiola.setting.detailscreen.LanguageScreen
-import com.mshdabiola.setting.detailscreen.LanguageScreenTestTags
 import org.junit.Assert.assertEquals
 import org.junit.Rule
 import org.junit.Test
@@ -56,7 +56,8 @@ class LanguageScreenTest {
 
         // 2. Verify all supported languages are displayed as items
         languages.take(3).forEach { (name, code) ->
-            composeRule.onNodeWithTag(LanguageScreenTestTags.languageItem(code), useUnmergedTree = true)
+            composeRule.onNodeWithTag(LanguageScreenTestTags.languageItem(code),
+                useUnmergedTree = true)
                 .assertIsDisplayed()
             // Optional: could also check if the text (name) is displayed within the item
         }

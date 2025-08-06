@@ -21,9 +21,9 @@ import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import com.mshdabiola.designsystem.theme.KmtTheme
+import com.mshdabiola.model.testtag.AboutScreenTestTags
 import com.mshdabiola.setting.detailscreen.AboutScreen
-import com.mshdabiola.setting.detailscreen.AboutScreenTestTags
-import org.junit.Assert.assertTrue // For assertTrue
+import org.junit.Assert.assertTrue
 import org.junit.Rule
 import org.junit.Test
 

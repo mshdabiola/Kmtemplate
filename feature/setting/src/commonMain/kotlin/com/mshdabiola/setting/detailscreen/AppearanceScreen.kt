@@ -50,6 +50,7 @@ import androidx.compose.ui.unit.dp
 import com.mshdabiola.designsystem.drawable.KmtIcons
 import com.mshdabiola.designsystem.theme.KmtTheme // For Preview
 import com.mshdabiola.model.DarkThemeConfig
+import com.mshdabiola.model.testtag.AppearanceScreenTestTags
 import com.mshdabiola.setting.SettingState
 import kmtemplate.feature.setting.generated.resources.Res
 import kmtemplate.feature.setting.generated.resources.appearance_background_title
@@ -69,30 +70,6 @@ import kmtemplate.feature.setting.generated.resources.daynight
 import org.jetbrains.compose.resources.stringArrayResource
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
-
-object AppearanceScreenTestTags {
-    const val SCREEN_ROOT = "appearance:screen_root"
-
-    const val CONTRAST_TITLE = "appearance:contrast_title"
-    // ContrastTimeline itself will have its own root tag under ContrastTimelineTestTags
-
-    const val BACKGROUND_TITLE = "appearance:background_title"
-    const val GRADIENT_BACKGROUND_ROW = "appearance:gradient_background_row"
-    const val GRADIENT_BACKGROUND_TEXT = "appearance:gradient_background_text"
-    const val GRADIENT_BACKGROUND_SWITCH = "appearance:gradient_background_switch"
-
-    const val DARK_MODE_TITLE = "appearance:dark_mode_title"
-    fun darkModeOptionRow(name: String) = "appearance:dark_mode_option_row_$name"
-    fun darkModeRadioButton(name: String) = "appearance:dark_mode_radio_button_$name"
-    fun darkModeOptionText(name: String) = "appearance:dark_mode_option_text_$name"
-}
-
-object ContrastTimelineTestTags {
-    const val TIMELINE_ROOT = "contrast_timeline:root"
-    fun optionItem(id: Int) = "contrast_timeline:option_item_$id"
-    fun optionIcon(id: Int) = "contrast_timeline:option_icon_$id"
-    fun optionBackground(id: Int) = "contrast_timeline:option_background_$id"
-}
 
 @Composable
 fun AppearanceScreen(
@@ -257,7 +234,7 @@ fun ContrastTimeline(
         modifier = modifier // Apply the passed modifier here
             .fillMaxWidth()
             .padding(vertical = 16.dp)
-            .testTag(ContrastTimelineTestTags.TIMELINE_ROOT),
+            .testTag(AppearanceScreenTestTags.ContrastTimelineTestTags.TIMELINE_ROOT),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceEvenly,
     ) {
@@ -275,7 +252,7 @@ fun ContrastTimeline(
                         onClickLabel = option.clickLabel,
                     )
                     .padding(horizontal = 4.dp)
-                    .testTag(ContrastTimelineTestTags.optionItem(option.id)),
+                    .testTag(AppearanceScreenTestTags.ContrastTimelineTestTags.optionItem(option.id)),
             ) {
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     if (index > 0) {
@@ -299,7 +276,8 @@ fun ContrastTimeline(
                                 color = if (isSelected) selectedIconColor else Color.Transparent,
                                 shape = CircleShape,
                             )
-                            .testTag(ContrastTimelineTestTags.optionBackground(option.id)),
+                            .testTag(AppearanceScreenTestTags
+                                .ContrastTimelineTestTags.optionBackground(option.id)),
                         contentAlignment = Alignment.Center,
                     ) {
                         Icon(
@@ -307,7 +285,8 @@ fun ContrastTimeline(
                             contentDescription = option.contentDescription,
                             modifier = Modifier
                                 .size(iconSize)
-                                .testTag(ContrastTimelineTestTags.optionIcon(option.id)),
+                                .testTag(AppearanceScreenTestTags
+                                    .ContrastTimelineTestTags.optionIcon(option.id)),
                             tint = if (isSelected) selectedIconColor else unselectedIconColor,
                         )
                     }

@@ -23,9 +23,11 @@ import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.performClick
 import com.mshdabiola.designsystem.theme.KmtTheme
 import com.mshdabiola.model.DarkThemeConfig
-import com.mshdabiola.setting.detailscreen.AppearanceScreenTestTags // For detail view check
-import com.mshdabiola.setting.detailscreen.ContrastTimelineTestTags
-import com.mshdabiola.setting.detailscreen.FaqScreenTestTags // For detail view check
+import com.mshdabiola.model.testtag.AppearanceScreenTestTags
+import com.mshdabiola.model.testtag.FaqScreenTestTags
+import com.mshdabiola.model.testtag.SettingDetailScreenTestTags
+import com.mshdabiola.model.testtag.SettingScreenListTestTags
+import com.mshdabiola.model.testtag.SettingScreenTestTags
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Rule
@@ -97,7 +99,8 @@ class SettingScreenTest {
 
         // 3. Verify callbacks are passed and work (optional, but good for integration)
         val targetContrastOptionId = 1 // Example, ensure this ID exists in your ContrastTimeline
-        composeRule.onNodeWithTag(ContrastTimelineTestTags.optionItem(targetContrastOptionId))
+        composeRule.onNodeWithTag(AppearanceScreenTestTags
+            .ContrastTimelineTestTags.optionItem(targetContrastOptionId))
             .performClick()
         assertEquals(targetContrastOptionId, onContrastChangedCalledWith)
 

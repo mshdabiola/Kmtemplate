@@ -29,9 +29,8 @@ import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.performClick
 import com.mshdabiola.designsystem.theme.KmtTheme
 import com.mshdabiola.model.DarkThemeConfig
+import com.mshdabiola.model.testtag.AppearanceScreenTestTags
 import com.mshdabiola.setting.detailscreen.AppearanceScreen
-import com.mshdabiola.setting.detailscreen.AppearanceScreenTestTags
-import com.mshdabiola.setting.detailscreen.ContrastTimelineTestTags
 import org.junit.Assert.assertEquals
 import org.junit.Rule
 import org.junit.Test
@@ -65,12 +64,15 @@ class AppearanceScreenTest {
 
         // Verify Contrast Section
         composeRule.onNodeWithTag(AppearanceScreenTestTags.CONTRAST_TITLE).assertIsDisplayed()
-        composeRule.onNodeWithTag(ContrastTimelineTestTags.TIMELINE_ROOT, useUnmergedTree = true)
+        composeRule.onNodeWithTag(AppearanceScreenTestTags.
+        ContrastTimelineTestTags.TIMELINE_ROOT, useUnmergedTree = true)
             .assertIsDisplayed()
         // Check initial contrast selection (id = 0 for Low)
-        composeRule.onNodeWithTag(ContrastTimelineTestTags.optionBackground(0), useUnmergedTree = true)
+        composeRule.onNodeWithTag(AppearanceScreenTestTags.
+        ContrastTimelineTestTags.optionBackground(0), useUnmergedTree = true)
             .assertIsDisplayed()
-        composeRule.onNodeWithTag(ContrastTimelineTestTags.optionIcon(0), useUnmergedTree = true)
+        composeRule.onNodeWithTag(AppearanceScreenTestTags.
+        ContrastTimelineTestTags.optionIcon(0), useUnmergedTree = true)
             .assertIsDisplayed()
 
         // Verify Background Section
@@ -129,7 +131,7 @@ class AppearanceScreenTest {
         }
 
         composeRule.onNodeWithTag(
-            ContrastTimelineTestTags.optionItem(targetContrastId),
+            AppearanceScreenTestTags.ContrastTimelineTestTags.optionItem(targetContrastId),
             useUnmergedTree = true,
         )
             .performClick()
@@ -137,11 +139,11 @@ class AppearanceScreenTest {
         assertEquals(targetContrastId, callbackContrast)
         // Verify UI updates (the new option item should now be visually selected)
         composeRule.onNodeWithTag(
-            ContrastTimelineTestTags.optionBackground(targetContrastId),
+            AppearanceScreenTestTags.ContrastTimelineTestTags.optionBackground(targetContrastId),
             useUnmergedTree = true,
         ).assertIsDisplayed()
         composeRule.onNodeWithTag(
-            ContrastTimelineTestTags.optionIcon(targetContrastId),
+            AppearanceScreenTestTags.ContrastTimelineTestTags.optionIcon(targetContrastId),
             useUnmergedTree = true,
         ).assertIsDisplayed()
     }
