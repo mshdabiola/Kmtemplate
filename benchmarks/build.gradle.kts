@@ -69,13 +69,7 @@ android {
         )
     }
 
-//    testOptions.managedDevices.devices {
-//        create<ManagedVirtualDevice>("pixel6Api34") {
-//            device = "Pixel 6"
-//            apiLevel = 34
-//            systemImageSource = "google"
-//        }
-//    }
+
     testOptions.managedDevices.allDevices {
 
         create<com.android.build.api.dsl.ManagedVirtualDevice>("pixel6Api33") {
