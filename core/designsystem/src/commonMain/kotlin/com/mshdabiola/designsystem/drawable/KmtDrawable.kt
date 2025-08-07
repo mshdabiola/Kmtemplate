@@ -31,7 +31,7 @@ val AppIcon: ImageVector
             defaultWidth = 128.58.dp,
             defaultHeight = 176.dp,
             viewportWidth = 128.58f,
-            viewportHeight = 176f
+            viewportHeight = 176f,
         ).apply {
             path(fill = SolidColor(Color.White)) {
                 moveTo(12f, 0f)

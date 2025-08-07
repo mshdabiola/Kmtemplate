@@ -16,7 +16,6 @@
 package com.mshdabiola.database.di
 
 import androidx.room.Room
-import androidx.room.RoomDatabase
 import androidx.sqlite.driver.bundled.BundledSQLiteDriver
 import com.mshdabiola.database.KmtDatabase
 import com.mshdabiola.database.util.Constant.DATABASE_NAME
