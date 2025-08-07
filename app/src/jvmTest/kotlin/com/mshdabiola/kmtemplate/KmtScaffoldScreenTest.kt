@@ -35,7 +35,6 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.createGraph
 import androidx.window.core.layout.WindowSizeClass
-import androidx.window.core.layout.WindowWidthSizeClass
 import com.mshdabiola.designsystem.theme.KmtTheme
 import com.mshdabiola.detail.navigation.Detail
 import com.mshdabiola.detail.navigation.navigateToDetail
@@ -63,7 +62,7 @@ class KmtScaffoldScreenTest {
     // Helper to create KmtAppState for different scenarios
     @Composable
     private fun createTestAppState(
-        windowWidthSizeClass: WindowWidthSizeClass,
+        windowWidthSizeClass: Int,
         drawerInitialValue: DrawerValue = DrawerValue.Closed, // For ModalNavigationDrawer
         railInitialValue: WideNavigationRailValue = WideNavigationRailValue.Collapsed, // For WideNavigationRail
     ): KmtAppState {
@@ -75,15 +74,7 @@ class KmtScaffoldScreenTest {
                     composable<Setting> { }
                 }
         }
-        val windowSizeClass = WindowSizeClass.compute(
-            when (windowWidthSizeClass) {
-                WindowWidthSizeClass.COMPACT -> 300f // dpWidth
-                WindowWidthSizeClass.MEDIUM -> 700f
-                WindowWidthSizeClass.EXPANDED -> 900f
-                else -> 300f
-            },
-            800f, // dpHeight, less critical for these tests
-        )
+        val windowSizeClass = WindowSizeClass(windowWidthSizeClass,800)
 
         return rememberKmtAppState(
             windowSizeClass = windowSizeClass,
@@ -117,7 +108,7 @@ class KmtScaffoldScreenTest {
         lateinit var appState: KmtAppState
         composeTestRule.setContent {
             appState = createTestAppState(
-                windowWidthSizeClass = WindowWidthSizeClass.COMPACT,
+                windowWidthSizeClass = 300,
                 drawerInitialValue = DrawerValue.Open, // Ensure drawer content is composed
             )
             TestAppScaffold(appState)
@@ -153,7 +144,7 @@ class KmtScaffoldScreenTest {
         lateinit var appState: KmtAppState
         composeTestRule.setContent {
             appState = createTestAppState(
-                windowWidthSizeClass = WindowWidthSizeClass.MEDIUM,
+                windowWidthSizeClass = WindowSizeClass.WIDTH_DP_MEDIUM_LOWER_BOUND,
                 railInitialValue = WideNavigationRailValue.Collapsed,
             )
             TestAppScaffold(appState)
@@ -181,7 +172,7 @@ class KmtScaffoldScreenTest {
         lateinit var appState: KmtAppState
         composeTestRule.setContent {
             appState = createTestAppState(
-                windowWidthSizeClass = WindowWidthSizeClass.MEDIUM,
+                windowWidthSizeClass =WindowSizeClass.WIDTH_DP_MEDIUM_LOWER_BOUND,
                 railInitialValue = WideNavigationRailValue.Expanded, // Start expanded
             )
             TestAppScaffold(appState)
@@ -209,7 +200,7 @@ class KmtScaffoldScreenTest {
         composeTestRule.setContent {
             // Start with rail collapsed
             appState = createTestAppState(
-                windowWidthSizeClass = WindowWidthSizeClass.MEDIUM,
+                windowWidthSizeClass =WindowSizeClass.WIDTH_DP_MEDIUM_LOWER_BOUND,
                 railInitialValue = WideNavigationRailValue.Collapsed,
             )
             TestAppScaffold(appState)
@@ -241,7 +232,7 @@ class KmtScaffoldScreenTest {
         lateinit var appState: KmtAppState
         composeTestRule.setContent {
             appState = createTestAppState(
-                windowWidthSizeClass = WindowWidthSizeClass.EXPANDED,
+                windowWidthSizeClass = WindowSizeClass.WIDTH_DP_EXPANDED_LOWER_BOUND,
             )
             TestAppScaffold(appState)
         }
@@ -266,7 +257,7 @@ class KmtScaffoldScreenTest {
         lateinit var appState: KmtAppState
         composeTestRule.setContent {
             appState = createTestAppState(
-                windowWidthSizeClass = WindowWidthSizeClass.COMPACT,
+                windowWidthSizeClass = 300,
             )
             mockNavController.navigateToDetail(Detail(1))
 

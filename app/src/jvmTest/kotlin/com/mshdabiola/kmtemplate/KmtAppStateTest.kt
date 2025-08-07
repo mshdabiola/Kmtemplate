@@ -87,11 +87,11 @@ class KmtAppStateTest {
         Dispatchers.resetMain()
     }
 
-    private fun initializeStateAndNavHostForNavigationTests(width: Float): KmtAppState {
+    private fun initializeStateAndNavHostForNavigationTests(width: Int): KmtAppState {
         lateinit var appState: KmtAppState
         composeTestRule.setContent {
             // For navigation tests, we can use any state, e.g., Compact
-            val compactWindowSize = WindowSizeClass.compute(width, 600f)
+            val compactWindowSize = WindowSizeClass(width, 600)
             val drawerState = rememberDrawerState(DrawerValue.Closed)
             appState = rememberKmtAppState(
                 windowSizeClass = compactWindowSize,
@@ -110,7 +110,7 @@ class KmtAppStateTest {
 
     @Test
     fun rememberKmtAppState_compactWidth_returnsCompactState() = runTest(testDispatcher) {
-        val state = initializeStateAndNavHostForNavigationTests(300f)
+        val state = initializeStateAndNavHostForNavigationTests(300)
 
         assertTrue(state is Compact)
         assertNotNull((state as Compact).onDrawer)
@@ -118,21 +118,21 @@ class KmtAppStateTest {
 
     @Test
     fun rememberKmtAppState_mediumWidth_returnsMediumState() = runTest(testDispatcher) {
-        val state = initializeStateAndNavHostForNavigationTests(800f)
+        val state = initializeStateAndNavHostForNavigationTests(800)
         assertTrue(state is Medium)
         assertNull((state as Medium).onDrawer)
     }
 
     @Test
     fun rememberKmtAppState_expandedWidth_returnsExpandState() = runTest(testDispatcher) {
-        val state = initializeStateAndNavHostForNavigationTests(1000f)
+        val state = initializeStateAndNavHostForNavigationTests(1000)
         assertTrue(state is Expand)
         assertNull((state as Expand).onDrawer)
     }
 
     @Test
     fun navigateTopRoute_navigatesToMainCorrectly() = runTest(testDispatcher) {
-        val state = initializeStateAndNavHostForNavigationTests(300f)
+        val state = initializeStateAndNavHostForNavigationTests(300)
         advanceUntilIdle() // Allow navigation to complete
 
         assertTrue(navController.currentBackStackEntry?.destination?.hasRoute(Main::class) ?: false)
@@ -141,7 +141,7 @@ class KmtAppStateTest {
 
     @Test
     fun navigateTopRoute_navigatesToSettingCorrectly() = runTest(testDispatcher) {
-        val state = initializeStateAndNavHostForNavigationTests(300f)
+        val state = initializeStateAndNavHostForNavigationTests(300)
 
         composeTestRule.runOnUiThread { state.navigateTopRoute(Setting) }
         advanceUntilIdle()
@@ -152,7 +152,7 @@ class KmtAppStateTest {
 
     @Test
     fun isInCurrentRoute_returnsTrueForCurrentRoute() = runTest(testDispatcher) {
-        val state = initializeStateAndNavHostForNavigationTests(300f)
+        val state = initializeStateAndNavHostForNavigationTests(300)
         composeTestRule.runOnUiThread { state.navigateTopRoute(Main) }
         advanceUntilIdle()
         assertTrue(state.isInCurrentRoute(Main))
@@ -160,7 +160,7 @@ class KmtAppStateTest {
 
     @Test
     fun isInCurrentRoute_returnsFalseForOtherRoute() = runTest(testDispatcher) {
-        val state = initializeStateAndNavHostForNavigationTests(300f)
+        val state = initializeStateAndNavHostForNavigationTests(300)
         composeTestRule.runOnUiThread { state.navigateTopRoute(Main) }
         advanceUntilIdle()
         assertFalse(state.isInCurrentRoute(Setting))
