@@ -131,7 +131,7 @@ jobs:
           token: ${{ secrets.CODECOV_TOKEN }}
           files: ./**/build/test-results/**/*.xml
 
-      - name: Upload local coverage reports (XML + HTML) (only API 30)
+      - name: Upload local coverage reports (XML + HTML)
         uses: actions/upload-artifact@v4
         with:
           name: coverage-reports
