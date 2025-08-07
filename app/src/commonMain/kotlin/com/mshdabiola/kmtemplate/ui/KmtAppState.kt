@@ -29,7 +29,6 @@ import androidx.navigation.NavDestination.Companion.hasRoute
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import androidx.window.core.layout.WindowSizeClass
-import androidx.window.core.layout.WindowWidthSizeClass
 import com.mshdabiola.main.navigation.Main
 import com.mshdabiola.main.navigation.navigateToMain
 import com.mshdabiola.setting.navigation.Setting
@@ -142,12 +141,12 @@ data class Expand(
 
 @Stable
 val WindowSizeClass.isWidthCompact: Boolean
-    get() = windowWidthSizeClass == WindowWidthSizeClass.COMPACT
+    get() = minWidthDp <WindowSizeClass.WIDTH_DP_MEDIUM_LOWER_BOUND
 
 @Stable
 inline val WindowSizeClass.isWidthMedium: Boolean
-    get() = windowWidthSizeClass == WindowWidthSizeClass.MEDIUM
+    get() = minWidthDp <WindowSizeClass.WIDTH_DP_EXPANDED_LOWER_BOUND
 
 @Stable
 inline val WindowSizeClass.isWidthExpanded: Boolean
-    get() = windowWidthSizeClass == WindowWidthSizeClass.EXPANDED
+    get() = minWidthDp >WindowSizeClass.WIDTH_DP_EXPANDED_LOWER_BOUND
