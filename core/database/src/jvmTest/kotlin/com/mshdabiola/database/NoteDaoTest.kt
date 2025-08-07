@@ -59,7 +59,6 @@ class NoteDaoTest {
             Room
                 .inMemoryDatabaseBuilder<KmtDatabase>()
                 .setDriver(BundledSQLiteDriver())
-                .setDriver(BundledSQLiteDriver())
                 .setQueryCoroutineContext(Dispatchers.IO)
                 .build()
         noteDao = database.getNoteDao()
