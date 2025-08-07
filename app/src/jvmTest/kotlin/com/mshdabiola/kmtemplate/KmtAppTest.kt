@@ -123,10 +123,10 @@ class KmtAppTest : KoinTest {
 
     @OptIn(ExperimentalMaterial3ExpressiveApi::class)
     @Composable
-    fun KmtApp(widthSizeClass: Int =WindowSizeClass.WIDTH_DP_MEDIUM_LOWER_BOUND) {
+    fun KmtApp(widthSizeClass: Int = WindowSizeClass.WIDTH_DP_MEDIUM_LOWER_BOUND) {
         val testCoroutineScope = CoroutineScope(StandardTestDispatcher())
 
-        val windowSizeClass = WindowSizeClass(widthSizeClass,800)
+        val windowSizeClass = WindowSizeClass(widthSizeClass, 800)
         appState = rememberKmtAppState(windowSizeClass, testCoroutineScope)
 
         CompositionLocalProvider(

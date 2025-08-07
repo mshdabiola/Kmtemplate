@@ -50,9 +50,9 @@ fun rememberKmtAppState(
         windowSizeClass,
     ) {
         when {
-            windowSizeClass.isWidthExpanded ->  Expand(navController)
+            windowSizeClass.isWidthExpanded -> Expand(navController)
             windowSizeClass.isWidthMedium -> Medium(navController, coroutineScope, wideNavigationRailState)
-            else ->Compact(navController, coroutineScope, drawerState)
+            else -> Compact(navController, coroutineScope, drawerState)
         }
     }
 }
@@ -141,12 +141,12 @@ data class Expand(
 
 @Stable
 val WindowSizeClass.isWidthCompact: Boolean
-    get() = minWidthDp >=0
+    get() = minWidthDp >= 0
 
 @Stable
 inline val WindowSizeClass.isWidthMedium: Boolean
-    get() = minWidthDp >=WindowSizeClass.WIDTH_DP_MEDIUM_LOWER_BOUND
+    get() = minWidthDp >= WindowSizeClass.WIDTH_DP_MEDIUM_LOWER_BOUND
 
 @Stable
 inline val WindowSizeClass.isWidthExpanded: Boolean
-    get() = minWidthDp >=WindowSizeClass.WIDTH_DP_EXPANDED_LOWER_BOUND
+    get() = minWidthDp >= WindowSizeClass.WIDTH_DP_EXPANDED_LOWER_BOUND
