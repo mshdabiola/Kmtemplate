@@ -104,7 +104,7 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@v4.7.3
         with:
           GITHUB_TOKEN: ${{ secrets.TOKEN }}
-          BRANCH: compose-web # The branch the action should deploy to.
+          BRANCH: release-web-app # The branch the action should deploy to.
           FOLDER: app/build/dist/wasmJs/productionExecutable # The folder the action should deploy.
           CLEAN: true # Automatically remove deleted files from the deploy branch
 
