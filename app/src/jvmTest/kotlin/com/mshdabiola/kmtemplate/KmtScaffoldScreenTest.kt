@@ -74,7 +74,7 @@ class KmtScaffoldScreenTest {
                     composable<Setting> { }
                 }
         }
-        val windowSizeClass = WindowSizeClass(windowWidthSizeClass,800)
+        val windowSizeClass = WindowSizeClass(windowWidthSizeClass, 800)
 
         return rememberKmtAppState(
             windowSizeClass = windowSizeClass,
@@ -172,7 +172,7 @@ class KmtScaffoldScreenTest {
         lateinit var appState: KmtAppState
         composeTestRule.setContent {
             appState = createTestAppState(
-                windowWidthSizeClass =WindowSizeClass.WIDTH_DP_MEDIUM_LOWER_BOUND,
+                windowWidthSizeClass = WindowSizeClass.WIDTH_DP_MEDIUM_LOWER_BOUND,
                 railInitialValue = WideNavigationRailValue.Expanded, // Start expanded
             )
             TestAppScaffold(appState)
@@ -200,7 +200,7 @@ class KmtScaffoldScreenTest {
         composeTestRule.setContent {
             // Start with rail collapsed
             appState = createTestAppState(
-                windowWidthSizeClass =WindowSizeClass.WIDTH_DP_MEDIUM_LOWER_BOUND,
+                windowWidthSizeClass = WindowSizeClass.WIDTH_DP_MEDIUM_LOWER_BOUND,
                 railInitialValue = WideNavigationRailValue.Collapsed,
             )
             TestAppScaffold(appState)
