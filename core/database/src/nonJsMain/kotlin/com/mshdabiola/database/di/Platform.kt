@@ -30,10 +30,3 @@ val daoModules =
             get<KmtDatabase>().getNoteDao()
         }
     }
-
-fun getRoomDatabase(builder: RoomDatabase.Builder<KmtDatabase>): KmtDatabase {
-    return builder
-        .setDriver(BundledSQLiteDriver())
-        .setQueryCoroutineContext(Dispatchers.IO)
-        .build()
-}
