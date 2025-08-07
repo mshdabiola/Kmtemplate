@@ -15,10 +15,7 @@
  */
 package com.mshdabiola.database.di
 
-import androidx.room.RoomDatabase
-import androidx.sqlite.driver.bundled.BundledSQLiteDriver
 import com.mshdabiola.database.KmtDatabase
-import kotlinx.coroutines.Dispatchers
 import org.koin.core.module.Module
 import org.koin.dsl.module
 

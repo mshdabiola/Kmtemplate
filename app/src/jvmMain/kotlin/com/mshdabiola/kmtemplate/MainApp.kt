@@ -62,7 +62,7 @@ fun mainApp() {
         Window(
             onCloseRequest = ::exitApplication,
             title = "${KmtStrings.brand} v${KmtStrings.version}",
-           icon = painterResource(Res.drawable.desktopicon),
+            icon = painterResource(Res.drawable.desktopicon),
             state = windowState,
         ) {
             val show = remember { mutableStateOf(true) }
