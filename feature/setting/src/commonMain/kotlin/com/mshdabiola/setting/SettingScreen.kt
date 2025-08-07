@@ -25,6 +25,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import com.mshdabiola.model.DarkThemeConfig
+import com.mshdabiola.model.testtag.SettingScreenTestTags
 import com.mshdabiola.ui.SharedTransitionContainer
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.ui.tooling.preview.Preview
@@ -116,8 +117,4 @@ internal fun SettingScreenPreview() {
             settingState = settingState,
         )
     }
-}
-
-object SettingScreenTestTags {
-    const val SCREEN_ROOT = "setting:screen_root" // For the ListDetailPaneScaffold or main root
 }

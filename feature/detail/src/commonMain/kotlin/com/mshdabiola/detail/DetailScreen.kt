@@ -35,6 +35,7 @@ import com.mshdabiola.designsystem.component.KmtTextField
 import com.mshdabiola.designsystem.component.KmtTopAppBar
 import com.mshdabiola.designsystem.drawable.KmtIcons
 import com.mshdabiola.detail.navigation.Detail
+import com.mshdabiola.model.testtag.DetailScreenTestTags
 import com.mshdabiola.ui.LocalNavAnimatedContentScope
 import com.mshdabiola.ui.LocalSharedTransitionScope
 import kmtemplate.feature.detail.generated.resources.Res
@@ -44,16 +45,6 @@ import kmtemplate.feature.detail.generated.resources.detail_delete_icon_content_
 import kmtemplate.feature.detail.generated.resources.detail_screen_title
 import kmtemplate.feature.detail.generated.resources.detail_title_placeholder
 import org.jetbrains.compose.resources.stringResource
-
-// Define a TestTags object
-object DetailScreenTestTags {
-    const val SCREEN_ROOT = "DetailScreenRoot"
-    const val TITLE_TEXT_FIELD = "DetailScreenTitleTextField"
-    const val CONTENT_TEXT_FIELD = "DetailScreenContentTextField"
-    const val DELETE_BUTTON = "DetailScreenDeleteButton"
-    const val BACK_BUTTON = "DetailScreenBackButton"
-    const val TOP_APP_BAR = "DetailScreenTopAppBar"
-}
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalSharedTransitionApi::class)
 @Composable

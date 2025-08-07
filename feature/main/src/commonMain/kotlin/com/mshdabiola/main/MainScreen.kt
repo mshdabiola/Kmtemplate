@@ -49,6 +49,7 @@ import com.mshdabiola.designsystem.component.KmtTopAppBar
 import com.mshdabiola.designsystem.drawable.KmtIcons
 import com.mshdabiola.designsystem.strings.KmtStrings
 import com.mshdabiola.designsystem.theme.LocalTintTheme
+import com.mshdabiola.model.testtag.MainScreenTestTags
 import com.mshdabiola.ui.NoteCard
 import io.github.alexzhirkevich.compottie.Compottie
 import io.github.alexzhirkevich.compottie.LottieCompositionSpec
@@ -59,20 +60,6 @@ import kmtemplate.feature.main.generated.resources.features_main_empty_body
 import kmtemplate.feature.main.generated.resources.features_main_empty_title
 import kmtemplate.feature.main.generated.resources.features_main_screen_title_home
 import org.jetbrains.compose.resources.stringResource
-
-// Define a TestTags object for MainScreen
-object MainScreenTestTags {
-    const val SCREEN_ROOT = "MainScreenRoot"
-    const val TOP_APP_BAR = "MainScreenTopAppBar"
-    const val LOADING_INDICATOR = "MainScreenLoadingIndicator"
-    const val EMPTY_STATE_COLUMN = "MainScreenEmptyStateColumn"
-    const val EMPTY_STATE_IMAGE = "MainScreenEmptyStateImage"
-    const val EMPTY_STATE_TITLE = "MainScreenEmptyStateTitle"
-    const val EMPTY_STATE_DESCRIPTION = "MainScreenEmptyStateDescription"
-    const val NOTE_LIST = "MainScreenNoteList"
-    // You might want a way to tag individual NoteCard items if needed for specific tests,
-    // e.g., by appending the note ID: fun noteCardTag(id: Long) = "MainScreenNoteCard_$id"
-}
 
 @OptIn(
     ExperimentalSharedTransitionApi::class,

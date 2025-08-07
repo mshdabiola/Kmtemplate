@@ -7,13 +7,11 @@ androidxComposeMaterial3Adaptive = "1.2.0-alpha04"
 androidxCore = "1.16.0"
 androidxCoreSplashscreen = "1.0.1"
 androidxDataStore = "1.1.7"
-androidxEspresso = "3.7.0"
 androidx-lifecycle = "2.9.1"
 androidxMacroBenchmark = "1.4.0"
 androidxProfileinstaller = "1.4.1"
 androidxTestCore = "1.7.0"
 androidxTestExt = "1.3.0"
-androidxTestRules = "1.7.0"
 androidxTestRunner = "1.7.0"
 androidxTracing = "1.3.0"
 androidxUiAutomator = "2.3.0"
@@ -30,7 +28,6 @@ dependencyGuard = "0.5.0"
 detekt = "1.23.8"
 firebaseBom = "33.16.0"
 firebaseCrashlyticsPlugin = "3.0.4"
-firebaseCrashylyticsPlugins = "2.9.9"
 firebasePerfPlugin = "1.4.2"
 gmsPlugin = "4.4.3"
 kermit = "2.0.6"
@@ -82,9 +79,7 @@ androidx-lifecycle-viewmodelCompose = { module = "org.jetbrains.androidx.lifecyc
 androidx-navigation-compose = { module = "org.jetbrains.androidx.navigation:navigation-compose", version.ref = "composeNavigation" }
 androidx-profileinstaller = { group = "androidx.profileinstaller", name = "profileinstaller", version.ref = "androidxProfileinstaller" }
 androidx-test-core = { group = "androidx.test", name = "core", version.ref = "androidxTestCore" }
-androidx-test-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "androidxEspresso" }
 androidx-test-ext = { group = "androidx.test.ext", name = "junit-ktx", version.ref = "androidxTestExt" }
-androidx-test-rules = { group = "androidx.test", name = "rules", version.ref = "androidxTestRules" }
 androidx-test-runner = { group = "androidx.test", name = "runner", version.ref = "androidxTestRunner" }
 androidx-test-uiautomator = { group = "androidx.test.uiautomator", name = "uiautomator", version.ref = "androidxUiAutomator" }
 androidx-tracing-ktx = { group = "androidx.tracing", name = "tracing-ktx", version.ref = "androidxTracing" }

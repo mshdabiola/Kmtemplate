@@ -23,13 +23,8 @@ import androidx.compose.ui.platform.testTag
 import com.mshdabiola.designsystem.component.KmtButton
 import com.mshdabiola.designsystem.component.KmtTextButton
 import com.mshdabiola.model.ReleaseInfo
+import com.mshdabiola.model.testtag.ReleaseUpdateTags
 import org.jetbrains.compose.ui.tooling.preview.Preview
-
-const val RELEASE_UPDATE_DIALOG_TAG = "release_update_dialog"
-const val RELEASE_UPDATE_DIALOG_TITLE_TAG = "release_update_dialog_title"
-const val RELEASE_UPDATE_DIALOG_BODY_TAG = "release_update_dialog_body"
-const val RELEASE_UPDATE_DIALOG_CONFIRM_BUTTON_TAG = "release_update_dialog_confirm_button"
-const val RELEASE_UPDATE_DIALOG_DISMISS_BUTTON_TAG = "release_update_dialog_dismiss_button"
 
 @Composable
 fun ReleaseUpdateDialog(
@@ -38,25 +33,25 @@ fun ReleaseUpdateDialog(
     onDownloadClick: () -> Unit,
 ) {
     AlertDialog(
-        modifier = Modifier.testTag(RELEASE_UPDATE_DIALOG_TAG),
+        modifier = Modifier.testTag(ReleaseUpdateTags.RELEASE_UPDATE_DIALOG_TAG),
         onDismissRequest = onDismissRequest,
         title = {
             Text(
                 text = "New Update Available",
-                modifier = Modifier.testTag(RELEASE_UPDATE_DIALOG_TITLE_TAG),
+                modifier = Modifier.testTag(ReleaseUpdateTags.RELEASE_UPDATE_DIALOG_TITLE_TAG),
             )
         },
         text = {
             Text(
                 text = releaseInfo.body,
                 maxLines = 10,
-                modifier = Modifier.testTag(RELEASE_UPDATE_DIALOG_BODY_TAG),
+                modifier = Modifier.testTag(ReleaseUpdateTags.RELEASE_UPDATE_DIALOG_BODY_TAG),
             )
         },
         confirmButton = {
             KmtButton(
                 onClick = onDownloadClick,
-                modifier = Modifier.testTag(RELEASE_UPDATE_DIALOG_CONFIRM_BUTTON_TAG),
+                modifier = Modifier.testTag(ReleaseUpdateTags.RELEASE_UPDATE_DIALOG_CONFIRM_BUTTON_TAG),
             ) {
                 Text("Download")
             }
@@ -64,7 +59,7 @@ fun ReleaseUpdateDialog(
         dismissButton = {
             KmtTextButton(
                 onClick = onDismissRequest,
-                modifier = Modifier.testTag(RELEASE_UPDATE_DIALOG_DISMISS_BUTTON_TAG),
+                modifier = Modifier.testTag(ReleaseUpdateTags.RELEASE_UPDATE_DIALOG_DISMISS_BUTTON_TAG),
             ) {
                 Text("Cancel")
             }

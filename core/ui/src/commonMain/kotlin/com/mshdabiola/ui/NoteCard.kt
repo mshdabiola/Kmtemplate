@@ -32,14 +32,8 @@ import androidx.compose.ui.platform.testTag // Import testTag
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.mshdabiola.model.Note
+import com.mshdabiola.model.testtag.NoteCardTestTags
 import org.jetbrains.compose.ui.tooling.preview.Preview
-
-// It's a good practice to define your test tags as constants
-object NoteCardTestTags {
-    const val ROOT = "NoteCardRoot"
-    const val TITLE = "NoteCardTitle"
-    const val CONTENT = "NoteCardContent"
-}
 
 @OptIn(ExperimentalSharedTransitionApi::class)
 @Composable

@@ -32,6 +32,7 @@ import com.mshdabiola.designsystem.component.KmtIconButton
 import com.mshdabiola.designsystem.component.KmtTopAppBar
 import com.mshdabiola.designsystem.drawable.KmtIcons
 import com.mshdabiola.model.DarkThemeConfig
+import com.mshdabiola.model.testtag.SettingDetailScreenTestTags
 import com.mshdabiola.setting.detailscreen.AboutScreen
 import com.mshdabiola.setting.detailscreen.AppearanceScreen
 import com.mshdabiola.setting.detailscreen.FaqScreen
@@ -119,18 +120,4 @@ internal fun SettingDetailScreen(
             }
         }
     }
-}
-
-object SettingDetailScreenTestTags {
-    const val SCREEN_ROOT = "setting_detail:screen_root"
-    const val TOP_APP_BAR = "setting_detail:top_app_bar"
-    const val BACK_ICON_BUTTON = "setting_detail:back_icon_button"
-
-    // If you need to target specific detail content containers,
-    // you might add tags like:
-    // const val APPEARANCE_CONTENT_CONTAINER = "setting_detail:appearance_content"
-    // const val FAQ_CONTENT_CONTAINER = "setting_detail:faq_content"
-    // const val ABOUT_CONTENT_CONTAINER = "setting_detail:about_content"
-    // However, often the tags within the specific content screens (AppearanceScreen, FaqScreen, etc.)
-    // are sufficient. You can decide based on your testing needs.
 }

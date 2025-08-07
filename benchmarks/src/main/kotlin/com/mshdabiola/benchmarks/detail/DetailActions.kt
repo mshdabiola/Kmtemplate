@@ -20,9 +20,10 @@ package com.mshdabiola.benchmarks.detail
 import androidx.benchmark.macro.MacrobenchmarkScope
 import androidx.test.uiautomator.By
 import androidx.test.uiautomator.Until
+import com.mshdabiola.model.testtag.DetailScreenTestTags
 
 fun MacrobenchmarkScope.goBack() {
-    val selector = By.res("DetailScreenBackButton")
+    val selector = By.res(DetailScreenTestTags.BACK_BUTTON)
 
     device.wait(Until.hasObject(selector), 5000)
 
@@ -34,8 +35,8 @@ fun MacrobenchmarkScope.goBack() {
 }
 
 fun MacrobenchmarkScope.addNote() {
-    val titleSelector = By.res("DetailScreenTitleTextField")
-    val contentSelector = By.res("DetailScreenContentTextField")
+    val titleSelector = By.res(DetailScreenTestTags.TITLE_TEXT_FIELD)
+    val contentSelector = By.res(DetailScreenTestTags.CONTENT_TEXT_FIELD)
 
     device.wait(Until.hasObject(titleSelector), 5000)
 
@@ -44,8 +45,8 @@ fun MacrobenchmarkScope.addNote() {
 
     titleTextField.text = "title"
     contentTextField.text = "content"
-//    DetailScreenDeleteButton
-    device.wait(Until.hasObject(By.res(
-        "DetailScreenDeleteButton")), 3000L)
-    // Wait until saved title are shown on screen
+    device.wait(
+        Until.hasObject(By.res(DetailScreenTestTags.DELETE_BUTTON)),
+        3000L,
+    )
 }

@@ -22,6 +22,7 @@ import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.performClick
 import com.mshdabiola.model.ReleaseInfo
+import com.mshdabiola.model.testtag.ReleaseUpdateTags
 import org.junit.Rule
 import org.junit.Test
 
@@ -48,17 +49,17 @@ class ReleaseUpdateDialogTest {
             )
         }
 
-        composeTestRule.onNodeWithTag(RELEASE_UPDATE_DIALOG_TAG).assertIsDisplayed()
-        composeTestRule.onNodeWithTag(RELEASE_UPDATE_DIALOG_TITLE_TAG)
+        composeTestRule.onNodeWithTag(ReleaseUpdateTags.RELEASE_UPDATE_DIALOG_TAG).assertIsDisplayed()
+        composeTestRule.onNodeWithTag(ReleaseUpdateTags.RELEASE_UPDATE_DIALOG_TITLE_TAG)
             .assertIsDisplayed()
             .assertTextEquals("New Update Available")
-        composeTestRule.onNodeWithTag(RELEASE_UPDATE_DIALOG_BODY_TAG)
+        composeTestRule.onNodeWithTag(ReleaseUpdateTags.RELEASE_UPDATE_DIALOG_BODY_TAG)
             .assertIsDisplayed()
             .assertTextEquals(testReleaseInfo.body)
-        composeTestRule.onNodeWithTag(RELEASE_UPDATE_DIALOG_CONFIRM_BUTTON_TAG)
+        composeTestRule.onNodeWithTag(ReleaseUpdateTags.RELEASE_UPDATE_DIALOG_CONFIRM_BUTTON_TAG)
             .assertIsDisplayed()
         // .assertTextEquals("Download") // KmtButton does not directly expose text for assertion
-        composeTestRule.onNodeWithTag(RELEASE_UPDATE_DIALOG_DISMISS_BUTTON_TAG)
+        composeTestRule.onNodeWithTag(ReleaseUpdateTags.RELEASE_UPDATE_DIALOG_DISMISS_BUTTON_TAG)
             .assertIsDisplayed()
         // .assertTextEquals("Cancel") // TextButton's child Text is not directly accessible by tag here
     }
@@ -74,7 +75,8 @@ class ReleaseUpdateDialogTest {
             )
         }
 
-        composeTestRule.onNodeWithTag(RELEASE_UPDATE_DIALOG_CONFIRM_BUTTON_TAG).performClick()
+        composeTestRule.onNodeWithTag(ReleaseUpdateTags.RELEASE_UPDATE_DIALOG_CONFIRM_BUTTON_TAG)
+            .performClick()
         assert(downloadClicked)
     }
 
@@ -89,7 +91,8 @@ class ReleaseUpdateDialogTest {
             )
         }
 
-        composeTestRule.onNodeWithTag(RELEASE_UPDATE_DIALOG_DISMISS_BUTTON_TAG).performClick()
+        composeTestRule.onNodeWithTag(ReleaseUpdateTags.RELEASE_UPDATE_DIALOG_DISMISS_BUTTON_TAG)
+            .performClick()
         assert(dismissClicked)
     }
 }
