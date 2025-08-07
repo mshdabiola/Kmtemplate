@@ -18,8 +18,8 @@ package com.mshdabiola.database
 import androidx.room.Room
 import androidx.sqlite.driver.bundled.BundledSQLiteDriver
 import com.mshdabiola.database.dao.NoteDao
-import com.mshdabiola.database.di.getRoomDatabase
 import com.mshdabiola.database.model.NoteEntity
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.runTest
 import org.junit.After
@@ -55,11 +55,12 @@ class NoteDaoTest {
 
     @Before
     fun createDb() {
-        val db =
+        database =
             Room
                 .inMemoryDatabaseBuilder<KmtDatabase>()
                 .setDriver(BundledSQLiteDriver())
-        database = getRoomDatabase(db)
+                .setQueryCoroutineContext(Dispatchers.IO)
+                .build()
         noteDao = database.getNoteDao()
     }
 

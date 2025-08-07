@@ -16,9 +16,10 @@
 package com.mshdabiola.database.di
 
 import androidx.room.Room
-import androidx.room.RoomDatabase
+import androidx.sqlite.driver.bundled.BundledSQLiteDriver
 import com.mshdabiola.database.KmtDatabase
 import com.mshdabiola.database.util.Constant.DATABASE_NAME
+import kotlinx.coroutines.Dispatchers
 import org.koin.core.module.Module
 import org.koin.dsl.module
 import java.io.File
@@ -30,14 +31,17 @@ actual val databaseModule: Module
     get() =
         module {
             single {
-                getRoomDatabase(getDatabaseBuilder())
+                getDatabaseBuilder()
             }
             includes(daoModules)
         }
 
-fun getDatabaseBuilder(): RoomDatabase.Builder<KmtDatabase> {
+fun getDatabaseBuilder(): KmtDatabase {
     val path = File(databasePath, DATABASE_NAME)
     return Room.databaseBuilder<KmtDatabase>(
         name = path.absolutePath,
     )
+        .setDriver(BundledSQLiteDriver())
+        .setQueryCoroutineContext(Dispatchers.IO)
+        .build()
 }

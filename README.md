@@ -49,14 +49,14 @@
   <img src="./fastlane/metadata/android/en-US/images/icon.png" width="200" />
 </p>
 <p align="center">
-  <img src="./icons/screenshot.png" width="800" alt="Application Screenshot" />
+  <img src="images/screenshot.png" width="800" alt="Application Screenshot" />
 </p>
 
 <div align="center">
 <!-- <a href="https://apt.izzysoft.de/packages/com.mshdabiola.kmttemplate/"><img src="https://gitlab.com/IzzyOnDroid/repo/-/raw/master/assets/IzzyOnDroid.png" height="80"></a> -->
 <a href="https://f-droid.org/en/packages/com.mshdabiola.kmttemplate"><img src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png" height="80" alt="Get it on F-Droid"></a>
-  <a href="https://github.com/mshdabiola/Kmtemplate/releases"><img src="./icons/desktop-icon.png" height="80" alt="Download for Desktop"></a>
-   <a href="https://github.com/mshdabiola/Kmtemplate/releases"><img src="./icons/web-icon.png" height="80" alt="Try it on Web"></a>
+  <a href="https://github.com/mshdabiola/Kmtemplate/releases"><img src="images/desktop-icon.png" height="80" alt="Download for Desktop"></a>
+   <a href="https://github.com/mshdabiola/Kmtemplate/releases"><img src="images/web-icon.png" height="80" alt="Try it on Web"></a>
     <a href="https://github.com/mshdabiola/Kmtemplate/releases"><img src="https://raw.githubusercontent.com/NeoApplications/Neo-Backup/034b226cea5c1b30eb4f6a6f313e4dadcbb0ece4/badge_github.png" height="80" alt="Get it on Github"></a>
 </div>
 
@@ -76,7 +76,7 @@ The design principles and architectural choices applied in this project are idea
 This project follows **Clean Architecture** principles, ensuring a scalable, maintainable, and testable codebase. The architecture divides the application into three main layers with clear boundaries, promoting a strong separation of concerns.
 
 <p align="center">
-  <img src="./icons/Architecture - overall.png" width="800" alt="Overall Architecture Diagram" />
+  <img src="images/Architecture - overall.png" width="800" alt="Overall Architecture Diagram" />
 </p>
 
 ### 💻 Presentation Layer
@@ -104,7 +104,7 @@ This layer is responsible for encapsulating application data. It provides the ne
 * **Data Sources**: The low-level implementation for data access, such as **Ktor** for network requests or **Room** for local database storage.
 
 <p align="center">
-  <img src="./icons/Architecture - data.png" width="800" alt="Data Layer Architecture Diagram" />
+  <img src="images/Architecture - data.png" width="800" alt="Data Layer Architecture Diagram" />
 </p>
 
 ---
@@ -114,7 +114,7 @@ This layer is responsible for encapsulating application data. It provides the ne
 The codebase is organized into multiple Gradle modules to improve maintainability, scalability, and reusability. This modular approach enables independent development, easier testing, and faster build times, while supporting code sharing across all supported platforms.
 
 <p align="center">
-  <img src="./icons/Modularization.png" width="800" alt="Modularization Diagram" />
+  <img src="images/Modularization.png" width="800" alt="Modularization Diagram" />
 </p>
 
 * **:app**: The main application module that wires everything together. It contains platform-specific code for each target (Android, JVM, WASM) and the entry points for the application.
@@ -165,7 +165,7 @@ See the app in action across all supported screens:
   <img src="./fastlane/metadata/android/en-US/images/tabletScreenshots/2.png" width="200" alt="Tablet Settings Screen Screenshot" />
   <img src="./fastlane/metadata/android/en-US/images/tabletScreenshots/3.png" width="200" alt="Tablet Detail Screen Screenshot" />
 </p>
-<!-- 
+<!--
 ### 🌐 WASM (Web)
 <p align="center">
   <img src="./fastlane/metadata/android/en-US/images/webScreenshots/1.png" width="200" alt="Web Home Screen Screenshot" />
