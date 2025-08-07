@@ -64,4 +64,6 @@ object KmtIcons {
 
     val BugReport = Icons.Rounded.BugReport
     val Faq = Icons.AutoMirrored.Rounded.Chat
+
+    val AppIcon = com.mshdabiola.designsystem.drawable.AppIcon
 }

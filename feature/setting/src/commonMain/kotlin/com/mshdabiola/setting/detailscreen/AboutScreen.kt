@@ -38,7 +38,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import com.mshdabiola.designsystem.component.KmtTextButton
-import com.mshdabiola.designsystem.drawable.KmtDrawable
+import com.mshdabiola.designsystem.drawable.KmtIcons
 import com.mshdabiola.designsystem.strings.KmtStrings
 import com.mshdabiola.designsystem.theme.KmtTheme
 import com.mshdabiola.model.testtag.AboutScreenTestTags
@@ -71,7 +71,7 @@ fun AboutScreen(
         horizontalAlignment = Alignment.Start,
     ) {
         Icon(
-            imageVector = KmtDrawable.brand,
+            imageVector = KmtIcons.AppIcon,
             contentDescription = "App Logo",
             modifier = Modifier
                 .align(Alignment.CenterHorizontally)

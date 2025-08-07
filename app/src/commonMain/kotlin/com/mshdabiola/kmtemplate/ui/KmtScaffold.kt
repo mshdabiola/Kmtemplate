@@ -69,7 +69,6 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.createGraph
-import com.mshdabiola.designsystem.drawable.KmtDrawable
 import com.mshdabiola.designsystem.drawable.KmtIcons
 import com.mshdabiola.designsystem.strings.KmtStrings
 import com.mshdabiola.detail.navigation.Detail
@@ -339,7 +338,7 @@ fun DrawerContent(
                     modifier = Modifier
                         .size(24.dp)
                         .testTag(KmtScaffoldTestTags.DrawerContentTestTags.BRAND_ICON),
-                    imageVector = KmtDrawable.brand,
+                    imageVector = KmtIcons.AppIcon,
                     contentDescription = stringResource(Res.string.brand_content_description),
                     tint = MaterialTheme.colorScheme.primary,
                 )

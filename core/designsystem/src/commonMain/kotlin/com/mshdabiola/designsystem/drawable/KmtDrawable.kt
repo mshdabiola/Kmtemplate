@@ -15,17 +15,71 @@
  */
 package com.mshdabiola.designsystem.drawable
 
-import androidx.compose.runtime.Composable
-import kmtemplate.core.designsystem.generated.resources.Res
-import kmtemplate.core.designsystem.generated.resources.brand_png
-import kmtemplate.core.designsystem.generated.resources.brand_vector
-import org.jetbrains.compose.resources.painterResource
-import org.jetbrains.compose.resources.vectorResource
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.SolidColor
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.graphics.vector.path
+import androidx.compose.ui.unit.dp
 
-object KmtDrawable {
-    val brand
-        @Composable get() = vectorResource(Res.drawable.brand_vector)
+val AppIcon: ImageVector
+    get() {
+        if (_AppIcon != null) {
+            return _AppIcon!!
+        }
+        _AppIcon = ImageVector.Builder(
+            name = "AppIcon",
+            defaultWidth = 128.58.dp,
+            defaultHeight = 176.dp,
+            viewportWidth = 128.58f,
+            viewportHeight = 176f
+        ).apply {
+            path(fill = SolidColor(Color.White)) {
+                moveTo(12f, 0f)
+                horizontalLineTo(116.58f)
+                arcToRelative(12f, 12f, 0f, isMoreThanHalf = false, isPositiveArc = true, 12f, 12f)
+                verticalLineTo(25f)
+                arcToRelative(0f, 0f, 0f, isMoreThanHalf = false, isPositiveArc = true, 0f, 0f)
+                horizontalLineTo(0f)
+                arcToRelative(0f, 0f, 0f, isMoreThanHalf = false, isPositiveArc = true, 0f, 0f)
+                verticalLineTo(12f)
+                arcTo(12f, 12f, 0f, isMoreThanHalf = false, isPositiveArc = true, 12f, 0f)
+                close()
+            }
+            path(fill = SolidColor(Color.White)) {
+                moveTo(0f, 32f)
+                horizontalLineTo(40.58f)
+                arcToRelative(0f, 0f, 0f, isMoreThanHalf = false, isPositiveArc = true, 0f, 0f)
+                verticalLineTo(176f)
+                arcToRelative(0f, 0f, 0f, isMoreThanHalf = false, isPositiveArc = true, 0f, 0f)
+                horizontalLineTo(11.91f)
+                arcTo(11.91f, 11.91f, 0f, isMoreThanHalf = false, isPositiveArc = true, 0f, 164.09f)
+                verticalLineTo(32f)
+                arcTo(0f, 0f, 0f, isMoreThanHalf = false, isPositiveArc = true, 0f, 32f)
+                close()
+            }
+            path(fill = SolidColor(Color.White)) {
+                moveTo(48.58f, 32f)
+                horizontalLineToRelative(80f)
+                verticalLineToRelative(60f)
+                horizontalLineToRelative(-80f)
+                close()
+            }
+            path(fill = SolidColor(Color.White)) {
+                moveTo(48.58f, 100f)
+                horizontalLineToRelative(80f)
+                arcToRelative(0f, 0f, 0f, isMoreThanHalf = false, isPositiveArc = true, 0f, 0f)
+                verticalLineToRelative(63.69f)
+                arcTo(12.31f, 12.31f, 0f, isMoreThanHalf = false, isPositiveArc = true, 116.26f, 176f)
+                horizontalLineTo(48.58f)
+                arcToRelative(0f, 0f, 0f, isMoreThanHalf = false, isPositiveArc = true, 0f, 0f)
+                verticalLineTo(100f)
+                arcTo(0f, 0f, 0f, isMoreThanHalf = false, isPositiveArc = true, 48.58f, 100f)
+                close()
+            }
+        }.build()
 
-    val brandImage
-        @Composable get() = painterResource(Res.drawable.brand_png)
-}
+        return _AppIcon!!
+    }
+
+@Suppress("ObjectPropertyName")
+private var _AppIcon: ImageVector? = null
