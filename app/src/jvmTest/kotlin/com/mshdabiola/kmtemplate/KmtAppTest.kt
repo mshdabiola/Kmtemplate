@@ -36,7 +36,6 @@ import androidx.lifecycle.ViewModelStoreOwner
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.viewmodel.compose.LocalViewModelStoreOwner
 import androidx.window.core.layout.WindowSizeClass
-import androidx.window.core.layout.WindowWidthSizeClass
 import co.touchlab.kermit.koin.kermitLoggerModule
 import com.mshdabiola.detail.detailModule
 import com.mshdabiola.detail.navigation.Detail
@@ -124,18 +123,10 @@ class KmtAppTest : KoinTest {
 
     @OptIn(ExperimentalMaterial3ExpressiveApi::class)
     @Composable
-    fun KmtApp(windowWidthSizeClass: WindowWidthSizeClass = WindowWidthSizeClass.COMPACT) {
+    fun KmtApp(widthSizeClass: Int =WindowSizeClass.WIDTH_DP_MEDIUM_LOWER_BOUND) {
         val testCoroutineScope = CoroutineScope(StandardTestDispatcher())
 
-        val windowSizeClass = WindowSizeClass.compute(
-            when (windowWidthSizeClass) {
-                WindowWidthSizeClass.COMPACT -> 300f // dpWidth
-                WindowWidthSizeClass.MEDIUM -> 700f
-                WindowWidthSizeClass.EXPANDED -> 900f
-                else -> 300f
-            },
-            800f, // dpHeight, less critical for these tests
-        )
+        val windowSizeClass = WindowSizeClass(widthSizeClass,800)
         appState = rememberKmtAppState(windowSizeClass, testCoroutineScope)
 
         CompositionLocalProvider(
@@ -234,7 +225,7 @@ class KmtAppTest : KoinTest {
     @Test
     fun kmtApp_navigateToSettingsScreen_andVerify() {
         composeTestRule.setContent {
-            KmtApp(windowWidthSizeClass = WindowWidthSizeClass.EXPANDED)
+            KmtApp(widthSizeClass = WindowSizeClass.WIDTH_DP_EXPANDED_LOWER_BOUND)
         }
         composeTestRule.onAllNodesWithTag(SplashScreenTestTags.SCREEN_ROOT).fetchSemanticsNodes().isEmpty()
 
