@@ -50,9 +50,9 @@ fun rememberKmtAppState(
         windowSizeClass,
     ) {
         when {
-            windowSizeClass.isWidthExpanded ->  Expand(navController)
+            windowSizeClass.isWidthExpanded -> Expand(navController)
             windowSizeClass.isWidthMedium -> Medium(navController, coroutineScope, wideNavigationRailState)
-            else ->Compact(navController, coroutineScope, drawerState)
+            else -> Compact(navController, coroutineScope, drawerState)
         }
     }
 }
