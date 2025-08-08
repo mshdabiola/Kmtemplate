@@ -17,11 +17,12 @@
 <resources>
     <string name="app_name">Kmtemplate</string>
     <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
-    <string name="crash_title">PLEASE POST THE ATTACHED STACK TRACE ON GITHUB IF POSSIBLE</string>
-    <string name="crash_body">Hello! I am sorry that the application crashed.
-        Please review the attached log file and post it on
-        Github https://github.com/mshdabiola/kmtemplate/issues/new. I will
-        try to respond as soon as possible. Thank you!</string>
+    <string name="crash_title">Help Us Fix This Crash</string>
+    <string name="crash_body">    Hello! We are very sorry the application crashed.
+        To help us find and fix the problem,
+        you can also send the attached log file to our GitHub issues page.
+        Your help is greatly appreciated!\n\nhttps://github.com/mshdabiola/kmtemplate/issues/new
+</string>
     <string name="email">Mshabiola@gmail.com</string>
 
 </resources>
