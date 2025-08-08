@@ -18,7 +18,6 @@ import com.android.build.api.variant.ApplicationAndroidComponentsExtension
 import com.android.build.gradle.BaseExtension
 import com.mshdabiola.app.configureBadgingTasks
 import com.mshdabiola.app.configureKotlinAndroid
-import com.mshdabiola.app.configureKotlinMultiplatform
 import com.mshdabiola.app.configurePrintApksTask
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -75,7 +74,6 @@ class AndroidApplicationConventionPlugin : Plugin<Project> {
                     }
                     binaries.executable()
                 }
-
             }
         }
     }
