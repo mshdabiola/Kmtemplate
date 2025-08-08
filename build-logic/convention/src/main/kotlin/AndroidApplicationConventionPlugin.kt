@@ -24,7 +24,10 @@ import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure
 import org.gradle.kotlin.dsl.getByType
+import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
+import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig
+import kotlin.text.set
 
 class AndroidApplicationConventionPlugin : Plugin<Project> {
     override fun apply(target: Project) {
@@ -48,7 +51,31 @@ class AndroidApplicationConventionPlugin : Plugin<Project> {
                 configureBadgingTasks(extensions.getByType<BaseExtension>(), this)
             }
             extensions.configure<KotlinMultiplatformExtension> {
-                configureKotlinMultiplatform(this)
+                jvmToolchain(21)
+
+                androidTarget()
+                // jvm("desktop")
+                jvm()
+                @OptIn(ExperimentalWasmDsl::class)
+                wasmJs {
+                    outputModuleName.set("composeApp")
+                    browser {
+                        val rootDirPath = project.rootDir.path
+                        val projectDirPath = project.projectDir.path
+                        commonWebpackConfig {
+                            outputFileName = "composeApp.js"
+                            devServer = (devServer ?: KotlinWebpackConfig.DevServer()).apply {
+                                static = (static ?: mutableListOf()).apply {
+                                    // Serve sources to debug inside browser
+                                    add(rootDirPath)
+                                    add(projectDirPath)
+                                }
+                            }
+                        }
+                    }
+                    binaries.executable()
+                }
+
             }
         }
     }
