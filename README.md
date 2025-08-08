@@ -55,8 +55,8 @@
 <div align="center">
 <!-- <a href="https://apt.izzysoft.de/packages/com.mshdabiola.kmttemplate/"><img src="https://gitlab.com/IzzyOnDroid/repo/-/raw/master/assets/IzzyOnDroid.png" height="80"></a> -->
 <a href="https://f-droid.org/en/packages/com.mshdabiola.kmttemplate"><img src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png" height="80" alt="Get it on F-Droid"></a>
-  <a href="https://github.com/mshdabiola/Kmtemplate/releases"><img src="images/desktop-icon.png" height="80" alt="Download for Desktop"></a>
-   <a href="https://github.com/mshdabiola/Kmtemplate/releases"><img src="images/web-icon.png" height="80" alt="Try it on Web"></a>
+  <a href="https://kmtemplate-download.onrender.com"><img src="images/desktop-icon.png" height="80" alt="Download for Desktop"></a>
+   <a href="https://kmtemplate.onrender.com/"><img src="images/web-icon.png" height="80" alt="Try it on Web"></a>
     <a href="https://github.com/mshdabiola/Kmtemplate/releases"><img src="https://raw.githubusercontent.com/NeoApplications/Neo-Backup/034b226cea5c1b30eb4f6a6f313e4dadcbb0ece4/badge_github.png" height="80" alt="Get it on Github"></a>
 </div>
 
