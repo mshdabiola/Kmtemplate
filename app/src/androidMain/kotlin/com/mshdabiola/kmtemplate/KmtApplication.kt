@@ -68,17 +68,13 @@ class KmtApplication : Application() {
                 applicationModule,
             )
         }
-        setupCrashReporter()
-
-//        if (packageName.contains("debug")) {
-//            Timber.plant(Timber.DebugTree())
-//            Timber.e("log on app create")
-//        }
+        if (platform.flavor== Flavor.FossReliant){
+            setupCrashReporter()
+        }
     }
 
     private fun setupCrashReporter() {
         Thread {
-//            if (true) {
             initAcra {
                 reportFormat = StringFormat.KEY_VALUE_LIST
                 reportContent = listOf(
@@ -94,10 +90,6 @@ class KmtApplication : Application() {
                     reportFileName = "Kmtemplate_Bug_Report.txt"
                 }
             }
-//            } else {
-//                System.setProperty(DEBUG_PROPERTY_NAME, DEBUG_PROPERTY_VALUE_ON)
-// //                Timber.plant(Timber.DebugTree())
-//            }
         }.start()
     }
 
