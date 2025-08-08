@@ -1,15 +1,29 @@
 /*
- *abiola 2024
+ * Copyright (C) 2024-2025 MshdAbiola
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published
+ * by the Free Software Foundation, version 3.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program. If not, see <https://www.gnu.org/licenses/>.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
  */
-
 package com.mshdabiola.benchmarks.detail
 
 import androidx.benchmark.macro.MacrobenchmarkScope
 import androidx.test.uiautomator.By
 import androidx.test.uiautomator.Until
+import com.mshdabiola.model.testtag.DetailScreenTestTags
 
 fun MacrobenchmarkScope.goBack() {
-    val selector = By.res("back")
+    val selector = By.res(DetailScreenTestTags.BACK_BUTTON)
 
     device.wait(Until.hasObject(selector), 5000)
 
@@ -21,8 +35,8 @@ fun MacrobenchmarkScope.goBack() {
 }
 
 fun MacrobenchmarkScope.addNote() {
-    val titleSelector = By.res("detail:title")
-    val contentSelector = By.res("detail:content")
+    val titleSelector = By.res(DetailScreenTestTags.TITLE_TEXT_FIELD)
+    val contentSelector = By.res(DetailScreenTestTags.CONTENT_TEXT_FIELD)
 
     device.wait(Until.hasObject(titleSelector), 5000)
 
@@ -31,6 +45,8 @@ fun MacrobenchmarkScope.addNote() {
 
     titleTextField.text = "title"
     contentTextField.text = "content"
-
-    // Wait until saved title are shown on screen
+    device.wait(
+        Until.hasObject(By.res(DetailScreenTestTags.DELETE_BUTTON)),
+        3000L,
+    )
 }

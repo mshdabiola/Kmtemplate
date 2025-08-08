@@ -1,0 +1,7 @@
+
+
+[*.{kt,kts}]
+ktlint_kmtemplate_prefer-method-name=disabled
+
+[*.{kt,kts}]
+ktlint_kmtemplate_prefer-receiver-name=disabled

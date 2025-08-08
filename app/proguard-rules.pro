@@ -26,6 +26,8 @@
 
 }
 -dontwarn com.google.firebase.perf.network.FirebasePerfUrlConnection
+-dontwarn javax.annotation.processing.AbstractProcessor
+-dontwarn javax.annotation.processing.SupportedOptions
 
 -keepattributes Signature,RuntimeVisibleAnnotations,AnnotationDefault
 -keepclassmembers class * {

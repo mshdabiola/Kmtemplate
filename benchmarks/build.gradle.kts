@@ -1,5 +1,19 @@
 /*
- *abiola 2022
+ * Copyright (C) 2022-2025 MshdAbiola
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published
+ * by the Free Software Foundation, version 3.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program. If not, see <https://www.gnu.org/licenses/>.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
  */
 import com.mshdabiola.app.BuildType
 import com.mshdabiola.app.configureFlavors
@@ -10,6 +24,9 @@ plugins {
     alias(libs.plugins.baselineprofile)
 }
 
+kotlin {
+    jvmToolchain(21)
+}
 android {
     namespace = "com.mshdabiola.benchmarks"
 
@@ -43,7 +60,7 @@ android {
 
     // Use the same flavor dimensions as the application to allow generating Baseline Profiles on prod,
     // which is more close to what will be shipped to users (no fake data), but has ability to run the
-    // benchmarks on demo, so we benchmark on stable data. 
+    // benchmarks on demo, so we benchmark on stable data.
     configureFlavors(this) { flavor ->
         buildConfigField(
             "String",
@@ -52,14 +69,9 @@ android {
         )
     }
 
-//    testOptions.managedDevices.devices {
-//        create<ManagedVirtualDevice>("pixel6Api34") {
-//            device = "Pixel 6"
-//            apiLevel = 34
-//            systemImageSource = "google"
-//        }
-//    }
-    testOptions.managedDevices.devices {
+
+    testOptions.managedDevices.allDevices {
+
         create<com.android.build.api.dsl.ManagedVirtualDevice>("pixel6Api33") {
             device = "Pixel 6"
             apiLevel = 33
@@ -83,9 +95,9 @@ baselineProfile {
 dependencies {
     implementation(libs.androidx.benchmark.macro)
     implementation(libs.androidx.test.core)
-    implementation(libs.androidx.test.espresso.core)
     implementation(libs.androidx.test.ext)
-    implementation(libs.androidx.test.rules)
     implementation(libs.androidx.test.runner)
     implementation(libs.androidx.test.uiautomator)
+    implementation(projects.core.model)
+
 }

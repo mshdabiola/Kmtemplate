@@ -1,3 +1,4 @@
+
 pluginManagement {
     repositories {
         includeBuild("build-logic")
@@ -10,7 +11,7 @@ pluginManagement {
 
 // settings.gradle.kts
 plugins {
-    id("org.gradle.toolchains.foojay-resolver") version "0.10.0"
+    id("org.gradle.toolchains.foojay-resolver") version "1.0.0"
 }
 
 toolchainManagement {
@@ -37,28 +38,22 @@ dependencyResolutionManagement {
         maven(url = "https://maven.pkg.jetbrains.space/kotlin/p/wasm/experimental")
     }
 }
-rootProject.name = "HydraulicApp"
-include(":modules:database")
-include(":modules:designsystem")
-include(":modules:model")
-include(":modules:network")
-include(":modules:data")
-include(":modules:domain")
-include(":modules:testing")
-include(":modules:ui")
-include(":modules:analytics")
-include(":modules:datastore")
+rootProject.name = "Kmtemplate"
+include(":core:database")
+include(":core:designsystem")
+include(":core:model")
+include(":core:network")
+include(":core:data")
+include(":core:testing")
+include(":core:ui")
+include(":core:analytics")
+include(":core:datastore")
 
 include(":benchmarks")
 include(":app")
 
-include(":features:main")
-include(":features:detail")
-include(":features:setting")
-//include(":lint")
+include(":feature:main")
+include(":feature:detail")
+include(":feature:setting")
+// include(":lint")
 include(":ktlint")
-
-
-
-
-

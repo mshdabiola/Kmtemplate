@@ -1,4 +1,4 @@
-###  HydraulicApp Module Graph
+###  Kmtemplate Module Graph
 
 ```mermaid
 %%{

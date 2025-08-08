@@ -1,20 +1,33 @@
+/*
+ * Designed and developed by 2024 mshdabiola (lawal abiola)
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 import com.mshdabiola.app.BuildType
-import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
-import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig
 
 plugins {
-    alias(libs.plugins.kotlinMultiplatform)
-    alias(libs.plugins.jetbrainsCompose)
-
     id("mshdabiola.android.application")
     id("mshdabiola.android.application.compose")
     id("mshdabiola.android.application.flavor")
+    alias(libs.plugins.jetbrainsCompose)
     alias(libs.plugins.conveyor)
     alias(libs.plugins.baselineprofile)
+    alias(libs.plugins.composehot)
+    alias(libs.plugins.screenshot)
 
 }
 
-group = "com.mshdabiola.hydraulicapp"
+group = "com.mshdabiola.kmtemplate"
 version = libs.versions.versionName.get()
 
 dependencies {
@@ -37,13 +50,8 @@ dependencies {
     implementation(libs.androidx.window.core)
     implementation(libs.kotlinx.coroutines.guava)
 
-    debugImplementation(libs.androidx.compose.ui.testManifest)
-
-
-    androidTestImplementation(projects.modules.testing)
-    androidTestImplementation(libs.androidx.navigation.testing)
-
     baselineProfile(projects.benchmarks)
+    implementation(libs.kermit.koin)
 
 
     googlePlayImplementation(platform(libs.firebase.bom))
@@ -56,55 +64,16 @@ dependencies {
     googlePlayImplementation(libs.firebase.message)
     googlePlayImplementation(libs.firebase.auth)
 
-    googlePlayImplementation(libs.play.game)
-    googlePlayImplementation(libs.play.update)
-    googlePlayImplementation(libs.play.update.kts)
-    googlePlayImplementation(libs.play.review)
-    googlePlayImplementation(libs.play.review.kts)
+
+    implementation(libs.acra.mail)
+
+    screenshotTestImplementation(libs.screenshot.validation.api)
+    screenshotTestImplementation(libs.androidx.compose.ui.tooling)
+
 }
-java {
-    toolchain {
-        languageVersion = JavaLanguageVersion.of(21)
-        vendor = JvmVendorSpec.JETBRAINS
-        implementation = JvmImplementation.VENDOR_SPECIFIC
-    }
-}
+
 kotlin {
-    androidTarget()
-    jvm()
-
-    @OptIn(org.jetbrains.kotlin.gradle.ExperimentalWasmDsl::class)
-    wasmJs {
-        moduleName = "composeApp"
-        browser {
-            val rootDirPath = project.rootDir.path
-            val projectDirPath = project.projectDir.path
-            commonWebpackConfig {
-                outputFileName = "composeApp.js"
-                devServer = (devServer ?: KotlinWebpackConfig.DevServer()).apply {
-                    static = (static ?: mutableListOf()).apply {
-                        // Serve sources to debug inside browser
-                        add(rootDirPath)
-                        add(projectDirPath)
-                    }
-                }
-            }
-        }
-        binaries.executable()
-    }
-    @OptIn(ExperimentalKotlinGradlePluginApi::class)
-    applyDefaultHierarchyTemplate {
-        common {
-            group("nonJs") {
-                withAndroidTarget()
-                // withIos()
-                withJvm()
-            }
-        }
-    }
-
     sourceSets {
-        val jvmMain by getting
 
         androidMain.dependencies {
             implementation(libs.androidx.activity.compose)
@@ -112,23 +81,22 @@ kotlin {
 
         }
         commonMain.dependencies {
-//
+
             implementation(libs.koin.core)
 
-            implementation(projects.modules.designsystem)
-            implementation(projects.modules.data)
-            implementation(projects.modules.ui)
-            implementation(projects.modules.model)
-            implementation(projects.modules.analytics)
+            implementation(projects.core.designsystem)
+            implementation(projects.core.data)
+            implementation(projects.core.ui)
+            implementation(projects.core.model)
+            implementation(projects.core.analytics)
 
 
-            implementation(projects.features.main)
-            implementation(projects.features.detail)
-            implementation(projects.features.setting)
+            implementation(projects.feature.main)
+            implementation(projects.feature.detail)
+            implementation(projects.feature.setting)
 
             // Logger
             implementation(libs.kermit)
-//            implementation(libs.kermit.koin)
 
             implementation(libs.androidx.compose.material3.adaptive)
             implementation(libs.androidx.compose.material3.adaptive.layout)
@@ -137,20 +105,16 @@ kotlin {
 
 
         }
-        val nonJsMain by getting{
-            dependencies {
-                implementation(libs.kermit.koin)
 
-            }
-        }
 
         jvmMain.dependencies {
+            implementation(libs.bugsnag)
+            implementation(libs.kermit.koin)
             implementation(compose.desktop.currentOs)
             implementation(libs.kotlinx.coroutines.swing)
-
         }
         jvmTest.dependencies {
-            implementation(projects.modules.testing)
+            implementation(projects.core.testing)
         }
 
     }
@@ -163,10 +127,10 @@ android {
     sourceSets["main"].res.srcDirs("src/androidMain/res")
     sourceSets["main"].resources.srcDirs("src/commonMain/composeResources")
 
-    namespace = "com.mshdabiola.hydraulicapp"
-
+    namespace = "com.mshdabiola.kmtemplate"
+    experimentalProperties["android.experimental.enableScreenshotTest"] = true
     defaultConfig {
-        applicationId = "com.mshdabiola.hydraulicapp"
+        applicationId = "com.mshdabiola.kmtemplate"
         versionCode = libs.versions.versionCode.get().toIntOrNull()
         versionName = System.getenv("VERSION_NAME") ?: libs.versions.versionName.get()
 
@@ -224,7 +188,7 @@ android {
 
 compose.desktop {
     application {
-        mainClass = "com.mshdabiola.hydraulicapp.MainAppKt"
+        mainClass = "com.mshdabiola.kmtemplate.MainAppKt"
 
 
         buildTypes.release.proguard {

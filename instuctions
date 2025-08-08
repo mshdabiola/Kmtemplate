@@ -14,13 +14,20 @@
     ./gradlew wasmJsBrowserDistribution
 
 export TOKEN="your_actual_token"
- conveyor make rendered-icons
+ conveyor make rendered-icons --overwrite
     conveyor make site
     ./gradlew run
 
-./gradlew jvmRunHot -PmainClass=com.mshdabiola.hydraulicapp.MainAppKt
+./gradlew app:jvmRunHot -PmainClass=com.mshdabiola.kmtemplate.MainAppKt
+./gradlew app:jvmRun -PmainClass=com.mshdabiola.kmtemplate.MainAppKt
+Use `./gradlew reload` to hot reload the application
+| Use `./gradlew :app:hotReloadJvmMain` to hot reload the application (alternative)
+| Use `./gradlew :app:jvmRunHot --auto` to automatically reload the application on source changes
 
 //./gradlew assembleDebug -PenableComposeCompilerReports=true
 // ./gradlew assembleDebug -PenableComposeCompilerMetrics=true
-
+./gradlew build-logic:convention:spotlessApply
 https://randombits.dev/articles/android/fdroid
+
+
+ ./gradlew renameProjectArtifacts -PnewPackageName=com.abiola.notepad -PnewPrefix=NtP

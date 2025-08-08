@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Designed and developed by 2024 mshdabiola (lawal abiola)
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources>
+    <string name="screen_name">Cài đặt</string>
+    <string name="version">Phiên bản</string>
+    <string name="version_code">Mã phiên bản</string>
+    <string name="last_update">Cập nhật lần cuối</string>
+    <string name="about">Kmtemplate: Một điểm khởi đầu cho các dự án Kotlin Multiplatform của bạn, cung cấp nền tảng vững chắc và các phương pháp hay nhất.</string>
+    <string name="developed_by">Được phát triển bởi</string>
+    <string name="developer">Mshdabiola</string>
+    <string name="contact_us">Liên hệ với chúng tôi</string>
+    <string name="privacy_policy">Chính sách bảo mật</string>
+    <string name="terms_and_condition">Điều khoản và điều kiện</string>
+    <string name="appearance_contrast_title">Độ tương phản</string>
+    <string name="appearance_contrast_option_low_cd">Độ tương phản thấp</string>
+    <string name="appearance_contrast_option_low_label">Thấp</string>
+    <string name="appearance_contrast_option_standard_cd">Độ tương phản tiêu chuẩn</string>
+    <string name="appearance_contrast_option_standard_label">Tiêu chuẩn</string>
+    <string name="appearance_contrast_option_high_cd">Độ tương phản cao</string>
+    <string name="appearance_contrast_option_high_label">Cao</string>
+    <string name="appearance_background_title">Nền</string>
+    <string name="appearance_gradient_background_text">Hiển thị nền gradient</string>
+    <string name="appearance_dark_mode_title">Chế độ tối</string>
+    <string name="appearance_select_contrast_low">Chọn Thấp</string>
+    <string name="appearance_select_contrast_standard">Chọn Tiêu chuẩn</string>
+    <string name="appearance_select_contrast_high">Chọn Cao</string>
+    <string name="faq_kmp_question">Kotlin Multiplatform (KMP) là gì?</string>
+    <string name="faq_kmp_answer">Kotlin Multiplatform cho phép bạn chia sẻ mã (như logic nghiệp vụ, các lớp dữ liệu, v.v.) trên các nền tảng khác nhau như Android, iOS, Web, Desktop và Server-side, đồng thời chỉ viết mã dành riêng cho nền tảng khi cần thiết (ví dụ: cho giao diện người dùng hoặc các API dành riêng cho nền tảng).</string>
+    <string name="faq_template_help_question">Mẫu này giúp ích gì cho việc phát triển KMP?</string>
+    <string name="faq_template_help_answer">Mẫu này cung cấp cấu trúc dự án được cấu hình sẵn với các mô-đun được chia sẻ, các mô-đun dành riêng cho nền tảng và các ví dụ về cách triển khai các mẫu phổ biến như ViewModel được chia sẻ, kho lưu trữ dữ liệu và Compose Multiplatform cho giao diện người dùng.</string>
+    <string name="faq_share_ui_question">Tôi có thể chia sẻ mã giao diện người dùng với KMP không?</string>
+    <string name="faq_share_ui_answer">Có, với Compose Multiplatform, bạn có thể viết giao diện người dùng của mình một lần bằng Jetpack Compose và triển khai nó trên Android, Desktop (Windows, macOS, Linux), iOS (Alpha) và Web (Thử nghiệm). Mẫu này sử dụng Compose Multiplatform.</string>
+    <string name="faq_benefits_question">Những lợi ích của việc sử dụng KMP là gì?</string>
+    <string name="faq_benefits_answer">Những lợi ích chính bao gồm: \n- Tái sử dụng mã: Viết logic chung một lần và chia sẻ nó.\n- Tính nhất quán: Đảm bảo hành vi nhất quán trên các nền tảng.\n- Phát triển nhanh hơn: Giảm công việc lặp lại.\n- Hiệu suất gốc: Mã Kotlin được chia sẻ được biên dịch thành mã gốc cho từng nền tảng.\n- Tính linh hoạt: Chọn lượng mã để chia sẻ.</string>
+    <string name="faq_find_shared_code_question">Tôi có thể tìm mã được chia sẻ trong mẫu này ở đâu?</string>
+    <string name="faq_find_shared_code_answer">Mã được chia sẻ thường nằm trong các mô-đun có tên `commonMain` trong các bộ nguồn được chia sẻ (ví dụ: `shared/src/commonMain`, `features/featureName/src/commonMain`). Mã dành riêng cho nền tảng nằm trong các bộ nguồn nền tảng tương ứng như `androidMain` hoặc `iosMain`.</string>
+    <string name="faq_empty_state">Hiện tại không có Câu hỏi thường gặp.</string>
+    <string name="faq_icon_cd_collapse">Thu gọn</string>
+    <string name="faq_icon_cd_expand">Mở rộng</string>
+    <string name="faq_preview_shared_code_question">Tôi có thể tìm mã được chia sẻ trong mẫu này ở đâu?</string>
+    <string name="faq_preview_shared_code_answer_collapsed">Mã được chia sẻ thường nằm trong các mô-đun có tên...</string>
+    <string name="faq_preview_shared_code_answer_expanded">Mã được chia sẻ thường nằm trong các mô-đun có tên `commonMain`...</string>
+
+    <string-array name="segment">
+        <item>Chung</item>
+        <item>Hỗ trợ</item>
+    </string-array>
+
+    <string-array name="general">
+        <item>Giao diện</item>
+        <item>Ngôn ngữ</item>
+    </string-array>
+
+    <string-array name="support">
+        <item>Báo cáo sự cố</item>
+        <item>Câu hỏi thường gặp</item>
+        <item>Giới thiệu</item>
+    </string-array>
+
+    <string-array name="theme">
+        <item>Mặc định</item>
+        <item>Xanh lá</item>
+    </string-array>
+
+    <string-array name="daynight">
+        <item>Theo hệ thống</item>
+        <item>Sáng</item>
+        <item>Tối</item>
+    </string-array>
+</resources>

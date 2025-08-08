@@ -1,181 +1,122 @@
 {
   "project_info": {
-    "project_number": "801461677522",
-    "project_id": "hydraulicapp-7ec62",
-    "storage_bucket": "hydraulicapp-7ec62.appspot.com"
+    "project_number": "855770911336",
+    "project_id": "kmtemplate-71cf8",
+    "storage_bucket": "kmtemplate-71cf8.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:801461677522:android:63a1c6467747f0a2a3ac0b",
+        "mobilesdk_app_id": "1:855770911336:android:5cf610f57807c15ca461dd",
         "android_client_info": {
-          "package_name": "com.mshdabiola.hydraulicapp.play.debug"
+          "package_name": "com.mshdabiola.kmtemplate.play"
         }
       },
-      "oauth_client": [
-        {
-          "client_id": "801461677522-75h4mmgteqqsh8vjdrm94df2h5ftnmmi.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
+      "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyBFkACfDU_wVm0yP1ariOVs-lCyePOyKYk"
+          "current_key": "AIzaSyDBNe7mL0MVRHn_iXK70Xt5FVIUqf9pArI"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "801461677522-75h4mmgteqqsh8vjdrm94df2h5ftnmmi.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
+          "other_platform_oauth_client": []
         }
       }
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:801461677522:android:63a1c6467747f0a2a3ac0b",
+        "mobilesdk_app_id": "1:855770911336:android:e334f99ae608142ba461dd",
         "android_client_info": {
-          "package_name": "com.mshdabiola.hydraulicapp.foss.debug"
+          "package_name": "com.mshdabiola.kmtemplate.play.debug"
         }
       },
-      "oauth_client": [
-        {
-          "client_id": "801461677522-75h4mmgteqqsh8vjdrm94df2h5ftnmmi.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
+      "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyBFkACfDU_wVm0yP1ariOVs-lCyePOyKYk"
+          "current_key": "AIzaSyDBNe7mL0MVRHn_iXK70Xt5FVIUqf9pArI"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "801461677522-75h4mmgteqqsh8vjdrm94df2h5ftnmmi.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:855770911336:android:e334f99ae608142ba461dd",
+        "android_client_info": {
+          "package_name": "com.mshdabiola.kmtemplate.foss.debug"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDBNe7mL0MVRHn_iXK70Xt5FVIUqf9pArI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
         }
       }
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:801461677522:android:63a1c6467747f0a2a3ac0b",
+        "mobilesdk_app_id": "1:855770911336:android:e334f99ae608142ba461dd",
         "android_client_info": {
-          "package_name": "com.mshdabiola.hydraulicapp.play"
+          "package_name": "com.mshdabiola.kmtemplate.foss"
         }
       },
-      "oauth_client": [
-        {
-          "client_id": "801461677522-75h4mmgteqqsh8vjdrm94df2h5ftnmmi.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
+      "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyBFkACfDU_wVm0yP1ariOVs-lCyePOyKYk"
+          "current_key": "AIzaSyDBNe7mL0MVRHn_iXK70Xt5FVIUqf9pArI"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "801461677522-75h4mmgteqqsh8vjdrm94df2h5ftnmmi.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
+          "other_platform_oauth_client": []
         }
       }
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:801461677522:android:63a1c6467747f0a2a3ac0b",
+        "mobilesdk_app_id": "1:855770911336:android:e334f99ae608142ba461dd",
         "android_client_info": {
-          "package_name": "com.mshdabiola.hydraulicapp.foss"
+          "package_name": "com.mshdabiola.kmtemplate.play.benchmark"
         }
       },
-      "oauth_client": [
-        {
-          "client_id": "801461677522-75h4mmgteqqsh8vjdrm94df2h5ftnmmi.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
+      "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyBFkACfDU_wVm0yP1ariOVs-lCyePOyKYk"
+          "current_key": "AIzaSyDBNe7mL0MVRHn_iXK70Xt5FVIUqf9pArI"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "801461677522-75h4mmgteqqsh8vjdrm94df2h5ftnmmi.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
+          "other_platform_oauth_client": []
         }
       }
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:801461677522:android:63a1c6467747f0a2a3ac0b",
+        "mobilesdk_app_id": "1:855770911336:android:e334f99ae608142ba461dd",
         "android_client_info": {
-          "package_name": "com.mshdabiola.hydraulicapp.play.benchmark"
+          "package_name": "com.mshdabiola.kmtemplate.foss.benchmark"
         }
       },
-      "oauth_client": [
-        {
-          "client_id": "801461677522-75h4mmgteqqsh8vjdrm94df2h5ftnmmi.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
+      "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyBFkACfDU_wVm0yP1ariOVs-lCyePOyKYk"
+          "current_key": "AIzaSyDBNe7mL0MVRHn_iXK70Xt5FVIUqf9pArI"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "801461677522-75h4mmgteqqsh8vjdrm94df2h5ftnmmi.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:801461677522:android:63a1c6467747f0a2a3ac0b",
-        "android_client_info": {
-          "package_name": "com.mshdabiola.hydraulicapp.foss.benchmark"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "801461677522-75h4mmgteqqsh8vjdrm94df2h5ftnmmi.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyBFkACfDU_wVm0yP1ariOVs-lCyePOyKYk"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "801461677522-75h4mmgteqqsh8vjdrm94df2h5ftnmmi.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
+          "other_platform_oauth_client": []
         }
       }
     }

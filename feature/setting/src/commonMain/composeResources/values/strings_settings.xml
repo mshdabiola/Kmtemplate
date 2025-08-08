@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Designed and developed by 2024 mshdabiola (lawal abiola)
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources>
+
+    <string name="screen_name">Settings</string>
+    <string name="version">Version</string>
+    <string name="version_code">Version Code</string>
+    <string name="last_update">Last Update</string>
+    <string name="about">Kmtemplate: A starting point for your Kotlin Multiplatform projects, providing a solid foundation and best practices.</string>
+    <string name="developed_by">Developed by</string>
+    <string name="developer">Mshdabiola</string>
+    <string name="contact_us">Contact Us</string>
+    <string name="privacy_policy">Privacy Policy</string>
+    <string name="terms_and_condition">Terms and Condition</string>
+
+    <string name="appearance_contrast_title">Contrast</string>
+    <string name="appearance_contrast_option_low_cd">Low Contrast</string>
+    <string name="appearance_contrast_option_low_label">Low</string>
+    <string name="appearance_contrast_option_standard_cd">Standard Contrast</string>
+    <string name="appearance_contrast_option_standard_label">Standard</string>
+    <string name="appearance_contrast_option_high_cd">High Contrast</string>
+    <string name="appearance_contrast_option_high_label">High</string>
+    <string name="appearance_background_title">Background</string>
+    <string name="appearance_gradient_background_text">Show Gradient Background</string>
+    <string name="appearance_dark_mode_title">Dark Mode</string>
+    <string name="appearance_select_contrast_low">Select Low</string>
+    <string name="appearance_select_contrast_standard">Select Standard</string>
+    <string name="appearance_select_contrast_high">Select High</string>
+
+    <string name="faq_kmp_question">What is Kotlin Multiplatform (KMP)?</string>
+    <string name="faq_kmp_answer">Kotlin Multiplatform allows you to share code (like business logic, data layers, and more) across different platforms such as Android, iOS, Web, Desktop, and Server-side, all while writing platform-specific code only where necessary (e.g., for UI or platform-specific APIs).</string>
+    <string name="faq_template_help_question">How does this template help with KMP development?</string>
+    <string name="faq_template_help_answer">This template provides a pre-configured project structure with shared modules, platform-specific modules, and examples of how to implement common patterns like shared ViewModels, data repositories, and Compose Multiplatform for UI.</string>
+    <string name="faq_share_ui_question">Can I share UI code with KMP?</string>
+    <string name="faq_share_ui_answer">Yes, with Compose Multiplatform, you can write your UI once using Jetpack Compose and deploy it on Android, Desktop (Windows, macOS, Linux), iOS (Alpha), and Web (Experimental). This template utilizes Compose Multiplatform.</string>
+    <string name="faq_benefits_question">What are the benefits of using KMP?</string>
+    <string name="faq_benefits_answer">Key benefits include: \n- Code Reuse: Write common logic once and share it.\n- Consistency: Ensure consistent behavior across platforms.\n- Faster Development: Reduce redundant work.\n- Native Performance: Shared Kotlin code compiles to native code for each platform.\n- Flexibility: Choose how much code to share.</string>
+    <string name="faq_find_shared_code_question">Where can I find the shared code in this template?</string>
+    <string name="faq_find_shared_code_answer">Shared code is typically located in modules named `commonMain` within shared source sets (e.g., `shared/src/commonMain`, `features/featureName/src/commonMain`). Platform-specific code resides in corresponding platform source sets like `androidMain` or `iosMain`.</string>
+    <string name="faq_empty_state">No FAQs available at the moment.</string>
+    <string name="faq_icon_cd_collapse">Collapse</string>
+    <string name="faq_icon_cd_expand">Expand</string>
+    <string name="faq_preview_shared_code_question">Where can I find the shared code in this template?</string>
+    <string name="faq_preview_shared_code_answer_collapsed">Shared code is typically located in modules named...</string>
+    <string name="faq_preview_shared_code_answer_expanded">Shared code is typically located in modules named `commonMain`...</string>
+
+
+    <string-array name="segment">
+        <item>General</item>
+        <item>Support</item>
+    </string-array>
+
+    <string-array name="general">
+        <item>Appearance</item>
+        <item>Language</item>
+    </string-array>
+
+    <string-array name="support">
+        <item>Report an Issue</item>
+        <item>FAQ</item>
+        <item>About</item>
+    </string-array>
+
+    <string-array name="theme">
+        <item>Default</item>
+        <item>Green</item>
+    </string-array>
+
+    <string-array name="daynight">
+        <item>Follow system</item>
+        <item>Light</item>
+        <item>Dark</item>
+    </string-array>
+
+</resources>

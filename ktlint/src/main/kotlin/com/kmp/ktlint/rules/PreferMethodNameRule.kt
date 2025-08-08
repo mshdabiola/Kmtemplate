@@ -1,3 +1,20 @@
+/*
+ * Copyright (C) 2025 MshdAbiola
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published
+ * by the Free Software Foundation, version 3.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program. If not, see <https://www.gnu.org/licenses/>.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
 package com.kmp.ktlint.rules
 
 import com.pinterest.ktlint.rule.engine.core.api.Rule
@@ -6,37 +23,37 @@ import org.jetbrains.kotlin.com.intellij.lang.ASTNode
 import org.jetbrains.kotlin.psi.KtCallExpression
 
 class PreferMethodNameRule : Rule(
-    RuleId("hydraulicapp:prefer-method-name"),
+    RuleId("kmtemplate:prefer-method-name"),
     about =
-        Rule.About(
-            maintainer = "Your Name",
-            repositoryUrl = "https://github.com/mshdabiola/hydraulicapp",
-            issueTrackerUrl = "https://github.com/mshdabiola/hydraulicapp",
-        ),
+    Rule.About(
+        maintainer = "Your Name",
+        repositoryUrl = "https://github.com/mshdabiola/kmtemplate",
+        issueTrackerUrl = "https://github.com/mshdabiola/kmtemplate",
+    ),
 ) {
     // Define the mapping of deprecated method names to preferred method names
     private val methodNameReplacements =
         mapOf(
-            "MaterialTheme" to "HyaTheme",
-            "Button" to "HyaButton",
-            "OutlinedButton" to "HyaOutlinedButton",
-            "TextButton" to "HyaTextButton",
-            "FilterChip" to "HyaFilterChip",
-            "ElevatedFilterChip" to "HyaFilterChip",
-            "NavigationBar" to "HyaNavigationBar",
-            "NavigationBarItem" to "HyaNavigationBarItem",
-            "NavigationRail" to "HyaNavigationRail",
-            "NavigationRailItem" to "HyaNavigationRailItem",
-            "TabRow" to "HyaTabRow",
-            "Tab" to "HyaTab",
-            "IconToggleButton" to "HyaIconToggleButton",
-            "FilledIconToggleButton" to "HyaIconToggleButton",
-            "FilledTonalIconToggleButton" to "HyaIconToggleButton",
-            "OutlinedIconToggleButton" to "HyaIconToggleButton",
-            "CenterAlignedTopAppBar" to "HyaTopAppBar",
-            "SmallTopAppBar" to "HyaTopAppBar",
-            "MediumTopAppBar" to "HyaTopAppBar",
-            "LargeTopAppBar" to "HyaTopAppBar",
+            "MaterialTheme" to "KmtTheme",
+            "Button" to "KmtButton",
+            "OutlinedButton" to "KmtOutlinedButton",
+            "TextButton" to "KmtTextButton",
+            "FilterChip" to "KmtFilterChip",
+            "ElevatedFilterChip" to "KmtFilterChip",
+            "NavigationBar" to "KmtNavigationBar",
+            "NavigationBarItem" to "KmtNavigationBarItem",
+            "NavigationRail" to "KmtNavigationRail",
+            "NavigationRailItem" to "KmtNavigationRailItem",
+            "TabRow" to "KmtTabRow",
+            "Tab" to "KmtTab",
+            "IconToggleButton" to "KmtIconToggleButton",
+            "FilledIconToggleButton" to "KmtIconToggleButton",
+            "FilledTonalIconToggleButton" to "KmtIconToggleButton",
+            "OutlinedIconToggleButton" to "KmtIconToggleButton",
+            "CenterAlignedTopAppBar" to "KmtTopAppBar",
+            "SmallTopAppBar" to "KmtTopAppBar",
+            "MediumTopAppBar" to "KmtTopAppBar",
+            "LargeTopAppBar" to "KmtTopAppBar",
         )
 
     override fun beforeVisitChildNodes(

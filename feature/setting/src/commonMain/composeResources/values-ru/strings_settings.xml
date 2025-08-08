@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Designed and developed by 2024 mshdabiola (lawal abiola)
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources>
+    <string name="screen_name">Настройки</string>
+    <string name="version">Версия</string>
+    <string name="version_code">Код версии</string>
+    <string name="last_update">Последнее обновление</string>
+    <string name="about">Kmtemplate: Отправная точка для ваших проектов на Kotlin Multiplatform, предоставляющая прочную основу и лучшие практики.</string>
+    <string name="developed_by">Разработано</string>
+    <string name="developer">Mshdabiola</string>
+    <string name="contact_us">Связаться с нами</string>
+    <string name="privacy_policy">Политика конфиденциальности</string>
+    <string name="terms_and_condition">Условия использования</string>
+    <string name="appearance_contrast_title">Контраст</string>
+    <string name="appearance_contrast_option_low_cd">Низкий контраст</string>
+    <string name="appearance_contrast_option_low_label">Низкий</string>
+    <string name="appearance_contrast_option_standard_cd">Стандартный контраст</string>
+    <string name="appearance_contrast_option_standard_label">Стандартный</string>
+    <string name="appearance_contrast_option_high_cd">Высокий контраст</string>
+    <string name="appearance_contrast_option_high_label">Высокий</string>
+    <string name="appearance_background_title">Фон</string>
+    <string name="appearance_gradient_background_text">Показать градиентный фон</string>
+    <string name="appearance_dark_mode_title">Темный режим</string>
+    <string name="appearance_select_contrast_low">Выбрать Низкий</string>
+    <string name="appearance_select_contrast_standard">Выбрать Стандартный</string>
+    <string name="appearance_select_contrast_high">Выбрать Высокий</string>
+    <string name="faq_kmp_question">Что такое Kotlin Multiplatform (KMP)?</string>
+    <string name="faq_kmp_answer">Kotlin Multiplatform позволяет вам делиться кодом (например, бизнес-логикой, уровнями данных и многим другим) между различными платформами, такими как Android, iOS, Web, Desktop и Server-side, при этом писать специфический для платформы код только там, где это необходимо (например, для пользовательского интерфейса или API, специфичных для платформы).</string>
+    <string name="faq_template_help_question">Как этот шаблон помогает в разработке KMP?</string>
+    <string name="faq_template_help_answer">Этот шаблон предоставляет предварительно настроенную структуру проекта с общими модулями, модулями, специфичными для платформы, и примерами того, как реализовать общие шаблоны, такие как общие ViewModels, репозитории данных и Compose Multiplatform для пользовательского интерфейса.</string>
+    <string name="faq_share_ui_question">Могу ли я делиться UI-кодом с KMP?</string>
+    <string name="faq_share_ui_answer">Да, с помощью Compose Multiplatform вы можете написать свой пользовательский интерфейс один раз, используя Jetpack Compose, и развернуть его на Android, Desktop (Windows, macOS, Linux), iOS (Alpha) и Web (Экспериментальный). Этот шаблон использует Compose Multiplatform.</string>
+    <string name="faq_benefits_question">Каковы преимущества использования KMP?</string>
+    <string name="faq_benefits_answer">Ключевые преимущества включают: \n- Повторное использование кода: Напишите общую логику один раз и поделитесь ею.\n- Согласованность: Обеспечьте согласованное поведение на всех платформах.\n- Ускоренная разработка: Уменьшите избыточную работу.\n- Нативная производительность: Общий код Kotlin компилируется в нативный код для каждой платформы.\n- Гибкость: Выбирайте, какой объем кода нужно делиться.</string>
+    <string name="faq_find_shared_code_question">Где я могу найти общий код в этом шаблоне?</string>
+    <string name="faq_find_shared_code_answer">Общий код обычно находится в модулях с именем `commonMain` в общих наборах исходного кода (например, `shared/src/commonMain`, `features/featureName/src/commonMain`). Код, специфичный для платформы, находится в соответствующих наборах исходного кода платформы, таких как `androidMain` или `iosMain`.</string>
+    <string name="faq_empty_state">В настоящее время нет доступных вопросов и ответов.</string>
+    <string name="faq_icon_cd_collapse">Свернуть</string>
+    <string name="faq_icon_cd_expand">Развернуть</string>
+    <string name="faq_preview_shared_code_question">Где я могу найти общий код в этом шаблоне?</string>
+    <string name="faq_preview_shared_code_answer_collapsed">Общий код обычно находится в модулях с именем...</string>
+    <string name="faq_preview_shared_code_answer_expanded">Общий код обычно находится в модулях с именем `commonMain`...</string>
+
+    <string-array name="segment">
+        <item>Общие</item>
+        <item>Поддержка</item>
+    </string-array>
+
+    <string-array name="general">
+        <item>Внешний вид</item>
+        <item>Язык</item>
+    </string-array>
+
+    <string-array name="support">
+        <item>Сообщить о проблеме</item>
+        <item>Вопросы и ответы</item>
+        <item>О программе</item>
+    </string-array>
+
+    <string-array name="theme">
+        <item>По умолчанию</item>
+        <item>Зеленый</item>
+    </string-array>
+
+    <string-array name="daynight">
+        <item>Следовать системе</item>
+        <item>Светлая</item>
+        <item>Темная</item>
+    </string-array>
+</resources>
