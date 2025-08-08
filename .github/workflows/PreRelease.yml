@@ -1,4 +1,4 @@
-name:  Pre Release of Android, Desktop, and Web
+name:  Pre Release of Android, Desktop, Web and Bump Revision
 
 on:
   push:
@@ -57,6 +57,7 @@ jobs:
           labels: |
             auto-generated
             revision-update
+
 
 
   android:

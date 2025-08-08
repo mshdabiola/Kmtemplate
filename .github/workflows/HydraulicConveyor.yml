@@ -38,20 +38,3 @@ jobs:
           command: make copied-site
           signing_key: ${{ secrets.SIGNING_KEY }}
           agree_to_license: 1
-
-      - name: Update Foss Reliant Badging
-        run: ./gradlew updateFossReliantReleaseBadging
-
-      - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v7.0.8
-        with:
-          title: "chore: Bump Version name and code  "
-          body: "Bumps  Version name and code  "
-          branch: "bump-version-name-and-code"
-          branch-suffix: short-commit-hash
-          delete-branch: true
-          base: develop
-          signoff: false
-          token: ${{ secrets.TOKEN }}
-          committer: github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>
-          author: ${{ github.actor }} <${{ github.actor_id }}+${{ github.actor }}@users.noreply.github.com>
