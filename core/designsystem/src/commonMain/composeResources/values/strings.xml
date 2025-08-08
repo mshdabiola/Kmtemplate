@@ -17,9 +17,9 @@
 <resources>
     <string name="undefined">Undefined</string>
     <string name="brand">Kmtemplate</string>
-    <string name="version_name">0.0.1-alpha10</string>
-    <string name="version">0.0.1.9</string>
-    <string name="last_update">08, August 2025 09:16</string>
+    <string name="version_name">1.2.11</string>
+    <string name="version">1211</string>
+    <string name="last_update">08, August 2025 11:58</string>
     <string-array name="supported_languages_display_names">
         <item>English</item>
         <item>Tiếng Việt</item>
