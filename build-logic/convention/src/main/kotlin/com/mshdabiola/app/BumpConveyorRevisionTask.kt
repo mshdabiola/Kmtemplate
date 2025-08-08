@@ -47,7 +47,7 @@ abstract class BumpConveyorRevisionTask : DefaultTask() {
     @get:OutputFile
     val stringsXmlFile: File by lazy {
         project.rootProject.projectDir.resolve(
-            "modules/designsystem/src/commonMain/composeResources/values/strings.xml",
+            "core/designsystem/src/commonMain/composeResources/values/strings.xml",
         )
     }
 
