@@ -56,7 +56,7 @@ sqlite = "2.6.0-beta01"
 truth = "1.4.4"
 turbine = "1.2.1"
 uiTextGoogleFonts = "1.8.3"
-versionCode = "129"
+versionCode = "132"
 versionName = "1.2.9"
 
 
