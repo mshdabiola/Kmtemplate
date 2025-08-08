@@ -111,16 +111,6 @@ jobs:
       - name: Build jar
         run: ./gradlew createReleaseDistributable
 
-      - name: Run Conveyor
-        uses: hydraulic-software/conveyor/actions/build@v18.1
-        env:
-          TOKEN: ${{ secrets.TOKEN }}
-        with:
-          command: make copied-site
-          signing_key: ${{ secrets.SIGNING_KEY }}
-          extra_flags: -f ci.conveyor.conf
-          agree_to_license: 1
-
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v7.0.8
         with:
@@ -134,6 +124,17 @@ jobs:
           token: ${{ secrets.TOKEN }}
           committer: github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>
           author: ${{ github.actor }} <${{ github.actor_id }}+${{ github.actor }}@users.noreply.github.com>
+
+      - name: Run Conveyor
+        uses: hydraulic-software/conveyor/actions/build@v18.1
+        env:
+          TOKEN: ${{ secrets.TOKEN }}
+        with:
+          command: make copied-site
+          signing_key: ${{ secrets.SIGNING_KEY }}
+          extra_flags: -f ci.conveyor.conf
+          agree_to_license: 1
+
 
   web:
     name: Build and  Deploy Web Pre Release
