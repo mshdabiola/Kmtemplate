@@ -68,7 +68,7 @@ class KmtApplication : Application() {
                 applicationModule,
             )
         }
-        if (platform.flavor== Flavor.FossReliant){
+        if (platform.flavor == Flavor.FossReliant) {
             setupCrashReporter()
         }
     }
