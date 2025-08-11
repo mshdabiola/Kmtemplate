@@ -14,9 +14,10 @@
  * limitations under the License.
  */
 import com.mshdabiola.app.BumpConveyorRevisionTask
-import com.mshdabiola.app.BumpVersionTask
+import com.mshdabiola.app.PrependUnreleasedToChangelogTask
 import com.mshdabiola.app.RemoveFirebaseReferencesTask
 import com.mshdabiola.app.RenameProjectArtifactsTask
+import com.mshdabiola.app.SetPreReleaseVersionTag
 import com.mshdabiola.app.SetVersionFromTagTask
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -37,15 +38,15 @@ class CiTaskPlugin : Plugin<Project> {
             outputs.upToDateWhen { false }
         }
 
-        target.tasks.register<BumpVersionTask>("bumpVersionCode") {
-            description = "Updates the versionName and increments the versionCode in gradle/libs.versions.toml."
+        target.tasks.register<SetPreReleaseVersionTag>("setPreReleaseVersionTag") {
+            description =
+                "Sets the versionName and versionCode in gradle/libs.versions.toml based on provided tag values."
             group = "CI Utilities"
 
-            revisionFile.set(target.rootProject.file(".revision-version"))
-            libsVersionsTomlFile.set(target.rootProject.file("gradle/libs.versions.toml"))
-            outputLibsVersionsTomlFile.set(target.rootProject.file("gradle/libs.versions.toml"))
             newVersionName.set(project.providers.gradleProperty("newVersionName").orElse("0.0.1"))
-
+            // newVersionCode is derived from newVersionName in the task if not explicitly set via property
+            libsVersionsTomlFile.set(target.rootProject.file("gradle/libs.versions.toml"))
+            outputRevisionFile.set(target.rootProject.file(".revision-version"))
             outputs.upToDateWhen { false }
         }
 
@@ -57,7 +58,7 @@ class CiTaskPlugin : Plugin<Project> {
             newVersionName.set(project.providers.gradleProperty("newVersionName").orElse("0.0.1"))
             // newVersionCode is derived from newVersionName in the task if not explicitly set via property
             libsVersionsTomlFile.set(target.rootProject.file("gradle/libs.versions.toml"))
-            outputLibsVersionsTomlFile.set(target.rootProject.file("gradle/libs.versions.toml"))
+            changelogFile.set(target.rootProject.file("CHANGELOG.md"))
             outputRevisionFile.set(target.rootProject.file(".revision-version"))
             outputs.upToDateWhen { false }
         }
@@ -95,6 +96,16 @@ class CiTaskPlugin : Plugin<Project> {
 
             newPackageName.convention(target.providers.gradleProperty("newPackageName").orElse("com.example.newapp"))
             newPrefix.convention(target.providers.gradleProperty("newPrefix").orElse("nda"))
+        }
+
+        target.tasks.register<PrependUnreleasedToChangelogTask>("prependUnreleasedChangelog") {
+            description = "Prepends a new [Unreleased] section to CHANGELOG.md for the next development cycle."
+            group = "CI Utilities"
+
+            // This should be the version that was *just released* to correctly form the compare link.
+            newVersionName.set(project.providers.gradleProperty("newVersionName").orElse("0.0.1"))
+            changelogFile.set(target.rootProject.file("CHANGELOG.md"))
+            outputs.upToDateWhen { false } // Ensure it always runs if invoked
         }
     }
 }

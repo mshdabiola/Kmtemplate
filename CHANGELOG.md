@@ -1,19 +1,157 @@
-## 2025-07-07
+# Changelog
+
+All notable changes to this project will be documented in this file.
+
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+## [Unreleased]
+[Unreleased]: https://github.com/mshdabiola/kmtemplate/compare/1.2.9...HEAD
 
 ### Added
-- SARIF report handling.
-- Improved Spotless apply steps.
-- Refactored Detekt and Lint configurations.
-- Enabled Detekt and Lint SARIF uploads.
-
-## 2025-06-06
+- `PrependUnreleasedToChangelogTask`: New Gradle task to add an "Unreleased" section to `CHANGELOG.md` after a release, preparing for the next development cycle.
+- Integrated `PrependUnreleasedToChangelogTask` into `CiTaskPlugin`.
 
 ### Changed
-- Updated several dependencies to their latest versions.
-- Updated the Compose plugin and minimum SDK version.
-- Fixed bugs related to dependencies.
+- `SetVersionFromTagTask`:
+  - Now updates `CHANGELOG.md` to set the release version and date for the "[Unreleased]" section.
+  - Correctly updates and adds link definitions for the released version and the new "[Unreleased]" section.
+- `CiTaskPlugin`:
+  - `setVersionFromTag` task now correctly passes the `changelogFile` parameter.
+  - Added and configured `prependUnreleasedChangelog` task.
 
-## 2025-06-05
+## [0.0.5] - 2025-08-10
+[0.0.5]: https://github.com/mshdabiola/kltemplate/0.0.5
+
+### Added
+
+#### Baseline Profile Support
+- New `benchmarks` module for generating baseline profiles
+- `GenerateBaselineProfile` class for baseline profile collection
+- `StartupBaselineProfile` class for startup-specific profile generation
+- Managed virtual device configuration (`pixel6Api33`) with Pixel 6 device profile, API level 33
+- Baseline profile plugin integration in app module
+- AndroidJUnitRunner configuration for instrumentation tests in benchmarks
+- Self-instrumenting experimental property enabled for baseline profiles
+
+#### Build Configuration
+- Baseline profile dependencies (AndroidX Benchmark Macro, Test Runner, UI Automator, Profile Installer)
+- JVM toolchain version set to 21 for benchmarks module
 
 ### Changed
-- Updated ktlint Gradle plugin to version 12.3.0.
+
+#### App Module
+- Simplified `app/build.gradle.kts` dependencies:
+  - Replaced multiple project and library dependencies with single `projects.library` dependency
+  - Removed platform-specific desktop dependencies (commented out)
+  - Removed Android-specific dependencies (koin.android, androidx.core.ktx, androidx.lifecycle.runtimeCompose, androidx.window.core, kermit.koin)
+  - Removed `androidMain` and `jvmTest` source set dependencies entirely
+  - `jvmMain` no longer includes kermit.koin dependency
+
+#### Application Structure
+- `SamApplication` class simplified - removed all initialization logic (Logger, Koin DI startup)
+- `SamApp` composable now displays `NoteCard` with fixed "Title" and "Content" instead of simple "Texting" text
+- Main entry points simplified:
+  - JVM: `mainApp()` renamed to `main()`, removed Koin and logging setup
+  - WASM/JS: Removed Koin DI and logging from `main()` function
+  - Removed platform detection logic (`getPlatform()` function)
+
+#### Build Logic
+- `AndroidLibraryConventionPlugin`: Removed all dependency declarations from Kotlin multiplatform source sets
+- `KoverConventionPlugin`: Changed excluded subprojects from ["core", "model", "testing"] to ["benchmarks"]
+- Root `build.gradle.kts`: Removed plugin aliases for `kotlin.serialization`, `ksp`, and `room`
+
+#### Documentation
+- Benchmarks README: Changed from "Network Module Graph" to "Benchmarks Module Graph" with simplified bidirectional relationship between benchmarks and app
+
+### Removed
+
+#### Complete Modules Deleted
+
+##### Core Data Module (`core/data/`)
+- Entire module with build configuration, ProGuard rules
+- Repository interfaces: `NetworkRepository`, `NoteRepository`, `UserDataRepository`
+- Repository implementations: `RealNetworkRepository`, `RealNoteRepository`, `RealUserDataRepository`, `RealModelRepository`
+- Model extensions for converting between `UserPreferences` and `UserSettings`
+- Dependency injection modules: `DataModule` with platform-specific implementations
+- Platform-specific implementations for Android, JVM, and WASM/JS
+- Test classes: `NetworkRepositoryTest`, `NoteRepositoryTest`, `UserDataRepositoryTest`
+- Test doubles: `TestNetworkDataSource`, `TestNoteDao`, `TestUserPreferenceDataSource`
+- Network monitoring utilities: `ConnectivityManagerNetworkMonitor`, `NetworkMonitor` interface
+
+##### Core Database Module (`core/database/`)
+- Entire module with Room database configuration
+- `SamDatabase` abstract class with Room annotations
+- `NoteDao` interface with CRUD operations
+- `NoteEntity` data class for database table
+- Database migrations and constants
+- Platform-specific database builders for Android and JVM
+- Database schemas for versions 1 of `KmtDatabase`, `SamDatabase`, and `SkeletonDatabase`
+- Test class: `NoteDaoTest`
+
+##### Core Datastore Module (`core/datastore/`)
+- Entire module for user preferences persistence
+- `UserPreferencesDataSource` interface
+- `RealUserPreferencesDataSource` implementations for different platforms
+- `UserPreferences` data model
+- `UserDataJsonSerializer` for JSON serialization
+- Platform-specific DataStore configurations
+- Test class: `RealUserPreferencesRepositoryTest`
+
+##### Core Model Module (`core/model/`)
+- Entire module with domain models
+- `DarkThemeConfig` enum (FOLLOW_SYSTEM, LIGHT, DARK)
+- `Platform` sealed class with Web, Desktop, and Android subclasses
+- `Flavor` enum (GooglePlay, FossReliant) and `BuildType` enum (Release, Debug)
+- `ReleaseInfo` sealed class with Error and Success subclasses
+- `Result` sealed interface with Success, Error, and Loading states
+- `UserSettings` data class
+- Extension function `Flow<T>.asResult()`
+
+##### Core Network Module (`core/network/`)
+- Entire module with Ktor HTTP client setup
+- `NetworkDataSource` interface
+- `RealNetworkDataSource` implementation
+- HTTP client configuration with platform-specific implementations
+- Network models: `Asset`, `GitHubReleaseInfo`
+- Network module dependency injection
+- ProGuard consumer rules for network serialization
+- Test class: `NetworkSourceTest`
+
+##### Core Testing Module (`core/testing/`)
+- Entire module with testing utilities
+- Fake data and repositories: `FakeNetworkRepository`, `FakeNoteRepository`, `FakeUserDataRepository`
+- Test data module for dependency injection
+- Test dispatcher module with `UnconfinedTestDispatcher`
+- `MainDispatcherRule` for JVM coroutine testing
+- Test logger configuration using Kermit
+- Sample test data (list of 10 Note objects)
+
+##### Core UI Module (`core/ui/`)
+- Directory structure removed (only .gitignore was present)
+
+#### Application Components
+- `MainAppViewModel` class with UI state management
+- `MainActivityUiState` sealed interface with Loading and Success states
+- `ApplicationModule` providing ViewModel dependencies
+
+#### Dependency Injection
+- All Koin-related code and modules removed throughout the project
+- Kermit logging initialization removed from all entry points
+
+#### Dependencies Removed
+- Koin (core, android, test)
+- Kermit logging library
+- Room database
+- KSP (Kotlin Symbol Processing)
+- Kotlin serialization
+- Ktor client libraries
+- AndroidX DataStore
+- Okio
+- Various AndroidX libraries (core.ktx, lifecycle.runtimeCompose, window.core)
+- SLF4J
+- Kotlinx coroutines test libraries
+
+#### Configuration Files
+- Multiple `.gitignore` files in core modules
+- ProGuard rules for various modules
+- AndroidManifest.xml files in core modules (were mostly empty)

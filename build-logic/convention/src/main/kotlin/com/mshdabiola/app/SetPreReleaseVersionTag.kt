@@ -24,14 +24,11 @@ import org.gradle.api.tasks.InputFile
 import org.gradle.api.tasks.OutputFile
 import org.gradle.api.tasks.TaskAction
 import java.io.File
-import java.text.SimpleDateFormat
-import java.util.Date
-import java.util.Locale
 
 /**
  * A Gradle task to set versionName and versionCode in gradle/libs.versions.toml directly from provided values.
  */
-abstract class SetVersionFromTagTask : DefaultTask() {
+abstract class SetPreReleaseVersionTag : DefaultTask() {
 
     @get:Input
     abstract val newVersionName: Property<String>
@@ -41,9 +38,6 @@ abstract class SetVersionFromTagTask : DefaultTask() {
 
     @get:OutputFile
     abstract val outputRevisionFile: RegularFileProperty
-
-    @get:InputFile // Added for the changelog
-    abstract val changelogFile: RegularFileProperty
 
     @get:OutputFile
     val stringsXmlFile: File by lazy {
@@ -60,7 +54,7 @@ abstract class SetVersionFromTagTask : DefaultTask() {
         } else {
             0
         }
-        revFile.writeText("0")
+
         val tomlFile = libsVersionsTomlFile.asFile.get()
         val versionGet = newVersionName.get()
         val versionNameToSet = if (versionGet.isNotEmpty() && versionGet[0].isLetter()) {
@@ -91,8 +85,8 @@ abstract class SetVersionFromTagTask : DefaultTask() {
             // Alternatively, you could default to 0 (so new code becomes 1),
             // but the requirement is to increment the existing one.
             throw GradleException(
-                "versionCode not found in" +
-                    " ${tomlFile.name}. Cannot increment.",
+                "versionCode not found " +
+                    "in ${tomlFile.name}. Cannot increment.",
             )
         }
 
@@ -133,32 +127,11 @@ abstract class SetVersionFromTagTask : DefaultTask() {
         println("Successfully updated ${tomlFile.name}.")
 
         // Update changelog (assuming this part remains the same)
-        updateChangelog(versionNameToSet)
         updateVersionInfoInStringsXml(
             newVersionCode = versionCodeToSet.toString(),
             newVersionName = versionNameToSet,
             stringsXmlFile = stringsXmlFile,
             logger = logger,
         )
-    }
-
-    private fun updateChangelog(newVersion: String) {
-        val changelog = changelogFile.asFile.get()
-        val lines = changelog.readLines().toMutableList()
-        val currentDate = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())
-
-        val unreleasedHeaderIndex = lines.indexOfFirst { it.trim() == "## [Unreleased]" }
-        if (unreleasedHeaderIndex != -1) {
-            lines[unreleasedHeaderIndex] = "## [$newVersion] - $currentDate"
-        }
-
-        val newVersionLink = "[$newVersion]: https://github.com/mshdabiola/kmtemplate/$newVersion"
-        val versionLinkIndex = lines.indexOfFirst { it.contains("[Unreleased]") }
-        if (versionLinkIndex != -1) {
-            lines[versionLinkIndex] = newVersionLink
-        }
-
-        changelog.writeText(lines.joinToString("\n"))
-        println("Successfully updated ${changelog.name} with version $newVersion.")
     }
 }
