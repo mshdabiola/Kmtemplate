@@ -88,7 +88,7 @@ jobs:
       - name: Bump version code
         id: bump_version_code
         run: |
-          ./gradlew bumpVersionCode -PnewVersionName=${{ github.ref_name }}
+          ./gradlew setPreReleaseVersionTag -PnewVersionName=${{ github.ref_name }}
 
       - name: Build  google play release variant apk
         run: ./gradlew assembleGooglePlayRelease
@@ -121,14 +121,19 @@ jobs:
         env:
           BUILD_TOOLS_VERSION: "34.0.0"
 
-      - name: Draft Release
-        uses: ncipollo/release-action@v1.18.0
+      - name: Extract release notes
+        id: release_notes
+        uses: ffurrer2/extract-release-notes@v2
         with:
+          prerelease: true
+
+      - name: Create release
+        uses: ncipollo/release-action@v1
+        with:
+          body: ${{ steps.release_notes.outputs.release_notes }}
           allowUpdates: true
           artifacts: "app/build/outputs/apk/**/**/**/*.apk,app/build/outputs/mapping/**/**/*.txt"
-          # token: ${{ secrets.TOKEN }}
           generateReleaseNotes: true
-          bodyFile: distribution/whatsnew/whatsnew-en-US
           prerelease: true
 
   desktop:
@@ -186,7 +191,7 @@ jobs:
       - name: Bump version code
         id: bump_version_code
         run: |
-          ./gradlew bumpVersionCode -PnewVersionName=${{ github.ref_name }}
+          ./gradlew setPreReleaseVersionTag -PnewVersionName=${{ github.ref_name }}
 
       - name: Build web app
         run: ./gradlew wasmJsBrowserDistribution
