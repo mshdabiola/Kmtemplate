@@ -22,10 +22,26 @@ import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.InputFile
 import org.gradle.api.tasks.OutputFile
 import org.gradle.api.tasks.TaskAction
-import java.io.File
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
+import kotlin.collections.indexOfFirst
+import kotlin.collections.joinToString
+import kotlin.collections.toMutableList
+import kotlin.io.readLines
+import kotlin.io.writeText
+import kotlin.text.contains
+import kotlin.text.isLetter
+import kotlin.text.isNotEmpty
+import kotlin.text.replace
+import kotlin.text.split
+import kotlin.text.substring
+import kotlin.text.toLongOrNull
+import kotlin.text.toRegex
+import kotlin.text.trim
 
 /**
- * A Gradle task to set versionName and versionCode in gradle/libs.versions.toml directly from provided values.
+ * A Gradle task to set versionName and versionCode in gradle/libs.versions.toml and update CHANGELOG.md.
  */
 abstract class SetVersionFromTagTask : DefaultTask() {
 
@@ -35,18 +51,11 @@ abstract class SetVersionFromTagTask : DefaultTask() {
     @get:InputFile
     abstract val libsVersionsTomlFile: RegularFileProperty
 
-    @get:OutputFile
-    abstract val outputRevisionFile: RegularFileProperty
+    @get:InputFile // Added for the changelog
+    abstract val changelogFile: RegularFileProperty
 
     @get:OutputFile
     abstract val outputLibsVersionsTomlFile: RegularFileProperty // Typically the same file for in-place updates
-
-    @get:OutputFile
-    val stringsXmlFile: File by lazy {
-        project.rootProject.projectDir.resolve(
-            "core/designsystem/src/commonMain/composeResources/values/strings.xml",
-        )
-    }
 
     @TaskAction
     fun setVersion() {
@@ -61,9 +70,6 @@ abstract class SetVersionFromTagTask : DefaultTask() {
 
         println("Setting versionName to: $versionNameToSet")
         println("Setting versionCode to: $versionCodeToSet")
-
-        val revFile = outputRevisionFile.asFile.get()
-        revFile.writeText("0")
 
         // Read all lines from the TOML file
         val lines = tomlFile.readLines()
@@ -96,22 +102,41 @@ abstract class SetVersionFromTagTask : DefaultTask() {
             updatedLines.add(modifiedLine)
         }
 
-        updateVersionInfoInStringsXml(
-            newVersionCode = versionCodeToSet.toString(),
-            newVersionName = versionNameToSet,
-            stringsXmlFile = stringsXmlFile,
-            logger = logger,
-        )
-
         // Write the updated lines back to the file
         tomlFile.writeText(updatedLines.joinToString("\n"))
         println("Successfully updated ${tomlFile.name}.")
+
+        // Update changelog
+        updateChangelog(versionNameToSet)
+    }
+
+    private fun updateChangelog(newVersion: String) {
+        val changelog = changelogFile.asFile.get()
+        val lines = changelog.readLines().toMutableList()
+        val currentDate = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())
+
+        val unreleasedHeaderIndex = lines.indexOfFirst { it.trim() == "## [Unreleased]" }
+        if (unreleasedHeaderIndex != -1) {
+            lines[unreleasedHeaderIndex] = "## [$newVersion] - $currentDate"
+        }
+
+        val newVersionLink = "[$newVersion]: https://github.com/mshdabiola/kmtemplate/$newVersion"
+        val versionLinkIndex = lines.indexOfFirst { it.contains("[Unreleased]") }
+        if (versionLinkIndex != -1) {
+            lines[versionLinkIndex] = newVersionLink
+        }
+
+        changelog.writeText(lines.joinToString("\n"))
+        println("Successfully updated ${changelog.name} with version $newVersion.")
     }
 
     private fun versionStringToNumber(versionString: String): Long {
         // Remove all non-digit characters (like dots)
-        val numericString = versionString.replace(".", "")
+        var numericString = versionString.replace(".", "")
 
+        if (numericString.contains("-")) {
+            numericString = numericString.split("-")[0]
+        }
         // Convert the resulting string to an integer
         return numericString.toLongOrNull() ?: 1
     }
