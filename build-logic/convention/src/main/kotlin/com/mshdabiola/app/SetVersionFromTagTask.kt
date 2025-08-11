@@ -90,10 +90,13 @@ abstract class SetVersionFromTagTask : DefaultTask() {
             // If versionCode is not found in the toml file, throw an error.
             // Alternatively, you could default to 0 (so new code becomes 1),
             // but the requirement is to increment the existing one.
-            throw GradleException("versionCode not found in ${tomlFile.name}. Cannot increment.") as Throwable
+            throw GradleException(
+                "versionCode not found in" +
+                    " ${tomlFile.name}. Cannot increment.",
+            )
         }
 
-        val versionCodeToSet = currentVersionCode +currentVersionCode+ 1
+        val versionCodeToSet = currentVersionCode + currentRevision + 1
         println("Setting versionCode to: $versionCodeToSet (incremented from $currentVersionCode)")
 
         val updatedLines = mutableListOf<String>()
@@ -109,7 +112,7 @@ abstract class SetVersionFromTagTask : DefaultTask() {
                     val (prefix, suffix) = matchResult.destructured
                     "$prefix$versionNameToSet$suffix"
                 }
-                println("Updated versionName line: '$line' -> '$modifiedLine'") // This println is from your existing code
+                println("Updated versionName line: '$line' -> '$modifiedLine'")
             }
 
             // 2. Update versionCode
@@ -120,7 +123,7 @@ abstract class SetVersionFromTagTask : DefaultTask() {
                     val (prefix, quote) = matchResult.destructured
                     "$prefix$quote$versionCodeToSet$quote" // Use the new incremented versionCodeToSet
                 }
-                println("Updated versionCode line: '$line' -> '$modifiedLine'") // This println is from your existing code
+                println("Updated versionCode line: '$line' -> '$modifiedLine'")
             }
             updatedLines.add(modifiedLine)
         }
@@ -138,7 +141,6 @@ abstract class SetVersionFromTagTask : DefaultTask() {
             logger = logger,
         )
     }
-
 
     private fun updateChangelog(newVersion: String) {
         val changelog = changelogFile.asFile.get()
@@ -159,5 +161,4 @@ abstract class SetVersionFromTagTask : DefaultTask() {
         changelog.writeText(lines.joinToString("\n"))
         println("Successfully updated ${changelog.name} with version $newVersion.")
     }
-
 }

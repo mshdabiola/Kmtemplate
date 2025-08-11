@@ -39,7 +39,6 @@ abstract class SetPreReleaseVersionTag : DefaultTask() {
     @get:OutputFile
     abstract val outputRevisionFile: RegularFileProperty
 
-
     @get:OutputFile
     val stringsXmlFile: File by lazy {
         project.rootProject.projectDir.resolve(
@@ -85,10 +84,13 @@ abstract class SetPreReleaseVersionTag : DefaultTask() {
             // If versionCode is not found in the toml file, throw an error.
             // Alternatively, you could default to 0 (so new code becomes 1),
             // but the requirement is to increment the existing one.
-            throw GradleException("versionCode not found in ${tomlFile.name}. Cannot increment.") as Throwable
+            throw GradleException(
+                "versionCode not found " +
+                    "in ${tomlFile.name}. Cannot increment.",
+            )
         }
 
-        val versionCodeToSet = currentVersionCode +currentRevision+ 1
+        val versionCodeToSet = currentVersionCode + currentRevision + 1
         println("Setting versionCode to: $versionCodeToSet (incremented from $currentVersionCode)")
 
         val updatedLines = mutableListOf<String>()
@@ -104,7 +106,7 @@ abstract class SetPreReleaseVersionTag : DefaultTask() {
                     val (prefix, suffix) = matchResult.destructured
                     "$prefix$versionNameToSet$suffix"
                 }
-                println("Updated versionName line: '$line' -> '$modifiedLine'") // This println is from your existing code
+                println("Updated versionName line: '$line' -> '$modifiedLine'")
             }
 
             // 2. Update versionCode
@@ -115,7 +117,7 @@ abstract class SetPreReleaseVersionTag : DefaultTask() {
                     val (prefix, quote) = matchResult.destructured
                     "$prefix$quote$versionCodeToSet$quote" // Use the new incremented versionCodeToSet
                 }
-                println("Updated versionCode line: '$line' -> '$modifiedLine'") // This println is from your existing code
+                println("Updated versionCode line: '$line' -> '$modifiedLine'")
             }
             updatedLines.add(modifiedLine)
         }
@@ -132,7 +134,4 @@ abstract class SetPreReleaseVersionTag : DefaultTask() {
             logger = logger,
         )
     }
-
-
-
 }
