@@ -12,36 +12,6 @@ permissions:
 
 jobs:
 
-  revision:
-    name: Bump Revision
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-      pull-requests: write
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Set up JDK
-        uses: actions/setup-java@v4
-        with:
-          distribution: 'zulu'
-          java-version-file: .github/workflows/.java-version
-
-      - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v4
-        with:
-          build-scan-publish: true
-          build-scan-terms-of-use-url: "https://gradle.com/terms-of-service"
-          build-scan-terms-of-use-agree: "yes"
-
-      - name: Set version from tag
-        run: ./gradlew setVersionFromTag -PnewVersionName=${{ github.ref_name }}
-
-      - name: Update Foss Reliant Release Badging
-        run: ./gradlew updateFossReliantReleaseBadging
-
-
   android:
     name: Build and  Deploy Android Pre Release
     runs-on: ubuntu-latest
