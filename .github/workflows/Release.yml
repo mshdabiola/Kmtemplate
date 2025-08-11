@@ -124,13 +124,13 @@ jobs:
 
       # Create Pull Request
       - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v7
+        uses: peter-evans/create-pull-request@v7.0.8
         with:
           commit-message: "Release ${{ github.ref_name }}"
           title: "Release ${{ github.ref_name }}"
           delete-branch: true
           reviewers: mshdabiola
-          branch: actions/release-apk
+          branch: actions/release
           signoff: false
           base: develop
 #          add-paths: |
