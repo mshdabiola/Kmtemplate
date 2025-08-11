@@ -83,8 +83,7 @@ jobs:
       - name: Extract release notes
         id: release_notes
         uses: ffurrer2/extract-release-notes@v2
-        with:
-          prerelease: false
+
 
       - name: Create release
         uses: ncipollo/release-action@v1
