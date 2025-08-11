@@ -1,19 +1,11 @@
-## 2025-07-07
+# Changelog
 
-### Added
-- SARIF report handling.
-- Improved Spotless apply steps.
-- Refactored Detekt and Lint configurations.
-- Enabled Detekt and Lint SARIF uploads.
+All notable changes to this project will be documented in this file.
 
-## 2025-06-06
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+## [Unreleased]
+[Unreleased]: https://github.com/mshdabiola/kmtemplate/compare/0.0.6...HEAD
 
-### Changed
-- Updated several dependencies to their latest versions.
-- Updated the Compose plugin and minimum SDK version.
-- Fixed bugs related to dependencies.
-
-## 2025-06-05
-
-### Changed
-- Updated ktlint Gradle plugin to version 12.3.0.
+## [1.5.6] - 2025-08-11
+[1.5.6]: https://github.com/mshdabiola/kmtemplate/1.5.6
