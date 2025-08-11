@@ -13,7 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import com.mshdabiola.app.BumpConveyorRevisionTask
 import com.mshdabiola.app.PrependUnreleasedToChangelogTask
+import com.mshdabiola.app.RemoveFirebaseReferencesTask
+import com.mshdabiola.app.RenameProjectArtifactsTask
+import com.mshdabiola.app.SetPreReleaseVersionTag
 import com.mshdabiola.app.SetVersionFromTagTask
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -22,18 +26,76 @@ import org.gradle.kotlin.dsl.register
 class CiTaskPlugin : Plugin<Project> {
 
     override fun apply(target: Project) {
-        target.tasks.register<SetVersionFromTagTask>("setVersionFromTag") {
+        target.tasks.register<BumpConveyorRevisionTask>("bumpConveyorRevision") {
+            description = "Reads, increments, and updates the Conveyor revision number in files."
+            group = "CI Utilities" // Good practice to group tasks
+
+            revisionFile.set(target.rootProject.file(".revision-version"))
+            outputRevisionFile.set(target.rootProject.file(".revision-version"))
+            conveyorConfigFile.set(target.rootProject.file("ci.conveyor.conf"))
+            newVersionName.set(project.providers.gradleProperty("newVersionName").orElse("0.0.1"))
+
+            outputs.upToDateWhen { false }
+        }
+
+        target.tasks.register<SetPreReleaseVersionTag>("setPreReleaseVersionTag") {
             description =
-                "Sets the versionName and versionCode in gradle/libs.versions.toml and updates CHANGELOG.md based on provided tag values."
+                "Sets the versionName and versionCode in gradle/libs.versions.toml based on provided tag values."
             group = "CI Utilities"
 
             newVersionName.set(project.providers.gradleProperty("newVersionName").orElse("0.0.1"))
             // newVersionCode is derived from newVersionName in the task if not explicitly set via property
             libsVersionsTomlFile.set(target.rootProject.file("gradle/libs.versions.toml"))
-            outputLibsVersionsTomlFile.set(target.rootProject.file("gradle/libs.versions.toml"))
+            outputRevisionFile.set(target.rootProject.file(".revision-version"))
+            outputs.upToDateWhen { false }
+        }
+
+        target.tasks.register<SetVersionFromTagTask>("setVersionFromTag") {
+            description =
+                "Sets the versionName and versionCode in gradle/libs.versions.toml based on provided tag values."
+            group = "CI Utilities"
+
+            newVersionName.set(project.providers.gradleProperty("newVersionName").orElse("0.0.1"))
+            // newVersionCode is derived from newVersionName in the task if not explicitly set via property
+            libsVersionsTomlFile.set(target.rootProject.file("gradle/libs.versions.toml"))
             changelogFile.set(target.rootProject.file("CHANGELOG.md"))
             outputRevisionFile.set(target.rootProject.file(".revision-version"))
             outputs.upToDateWhen { false }
+        }
+
+        target.tasks.register<RemoveFirebaseReferencesTask>("removeFirebaseReferences") {
+            description = "Removes all known Firebase-related declarations from various Gradle files."
+            group = "CI Utilities"
+
+            settingsGradleKtsFile.set(target.rootProject.file("settings.gradle.kts"))
+            outputSettingsGradleKtsFile.set(target.rootProject.file("settings.gradle.kts"))
+            firebaseConventionPluginFile.set(
+                target.rootProject.file(
+                    "build-logic/convention/src/main/kotlin/AndroidApplicationFirebaseConventionPlugin.kt",
+                ),
+            )
+            outputFirebaseConventionPluginFile.set(
+                target.rootProject.file(
+                    "build-logic/convention/src/main/kotlin/AndroidApplicationFirebaseConventionPlugin.kt",
+                ),
+            )
+            buildLogicConventionBuildGradleKtsFile.set(
+                target.rootProject.file("build-logic/convention/build.gradle.kts"),
+            )
+            outputBuildLogicConventionBuildGradleKtsFile.set(
+                target.rootProject.file("build-logic/convention/build.gradle.kts"),
+            )
+            rootBuildGradleKtsFile.set(target.rootProject.file("build.gradle.kts"))
+            outputRootBuildGradleKtsFile.set(target.rootProject.file("build.gradle.kts"))
+            outputs.upToDateWhen { false }
+        }
+
+        target.tasks.register<RenameProjectArtifactsTask>("renameProjectArtifacts") {
+            description = "Renames package, app name, and file prefixes across the project."
+            group = "Project Refactoring"
+
+            newPackageName.convention(target.providers.gradleProperty("newPackageName").orElse("com.example.newapp"))
+            newPrefix.convention(target.providers.gradleProperty("newPrefix").orElse("nda"))
         }
 
         target.tasks.register<PrependUnreleasedToChangelogTask>("prependUnreleasedChangelog") {
