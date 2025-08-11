@@ -36,9 +36,10 @@ jobs:
           build-scan-terms-of-use-agree: "yes"
 
       - name: Set version from tag
-        id: version_tag
-        run: |
-          ./gradlew setVersionFromTag -PnewVersionName=${{ github.ref_name }}
+        run: ./gradlew setVersionFromTag -PnewVersionName=${{ github.ref_name }}
+
+      - name: Update Foss Reliant Release Badging
+        run: ./gradlew updateFossReliantReleaseBadging
 
 
   android:
