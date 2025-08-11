@@ -30,8 +30,8 @@ class CiTaskPlugin : Plugin<Project> {
             description = "Reads, increments, and updates the Conveyor revision number in files."
             group = "CI Utilities" // Good practice to group tasks
 
-            revisionFile.set(target.rootProject.file(".revision-version"))
-            outputRevisionFile.set(target.rootProject.file(".revision-version"))
+            revisionFile.set(target.rootProject.file("version.txt"))
+            outputRevisionFile.set(target.rootProject.file("version.txt"))
             conveyorConfigFile.set(target.rootProject.file("ci.conveyor.conf"))
             newVersionName.set(project.providers.gradleProperty("newVersionName").orElse("0.0.1"))
 
@@ -46,7 +46,7 @@ class CiTaskPlugin : Plugin<Project> {
             newVersionName.set(project.providers.gradleProperty("newVersionName").orElse("0.0.1"))
             // newVersionCode is derived from newVersionName in the task if not explicitly set via property
             libsVersionsTomlFile.set(target.rootProject.file("gradle/libs.versions.toml"))
-            outputRevisionFile.set(target.rootProject.file(".revision-version"))
+            outputRevisionFile.set(target.rootProject.file("version.txt"))
             outputs.upToDateWhen { false }
         }
 
@@ -59,7 +59,7 @@ class CiTaskPlugin : Plugin<Project> {
             // newVersionCode is derived from newVersionName in the task if not explicitly set via property
             libsVersionsTomlFile.set(target.rootProject.file("gradle/libs.versions.toml"))
             changelogFile.set(target.rootProject.file("CHANGELOG.md"))
-            outputRevisionFile.set(target.rootProject.file(".revision-version"))
+            outputRevisionFile.set(target.rootProject.file("version.txt"))
             outputs.upToDateWhen { false }
         }
 

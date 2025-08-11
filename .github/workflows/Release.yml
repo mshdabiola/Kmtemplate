@@ -110,9 +110,11 @@ jobs:
           branch: actions/release
           signoff: false
           base: develop
-#          add-paths: |
-#            *.toml
-#            *.md
+          add-paths: |
+            *.toml
+            *.md
+            *.txt
+            *.xml
 
   web:
     name: Build and  Deploy Web Pre Release
