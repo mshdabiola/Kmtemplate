@@ -15,6 +15,10 @@ jobs:
   android:
     name: Build and  Deploy Android Pre Release
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+
     steps:
       # 1
       - uses: actions/checkout@v4
@@ -41,6 +45,9 @@ jobs:
 
       - name: Run setVersionFromTag
         run: ./gradlew setVersionFromTag -PnewVersionName=${{ github.ref_name }}
+
+      - name: Run updateFossReliantReleaseBadging
+        run: ./gradlew updateFossReliantReleaseBadging
 
       - name: Build  google play release variant apk
         run: ./gradlew assembleGooglePlayRelease
@@ -76,8 +83,7 @@ jobs:
       - name: Extract release notes
         id: release_notes
         uses: ffurrer2/extract-release-notes@v2
-        with:
-          prerelease: false
+
 
       - name: Create release
         uses: ncipollo/release-action@v1
