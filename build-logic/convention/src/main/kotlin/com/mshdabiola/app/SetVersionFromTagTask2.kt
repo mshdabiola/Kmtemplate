@@ -23,15 +23,28 @@ import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.InputFile
 import org.gradle.api.tasks.OutputFile
 import org.gradle.api.tasks.TaskAction
-import java.io.File
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
+import kotlin.collections.indexOfFirst
+import kotlin.collections.joinToString
+import kotlin.collections.toMutableList
+import kotlin.io.readLines
+import kotlin.io.writeText
+import kotlin.text.contains
+import kotlin.text.isLetter
+import kotlin.text.isNotEmpty
+import kotlin.text.replace
+import kotlin.text.split
+import kotlin.text.substring
+import kotlin.text.toLongOrNull
+import kotlin.text.toRegex
+import kotlin.text.trim
 
 /**
- * A Gradle task to set versionName and versionCode in gradle/libs.versions.toml directly from provided values.
+ * A Gradle task to set versionName and versionCode in gradle/libs.versions.toml and update CHANGELOG.md.
  */
-abstract class SetVersionFromTagTask : DefaultTask() {
+abstract class SetVersionFromTagTask2 : DefaultTask() {
 
     @get:Input
     abstract val newVersionName: Property<String>
@@ -39,26 +52,14 @@ abstract class SetVersionFromTagTask : DefaultTask() {
     @get:InputFile
     abstract val libsVersionsTomlFile: RegularFileProperty
 
-    @get:OutputFile
-    abstract val outputRevisionFile: RegularFileProperty
-
     @get:InputFile // Added for the changelog
     abstract val changelogFile: RegularFileProperty
 
     @get:OutputFile
     abstract val outputLibsVersionsTomlFile: RegularFileProperty // Typically the same file for in-place updates
 
-    @get:OutputFile
-    val stringsXmlFile: File by lazy {
-        project.rootProject.projectDir.resolve(
-            "core/designsystem/src/commonMain/composeResources/values/strings.xml",
-        )
-    }
-
     @TaskAction
     fun setVersion() {
-        val revFile = outputRevisionFile.asFile.get()
-        revFile.writeText("0")
         val tomlFile = libsVersionsTomlFile.asFile.get()
         val versionGet = newVersionName.get()
         val versionNameToSet = if (versionGet.isNotEmpty() && versionGet[0].isLetter()) {
@@ -129,12 +130,6 @@ abstract class SetVersionFromTagTask : DefaultTask() {
 
         // Update changelog (assuming this part remains the same)
         updateChangelog(versionNameToSet)
-        updateVersionInfoInStringsXml(
-            newVersionCode = versionCodeToSet.toString(),
-            newVersionName = versionNameToSet,
-            stringsXmlFile = stringsXmlFile,
-            logger = logger,
-        )
     }
 
 
@@ -157,5 +152,4 @@ abstract class SetVersionFromTagTask : DefaultTask() {
         changelog.writeText(lines.joinToString("\n"))
         println("Successfully updated ${changelog.name} with version $newVersion.")
     }
-
 }
