@@ -32,8 +32,8 @@ import kmtemplate.core.ui.generated.resources.Res
 import kmtemplate.core.ui.generated.resources.release_update_dialog_cancel_button
 import kmtemplate.core.ui.generated.resources.release_update_dialog_download_button
 import kmtemplate.core.ui.generated.resources.release_update_dialog_title
-import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.jetbrains.compose.resources.stringResource
+import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
 fun ReleaseUpdateDialog(
@@ -57,8 +57,7 @@ fun ReleaseUpdateDialog(
                 modifier = Modifier
                     .testTag(ReleaseUpdateTags.RELEASE_UPDATE_DIALOG_BODY_TAG)
                     .height(200.dp)
-                    .verticalScroll(scrollState)
-                ,
+                    .verticalScroll(scrollState),
             )
         },
         confirmButton = {
