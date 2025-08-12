@@ -6,7 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
-[Unreleased]: https://github.com/mshdabiola/kmtemplate/compare/1.2.14...HEAD
+[Unreleased]: https://github.com/mshdabiola/kmtemplate/compare/1.2.15...HEAD
+
+## [1.2.15] - 2025-08-12
+[1.2.15]: https://github.com/mshdabiola/kmtemplate/1.2.15
 
 ## [1.2.14] - 2025-08-11
 [1.2.14]: https://github.com/mshdabiola/kmtemplate/1.2.14
