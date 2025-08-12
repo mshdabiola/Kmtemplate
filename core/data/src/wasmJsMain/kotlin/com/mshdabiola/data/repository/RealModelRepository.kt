@@ -55,7 +55,7 @@ internal class RealModelRepository(
 
     override fun getOne(id: Long): Flow<Note?> {
         return notes
-            .map { notes1 -> notes1.first { it.id == id } }
+            .map { notes1 -> notes1.firstOrNull { it.id == id } }
             .flowOn(ioDispatcher)
     }
 
