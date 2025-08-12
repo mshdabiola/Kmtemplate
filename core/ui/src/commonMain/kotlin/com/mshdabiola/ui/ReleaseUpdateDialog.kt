@@ -28,7 +28,12 @@ import com.mshdabiola.designsystem.component.KmtButton
 import com.mshdabiola.designsystem.component.KmtTextButton
 import com.mshdabiola.model.ReleaseInfo
 import com.mshdabiola.model.testtag.ReleaseUpdateTags
+import kmtemplate.core.ui.generated.resources.Res
+import kmtemplate.core.ui.generated.resources.release_update_dialog_cancel_button
+import kmtemplate.core.ui.generated.resources.release_update_dialog_download_button
+import kmtemplate.core.ui.generated.resources.release_update_dialog_title
 import org.jetbrains.compose.ui.tooling.preview.Preview
+import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun ReleaseUpdateDialog(
@@ -42,7 +47,7 @@ fun ReleaseUpdateDialog(
         onDismissRequest = onDismissRequest,
         title = {
             Text(
-                text = "New Update Available",
+                text = stringResource(Res.string.release_update_dialog_title),
                 modifier = Modifier.testTag(ReleaseUpdateTags.RELEASE_UPDATE_DIALOG_TITLE_TAG),
             )
         },
@@ -61,7 +66,7 @@ fun ReleaseUpdateDialog(
                 onClick = onDownloadClick,
                 modifier = Modifier.testTag(ReleaseUpdateTags.RELEASE_UPDATE_DIALOG_CONFIRM_BUTTON_TAG),
             ) {
-                Text("Download")
+                Text(stringResource(Res.string.release_update_dialog_download_button))
             }
         },
         dismissButton = {
@@ -69,7 +74,7 @@ fun ReleaseUpdateDialog(
                 onClick = onDismissRequest,
                 modifier = Modifier.testTag(ReleaseUpdateTags.RELEASE_UPDATE_DIALOG_DISMISS_BUTTON_TAG),
             ) {
-                Text("Cancel")
+                Text(stringResource(Res.string.release_update_dialog_cancel_button))
             }
         },
 
