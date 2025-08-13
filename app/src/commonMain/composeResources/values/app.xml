@@ -15,8 +15,6 @@
      limitations under the License.
 -->
 <resources>
-    <string name="home_label">Home</string>
-    <string name="settings_label">Settings</string>
     <string name="rail_state_expanded">Expanded</string>
     <string name="rail_state_collapsed">Collapsed</string>
     <string name="rail_action_collapse">Collapse rail</string>
@@ -24,4 +22,8 @@
     <string name="brand_content_description">Brand</string>
     <string name="add_content_description">Add</string>
     <string name="fab_add_note_text">Add Note</string>
+    <string-array name="route">
+        <item>Home</item>
+        <item>Settings</item>
+    </string-array>
 </resources>

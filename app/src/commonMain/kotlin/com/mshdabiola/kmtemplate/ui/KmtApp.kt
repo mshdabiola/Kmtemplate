@@ -35,10 +35,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.key
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.testTag // Ensure this is imported
@@ -52,9 +52,9 @@ import com.mshdabiola.designsystem.strings.KmtStrings
 import com.mshdabiola.designsystem.theme.GradientColors
 import com.mshdabiola.designsystem.theme.KmtTheme
 import com.mshdabiola.designsystem.theme.LocalGradientColors
+import com.mshdabiola.kmtemplate.LocalAppLocale
 import com.mshdabiola.kmtemplate.MainActivityUiState
 import com.mshdabiola.kmtemplate.MainAppViewModel
-import com.mshdabiola.kmtemplate.changeLanguage
 import com.mshdabiola.kmtemplate.navigation.KmtNavHost
 import com.mshdabiola.model.DarkThemeConfig
 import com.mshdabiola.model.ReleaseInfo
@@ -91,19 +91,11 @@ fun KmtApp(
     val analyticsHelper = koinInject<AnalyticsHelper>()
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     val darkTheme = shouldUseDarkTheme(uiState)
-    val localLocalization = staticCompositionLocalOf { "en" }
-    var languageCode by remember { mutableStateOf("en") }
+    val languageCode = getLanguage(uiState)
     var releaseInfo by remember { mutableStateOf<ReleaseInfo.Success?>(null) }
     val windowRepository = getWindowRepository()
     val currentVersion = KmtStrings.versionCode
 
-    LaunchedEffect(uiState) {
-        if (uiState is MainActivityUiState.Success) {
-            val language = (uiState as MainActivityUiState.Success).userSettings.language
-            languageCode = language
-            changeLanguage(language)
-        }
-    }
     LaunchedEffect(Unit) {
         val info = viewModel.getLatestReleaseInfo(currentVersion).await()
         if (info is ReleaseInfo.Success) {
@@ -119,57 +111,59 @@ fun KmtApp(
         CompositionLocalProvider(
             LocalAnalyticsHelper provides analyticsHelper,
             LocalSharedTransitionScope provides this,
-            localLocalization provides languageCode,
+            LocalAppLocale provides languageCode,
 
         ) {
-            KmtTheme(
-                contrast = chooseContrast(uiState),
-                darkTheme = darkTheme,
-                disableDynamicTheming = shouldDisableDynamicTheming(uiState),
-            ) {
-                KmtBackground {
-                    // This could also be APP_ROOT_LAYOUT if preferred
-                    KmtGradientBackground(
-                        modifier = Modifier.testTag(KmtAppTestTags.GRADIENT_BACKGROUND),
-                        gradientColors =
-                        if (shouldShowGradientBackground(uiState)) {
-                            LocalGradientColors.current
-                        } else {
-                            GradientColors()
-                        },
-                    ) {
-                        Box {
-                            KmtScaffold(
-                                modifier = Modifier
-                                    .semanticsCommon {}
-                                    .testTag(KmtAppTestTags.MAIN_SCAFFOLD), // Tagging the KmtScaffold instance
-                                containerColor = Color.Transparent,
-                                contentWindowInsets = WindowInsets(0, 0, 0, 0),
-                                appState = appState,
-                            ) { padding ->
-                                Column(
-                                    Modifier
-                                        .fillMaxSize()
-                                        .padding(padding)
-                                        .consumeWindowInsets(padding)
-                                        .windowInsetsPadding(
-                                            WindowInsets.safeDrawing.only(WindowInsetsSides.Horizontal),
-                                        ),
-                                ) {
-                                    KmtNavHost(
-                                        appState = appState,
-                                        modifier = Modifier.testTag(KmtAppTestTags.NAV_HOST), // Tagging the NavHost
+            key(languageCode) {
+                KmtTheme(
+                    contrast = chooseContrast(uiState),
+                    darkTheme = darkTheme,
+                    disableDynamicTheming = shouldDisableDynamicTheming(uiState),
+                ) {
+                    KmtBackground {
+                        // This could also be APP_ROOT_LAYOUT if preferred
+                        KmtGradientBackground(
+                            modifier = Modifier.testTag(KmtAppTestTags.GRADIENT_BACKGROUND),
+                            gradientColors =
+                            if (shouldShowGradientBackground(uiState)) {
+                                LocalGradientColors.current
+                            } else {
+                                GradientColors()
+                            },
+                        ) {
+                            Box {
+                                KmtScaffold(
+                                    modifier = Modifier
+                                        .semanticsCommon {}
+                                        .testTag(KmtAppTestTags.MAIN_SCAFFOLD), // Tagging the KmtScaffold instance
+                                    containerColor = Color.Transparent,
+                                    contentWindowInsets = WindowInsets(0, 0, 0, 0),
+                                    appState = appState,
+                                ) { padding ->
+                                    Column(
+                                        Modifier
+                                            .fillMaxSize()
+                                            .padding(padding)
+                                            .consumeWindowInsets(padding)
+                                            .windowInsetsPadding(
+                                                WindowInsets.safeDrawing.only(WindowInsetsSides.Horizontal),
+                                            ),
+                                    ) {
+                                        KmtNavHost(
+                                            appState = appState,
+                                            modifier = Modifier.testTag(KmtAppTestTags.NAV_HOST), // Tagging the NavHost
+                                        )
+                                    }
+                                }
+
+                                if (releaseInfo != null) {
+                                    val info = releaseInfo!!
+                                    ReleaseUpdateDialog(
+                                        releaseInfo = info,
+                                        onDownloadClick = { windowRepository.openUrl(info.asset) },
+                                        onDismissRequest = { releaseInfo = null },
                                     )
                                 }
-                            }
-
-                            if (releaseInfo != null) {
-                                val info = releaseInfo!!
-                                ReleaseUpdateDialog(
-                                    releaseInfo = info,
-                                    onDownloadClick = { windowRepository.openUrl(info.asset) },
-                                    onDismissRequest = { releaseInfo = null },
-                                )
                             }
                         }
                     }
@@ -211,4 +205,12 @@ fun shouldShowGradientBackground(uiState: MainActivityUiState): Boolean =
         MainActivityUiState.Loading -> false
         is MainActivityUiState.Success ->
             uiState.userSettings.shouldShowGradientBackground
+    }
+
+@Composable
+fun getLanguage(uiState: MainActivityUiState): String =
+    when (uiState) {
+        MainActivityUiState.Loading -> "en"
+        is MainActivityUiState.Success ->
+            uiState.userSettings.language
     }

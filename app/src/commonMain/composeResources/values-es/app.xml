@@ -15,8 +15,6 @@
      limitations under the License.
 -->
 <resources>
-    <string name="home_label">Inicio</string>
-    <string name="settings_label">Ajustes</string>
     <string name="rail_state_expanded">Expandido</string>
     <string name="rail_state_collapsed">Contraído</string>
     <string name="rail_action_collapse">Contraer el raíl</string>
@@ -24,4 +22,8 @@
     <string name="brand_content_description">Marca</string>
     <string name="add_content_description">Añadir</string>
     <string name="fab_add_note_text">Añadir nota</string>
+    <string-array name="route">
+        <item>Inicio</item>
+        <item>Ajustes</item>
+    </string-array>
 </resources>

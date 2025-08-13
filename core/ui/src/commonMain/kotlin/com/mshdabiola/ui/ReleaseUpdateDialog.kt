@@ -15,15 +15,24 @@
  */
 package com.mshdabiola.ui
 
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.unit.dp
 import com.mshdabiola.designsystem.component.KmtButton
 import com.mshdabiola.designsystem.component.KmtTextButton
 import com.mshdabiola.model.ReleaseInfo
 import com.mshdabiola.model.testtag.ReleaseUpdateTags
+import kmtemplate.core.ui.generated.resources.Res
+import kmtemplate.core.ui.generated.resources.release_update_dialog_cancel_button
+import kmtemplate.core.ui.generated.resources.release_update_dialog_download_button
+import kmtemplate.core.ui.generated.resources.release_update_dialog_title
+import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
@@ -32,20 +41,23 @@ fun ReleaseUpdateDialog(
     onDismissRequest: () -> Unit,
     onDownloadClick: () -> Unit,
 ) {
+    val scrollState = rememberScrollState()
     AlertDialog(
         modifier = Modifier.testTag(ReleaseUpdateTags.RELEASE_UPDATE_DIALOG_TAG),
         onDismissRequest = onDismissRequest,
         title = {
             Text(
-                text = "New Update Available",
+                text = stringResource(Res.string.release_update_dialog_title),
                 modifier = Modifier.testTag(ReleaseUpdateTags.RELEASE_UPDATE_DIALOG_TITLE_TAG),
             )
         },
         text = {
             Text(
                 text = releaseInfo.body,
-                maxLines = 10,
-                modifier = Modifier.testTag(ReleaseUpdateTags.RELEASE_UPDATE_DIALOG_BODY_TAG),
+                modifier = Modifier
+                    .testTag(ReleaseUpdateTags.RELEASE_UPDATE_DIALOG_BODY_TAG)
+                    .height(200.dp)
+                    .verticalScroll(scrollState),
             )
         },
         confirmButton = {
@@ -53,7 +65,7 @@ fun ReleaseUpdateDialog(
                 onClick = onDownloadClick,
                 modifier = Modifier.testTag(ReleaseUpdateTags.RELEASE_UPDATE_DIALOG_CONFIRM_BUTTON_TAG),
             ) {
-                Text("Download")
+                Text(stringResource(Res.string.release_update_dialog_download_button))
             }
         },
         dismissButton = {
@@ -61,7 +73,7 @@ fun ReleaseUpdateDialog(
                 onClick = onDismissRequest,
                 modifier = Modifier.testTag(ReleaseUpdateTags.RELEASE_UPDATE_DIALOG_DISMISS_BUTTON_TAG),
             ) {
-                Text("Cancel")
+                Text(stringResource(Res.string.release_update_dialog_cancel_button))
             }
         },
 

@@ -15,16 +15,7 @@
      limitations under the License.
 -->
 <resources>
-
-    <string name="rail_state_expanded">Genişletilmiş</string>
-    <string name="rail_state_collapsed">Daraltılmış</string>
-    <string name="rail_action_collapse">Rayı daralt</string>
-    <string name="rail_action_expand">Rayı genişlet</string>
-    <string name="brand_content_description">Marka</string>
-    <string name="add_content_description">Ekle</string>
-    <string name="fab_add_note_text">Not Ekle</string>
-    <string-array name="route">
-        <item>Ana Sayfa</item>
-        <item>Ayarlar</item>
-    </string-array>
+    <string name="release_update_dialog_title">Nova atualização disponível</string>
+    <string name="release_update_dialog_download_button">Baixar</string>
+    <string name="release_update_dialog_cancel_button">Cancelar</string>
 </resources>

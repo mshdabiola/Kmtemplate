@@ -15,8 +15,7 @@
      limitations under the License.
 -->
 <resources>
-    <string name="home_label">Trang chủ</string>
-    <string name="settings_label">Cài đặt</string>
+
     <string name="rail_state_expanded">Mở rộng</string>
     <string name="rail_state_collapsed">Thu gọn</string>
     <string name="rail_action_collapse">Thu gọn thanh</string>
@@ -24,4 +23,8 @@
     <string name="brand_content_description">Thương hiệu</string>
     <string name="add_content_description">Thêm</string>
     <string name="fab_add_note_text">Thêm ghi chú</string>
+    <string-array name="route">
+        <item>Trang chủ</item>
+        <item>Cài đặt</item>
+    </string-array>
 </resources>

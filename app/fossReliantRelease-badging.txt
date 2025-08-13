@@ -1,4 +1,4 @@
-package: name='com.mshdabiola.kmtemplate.foss' versionCode='12' versionName='1.2.14' platformBuildVersionName='15' platformBuildVersionCode='35' compileSdkVersion='35' compileSdkVersionCodename='15'
+package: name='com.mshdabiola.kmtemplate.foss' versionCode='14' versionName='1.2.15' platformBuildVersionName='15' platformBuildVersionCode='35' compileSdkVersion='35' compileSdkVersionCodename='15'
 minSdkVersion:'26'
 targetSdkVersion:'35'
 uses-permission: name='android.permission.INTERNET'

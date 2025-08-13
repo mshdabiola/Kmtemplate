@@ -10,7 +10,7 @@
     ./gradlew assembleDebug -PenableComposeCompilerMetrics=true -PenableComposeCompilerReports=true
     ./gradlew :composeApp:generateReleaseBaselineProfile
 
-    ./gradlew wasmJsBrowserRun -t
+    ./gradlew wasmJsBrowserDevelopmentRun -t
     ./gradlew wasmJsBrowserDistribution
 
 export TOKEN="your_actual_token"
@@ -28,6 +28,9 @@ Use `./gradlew reload` to hot reload the application
 // ./gradlew assembleDebug -PenableComposeCompilerMetrics=true
 ./gradlew build-logic:convention:spotlessApply
 https://randombits.dev/articles/android/fdroid
+apksigner verify --print-certs app.apk
+*Signer #1 certificate SHA-256 digest: 7966373797459065b77517aadbecc04b484abcf693d23ef1a6ccfb9556868750
+Signer #1 certificate SHA-1 digest: a878b5a27dabd42c85a9675149aead093053ed1c
 
 
  ./gradlew renameProjectArtifacts -PnewPackageName=com.abiola.notepad -PnewPrefix=NtP

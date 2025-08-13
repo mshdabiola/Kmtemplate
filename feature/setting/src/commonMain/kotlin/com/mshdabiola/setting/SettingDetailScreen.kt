@@ -65,7 +65,14 @@ internal fun SettingDetailScreen(
         topBar = {
             KmtTopAppBar(
                 modifier = Modifier.testTag(SettingDetailScreenTestTags.TOP_APP_BAR),
-                title = { Text(stringArray[settingNav.segment][settingNav.index]) },
+                title = {
+                    Text(
+                        stringArray
+                            .getOrNull(settingNav.segment)
+                            ?.getOrNull(settingNav.index)
+                            ?: "",
+                    )
+                },
                 navigationIcon = {
                     if (onBack != null) {
                         KmtIconButton(
@@ -95,11 +102,15 @@ internal fun SettingDetailScreen(
                         modifier = Modifier.fillMaxSize(),
                     )
                 }
+
                 SettingNav.About -> {
                     AboutScreen(
                         modifier = Modifier.fillMaxSize(),
+                        openUrl = openUrl,
+                        openEmail = openEmail,
                     )
                 }
+
                 SettingNav.Appearance -> {
                     AppearanceScreen(
                         modifier = Modifier.fillMaxSize(),
@@ -109,6 +120,7 @@ internal fun SettingDetailScreen(
                         onGradientBackgroundChange = onGradientBackgroundChange,
                     )
                 }
+
                 SettingNav.Language -> {
                     LanguageScreen(
                         modifier = Modifier.fillMaxSize(),
@@ -116,7 +128,10 @@ internal fun SettingDetailScreen(
                         onLanguageSelected = onLanguageChange,
                     )
                 }
-                SettingNav.Issue -> { /* TODO: Implement Issue Screen */ }
+
+                SettingNav.Issue -> {
+                    /* TODO: Implement Issue Screen */
+                }
             }
         }
     }
