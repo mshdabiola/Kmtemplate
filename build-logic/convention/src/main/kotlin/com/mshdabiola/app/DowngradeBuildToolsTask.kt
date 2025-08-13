@@ -3,11 +3,10 @@ package com.mshdabiola.app // Or your appropriate package
 import org.gradle.api.DefaultTask
 import org.gradle.api.file.RegularFileProperty
 import org.gradle.api.provider.Property
-import org.gradle.api.tasks.InputFile
 import org.gradle.api.tasks.Input
+import org.gradle.api.tasks.InputFile
 import org.gradle.api.tasks.OutputFile
 import org.gradle.api.tasks.TaskAction
-import java.io.File
 import java.util.Properties
 
 abstract class DowngradeBuildToolsTask : DefaultTask() {
@@ -27,12 +26,8 @@ abstract class DowngradeBuildToolsTask : DefaultTask() {
     @get:Input
     abstract val agpVersionKeyInToml: Property<String> // Key for AGP in TOML, e.g., "androidGradlePlugin"
 
-
-    // OutputFile annotations are more for tasks that *produce* a new file as their primary output.
-    // If we modify in place, these aren't strictly necessary in the same way,
-    // but can be useful if the task is part of a chain where downstream tasks consume these.
-    // For direct in-place modification, the side effect is the key.
-    // However, to make Gradle aware of the outputs for up-to-date checks, it's good practice.
+    // These output properties should be configured ONCE in your build script
+    // to point to the same files as the input properties if modifying in-place.
     @get:OutputFile
     abstract val outputGradleWrapperPropertiesFile: RegularFileProperty
 
@@ -55,14 +50,12 @@ abstract class DowngradeBuildToolsTask : DefaultTask() {
 
             val currentDistUrl = props.getProperty("distributionUrl")
             if (currentDistUrl != null) {
-                // Assuming standard URL format: https://services.gradle.org/distributions/gradle-X.Y.Z-bin.zip
                 val newDistUrl = currentDistUrl.replace(Regex("gradle-[\\d.]+-bin\\.zip"), "gradle-$targetGradle-bin.zip")
                 if (newDistUrl != currentDistUrl) {
                     props.setProperty("distributionUrl", newDistUrl)
                     wrapperFile.outputStream().use { props.store(it, null) }
                     logger.lifecycle("Downgraded Gradle distributionUrl in ${wrapperFile.name} to use version $targetGradle.")
-                    // Copy to output property for Gradle's up-to-date checks
-                    outputGradleWrapperPropertiesFile.set(wrapperFile)
+                    // NO NEED to set outputGradleWrapperPropertiesFile here again
                 } else {
                     logger.lifecycle("Gradle distributionUrl in ${wrapperFile.name} already targets a version compatible with $targetGradle or pattern did not match.")
                 }
@@ -80,7 +73,7 @@ abstract class DowngradeBuildToolsTask : DefaultTask() {
             var agpLineFoundAndReplaced = false
 
             val agpRegex = Regex("""^\s*${Regex.escape(agpTomlKey)}\s*=\s*"[^"]+"\s*$""")
-            val agpVersionRegex = Regex(""""([^"]+)"""") // To extract current version for logging
+            val agpVersionRegex = Regex(""""([^"]+)"""")
 
             for (line in lines) {
                 if (line.matches(agpRegex)) {
@@ -88,12 +81,11 @@ abstract class DowngradeBuildToolsTask : DefaultTask() {
                     val currentVersion = currentVersionMatch?.groups?.get(1)?.value ?: "unknown"
 
                     if (currentVersion == targetAgp) {
-                        newLines.add(line) // Already the target version
-                        agpLineFoundAndReplaced = true // Consider it "handled"
+                        newLines.add(line)
+                        agpLineFoundAndReplaced = true
                         logger.lifecycle("AGP version in ${tomlFile.name} (key: '$agpTomlKey') is already $targetAgp.")
                     } else {
                         val newLine = """$agpTomlKey = "$targetAgp""""
-                        // Attempt to preserve leading whitespace if any
                         val leadingWhitespace = line.takeWhile { it.isWhitespace() }
                         newLines.add("$leadingWhitespace$newLine")
                         agpLineFoundAndReplaced = true
@@ -106,8 +98,7 @@ abstract class DowngradeBuildToolsTask : DefaultTask() {
 
             if (agpLineFoundAndReplaced) {
                 tomlFile.writeText(newLines.joinToString(System.lineSeparator()))
-                // Copy to output property for Gradle's up-to-date checks
-                outputLibsVersionsTomlFile.set(tomlFile)
+                // NO NEED to set outputLibsVersionsTomlFile here again
             } else {
                 logger.warn("Could not find or update AGP version key '$agpTomlKey' in ${tomlFile.name}. File untouched regarding AGP.")
             }

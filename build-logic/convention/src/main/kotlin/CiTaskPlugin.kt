@@ -114,18 +114,16 @@ class CiTaskPlugin : Plugin<Project> {
             group = "maintenance"
             description = "Downgrades build-logic's Gradle wrapper and root project's AGP version."
 
-            // Target build-logic's wrapper properties
+            // Input files
             gradleWrapperPropertiesFile.set(project.file("build-logic/gradle/wrapper/gradle-wrapper.properties"))
-            targetGradleVersion.set("8.13")
-
-            // Target root project's libs.versions.toml
             libsVersionsTomlFile.set(project.file("gradle/libs.versions.toml"))
-            targetAgpVersion.set("8.11.1")
-            // CHECK THIS KEY in your /gradle/libs.versions.toml
-            agpVersionKeyInToml.set("androidGradlePlugin") // Common alias used by AGP upgrade assistant / version catalogs.
-            // It could also be 'androidGradlePlugin', etc.
 
-            // Output files (for in-place modification, these point to the same files)
+            // Target versions and keys
+            targetGradleVersion.set("8.13")
+            targetAgpVersion.set("8.11.1")
+            agpVersionKeyInToml.set("androidGradlePlugin") // Or your actual key
+
+            // Output files (pointing to the same files as inputs for in-place modification)
             outputGradleWrapperPropertiesFile.set(project.file("build-logic/gradle/wrapper/gradle-wrapper.properties"))
             outputLibsVersionsTomlFile.set(project.file("gradle/libs.versions.toml"))
         }
