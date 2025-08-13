@@ -18,9 +18,8 @@ package com.mshdabiola.kmtemplate
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.ProvidedValue
 import androidx.compose.ui.platform.LocalConfiguration
-import androidx.compose.ui.platform.LocalContext
-import java.util.Locale
 import androidx.compose.ui.platform.LocalResources
+import java.util.Locale
 
 actual object LocalAppLocale {
     private var default: Locale? = null
@@ -35,7 +34,7 @@ actual object LocalAppLocale {
             default = Locale.getDefault()
         }
 
-        val new = when(value) {
+        val new = when (value) {
             null -> default!!
             else -> Locale(value)
         }
