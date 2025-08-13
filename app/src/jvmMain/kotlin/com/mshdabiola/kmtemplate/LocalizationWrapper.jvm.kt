@@ -31,7 +31,7 @@ actual object LocalAppLocale {
         if (default == null) {
             default = Locale.getDefault()
         }
-        val new = when(value) {
+        val new = when (value) {
             null -> default!!
             else -> Locale.forLanguageTag(value)
         }
