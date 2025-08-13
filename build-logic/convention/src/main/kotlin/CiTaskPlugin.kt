@@ -109,7 +109,6 @@ class CiTaskPlugin : Plugin<Project> {
             outputs.upToDateWhen { false } // Ensure it always runs if invoked
         }
 
-
         target.tasks.register<DowngradeBuildToolsTask>("downgradeBuildLogicAndAgp") {
             group = "maintenance"
             description = "Downgrades build-logic's Gradle wrapper and root project's AGP version."
@@ -127,6 +126,5 @@ class CiTaskPlugin : Plugin<Project> {
             outputGradleWrapperPropertiesFile.set(project.file("build-logic/gradle/wrapper/gradle-wrapper.properties"))
             outputLibsVersionsTomlFile.set(project.file("gradle/libs.versions.toml"))
         }
-
     }
 }

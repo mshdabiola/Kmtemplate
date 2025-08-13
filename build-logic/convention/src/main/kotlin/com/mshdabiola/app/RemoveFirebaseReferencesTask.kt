@@ -73,7 +73,8 @@ abstract class RemoveFirebaseReferencesTask : DefaultTask() {
 
                 // Check for foojay-resolver block:
                 if (trimmedLine == "plugins {" &&
-                    i + 1 < lines.size && lines[i + 1].trim().startsWith("id(\"org.gradle.toolchains.foojay-resolver\")") &&
+                    i + 1 < lines.size &&
+                    lines[i + 1].trim().startsWith("id(\"org.gradle.toolchains.foojay-resolver\")") &&
                     i + 2 < lines.size && lines[i + 2].trim() == "}"
                 ) {
                     i += 3 // Skip these 3 lines
@@ -108,7 +109,7 @@ abstract class RemoveFirebaseReferencesTask : DefaultTask() {
                     "https://maven.pkg.jetbrains.space/public/p/compose/dev",
                     "https://maven.pkg.jetbrains.space/kotlin/p/kotlin/kotlin-js-wrappers",
                     "https://maven.pkg.jetbrains.space/public/p/kotlinx-coroutines/maven",
-                    "https://maven.pkg.jetbrains.space/kotlin/p/wasm/experimental"
+                    "https://maven.pkg.jetbrains.space/kotlin/p/wasm/experimental",
                 )
 
                 var lineShouldBeRemoved = false
