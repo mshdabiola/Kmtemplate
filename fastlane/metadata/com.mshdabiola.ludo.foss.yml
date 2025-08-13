@@ -1,6 +1,6 @@
 Categories:
   - Productivity
-License: Apache-2.0
+License: GPL-3.0-or-later
 AuthorName: Lawal Abiola
 AuthorEmail: mshdabiola@gmail.com
 AuthorWebSite: https://github.com/mshdabiola
@@ -12,44 +12,24 @@ AutoName: Kmtemplate
 
 RepoType: git
 Repo: https://github.com/mshdabiola/kmtemplate.git
-Binaries: https://github.com/mshdabiola/kmtemplate/releases/download/%v/app-fossReliant-release-unsigned-signed.apk
+Binaries: https://github.com/mshdabiola/kmtemplate/releases/download/%v/app-foss-release-unsigned.apk
 
 Builds:
   - versionName: 1.2.15
-    versionCode: 14
-    commit: 8fbb4aab1521a853fffef5a58999260f46c3db01
+    versionCode: 10215
+    commit: f81e0584b163a7590d0baf403f9096732f7a6373
     subdir: app
-    sudo:
-      - echo "deb https://deb.debian.org/debian trixie main" > /etc/apt/sources.list.d/trixie.list
-      - apt-get update
-      - apt-get install -y -t trixie openjdk-21-jdk-headless
-      - update-alternatives --auto java
-      - export CPUS_MAX=6
-      - export CPUS=$(getconf _NPROCESSORS_ONLN)
-      - for (( c=$CPUS_MAX; c<$CPUS; c++ )) ; do echo 0 > /sys/devices/system/cpu/cpu$c/online
-        ; done
-    output: build/outputs/apk/fossReliant/release/app-fossReliant-release-unsigned.apk
     prebuild:
-      - gradle removeFirebaseReferences
-      - gradle clean
+      - sed -i -e '/id("com.google.gms.google-services")/d' -e '/id("com.google.firebase.crashlytics")/d' ../../app/build.gradle.kts
     scandelete:
       - build-logic/convention/build
     build:
-      - mkdir upstream
-      - pushd upstream
-      - curl -L -o upstream.apk https://github.com/mshdabiola/kmtemplate/releases/download/$$VERSION$$/app-fossReliant-release-unsigned-signed.apk
-      - unzip -q upstream.apk
-      - export upstreamhash=$(sha256sum assets/dexopt/baseline.prof|cut -d " " -f1)
-      - popd
-      - for i in {1..10}; do gradle clean assembleFossReliantRelease; mkdir local;
-        pushd local; unzip -q ../build/outputs/apk/fossReliant/release/app-fossReliant-release-unsigned.apk;
-        export localhash=$(sha256sum assets/dexopt/baseline.prof|cut -d " " -f1);
-        [[ $localhash == $upstreamhash ]] && break ; popd; rm -fr local; done
+      - gradle clean assembleFossRelease
 
-AllowedAPKSigningKeys: 7966373797459065b77517aadbecc04b484abcf693d23ef1a6ccfb9556868750
+AllowedAPKSigningKeys: 20942b036c0989f03d0d8ce6d69115796246f40673474350130a05a8d9047970
 
 AutoUpdateMode: Version
 UpdateCheckMode: Tags
 UpdateCheckData: gradle/libs.versions.toml|versionCode = "(\d+)"|.|versionName = "([\d.]+)"
 CurrentVersion: 1.2.15
-CurrentVersionCode: 14
+CurrentVersionCode: 10215
