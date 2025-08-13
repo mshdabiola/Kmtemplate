@@ -424,7 +424,8 @@ fun Fab(
     appState: KmtAppState,
 ) {
     AnimatedContent(
-        targetState = appState is Medium ,
+        targetState = appState is Medium &&
+            appState.wideNavigationRailState.targetValue == WideNavigationRailValue.Collapsed,
 
         modifier = modifier.testTag(KmtScaffoldTestTags.FabTestTags.FAB_ANIMATED_CONTENT),
         // Tag the AnimatedContent wrapper
