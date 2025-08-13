@@ -39,7 +39,6 @@ import androidx.compose.runtime.key
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.testTag // Ensure this is imported
@@ -97,7 +96,6 @@ fun KmtApp(
     val windowRepository = getWindowRepository()
     val currentVersion = KmtStrings.versionCode
 
-
     LaunchedEffect(Unit) {
         val info = viewModel.getLatestReleaseInfo(currentVersion).await()
         if (info is ReleaseInfo.Success) {
@@ -116,7 +114,7 @@ fun KmtApp(
             LocalAppLocale provides languageCode,
 
         ) {
-            key(languageCode){
+            key(languageCode) {
                 KmtTheme(
                     contrast = chooseContrast(uiState),
                     darkTheme = darkTheme,
@@ -127,11 +125,11 @@ fun KmtApp(
                         KmtGradientBackground(
                             modifier = Modifier.testTag(KmtAppTestTags.GRADIENT_BACKGROUND),
                             gradientColors =
-                                if (shouldShowGradientBackground(uiState)) {
-                                    LocalGradientColors.current
-                                } else {
-                                    GradientColors()
-                                },
+                            if (shouldShowGradientBackground(uiState)) {
+                                LocalGradientColors.current
+                            } else {
+                                GradientColors()
+                            },
                         ) {
                             Box {
                                 KmtScaffold(
@@ -171,7 +169,6 @@ fun KmtApp(
                     }
                 }
             }
-
         }
     }
 }
@@ -209,7 +206,6 @@ fun shouldShowGradientBackground(uiState: MainActivityUiState): Boolean =
         is MainActivityUiState.Success ->
             uiState.userSettings.shouldShowGradientBackground
     }
-
 
 @Composable
 fun getLanguage(uiState: MainActivityUiState): String =
