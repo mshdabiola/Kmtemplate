@@ -109,7 +109,7 @@ internal fun SettingListScreen(
             settingsMap.forEach { (mapIndex, settingList) ->
                 item {
                     Text(
-                        text = segmentArrayString[mapIndex],
+                        text = segmentArrayString.getOrElse(mapIndex,{"Home"}),
                         style = MaterialTheme.typography.titleSmall,
                         modifier = Modifier.testTag("${SettingScreenListTestTags.SECTION_HEADER_TEXT_PREFIX}$mapIndex"),
                     )
@@ -118,7 +118,10 @@ internal fun SettingListScreen(
                     SettingListItem(
                         modifier = Modifier,
                         icon = iconArray[setting.segment][setting.index],
-                        title = stringArray[setting.segment][setting.index],
+                        title = stringArray
+                            .getOrNull(setting.segment)
+                            ?.getOrNull(setting.index)
+                            ?: "Label",
                         onClick = { onSettingClick(setting) },
                         settingNav = setting,
                     )

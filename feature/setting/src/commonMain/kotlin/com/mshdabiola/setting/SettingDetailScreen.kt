@@ -56,16 +56,16 @@ internal fun SettingDetailScreen(
     openUrl: (String) -> Unit = {},
     openEmail: (String, String, String) -> Unit = { _, _, _ -> },
 ) {
-    val generalArrayString = stringArrayResource(Res.array.general)
-    val supportArrayString = stringArrayResource(Res.array.support)
-    val stringArray = listOf(generalArrayString, supportArrayString)
+//    val generalArrayString = stringArrayResource(Res.array.general)
+//    val supportArrayString = stringArrayResource(Res.array.support)
+//    val stringArray = listOf(generalArrayString, supportArrayString)
 
     Scaffold(
         modifier = modifier.testTag(SettingDetailScreenTestTags.SCREEN_ROOT),
         topBar = {
             KmtTopAppBar(
                 modifier = Modifier.testTag(SettingDetailScreenTestTags.TOP_APP_BAR),
-                title = { Text(stringArray[settingNav.segment][settingNav.index]) },
+                title = { Text("") },
                 navigationIcon = {
                     if (onBack != null) {
                         KmtIconButton(
