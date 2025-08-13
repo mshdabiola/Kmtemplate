@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 [Unreleased]: https://github.com/mshdabiola/kmtemplate/compare/1.2.15...HEAD
+### Added
+- Complete project structure and initial codebase setup
+- Core modules: analytics, data, database, datastore, designsystem, domain, model, network, testing, ui
+- Feature modules: detail, main, setting
+- Build configuration with Kotlin Multiplatform support (Android, Desktop, Web)
+- Benchmarks module for baseline profile generation
+- GitHub workflows for CI/CD (Build, PreRelease, Release)
+- Comprehensive test suites and screenshot testing
+- Localization support for multiple languages (DE, ES, FI, FR, IT, PL, PT, RU, TR, VI)
+### Changed
+- Updated version comparison logic in RealNetworkRepository
 
 ## [1.2.15] - 2025-08-12
 [1.2.15]: https://github.com/mshdabiola/kmtemplate/1.2.15
@@ -110,7 +121,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `Platform` sealed class with Web, Desktop, and Android subclasses
 - `Flavor` enum (GooglePlay, FossReliant) and `BuildType` enum (Release, Debug)
 - `ReleaseInfo` sealed class with Error and Success subclasses
-- `Result` sealed interface with Success, Error, and Loading states
+- `Result` sealed interface: Success, Error, and Loading states
 - `UserSettings` data class
 - Extension function `Flow<T>.asResult()`
 
