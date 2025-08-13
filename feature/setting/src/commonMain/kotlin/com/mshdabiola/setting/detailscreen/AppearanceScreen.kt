@@ -192,7 +192,7 @@ fun AppearanceScreen(
                     ),
                 )
                 Text(
-                    text = dayNightOptions.getOrElse(darkThemeConfigEntry.ordinal, { "Dark" }),
+                    text = dayNightOptions.getOrElse(darkThemeConfigEntry.ordinal, { "" }),
                     style = MaterialTheme.typography.bodyLarge,
                     color = MaterialTheme.colorScheme.onSurface,
                     modifier = Modifier

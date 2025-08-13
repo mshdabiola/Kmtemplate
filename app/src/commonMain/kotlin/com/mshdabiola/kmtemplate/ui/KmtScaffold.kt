@@ -382,9 +382,9 @@ fun DrawerContent(
                                 item.unSelectedIcon
                             }
                         Icon(imageVector = imageVector,
-                            contentDescription =routeArray.getOrElse(item.label,{"Home"}))
+                            contentDescription =routeArray.getOrElse(item.label,{""}))
                     },
-                    label = { Text(routeArray.getOrElse(item.label,{"Home"})) },
+                    label = { Text(routeArray.getOrElse(item.label,{""})) },
                     selected = appState.isInCurrentRoute(item.route),
                     onClick = {
                         appState.navigateTopRoute(item.route)
@@ -404,9 +404,9 @@ fun DrawerContent(
                                 item.unSelectedIcon
                             }
                         Icon(imageVector = imageVector,
-                            contentDescription = routeArray.getOrElse(item.label,{"Home"}))
+                            contentDescription = routeArray.getOrElse(item.label,{""}))
                     },
-                    label = { Text(routeArray.getOrElse(item.label,{"Home"})) },
+                    label = { Text(routeArray.getOrElse(item.label,{""})) },
                     selected = appState.isInCurrentRoute(item.route),
                     onClick = {
                         appState.navigateTopRoute(item.route)
