@@ -127,7 +127,8 @@ internal fun SettingDetailScreen(
                     )
                 }
 
-                SettingNav.Issue -> { /* TODO: Implement Issue Screen */
+                SettingNav.Issue -> {
+                    /* TODO: Implement Issue Screen */
                 }
             }
         }

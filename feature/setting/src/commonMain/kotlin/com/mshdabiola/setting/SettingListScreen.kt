@@ -109,7 +109,7 @@ internal fun SettingListScreen(
             settingsMap.forEach { (mapIndex, settingList) ->
                 item {
                     Text(
-                        text = segmentArrayString.getOrElse(mapIndex,{""}),
+                        text = segmentArrayString.getOrElse(mapIndex, { "" }),
                         style = MaterialTheme.typography.titleSmall,
                         modifier = Modifier.testTag("${SettingScreenListTestTags.SECTION_HEADER_TEXT_PREFIX}$mapIndex"),
                     )
