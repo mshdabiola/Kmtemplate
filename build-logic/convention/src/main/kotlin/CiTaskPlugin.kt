@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 import com.mshdabiola.app.BumpConveyorRevisionTask
+import com.mshdabiola.app.DowngradeBuildToolsTask
 import com.mshdabiola.app.PrependUnreleasedToChangelogTask
 import com.mshdabiola.app.RemoveFirebaseReferencesTask
 import com.mshdabiola.app.RenameProjectArtifactsTask
@@ -106,6 +107,24 @@ class CiTaskPlugin : Plugin<Project> {
             newVersionName.set(project.providers.gradleProperty("newVersionName").orElse("0.0.1"))
             changelogFile.set(target.rootProject.file("CHANGELOG.md"))
             outputs.upToDateWhen { false } // Ensure it always runs if invoked
+        }
+
+        target.tasks.register<DowngradeBuildToolsTask>("downgradeBuildLogicAndAgp") {
+            group = "maintenance"
+            description = "Downgrades build-logic's Gradle wrapper and root project's AGP version."
+
+            // Input files
+            gradleWrapperPropertiesFile.set(project.file("build-logic/gradle/wrapper/gradle-wrapper.properties"))
+            libsVersionsTomlFile.set(project.file("gradle/libs.versions.toml"))
+
+            // Target versions and keys
+            targetGradleVersion.set("8.13")
+            targetAgpVersion.set("8.11.1")
+            agpVersionKeyInToml.set("androidGradlePlugin") // Or your actual key
+
+            // Output files (pointing to the same files as inputs for in-place modification)
+            outputGradleWrapperPropertiesFile.set(project.file("build-logic/gradle/wrapper/gradle-wrapper.properties"))
+            outputLibsVersionsTomlFile.set(project.file("gradle/libs.versions.toml"))
         }
     }
 }

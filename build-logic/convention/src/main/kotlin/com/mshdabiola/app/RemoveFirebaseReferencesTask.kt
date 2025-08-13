@@ -65,14 +65,80 @@ abstract class RemoveFirebaseReferencesTask : DefaultTask() {
             settingsGradleKtsFile.get().asFile,
             outputSettingsGradleKtsFile.get().asFile,
         ) { lines ->
-            lines.filterNot { it.contains("maven(url = \"https://androidx.dev/storage/compose-compiler") }
+            val resultingLines = mutableListOf<String>()
+            var i = 0
+            while (i < lines.size) {
+                val currentLineText = lines[i] // Keep original line for adding to resultingLines
+                val trimmedLine = currentLineText.trim()
+
+                // Check for foojay-resolver block:
+                if (trimmedLine == "plugins {" &&
+                    i + 1 < lines.size &&
+                    lines[i + 1].trim().startsWith("id(\"org.gradle.toolchains.foojay-resolver\")") &&
+                    i + 2 < lines.size && lines[i + 2].trim() == "}"
+                ) {
+                    i += 3 // Skip these 3 lines
+                    logger.lifecycle("Removing foojay-resolver plugin block from settings.gradle.kts")
+                    continue
+                }
+
+                // Check for toolchainManagement block
+                if (trimmedLine == "toolchainManagement {") {
+                    var braceCount = 0
+                    var blockEndIndex = i
+                    var foundBlock = false
+                    for (j in i until lines.size) {
+                        if (lines[j].contains("{")) braceCount++
+                        if (lines[j].contains("}")) braceCount--
+                        if (braceCount == 0 && j >= i) { // Found the end of the block
+                            blockEndIndex = j
+                            foundBlock = true
+                            break
+                        }
+                    }
+                    if (foundBlock) { // Successfully found the complete block
+                        i = blockEndIndex + 1
+                        logger.lifecycle("Removing toolchainManagement block from settings.gradle.kts")
+                        continue
+                    }
+                }
+
+                // Filters for specific maven repository URLs
+                val urlsToRemove = listOf(
+                    "https://androidx.dev/storage/compose-compiler/repository/",
+                    "https://maven.pkg.jetbrains.space/public/p/compose/dev",
+                    "https://maven.pkg.jetbrains.space/kotlin/p/kotlin/kotlin-js-wrappers",
+                    "https://maven.pkg.jetbrains.space/public/p/kotlinx-coroutines/maven",
+                    "https://maven.pkg.jetbrains.space/kotlin/p/wasm/experimental",
+                )
+
+                var lineShouldBeRemoved = false
+                for (urlToRemove in urlsToRemove) {
+                    // Check for both double and single quotes around the URL
+                    if (trimmedLine.contains("maven(url = \"$urlToRemove\")") ||
+                        trimmedLine.contains("maven(url = '$urlToRemove')")
+                    ) {
+                        logger.lifecycle("Removing maven repo: $urlToRemove from settings.gradle.kts")
+                        lineShouldBeRemoved = true
+                        break
+                    }
+                }
+                if (lineShouldBeRemoved) {
+                    i++
+                    continue
+                }
+
+                resultingLines.add(currentLineText) // Add the original, non-trimmed line
+                i++
+            }
+            resultingLines
         }
 
         // 2. Process AndroidApplicationFirebaseConventionPlugin.kt
         processFile(
             firebaseConventionPluginFile.get().asFile,
             outputFirebaseConventionPluginFile.get().asFile,
-        ) { lines ->
+        ) {
             val newcode = """
                import org.gradle.api.Plugin
                import org.gradle.api.Project
@@ -104,26 +170,24 @@ abstract class RemoveFirebaseReferencesTask : DefaultTask() {
 
     // Helper function to abstract file processing
     private fun processFile(inputFile: File, outputFile: File, transformer: (List<String>) -> List<String>) {
-        logger.lifecycle("Processing file: ${inputFile.absolutePath}")
+        logger.lifecycle("Processing file for removal task: ${inputFile.absolutePath}")
 
         if (!inputFile.exists()) {
             logger.warn("File not found, skipping: ${inputFile.absolutePath}")
-            return // Or throw an error if the file is mandatory
+            return
         }
 
         val originalLines = inputFile.readLines()
         val modifiedLines = transformer(originalLines)
 
-        // Write back only if content changed to avoid unnecessary file writes
-        // and potentially preserve file timestamps if nothing changed.
         val newContent = modifiedLines.joinToString("\n")
         val originalContent = originalLines.joinToString("\n")
 
         if (newContent != originalContent) {
             outputFile.writeText(newContent)
-            logger.lifecycle("Updated file: ${outputFile.absolutePath}")
+            logger.lifecycle("Updated file via removal task: ${outputFile.absolutePath}")
         } else {
-            logger.lifecycle("No changes needed for file: ${outputFile.absolutePath}")
+            logger.lifecycle("No changes needed for file via removal task: ${outputFile.absolutePath}")
         }
     }
 }
