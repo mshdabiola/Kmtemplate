@@ -106,6 +106,8 @@ internal fun SettingDetailScreen(
                 SettingNav.About -> {
                     AboutScreen(
                         modifier = Modifier.fillMaxSize(),
+                        openUrl = openUrl,
+                        openEmail = openEmail,
                     )
                 }
 
