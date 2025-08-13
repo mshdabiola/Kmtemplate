@@ -15,8 +15,7 @@
      limitations under the License.
 -->
 <resources>
-    <string name="home_label">Strona główna</string>
-    <string name="settings_label">Ustawienia</string>
+
     <string name="rail_state_expanded">Rozwinięty</string>
     <string name="rail_state_collapsed">Zwinięty</string>
     <string name="rail_action_collapse">Zwiń szynę</string>
@@ -24,4 +23,8 @@
     <string name="brand_content_description">Marka</string>
     <string name="add_content_description">Dodaj</string>
     <string name="fab_add_note_text">Dodaj notatkę</string>
+    <string-array name="route">
+        <item>Strona główna</item>
+        <item>Ustawienia</item>
+    </string-array>
 </resources>

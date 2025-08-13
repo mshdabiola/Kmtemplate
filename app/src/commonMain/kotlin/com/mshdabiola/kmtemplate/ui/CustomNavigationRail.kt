@@ -15,11 +15,15 @@
  */
 package com.mshdabiola.kmtemplate.ui
 
-import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 
-data class TopLevelRoute<T : Any>(
-    val route: T,
-    val selectedIcon: ImageVector,
-    val unSelectedIcon: ImageVector,
-    val label: Int,
+@Composable
+expect fun CustomWideNavigationRailItem(
+    selected: Boolean,
+    onClick: () -> Unit,
+    icon: @Composable () -> Unit,
+    label: @Composable () -> Unit,
+    modifier: Modifier = Modifier,
+    railExpanded: Boolean, // Control whether to show the wider version
 )

@@ -10,7 +10,7 @@
     ./gradlew assembleDebug -PenableComposeCompilerMetrics=true -PenableComposeCompilerReports=true
     ./gradlew :composeApp:generateReleaseBaselineProfile
 
-    ./gradlew wasmJsBrowserRun -t
+    ./gradlew wasmJsBrowserDevelopmentRun -t
     ./gradlew wasmJsBrowserDistribution
 
 export TOKEN="your_actual_token"

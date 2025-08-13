@@ -15,8 +15,7 @@
      limitations under the License.
 -->
 <resources>
-    <string name="home_label">Início</string>
-    <string name="settings_label">Configurações</string>
+
     <string name="rail_state_expanded">Expandido</string>
     <string name="rail_state_collapsed">Recolhido</string>
     <string name="rail_action_collapse">Recolher carril</string>
@@ -24,4 +23,8 @@
     <string name="brand_content_description">Marca</string>
     <string name="add_content_description">Adicionar</string>
     <string name="fab_add_note_text">Adicionar Nota</string>
+    <string-array name="route">
+        <item>Início</item>
+        <item>Configurações</item>
+    </string-array>
 </resources>
