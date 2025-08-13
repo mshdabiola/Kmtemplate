@@ -2,14 +2,12 @@
 pluginManagement {
     repositories {
         includeBuild("build-logic")
-        // maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
         google()
         mavenCentral()
         gradlePluginPortal()
     }
 }
 
-// settings.gradle.kts
 plugins {
     id("org.gradle.toolchains.foojay-resolver") version "1.0.0"
 }

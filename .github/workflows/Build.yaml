@@ -221,6 +221,9 @@ jobs:
       - name: Remove Firebase References
         run: ./gradlew removeFirebaseReferences
 
+      - name: Downgrade Build Tools
+        run: ./gradlew downgradeBuildLogicAndAgp
+
       - name: Build all Foss Reliant APKs
         run: ./gradlew assembleFossReliant :benchmarks:assembleFossReliant
           -x pixel6Api33FossReliantNonMinifiedReleaseAndroidTest
