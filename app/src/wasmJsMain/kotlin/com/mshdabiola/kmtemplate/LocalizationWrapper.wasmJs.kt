@@ -20,6 +20,7 @@ import androidx.compose.runtime.ProvidedValue
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.text.intl.Locale
 
+@Suppress("ktlint:standard:class-naming", "ktlint:standard:backing-property-naming")
 external object window {
     var __customLocale: String?
 }
