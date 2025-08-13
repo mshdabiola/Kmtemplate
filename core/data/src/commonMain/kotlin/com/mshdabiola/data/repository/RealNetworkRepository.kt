@@ -44,7 +44,7 @@ internal class RealNetworkRepository(
             if (asset == null) {
                 throw Exception("Asset not found")
             }
-            if (versionStringToNumber(currentVersion) >
+            if (versionStringToNumber(currentVersion) >=
                 versionStringToNumber(gitHubReleaseInfo.tagName ?: "")
             ) {
                 throw Exception("Current version is greater than latest version")
