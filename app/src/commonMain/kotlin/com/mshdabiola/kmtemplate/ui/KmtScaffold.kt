@@ -33,6 +33,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.Icon
@@ -50,17 +51,14 @@ import androidx.compose.material3.SmallFloatingActionButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.WideNavigationRail
 import androidx.compose.material3.WideNavigationRailDefaults
-import androidx.compose.material3.WideNavigationRailItem
 import androidx.compose.material3.WideNavigationRailValue
 import androidx.compose.material3.contentColorFor
-import androidx.compose.material3.rememberWideNavigationRailState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.testTag // Ensure this import is present
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.unit.dp
@@ -77,17 +75,17 @@ import com.mshdabiola.kmtemplate.app.generated.resources.Res
 import com.mshdabiola.kmtemplate.app.generated.resources.add_content_description
 import com.mshdabiola.kmtemplate.app.generated.resources.brand_content_description
 import com.mshdabiola.kmtemplate.app.generated.resources.fab_add_note_text
-import com.mshdabiola.kmtemplate.app.generated.resources.home_label
 import com.mshdabiola.kmtemplate.app.generated.resources.rail_action_collapse
 import com.mshdabiola.kmtemplate.app.generated.resources.rail_action_expand
 import com.mshdabiola.kmtemplate.app.generated.resources.rail_state_collapsed
 import com.mshdabiola.kmtemplate.app.generated.resources.rail_state_expanded
-import com.mshdabiola.kmtemplate.app.generated.resources.settings_label
+import com.mshdabiola.kmtemplate.app.generated.resources.route
 import com.mshdabiola.main.navigation.Main
 import com.mshdabiola.model.testtag.KmtScaffoldTestTags
 import com.mshdabiola.setting.navigation.Setting
 import com.mshdabiola.ui.LocalSharedTransitionScope
 import com.mshdabiola.ui.SharedTransitionContainer
+import org.jetbrains.compose.resources.stringArrayResource
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
@@ -112,17 +110,19 @@ fun KmtScaffold(
                 route = Main,
                 selectedIcon = KmtIcons.Home,
                 unSelectedIcon = KmtIcons.HomeOutlined,
-                label = Res.string.home_label,
+                label = 0,
             ),
             TopLevelRoute(
                 route = Setting,
                 selectedIcon = KmtIcons.Settings,
                 unSelectedIcon = KmtIcons.SettingsOutlined,
-                label = Res.string.settings_label,
+                label = 1,
             ),
 
         )
     }
+    val routeArray = stringArrayResource(Res.array.route)
+
     val currentDestination = appState.navController
         .currentBackStackEntryAsState().value?.destination
     val isMain = remember(currentDestination) {
@@ -152,6 +152,7 @@ fun KmtScaffold(
                             appState = appState,
                             isMain = isMain,
                             topDestination = topDestination,
+                            routeArray = routeArray,
                         )
                     }
                 },
@@ -236,6 +237,7 @@ fun KmtScaffold(
                                     appState = appState,
                                     isMain = isMain,
                                     topDestination = topDestination,
+                                    routeArray = routeArray,
                                 )
                             }
                         }
@@ -251,6 +253,7 @@ fun KmtScaffold(
                                     appState = appState,
                                     isMain = isMain,
                                     topDestination = topDestination,
+                                    routeArray = routeArray,
                                 )
                             }
                         }
@@ -285,10 +288,8 @@ fun KmtScaffoldPreview() {
                 composable<Setting> { }
             }
     }
-    val appState = Medium(
+    val appState = Expand(
         navController = navController,
-        coroutineScope = rememberCoroutineScope(),
-        wideNavigationRailState = rememberWideNavigationRailState(),
     )
 
     SharedTransitionContainer {
@@ -319,6 +320,7 @@ fun DrawerContent(
     appState: KmtAppState,
     isMain: Boolean,
     topDestination: Set<TopLevelRoute<out Any>>,
+    routeArray: List<String>,
 ) {
     val scrollState = rememberScrollState()
 
@@ -367,26 +369,30 @@ fun DrawerContent(
         topDestination.forEach { item ->
 
             if (appState is Medium) {
-                WideNavigationRailItem(
-                    modifier = Modifier.testTag(
-                        KmtScaffoldTestTags.DrawerContentTestTags.wideNavigationRailItemTag(item.route),
-                    ),
-                    railExpanded = appState.wideNavigationRailState.targetValue == WideNavigationRailValue.Expanded,
-                    icon = {
-                        val imageVector =
-                            if (appState.isInCurrentRoute(item.route)) {
-                                item.selectedIcon
-                            } else {
-                                item.unSelectedIcon
-                            }
-                        Icon(imageVector = imageVector, contentDescription = stringResource(item.label))
-                    },
-                    label = { Text(stringResource(item.label)) },
-                    selected = appState.isInCurrentRoute(item.route),
-                    onClick = {
-                        appState.navigateTopRoute(item.route)
-                    },
-                )
+                Button(onClick = {}){
+                    Text(routeArray.getOrElse(item.label,{"Home"}))
+                }
+//                WideNavigationRailItem(
+//                    modifier = Modifier.testTag(
+//                        KmtScaffoldTestTags.DrawerContentTestTags.wideNavigationRailItemTag(item.route),
+//                    ),
+//                    railExpanded = appState.wideNavigationRailState.targetValue == WideNavigationRailValue.Expanded,
+//                    icon = {
+//                        val imageVector =
+//                            if (appState.isInCurrentRoute(item.route)) {
+//                                item.selectedIcon
+//                            } else {
+//                                item.unSelectedIcon
+//                            }
+//                        Icon(imageVector = imageVector,
+//                            contentDescription =routeArray.getOrElse(item.label,{"Home"}))
+//                    },
+//                    label = { Text(routeArray.getOrElse(item.label,{"Home"})) },
+//                    selected = appState.isInCurrentRoute(item.route),
+//                    onClick = {
+//                        appState.navigateTopRoute(item.route)
+//                    },
+//                )
             } else {
                 NavigationDrawerItem(
                     modifier = Modifier.testTag(
@@ -400,9 +406,10 @@ fun DrawerContent(
                             } else {
                                 item.unSelectedIcon
                             }
-                        Icon(imageVector = imageVector, contentDescription = stringResource(item.label))
+                        Icon(imageVector = imageVector,
+                            contentDescription = routeArray.getOrElse(item.label,{"Home"}))
                     },
-                    label = { Text(stringResource(item.label)) },
+                    label = { Text(routeArray.getOrElse(item.label,{"Home"})) },
                     selected = appState.isInCurrentRoute(item.route),
                     onClick = {
                         appState.navigateTopRoute(item.route)
@@ -420,8 +427,8 @@ fun Fab(
     appState: KmtAppState,
 ) {
     AnimatedContent(
-        targetState = appState is Medium &&
-            appState.wideNavigationRailState.targetValue == WideNavigationRailValue.Collapsed,
+        targetState = appState is Medium ,
+
         modifier = modifier.testTag(KmtScaffoldTestTags.FabTestTags.FAB_ANIMATED_CONTENT),
         // Tag the AnimatedContent wrapper
     ) { isCollapsedMediumFab ->
