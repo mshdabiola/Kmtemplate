@@ -22,5 +22,5 @@ data class TopLevelRoute<T : Any>(
     val route: T,
     val selectedIcon: ImageVector,
     val unSelectedIcon: ImageVector,
-    val label: StringResource,
+    val label: Int,
 )
