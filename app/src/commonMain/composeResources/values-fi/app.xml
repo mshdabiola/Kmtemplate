@@ -15,8 +15,6 @@
      limitations under the License.
 -->
 <resources>
-    <string name="home_label">Etusivu</string>
-    <string name="settings_label">Asetukset</string>
     <string name="rail_state_expanded">Laajennettu</string>
     <string name="rail_state_collapsed">Kutistettu</string>
     <string name="rail_action_collapse">Kutista sivupalkki</string>
@@ -24,4 +22,8 @@
     <string name="brand_content_description">Brändi</string>
     <string name="add_content_description">Lisää</string>
     <string name="fab_add_note_text">Lisää muistiinpano</string>
+    <string-array name="route">
+        <item>Etusivu</item>
+        <item>Asetukset</item>
+    </string-array>
 </resources>

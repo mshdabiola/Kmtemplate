@@ -15,8 +15,7 @@
      limitations under the License.
 -->
 <resources>
-    <string name="home_label">Главная</string>
-    <string name="settings_label">Настройки</string>
+
     <string name="rail_state_expanded">Развернуто</string>
     <string name="rail_state_collapsed">Свернуто</string>
     <string name="rail_action_collapse">Свернуть панель</string>
@@ -24,4 +23,8 @@
     <string name="brand_content_description">Бренд</string>
     <string name="add_content_description">Добавить</string>
     <string name="fab_add_note_text">Добавить заметку</string>
+    <string-array name="route">
+        <item>Главная</item>
+        <item>Настройки</item>
+    </string-array>
 </resources>

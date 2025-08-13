@@ -15,8 +15,6 @@
      limitations under the License.
 -->
 <resources>
-    <string name="home_label">Startseite</string>
-    <string name="settings_label">Einstellungen</string>
     <string name="rail_state_expanded">Erweitert</string>
     <string name="rail_state_collapsed">Zusammengeklappt</string>
     <string name="rail_action_collapse">Schiene einklappen</string>
@@ -24,4 +22,8 @@
     <string name="brand_content_description">Marke</string>
     <string name="add_content_description">Hinzufügen</string>
     <string name="fab_add_note_text">Notiz hinzufügen</string>
+    <string-array name="route">
+        <item>Startseite</item>
+        <item>Einstellungen</item>
+    </string-array>
 </resources>

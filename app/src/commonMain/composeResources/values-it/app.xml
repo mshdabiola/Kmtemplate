@@ -15,8 +15,6 @@
      limitations under the License.
 -->
 <resources>
-    <string name="home_label">Home</string>
-    <string name="settings_label">Impostazioni</string>
     <string name="rail_state_expanded">Espanso</string>
     <string name="rail_state_collapsed">Compresso</string>
     <string name="rail_action_collapse">Comprimi il rail</string>
@@ -24,4 +22,8 @@
     <string name="brand_content_description">Marchio</string>
     <string name="add_content_description">Aggiungi</string>
     <string name="fab_add_note_text">Aggiungi nota</string>
+    <string-array name="route">
+        <item>Home</item>
+        <item>Impostazioni</item>
+    </string-array>
 </resources>
