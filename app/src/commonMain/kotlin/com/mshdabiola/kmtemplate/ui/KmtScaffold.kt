@@ -369,30 +369,27 @@ fun DrawerContent(
         topDestination.forEach { item ->
 
             if (appState is Medium) {
-                Button(onClick = {}){
-                    Text(routeArray.getOrElse(item.label,{"Home"}))
-                }
-//                WideNavigationRailItem(
-//                    modifier = Modifier.testTag(
-//                        KmtScaffoldTestTags.DrawerContentTestTags.wideNavigationRailItemTag(item.route),
-//                    ),
-//                    railExpanded = appState.wideNavigationRailState.targetValue == WideNavigationRailValue.Expanded,
-//                    icon = {
-//                        val imageVector =
-//                            if (appState.isInCurrentRoute(item.route)) {
-//                                item.selectedIcon
-//                            } else {
-//                                item.unSelectedIcon
-//                            }
-//                        Icon(imageVector = imageVector,
-//                            contentDescription =routeArray.getOrElse(item.label,{"Home"}))
-//                    },
-//                    label = { Text(routeArray.getOrElse(item.label,{"Home"})) },
-//                    selected = appState.isInCurrentRoute(item.route),
-//                    onClick = {
-//                        appState.navigateTopRoute(item.route)
-//                    },
-//                )
+                CustomWideNavigationRailItem(
+                    modifier = Modifier.testTag(
+                        KmtScaffoldTestTags.DrawerContentTestTags.wideNavigationRailItemTag(item.route),
+                    ),
+                    railExpanded = appState.wideNavigationRailState.targetValue == WideNavigationRailValue.Expanded,
+                    icon = {
+                        val imageVector =
+                            if (appState.isInCurrentRoute(item.route)) {
+                                item.selectedIcon
+                            } else {
+                                item.unSelectedIcon
+                            }
+                        Icon(imageVector = imageVector,
+                            contentDescription =routeArray.getOrElse(item.label,{"Home"}))
+                    },
+                    label = { Text(routeArray.getOrElse(item.label,{"Home"})) },
+                    selected = appState.isInCurrentRoute(item.route),
+                    onClick = {
+                        appState.navigateTopRoute(item.route)
+                    },
+                )
             } else {
                 NavigationDrawerItem(
                     modifier = Modifier.testTag(
