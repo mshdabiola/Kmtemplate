@@ -1,23 +1,23 @@
 Categories:
-  - Games
-License: GPL-3.0-or-later
+  - Productivity
+License: Apache-2.0
 AuthorName: Lawal Abiola
 AuthorEmail: mshdabiola@gmail.com
 AuthorWebSite: https://github.com/mshdabiola
-SourceCode: https://github.com/mshdabiola/NaijaLudo
-IssueTracker: https://github.com/mshdabiola/NaijaLudo/issues
-Changelog: https://github.com/mshdabiola/NaijaLudo/releases
+SourceCode: https://github.com/mshdabiola/kmtemplate
+IssueTracker: https://github.com/mshdabiola/kmtemplate/issues
+Changelog: https://github.com/mshdabiola/kmtemplate/releases
 
-AutoName: NaijaLudo
+AutoName: Kmtemplate
 
 RepoType: git
-Repo: https://github.com/mshdabiola/NaijaLudo.git
-Binaries: https://github.com/mshdabiola/NaijaLudo/releases/download/%v/app-fossReliant-release-unsigned-signed.apk
+Repo: https://github.com/mshdabiola/kmtemplate.git
+Binaries: https://github.com/mshdabiola/kmtemplate/releases/download/%v/app-fossReliant-release-unsigned-signed.apk
 
 Builds:
-  - versionName: 3.1.4
-    versionCode: 314
-    commit: 29ce0847b38169fee08db1346795f5636e88576d
+  - versionName: 1.2.15
+    versionCode: 14
+    commit: 8fbb4aab1521a853fffef5a58999260f46c3db01
     subdir: app
     sudo:
       - echo "deb https://deb.debian.org/debian trixie main" > /etc/apt/sources.list.d/trixie.list
@@ -30,18 +30,14 @@ Builds:
         ; done
     output: build/outputs/apk/fossReliant/release/app-fossReliant-release-unsigned.apk
     prebuild:
-      - sed -i -e '/maven(url = "https:\/\/maven.pkg.jetbrains.space/d' -e '/maven(url
-        = "https:\/\/androidx.dev\/storage\/compose-compiler/d' ../settings.gradle.kts
-      - sed -i -e '/alias(libs.plugins.firebase./d' ../build.gradle.kts
-      - sed -i -e '/with(target) {/,/^        }/d' -e '/CrashlyticsExtension/d' ../build-logic/convention/src/main/kotlin/AndroidApplicationFirebaseConventionPlugin.kt
-      - sed -i -e '/libs.firebase/d' ../build-logic/convention/build.gradle.kts
+      - gradle removeFirebaseReferences
       - gradle clean
     scandelete:
       - build-logic/convention/build
     build:
       - mkdir upstream
       - pushd upstream
-      - curl -L -o upstream.apk https://github.com/mshdabiola/NaijaLudo/releases/download/$$VERSION$$/app-fossReliant-release-unsigned-signed.apk
+      - curl -L -o upstream.apk https://github.com/mshdabiola/kmtemplate/releases/download/$$VERSION$$/app-fossReliant-release-unsigned-signed.apk
       - unzip -q upstream.apk
       - export upstreamhash=$(sha256sum assets/dexopt/baseline.prof|cut -d " " -f1)
       - popd
@@ -55,5 +51,5 @@ AllowedAPKSigningKeys: 7966373797459065b77517aadbecc04b484abcf693d23ef1a6ccfb955
 AutoUpdateMode: Version
 UpdateCheckMode: Tags
 UpdateCheckData: gradle/libs.versions.toml|versionCode = "(\d+)"|.|versionName = "([\d.]+)"
-CurrentVersion: 3.1.4
-CurrentVersionCode: 314
+CurrentVersion: 1.2.15
+CurrentVersionCode: 14
