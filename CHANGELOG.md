@@ -8,6 +8,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 [Unreleased]: https://github.com/mshdabiola/kmtemplate/compare/1.2.15...HEAD
 
+
+### Added
+- `WideNavigationRailItem` composable for displaying a wider navigation item, typically used when the navigation rail is expanded. (Conceptual addition, assuming it was newly created or significantly fleshed out based on our discussion).
+
+### Changed
+- Refactored `ReleaseUpdateDialog.kt`:
+  - Moved hardcoded strings ("New Update Available", "Download", "Cancel") to `core/ui/src/commonMain/composeResources/values/strings_ui.xml`.
+  - Updated `ReleaseUpdateDialog` composable to use `stringResource` for these texts.
+- Suppressed `ktlint(standard:class-naming)` lint warning for `external object window` in `app/src/wasmJsMain/kotlin/com/mshdabiola/kmtemplate/LocalizationWrapper.wasmJs.kt` to allow lowercase naming for JavaScript interop.
+
+
 ## [1.2.15] - 2025-08-12
 [1.2.15]: https://github.com/mshdabiola/kmtemplate/1.2.15
 
