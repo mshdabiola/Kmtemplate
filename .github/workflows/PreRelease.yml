@@ -90,19 +90,19 @@ jobs:
         run: |
           ./gradlew setPreReleaseVersionTag -PnewVersionName=${{ github.ref_name }}
 
-#      - name: Build  google play release variant apk
-#        run: ./gradlew assembleGooglePlayRelease
-#
-#      - name: Sign google play APK
-#        uses: r0adkll/sign-android-release@v1.0.4
-#        with:
-#          releaseDirectory: app/build/outputs/apk/googlePlay/release
-#          signingKeyBase64: ${{ secrets.SIGNING_KEY2 }}
-#          alias: ${{ secrets.ALIAS }}
-#          keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
-#          keyPassword: ${{ secrets.KEY_PASSWORD }}
-#        env:
-#          BUILD_TOOLS_VERSION: "34.0.0"
+      - name: Build  google play release variant apk
+        run: ./gradlew assembleGooglePlayRelease
+
+      - name: Sign google play APK
+        uses: r0adkll/sign-android-release@v1.0.4
+        with:
+          releaseDirectory: app/build/outputs/apk/googlePlay/release
+          signingKeyBase64: ${{ secrets.SIGNING_KEY2 }}
+          alias: ${{ secrets.ALIAS }}
+          keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
+          keyPassword: ${{ secrets.KEY_PASSWORD }}
+        env:
+          BUILD_TOOLS_VERSION: "34.0.0"
 
       - name: Remove Firebase References
         run: ./gradlew removeFirebaseReferences
