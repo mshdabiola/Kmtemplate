@@ -44,6 +44,11 @@ internal class RealNetworkRepository(
             if (asset == null) {
                 throw Exception("Asset not found")
             }
+            if(currentVersion.any { it.isLetter() }||gitHubReleaseInfo.tagName?.any { it.isLetter() }==true){
+                throw Exception("Version contains non-numeric characters. " +
+                    "current version $currentVersion github version ${gitHubReleaseInfo.tagName}")
+            }
+
             if (versionStringToNumber(currentVersion) >=
                 versionStringToNumber(gitHubReleaseInfo.tagName ?: "")
             ) {

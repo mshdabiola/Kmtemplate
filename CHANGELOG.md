@@ -5,6 +5,22 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+[Unreleased]: https://github.com/mshdabiola/kmtemplate/compare/1.2.16...HEAD
+
+### Added
+- Baseline profile generation support.
+
+### Changed
+- Updated Android Gradle Plugin to 8.12.0.
+- Refactored version check to use version name.
+- Enhanced version validation logic in `RealNetworkRepository`.
+- Updated F-Droid metadata for Kmtemplate.
+- **CI**: Enabled `setVersionFromTag` task in the Release GitHub Actions workflow.
+- **Documentation**:
+  - Updated and reformatted development commands.
+  - Removed Detekt Compose configuration and module graph from documentation.
+
 ## [1.2.16] - 2025-08-14
 [1.2.16]: https://github.com/mshdabiola/kmtemplate/1.2.16
 
