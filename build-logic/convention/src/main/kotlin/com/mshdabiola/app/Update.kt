@@ -111,6 +111,6 @@ fun updateVersionInfoInStringsXml(
 
 // Helper function (can be the same as before)
 private fun getCurrentFormattedDateTime(): String {
-    val sdf = SimpleDateFormat("dd, MMMM yyyy HH:mm", Locale.ENGLISH)
+    val sdf = SimpleDateFormat("dd, MMMM yyyy", Locale.ENGLISH)
     return sdf.format(Date())
 }
