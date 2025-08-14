@@ -319,7 +319,6 @@ fun DrawerContent(
     val scrollState = rememberScrollState()
     val routeArray = stringArrayResource(Res.array.route)
 
-
     Column(
         modifier = modifier
             .verticalScroll(scrollState)
