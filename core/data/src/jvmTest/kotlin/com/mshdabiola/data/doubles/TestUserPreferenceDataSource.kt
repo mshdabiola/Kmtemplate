@@ -59,4 +59,8 @@ class TestUserPreferenceDataSource : UserPreferencesDataSource {
     override suspend fun setLanguage(language: String) {
         _userPreferences.update { it.copy(language = language) }
     }
+
+    override suspend fun setUpdateFromPreRelease(updateFromPreRelease: Boolean) {
+       _userPreferences.update { it.copy(updateFromPreRelease = updateFromPreRelease) }
+    }
 }

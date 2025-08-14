@@ -49,4 +49,8 @@ internal class RealUserPreferencesDataSource : UserPreferencesDataSource {
     override suspend fun setLanguage(language: String) {
         store.update { it?.copy(language = language) }
     }
+
+    override suspend fun setUpdateFromPreRelease(updateFromPreRelease: Boolean) {
+        store.update { it?.copy(updateFromPreRelease = updateFromPreRelease) }
+    }
 }
