@@ -120,7 +120,6 @@ fun KmtScaffold(
 
         )
     }
-    val routeArray = stringArrayResource(Res.array.route)
 
     val currentDestination = appState.navController
         .currentBackStackEntryAsState().value?.destination
@@ -151,7 +150,6 @@ fun KmtScaffold(
                             appState = appState,
                             isMain = isMain,
                             topDestination = topDestination,
-                            routeArray = routeArray,
                         )
                     }
                 },
@@ -236,7 +234,6 @@ fun KmtScaffold(
                                     appState = appState,
                                     isMain = isMain,
                                     topDestination = topDestination,
-                                    routeArray = routeArray,
                                 )
                             }
                         }
@@ -252,7 +249,6 @@ fun KmtScaffold(
                                     appState = appState,
                                     isMain = isMain,
                                     topDestination = topDestination,
-                                    routeArray = routeArray,
                                 )
                             }
                         }
@@ -319,9 +315,9 @@ fun DrawerContent(
     appState: KmtAppState,
     isMain: Boolean,
     topDestination: Set<TopLevelRoute<out Any>>,
-    routeArray: List<String>,
 ) {
     val scrollState = rememberScrollState()
+    val routeArray = stringArrayResource(Res.array.route)
 
     Column(
         modifier = modifier
