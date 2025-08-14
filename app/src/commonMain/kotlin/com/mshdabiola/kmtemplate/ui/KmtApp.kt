@@ -94,7 +94,7 @@ fun KmtApp(
     val languageCode = getLanguage(uiState)
     var releaseInfo by remember { mutableStateOf<ReleaseInfo.Success?>(null) }
     val windowRepository = getWindowRepository()
-    val currentVersion = KmtStrings.versionCode
+    val currentVersion = KmtStrings.version
 
     LaunchedEffect(Unit) {
         val info = viewModel.getLatestReleaseInfo(currentVersion).await()
