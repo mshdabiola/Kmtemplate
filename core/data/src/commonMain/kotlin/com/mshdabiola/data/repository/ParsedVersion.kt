@@ -30,7 +30,7 @@ data class ParsedVersion(
     }
 
     companion object {
-        private val VERSION_REGEX = Regex("""^(\d+)\.(\d+)\.(\d+)(?:-([a-zA-Z]+)(\d*))?""")
+        private val VERSION_REGEX = Regex("""^(\d+)\.(\d+)\.(\d+)(?:-([a-zA-Z]+)(\d*))?$""") // Added $ at the end
 
         fun fromString(versionString: String): ParsedVersion? {
             val match = VERSION_REGEX.find(versionString) ?: return null
@@ -48,13 +48,18 @@ data class ParsedVersion(
                     "alpha" -> PreReleaseType.ALPHA
                     "beta" -> PreReleaseType.BETA
                     "rc" -> PreReleaseType.RC
-                    else -> null // Or throw an error for unsupported pre-release types
+                    else -> return null // Invalid pre-release type if it's not one of the known ones
                 }
+                // If preReleaseType was valid, check preReleaseVersionStr
+                // It's okay for preReleaseVersionStr to be empty (e.g., "1.0.0-alpha"), defaults to 0
+                // It should not contain non-digits if not empty. toIntOrNull handles this.
                 preReleaseVersion = if (preReleaseVersionStr.isNotEmpty()) {
-                    preReleaseVersionStr.toIntOrNull() ?: 0 // Default to 0 if number is missing after type
+                    preReleaseVersionStr.toIntOrNull() // If it's not a valid int (e.g. "a1", or "1-1"), this will be null
                 } else {
                     0 // Default to 0 if only type is present e.g. "1.0.0-alpha"
                 }
+                // If preReleaseVersionStr was something like "alpha1bad", toIntOrNull would return null
+                if (preReleaseVersion == null) return null
             }
             return ParsedVersion(major, minor, patch, preReleaseType, preReleaseVersion)
         }
