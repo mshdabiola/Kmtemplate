@@ -20,5 +20,5 @@ import com.mshdabiola.model.ReleaseInfo
 interface NetworkRepository {
 
     suspend fun gotoGoogle(): String
-    suspend fun getLatestReleaseInfo(currentVersion: String): ReleaseInfo
+    suspend fun getLatestReleaseInfo(currentVersion: String,allowPreRelease:Boolean=false): ReleaseInfo
 }

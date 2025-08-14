@@ -27,7 +27,7 @@ internal class RealNetworkRepository(
         return "" // Placeholder, actual implementation would call networkSource
     }
 
-    override suspend fun getLatestReleaseInfo(currentVersion: String): ReleaseInfo {
+    override suspend fun getLatestReleaseInfo(currentVersion: String, allowPreRelease: Boolean): ReleaseInfo {
         if (platform !is Platform.Android) {
             return ReleaseInfo.Error("Device not supported")
         }
@@ -41,18 +41,19 @@ internal class RealNetworkRepository(
                 ?.firstOrNull {
                     it?.browserDownloadUrl?.contains(name) ?: false
                 }
-            if (asset == null) {
-                throw Exception("Asset not found")
-            }
-            if(currentVersion.any { it.isLetter() }||gitHubReleaseInfo.tagName?.any { it.isLetter() }==true){
-                throw Exception("Version contains non-numeric characters. " +
-                    "current version $currentVersion github version ${gitHubReleaseInfo.tagName}")
-            }
 
-            if (versionStringToNumber(currentVersion) >=
-                versionStringToNumber(gitHubReleaseInfo.tagName ?: "")
-            ) {
-                throw Exception("Current version is greater than latest version")
+            val currentParsedVersion = ParsedVersion.fromString(currentVersion)
+            val onlineParsedVersion = ParsedVersion.fromString(gitHubReleaseInfo.tagName ?: "")
+
+            when {
+                asset == null ->
+                    throw Exception("Asset not found")
+                onlineParsedVersion == null || currentParsedVersion == null ->
+                    throw Exception("Invalid version format")
+                allowPreRelease && onlineParsedVersion.preReleaseType != null ->
+                    throw Exception("Pre-release versions are not allowed")
+                currentParsedVersion > onlineParsedVersion ->
+                    throw Exception("Current version is greater than latest version")
             }
 
             ReleaseInfo.Success(
@@ -66,11 +67,4 @@ internal class RealNetworkRepository(
         }
     }
 
-    private fun versionStringToNumber(versionString: String): Long {
-        // Remove all non-digit characters
-        val numericString = versionString.filter { it.isDigit() }
-
-        // Convert the resulting string to an integer
-        return numericString.toLongOrNull() ?: 0L
-    }
 }
