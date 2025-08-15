@@ -50,7 +50,7 @@ internal class RealNetworkRepository(
                     throw Exception("Asset not found")
                 onlineParsedVersion == null || currentParsedVersion == null ->
                     throw Exception("Invalid version format")
-                allowPreRelease && onlineParsedVersion.preReleaseType != null ->
+                !allowPreRelease && onlineParsedVersion.preReleaseType != null ->
                     throw Exception("Pre-release versions are not allowed")
                 currentParsedVersion > onlineParsedVersion ->
                     throw Exception("Current version is greater than latest version")
