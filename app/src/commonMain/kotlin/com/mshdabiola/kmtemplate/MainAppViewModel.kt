@@ -28,11 +28,12 @@ import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 
 class MainAppViewModel(
-    userDataRepository: UserDataRepository,
+    private val userDataRepository: UserDataRepository,
     private val networkRepository: NetworkRepository,
     private val logger: Logger,
 ) : ViewModel() {
@@ -47,7 +48,16 @@ class MainAppViewModel(
 
     fun getLatestReleaseInfo(currentVersion: String): Deferred<ReleaseInfo> {
         return viewModelScope.async {
-            networkRepository.getLatestReleaseInfo(currentVersion)
+            val userSettings = userDataRepository.userSettings.first()
+            if (userSettings.showUpdateDialog) {
+                networkRepository.getLatestReleaseInfo(
+                    currentVersion = currentVersion,
+                    allowPreRelease = userSettings.updateFromPreRelease
+                )
+
+            }else{
+                ReleaseInfo.Error("Update dialog is disabled")
+            }
         }
     }
 
