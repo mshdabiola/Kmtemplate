@@ -17,6 +17,7 @@ package com.mshdabiola.data.di
 
 import com.mshdabiola.data.repository.NoteRepository
 import com.mshdabiola.data.repository.RealModelRepository
+import com.mshdabiola.database.di.daoModules
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import org.koin.core.module.Module
@@ -27,7 +28,7 @@ import org.koin.dsl.module
 actual val dataModule: Module
     get() =
         module {
-            includes(commonModule)
+            includes(commonModule, daoModules)
             single { Dispatchers.Default } bind CoroutineDispatcher::class
             singleOf(::RealModelRepository) bind NoteRepository::class
         }
