@@ -1,4 +1,4 @@
-  ./gradlew :modules:designsystem:jacocoTestReport
+./gradlew koverHtmlReportJvm koverXmlReportJvm
 
   ./gradlew lintFossReliantDebug;
   ./gradlew updateFossReliantReleaseBadging;

@@ -82,6 +82,18 @@ class FakeUserDataRepository : UserDataRepository {
         }
     }
 
+    override suspend fun setUpdateFromPreRelease(updateFromPreRelease: Boolean) {
+        _userSettings.update { currentUserData ->
+            currentUserData.copy(updateFromPreRelease = updateFromPreRelease)
+        }
+    }
+
+    override suspend fun setShowUpdateDialog(showUpdateDialog: Boolean) {
+        _userSettings.update { currentUserData ->
+            currentUserData.copy(showUpdateDialog = showUpdateDialog)
+        }
+    }
+
     /**
      * Helper function to directly set the entire UserData object, useful for test setup.
      */

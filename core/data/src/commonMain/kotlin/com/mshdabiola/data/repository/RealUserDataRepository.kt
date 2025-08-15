@@ -65,4 +65,12 @@ internal class RealUserDataRepository(
     override suspend fun setLanguage(language: String) {
         withContext(ioDispatcher) { userPreferencesRepository.setLanguage(language) }
     }
+
+    override suspend fun setUpdateFromPreRelease(updateFromPreRelease: Boolean) {
+        withContext(ioDispatcher) { userPreferencesRepository.setUpdateFromPreRelease(updateFromPreRelease) }
+    }
+
+    override suspend fun setShowUpdateDialog(showUpdateDialog: Boolean) {
+        withContext(ioDispatcher) { userPreferencesRepository.setShowUpdateDialog(showUpdateDialog) }
+    }
 }

@@ -52,4 +52,12 @@ class RealUserPreferencesDataSource(
     override suspend fun setLanguage(language: String) {
         userdata.updateData { it.copy(language = language) }
     }
+
+    override suspend fun setUpdateFromPreRelease(updateFromPreRelease: Boolean) {
+        userdata.updateData { it.copy(updateFromPreRelease = updateFromPreRelease) }
+    }
+
+    override suspend fun setShowUpdateDialog(showUpdateDialog: Boolean) {
+        userdata.updateData { it.copy(showUpdateDialog = showUpdateDialog) }
+    }
 }

@@ -171,10 +171,10 @@ abstract class RemoveFirebaseReferencesTask : DefaultTask() {
 
     // Helper function to abstract file processing
     private fun processFile(inputFile: File, outputFile: File, transformer: (List<String>) -> List<String>) {
-        logger.lifecycle("Processing file for removal task: ${inputFile.absolutePath}")
+        logger.lifecycle("Processing file for removal task: ${inputFile.path}")
 
         if (!inputFile.exists()) {
-            logger.warn("File not found, skipping: ${inputFile.absolutePath}")
+            logger.warn("File not found, skipping: ${inputFile.path}")
             return
         }
 
@@ -186,9 +186,9 @@ abstract class RemoveFirebaseReferencesTask : DefaultTask() {
 
         if (newContent != originalContent) {
             outputFile.writeText(newContent)
-            logger.lifecycle("Updated file via removal task: ${outputFile.absolutePath}")
+            logger.lifecycle("Updated file via removal task: ${outputFile.path}")
         } else {
-            logger.lifecycle("No changes needed for file via removal task: ${outputFile.absolutePath}")
+            logger.lifecycle("No changes needed for file via removal task: ${outputFile.path}")
         }
     }
 }

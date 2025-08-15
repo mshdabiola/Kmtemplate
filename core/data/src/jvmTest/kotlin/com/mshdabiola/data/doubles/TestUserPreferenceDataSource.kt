@@ -31,7 +31,7 @@ class TestUserPreferenceDataSource : UserPreferencesDataSource {
             shouldHideOnboarding = false,
             contrast = 0,
             shouldShowGradientBackground = true,
-            language = "en",
+            language = "en-US",
         ),
     )
     override val userPreferences: Flow<UserPreferences> = _userPreferences.asStateFlow()
@@ -58,5 +58,13 @@ class TestUserPreferenceDataSource : UserPreferencesDataSource {
 
     override suspend fun setLanguage(language: String) {
         _userPreferences.update { it.copy(language = language) }
+    }
+
+    override suspend fun setUpdateFromPreRelease(updateFromPreRelease: Boolean) {
+        _userPreferences.update { it.copy(updateFromPreRelease = updateFromPreRelease) }
+    }
+
+    override suspend fun setShowUpdateDialog(showUpdateDialog: Boolean) {
+        _userPreferences.update { it.copy(showUpdateDialog = showUpdateDialog) }
     }
 }
