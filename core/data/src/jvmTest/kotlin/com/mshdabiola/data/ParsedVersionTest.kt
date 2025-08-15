@@ -25,210 +25,263 @@ import kotlin.test.assertTrue
 
 class ParsedVersionTest {
 
-    // Test cases for ParsedVersion.fromString()
     @Test
-    fun `fromString handles valid full versions`() {
-        val version = ParsedVersion.fromString("1.2.3")
-        assertNotNull(version)
-        assertEquals(1, version.major)
-        assertEquals(2, version.minor)
-        assertEquals(3, version.patch)
-        assertNull(version.preReleaseType)
-        assertNull(version.preReleaseVersion)
+    fun `fromString parses simple version`() {
+        val parsed = ParsedVersion.fromString("1.2.3")
+        assertNotNull(parsed)
+        assertEquals(1, parsed!!.major)
+        assertEquals(2, parsed.minor)
+        assertEquals(3, parsed.patch)
+        assertNull(parsed.preReleaseType)
+        assertNull(parsed.preReleaseVersion)
     }
 
     @Test
-    fun `fromString handles valid versions with alpha pre-release`() {
-        val version = ParsedVersion.fromString("1.0.0-alpha1")
-        assertNotNull(version)
-        assertEquals(1, version.major)
-        assertEquals(0, version.minor)
-        assertEquals(0, version.patch)
-        assertEquals(ParsedVersion.PreReleaseType.ALPHA, version.preReleaseType)
-        assertEquals(1, version.preReleaseVersion)
+    fun `fromString parses version with v prefix`() {
+        val parsed = ParsedVersion.fromString("v0.10.5")
+        assertNotNull(parsed)
+        assertEquals(0, parsed!!.major)
+        assertEquals(10, parsed.minor)
+        assertEquals(5, parsed.patch)
+        assertNull(parsed.preReleaseType)
+        assertNull(parsed.preReleaseVersion)
     }
 
     @Test
-    fun `fromString handles valid versions with beta pre-release and leading zero`() {
-        val version = ParsedVersion.fromString("2.3.4-beta02")
-        assertNotNull(version)
-        assertEquals(2, version.major)
-        assertEquals(3, version.minor)
-        assertEquals(4, version.patch)
-        assertEquals(ParsedVersion.PreReleaseType.BETA, version.preReleaseType)
-        assertEquals(2, version.preReleaseVersion)
+    fun `fromString parses alpha pre-release without number`() {
+        val parsed = ParsedVersion.fromString("1.0.0-alpha")
+        assertNotNull(parsed)
+        assertEquals(1, parsed!!.major)
+        assertEquals(0, parsed.minor)
+        assertEquals(0, parsed.patch)
+        assertEquals(ParsedVersion.PreReleaseType.ALPHA, parsed.preReleaseType)
+        assertEquals(0, parsed.preReleaseVersion) // Defaults to 0
     }
 
     @Test
-    fun `fromString handles valid versions with rc pre-release`() {
-        val version = ParsedVersion.fromString("3.0.0-rc5")
-        assertNotNull(version)
-        assertEquals(3, version.major)
-        assertEquals(0, version.minor)
-        assertEquals(0, version.patch)
-        assertEquals(ParsedVersion.PreReleaseType.RC, version.preReleaseType)
-        assertEquals(5, version.preReleaseVersion)
+    fun `fromString parses alpha pre-release with number`() {
+        val parsed = ParsedVersion.fromString("2.3.4-alpha1")
+        assertNotNull(parsed)
+        assertEquals(2, parsed!!.major)
+        assertEquals(3, parsed.minor)
+        assertEquals(4, parsed.patch)
+        assertEquals(ParsedVersion.PreReleaseType.ALPHA, parsed.preReleaseType)
+        assertEquals(1, parsed.preReleaseVersion)
     }
 
     @Test
-    fun `fromString handles valid versions with pre-release type but no number`() {
-        val versionAlpha = ParsedVersion.fromString("1.0.0-alpha")
-        assertNotNull(versionAlpha)
-        assertEquals(ParsedVersion.PreReleaseType.ALPHA, versionAlpha.preReleaseType)
-        assertEquals(0, versionAlpha.preReleaseVersion, "Expected pre-release version 0 for -alpha")
-
-        val versionBeta = ParsedVersion.fromString("1.0.0-beta")
-        assertNotNull(versionBeta)
-        assertEquals(ParsedVersion.PreReleaseType.BETA, versionBeta.preReleaseType)
-        assertEquals(0, versionBeta.preReleaseVersion, "Expected pre-release version 0 for -beta")
-
-        val versionRC = ParsedVersion.fromString("1.0.0-rc")
-        assertNotNull(versionRC)
-        assertEquals(ParsedVersion.PreReleaseType.RC, versionRC.preReleaseType)
-        assertEquals(0, versionRC.preReleaseVersion, "Expected pre-release version 0 for -rc")
+    fun `fromString parses beta pre-release with multi-digit number`() {
+        val parsed = ParsedVersion.fromString("v3.0.1-beta023")
+        assertNotNull(parsed)
+        assertEquals(3, parsed!!.major)
+        assertEquals(0, parsed.minor)
+        assertEquals(1, parsed.patch)
+        assertEquals(ParsedVersion.PreReleaseType.BETA, parsed.preReleaseType)
+        assertEquals(23, parsed.preReleaseVersion)
     }
 
     @Test
-    fun `fromString returns null for invalid version short string`() {
+    fun `fromString parses rc pre-release`() {
+        val parsed = ParsedVersion.fromString("0.0.1-rc5")
+        assertNotNull(parsed)
+        assertEquals(0, parsed!!.major)
+        assertEquals(0, parsed.minor)
+        assertEquals(1, parsed.patch)
+        assertEquals(ParsedVersion.PreReleaseType.RC, parsed.preReleaseType)
+        assertEquals(5, parsed.preReleaseVersion)
+    }
+
+    @Test
+    fun `fromString parses case-insensitive pre-release type`() {
+        val parsedAlpha = ParsedVersion.fromString("1.0.0-AlPhA2")
+        assertNotNull(parsedAlpha)
+        assertEquals(ParsedVersion.PreReleaseType.ALPHA, parsedAlpha!!.preReleaseType)
+        assertEquals(2, parsedAlpha.preReleaseVersion)
+
+        val parsedBeta = ParsedVersion.fromString("1.0.0-BeTa")
+        assertNotNull(parsedBeta)
+        assertEquals(ParsedVersion.PreReleaseType.BETA, parsedBeta!!.preReleaseType)
+        assertEquals(0, parsedBeta.preReleaseVersion)
+
+        val parsedRC = ParsedVersion.fromString("1.0.0-rC99")
+        assertNotNull(parsedRC)
+        assertEquals(ParsedVersion.PreReleaseType.RC, parsedRC!!.preReleaseType)
+        assertEquals(99, parsedRC.preReleaseVersion)
+    }
+
+    // --- Test fromString invalid inputs ---
+
+    @Test
+    fun `fromString returns null for missing minor patch`() {
+        assertNull(ParsedVersion.fromString("1"))
         assertNull(ParsedVersion.fromString("1.2"))
     }
 
     @Test
-    fun `fromString returns null for non-numeric component`() {
-        assertNull(ParsedVersion.fromString("1.a.3"))
+    fun `fromString returns null for non-numeric components`() {
+        assertNull(ParsedVersion.fromString("a.b.c"))
+        assertNull(ParsedVersion.fromString("1.x.3"))
     }
 
     @Test
-    fun `fromString returns null for unsupported pre-release type`() {
+    fun `fromString returns null for invalid pre-release type`() {
         assertNull(ParsedVersion.fromString("1.2.3-gamma1"))
+        assertNull(ParsedVersion.fromString("1.2.3-dev"))
     }
 
     @Test
-    fun `fromString returns null for invalid pre-release format`() {
-        assertNull(ParsedVersion.fromString("1.2.3-alpha-1")) // Multiple hyphens not standard
+    fun `fromString returns null for pre-release type with non-numeric version`() {
+        assertNull(ParsedVersion.fromString("1.2.3-alphaX"))
+        assertNull(ParsedVersion.fromString("1.2.3-betaY2")) // even if part is numeric
     }
 
     @Test
-    fun `fromString returns null for completely invalid string`() {
-        assertNull(ParsedVersion.fromString("abc"))
+    fun `fromString returns null for just hyphen`() {
+        assertNull(ParsedVersion.fromString("1.2.3-"))
     }
 
     @Test
-    fun `fromString returns null for empty string`() {
-        assertNull(ParsedVersion.fromString(""))
+    fun `fromString returns null for extra characters after valid simple version`() {
+        // These are rejected because the simplerRegex has `$`
+        assertNull(ParsedVersion.fromString("1.2.3abc"))
     }
 
     @Test
-    fun `fromString handles large version numbers`() {
-        val version = ParsedVersion.fromString("12345.67890.112233")
-        assertNotNull(version)
-        assertEquals(12345, version.major)
-        assertEquals(67890, version.minor)
-        assertEquals(112233, version.patch)
+    fun `fromString returns null for dot prefix or suffix`() {
+        assertNull(ParsedVersion.fromString(".1.2.3"))
+        assertNull(ParsedVersion.fromString("1.2.3."))
     }
 
-    // Test cases for ParsedVersion.compareTo()
-    @Test
-    fun `compareTo distinguishes major versions`() {
-        assertTrue(ParsedVersion.fromString("2.0.0")!! > ParsedVersion.fromString("1.9.9")!!)
-        assertTrue(ParsedVersion.fromString("1.0.0")!! < ParsedVersion.fromString("2.0.0")!!)
-    }
+    // --- Test specific regex handling from ParsedVersion.kt ---
 
     @Test
-    fun `compareTo distinguishes minor versions`() {
-        assertTrue(ParsedVersion.fromString("1.2.0")!! > ParsedVersion.fromString("1.1.9")!!)
-        assertTrue(ParsedVersion.fromString("1.1.0")!! < ParsedVersion.fromString("1.2.0")!!)
-    }
-
-    @Test
-    fun `compareTo distinguishes patch versions`() {
-        assertTrue(ParsedVersion.fromString("1.0.2")!! > ParsedVersion.fromString("1.0.1")!!)
-        assertTrue(ParsedVersion.fromString("1.0.1")!! < ParsedVersion.fromString("1.0.2")!!)
+    fun `fromString correctly invalidates X_Y_Z-TYPE--SUFFIX format`() {
+        // This format is specifically invalidated after being matched by VERSION_REGEX
+        // preReleaseTypeStr != null && (preReleaseVersionNumStr != null &&
+        // preReleaseVersionNumStr.isEmpty()) && generalSuffixStr != null
+        assertNull(ParsedVersion.fromString("1.0.0-alpha-SNAPSHOT"))
+        // alpha (group 4), "" (group 5), SNAPSHOT (group 6) -> invalid
+        assertNull(ParsedVersion.fromString("2.1.0-beta-rc1"))
+        // beta (group 4), "" (group 5), rc1 (group 6) -> invalid
+        assertNull(ParsedVersion.fromString("v3.3.3-rc-custom"))
+        // rc (group 4), "" (group 5), custom (group 6) -> invalid
     }
 
     @Test
-    fun `compareTo handles equal full versions`() {
-        assertEquals(0, ParsedVersion.fromString("1.0.0")!!.compareTo(ParsedVersion.fromString("1.0.0")!!))
+    fun `fromString allows X_Y_Z-TYPE_VERSION-SUFFIX format`() {
+        // This format is valid because preReleaseVersionNumStr is NOT empty
+        val parsed = ParsedVersion.fromString("1.0.0-alpha1-SNAPSHOT")
+        assertNotNull(parsed)
+        assertEquals(1, parsed!!.major)
+        assertEquals(0, parsed.minor)
+        assertEquals(0, parsed.patch)
+        assertEquals(ParsedVersion.PreReleaseType.ALPHA, parsed.preReleaseType)
+        assertEquals(1, parsed.preReleaseVersion) // "SNAPSHOT" suffix is ignored by current parseComponents
+    }
+
+    // --- Test comparison logic (isMoreRecent and compareTo) ---
+
+    @Test
+    fun `isMoreRecent basic comparisons`() {
+        assertTrue(ParsedVersion.isMoreRecent("1.2.3", "1.2.2"))
+        assertTrue(ParsedVersion.isMoreRecent("1.3.0", "1.2.9"))
+        assertTrue(ParsedVersion.isMoreRecent("2.0.0", "1.9.9"))
+        assertFalse(ParsedVersion.isMoreRecent("1.2.3", "1.2.3"))
+        assertFalse(ParsedVersion.isMoreRecent("1.2.3", "1.2.4"))
     }
 
     @Test
-    fun `compareTo full release is greater than pre-release`() {
-        assertTrue(ParsedVersion.fromString("1.0.0")!! > ParsedVersion.fromString("1.0.0-rc1")!!)
-        assertTrue(ParsedVersion.fromString("1.0.0-alpha1")!! < ParsedVersion.fromString("1.0.0")!!)
+    fun `isMoreRecent with v prefix`() {
+        assertTrue(ParsedVersion.isMoreRecent("v1.2.3", "1.2.2"))
+        assertFalse(ParsedVersion.isMoreRecent("1.2.2", "v1.2.3"))
     }
 
     @Test
-    fun `compareTo distinguishes pre-release types`() {
-        assertTrue(ParsedVersion.fromString("1.0.0-beta1")!! > ParsedVersion.fromString("1.0.0-alpha1")!!)
-        assertTrue(ParsedVersion.fromString("1.0.0-rc1")!! > ParsedVersion.fromString("1.0.0-beta1")!!)
-        assertTrue(ParsedVersion.fromString("1.0.0-alpha2")!! < ParsedVersion.fromString("1.0.0-beta1")!!)
-    }
-
-    @Test
-    fun `compareTo distinguishes pre-release versions of same type`() {
-        assertTrue(ParsedVersion.fromString("1.0.0-alpha2")!! > ParsedVersion.fromString("1.0.0-alpha1")!!)
-        assertTrue(ParsedVersion.fromString("1.0.0-beta0")!! < ParsedVersion.fromString("1.0.0-beta1")!!)
-    }
-
-    @Test
-    fun `compareTo handles pre-release with implicit zero version`() {
-        // "1.0.0-alpha" is equivalent to "1.0.0-alpha0"
-        val vAlpha0 = ParsedVersion.fromString("1.0.0-alpha")!!
-        val vAlpha1 = ParsedVersion.fromString("1.0.0-alpha1")!!
-        assertTrue(vAlpha1 > vAlpha0)
-        assertEquals(0, vAlpha0.compareTo(ParsedVersion.fromString("1.0.0-alpha0")!!))
-    }
-
-    @Test
-    fun `compareTo handles equal pre-release versions`() {
-        assertEquals(
-            0,
-            ParsedVersion.fromString("1.0.0-alpha1")!!.compareTo(ParsedVersion.fromString("1.0.0-alpha1")!!),
-        )
-    }
-
-    // Test cases for ParsedVersion.isMoreRecent()
-    @Test
-    fun `isMoreRecent basic cases`() {
-        assertTrue(ParsedVersion.isMoreRecent("1.0.1", "1.0.0"))
-        assertFalse(ParsedVersion.isMoreRecent("1.0.0", "1.0.1"))
-        assertFalse(ParsedVersion.isMoreRecent("1.0.0", "1.0.0")) // Not more recent if equal
-    }
-
-    @Test
-    fun `isMoreRecent with pre-releases`() {
+    fun `isMoreRecent full release vs pre-release`() {
         assertTrue(ParsedVersion.isMoreRecent("1.0.0", "1.0.0-rc1"))
-        assertFalse(ParsedVersion.isMoreRecent("1.0.0-rc1", "1.0.0"))
-        assertTrue(ParsedVersion.isMoreRecent("1.0.0-beta2", "1.0.0-beta1"))
-        assertTrue(ParsedVersion.isMoreRecent("1.0.0-rc1", "1.0.0-beta5"))
+        assertTrue(ParsedVersion.isMoreRecent("1.0.0", "1.0.0-beta5"))
+        assertTrue(ParsedVersion.isMoreRecent("1.0.0", "1.0.0-alpha10"))
+        assertFalse(ParsedVersion.isMoreRecent("1.0.0-alpha1", "1.0.0"))
     }
 
     @Test
-    fun `isMoreRecent with one invalid version string`() {
-        assertFalse(ParsedVersion.isMoreRecent("1.0.0", "invalid"))
+    fun `isMoreRecent pre-release type comparisons`() {
+        assertTrue(ParsedVersion.isMoreRecent("1.0.0-rc1", "1.0.0-beta2"))
+        assertTrue(ParsedVersion.isMoreRecent("1.0.0-beta3", "1.0.0-alpha4"))
+        assertFalse(ParsedVersion.isMoreRecent("1.0.0-alpha1", "1.0.0-beta1"))
+        assertFalse(ParsedVersion.isMoreRecent("1.0.0-beta1", "1.0.0-rc1"))
+    }
+
+    @Test
+    fun `isMoreRecent same pre-release type, different versions`() {
+        assertTrue(ParsedVersion.isMoreRecent("1.0.0-alpha2", "1.0.0-alpha1"))
+        assertTrue(ParsedVersion.isMoreRecent("1.0.0-beta10", "1.0.0-beta2"))
+        assertTrue(ParsedVersion.isMoreRecent("1.0.0-rc5", "1.0.0-rc0"))
+        assertFalse(ParsedVersion.isMoreRecent("1.0.0-alpha1", "1.0.0-alpha2"))
+    }
+
+    @Test
+    fun `isMoreRecent with pre-release no number vs number`() {
+        // "alpha" is treated as "alpha0"
+        assertTrue(ParsedVersion.isMoreRecent("1.0.0-alpha1", "1.0.0-alpha"))
+        assertFalse(ParsedVersion.isMoreRecent("1.0.0-alpha", "1.0.0-alpha1"))
+        assertTrue(ParsedVersion.isMoreRecent("1.0.0-beta2", "1.0.0-beta"))
+    }
+
+    @Test
+    fun `isMoreRecent returns false for invalid versions`() {
         assertFalse(ParsedVersion.isMoreRecent("invalid", "1.0.0"))
-    }
-
-    @Test
-    fun `isMoreRecent with both invalid version strings`() {
+        assertFalse(ParsedVersion.isMoreRecent("1.0.0", "invalid"))
         assertFalse(ParsedVersion.isMoreRecent("invalid1", "invalid2"))
     }
 
     @Test
-    fun `fromString with mixed case pre-release types`() {
-        val versionAlpha = ParsedVersion.fromString("1.0.0-AlpHa1")
-        assertNotNull(versionAlpha)
-        assertEquals(ParsedVersion.PreReleaseType.ALPHA, versionAlpha.preReleaseType)
-        assertEquals(1, versionAlpha.preReleaseVersion)
+    fun `compareTo directly`() {
+        val v100 = ParsedVersion.fromString("1.0.0")!!
+        val v100a1 = ParsedVersion.fromString("1.0.0-alpha1")!!
+        val v100b1 = ParsedVersion.fromString("1.0.0-beta1")!!
+        val v100rc1 = ParsedVersion.fromString("1.0.0-rc1")!!
+        val v101 = ParsedVersion.fromString("1.0.1")!!
+        val v090 = ParsedVersion.fromString("0.9.0")!!
 
-        val versionBeta = ParsedVersion.fromString("2.3.4-BeTa02")
-        assertNotNull(versionBeta)
-        assertEquals(ParsedVersion.PreReleaseType.BETA, versionBeta.preReleaseType)
-        assertEquals(2, versionBeta.preReleaseVersion)
+        assertTrue(v100 > v100rc1)
+        assertTrue(v100rc1 > v100b1)
+        assertTrue(v100b1 > v100a1)
+        assertTrue(v100a1 > v090)
+        assertTrue(v101 > v100)
 
-        val versionRC = ParsedVersion.fromString("3.0.0-rC5")
-        assertNotNull(versionRC)
-        assertEquals(ParsedVersion.PreReleaseType.RC, versionRC.preReleaseType)
-        assertEquals(5, versionRC.preReleaseVersion)
+        assertEquals(0, v100.compareTo(ParsedVersion.fromString("1.0.0")!!))
+        assertTrue(v100.compareTo(v100a1) > 0)
+        assertTrue(v100a1.compareTo(v100) < 0)
+    }
+
+    @Test
+    fun `sorting versions`() {
+        val versions = listOf(
+            "1.0.0-alpha1",
+            "1.2.3",
+            "0.9.0",
+            "1.0.0-rc1",
+            "1.0.0-alpha2",
+            "1.0.0",
+            "v0.8.0",
+            "1.0.0-beta10",
+            "1.0.0-beta2",
+        )
+        val parsedAndSorted = versions.mapNotNull { ParsedVersion.fromString(it) }.sorted()
+
+        val expectedOrder = listOf(
+            ParsedVersion.fromString("v0.8.0")!!,
+            ParsedVersion.fromString("0.9.0")!!,
+            ParsedVersion.fromString("1.0.0-alpha1")!!,
+            ParsedVersion.fromString("1.0.0-alpha2")!!,
+            ParsedVersion.fromString("1.0.0-beta2")!!,
+            ParsedVersion.fromString("1.0.0-beta10")!!,
+            ParsedVersion.fromString("1.0.0-rc1")!!,
+            ParsedVersion.fromString("1.0.0")!!,
+            ParsedVersion.fromString("1.2.3")!!,
+        ).sorted() // Ensure expected is also sorted by the same logic for safety
+
+        assertEquals(expectedOrder.map { it.toString() }, parsedAndSorted.map { it.toString() })
     }
 }

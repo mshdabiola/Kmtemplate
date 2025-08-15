@@ -60,53 +60,64 @@ data class ParsedVersion(
         private val VERSION_REGEX = Regex("^v?(\\d+)\\.(\\d+)\\.(\\d+)(?:-([a-zA-Z]+)(\\d*))?(?:-(.+))?$")
 
         fun fromString(versionString: String): ParsedVersion? {
-            val match = VERSION_REGEX.find(versionString)
+            // Try the simpler regex first for common cases without a general suffix.
+            val simplerRegex = Regex("^v?(\\d+)\\.(\\d+)\\.(\\d+)(?:-([a-zA-Z]+)(\\d*))?$")
+            val simpleMatch = simplerRegex.find(versionString)
 
-            if (match == null) {
-                // If the main regex doesn't match, try a simpler regex for basic cases without any general suffix.
-                val simplerRegex = Regex("^v?(\\d+)\\.(\\d+)\\.(\\d+)(?:-([a-zA-Z]+)(\\d*))?$")
-                val simpleMatch = simplerRegex.find(versionString) ?: return null // Truly invalid format
-
-                val majorStr = simpleMatch.groups[1]?.value ?: return null
-                val minorStr = simpleMatch.groups[2]?.value ?: return null
-                val patchStr = simpleMatch.groups[3]?.value ?: return null
-                val preReleaseTypeStr = simpleMatch.groups[4]?.value
-                val preReleaseVersionNumStr = simpleMatch.groups[5]?.value
-                return parseComponents(
-                    majorStr,
-                    minorStr,
-                    patchStr,
-                    preReleaseTypeStr,
-                    preReleaseVersionNumStr,
-                    null,
-                )
-            } else {
-                val majorStr = match.groups[1]?.value ?: return null
-                val minorStr = match.groups[2]?.value ?: return null
-                val patchStr = match.groups[3]?.value ?: return null
-
-                val preReleaseTypeStr = match.groups[4]?.value
-                val preReleaseVersionNumStr = match.groups[5]?.value
-                val generalSuffixStr = match.groups[6]?.value
-
-                // Check for invalid format like "1.2.3-alpha-1" or "1.2.3-beta-foo"
-                // This is when a pre-release type is present, its specific version number is empty,
-                // AND a general suffix part immediately follows.
-                if (preReleaseTypeStr != null &&
-                    (preReleaseVersionNumStr != null && preReleaseVersionNumStr.isEmpty()) &&
-                    generalSuffixStr != null
-                ) {
-                    return null // Invalid format like "X.Y.Z-TYPE--SUFFIX"
+            if (simpleMatch != null) {
+                // Check if the simpler regex consumed the entire string.
+                // If not, it means there might be a general suffix, so the simpler regex isn't enough.
+                if (simpleMatch.value.length == versionString.length) {
+                    val majorStr = simpleMatch.groups[1]?.value ?: return null
+                    val minorStr = simpleMatch.groups[2]?.value ?: return null
+                    val patchStr = simpleMatch.groups[3]?.value ?: return null
+                    val preReleaseTypeStr = simpleMatch.groups[4]?.value
+                    val preReleaseVersionNumStr = simpleMatch.groups[5]?.value
+                    return parseComponents(
+                        majorStr,
+                        minorStr,
+                        patchStr,
+                        preReleaseTypeStr,
+                        preReleaseVersionNumStr,
+                        null, // No general suffix for simpler match
+                    )
                 }
-                return parseComponents(
-                    majorStr,
-                    minorStr,
-                    patchStr,
-                    preReleaseTypeStr,
-                    preReleaseVersionNumStr,
-                    generalSuffixStr,
-                )
+                // If simpleMatch matched but not the whole string, proceed to the more complex regex.
             }
+
+            // If the simpler regex didn't match, or matched only a part of the string,
+            // try the more comprehensive VERSION_REGEX.
+            val match = VERSION_REGEX.find(versionString) ?: return null // Truly invalid format if this also fails
+
+            val majorStr = match.groups[1]?.value ?: return null
+            val minorStr = match.groups[2]?.value ?: return null
+            val patchStr = match.groups[3]?.value ?: return null
+
+            val preReleaseTypeStr = match.groups[4]?.value
+            val preReleaseVersionNumStr = match.groups[5]?.value
+            val generalSuffixStr = match.groups[6]?.value
+
+            // Check for invalid format like "1.2.3-alpha--1" or "1.2.3-beta--foo"
+            // This is when a pre-release type is present, its specific version number is empty,
+            // AND a general suffix part immediately follows.
+            if (preReleaseTypeStr != null &&
+                (preReleaseVersionNumStr != null && preReleaseVersionNumStr.isEmpty()) &&
+                generalSuffixStr != null
+            ) {
+                // This specific invalid case (e.g., "X.Y.Z-TYPE--SUFFIX") might have been
+                // partially matched by simplerRegex if simplerRegex was allowed to not match the whole string.
+                // However, VERSION_REGEX is more specific for this.
+                return null
+            }
+
+            return parseComponents(
+                majorStr,
+                minorStr,
+                patchStr,
+                preReleaseTypeStr,
+                preReleaseVersionNumStr,
+                generalSuffixStr,
+            )
         }
 
         private fun parseComponents(
