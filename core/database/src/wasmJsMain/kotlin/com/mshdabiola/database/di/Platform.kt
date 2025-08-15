@@ -17,10 +17,6 @@ package com.mshdabiola.database.di
 
 import com.mshdabiola.RealNoteDataSource
 import com.mshdabiola.database.dao.NoteDao
-import io.github.xxfast.kstore.KStore
-import io.github.xxfast.kstore.storage.storeOf
-import kotlinx.serialization.Serializable
-import kotlinx.serialization.json.Json
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.bind
 import org.koin.dsl.module

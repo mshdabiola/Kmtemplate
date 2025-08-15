@@ -27,7 +27,7 @@ import kotlinx.coroutines.withContext
 
 internal class RealModelRepository(
     private val ioDispatcher: CoroutineDispatcher,
-    private val noteDao: NoteDao
+    private val noteDao: NoteDao,
 ) : NoteRepository {
 
     override suspend fun upsert(note: Note): Long = withContext(ioDispatcher) {
@@ -50,7 +50,7 @@ internal class RealModelRepository(
 
     override suspend fun delete(id: Long) {
         withContext(ioDispatcher) {
-           noteDao.delete(id)
+            noteDao.delete(id)
         }
     }
 }
