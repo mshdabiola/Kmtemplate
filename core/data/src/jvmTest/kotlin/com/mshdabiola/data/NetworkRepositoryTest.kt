@@ -117,6 +117,28 @@ class NetworkRepositoryTest {
     }
 
     @Test
+    fun getLatestReleaseInfo_currentIsPreRelease_latestIsFullRelease_returnsSuccess() = runTest {
+        repository = RealNetworkRepository(networkDataSource, androidPlatform)
+        val currentVersion = "1.0.0-rc1"
+        val latestGitHubRelease = GitHubReleaseInfo(
+            tagName = "v1.0.0",
+            releaseName = "Stable Release 1.0.0",
+            body = "This is the full 1.0.0 release.",
+            assets = listOf(Asset(browserDownloadUrl = "app-fossReliant-release-unsigned-signed.apk", size = 12345)),
+        )
+        networkDataSource.setNextReleaseInfo(latestGitHubRelease)
+
+        val result = repository.getLatestReleaseInfo(currentVersion)
+
+        assertTrue("Result should be Success, but was $result", result is ReleaseInfo.Success)
+        val successResult = result as ReleaseInfo.Success
+        assertEquals("v1.0.0", successResult.tagName)
+        assertEquals("Stable Release 1.0.0", successResult.releaseName)
+        assertEquals("This is the full 1.0.0 release.", successResult.body)
+        assertEquals("app-fossReliant-release-unsigned-signed.apk", successResult.asset)
+    }
+
+    @Test
     fun `gotoGoogle returns empty string as per placeholder implementation`() = runTest {
         // Platform doesn't matter for this test as per current implementation
         repository = RealNetworkRepository(networkDataSource, androidPlatform)
