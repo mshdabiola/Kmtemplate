@@ -27,6 +27,7 @@
   ./gradlew build-logic:convention:spotlessApply
 
   https://randombits.dev/articles/android/fdroid
+  https://favycon.vercel.app/
   apksigner verify --print-certs app.apk
 
   ./gradlew renameProjectArtifacts -PnewPackageName=com.abiola.notepad -PnewPrefix=NtP
