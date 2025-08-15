@@ -38,6 +38,8 @@ plugins {
 //    id("mshdabiola.android.room")
     alias(libs.plugins.ksp)
     alias(libs.plugins.room)
+    alias(libs.plugins.kotlin.serialization)
+
 
 
 
@@ -73,11 +75,14 @@ kotlin {
             languageSettings.optIn("kotlin.experimental.ExperimentalObjCName")
         }
 
+        wasmJsMain.dependencies{
+            implementation(libs.kstore.storage)
+            implementation(libs.kstore)
+            implementation(libs.kotlinx.browser)
+            implementation(libs.kotlinx.serialization.json)
 
-//        jvmTest.dependencies {
-//            implementation(projects.modules.testing)
-//        }
 
+        }
         val nonJsMain by getting {
             dependencies {
                 implementation(libs.room.runtime)

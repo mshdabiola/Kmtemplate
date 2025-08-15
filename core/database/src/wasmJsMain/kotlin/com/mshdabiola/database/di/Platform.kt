@@ -13,22 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.mshdabiola.data.di
+package com.mshdabiola.database.di
 
-import com.mshdabiola.data.repository.NoteRepository
-import com.mshdabiola.data.repository.RealModelRepository
-import com.mshdabiola.database.di.daoModules
-import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.Dispatchers
-import org.koin.core.module.Module
+import com.mshdabiola.RealNoteDataSource
+import com.mshdabiola.database.dao.NoteDao
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.bind
 import org.koin.dsl.module
 
-actual val dataModule: Module
-    get() =
-        module {
-            includes(commonModule, daoModules)
-            single { Dispatchers.Default } bind CoroutineDispatcher::class
-            singleOf(::RealModelRepository) bind NoteRepository::class
-        }
+val daoModules =
+    module {
+        singleOf(::RealNoteDataSource) bind NoteDao::class
+    }
