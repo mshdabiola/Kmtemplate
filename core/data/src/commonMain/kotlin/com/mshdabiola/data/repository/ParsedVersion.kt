@@ -79,12 +79,12 @@ data class ParsedVersion(
          *         Returns false if either version string is invalid.
          */
         fun isMoreRecent(version1: String, version2: String): Boolean {
-            val parsedV1 = ParsedVersion.fromString(version1)
-            val parsedV2 = ParsedVersion.fromString(version2)
+            val parsedV1 = fromString(version1)
+            val parsedV2 = fromString(version2)
 
             if (parsedV1 == null || parsedV2 == null) {
                 println("Warning: Invalid version string encountered. V1: '$version1', V2: '$version2'")
-                return false // Or throw an IllegalArgumentException
+                throw IllegalArgumentException("Invalid version string encountered")
             }
 
             return parsedV1 > parsedV2
