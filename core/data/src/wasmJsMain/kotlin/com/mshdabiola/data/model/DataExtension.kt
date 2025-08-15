@@ -20,4 +20,4 @@ import com.mshdabiola.model.Note
 
 fun Note.asNoteEntity() = NoteEntity(if (id == -1L) null else id, title, content)
 
-fun NoteEntity.asNote() = Note(id ?: -1, title, content)
+fun NoteEntity.asNote() = Note(id ?: -1L, title, content)

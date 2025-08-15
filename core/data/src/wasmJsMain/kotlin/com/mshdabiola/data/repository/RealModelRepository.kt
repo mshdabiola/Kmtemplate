@@ -30,10 +30,8 @@ internal class RealModelRepository(
     private val noteDao: NoteDao
 ) : NoteRepository {
 
-    override suspend fun upsert(note: Note): Long {
-        return withContext(ioDispatcher) {
-            return@withContext noteDao.upsert(note.asNoteEntity())
-        }
+    override suspend fun upsert(note: Note): Long = withContext(ioDispatcher) {
+        noteDao.upsert(note.asNoteEntity())
     }
 
     override fun getAll(): Flow<List<Note>> {
