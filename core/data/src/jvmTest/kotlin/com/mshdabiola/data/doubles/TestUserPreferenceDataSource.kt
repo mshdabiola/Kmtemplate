@@ -31,7 +31,7 @@ class TestUserPreferenceDataSource : UserPreferencesDataSource {
             shouldHideOnboarding = false,
             contrast = 0,
             shouldShowGradientBackground = true,
-            language = "en",
+            language = "en-US",
         ),
     )
     override val userPreferences: Flow<UserPreferences> = _userPreferences.asStateFlow()

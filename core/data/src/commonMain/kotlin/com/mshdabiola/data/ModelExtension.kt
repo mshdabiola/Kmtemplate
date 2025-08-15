@@ -27,6 +27,8 @@ fun UserPreferences.asUserSettings() = UserSettings(
     darkThemeConfig = DarkThemeConfig.entries
         .getOrElse(darkThemeConfig) { DarkThemeConfig.FOLLOW_SYSTEM },
     contrast = contrast,
+    showUpdateDialog = showUpdateDialog,
+    updateFromPreRelease = updateFromPreRelease,
 )
 
 fun UserSettings.asUserPreferences() = UserPreferences(
@@ -36,4 +38,6 @@ fun UserSettings.asUserPreferences() = UserPreferences(
     language = language,
     darkThemeConfig = darkThemeConfig.ordinal,
     contrast = contrast,
+    showUpdateDialog = showUpdateDialog,
+    updateFromPreRelease = updateFromPreRelease,
 )

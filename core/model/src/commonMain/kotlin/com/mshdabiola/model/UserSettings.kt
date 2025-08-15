@@ -23,4 +23,5 @@ data class UserSettings(
     val shouldShowGradientBackground: Boolean = false,
     val language: String = "en-US",
     val updateFromPreRelease: Boolean = false,
+    val showUpdateDialog: Boolean = false,
 )

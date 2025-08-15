@@ -50,7 +50,9 @@ class UserDataRepositoryTest {
         assertFalse(userSettings.shouldHideOnboarding)
         assertEquals(0, userSettings.contrast)
         assertTrue(userSettings.shouldShowGradientBackground)
-        assertEquals("en", userSettings.language)
+        assertEquals("en-US", userSettings.language) // مطابق با UserSettings.kt
+        assertFalse(userSettings.updateFromPreRelease)
+        assertFalse(userSettings.showUpdateDialog)
     }
 
     @Test
@@ -99,5 +101,21 @@ class UserDataRepositoryTest {
         repository.setLanguage(newLanguage)
         val userSettings = repository.userSettings.first()
         assertEquals(newLanguage, userSettings.language)
+    }
+
+    @Test
+    fun `setUpdateFromPreRelease updates updateFromPreRelease`() = runTest(testDispatcher) {
+        val newValue = true
+        repository.setUpdateFromPreRelease(newValue)
+        val userSettings = repository.userSettings.first()
+        assertEquals(newValue, userSettings.updateFromPreRelease)
+    }
+
+    @Test
+    fun `setShowUpdateDialog updates showUpdateDialog`() = runTest(testDispatcher) {
+        val newValue = true
+        repository.setShowUpdateDialog(newValue)
+        val userSettings = repository.userSettings.first()
+        assertEquals(newValue, userSettings.showUpdateDialog)
     }
 }
