@@ -68,7 +68,7 @@ class MainAppViewModelTest {
 
     @Test
     fun `uiState is Loading initially then Success with initial repo data`() = runTest(testDispatcher) {
-        val initialRepoData = userDataRepository.userSettingsSource.value
+        val initialRepoData = userDataRepository.userSettingsSource.value // This will have defaults for new fields
 
         viewModel.uiState.test(timeout = 3.seconds) {
             assertEquals(Loading, awaitItem())
@@ -92,6 +92,8 @@ class MainAppViewModelTest {
             contrast = 1,
             darkThemeConfig = DarkThemeConfig.DARK,
             useDynamicColor = true,
+            updateFromPreRelease = true, // Added
+            showUpdateDialog = true, // Added
         )
 
         viewModel.uiState.test(timeout = 3.seconds) {
@@ -124,12 +126,16 @@ class MainAppViewModelTest {
             darkThemeConfig = DarkThemeConfig.LIGHT,
             useDynamicColor = true,
             shouldHideOnboarding = false,
+            updateFromPreRelease = false, // Added
+            showUpdateDialog = true, // Added
         )
         val updatedUserSettings2 = UserSettings(
             contrast = 2,
             darkThemeConfig = DarkThemeConfig.DARK,
             useDynamicColor = true,
             shouldHideOnboarding = true,
+            updateFromPreRelease = true, // Added
+            showUpdateDialog = false, // Added
         )
 
         viewModel.uiState.test {
@@ -151,7 +157,9 @@ class MainAppViewModelTest {
     }
 
     @Test
-    fun `getLatestReleaseInfo returns Success when network call is successful`() = runTest(testDispatcher) {
+    fun `getLatestReleaseInfo returns Success when network call is successful and showUpdateDialog is true`() =
+        runTest(testDispatcher) {
+        userDataRepository.setFakeUserData(UserSettings(showUpdateDialog = true, updateFromPreRelease = true))
         val expectedReleaseInfo = ReleaseInfo.Success(
             tagName = "v1.0.0",
             releaseName = "Test Release",
@@ -166,7 +174,9 @@ class MainAppViewModelTest {
     }
 
     @Test
-    fun `getLatestReleaseInfo returns Error when network call fails`() = runTest(testDispatcher) {
+    fun `getLatestReleaseInfo returns Error when network call fails even if showUpdateDialog is true`() =
+        runTest(testDispatcher) {
+        userDataRepository.setFakeUserData(UserSettings(showUpdateDialog = true, updateFromPreRelease = true))
         val errorMessage = "Network error"
         networkRepository.setShouldThrowError(true, errorMessage)
 
@@ -174,5 +184,49 @@ class MainAppViewModelTest {
 
         assertTrue(result is ReleaseInfo.Error)
         assertEquals(errorMessage, (result as ReleaseInfo.Error).message)
+    }
+
+    @Test
+    fun `getLatestReleaseInfo returns Error with specific message when showUpdateDialog is false`() =
+        runTest(testDispatcher) {
+        userDataRepository.setFakeUserData(UserSettings(showUpdateDialog = false))
+        // Network call should not happen, so we don't need to mock networkRepository
+
+        val result = viewModel.getLatestReleaseInfo("0.0.1").await()
+
+        assertTrue(result is ReleaseInfo.Error)
+        assertEquals("Update dialog is disabled", (result as ReleaseInfo.Error).message)
+    }
+
+    @Test
+    fun `getLatestReleaseInfo considers updateFromPreRelease setting`() = runTest(testDispatcher) {
+        val currentVersion = "1.0.0"
+        val expectedReleaseInfo = ReleaseInfo.Success(
+            tagName = "v1.1.0-alpha",
+            releaseName = "Pre-release",
+            body = "Test pre-release",
+            asset = "pre.apk",
+        )
+        networkRepository.setNextReleaseInfo(expectedReleaseInfo) // This will be used for both calls
+
+        // Scenario 1: updateFromPreRelease = true
+        userDataRepository.setFakeUserData(UserSettings(showUpdateDialog = true, updateFromPreRelease = true))
+        val resultWithPreRelease = viewModel.getLatestReleaseInfo(currentVersion).await()
+        assertEquals(expectedReleaseInfo, resultWithPreRelease)
+
+
+        // Scenario 2: updateFromPreRelease = false
+        // We'll set a different success response for the second call to ensure the mock is being hit with new params
+        val expectedStableReleaseInfo = ReleaseInfo.Success(
+            tagName = "v1.0.1",
+            releaseName = "Stable Release",
+            body = "Test stable release.",
+            asset = "stable.apk",
+        )
+        networkRepository.setNextReleaseInfo(expectedStableReleaseInfo)
+        userDataRepository.setFakeUserData(UserSettings(showUpdateDialog = true, updateFromPreRelease = false))
+        val resultWithoutPreRelease = viewModel.getLatestReleaseInfo(currentVersion).await()
+        assertEquals(expectedStableReleaseInfo, resultWithoutPreRelease)
+
     }
 }
