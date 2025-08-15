@@ -52,10 +52,9 @@ class MainAppViewModel(
             if (userSettings.showUpdateDialog) {
                 networkRepository.getLatestReleaseInfo(
                     currentVersion = currentVersion,
-                    allowPreRelease = userSettings.updateFromPreRelease
+                    allowPreRelease = userSettings.updateFromPreRelease,
                 )
-
-            }else{
+            } else {
                 ReleaseInfo.Error("Update dialog is disabled")
             }
         }

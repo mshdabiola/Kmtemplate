@@ -43,7 +43,6 @@ abstract class DowngradeBuildToolsToLastWorkingVersionTask : DefaultTask() {
     private val targetAgpVersion = "8.11.1"
     private val agpVersionKeyInToml = "androidGradlePlugin"
 
-
     @TaskAction
     fun downgrade() {
         val wrapperFile = gradleWrapperPropertiesFile.get().asFile
@@ -58,15 +57,24 @@ abstract class DowngradeBuildToolsToLastWorkingVersionTask : DefaultTask() {
             if (currentDistUrl != null) {
                 val currentGradleVersion = Regex("gradle-([\\d.]+)-bin\\.zip").find(currentDistUrl)?.groupValues?.get(1)
                 if (currentGradleVersion == targetGradleVersion) {
-                    logger.lifecycle("Gradle version in ${wrapperFile.name} is already $targetGradleVersion. No changes needed.")
+                    logger.lifecycle(
+                        "Gradle version in ${wrapperFile.name} is already $targetGradleVersion. No changes needed.",
+                    )
                 } else {
-                    val newDistUrl = currentDistUrl.replace(Regex("gradle-[\\d.]+-bin\\.zip"), "gradle-$targetGradleVersion-bin.zip")
+                    val newDistUrl = currentDistUrl.replace(
+                        Regex("gradle-[\\d.]+-bin\\.zip"),
+                        "gradle-$targetGradleVersion-bin.zip",
+                    )
                     if (newDistUrl != currentDistUrl) {
                         props.setProperty("distributionUrl", newDistUrl)
                         wrapperFile.outputStream().use { props.store(it, null) }
-                        logger.lifecycle("Downgraded Gradle distributionUrl in ${wrapperFile.name} from $currentGradleVersion to $targetGradleVersion.")
+                        logger.lifecycle(
+                            "Downgraded Gradle distributionUrl in ${wrapperFile.name} from $currentGradleVersion to $targetGradleVersion.",
+                        )
                     } else {
-                        logger.lifecycle("Gradle distributionUrl in ${wrapperFile.name} pattern did not match or already targets $targetGradleVersion.")
+                        logger.lifecycle(
+                            "Gradle distributionUrl in ${wrapperFile.name} pattern did not match or already targets $targetGradleVersion.",
+                        )
                     }
                 }
             } else {
@@ -92,13 +100,17 @@ abstract class DowngradeBuildToolsToLastWorkingVersionTask : DefaultTask() {
                     val currentVersion = match.groupValues[1]
                     if (currentVersion == targetAgpVersion) {
                         newLines.add(line) // Keep the line as is
-                        logger.lifecycle("AGP version in ${tomlFile.name} (key: '$agpVersionKeyInToml') is already $targetAgpVersion.")
+                        logger.lifecycle(
+                            "AGP version in ${tomlFile.name} (key: '$agpVersionKeyInToml') is already $targetAgpVersion.",
+                        )
                     } else {
                         val newLineContent = """$agpVersionKeyInToml = "$targetAgpVersion""""
                         val leadingWhitespace = line.takeWhile { it.isWhitespace() }
                         newLines.add("$leadingWhitespace$newLineContent")
                         agpVersionChanged = true
-                        logger.lifecycle("Downgraded AGP version in ${tomlFile.name} (key: '$agpVersionKeyInToml') from $currentVersion to $targetAgpVersion.")
+                        logger.lifecycle(
+                            "Downgraded AGP version in ${tomlFile.name} (key: '$agpVersionKeyInToml') from $currentVersion to $targetAgpVersion.",
+                        )
                     }
                 } else {
                     newLines.add(line)
@@ -108,10 +120,11 @@ abstract class DowngradeBuildToolsToLastWorkingVersionTask : DefaultTask() {
             if (agpLineFoundAndReplaced && agpVersionChanged) {
                 tomlFile.writeText(newLines.joinToString(System.lineSeparator()))
             } else if (!agpLineFoundAndReplaced) {
-                logger.warn("Could not find AGP version key '$agpVersionKeyInToml' in ${tomlFile.name}. File untouched regarding AGP.")
+                logger.warn(
+                    "Could not find AGP version key '$agpVersionKeyInToml' in ${tomlFile.name}. File untouched regarding AGP.",
+                )
             }
             // If agpLineFoundAndReplaced is true but agpVersionChanged is false, it means version was already correct, so no write needed.
-
         } else {
             logger.error("libs.versions.toml file not found: ${tomlFile.path}")
         }

@@ -159,44 +159,44 @@ class MainAppViewModelTest {
     @Test
     fun `getLatestReleaseInfo returns Success when network call is successful and showUpdateDialog is true`() =
         runTest(testDispatcher) {
-        userDataRepository.setFakeUserData(UserSettings(showUpdateDialog = true, updateFromPreRelease = true))
-        val expectedReleaseInfo = ReleaseInfo.Success(
-            tagName = "v1.0.0",
-            releaseName = "Test Release",
-            body = "This is a test release.",
-            asset = "test.apk",
-        )
-        networkRepository.setNextReleaseInfo(expectedReleaseInfo)
+            userDataRepository.setFakeUserData(UserSettings(showUpdateDialog = true, updateFromPreRelease = true))
+            val expectedReleaseInfo = ReleaseInfo.Success(
+                tagName = "v1.0.0",
+                releaseName = "Test Release",
+                body = "This is a test release.",
+                asset = "test.apk",
+            )
+            networkRepository.setNextReleaseInfo(expectedReleaseInfo)
 
-        val result = viewModel.getLatestReleaseInfo("0.0.1").await()
+            val result = viewModel.getLatestReleaseInfo("0.0.1").await()
 
-        assertEquals(expectedReleaseInfo, result)
-    }
+            assertEquals(expectedReleaseInfo, result)
+        }
 
     @Test
     fun `getLatestReleaseInfo returns Error when network call fails even if showUpdateDialog is true`() =
         runTest(testDispatcher) {
-        userDataRepository.setFakeUserData(UserSettings(showUpdateDialog = true, updateFromPreRelease = true))
-        val errorMessage = "Network error"
-        networkRepository.setShouldThrowError(true, errorMessage)
+            userDataRepository.setFakeUserData(UserSettings(showUpdateDialog = true, updateFromPreRelease = true))
+            val errorMessage = "Network error"
+            networkRepository.setShouldThrowError(true, errorMessage)
 
-        val result = viewModel.getLatestReleaseInfo("0.0.1").await()
+            val result = viewModel.getLatestReleaseInfo("0.0.1").await()
 
-        assertTrue(result is ReleaseInfo.Error)
-        assertEquals(errorMessage, (result as ReleaseInfo.Error).message)
-    }
+            assertTrue(result is ReleaseInfo.Error)
+            assertEquals(errorMessage, (result as ReleaseInfo.Error).message)
+        }
 
     @Test
     fun `getLatestReleaseInfo returns Error with specific message when showUpdateDialog is false`() =
         runTest(testDispatcher) {
-        userDataRepository.setFakeUserData(UserSettings(showUpdateDialog = false))
-        // Network call should not happen, so we don't need to mock networkRepository
+            userDataRepository.setFakeUserData(UserSettings(showUpdateDialog = false))
+            // Network call should not happen, so we don't need to mock networkRepository
 
-        val result = viewModel.getLatestReleaseInfo("0.0.1").await()
+            val result = viewModel.getLatestReleaseInfo("0.0.1").await()
 
-        assertTrue(result is ReleaseInfo.Error)
-        assertEquals("Update dialog is disabled", (result as ReleaseInfo.Error).message)
-    }
+            assertTrue(result is ReleaseInfo.Error)
+            assertEquals("Update dialog is disabled", (result as ReleaseInfo.Error).message)
+        }
 
     @Test
     fun `getLatestReleaseInfo considers updateFromPreRelease setting`() = runTest(testDispatcher) {
@@ -214,7 +214,6 @@ class MainAppViewModelTest {
         val resultWithPreRelease = viewModel.getLatestReleaseInfo(currentVersion).await()
         assertEquals(expectedReleaseInfo, resultWithPreRelease)
 
-
         // Scenario 2: updateFromPreRelease = false
         // We'll set a different success response for the second call to ensure the mock is being hit with new params
         val expectedStableReleaseInfo = ReleaseInfo.Success(
@@ -227,6 +226,5 @@ class MainAppViewModelTest {
         userDataRepository.setFakeUserData(UserSettings(showUpdateDialog = true, updateFromPreRelease = false))
         val resultWithoutPreRelease = viewModel.getLatestReleaseInfo(currentVersion).await()
         assertEquals(expectedStableReleaseInfo, resultWithoutPreRelease)
-
     }
 }

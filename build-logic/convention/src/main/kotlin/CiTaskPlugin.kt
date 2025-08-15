@@ -131,11 +131,10 @@ class CiTaskPlugin : Plugin<Project> {
         target.tasks.register<DowngradeBuildToolsToLastWorkingVersionTask>("downgradeBuildTools") {
             description = "Downgrades Gradle and AGP to the last known good versions."
             group = "build setup"
-             gradleWrapperPropertiesFile.set(project.rootProject.file("gradle/wrapper/gradle-wrapper.properties"))
-             libsVersionsTomlFile.set(project.rootProject.file("gradle/libs.versions.toml"))
-             outputGradleWrapperPropertiesFile.set(project.rootProject.file("gradle/wrapper/gradle-wrapper.properties"))
-             outputLibsVersionsTomlFile.set(project.rootProject.file("gradle/libs.versions.toml"))
-         }
-
+            gradleWrapperPropertiesFile.set(project.rootProject.file("gradle/wrapper/gradle-wrapper.properties"))
+            libsVersionsTomlFile.set(project.rootProject.file("gradle/libs.versions.toml"))
+            outputGradleWrapperPropertiesFile.set(project.rootProject.file("gradle/wrapper/gradle-wrapper.properties"))
+            outputLibsVersionsTomlFile.set(project.rootProject.file("gradle/libs.versions.toml"))
+        }
     }
 }
