@@ -107,7 +107,7 @@ data class ParsedVersion(
             if (parsedV1 == null || parsedV2 == null) {
                 println("Warning: Invalid version string encountered. V1: '$version1', V2: '$version2'")
                 // Consider whether to throw or return false. Current code throws.
-                throw IllegalArgumentException("Invalid version string encountered. V1: '$version1', V2: '$version2'")
+                return false
             }
 
             return parsedV1 > parsedV2
