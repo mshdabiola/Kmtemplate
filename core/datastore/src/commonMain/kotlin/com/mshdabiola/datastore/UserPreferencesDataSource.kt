@@ -43,4 +43,6 @@ interface UserPreferencesDataSource {
     suspend fun setLanguage(language: String)
 
     suspend fun setUpdateFromPreRelease(updateFromPreRelease: Boolean)
+
+    suspend fun setShowUpdateDialog(showUpdateDialog: Boolean)
 }

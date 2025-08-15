@@ -29,4 +29,5 @@ data class UserPreferences(
     val shouldShowGradientBackground: Boolean = false,
     val language: String = "en-US",
     val updateFromPreRelease: Boolean = false,
+    val showUpdateDialog: Boolean = false,
 )

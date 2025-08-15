@@ -63,4 +63,8 @@ class TestUserPreferenceDataSource : UserPreferencesDataSource {
     override suspend fun setUpdateFromPreRelease(updateFromPreRelease: Boolean) {
         _userPreferences.update { it.copy(updateFromPreRelease = updateFromPreRelease) }
     }
+
+    override suspend fun setShowUpdateDialog(showUpdateDialog: Boolean) {
+        _userPreferences.update { it.copy(showUpdateDialog = showUpdateDialog) }
+    }
 }

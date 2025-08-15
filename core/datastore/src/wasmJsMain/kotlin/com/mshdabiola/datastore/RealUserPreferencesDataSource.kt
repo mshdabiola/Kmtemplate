@@ -53,4 +53,8 @@ internal class RealUserPreferencesDataSource : UserPreferencesDataSource {
     override suspend fun setUpdateFromPreRelease(updateFromPreRelease: Boolean) {
         store.update { it?.copy(updateFromPreRelease = updateFromPreRelease) }
     }
+
+    override suspend fun setShowUpdateDialog(showUpdateDialog: Boolean) {
+        store.update { it?.copy(showUpdateDialog = showUpdateDialog) }
+    }
 }

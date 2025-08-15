@@ -132,6 +132,7 @@ class RealUserPreferencesRepositoryTest {
             darkThemeConfig = 1,
             useDynamicColor = false,
             shouldHideOnboarding = false,
+            showUpdateDialog = false,
         )
         assertEquals(expectedUserSettings, repository.userPreferences.first())
     }
@@ -153,6 +154,18 @@ class RealUserPreferencesRepositoryTest {
         val repository = getDataStore("userdata_setLanguage")
 
         repository.setLanguage(newLanguage)
+
+        val updatedUserData = repository.userPreferences.first()
+        assertEquals(expectedUserData, updatedUserData)
+    }
+
+    @Test
+    fun `setShowUpdateDialog updates DataStore and flow emits new value`() = runTest {
+        val newShowUpdateDialog = true
+        val expectedUserData = initialUserSettings.copy(showUpdateDialog = newShowUpdateDialog)
+        val repository = getDataStore("userdata_setShowUpdateDialog")
+
+        repository.setShowUpdateDialog(newShowUpdateDialog)
 
         val updatedUserData = repository.userPreferences.first()
         assertEquals(expectedUserData, updatedUserData)
@@ -184,6 +197,7 @@ class RealUserPreferencesRepositoryTest {
         val preReleaseContrast = 99 // This should be IGNORED as user set contrast to 30
         val preReleaseLanguage = "es-ES" // This should be IGNORED as user set language
         val preReleaseGradient = false // New default different from initialUserSettings
+        val preReleaseShowUpdateDialog = true // New default different from initialUserSettings
 
         val preReleaseSettings = UserPreferences(
             contrast = preReleaseContrast, // User has set this, should be ignored
@@ -192,6 +206,7 @@ class RealUserPreferencesRepositoryTest {
             language = preReleaseLanguage, // User has set this, should be ignored
             shouldHideOnboarding = false, // User has set this to true, so false should be ignored
             shouldShowGradientBackground = preReleaseGradient, // User has NOT set this, should be applied
+            showUpdateDialog = preReleaseShowUpdateDialog, // User has NOT set this, should be applied
         )
 
         // 3. Call the (hypothetical) update method
@@ -207,6 +222,7 @@ class RealUserPreferencesRepositoryTest {
             language = userSetLanguage, // Preserved user setting
             shouldHideOnboarding = userSetOnboarding, // Preserved user setting
             shouldShowGradientBackground = preReleaseGradient, // Updated from pre-release
+            showUpdateDialog = preReleaseShowUpdateDialog, // Updated from pre-release
         )
 
         // 5. Assert (This assertion will fail until updateFromPreRelease is implemented and called)
@@ -242,6 +258,11 @@ class RealUserPreferencesRepositoryTest {
                 preReleaseSettings.shouldShowGradientBackground
             } else {
                 initialUserPrefs.shouldShowGradientBackground
+            },
+            showUpdateDialog = if (initialUserPrefs.showUpdateDialog == initialUserSettings.showUpdateDialog) {
+                preReleaseSettings.showUpdateDialog
+            } else {
+                initialUserPrefs.showUpdateDialog
             },
         )
 
