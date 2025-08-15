@@ -17,12 +17,20 @@ package com.mshdabiola.kmtemplate
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
+import androidx.compose.material3.adaptive.currentWindowAdaptiveInfo
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.window.ComposeViewport
+import androidx.navigation.ExperimentalBrowserHistoryApi
+import androidx.navigation.NavHostController
+import androidx.navigation.bindToBrowserNavigation
+import androidx.navigation.bindToNavigation
+import androidx.navigation.compose.rememberNavController
+import androidx.window.core.layout.WindowSizeClass
 import co.touchlab.kermit.DefaultFormatter
 import co.touchlab.kermit.Logger
 import co.touchlab.kermit.Severity
@@ -30,26 +38,40 @@ import co.touchlab.kermit.loggerConfigInit
 import co.touchlab.kermit.platformLogWriter
 import com.mshdabiola.kmtemplate.di.appModule
 import com.mshdabiola.kmtemplate.ui.KmtApp
+import com.mshdabiola.kmtemplate.ui.KmtAppState
 import com.mshdabiola.kmtemplate.ui.SplashScreen
+import com.mshdabiola.kmtemplate.ui.rememberKmtAppState
 import com.mshdabiola.model.Platform
 import kotlinx.browser.document
+import kotlinx.browser.window
 import kotlinx.coroutines.delay
 import org.koin.core.context.GlobalContext.startKoin
 import org.koin.dsl.bind
 import org.koin.dsl.module
 
-@OptIn(ExperimentalComposeUiApi::class)
+@OptIn(ExperimentalComposeUiApi::class,
+    ExperimentalMaterial3ExpressiveApi::class,
+    ExperimentalBrowserHistoryApi::class)
 fun mainApp() {
     ComposeViewport(document.body!!) {
         val show = remember { mutableStateOf(true) }
+        val   windowSizeClass: WindowSizeClass = currentWindowAdaptiveInfo().windowSizeClass
+        val  navController: NavHostController = rememberNavController()
+       val appState: KmtAppState = rememberKmtAppState(
+           navController = navController,
+        windowSizeClass = windowSizeClass)
         LaunchedEffect(Unit) {
             delay(2000)
             show.value = false
         }
         Box(Modifier.fillMaxSize()) {
-            KmtApp()
+            KmtApp(windowSizeClass = windowSizeClass, appState = appState)
             if (show.value) {
                 SplashScreen()
+            }else{
+                LaunchedEffect(navController){
+                    navController.bindToBrowserNavigation(null)
+                }
             }
         }
     }
