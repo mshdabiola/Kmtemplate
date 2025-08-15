@@ -1,4 +1,5 @@
 package com.mshdabiola.data.repository
+
 data class ParsedVersion(
     val major: Int,
     val minor: Int,
@@ -30,7 +31,8 @@ data class ParsedVersion(
     }
 
     companion object {
-        private val VERSION_REGEX = Regex("""^(\d+)\.(\d+)\.(\d+)(?:-([a-zA-Z]+)(\d*))?$""") // Added $ at the end
+        // Updated Regex: allows optional 'v' prefix and optional arbitrary suffix like -SNAPSHOT
+        private val VERSION_REGEX = Regex("""^v?(\d+)\.(\d+)\.(\d+)(?:-([a-zA-Z]+)(\d*))?(?:-.+)?$""")
 
         fun fromString(versionString: String): ParsedVersion? {
             val match = VERSION_REGEX.find(versionString) ?: return null
@@ -48,18 +50,37 @@ data class ParsedVersion(
                     "alpha" -> PreReleaseType.ALPHA
                     "beta" -> PreReleaseType.BETA
                     "rc" -> PreReleaseType.RC
-                    else -> return null // Invalid pre-release type if it's not one of the known ones
+                    else -> {
+                        // If preReleaseTypeStr is not recognized, but preReleaseVersionStr might be digits,
+                        // this combination is invalid. However, if preReleaseVersionStr is empty,
+                        // it could be something like "1.0.0-custom" which is fine (parsed as full version).
+                        // The (?:-.+)? in regex handles suffixes not matching pre-release pattern.
+                        // If preReleaseTypeStr is not empty and not recognized, it's an invalid format.
+                        return null
+                    }
                 }
-                // If preReleaseType was valid, check preReleaseVersionStr
-                // It's okay for preReleaseVersionStr to be empty (e.g., "1.0.0-alpha"), defaults to 0
-                // It should not contain non-digits if not empty. toIntOrNull handles this.
                 preReleaseVersion = if (preReleaseVersionStr.isNotEmpty()) {
-                    preReleaseVersionStr.toIntOrNull() // If it's not a valid int (e.g. "a1", or "1-1"), this will be null
+                    preReleaseVersionStr.toIntOrNull()
                 } else {
                     0 // Default to 0 if only type is present e.g. "1.0.0-alpha"
                 }
-                // If preReleaseVersionStr was something like "alpha1bad", toIntOrNull would return null
-                if (preReleaseVersion == null) return null
+                // This check is tricky. If preReleaseVersionStr is "abc", toIntOrNull is null.
+                // If preReleaseType was valid (e.g. "alpha") but version part is "abc",
+                // it should be invalid.
+                // Current regex (\d*) ensures preReleaseVersionStr is digits or empty,
+                // so toIntOrNull on non-empty preReleaseVersionStr won't be null.
+                // If preReleaseVersionStr is empty, preReleaseVersion becomes 0.
+                // So, `preReleaseVersion` (the Int?) is effectively never null here.
+                // The new condition: if (preReleaseVersion == null && preReleaseTypeStr.isNotEmpty() && preReleaseType == null) return null
+                // This seems to intend to catch a state where preReleaseTypeStr was populated but NOT a valid enum,
+                // and preReleaseVersionStr couldn't be parsed.
+                // However, if preReleaseTypeStr is not empty and not a valid enum, we already returned null above.
+                // So, the `preReleaseType == null` part of this new condition would only be met if preReleaseTypeStr was empty.
+                // If preReleaseTypeStr is empty, then `preReleaseTypeStr.isNotEmpty()` is false, short-circuiting.
+                // This specific new 'if' condition seems to have no effect with the current surrounding logic and regex.
+                // The original `if (preReleaseVersion == null) return null;` also had no effect with \d*.
+                if (preReleaseVersion == null && preReleaseTypeStr.isNotEmpty() && preReleaseType == null) return null
+
             }
             return ParsedVersion(major, minor, patch, preReleaseType, preReleaseVersion)
         }
@@ -69,9 +90,10 @@ data class ParsedVersion(
          *
          * Supports versions like:
          * - "1.2.3"
+         * - "v1.2.3"
          * - "1.2.3-alpha1"
-         * - "1.2.3-beta02"
-         * - "1.2.3-rc5"
+         * - "v1.2.3-beta02"
+         * - "1.2.3-rc5-SNAPSHOT"
          *
          * @param version1 The first version string.
          * @param version2 The second version string to compare against.
@@ -84,7 +106,8 @@ data class ParsedVersion(
 
             if (parsedV1 == null || parsedV2 == null) {
                 println("Warning: Invalid version string encountered. V1: '$version1', V2: '$version2'")
-                throw IllegalArgumentException("Invalid version string encountered")
+                // Consider whether to throw or return false. Current code throws.
+                throw IllegalArgumentException("Invalid version string encountered. V1: '$version1', V2: '$version2'")
             }
 
             return parsedV1 > parsedV2
