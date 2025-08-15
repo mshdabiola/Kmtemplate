@@ -1,3 +1,18 @@
+/*
+ * Designed and developed by 2024 mshdabiola (lawal abiola)
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.mshdabiola.data.repository
 
 data class ParsedVersion(
@@ -5,11 +20,13 @@ data class ParsedVersion(
     val minor: Int,
     val patch: Int,
     val preReleaseType: PreReleaseType?,
-    val preReleaseVersion: Int?
+    val preReleaseVersion: Int?,
 ) : Comparable<ParsedVersion> {
 
     enum class PreReleaseType {
-        ALPHA, BETA, RC
+        ALPHA,
+        BETA,
+        RC,
     }
 
     override fun compareTo(other: ParsedVersion): Int {
@@ -20,7 +37,8 @@ data class ParsedVersion(
         // Handling pre-releases: A version without pre-release is newer
         if (preReleaseType == null && other.preReleaseType != null) return 1
         if (preReleaseType != null && other.preReleaseType == null) return -1
-        if (preReleaseType == null && other.preReleaseType == null) return 0 // Both are full releases and equal numeric parts
+        if (preReleaseType == null && other.preReleaseType == null) return 0
+        // Both are full releases and equal numeric parts
 
         // Both have pre-releases
         val typeComparison = (preReleaseType?.ordinal ?: -1).compareTo(other.preReleaseType?.ordinal ?: -1)
@@ -31,87 +49,110 @@ data class ParsedVersion(
     }
 
     companion object {
-        // Updated Regex: allows optional 'v' prefix and optional arbitrary suffix like -SNAPSHOT
-        private val VERSION_REGEX = Regex("""^v?(\d+)\.(\d+)\.(\d+)(?:-([a-zA-Z]+)(\d*))?(?:-.+)?$""")
+        // Regex:
+        // Group 1: major version (digits)
+        // Group 2: minor version (digits)
+        // Group 3: patch version (digits)
+        // Group 4: (Optional) pre-release type (letters, e.g., "alpha", "beta", "rc")
+        // Group 5: (Optional, only if Group 4 exists) pre-release version number (digits, can be empty)
+        // Group 6: (Optional) general suffix, starts with a hyphen
+        // (e.g., "-SNAPSHOT", "-build123", or the "-1" in "alpha-1")
+        private val VERSION_REGEX = Regex("^v?(\\d+)\\.(\\d+)\\.(\\d+)(?:-([a-zA-Z]+)(\\d*))?(?:-(.+))?$")
 
         fun fromString(versionString: String): ParsedVersion? {
-            val match = VERSION_REGEX.find(versionString) ?: return null
-            val (majorStr, minorStr, patchStr, preReleaseTypeStr, preReleaseVersionStr) = match.destructured
+            val match = VERSION_REGEX.find(versionString)
 
+            if (match == null) {
+                // If the main regex doesn't match, try a simpler regex for basic cases without any general suffix.
+                val simplerRegex = Regex("^v?(\\d+)\\.(\\d+)\\.(\\d+)(?:-([a-zA-Z]+)(\\d*))?$")
+                val simpleMatch = simplerRegex.find(versionString) ?: return null // Truly invalid format
+
+                val majorStr = simpleMatch.groups[1]?.value ?: return null
+                val minorStr = simpleMatch.groups[2]?.value ?: return null
+                val patchStr = simpleMatch.groups[3]?.value ?: return null
+                val preReleaseTypeStr = simpleMatch.groups[4]?.value
+                val preReleaseVersionNumStr = simpleMatch.groups[5]?.value
+                return parseComponents(
+                    majorStr,
+                    minorStr,
+                    patchStr,
+                    preReleaseTypeStr,
+                    preReleaseVersionNumStr,
+                    null,
+                )
+            } else {
+                val majorStr = match.groups[1]?.value ?: return null
+                val minorStr = match.groups[2]?.value ?: return null
+                val patchStr = match.groups[3]?.value ?: return null
+
+                val preReleaseTypeStr = match.groups[4]?.value
+                val preReleaseVersionNumStr = match.groups[5]?.value
+                val generalSuffixStr = match.groups[6]?.value
+
+                // Check for invalid format like "1.2.3-alpha-1" or "1.2.3-beta-foo"
+                // This is when a pre-release type is present, its specific version number is empty,
+                // AND a general suffix part immediately follows.
+                if (preReleaseTypeStr != null &&
+                    (preReleaseVersionNumStr != null && preReleaseVersionNumStr.isEmpty()) &&
+                    generalSuffixStr != null
+                ) {
+                    return null // Invalid format like "X.Y.Z-TYPE--SUFFIX"
+                }
+                return parseComponents(
+                    majorStr,
+                    minorStr,
+                    patchStr,
+                    preReleaseTypeStr,
+                    preReleaseVersionNumStr,
+                    generalSuffixStr,
+                )
+            }
+        }
+
+        private fun parseComponents(
+            majorStr: String,
+            minorStr: String,
+            patchStr: String,
+            preReleaseTypeStr: String?,
+            preReleaseVersionNumStr: String?,
+            @Suppress("UNUSED_PARAMETER") generalSuffixStr: String?,
+            // Suffix is used for validation before calling this
+        ): ParsedVersion? {
             val major = majorStr.toIntOrNull() ?: return null
             val minor = minorStr.toIntOrNull() ?: return null
             val patch = patchStr.toIntOrNull() ?: return null
 
-            var preReleaseType: PreReleaseType? = null
-            var preReleaseVersion: Int? = null
+            var parsedPreReleaseType: PreReleaseType? = null
+            var parsedPreReleaseVersion: Int? = null
 
-            if (preReleaseTypeStr.isNotEmpty()) {
-                preReleaseType = when (preReleaseTypeStr.lowercase()) {
+            if (preReleaseTypeStr != null) {
+                parsedPreReleaseType = when (preReleaseTypeStr.lowercase()) {
                     "alpha" -> PreReleaseType.ALPHA
                     "beta" -> PreReleaseType.BETA
                     "rc" -> PreReleaseType.RC
-                    else -> {
-                        // If preReleaseTypeStr is not recognized, but preReleaseVersionStr might be digits,
-                        // this combination is invalid. However, if preReleaseVersionStr is empty,
-                        // it could be something like "1.0.0-custom" which is fine (parsed as full version).
-                        // The (?:-.+)? in regex handles suffixes not matching pre-release pattern.
-                        // If preReleaseTypeStr is not empty and not recognized, it's an invalid format.
-                        return null
-                    }
+                    else -> return null // Invalid pre-release type name
                 }
-                preReleaseVersion = if (preReleaseVersionStr.isNotEmpty()) {
-                    preReleaseVersionStr.toIntOrNull()
-                } else {
-                    0 // Default to 0 if only type is present e.g. "1.0.0-alpha"
-                }
-                // This check is tricky. If preReleaseVersionStr is "abc", toIntOrNull is null.
-                // If preReleaseType was valid (e.g. "alpha") but version part is "abc",
-                // it should be invalid.
-                // Current regex (\d*) ensures preReleaseVersionStr is digits or empty,
-                // so toIntOrNull on non-empty preReleaseVersionStr won't be null.
-                // If preReleaseVersionStr is empty, preReleaseVersion becomes 0.
-                // So, `preReleaseVersion` (the Int?) is effectively never null here.
-                // The new condition: if (preReleaseVersion == null && preReleaseTypeStr.isNotEmpty() && preReleaseType == null) return null
-                // This seems to intend to catch a state where preReleaseTypeStr was populated but NOT a valid enum,
-                // and preReleaseVersionStr couldn't be parsed.
-                // However, if preReleaseTypeStr is not empty and not a valid enum, we already returned null above.
-                // So, the `preReleaseType == null` part of this new condition would only be met if preReleaseTypeStr was empty.
-                // If preReleaseTypeStr is empty, then `preReleaseTypeStr.isNotEmpty()` is false, short-circuiting.
-                // This specific new 'if' condition seems to have no effect with the current surrounding logic and regex.
-                // The original `if (preReleaseVersion == null) return null;` also had no effect with \d*.
-                if (preReleaseVersion == null && preReleaseTypeStr.isNotEmpty() && preReleaseType == null) return null
 
+                parsedPreReleaseVersion = if (preReleaseVersionNumStr != null &&
+                    preReleaseVersionNumStr.isNotEmpty()
+                ) {
+                    preReleaseVersionNumStr.toIntOrNull() ?: return null // Should be digits due to regex (\d*)
+                } else {
+                    0 // Default to 0 if only type is present (e.g., "1.0.0-alpha")
+                }
             }
-            return ParsedVersion(major, minor, patch, preReleaseType, preReleaseVersion)
+            return ParsedVersion(major, minor, patch, parsedPreReleaseType, parsedPreReleaseVersion)
         }
 
-        /**
-         * Compares two version strings to determine if the first version is more recent than the second.
-         *
-         * Supports versions like:
-         * - "1.2.3"
-         * - "v1.2.3"
-         * - "1.2.3-alpha1"
-         * - "v1.2.3-beta02"
-         * - "1.2.3-rc5-SNAPSHOT"
-         *
-         * @param version1 The first version string.
-         * @param version2 The second version string to compare against.
-         * @return True if version1 is more recent than version2, false otherwise.
-         *         Returns false if either version string is invalid.
-         */
         fun isMoreRecent(version1: String, version2: String): Boolean {
             val parsedV1 = fromString(version1)
             val parsedV2 = fromString(version2)
 
             if (parsedV1 == null || parsedV2 == null) {
-                println("Warning: Invalid version string encountered. V1: '$version1', V2: '$version2'")
-                // Consider whether to throw or return false. Current code throws.
+                println("Warning: Invalid version string encountered. V1: \'$version1\', V2: \'$version2\'")
                 return false
             }
-
             return parsedV1 > parsedV2
         }
-
     }
 }

@@ -1,3 +1,18 @@
+/*
+ * Designed and developed by 2024 mshdabiola (lawal abiola)
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.mshdabiola.data
 
 import com.mshdabiola.data.repository.ParsedVersion
@@ -72,6 +87,7 @@ class ParsedVersionTest {
         assertEquals(ParsedVersion.PreReleaseType.RC, versionRC.preReleaseType)
         assertEquals(0, versionRC.preReleaseVersion, "Expected pre-release version 0 for -rc")
     }
+
     @Test
     fun `fromString returns null for invalid version short string`() {
         assertNull(ParsedVersion.fromString("1.2"))
@@ -86,6 +102,7 @@ class ParsedVersionTest {
     fun `fromString returns null for unsupported pre-release type`() {
         assertNull(ParsedVersion.fromString("1.2.3-gamma1"))
     }
+
     @Test
     fun `fromString returns null for invalid pre-release format`() {
         assertNull(ParsedVersion.fromString("1.2.3-alpha-1")) // Multiple hyphens not standard
@@ -152,7 +169,8 @@ class ParsedVersionTest {
         assertTrue(ParsedVersion.fromString("1.0.0-alpha2")!! > ParsedVersion.fromString("1.0.0-alpha1")!!)
         assertTrue(ParsedVersion.fromString("1.0.0-beta0")!! < ParsedVersion.fromString("1.0.0-beta1")!!)
     }
-     @Test
+
+    @Test
     fun `compareTo handles pre-release with implicit zero version`() {
         // "1.0.0-alpha" is equivalent to "1.0.0-alpha0"
         val vAlpha0 = ParsedVersion.fromString("1.0.0-alpha")!!
@@ -161,10 +179,12 @@ class ParsedVersionTest {
         assertEquals(0, vAlpha0.compareTo(ParsedVersion.fromString("1.0.0-alpha0")!!))
     }
 
-
     @Test
     fun `compareTo handles equal pre-release versions`() {
-        assertEquals(0, ParsedVersion.fromString("1.0.0-alpha1")!!.compareTo(ParsedVersion.fromString("1.0.0-alpha1")!!))
+        assertEquals(
+            0,
+            ParsedVersion.fromString("1.0.0-alpha1")!!.compareTo(ParsedVersion.fromString("1.0.0-alpha1")!!),
+        )
     }
 
     // Test cases for ParsedVersion.isMoreRecent()

@@ -68,5 +68,4 @@ internal class RealNetworkRepository(
             ReleaseInfo.Error(e.message ?: "Unknown error")
         }
     }
-
 }

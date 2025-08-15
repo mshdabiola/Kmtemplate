@@ -96,7 +96,8 @@ class NetworkRepositoryTest {
         )
         networkDataSource.setNextReleaseInfo(expectedReleaseInfo)
 
-        val result = repository.getLatestReleaseInfo("2.0.0", allowPreRelease = false) // current version
+        val result = repository.getLatestReleaseInfo("2.0.0", allowPreRelease = false)
+        // current version
 
         assertTrue(result is ReleaseInfo.Error)
         assertEquals(
@@ -149,7 +150,7 @@ class NetworkRepositoryTest {
             tagName = "v1.0.0",
             releaseName = "GP Debug Release",
             body = "Body for GP Debug",
-            assets = listOf(Asset(browserDownloadUrl = expectedAssetName, size = 100))
+            assets = listOf(Asset(browserDownloadUrl = expectedAssetName, size = 100)),
         )
         networkDataSource.setNextReleaseInfo(releaseInfo)
 
@@ -164,7 +165,7 @@ class NetworkRepositoryTest {
         repository = RealNetworkRepository(networkDataSource, androidPlatform)
         val releaseInfo = GitHubReleaseInfo(
             tagName = "v1.0.0",
-            assets = listOf(Asset(browserDownloadUrl = "app-fossReliant-release-unsigned-signed.apk", size = 100))
+            assets = listOf(Asset(browserDownloadUrl = "app-fossReliant-release-unsigned-signed.apk", size = 100)),
         )
         networkDataSource.setNextReleaseInfo(releaseInfo)
 
@@ -178,7 +179,7 @@ class NetworkRepositoryTest {
         repository = RealNetworkRepository(networkDataSource, androidPlatform)
         val releaseInfo = GitHubReleaseInfo(
             tagName = "v-bad.1.0", // Invalid tag
-            assets = listOf(Asset(browserDownloadUrl = "app-fossReliant-release-unsigned-signed.apk", size = 100))
+            assets = listOf(Asset(browserDownloadUrl = "app-fossReliant-release-unsigned-signed.apk", size = 100)),
         )
         networkDataSource.setNextReleaseInfo(releaseInfo)
 
@@ -192,7 +193,7 @@ class NetworkRepositoryTest {
         repository = RealNetworkRepository(networkDataSource, androidPlatform)
         val releaseInfo = GitHubReleaseInfo(
             tagName = null,
-            assets = listOf(Asset(browserDownloadUrl = "app-fossReliant-release-unsigned-signed.apk", size = 100))
+            assets = listOf(Asset(browserDownloadUrl = "app-fossReliant-release-unsigned-signed.apk", size = 100)),
         )
         networkDataSource.setNextReleaseInfo(releaseInfo)
 
@@ -206,7 +207,7 @@ class NetworkRepositoryTest {
         repository = RealNetworkRepository(networkDataSource, androidPlatform)
         val releaseInfo = GitHubReleaseInfo(
             tagName = "",
-            assets = listOf(Asset(browserDownloadUrl = "app-fossReliant-release-unsigned-signed.apk", size = 100))
+            assets = listOf(Asset(browserDownloadUrl = "app-fossReliant-release-unsigned-signed.apk", size = 100)),
         )
         networkDataSource.setNextReleaseInfo(releaseInfo)
 
@@ -220,13 +221,16 @@ class NetworkRepositoryTest {
         repository = RealNetworkRepository(networkDataSource, androidPlatform)
         val releaseInfo = GitHubReleaseInfo(
             tagName = "v1.0.0",
-            assets = listOf(Asset(browserDownloadUrl = "app-fossReliant-release-unsigned-signed.apk", size = 100))
+            assets = listOf(Asset(browserDownloadUrl = "app-fossReliant-release-unsigned-signed.apk", size = 100)),
         )
         networkDataSource.setNextReleaseInfo(releaseInfo)
 
         val result = repository.getLatestReleaseInfo("1.0.0", allowPreRelease = false)
         assertTrue(result is ReleaseInfo.Error)
-        assertEquals("Current version is equal to latest version", (result as ReleaseInfo.Error).message)
+        assertEquals(
+            "Current version is equal to latest version",
+            (result as ReleaseInfo.Error).message,
+        )
     }
 
     @Test
@@ -234,7 +238,7 @@ class NetworkRepositoryTest {
         repository = RealNetworkRepository(networkDataSource, androidPlatform)
         val releaseInfo = GitHubReleaseInfo(
             tagName = "v1.0.1-alpha1",
-            assets = listOf(Asset(browserDownloadUrl = "app-fossReliant-release-unsigned-signed.apk", size = 100))
+            assets = listOf(Asset(browserDownloadUrl = "app-fossReliant-release-unsigned-signed.apk", size = 100)),
         )
         networkDataSource.setNextReleaseInfo(releaseInfo)
 
@@ -248,7 +252,7 @@ class NetworkRepositoryTest {
         repository = RealNetworkRepository(networkDataSource, androidPlatform)
         val releaseInfo = GitHubReleaseInfo(
             tagName = "v1.0.0-alpha2",
-            assets = listOf(Asset(browserDownloadUrl = "app-fossReliant-release-unsigned-signed.apk", size = 100))
+            assets = listOf(Asset(browserDownloadUrl = "app-fossReliant-release-unsigned-signed.apk", size = 100)),
         )
         networkDataSource.setNextReleaseInfo(releaseInfo)
 
@@ -262,13 +266,17 @@ class NetworkRepositoryTest {
         repository = RealNetworkRepository(networkDataSource, androidPlatform)
         val releaseInfo = GitHubReleaseInfo(
             tagName = "v1.0.0-alpha2",
-            assets = listOf(Asset(browserDownloadUrl = "app-fossReliant-release-unsigned-signed.apk", size = 100))
+            assets = listOf(Asset(browserDownloadUrl = "app-fossReliant-release-unsigned-signed.apk", size = 100)),
         )
         networkDataSource.setNextReleaseInfo(releaseInfo)
 
-        val result = repository.getLatestReleaseInfo("1.0.0-beta1", allowPreRelease = false) // current is beta, online is alpha
+        val result = repository.getLatestReleaseInfo("1.0.0-beta1", allowPreRelease = false)
+        // current is beta, online is alpha
         assertTrue(result is ReleaseInfo.Error)
-        assertEquals("Current version is greater than latest version", (result as ReleaseInfo.Error).message)
+        assertEquals(
+            "Current version is greater than latest version",
+            (result as ReleaseInfo.Error).message,
+        )
     }
 
     @Test
@@ -276,13 +284,16 @@ class NetworkRepositoryTest {
         repository = RealNetworkRepository(networkDataSource, androidPlatform)
         val releaseInfo = GitHubReleaseInfo(
             tagName = "v1.0.0-rc1",
-            assets = listOf(Asset(browserDownloadUrl = "app-fossReliant-release-unsigned-signed.apk", size = 100))
+            assets = listOf(Asset(browserDownloadUrl = "app-fossReliant-release-unsigned-signed.apk", size = 100)),
         )
         networkDataSource.setNextReleaseInfo(releaseInfo)
 
         val result = repository.getLatestReleaseInfo("1.0.0-rc1", allowPreRelease = false)
         assertTrue(result is ReleaseInfo.Error)
-        assertEquals("Current version is equal to latest version", (result as ReleaseInfo.Error).message)
+        assertEquals(
+            "Current version is equal to latest version",
+            (result as ReleaseInfo.Error).message,
+        )
     }
 
     @Test
@@ -290,7 +301,7 @@ class NetworkRepositoryTest {
         repository = RealNetworkRepository(networkDataSource, androidPlatform)
         val releaseInfo = GitHubReleaseInfo(
             tagName = "v1.0.0",
-            assets = null // Null asset list
+            assets = null, // Null asset list
         )
         networkDataSource.setNextReleaseInfo(releaseInfo)
 
@@ -304,7 +315,7 @@ class NetworkRepositoryTest {
         repository = RealNetworkRepository(networkDataSource, androidPlatform)
         val releaseInfo = GitHubReleaseInfo(
             tagName = "v1.0.0",
-            assets = emptyList() // Empty asset list
+            assets = emptyList(), // Empty asset list
         )
         networkDataSource.setNextReleaseInfo(releaseInfo)
 
@@ -318,7 +329,7 @@ class NetworkRepositoryTest {
         repository = RealNetworkRepository(networkDataSource, androidPlatform)
         val releaseInfo = GitHubReleaseInfo(
             tagName = "v1.0.0",
-            assets = listOf(Asset(browserDownloadUrl = null, size = 100)) // Asset with null URL
+            assets = listOf(Asset(browserDownloadUrl = null, size = 100)), // Asset with null URL
         )
         networkDataSource.setNextReleaseInfo(releaseInfo)
 
@@ -328,30 +339,49 @@ class NetworkRepositoryTest {
     }
 
     @Test
-    fun `getLatestReleaseInfo success when current version has no pre-release and online has pre-release but older`() = runTest {
-        repository = RealNetworkRepository(networkDataSource, androidPlatform)
-        networkDataSource.setNextReleaseInfo(GitHubReleaseInfo(
-            tagName = "v0.9.0-rc1", // Older pre-release
-            releaseName = "Old RC", body = "Body",
-            assets = listOf(Asset("app-fossReliant-release-unsigned-signed.apk", 1))
-        ))
-        val result = repository.getLatestReleaseInfo("1.0.0", allowPreRelease = false) // Current is full release
-        assertTrue("Expected error as current is newer, got $result", result is ReleaseInfo.Error)
-        assertEquals("Current version is greater than latest version", (result as ReleaseInfo.Error).message)
-    }
+    fun `getLatestReleaseInfo success when current version has no pre-release and online has pre-release but older`() =
+        runTest {
+            repository = RealNetworkRepository(networkDataSource, androidPlatform)
+            networkDataSource.setNextReleaseInfo(
+                GitHubReleaseInfo(
+                    tagName = "v0.9.0-rc1", // Older pre-release
+                    releaseName = "Old RC",
+                    body = "Body",
+                    assets = listOf(Asset("app-fossReliant-release-unsigned-signed.apk", 1)),
+                ),
+            )
+            val result = repository.getLatestReleaseInfo("1.0.0", allowPreRelease = false)
+            // Current is full release
+            assertTrue("Expected error as current is newer, got $result", result is ReleaseInfo.Error)
+            assertEquals(
+                "Current version is greater than latest version",
+                (result as ReleaseInfo.Error).message,
+            )
+        }
 
     @Test
-    fun `getLatestReleaseInfo success when current version has pre-release and online has older full release`() = runTest {
-        repository = RealNetworkRepository(networkDataSource, androidPlatform)
-        networkDataSource.setNextReleaseInfo(GitHubReleaseInfo(
-            tagName = "v0.9.0", // Older full release
-            releaseName = "Old Full", body = "Body",
-            assets = listOf(Asset("app-fossReliant-release-unsigned-signed.apk", 1))
-        ))
-        val result = repository.getLatestReleaseInfo("1.0.0-alpha1", allowPreRelease = false) // Current is newer pre-release
-        assertTrue("Expected error as current is newer, got $result", result is ReleaseInfo.Error)
-        assertEquals("Current version is greater than latest version", (result as ReleaseInfo.Error).message)
-    }
+    fun `getLatestReleaseInfo success when current version has pre-release and online has older full release`() =
+        runTest {
+            repository = RealNetworkRepository(networkDataSource, androidPlatform)
+            networkDataSource.setNextReleaseInfo(
+                GitHubReleaseInfo(
+                    tagName = "v0.9.0", // Older full release
+                    releaseName = "Old Full",
+                    body = "Body",
+                    assets = listOf(Asset("app-fossReliant-release-unsigned-signed.apk", 1)),
+                ),
+            )
+            val result = repository.getLatestReleaseInfo("1.0.0-alpha1", allowPreRelease = false)
+            // Current is newer pre-release
+            assertTrue(
+                "Expected error as current is newer, got $result",
+                result is ReleaseInfo.Error,
+            )
+            assertEquals(
+                "Current version is greater than latest version",
+                (result as ReleaseInfo.Error).message,
+            )
+        }
 
     @Test
     fun `gotoGoogle returns empty string as per placeholder implementation`() = runTest {
@@ -368,7 +398,7 @@ class NetworkRepositoryTest {
             tagName = "v1.0.0-rc1",
             releaseName = "Pre-release Candidate",
             body = "This is a release candidate.",
-            assets = listOf(Asset(browserDownloadUrl = "app-fossReliant-release-unsigned-signed.apk", size = 100))
+            assets = listOf(Asset(browserDownloadUrl = "app-fossReliant-release-unsigned-signed.apk", size = 100)),
         )
         networkDataSource.setNextReleaseInfo(preReleaseOnline)
 
@@ -387,13 +417,13 @@ class NetworkRepositoryTest {
             tagName = onlineVersionTag,
             releaseName = "Alpha release",
             body = "This is an alpha test release.",
-            assets = listOf(Asset(browserDownloadUrl = expectedAssetName, size = 120))
+            assets = listOf(Asset(browserDownloadUrl = expectedAssetName, size = 120)),
         )
         networkDataSource.setNextReleaseInfo(preReleaseOnline)
 
         val result = repository.getLatestReleaseInfo("1.0.0", allowPreRelease = false)
 
-        assertTrue("Result should be Success, but was $result",result is ReleaseInfo.Success)
+        assertTrue("Result should be Success, but was $result", result is ReleaseInfo.Success)
         val successResult = result as ReleaseInfo.Success
         assertEquals(onlineVersionTag, successResult.tagName)
         assertEquals("Alpha release", successResult.releaseName)

@@ -220,19 +220,39 @@ class RealUserPreferencesRepositoryTest {
         // and assert the result.
         val simulatedActualPreferencesAfterUpdate = UserPreferences(
             contrast = initialUserPrefs.contrast, // Kept user's
-            darkThemeConfig = if (initialUserPrefs.darkThemeConfig == initialUserSettings.darkThemeConfig) preReleaseSettings.darkThemeConfig else initialUserPrefs.darkThemeConfig,
-            useDynamicColor = if (initialUserPrefs.useDynamicColor == initialUserSettings.useDynamicColor) preReleaseSettings.useDynamicColor else initialUserPrefs.useDynamicColor,
+            darkThemeConfig = if (initialUserPrefs.darkThemeConfig ==
+                initialUserSettings.darkThemeConfig
+            ) {
+                preReleaseSettings.darkThemeConfig
+            } else {
+                initialUserPrefs.darkThemeConfig
+            },
+            useDynamicColor = if (initialUserPrefs.useDynamicColor ==
+                initialUserSettings.useDynamicColor
+            ) {
+                preReleaseSettings.useDynamicColor
+            } else {
+                initialUserPrefs.useDynamicColor
+            },
             language = initialUserPrefs.language, // Kept user's
             shouldHideOnboarding = initialUserPrefs.shouldHideOnboarding, // Kept user's
-            shouldShowGradientBackground = if (initialUserPrefs.shouldShowGradientBackground == initialUserSettings.shouldShowGradientBackground) preReleaseSettings.shouldShowGradientBackground else initialUserPrefs.shouldShowGradientBackground
+            shouldShowGradientBackground = if (initialUserPrefs.shouldShowGradientBackground ==
+                initialUserSettings.shouldShowGradientBackground
+            ) {
+                preReleaseSettings.shouldShowGradientBackground
+            } else {
+                initialUserPrefs.shouldShowGradientBackground
+            },
         )
-
 
         // This is the ideal assertion once updateFromPreRelease IS implemented and called:
         // assertEquals(expectedUserData, repository.userPreferences.first())
 
         // For now, to allow the test to be added without the actual method:
-        assertEquals(expectedUserData, simulatedActualPreferencesAfterUpdate, "This assertion demonstrates the expected outcome. It will correctly pass once 'updateFromPreRelease' is implemented and used.")
-
+        assertEquals(
+            expectedUserData,
+            simulatedActualPreferencesAfterUpdate,
+            "This assertion demonstrates the expected outcome. It will correctly pass once 'updateFromPreRelease' is implemented and used.",
+        )
     }
 }

@@ -32,7 +32,10 @@ class FakeNetworkRepository : NetworkRepository {
         return "got to google"
     }
 
-    override suspend fun getLatestReleaseInfo(currentVersion: String): ReleaseInfo {
+    override suspend fun getLatestReleaseInfo(
+        currentVersion: String,
+        allowPreRelease: Boolean,
+    ): ReleaseInfo {
         return if (shouldThrowError) {
             ReleaseInfo.Error(errorMessage)
         } else {
