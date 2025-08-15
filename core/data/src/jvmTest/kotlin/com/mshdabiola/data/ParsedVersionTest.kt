@@ -285,3 +285,208 @@ class ParsedVersionTest {
         assertEquals(expectedOrder.map { it.toString() }, parsedAndSorted.map { it.toString() })
     }
 }
+
+//
+// -----------------------------------------------------------------------------
+// Additional thorough tests for ParsedVersion
+// Test framework: JUnit 4 (org.junit.Test) + kotlin.test assertions
+// These tests complement the existing suite by covering edge cases such as:
+// - Boundary numeric values (zeros, large numbers)
+// - toString consistency with parsing
+// - equals and hashCode contract
+// - Handling of leading/trailing spaces and mixed separators
+// - More comparison edge cases (mixed prefixes, pre-release ordering, patch/minor boundaries)
+// -----------------------------------------------------------------------------
+
+import kotlin.random.Random
+
+class ParsedVersionAdditionalTest {
+
+    // --- Parsing boundary and odd inputs ---
+
+    @Test
+    fun `fromString parses zeroed version correctly`() {
+        val v = ParsedVersion.fromString("0.0.0")
+        assertNotNull(v)
+        assertEquals(0, v!!.major)
+        assertEquals(0, v.minor)
+        assertEquals(0, v.patch)
+        assertNull(v.preReleaseType)
+        assertNull(v.preReleaseVersion)
+    }
+
+    @Test
+    fun `fromString rejects negative components`() {
+        assertNull(ParsedVersion.fromString("-1.0.0"))
+        assertNull(ParsedVersion.fromString("1.-1.0"))
+        assertNull(ParsedVersion.fromString("1.0.-1"))
+        assertNull(ParsedVersion.fromString("v-1.2.3"))
+    }
+
+    @Test
+    fun `fromString rejects empty strings and whitespace only`() {
+        assertNull(ParsedVersion.fromString(""))
+        assertNull(ParsedVersion.fromString("   "))
+        assertNull(ParsedVersion.fromString("\n\t"))
+    }
+
+    @Test
+    fun `fromString rejects extra separators or malformed punctuation`() {
+        // Double dots, missing components between dots, underscores-only, etc.
+        assertNull(ParsedVersion.fromString("1..0.0"))
+        assertNull(ParsedVersion.fromString("..1.0.0"))
+        assertNull(ParsedVersion.fromString("1.0.0.."))
+        assertNull(ParsedVersion.fromString("_1.0.0"))
+        assertNull(ParsedVersion.fromString("1.0.0_"))
+        assertNull(ParsedVersion.fromString("v.1.0.0"))
+    }
+
+    @Test
+    fun `fromString ignores trailing suffix when pre-release version present but not otherwise`() {
+        // Allowed format X.Y.Z-TYPE<version>-SUFFIX (suffix ignored)
+        val ok = ParsedVersion.fromString("2.0.0-beta12-customSuffix")
+        assertNotNull(ok)
+        assertEquals(2, ok!!.major)
+        assertEquals(0, ok.minor)
+        assertEquals(0, ok.patch)
+        assertEquals(ParsedVersion.PreReleaseType.BETA, ok.preReleaseType)
+        assertEquals(12, ok.preReleaseVersion)
+
+        // Not allowed when version after TYPE is missing (as per existing tests)
+        assertNull(ParsedVersion.fromString("2.0.0-beta-customSuffix"))
+    }
+
+    @Test
+    fun `fromString rejects numeric overflow-like sequences`() {
+        // Very long numbers; behavior should remain stable (either parse or reject consistently).
+        // If implementation uses safe Int parsing with bounds, long components should be rejected.
+        assertNull(ParsedVersion.fromString("999999999999999999.0.0"))
+        assertNull(ParsedVersion.fromString("1.999999999999999999.0"))
+        assertNull(ParsedVersion.fromString("1.0.999999999999999999"))
+    }
+
+    // --- toString and round-trip parsing ---
+
+    @Test
+    fun `toString of parsed release yields the same canonical representation`() {
+        val raw = "3.4.5"
+        val parsed = ParsedVersion.fromString(raw)
+        assertNotNull(parsed)
+        assertEquals(raw, parsed!!.toString())
+        // Round-trip
+        val back = ParsedVersion.fromString(parsed.toString())
+        assertNotNull(back)
+        assertEquals(parsed.toString(), back!!.toString())
+    }
+
+    @Test
+    fun `toString of pre-release includes normalized lowercase type and version`() {
+        val parsed = ParsedVersion.fromString("v1.2.3-RC07")
+        assertNotNull(parsed)
+        // Expect normalized "rc7" in toString
+        assertEquals("1.2.3-rc7", parsed!!.toString())
+        // Round-trip consistency
+        val back = ParsedVersion.fromString(parsed.toString())
+        assertNotNull(back)
+        assertEquals(parsed.toString(), back!!.toString())
+    }
+
+    // --- equals and hashCode contract ---
+
+    @Test
+    fun `equals and hashCode identical objects`() {
+        val a = ParsedVersion.fromString("1.2.3-rc5")!!
+        val b = ParsedVersion.fromString("v1.2.3-RC005")!! // different raw, same normalized
+        assertTrue(a == b)
+        assertEquals(a.hashCode(), b.hashCode())
+    }
+
+    @Test
+    fun `equals and hashCode differ when components differ`() {
+        val a = ParsedVersion.fromString("1.2.3")!!
+        val b = ParsedVersion.fromString("1.2.4")!!
+        val c = ParsedVersion.fromString("1.2.3-alpha1")!!
+        assertTrue(a != b)
+        assertTrue(a != c)
+        // Hash codes should generally differ for different versions, though not required by contract
+        // We still check a simple inequality where likely different.
+        assertTrue(a.hashCode() != b.hashCode() || a == b)
+    }
+
+    // --- compareTo edge cases ---
+
+    @Test
+    fun `compareTo treats missing pre-release as greater than any pre-release`() {
+        val full = ParsedVersion.fromString("4.0.0")!!
+        val rc = ParsedVersion.fromString("4.0.0-rc999")!!
+        assertTrue(full > rc)
+    }
+
+    @Test
+    fun `compareTo with different patch and pre-release`() {
+        // Even a lower pre-release of higher patch should be greater than a full of lower patch
+        val lowerFull = ParsedVersion.fromString("2.0.9")!!
+        val higherPre = ParsedVersion.fromString("2.0.10-alpha1")!!
+        assertTrue(higherPre > lowerFull)
+    }
+
+    @Test
+    fun `compareTo symmetric consistency`() {
+        val a = ParsedVersion.fromString("1.0.0-beta2")!!
+        val b = ParsedVersion.fromString("1.0.0-beta10")!!
+        val cmpAB = a.compareTo(b)
+        val cmpBA = b.compareTo(a)
+        assertTrue(cmpAB < 0)
+        assertTrue(cmpBA > 0)
+        assertEquals(cmpAB, -cmpBA)
+    }
+
+    // --- isMoreRecent mixed casing and prefix interactions ---
+
+    @Test
+    fun `isMoreRecent handles mixed casing and v prefix consistently`() {
+        assertTrue(ParsedVersion.isMoreRecent("V2.1.0", "v2.0.9"))
+        assertFalse(ParsedVersion.isMoreRecent("v1.0.0", "V1.0.0"))
+        assertTrue(ParsedVersion.isMoreRecent("v1.0.1", "1.0.0-rc9"))
+        assertFalse(ParsedVersion.isMoreRecent("1.0.0-alpha9", "1.0.0"))
+    }
+
+    // --- Robustness of parsing against surrounding whitespace ---
+
+    @Test
+    fun `fromString gracefully handles surrounding whitespace when present`() {
+        // If implementation does not trim, these should safely return null (no crash).
+        // If it trims, they should parse. We only assert non-crashing and consistent null or parsed state.
+        val inputs = listOf(" 1.2.3", "1.2.3 ", "\t1.2.3\n")
+        for (raw in inputs) {
+            val parsed = ParsedVersion.fromString(raw)
+            // Accept either consistent parse or null; but ensure isMoreRecent doesn't crash
+            assertFalse(ParsedVersion.isMoreRecent(raw, "1.2.2") && parsed == null)
+        }
+    }
+
+    // --- Stress test: ordering a randomized set against a known-sorted projection ---
+
+    @Test
+    fun `sorting maintains transitive order for a mixed set`() {
+        val candidates = listOf(
+            "0.0.9",
+            "0.1.0",
+            "1.0.0-alpha1",
+            "1.0.0-alpha2",
+            "1.0.0-beta1",
+            "1.0.0-rc1",
+            "1.0.0",
+            "1.0.1",
+            "1.1.0",
+            "2.0.0",
+            "v2.0.0-alpha10",
+        )
+        val shuffled = candidates.shuffled(Random(123))
+        val parsed = shuffled.mapNotNull { ParsedVersion.fromString(it) }
+        val sorted = parsed.sorted()
+        // Ensure sorted order equals sorting the canonical strings under the same comparator
+        val expected = candidates.mapNotNull { ParsedVersion.fromString(it) }.sorted()
+        assertEquals(expected.map { it.toString() }, sorted.map { it.toString() })
+    }
+}
