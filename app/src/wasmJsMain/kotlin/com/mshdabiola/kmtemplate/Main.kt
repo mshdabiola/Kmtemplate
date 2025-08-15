@@ -28,7 +28,6 @@ import androidx.compose.ui.window.ComposeViewport
 import androidx.navigation.ExperimentalBrowserHistoryApi
 import androidx.navigation.NavHostController
 import androidx.navigation.bindToBrowserNavigation
-import androidx.navigation.bindToNavigation
 import androidx.navigation.compose.rememberNavController
 import androidx.window.core.layout.WindowSizeClass
 import co.touchlab.kermit.DefaultFormatter
@@ -43,23 +42,25 @@ import com.mshdabiola.kmtemplate.ui.SplashScreen
 import com.mshdabiola.kmtemplate.ui.rememberKmtAppState
 import com.mshdabiola.model.Platform
 import kotlinx.browser.document
-import kotlinx.browser.window
 import kotlinx.coroutines.delay
 import org.koin.core.context.GlobalContext.startKoin
 import org.koin.dsl.bind
 import org.koin.dsl.module
 
-@OptIn(ExperimentalComposeUiApi::class,
+@OptIn(
+    ExperimentalComposeUiApi::class,
     ExperimentalMaterial3ExpressiveApi::class,
-    ExperimentalBrowserHistoryApi::class)
+    ExperimentalBrowserHistoryApi::class,
+)
 fun mainApp() {
     ComposeViewport(document.body!!) {
         val show = remember { mutableStateOf(true) }
-        val   windowSizeClass: WindowSizeClass = currentWindowAdaptiveInfo().windowSizeClass
-        val  navController: NavHostController = rememberNavController()
-       val appState: KmtAppState = rememberKmtAppState(
-           navController = navController,
-        windowSizeClass = windowSizeClass)
+        val windowSizeClass: WindowSizeClass = currentWindowAdaptiveInfo().windowSizeClass
+        val navController: NavHostController = rememberNavController()
+        val appState: KmtAppState = rememberKmtAppState(
+            navController = navController,
+            windowSizeClass = windowSizeClass,
+        )
         LaunchedEffect(Unit) {
             delay(2000)
             show.value = false
@@ -68,8 +69,8 @@ fun mainApp() {
             KmtApp(windowSizeClass = windowSizeClass, appState = appState)
             if (show.value) {
                 SplashScreen()
-            }else{
-                LaunchedEffect(navController){
+            } else {
+                LaunchedEffect(navController) {
                     navController.bindToBrowserNavigation(null)
                 }
             }
