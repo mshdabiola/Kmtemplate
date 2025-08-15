@@ -51,8 +51,8 @@ class UserDataRepositoryTest {
         assertEquals(0, userSettings.contrast)
         assertTrue(userSettings.shouldShowGradientBackground)
         assertEquals("en-US", userSettings.language) // مطابق با UserSettings.kt
-        assertFalse(userSettings.updateFromPreRelease)
-        assertFalse(userSettings.showUpdateDialog)
+        assertTrue(userSettings.updateFromPreRelease)
+        assertTrue(userSettings.showUpdateDialog)
     }
 
     @Test

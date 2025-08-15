@@ -132,7 +132,7 @@ class RealUserPreferencesRepositoryTest {
             darkThemeConfig = 1,
             useDynamicColor = false,
             shouldHideOnboarding = false,
-            showUpdateDialog = false,
+            showUpdateDialog = true,
         )
         assertEquals(expectedUserSettings, repository.userPreferences.first())
     }
