@@ -216,7 +216,7 @@ class NetworkRepositoryTest {
     }
 
     @Test
-    fun `getLatestReleaseInfo success when versions are equal (full)`() = runTest {
+    fun getLatestReleaseInfo_error_when_versions_are_equal_full() = runTest {
         repository = RealNetworkRepository(networkDataSource, androidPlatform)
         val releaseInfo = GitHubReleaseInfo(
             tagName = "v1.0.0",
@@ -225,11 +225,8 @@ class NetworkRepositoryTest {
         networkDataSource.setNextReleaseInfo(releaseInfo)
 
         val result = repository.getLatestReleaseInfo("1.0.0", allowPreRelease = false)
-        // Equal or newer is not an error, it implies no update is strictly *needed* if we only update on greater.
-        // However, the current logic only throws if currentParsedVersion > onlineParsedVersion.
-        // So, if they are equal, it should proceed to Success.
-        assertTrue(result is ReleaseInfo.Success)
-        assertEquals("v1.0.0", (result as ReleaseInfo.Success).tagName)
+        assertTrue(result is ReleaseInfo.Error)
+        assertEquals("Current version is equal to latest version", (result as ReleaseInfo.Error).message)
     }
 
     @Test
@@ -275,7 +272,7 @@ class NetworkRepositoryTest {
     }
 
     @Test
-    fun `getLatestReleaseInfo success when versions are equal (pre-release)`() = runTest {
+    fun getLatestReleaseInfo_error_when_versions_are_equal_pre_release() = runTest {
         repository = RealNetworkRepository(networkDataSource, androidPlatform)
         val releaseInfo = GitHubReleaseInfo(
             tagName = "v1.0.0-rc1",
@@ -284,8 +281,8 @@ class NetworkRepositoryTest {
         networkDataSource.setNextReleaseInfo(releaseInfo)
 
         val result = repository.getLatestReleaseInfo("1.0.0-rc1", allowPreRelease = false)
-        assertTrue(result is ReleaseInfo.Success)
-        assertEquals("v1.0.0-rc1", (result as ReleaseInfo.Success).tagName)
+        assertTrue(result is ReleaseInfo.Error)
+        assertEquals("Current version is equal to latest version", (result as ReleaseInfo.Error).message)
     }
 
     @Test

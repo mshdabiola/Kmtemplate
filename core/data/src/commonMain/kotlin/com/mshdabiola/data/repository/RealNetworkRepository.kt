@@ -52,7 +52,7 @@ internal class RealNetworkRepository(
                     throw Exception("Invalid version format")
                 allowPreRelease && onlineParsedVersion.preReleaseType != null ->
                     throw Exception("Pre-release versions are not allowed")
-                currentParsedVersion >onlineParsedVersion ->
+                currentParsedVersion > onlineParsedVersion ->
                     throw Exception("Current version is greater than latest version")
                 currentParsedVersion == onlineParsedVersion ->
                     throw Exception("Current version is equal to latest version")
