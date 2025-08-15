@@ -49,14 +49,34 @@ class RealUserPreferencesDataSource(
         userdata.updateData { it.copy(shouldShowGradientBackground = shouldShowGradientBackground) }
     }
 
+    /**
+     * Persistently updates the user's preferred language in the DataStore.
+     *
+     * @param language The language identifier to store for the user preferences (e.g., a language or locale tag).
+     */
     override suspend fun setLanguage(language: String) {
         userdata.updateData { it.copy(language = language) }
     }
 
+    /**
+     * Persist the user's preference for receiving updates from pre-release channels.
+     *
+     * This is a suspend function that updates the stored UserPreferences, setting the
+     * `updateFromPreRelease` flag to the provided value.
+     *
+     * @param updateFromPreRelease true to enable receiving pre-release updates; false to disable.
+     */
     override suspend fun setUpdateFromPreRelease(updateFromPreRelease: Boolean) {
         userdata.updateData { it.copy(updateFromPreRelease = updateFromPreRelease) }
     }
 
+    /**
+     * Persist the user's preference for showing the update dialog.
+     *
+     * Updates the stored UserPreferences by setting the `showUpdateDialog` flag.
+     *
+     * @param showUpdateDialog true to show the update dialog to the user; false to hide it.
+     */
     override suspend fun setShowUpdateDialog(showUpdateDialog: Boolean) {
         userdata.updateData { it.copy(showUpdateDialog = showUpdateDialog) }
     }

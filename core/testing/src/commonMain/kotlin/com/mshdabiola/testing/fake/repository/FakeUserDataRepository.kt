@@ -76,18 +76,35 @@ class FakeUserDataRepository : UserDataRepository {
         }
     }
 
+    /**
+     * Sets the stored user language and emits the updated UserSettings to observers.
+     *
+     * @param language Language identifier to persist (e.g., `"en"`, `"en-US"`).
     override suspend fun setLanguage(language: String) {
         _userSettings.update { currentUserData ->
             currentUserData.copy(language = language)
         }
     }
 
+    /**
+     * Update the stored user setting that controls whether updates from pre-release versions are allowed.
+     *
+     * @param updateFromPreRelease If true, the user will receive or accept updates originating from pre-release releases; if false, those updates will be disabled.
+     */
     override suspend fun setUpdateFromPreRelease(updateFromPreRelease: Boolean) {
         _userSettings.update { currentUserData ->
             currentUserData.copy(updateFromPreRelease = updateFromPreRelease)
         }
     }
 
+    /**
+     * Set whether the app should show the update dialog and emit the change to the repository's user settings flow.
+     *
+     * Updates the stored UserSettings by setting `showUpdateDialog` to the given value; subscribers of [userSettings]
+     * will receive the updated state.
+     *
+     * @param showUpdateDialog true to indicate the update dialog should be shown, false otherwise.
+     */
     override suspend fun setShowUpdateDialog(showUpdateDialog: Boolean) {
         _userSettings.update { currentUserData ->
             currentUserData.copy(showUpdateDialog = showUpdateDialog)

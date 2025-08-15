@@ -28,10 +28,27 @@ class FakeNetworkRepository : NetworkRepository {
     private var shouldThrowError: Boolean = false
     private var errorMessage: String = "Default error message"
 
+    /**
+     * Fake implementation that simulates navigating to Google.
+     *
+     * Returns a fixed success string used by tests.
+     *
+     * @return A constant string "got to google" indicating the simulated navigation result.
+     */
     override suspend fun gotoGoogle(): String {
         return "got to google"
     }
 
+    /**
+     * Returns the configured release information for the given current version.
+     *
+     * This is a test/fake implementation that consults internal state:
+     * - If `shouldThrowError` is true, returns `ReleaseInfo.Error` with the configured `errorMessage`.
+     * - Otherwise returns the `nextReleaseInfo` previously set via `setNextReleaseInfo`.
+     *
+     * @param currentVersion The current app version (ignored by this fake; accepted for API compatibility).
+     * @param allowPreRelease Whether pre-release versions are allowed (currently ignored by this fake).
+     * @return A [ReleaseInfo] representing either the configured success value or an error.*/
     override suspend fun getLatestReleaseInfo(
         currentVersion: String,
         allowPreRelease: Boolean,
