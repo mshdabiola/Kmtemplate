@@ -15,7 +15,6 @@
  */
 import com.mshdabiola.app.BumpConveyorRevisionTask
 import com.mshdabiola.app.DowngradeBuildToolsTask
-import com.mshdabiola.app.DowngradeBuildToolsToLastWorkingVersionTask
 import com.mshdabiola.app.PrependUnreleasedToChangelogTask
 import com.mshdabiola.app.RemoveFirebaseReferencesTask
 import com.mshdabiola.app.RenameProjectArtifactsTask
@@ -126,15 +125,6 @@ class CiTaskPlugin : Plugin<Project> {
             // Output files (pointing to the same files as inputs for in-place modification)
             outputGradleWrapperPropertiesFile.set(project.file("build-logic/gradle/wrapper/gradle-wrapper.properties"))
             outputLibsVersionsTomlFile.set(project.file("gradle/libs.versions.toml"))
-        }
-
-        target.tasks.register<DowngradeBuildToolsToLastWorkingVersionTask>("downgradeBuildTools") {
-            description = "Downgrades Gradle and AGP to the last known good versions."
-            group = "build setup"
-            gradleWrapperPropertiesFile.set(project.rootProject.file("gradle/wrapper/gradle-wrapper.properties"))
-            libsVersionsTomlFile.set(project.rootProject.file("gradle/libs.versions.toml"))
-            outputGradleWrapperPropertiesFile.set(project.rootProject.file("gradle/wrapper/gradle-wrapper.properties"))
-            outputLibsVersionsTomlFile.set(project.rootProject.file("gradle/libs.versions.toml"))
         }
     }
 }

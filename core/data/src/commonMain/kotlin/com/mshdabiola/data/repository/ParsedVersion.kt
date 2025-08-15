@@ -149,7 +149,6 @@ data class ParsedVersion(
             val parsedV2 = fromString(version2)
 
             if (parsedV1 == null || parsedV2 == null) {
-                println("Warning: Invalid version string encountered. V1: \'$version1\', V2: \'$version2\'")
                 return false
             }
             return parsedV1 > parsedV2
