@@ -5,10 +5,11 @@ import com.mshdabiola.database.model.NoteEntity
 import io.github.xxfast.kstore.KStore
 import io.github.xxfast.kstore.storage.storeOf
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.mapNotNull
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.onEach
 
 internal class RealNoteDataSource : NoteDao {
-    private val noteDataSource: KStore<List<NoteEntity>> = storeOf(key = "userdata", default = listOf())
+    private val noteDataSource: KStore<List<NoteEntity>> = storeOf(key = "note_db", default = listOf())
 
     override suspend fun upsert(noteEntity: NoteEntity): Long {
         var resultingId: Long? = null
@@ -56,13 +57,14 @@ internal class RealNoteDataSource : NoteDao {
     override fun getAll(): Flow<List<NoteEntity>> {
         return noteDataSource
             .updates
-            .mapNotNull { it }
+            .onEach { println("noteDataSource: $it") }
+            .map{ it ?: emptyList() }
     }
 
     override fun getOne(id: Long): Flow<NoteEntity?> {
         return noteDataSource
             .updates
-            .mapNotNull { list -> list?.firstOrNull { it.id == id } }
+            .map{ list -> list?.firstOrNull { it.id == id } }
     }
 
     override suspend fun delete(id: Long) {
