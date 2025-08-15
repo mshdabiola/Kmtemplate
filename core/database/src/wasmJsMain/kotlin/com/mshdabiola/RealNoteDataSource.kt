@@ -11,43 +11,45 @@ internal class RealNoteDataSource : NoteDao {
     private val noteDataSource: KStore<List<NoteEntity>> = storeOf(key = "userdata", default = listOf())
 
     override suspend fun upsert(noteEntity: NoteEntity): Long {
-
-        if (noteEntity.id == null) {
-            val list = noteDataSource.get() ?: listOf()
-            val newId = (list.maxByOrNull { it.id ?: 0 }?.id ?: 0) + 1
-            noteDataSource.update { it?.plus(noteEntity.copy(id = newId)) ?: listOf(noteEntity.copy(id = newId)) }
-            return newId
-        }else{
-            val list = noteDataSource.get() ?: listOf()
-            val index = list.indexOfFirst { it.id == noteEntity.id }
-            if (index != -1) {
-                val newList = list.toMutableList()
-                newList[index] = noteEntity
-                noteDataSource.update { newList }
-                return noteEntity.id
-            }else{
-                noteDataSource.update { it?.plus(noteEntity) ?: listOf(noteEntity) }
-                return noteEntity.id
+        var resultingId: Long? = null
+        noteDataSource.update { list ->
+            val currentList = list ?: emptyList()
+            if (noteEntity.id == null) {
+                val newId = (currentList.maxByOrNull { it.id ?: 0 }?.id ?: 0) + 1
+                resultingId = newId
+                currentList + noteEntity.copy(id = newId)
+            } else {
+                resultingId = noteEntity.id
+                val index = currentList.indexOfFirst { it.id == noteEntity.id }
+                if (index != -1) {
+                    currentList.toMutableList().apply { this[index] = noteEntity }
+                } else {
+                    currentList + noteEntity
+                }
             }
         }
+        return resultingId!!
     }
 
     override suspend fun insert(noteEntity: NoteEntity): Long {
-        val list = noteDataSource.get() ?: listOf()
-        val newId = (list.maxByOrNull { it.id ?: 0 }?.id ?: 0) + 1
-        noteDataSource.update { it?.plus(noteEntity.copy(id = newId)) ?: listOf(noteEntity.copy(id = newId)) }
+        var newId = -1L
+        noteDataSource.update { list ->
+            val currentList = list ?: emptyList()
+            newId = (currentList.maxByOrNull { it.id ?: 0 }?.id ?: 0) + 1
+            currentList + noteEntity.copy(id = newId)
+        }
         return newId
     }
 
     override suspend fun update(noteEntity: NoteEntity) {
-        val list = noteDataSource.get() ?: listOf()
-        val index = list.indexOfFirst { it.id == noteEntity.id }
-        if (index != -1) {
-            val newList = list.toMutableList()
-            newList[index] = noteEntity
-            noteDataSource.update { newList }
-        }else{
-            noteDataSource.update { it?.plus(noteEntity) ?: listOf(noteEntity) }
+        noteDataSource.update { list ->
+            val currentList = list ?: return@update list
+            val index = currentList.indexOfFirst { it.id == noteEntity.id }
+            if (index != -1) {
+                currentList.toMutableList().apply { this[index] = noteEntity }
+            } else {
+                currentList
+            }
         }
     }
 
@@ -68,8 +70,21 @@ internal class RealNoteDataSource : NoteDao {
     }
 
     override suspend fun insertAll(notes: List<NoteEntity>) {
-        for (note in notes) {
-            upsert(note)
+        noteDataSource.update { list ->
+            val currentList = list ?: emptyList()
+            val noteMap = currentList.associateBy { it.id }.toMutableMap()
+            var maxId = currentList.maxByOrNull { it.id ?: 0 }?.id ?: 0
+
+            for (note in notes) {
+                if (note.id == null) {
+                    maxId++
+                    val newNote = note.copy(id = maxId)
+                    noteMap[newNote.id] = newNote
+                } else {
+                    noteMap[note.id] = note
+                }
+            }
+            noteMap.values.toList()
         }
     }
 
