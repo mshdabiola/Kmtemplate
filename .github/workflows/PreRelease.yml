@@ -107,8 +107,8 @@ jobs:
       - name: Remove Firebase References
         run: ./gradlew removeFirebaseReferences
 
-      - name: Downgrade Build Tools
-        run: ./gradlew downgradeBuildLogicAndAgp
+#      - name: Downgrade Build Tools
+#        run: ./gradlew downgradeBuildLogicAndAgp
 
       - name: Build foss reliant release variant apk
         run: ./gradlew assembleFossReliantRelease
