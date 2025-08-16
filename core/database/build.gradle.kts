@@ -86,9 +86,10 @@ kotlin {
         val nonJsMain by getting {
             dependencies {
                 implementation(libs.room.runtime)
-//                implementation(libs.room.ktx)
-                implementation(libs.sqlite.bundled)
             }
+        }
+        jvmMain.dependencies {
+           implementation(libs.sqlite.bundled)
         }
     }
 }
