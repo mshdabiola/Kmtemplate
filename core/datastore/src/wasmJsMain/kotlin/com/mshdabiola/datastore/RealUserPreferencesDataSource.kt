@@ -46,14 +46,37 @@ internal class RealUserPreferencesDataSource : UserPreferencesDataSource {
         store.update { it?.copy(shouldShowGradientBackground = shouldShowGradientBackground) }
     }
 
+    /**
+     * Persistently updates the user's preferred language.
+     *
+     * Sets the `language` field in the stored UserPreferences to the provided value.
+     *
+     * @param language The language identifier to persist (e.g., "en", "fr", "es").
+     *
+     * If there are no existing preferences in the store (current value is `null`), no change is made.
+     */
     override suspend fun setLanguage(language: String) {
         store.update { it?.copy(language = language) }
     }
 
+    /**
+     * Persistently sets whether the user opts in to updates from pre-release versions.
+     *
+     * Updates the stored UserPreferences' `updateFromPreRelease` flag to the provided value.
+     *
+     * @param updateFromPreRelease True to enable receiving pre-release updates; false to disable.
+     */
     override suspend fun setUpdateFromPreRelease(updateFromPreRelease: Boolean) {
         store.update { it?.copy(updateFromPreRelease = updateFromPreRelease) }
     }
 
+    /**
+     * Persistently sets whether the update dialog should be shown to the user.
+     *
+     * Updates the stored UserPreferences' `showUpdateDialog` flag to the provided value.
+     *
+     * @param showUpdateDialog true to show the update dialog, false to hide it
+     */
     override suspend fun setShowUpdateDialog(showUpdateDialog: Boolean) {
         store.update { it?.copy(showUpdateDialog = showUpdateDialog) }
     }

@@ -56,14 +56,35 @@ class TestUserPreferenceDataSource : UserPreferencesDataSource {
         _userPreferences.update { it.copy(shouldShowGradientBackground = shouldShowGradientBackground) }
     }
 
+    /**
+     * Update the stored user language preference.
+     *
+     * Updates the in-memory UserPreferences' `language` field and emits the change to observers of [userPreferences].
+     *
+     * @param language The language tag to set (e.g., "en-US", BCP‑47 style). */
     override suspend fun setLanguage(language: String) {
         _userPreferences.update { it.copy(language = language) }
     }
 
+    /**
+     * Set whether the user opts into receiving pre-release (beta) updates.
+     *
+     * Updates the stored user preferences so observers of `userPreferences` will receive the new value.
+     *
+     * @param updateFromPreRelease True to enable pre-release updates; false to disable.
+     */
     override suspend fun setUpdateFromPreRelease(updateFromPreRelease: Boolean) {
         _userPreferences.update { it.copy(updateFromPreRelease = updateFromPreRelease) }
     }
 
+    /**
+     * Update the stored preference that controls whether the update dialog is shown.
+     *
+     * This suspending function atomically updates the in-memory UserPreferences instance so observers of
+     * the exposed preferences flow receive the new value.
+     *
+     * @param showUpdateDialog True to indicate the update dialog should be shown, false to hide it.
+     */
     override suspend fun setShowUpdateDialog(showUpdateDialog: Boolean) {
         _userPreferences.update { it.copy(showUpdateDialog = showUpdateDialog) }
     }

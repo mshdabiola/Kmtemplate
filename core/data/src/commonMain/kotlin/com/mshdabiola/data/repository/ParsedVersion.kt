@@ -29,6 +29,18 @@ data class ParsedVersion(
         RC,
     }
 
+    /**
+     * Compares this ParsedVersion to another according to semantic-versioning-like rules.
+     *
+     * Comparison order:
+     * 1. Major, then minor, then patch (first difference determines ordering).
+     * 2. A version without a pre-release is considered newer than the same numeric version with a pre-release.
+     * 3. If both have pre-releases, compare pre-release types by their enum ordinal (ALPHA < BETA < RC).
+     * 4. If pre-release types are equal, compare pre-release version numbers, treating a missing number as 0.
+     *
+     * @return a negative integer, zero, or a positive integer as this version is less than, equal to,
+     * or greater than the [other] version.
+     */
     override fun compareTo(other: ParsedVersion): Int {
         if (major != other.major) return major.compareTo(other.major)
         if (minor != other.minor) return minor.compareTo(other.minor)
@@ -59,6 +71,16 @@ data class ParsedVersion(
         // (e.g., "-SNAPSHOT", "-build123", or the "-1" in "alpha-1")
         private val VERSION_REGEX = Regex("^v?(\\d+)\\.(\\d+)\\.(\\d+)(?:-([a-zA-Z]+)(\\d*))?(?:-(.+))?$")
 
+        /**
+         * Parse a semantic version string into a ParsedVersion instance.
+         *
+         * Accepts versions like `v1.2.3`, `1.2.3-alpha1`, `1.2.3-beta`, `1.2.3-rc2` and variants with an optional general suffix.
+         * The function first attempts a common/simple form and falls back to a more comprehensive pattern for other valid forms.
+         *
+         * @param versionString The version string to parse.
+         * @return A ParsedVersion on successful parse, or `null` if the string is not a valid/recognized version
+         *         (including cases such as a pre-release type with an empty numeric component immediately followed by a general suffix).
+         */
         fun fromString(versionString: String): ParsedVersion? {
             // Try the simpler regex first for common cases without a general suffix.
             val simplerRegex = Regex("^v?(\\d+)\\.(\\d+)\\.(\\d+)(?:-([a-zA-Z]+)(\\d*))?$")
@@ -120,6 +142,22 @@ data class ParsedVersion(
             )
         }
 
+        /**
+         * Parse numeric version components and optional pre-release pieces into a ParsedVersion.
+         *
+         * Converts the provided major/minor/patch decimal strings to integers and, if a pre-release
+         * type is present, maps it to PreReleaseType (`"alpha"`, `"beta"`, `"rc"` case-insensitive).
+         * If a pre-release type is present but its numeric suffix is empty, the pre-release version
+         * defaults to 0 (e.g. `1.0.0-alpha` -> preReleaseVersion = 0).
+         *
+         * @param majorStr Decimal string for the major version component.
+         * @param minorStr Decimal string for the minor version component.
+         * @param patchStr Decimal string for the patch version component.
+         * @param preReleaseTypeStr Optional pre-release type string (case-insensitive): `"alpha"`, `"beta"`, or `"rc"`.
+         * @param preReleaseVersionNumStr Optional numeric string for the pre-release version; when present it must parse to an integer.
+         * @param generalSuffixStr Optional general suffix that is not used by this routine (kept for call-site validation).
+         * @return A ParsedVersion on successful parsing; `null` if any numeric parse fails or if an invalid pre-release type/name is provided.
+         */
         private fun parseComponents(
             majorStr: String,
             minorStr: String,
@@ -155,6 +193,17 @@ data class ParsedVersion(
             return ParsedVersion(major, minor, patch, parsedPreReleaseType, parsedPreReleaseVersion)
         }
 
+        /**
+         * Returns true when the first version string represents a newer semantic version than the second.
+         *
+         * Both inputs are parsed using ParsedVersion.fromString. Supported formats are semantic versions
+         * like `vX.Y.Z` with optional pre-release (`-alphaN`, `-betaN`, `-rcN`) and an optional general suffix.
+         * If either string cannot be parsed, this function returns false.
+         *
+         * @param version1 Candidate newer version string.
+         * @param version2 Candidate older version string to compare against.
+         * @return `true` if `version1` is strictly more recent than `version2`, otherwise `false`.
+         */
         fun isMoreRecent(version1: String, version2: String): Boolean {
             val parsedV1 = fromString(version1)
             val parsedV2 = fromString(version2)

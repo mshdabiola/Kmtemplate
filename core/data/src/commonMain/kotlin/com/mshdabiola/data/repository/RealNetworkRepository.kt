@@ -23,10 +23,39 @@ internal class RealNetworkRepository(
     private val networkSource: NetworkDataSource,
     private val platform: Platform,
 ) : NetworkRepository {
+    /**
+     * Placeholder implementation that would navigate to Google.
+     *
+     * Currently a no-op that returns an empty string; future implementations should perform the network/navigation call (e.g., via `networkSource`) and return the resulting URL or identifier.
+     *
+     * @return An empty string in the current implementation. Future implementations should return the Google navigation result (e.g., a URL).
+     */
     override suspend fun gotoGoogle(): String {
         return "" // Placeholder, actual implementation would call networkSource
     }
 
+    /**
+     * Fetches the latest release information for the app and compares it to the provided current version.
+     *
+     * Returns ReleaseInfo.Success with release metadata and the matching APK asset URL when:
+     * - running on Android,
+     * - a release asset matching the current platform flavor/build type exists,
+     * - both the current and online versions parse successfully,
+     * - pre-release versions are allowed (or the online release is not a pre-release),
+     * - and the online version is strictly newer than the current version.
+     *
+     * Otherwise returns ReleaseInfo.Error with a short message describing the failure:
+     * - "Device not supported" if not running on Android,
+     * - "Asset not found" if no matching APK asset is present,
+     * - "Invalid version format" if either version string cannot be parsed,
+     * - "Pre-release versions are not allowed" if a pre-release is encountered while disallowed,
+     * - "Current version is greater than latest version" or "Current version is equal to latest version" for non-upgrade cases,
+     * - or a generic "Unknown error" when an unexpected exception occurs.
+     *
+     * @param currentVersion the currently installed app version string to compare against the latest release tag.
+     * @param allowPreRelease if false, pre-release online versions will be ignored and treated as an error.
+     * @return ReleaseInfo.Success when an upgradeable release is found; otherwise ReleaseInfo.Error with a brief reason.
+     */
     override suspend fun getLatestReleaseInfo(currentVersion: String, allowPreRelease: Boolean): ReleaseInfo {
         if (platform !is Platform.Android) {
             return ReleaseInfo.Error("Device not supported")

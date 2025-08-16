@@ -47,6 +47,20 @@ import org.koin.core.context.GlobalContext.startKoin
 import org.koin.dsl.bind
 import org.koin.dsl.module
 
+/**
+ * Sets up and launches the Compose-based web UI.
+ *
+ * Initializes a ComposeViewport attached to the browser document body, computes the current
+ * window size class, creates a navigation controller and remembered app state, and composes
+ * the app UI. Displays a splash screen for two seconds after composition; once the splash is
+ * hidden, binds the navigation controller to browser history so browser navigation controls
+ * reflect app navigation.
+ *
+ * Side effects:
+ * - Attaches the Compose UI root to `document.body` (non-null asserted).
+ * - Starts a 2-second timer to hide the splash screen.
+ * - Binds the NavHostController to browser navigation after the splash is dismissed.
+ */
 @OptIn(
     ExperimentalComposeUiApi::class,
     ExperimentalMaterial3ExpressiveApi::class,

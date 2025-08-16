@@ -169,7 +169,15 @@ abstract class RemoveFirebaseReferencesTask : DefaultTask() {
         }
     }
 
-    // Helper function to abstract file processing
+    /**
+     * Apply a line-based transformation to an input text file and write the result to an output file only if it changed.
+     *
+     * If the input file does not exist the function returns without writing. The file's lines are read, passed to
+     * [transformer], and the transformed lines are compared to the original (joined with '\n'); [outputFile] is
+     * overwritten with the transformed content only when it differs from the original.
+     *
+     * @param transformer Function that receives the file's lines and returns the transformed lines to be written.
+     */
     private fun processFile(inputFile: File, outputFile: File, transformer: (List<String>) -> List<String>) {
         logger.lifecycle("Processing file for removal task: ${inputFile.path}")
 
