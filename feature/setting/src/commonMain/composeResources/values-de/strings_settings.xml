@@ -63,6 +63,7 @@
     <string-array name="general">
         <item>Erscheinungsbild</item>
         <item>Sprache</item>
+        <item>Nach Updates suchen</item>
     </string-array>
 
     <string-array name="support">
