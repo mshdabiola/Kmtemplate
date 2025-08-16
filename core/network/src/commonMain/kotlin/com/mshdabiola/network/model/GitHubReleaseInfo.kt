@@ -30,4 +30,6 @@ data class GitHubReleaseInfo(
     val htmlUrl: String? = null,
     @SerialName("assets")
     val assets: List<Asset?>? = null,
+    @SerialName("prerelease")
+    val prerelease: Boolean?,
 )
