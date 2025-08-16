@@ -55,7 +55,7 @@ spotless = "7.2.1"
 sqlite = "2.6.0-beta01"
 truth = "1.4.4"
 turbine = "1.2.1"
-uiTextGoogleFonts = "1.8.3"
+uiTextGoogleFonts = "1.9.0"
 versionCode = "17"
 versionName = "1.2.16"
 
