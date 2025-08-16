@@ -62,7 +62,31 @@ internal class RealUserDataRepository(
         }
     }
 
+    /**
+     * Persist the user's selected language preference.
+     *
+     * @param language The language identifier (e.g., locale code or language tag) used by the app to select localization. */
     override suspend fun setLanguage(language: String) {
         withContext(ioDispatcher) { userPreferencesRepository.setLanguage(language) }
+    }
+
+    /**
+     * Persist the user's preference for updating from pre-release builds.
+     *
+     * This suspending function stores the provided flag in the underlying preferences on the IO dispatcher.
+     *
+     * @param updateFromPreRelease True to enable updating from pre-release builds; false to disable.
+     */
+    override suspend fun setUpdateFromPreRelease(updateFromPreRelease: Boolean) {
+        withContext(ioDispatcher) { userPreferencesRepository.setUpdateFromPreRelease(updateFromPreRelease) }
+    }
+
+    /**
+     * Persist the user's preference for showing the update dialog.
+     *
+     * @param showUpdateDialog True to show the update dialog when appropriate; false to suppress it.
+     */
+    override suspend fun setShowUpdateDialog(showUpdateDialog: Boolean) {
+        withContext(ioDispatcher) { userPreferencesRepository.setShowUpdateDialog(showUpdateDialog) }
     }
 }

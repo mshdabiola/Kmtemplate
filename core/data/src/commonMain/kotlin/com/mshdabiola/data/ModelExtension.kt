@@ -19,6 +19,15 @@ import com.mshdabiola.datastore.model.UserPreferences
 import com.mshdabiola.model.DarkThemeConfig
 import com.mshdabiola.model.UserSettings
 
+/**
+ * Converts this UserPreferences instance into a UserSettings value.
+ *
+ * Maps each stored preference field to the corresponding UserSettings property. The integer
+ * `darkThemeConfig` is resolved into a DarkThemeConfig enum by indexing `DarkThemeConfig.entries`;
+ * if the stored index is out of range the function falls back to `DarkThemeConfig.FOLLOW_SYSTEM`.
+ *
+ * @return A new UserSettings populated from this UserPreferences.
+ */
 fun UserPreferences.asUserSettings() = UserSettings(
     useDynamicColor = useDynamicColor,
     shouldHideOnboarding = shouldHideOnboarding,
@@ -27,8 +36,18 @@ fun UserPreferences.asUserSettings() = UserSettings(
     darkThemeConfig = DarkThemeConfig.entries
         .getOrElse(darkThemeConfig) { DarkThemeConfig.FOLLOW_SYSTEM },
     contrast = contrast,
+    showUpdateDialog = showUpdateDialog,
+    updateFromPreRelease = updateFromPreRelease,
 )
 
+/**
+ * Convert this UserSettings instance to a UserPreferences datastore model.
+ *
+ * Copies all settings fields; the enum `darkThemeConfig` is stored as its ordinal
+ * integer. Includes `showUpdateDialog` and `updateFromPreRelease`.
+ *
+ * @return A new UserPreferences populated from this UserSettings.
+ */
 fun UserSettings.asUserPreferences() = UserPreferences(
     useDynamicColor = useDynamicColor,
     shouldHideOnboarding = shouldHideOnboarding,
@@ -36,4 +55,6 @@ fun UserSettings.asUserPreferences() = UserPreferences(
     language = language,
     darkThemeConfig = darkThemeConfig.ordinal,
     contrast = contrast,
+    showUpdateDialog = showUpdateDialog,
+    updateFromPreRelease = updateFromPreRelease,
 )

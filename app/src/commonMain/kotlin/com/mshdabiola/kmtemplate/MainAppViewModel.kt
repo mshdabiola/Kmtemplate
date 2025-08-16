@@ -28,11 +28,12 @@ import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 
 class MainAppViewModel(
-    userDataRepository: UserDataRepository,
+    private val userDataRepository: UserDataRepository,
     private val networkRepository: NetworkRepository,
     private val logger: Logger,
 ) : ViewModel() {
@@ -45,9 +46,29 @@ class MainAppViewModel(
             started = SharingStarted.WhileSubscribed(5_000),
         )
 
+    /**
+     * Asynchronously fetches the latest release information for the given app version.
+     *
+     * The function launches a coroutine in the ViewModel's scope and first reads stored user settings.
+     * If the user's `showUpdateDialog` setting is true, it delegates to the network repository to
+     * retrieve release info, passing the user's `updateFromPreRelease` preference as `allowPreRelease`.
+     * If `showUpdateDialog` is false, it immediately returns a `ReleaseInfo.Error` with the message
+     * "Update dialog is disabled".
+     *
+     * @param currentVersion The current app version string to compare against releases.
+     * @return A [Deferred] that completes with the fetched [ReleaseInfo] or an error placeholder.
+     */
     fun getLatestReleaseInfo(currentVersion: String): Deferred<ReleaseInfo> {
         return viewModelScope.async {
-            networkRepository.getLatestReleaseInfo(currentVersion)
+            val userSettings = userDataRepository.userSettings.first()
+            if (userSettings.showUpdateDialog) {
+                networkRepository.getLatestReleaseInfo(
+                    currentVersion = currentVersion,
+                    allowPreRelease = userSettings.updateFromPreRelease,
+                )
+            } else {
+                ReleaseInfo.Error("Update dialog is disabled")
+            }
         }
     }
 

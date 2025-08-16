@@ -10,6 +10,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - Baseline profile generation support.
+- `showUpdateDialog` setting to `UserPreferences` and `UserDataRepository` to control update notification visibility.
+- `updateFromPreRelease` setting to `UserDataRepository` to control whether pre-release versions are considered for updates.
+- Corresponding tests for the new user preference settings in relevant test files.
 
 ### Changed
 - Updated Android Gradle Plugin to 8.12.0.
@@ -20,6 +23,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Documentation**:
   - Updated and reformatted development commands.
   - Removed Detekt Compose configuration and module graph from documentation.
+- Updated `UserPreferencesDataSource` and its implementations (`RealUserPreferencesDataSource` for nonJsMain and wasmJsMain) to include `setShowUpdateDialog`.
+- Updated `UserDataRepository` and its implementations (`RealUserDataRepository`, `FakeUserDataRepository`) to include `setUpdateFromPreRelease` and `setShowUpdateDialog`.
+- `MainAppViewModelTest`: Adjusted tests to reflect new user settings (`showUpdateDialog`, `updateFromPreRelease`) and their impact on update checks.
+- `ParsedVersion`: Modified `fromString` to allow parsing of version strings with trailing characters by making the fallback `simplerRegex` more lenient (e.g., "1.2.3.4" is now parsed as "1.2.3").
+- `ParsedVersionTest`: Updated tests to align with the modified parsing behavior in `ParsedVersion.fromString`.
 
 ## [1.2.16] - 2025-08-14
 [1.2.16]: https://github.com/mshdabiola/kmtemplate/1.2.16
