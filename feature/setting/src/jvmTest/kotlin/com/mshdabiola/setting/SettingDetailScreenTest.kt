@@ -22,6 +22,7 @@ import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import com.mshdabiola.designsystem.theme.KmtTheme
 import com.mshdabiola.model.DarkThemeConfig
+import com.mshdabiola.model.UserSettings
 import com.mshdabiola.model.testtag.AboutScreenTestTags
 import com.mshdabiola.model.testtag.AppearanceScreenTestTags
 import com.mshdabiola.model.testtag.FaqScreenTestTags
@@ -37,9 +38,10 @@ class SettingDetailScreenTest {
     val composeRule = createComposeRule()
 
     private val sampleSettingState = SettingState(
-        contrast = 0,
-        darkThemeConfig = DarkThemeConfig.FOLLOW_SYSTEM,
-    )
+        userSettings = UserSettings(
+            contrast = 0,
+            darkThemeConfig = DarkThemeConfig.FOLLOW_SYSTEM,
+        ))
 
     // Helper to get expected titles. In a real scenario with complex resource setup for tests,
     // you might predefine these or ensure stringArrayResource works as expected.

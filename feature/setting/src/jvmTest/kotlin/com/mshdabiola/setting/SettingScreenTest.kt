@@ -23,6 +23,7 @@ import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.performClick
 import com.mshdabiola.designsystem.theme.KmtTheme
 import com.mshdabiola.model.DarkThemeConfig
+import com.mshdabiola.model.UserSettings
 import com.mshdabiola.model.testtag.AppearanceScreenTestTags
 import com.mshdabiola.model.testtag.FaqScreenTestTags
 import com.mshdabiola.model.testtag.SettingDetailScreenTestTags
@@ -39,9 +40,10 @@ class SettingScreenTest {
     val composeRule = createComposeRule()
 
     private val initialSettingState = SettingState(
+        userSettings = UserSettings(
         contrast = 0,
         darkThemeConfig = DarkThemeConfig.FOLLOW_SYSTEM,
-    )
+    ))
 
     // Expected titles for quick verification (adjust if your resource loading differs in test)
     // These should ideally come from your string resources in a real app for better maintenance
