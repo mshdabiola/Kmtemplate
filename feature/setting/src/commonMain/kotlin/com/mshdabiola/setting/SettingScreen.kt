@@ -106,10 +106,7 @@ fun SettingScreen(
 @Preview()
 @Composable
 internal fun SettingScreenPreview() {
-    val settingState = SettingState(
-        contrast = 0,
-        darkThemeConfig = DarkThemeConfig.DARK,
-    )
+    val settingState = SettingState()
     SharedTransitionContainer {
         SettingScreen(
             modifier = Modifier,

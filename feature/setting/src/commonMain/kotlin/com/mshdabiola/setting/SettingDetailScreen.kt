@@ -114,7 +114,7 @@ internal fun SettingDetailScreen(
                 SettingNav.Appearance -> {
                     AppearanceScreen(
                         modifier = Modifier.fillMaxSize(),
-                        settingsState = settingState,
+                        userSettings = settingState.userSettings,
                         onContrastChange = onContrastChange,
                         onDarkModeChange = onDarkModeChange,
                         onGradientBackgroundChange = onGradientBackgroundChange,
@@ -124,7 +124,7 @@ internal fun SettingDetailScreen(
                 SettingNav.Language -> {
                     LanguageScreen(
                         modifier = Modifier.fillMaxSize(),
-                        currentLanguageCode = settingState.language,
+                        currentLanguageCode = settingState.userSettings.language,
                         onLanguageSelected = onLanguageChange,
                     )
                 }
