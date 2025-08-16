@@ -115,12 +115,14 @@ class NetworkDataSourceTest {
         val expectedReleaseJson = getResourceAsText("github.json") // Make sure the path is correct
         val gitHubReleaseInfo = testJson.decodeFromString(
             ListSerializer(GitHubReleaseInfo.serializer()),
-            expectedReleaseJson).first()
+            expectedReleaseJson,
+        ).first()
 
         val mockEngine = MockEngine { request ->
             assertEquals(
                 "https://api.github.com/repos/mshdabiola/kmtemplate/releases",
-                request.url.toString())
+                request.url.toString(),
+            )
             respond(
                 content = expectedReleaseJson,
                 status = HttpStatusCode.OK,
@@ -144,13 +146,14 @@ class NetworkDataSourceTest {
         assertTrue(result.prerelease == true)
         assertEquals(
             gitHubReleaseInfo.htmlUrl,
-            result.htmlUrl)
+            result.htmlUrl,
+        )
 
         assertNotNull(result.assets)
         assertEquals(gitHubReleaseInfo.assets?.size, result.assets.size)
 
         val firstAsset = result.assets[0]
-        val expectAssetFirst=gitHubReleaseInfo.assets?.first()
+        val expectAssetFirst = gitHubReleaseInfo.assets?.first()
         assertNotNull(firstAsset)
         assertEquals(
             expectAssetFirst?.browserDownloadUrl,
@@ -159,7 +162,7 @@ class NetworkDataSourceTest {
         assertEquals(expectAssetFirst?.size, firstAsset.size)
 
         val secondAsset = result.assets[1]
-        val expectAssetSecond=gitHubReleaseInfo.assets?.getOrNull(1)
+        val expectAssetSecond = gitHubReleaseInfo.assets?.getOrNull(1)
 
         assertNotNull(secondAsset)
         assertEquals(
@@ -176,7 +179,8 @@ class NetworkDataSourceTest {
         val mockEngine = MockEngine { request ->
             assertEquals(
                 "https://api.github.com/repos/mshdabiola/kmtemplate/releases",
-                request.url.toString())
+                request.url.toString(),
+            )
             respond(
                 content = "Error: Repository Not Found",
                 status = HttpStatusCode.NotFound,
@@ -234,7 +238,8 @@ class NetworkDataSourceTest {
         val mockEngine = MockEngine { request ->
             assertEquals(
                 "https://api.github.com/repos/mshdabiola/kmtemplate/releases",
-                request.url.toString())
+                request.url.toString(),
+            )
             respond(
                 content = "[]", // Empty list of releases
                 status = HttpStatusCode.OK,
