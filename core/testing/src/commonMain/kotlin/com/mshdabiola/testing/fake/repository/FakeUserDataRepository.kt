@@ -80,6 +80,7 @@ class FakeUserDataRepository : UserDataRepository {
      * Sets the stored user language and emits the updated UserSettings to observers.
      *
      * @param language Language identifier to persist (e.g., `"en"`, `"en-US"`).
+     */
     override suspend fun setLanguage(language: String) {
         _userSettings.update { currentUserData ->
             currentUserData.copy(language = language)

@@ -39,34 +39,34 @@ interface UserPreferencesDataSource {
     suspend fun setShouldHideOnboarding(shouldHideOnboarding: Boolean)
 
     /**
- * Sets whether the app should display a gradient background for the user.
- *
- * Persistently updates the stored preference that controls gradient background visibility.
- *
- * @param shouldShowGradientBackground True to show a gradient background, false to disable it.
- */
-suspend fun setShouldShowGradientBackground(shouldShowGradientBackground: Boolean)
+     * Sets whether the app should display a gradient background for the user.
+     *
+     * Persistently updates the stored preference that controls gradient background visibility.
+     *
+     * @param shouldShowGradientBackground True to show a gradient background, false to disable it.
+     */
+    suspend fun setShouldShowGradientBackground(shouldShowGradientBackground: Boolean)
 
     /**
- * Updates the user's preferred language.
- *
- * @param language A language identifier (locale tag or language code) to store as the user's preference.
- */
-suspend fun setLanguage(language: String)
+     * Updates the user's preferred language.
+     *
+     * @param language A language identifier (locale tag or language code) to store as the user's preference.
+     */
+    suspend fun setLanguage(language: String)
 
     /**
- * Sets whether the user allows applying updates from pre-release builds.
- *
- * @param updateFromPreRelease True to enable receiving/installing updates from pre-release channels; false to restrict updates to stable releases.
- */
-suspend fun setUpdateFromPreRelease(updateFromPreRelease: Boolean)
+     * Sets whether the user allows applying updates from pre-release builds.
+     *
+     * @param updateFromPreRelease True to enable receiving/installing updates from pre-release channels; false to restrict updates to stable releases.
+     */
+    suspend fun setUpdateFromPreRelease(updateFromPreRelease: Boolean)
 
     /**
- * Persists whether the in-app update dialog should be shown to the user.
- *
- * Calling this updates the stored user preference so subsequent sessions will reflect the choice.
- *
- * @param showUpdateDialog True to show the update dialog; false to hide it.
- */
-suspend fun setShowUpdateDialog(showUpdateDialog: Boolean)
+     * Persists whether the in-app update dialog should be shown to the user.
+     *
+     * Calling this updates the stored user preference so subsequent sessions will reflect the choice.
+     *
+     * @param showUpdateDialog True to show the update dialog; false to hide it.
+     */
+    suspend fun setShowUpdateDialog(showUpdateDialog: Boolean)
 }

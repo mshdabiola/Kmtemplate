@@ -43,36 +43,36 @@ interface UserDataRepository {
     suspend fun setShouldHideOnboarding(shouldHideOnboarding: Boolean)
 
     /**
- * Update the user's preference for showing a gradient background in the UI.
- *
- * This suspend function persists the preference so the app can show or hide gradient backgrounds
- * according to the user's choice.
- *
- * @param shouldShowGradientBackground True to enable gradient backgrounds, false to disable them.
- */
-suspend fun setShouldShowGradientBackground(shouldShowGradientBackground: Boolean)
+     * Update the user's preference for showing a gradient background in the UI.
+     *
+     * This suspend function persists the preference so the app can show or hide gradient backgrounds
+     * according to the user's choice.
+     *
+     * @param shouldShowGradientBackground True to enable gradient backgrounds, false to disable them.
+     */
+    suspend fun setShouldShowGradientBackground(shouldShowGradientBackground: Boolean)
 
     /**
- * Update the user's preferred application language.
- *
- * @param language The language/locale identifier to set (e.g. "en", "en-US"). */
-suspend fun setLanguage(language: String)
+     * Update the user's preferred application language.
+     *
+     * @param language The language/locale identifier to set (e.g. "en", "en-US"). */
+    suspend fun setLanguage(language: String)
 
     /**
- * Enable or disable receiving updates from pre-release channels.
- *
- * Persists the user's preference for allowing the app to update from pre-release (e.g., alpha/beta) releases.
- *
- * @param updateFromPreRelease True to enable updates from pre-release channels; false to disable.
- */
-suspend fun setUpdateFromPreRelease(updateFromPreRelease: Boolean)
+     * Enable or disable receiving updates from pre-release channels.
+     *
+     * Persists the user's preference for allowing the app to update from pre-release (e.g., alpha/beta) releases.
+     *
+     * @param updateFromPreRelease True to enable updates from pre-release channels; false to disable.
+     */
+    suspend fun setUpdateFromPreRelease(updateFromPreRelease: Boolean)
 
     /**
- * Sets whether the in-app update dialog should be shown to the user.
- *
- * Persists the user's preference for showing the update dialog.
- *
- * @param showUpdateDialog true to show the update dialog, false to hide it
- */
-suspend fun setShowUpdateDialog(showUpdateDialog: Boolean)
+     * Sets whether the in-app update dialog should be shown to the user.
+     *
+     * Persists the user's preference for showing the update dialog.
+     *
+     * @param showUpdateDialog true to show the update dialog, false to hide it
+     */
+    suspend fun setShowUpdateDialog(showUpdateDialog: Boolean)
 }
