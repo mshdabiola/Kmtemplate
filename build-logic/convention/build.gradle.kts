@@ -45,7 +45,6 @@ kotlin {
     jvmToolchain(21)
 }
 
-// Configuration should be synced with [/build-logic/src/main/kotlin/mihon/gradle/configurations/spotless.kt]
 spotless {
 
     kotlin {
@@ -69,7 +68,6 @@ dependencies {
     compileOnly(libs.android.gradlePlugin)
     compileOnly(libs.firebase.crashlytics.gradlePlugin)
     compileOnly(libs.firebase.performance.gradlePlugin)
-    implementation(libs.truth)
     compileOnly(libs.ksp.gradlePlugin)
     compileOnly(libs.kotlin.powerAssert)
     compileOnly(libs.compose.gradlePlugin)
@@ -78,8 +76,6 @@ dependencies {
     compileOnly(libs.spotless.gradlePlugin)
     compileOnly(libs.jlleitschuh.gradlePlugin)
     compileOnly(libs.detekt.gradlePlugin)
-
-//    compileOnly("org.jlleitschuh.gradle:ktlint-gradle:12.3.0")
 
 
 
