@@ -68,9 +68,9 @@ data class ParsedVersion(
                 // Check if the simpler regex consumed the entire string.
                 // If not, it means there might be a general suffix, so the simpler regex isn't enough.
                 if (simpleMatch.value.length == versionString.length) {
-                    val majorStr = simpleMatch.groups[1]?.value ?: return null
-                    val minorStr = simpleMatch.groups[2]?.value ?: return null
-                    val patchStr = simpleMatch.groups[3]?.value ?: return null
+                    val majorStr = simpleMatch.groups[1]!!.value
+                    val minorStr = simpleMatch.groups[2]!!.value
+                    val patchStr = simpleMatch.groups[3]!!.value
                     val preReleaseTypeStr = simpleMatch.groups[4]?.value
                     val preReleaseVersionNumStr = simpleMatch.groups[5]?.value
                     return parseComponents(
@@ -89,9 +89,9 @@ data class ParsedVersion(
             // try the more comprehensive VERSION_REGEX.
             val match = VERSION_REGEX.find(versionString) ?: return null // Truly invalid format if this also fails
 
-            val majorStr = match.groups[1]?.value ?: return null
-            val minorStr = match.groups[2]?.value ?: return null
-            val patchStr = match.groups[3]?.value ?: return null
+            val majorStr = match.groups[1]!!.value
+            val minorStr = match.groups[2]!!.value
+            val patchStr = match.groups[3]!!.value
 
             val preReleaseTypeStr = match.groups[4]?.value
             val preReleaseVersionNumStr = match.groups[5]?.value
@@ -129,9 +129,9 @@ data class ParsedVersion(
             @Suppress("UNUSED_PARAMETER") generalSuffixStr: String?,
             // Suffix is used for validation before calling this
         ): ParsedVersion? {
-            val major = majorStr.toIntOrNull() ?: return null
-            val minor = minorStr.toIntOrNull() ?: return null
-            val patch = patchStr.toIntOrNull() ?: return null
+            val major = majorStr.toInt()
+            val minor = minorStr.toInt()
+            val patch = patchStr.toInt()
 
             var parsedPreReleaseType: PreReleaseType? = null
             var parsedPreReleaseVersion: Int? = null
