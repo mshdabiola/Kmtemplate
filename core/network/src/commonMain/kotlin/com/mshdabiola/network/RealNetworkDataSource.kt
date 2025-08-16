@@ -22,6 +22,7 @@ import io.ktor.client.plugins.ClientRequestException
 import io.ktor.client.request.get
 import io.ktor.client.statement.HttpResponse
 import io.ktor.http.isSuccess
+// kotlin.NoSuchElementException is usually available without explicit import
 
 class RealNetworkDataSource(
     private val httpClient: HttpClient,
@@ -36,17 +37,21 @@ class RealNetworkDataSource(
 
     override suspend fun getLatestKmtemplateRelease(): GitHubReleaseInfo {
         val response: HttpResponse = httpClient.get(
-            "https://api.github.com/repos/mshdabiola/kmtemplate/releases/latest",
+            "https://api.github.com/repos/mshdabiola/kmtemplate/releases",
         )
         if (!response.status.isSuccess()) {
             // You might want to throw a more specific exception or return a sealed result type
             // to handle different error cases (e.g., 404 Not Found if no releases exist)
             throw ClientRequestException(
                 response,
-                "Failed to fetch latest release: ${response.status.value}",
+                "Failed to fetch releases: ${response.status.value}",
             )
         }
         // Assumes your HttpClient is configured with ContentNegotiation and Json { ignoreUnknownKeys = true }
-        return response.body()
+        val releases: List<GitHubReleaseInfo> = response.body()
+        if (releases.isEmpty()) {
+            throw NoSuchElementException("No releases found for mshdabiola/kmtemplate")
+        }
+        return releases.first()
     }
 }
