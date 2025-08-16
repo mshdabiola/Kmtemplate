@@ -58,6 +58,7 @@ class TestNetworkDataSource : NetworkDataSource {
                 ),
             ),
             body = "This is the initial release of Kmtemplate.",
+            prerelease = false,
         )
     }
 }
