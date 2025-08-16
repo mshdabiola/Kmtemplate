@@ -48,7 +48,12 @@
     <string name="faq_share_ui_question">Can I share UI code with KMP?</string>
     <string name="faq_share_ui_answer">Yes, with Compose Multiplatform, you can write your UI once using Jetpack Compose and deploy it on Android, Desktop (Windows, macOS, Linux), iOS (Alpha), and Web (Experimental). This template utilizes Compose Multiplatform.</string>
     <string name="faq_benefits_question">What are the benefits of using KMP?</string>
-    <string name="faq_benefits_answer">Key benefits include: \n- Code Reuse: Write common logic once and share it.\n- Consistency: Ensure consistent behavior across platforms.\n- Faster Development: Reduce redundant work.\n- Native Performance: Shared Kotlin code compiles to native code for each platform.\n- Flexibility: Choose how much code to share.</string>
+    <string name="faq_benefits_answer">Key benefits include:
+- Code Reuse: Write common logic once and share it.
+- Consistency: Ensure consistent behavior across platforms.
+- Faster Development: Reduce redundant work.
+- Native Performance: Shared Kotlin code compiles to native code for each platform.
+- Flexibility: Choose how much code to share.</string>
     <string name="faq_find_shared_code_question">Where can I find the shared code in this template?</string>
     <string name="faq_find_shared_code_answer">Shared code is typically located in modules named `commonMain` within shared source sets (e.g., `shared/src/commonMain`, `features/featureName/src/commonMain`). Platform-specific code resides in corresponding platform source sets like `androidMain` or `iosMain`.</string>
     <string name="faq_empty_state">No FAQs available at the moment.</string>
@@ -70,7 +75,7 @@
     </string-array>
 
     <string-array name="support">
-        <item>Report an Issue</item>
+        <item>Report bug</item>
         <item>FAQ</item>
         <item>About</item>
     </string-array>
