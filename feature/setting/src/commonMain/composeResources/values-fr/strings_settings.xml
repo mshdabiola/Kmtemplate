@@ -63,6 +63,7 @@
     <string-array name="general">
         <item>Apparence</item>
         <item>Langue</item>
+        <item>Vérifier les mises à jour</item>
     </string-array>
 
     <string-array name="support">

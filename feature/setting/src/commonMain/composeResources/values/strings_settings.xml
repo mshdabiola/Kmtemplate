@@ -72,6 +72,7 @@
     <string-array name="general">
         <item>Appearance</item>
         <item>Language</item>
+        <item>Check for update</item>
     </string-array>
 
     <string-array name="support">

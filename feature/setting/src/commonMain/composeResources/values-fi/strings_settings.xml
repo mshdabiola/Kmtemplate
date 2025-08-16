@@ -63,6 +63,7 @@
     <string-array name="general">
         <item>Ulkoasu</item>
         <item>Kieli</item>
+        <item>Tarkista päivitykset</item>
     </string-array>
 
     <string-array name="support">
