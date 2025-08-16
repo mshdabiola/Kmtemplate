@@ -76,12 +76,12 @@ class NetworkRepositoryTest {
 
         val result = repository.getLatestReleaseInfo("0.9.0", allowPreRelease = false)
 
-        assertTrue("Expected Success, got $result", result is ReleaseInfo.Success)
-        val success = result as ReleaseInfo.Success
-        assertEquals("v1.0.0", success.tagName)
-        assertEquals("Test Release", success.releaseName)
-        assertEquals("Release body", success.body)
-        assertEquals("app-fossReliant-release-unsigned-signed.apk", success.asset)
+        assertTrue("Expected Success, got $result", result is ReleaseInfo.NewUpdate)
+        val newUpdate = result as ReleaseInfo.NewUpdate
+        assertEquals("v1.0.0", newUpdate.tagName)
+        assertEquals("Test Release", newUpdate.releaseName)
+        assertEquals("Release body", newUpdate.body)
+        assertEquals("app-fossReliant-release-unsigned-signed.apk", newUpdate.asset)
     }
 
     @Test
@@ -97,8 +97,8 @@ class NetworkRepositoryTest {
 
         val result = repository.getLatestReleaseInfo("1.0.0", allowPreRelease = false)
 
-        assertTrue("Expected Success, got $result", result is ReleaseInfo.Success)
-        assertEquals(expectedAssetName, (result as ReleaseInfo.Success).asset)
+        assertTrue("Expected Success, got $result", result is ReleaseInfo.NewUpdate)
+        assertEquals(expectedAssetName, (result as ReleaseInfo.NewUpdate).asset)
         assertEquals("v2.0.0", result.tagName)
     }
 
@@ -235,8 +235,8 @@ class NetworkRepositoryTest {
         networkDataSource.setNextReleaseInfo(releaseInfo)
 
         val result = repository.getLatestReleaseInfo("1.0.0", allowPreRelease = true)
-        assertTrue("Expected Success, got $result", result is ReleaseInfo.Success)
-        assertEquals("v1.0.1-alpha1", (result as ReleaseInfo.Success).tagName)
+        assertTrue("Expected Success, got $result", result is ReleaseInfo.NewUpdate)
+        assertEquals("v1.0.1-alpha1", (result as ReleaseInfo.NewUpdate).tagName)
     }
 
     @Test
@@ -246,8 +246,8 @@ class NetworkRepositoryTest {
         networkDataSource.setNextReleaseInfo(releaseInfo)
 
         val result = repository.getLatestReleaseInfo("1.0.0-alpha2", allowPreRelease = true)
-        assertTrue("Expected Success, got $result", result is ReleaseInfo.Success)
-        assertEquals("v1.0.0-beta1", (result as ReleaseInfo.Success).tagName)
+        assertTrue("Expected Success, got $result", result is ReleaseInfo.NewUpdate)
+        assertEquals("v1.0.0-beta1", (result as ReleaseInfo.NewUpdate).tagName)
     }
 
     @Test
@@ -276,8 +276,8 @@ class NetworkRepositoryTest {
         networkDataSource.setNextReleaseInfo(releaseInfo)
 
         val result = repository.getLatestReleaseInfo("1.0.0", allowPreRelease = false)
-        assertTrue("Expected Success, got $result", result is ReleaseInfo.Success)
-        assertEquals("v1.1.0", (result as ReleaseInfo.Success).tagName)
+        assertTrue("Expected Success, got $result", result is ReleaseInfo.NewUpdate)
+        assertEquals("v1.1.0", (result as ReleaseInfo.NewUpdate).tagName)
     }
 
 
@@ -316,8 +316,8 @@ class NetworkRepositoryTest {
             networkDataSource.setNextReleaseInfo(releaseInfo)
 
             val result = repository.getLatestReleaseInfo("0.9.0-rc1", allowPreRelease = false)
-            assertTrue("Expected Success, got $result", result is ReleaseInfo.Success)
-            assertEquals("v1.0.0", (result as ReleaseInfo.Success).tagName)
+            assertTrue("Expected Success, got $result", result is ReleaseInfo.NewUpdate)
+            assertEquals("v1.0.0", (result as ReleaseInfo.NewUpdate).tagName)
         }
 
     @Test
@@ -328,8 +328,8 @@ class NetworkRepositoryTest {
             networkDataSource.setNextReleaseInfo(releaseInfo)
 
             val result = repository.getLatestReleaseInfo("0.9.0-rc1", allowPreRelease = true)
-            assertTrue("Expected Success, got $result", result is ReleaseInfo.Success)
-            assertEquals("v1.0.0", (result as ReleaseInfo.Success).tagName)
+            assertTrue("Expected Success, got $result", result is ReleaseInfo.NewUpdate)
+            assertEquals("v1.0.0", (result as ReleaseInfo.NewUpdate).tagName)
         }
 
 
