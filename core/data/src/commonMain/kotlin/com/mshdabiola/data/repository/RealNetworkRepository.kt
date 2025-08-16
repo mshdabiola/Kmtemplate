@@ -79,7 +79,7 @@ internal class RealNetworkRepository(
                     throw Exception("Asset not found")
                 onlineParsedVersion == null || currentParsedVersion == null ->
                     throw Exception("Invalid version format")
-                !allowPreRelease && gitHubReleaseInfo.prerelease==true ->
+                !allowPreRelease && gitHubReleaseInfo.prerelease == true ->
                     throw Exception("Pre-release versions are not allowed")
                 currentParsedVersion > onlineParsedVersion ->
                     throw Exception("Current version is greater than latest version")
