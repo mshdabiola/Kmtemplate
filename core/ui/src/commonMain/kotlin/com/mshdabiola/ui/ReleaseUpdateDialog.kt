@@ -37,7 +37,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
 fun ReleaseUpdateDialog(
-    releaseInfo: ReleaseInfo.Success,
+    releaseInfo: ReleaseInfo.NewUpdate,
     onDismissRequest: () -> Unit,
     onDownloadClick: () -> Unit,
 ) {
@@ -83,7 +83,7 @@ fun ReleaseUpdateDialog(
 @Preview
 @Composable
 fun ReleaseUpdateDialogPreview() {
-    val releaseInfo = ReleaseInfo.Success(
+    val releaseInfo = ReleaseInfo.NewUpdate(
         tagName = "v1.0.0",
         releaseName = "Initial Release",
         body = "This is the first release of the application.",

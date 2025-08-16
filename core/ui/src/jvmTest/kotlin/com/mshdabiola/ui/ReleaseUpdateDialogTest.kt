@@ -32,7 +32,7 @@ class ReleaseUpdateDialogTest {
     @get:Rule
     val composeTestRule = createComposeRule()
 
-    private val testReleaseInfo = ReleaseInfo.Success(
+    private val testReleaseInfo = ReleaseInfo.NewUpdate(
         tagName = "v1.0.0",
         releaseName = "Test Release",
         body = "This is a test release body.",
