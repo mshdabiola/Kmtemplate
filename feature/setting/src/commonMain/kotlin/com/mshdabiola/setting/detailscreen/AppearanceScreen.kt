@@ -50,6 +50,7 @@ import androidx.compose.ui.unit.dp
 import com.mshdabiola.designsystem.drawable.KmtIcons
 import com.mshdabiola.designsystem.theme.KmtTheme // For Preview
 import com.mshdabiola.model.DarkThemeConfig
+import com.mshdabiola.model.UserSettings
 import com.mshdabiola.model.testtag.AppearanceScreenTestTags
 import com.mshdabiola.setting.SettingState
 import kmtemplate.feature.setting.generated.resources.Res
@@ -74,7 +75,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 @Composable
 fun AppearanceScreen(
     modifier: Modifier = Modifier,
-    settingsState: SettingState,
+    userSettings: UserSettings,
     onContrastChange: (Int) -> Unit,
     onDarkModeChange: (DarkThemeConfig) -> Unit,
     onGradientBackgroundChange: (Boolean) -> Unit,
@@ -123,7 +124,7 @@ fun AppearanceScreen(
         ContrastTimeline(
             // modifier is passed, root tag is inside ContrastTimeline
             options = contrastOptions,
-            selectedOptionId = settingsState.contrast,
+            selectedOptionId = userSettings.contrast,
             onOptionSelected = { onContrastChange(it) },
         )
 
@@ -140,7 +141,7 @@ fun AppearanceScreen(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .clickable { onGradientBackgroundChange(!settingsState.gradientBackground) }
+                .clickable { onGradientBackgroundChange(!userSettings.shouldShowGradientBackground) }
                 .padding(vertical = 12.dp)
                 .testTag(AppearanceScreenTestTags.GRADIENT_BACKGROUND_ROW),
             verticalAlignment = Alignment.CenterVertically,
@@ -153,7 +154,7 @@ fun AppearanceScreen(
                 color = MaterialTheme.colorScheme.onSurface,
             )
             Switch(
-                checked = settingsState.gradientBackground,
+                checked = userSettings.shouldShowGradientBackground,
                 onCheckedChange = { onGradientBackgroundChange(it) },
                 modifier = Modifier.testTag(AppearanceScreenTestTags.GRADIENT_BACKGROUND_SWITCH),
             )
@@ -179,7 +180,7 @@ fun AppearanceScreen(
                 verticalAlignment = Alignment.CenterVertically,
             ) {
                 RadioButton(
-                    selected = darkThemeConfigEntry.ordinal == settingsState.darkThemeConfig.ordinal,
+                    selected = darkThemeConfigEntry.ordinal == userSettings.darkThemeConfig.ordinal,
                     onClick = { onDarkModeChange(darkThemeConfigEntry) },
                     colors = RadioButtonDefaults.colors(
                         selectedColor = MaterialTheme.colorScheme.primary,
@@ -316,11 +317,7 @@ fun ContrastTimeline(
 fun AppearanceScreenPreview() {
     KmtTheme {
         AppearanceScreen(
-            settingsState = SettingState(
-                contrast = 0,
-                darkThemeConfig = DarkThemeConfig.DARK,
-                gradientBackground = true,
-            ),
+            userSettings = UserSettings(),
             onContrastChange = {},
             onDarkModeChange = {},
             onGradientBackgroundChange = {},

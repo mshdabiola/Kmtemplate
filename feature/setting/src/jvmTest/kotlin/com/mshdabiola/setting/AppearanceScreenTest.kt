@@ -29,6 +29,7 @@ import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.performClick
 import com.mshdabiola.designsystem.theme.KmtTheme
 import com.mshdabiola.model.DarkThemeConfig
+import com.mshdabiola.model.UserSettings
 import com.mshdabiola.model.testtag.AppearanceScreenTestTags
 import com.mshdabiola.setting.detailscreen.AppearanceScreen
 import org.junit.Assert.assertEquals
@@ -40,18 +41,19 @@ class AppearanceScreenTest {
     @get:Rule
     val composeRule = createComposeRule()
 
-    private val initialSettingsState = SettingState(
-        contrast = 0, // Low contrast (id=0)
-        darkThemeConfig = DarkThemeConfig.FOLLOW_SYSTEM,
-        gradientBackground = true,
-    )
+    private val initialSettingsState = UserSettings(
+            contrast = 0, // Low contrast (id=0)
+            darkThemeConfig = DarkThemeConfig.FOLLOW_SYSTEM,
+            shouldShowGradientBackground = true,
+        )
+
 
     @Test
     fun appearanceScreen_initialState_displaysCorrectly() {
         composeRule.setContent {
             KmtTheme {
                 AppearanceScreen(
-                    settingsState = initialSettingsState,
+                    userSettings = initialSettingsState,
                     onContrastChange = {},
                     onDarkModeChange = {},
                     onGradientBackgroundChange = {},
@@ -90,7 +92,7 @@ class AppearanceScreenTest {
         composeRule.onNodeWithTag(AppearanceScreenTestTags.GRADIENT_BACKGROUND_TEXT, useUnmergedTree = true)
             .assertIsDisplayed()
         composeRule.onNodeWithTag(AppearanceScreenTestTags.GRADIENT_BACKGROUND_SWITCH).assertIsDisplayed()
-        if (initialSettingsState.gradientBackground) {
+        if (initialSettingsState.shouldShowGradientBackground) {
             composeRule.onNodeWithTag(AppearanceScreenTestTags.GRADIENT_BACKGROUND_SWITCH).assertIsOn()
         } else {
             composeRule.onNodeWithTag(AppearanceScreenTestTags.GRADIENT_BACKGROUND_SWITCH).assertIsOff()
@@ -128,7 +130,7 @@ class AppearanceScreenTest {
             var currentSettings by remember { mutableStateOf(initialSettingsState) }
             KmtTheme {
                 AppearanceScreen(
-                    settingsState = currentSettings,
+                    userSettings = currentSettings,
                     onContrastChange = { newContrast ->
                         callbackContrast = newContrast
                         currentSettings = currentSettings.copy(contrast = newContrast)
@@ -160,18 +162,18 @@ class AppearanceScreenTest {
     @Test
     fun appearanceScreen_toggleGradientBackground_invokesCallbackAndUpdatesSwitch() {
         var callbackGradient: Boolean? = null
-        val expectedGradientValue = !initialSettingsState.gradientBackground
+        val expectedGradientValue = !initialSettingsState.shouldShowGradientBackground
 
         composeRule.setContent {
             var currentSettings by remember { mutableStateOf(initialSettingsState) }
             KmtTheme {
                 AppearanceScreen(
-                    settingsState = currentSettings,
+                    userSettings = currentSettings,
                     onContrastChange = {},
                     onDarkModeChange = {},
                     onGradientBackgroundChange = { newGradientState ->
                         callbackGradient = newGradientState
-                        currentSettings = currentSettings.copy(gradientBackground = newGradientState)
+                        currentSettings = currentSettings.copy(shouldShowGradientBackground = newGradientState)
                     },
                 )
             }
@@ -198,7 +200,7 @@ class AppearanceScreenTest {
             var currentSettings by remember { mutableStateOf(initialSettingsState) }
             KmtTheme {
                 AppearanceScreen(
-                    settingsState = currentSettings,
+                    userSettings = currentSettings,
                     onContrastChange = {},
                     onDarkModeChange = { newConfig ->
                         callbackDarkMode = newConfig
