@@ -34,7 +34,7 @@ kermit = "2.0.6"
 koin = "4.1.0"
 koinCompose = "4.1.0"
 kotlin = "2.2.10"
-kotlinxBrowser = "0.5.0"
+kotlinxBrowser = "0.3"
 kotlinxCollectionImmutable = "0.4.0"
 kotlinxCoroutines = "1.10.2"
 kotlinxDatetime = "0.7.1-0.6.x-compat"
@@ -53,7 +53,6 @@ screenshot = "0.0.1-alpha11"
 slf4jSimple = "2.0.17"
 spotless = "7.2.1"
 sqlite = "2.6.0-rc01"
-truth = "1.4.4"
 turbine = "1.2.1"
 uiTextGoogleFonts = "1.9.0"
 versionCode = "17"
@@ -156,7 +155,6 @@ screenshot-validation-api = { group = "com.android.tools.screenshot", name = "sc
 slf4j-simple = { module = "org.slf4j:slf4j-simple", version.ref = "slf4jSimple" }
 spotless-gradlePlugin = { group = "com.diffplug.spotless", name = "spotless-plugin-gradle", version.ref = "spotless" }
 sqlite-bundled = { module = "androidx.sqlite:sqlite-bundled", version.ref = "sqlite" }
-truth = { group = "com.google.truth", name = "truth", version.ref = "truth" }
 turbine = { group = "app.cash.turbine", name = "turbine", version.ref = "turbine" }
 
 
