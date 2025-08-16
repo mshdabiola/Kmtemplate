@@ -17,26 +17,37 @@ package com.mshdabiola.setting
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.mshdabiola.data.repository.NetworkRepository
 import com.mshdabiola.data.repository.UserDataRepository
 import com.mshdabiola.model.DarkThemeConfig
+import com.mshdabiola.model.Platform
+import com.mshdabiola.model.ReleaseInfo
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
-class SettingViewModel constructor(
+class SettingViewModel(
     private val userDataRepository: UserDataRepository,
+    private val networkRepository: NetworkRepository,
+    private val platform: Platform,
 ) : ViewModel() {
-    val settingState = userDataRepository
-        .userSettings
-        .map { userData ->
-            SettingState(
-                contrast = userData.contrast,
-                darkThemeConfig = userData.darkThemeConfig,
-                gradientBackground = userData.shouldShowGradientBackground,
-                language = userData.language,
-            )
-        }
+
+    private val releaseInfoFlow = MutableStateFlow<ReleaseInfo?>(null)
+    val settingState = combine(
+        userDataRepository.userSettings,
+        releaseInfoFlow,
+    )
+    { userSettings, releaseInfo ->
+        SettingState(
+            userSettings = userSettings,
+            releaseInfo = releaseInfo,
+            platform = platform,
+        )
+
+    }
         .stateIn(
             scope = viewModelScope,
             started = SharingStarted.WhileSubscribed(),
@@ -64,6 +75,27 @@ class SettingViewModel constructor(
     fun setLanguage(language: String) {
         viewModelScope.launch {
             userDataRepository.setLanguage(language)
+        }
+    }
+
+    fun setUpdateFromPreRelease(updateFromPreRelease: Boolean) {
+        viewModelScope.launch {
+            userDataRepository.setUpdateFromPreRelease(updateFromPreRelease)
+        }
+    }
+
+    fun setShowDialog(showDialog: Boolean) {
+        viewModelScope.launch {
+            userDataRepository.setShowUpdateDialog(showDialog)
+        }
+    }
+
+    fun checkForUpdate(currentVersion: String) {
+        viewModelScope.launch {
+            val allowPreRelease = settingState.value.userSettings.updateFromPreRelease
+            val releaseInfo = networkRepository.getLatestReleaseInfo(currentVersion, allowPreRelease)
+            releaseInfoFlow.value = releaseInfo
+
         }
     }
 }
