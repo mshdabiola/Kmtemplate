@@ -120,9 +120,12 @@ private fun Project.configureKotlin() {
             // Override by setting warningsAsErrors=true in your ~/.gradle/gradle.properties
             val warningsAsErrors: String? by project
             allWarningsAsErrors.set(warningsAsErrors.toBoolean())
-            freeCompilerArgs.set(mutableListOf(
-                "-opt-in=kotlinx.coroutines.ExperimentalCoroutinesApi",
-                "-Xexpect-actual-classes"))
+            freeCompilerArgs.set(
+                mutableListOf(
+                    "-opt-in=kotlinx.coroutines.ExperimentalCoroutinesApi",
+                    "-Xexpect-actual-classes",
+                ),
+            )
         }
     }
 }
