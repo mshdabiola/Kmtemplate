@@ -19,7 +19,7 @@ import com.mshdabiola.data.repository.NetworkRepository
 import com.mshdabiola.model.ReleaseInfo
 
 class FakeNetworkRepository : NetworkRepository {
-    private var nextReleaseInfo: ReleaseInfo = ReleaseInfo.Success(
+    private var nextReleaseInfo: ReleaseInfo = ReleaseInfo.NewUpdate(
         asset = "",
         body = "body",
         releaseName = "releaseName",
@@ -60,7 +60,7 @@ class FakeNetworkRepository : NetworkRepository {
         }
     }
 
-    fun setNextReleaseInfo(expectedReleaseInfo: ReleaseInfo.Success) {
+    fun setNextReleaseInfo(expectedReleaseInfo: ReleaseInfo.NewUpdate) {
         this.nextReleaseInfo = expectedReleaseInfo
         this.shouldThrowError = false
     }

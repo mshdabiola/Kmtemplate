@@ -16,12 +16,28 @@
 package com.mshdabiola.model
 
 sealed class ReleaseInfo {
+    /**
+     * Represents an error that occurred while fetching or processing release information.
+     * @param message A descriptive message of the error.
+     */
     data class Error(val message: String) : ReleaseInfo()
-    data class Success(
+
+    /**
+     * Represents a successful check where a new update is available.
+     * @param tagName The tag name of the new release (e.g., "v1.2.0").
+     * @param releaseName The human-readable name of the release (e.g., "Version 1.2.0").
+     * @param body A description or changelog for the new release.
+     * @param asset The URL to the downloadable asset for the update.
+     */
+    data class NewUpdate(
         val tagName: String,
         val releaseName: String,
         val body: String,
         val asset: String,
-    ) :
-        ReleaseInfo()
+    ) : ReleaseInfo()
+
+    /**
+     * Represents a state where the current version is up to date and no new update is available.
+     */
+    object UpToDate : ReleaseInfo()
 }
