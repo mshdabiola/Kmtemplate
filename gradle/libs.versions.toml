@@ -4,7 +4,7 @@ androidGradlePlugin = "8.12.0"
 androidTools = "31.12.0"
 androidxActivity = "1.10.1"
 androidxComposeMaterial3Adaptive = "1.2.0-alpha04"
-androidxCore = "1.17.0"
+androidxCore = "1.16.0"
 androidxCoreSplashscreen = "1.0.1"
 androidxDataStore = "1.1.7"
 androidx-lifecycle = "2.9.2"
@@ -34,7 +34,7 @@ kermit = "2.0.6"
 koin = "4.1.0"
 koinCompose = "4.1.0"
 kotlin = "2.2.10"
-kotlinxBrowser = "0.5.0"
+kotlinxBrowser = "0.3"
 kotlinxCollectionImmutable = "0.4.0"
 kotlinxCoroutines = "1.10.2"
 kotlinxDatetime = "0.7.1-0.6.x-compat"
@@ -53,7 +53,6 @@ screenshot = "0.0.1-alpha11"
 slf4jSimple = "2.0.17"
 spotless = "7.2.1"
 sqlite = "2.6.0-rc01"
-truth = "1.4.4"
 turbine = "1.2.1"
 uiTextGoogleFonts = "1.9.0"
 versionCode = "17"
@@ -95,14 +94,14 @@ compose-hot-gradlePlugin = { module = "org.jetbrains.compose.hot-reload:hot-relo
 compottie = { module = "io.github.alexzhirkevich:compottie", version.ref = "compottie" }
 compottie-resources = { module = "io.github.alexzhirkevich:compottie-resources", version.ref = "compottie" }
 detekt-gradlePlugin = { module = "io.gitlab.arturbosch.detekt:detekt-gradle-plugin", version.ref = "detekt" }
-firebase-analytics = { group = "com.google.firebase", name = "firebase-analytics-ktx" }
+firebase-analytics = { group = "com.google.firebase", name = "firebase-analytics" }
 firebase-auth = { group = "com.google.firebase", name = "firebase-auth" }
 firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.ref = "firebaseBom" }
-firebase-cloud-messaging = { group = "com.google.firebase", name = "firebase-messaging-ktx" }
-firebase-crashlytics = { group = "com.google.firebase", name = "firebase-crashlytics-ktx" }
+firebase-cloud-messaging = { group = "com.google.firebase", name = "firebase-messaging" }
+firebase-crashlytics = { group = "com.google.firebase", name = "firebase-crashlytics" }
 firebase-crashlytics-gradlePlugin = { group = "com.google.firebase", name = "firebase-crashlytics-gradle", version.ref = "firebaseCrashlyticsPlugin" }
 firebase-message = { group = "com.google.firebase", name = "firebase-inappmessaging-display" }
-firebase-performance = { group = "com.google.firebase", name = "firebase-perf-ktx" }
+firebase-performance = { group = "com.google.firebase", name = "firebase-perf" }
 firebase-performance-gradlePlugin = { group = "com.google.firebase", name = "perf-plugin", version.ref = "firebasePerfPlugin" }
 firebase-remoteconfig = { group = "com.google.firebase", name = "firebase-config" }
 jlleitschuh-gradlePlugin = { module = "org.jlleitschuh.gradle:ktlint-gradle", version.ref = "ktlint" }
@@ -156,7 +155,6 @@ screenshot-validation-api = { group = "com.android.tools.screenshot", name = "sc
 slf4j-simple = { module = "org.slf4j:slf4j-simple", version.ref = "slf4jSimple" }
 spotless-gradlePlugin = { group = "com.diffplug.spotless", name = "spotless-plugin-gradle", version.ref = "spotless" }
 sqlite-bundled = { module = "androidx.sqlite:sqlite-bundled", version.ref = "sqlite" }
-truth = { group = "com.google.truth", name = "truth", version.ref = "truth" }
 turbine = { group = "app.cash.turbine", name = "turbine", version.ref = "turbine" }
 
 
