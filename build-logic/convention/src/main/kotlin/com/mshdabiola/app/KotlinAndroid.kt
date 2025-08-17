@@ -54,7 +54,7 @@ internal fun Project.configureKotlinMultiplatform(
                     }
                 }
             }
-            binaries.executable() // Or other binary types
+//            binaries.executable() // Or other binary types
 
         }
     }

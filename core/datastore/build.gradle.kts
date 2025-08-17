@@ -62,7 +62,7 @@ kotlin {
         wasmJsMain.dependencies{
             implementation(libs.kstore.storage)
             implementation(libs.kstore)
-            implementation(libs.kotlinx.browser)
+//            implementation(libs.kotlinx.browser)
 
         }
         val nonJsMain by getting {
