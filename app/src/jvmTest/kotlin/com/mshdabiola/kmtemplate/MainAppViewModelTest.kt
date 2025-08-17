@@ -160,7 +160,7 @@ class MainAppViewModelTest {
     fun `getLatestReleaseInfo returns Success when network call is successful and showUpdateDialog is true`() =
         runTest(testDispatcher) {
             userDataRepository.setFakeUserData(UserSettings(showUpdateDialog = true, updateFromPreRelease = true))
-            val expectedReleaseInfo = ReleaseInfo.Success(
+            val expectedReleaseInfo = ReleaseInfo.NewUpdate(
                 tagName = "v1.0.0",
                 releaseName = "Test Release",
                 body = "This is a test release.",
@@ -201,7 +201,7 @@ class MainAppViewModelTest {
     @Test
     fun `getLatestReleaseInfo considers updateFromPreRelease setting`() = runTest(testDispatcher) {
         val currentVersion = "1.0.0"
-        val expectedReleaseInfo = ReleaseInfo.Success(
+        val expectedReleaseInfo = ReleaseInfo.NewUpdate(
             tagName = "v1.1.0-alpha",
             releaseName = "Pre-release",
             body = "Test pre-release",
@@ -216,7 +216,7 @@ class MainAppViewModelTest {
 
         // Scenario 2: updateFromPreRelease = false
         // We'll set a different success response for the second call to ensure the mock is being hit with new params
-        val expectedStableReleaseInfo = ReleaseInfo.Success(
+        val expectedStableReleaseInfo = ReleaseInfo.NewUpdate(
             tagName = "v1.0.1",
             releaseName = "Stable Release",
             body = "Test stable release.",

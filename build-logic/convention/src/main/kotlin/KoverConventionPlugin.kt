@@ -83,6 +83,7 @@ class KoverConventionPlugin : Plugin<Project> {
                                 "*.generated.resources",
                                 "*.di",
                                 "*.navigation",
+                                "*.model",
                             )
                         }
                     }
