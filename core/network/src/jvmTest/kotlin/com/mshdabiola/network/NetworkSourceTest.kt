@@ -268,6 +268,8 @@ class NetworkDataSourceTest {
 
     // Helper function to read a resource file
     fun getResourceAsText(path: String): String {
-        return InputStreamReader(ClassLoader.getSystemResourceAsStream(path)!!).readText()
+        val stream = ClassLoader.getSystemResourceAsStream(path)
+        requireNotNull(stream) { "Resource not found: $path" }
+        return InputStreamReader(stream).readText()
     }
 }
