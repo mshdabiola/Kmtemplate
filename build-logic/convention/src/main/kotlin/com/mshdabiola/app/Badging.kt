@@ -137,10 +137,8 @@ abstract class CheckBadgingTask : DefaultTask() {
         }
 
         throw AssertionError(diffOutput.toString())
-        }
     }
-
-
+}
 
 fun Project.configureBadgingTasks(
     baseExtension: BaseExtension,
