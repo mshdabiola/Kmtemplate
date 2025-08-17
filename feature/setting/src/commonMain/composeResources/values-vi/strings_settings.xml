@@ -63,6 +63,7 @@
     <string-array name="general">
         <item>Giao diện</item>
         <item>Ngôn ngữ</item>
+        <item>Kiểm tra bản cập nhật</item>
     </string-array>
 
     <string-array name="support">
