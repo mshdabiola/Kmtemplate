@@ -96,59 +96,50 @@ abstract class CheckBadgingTask : DefaultTask() {
         val goldenFile = goldenBadging.get().asFile
         val generatedFile = generatedBadging.get().asFile
 
-        val goldenLines = goldenFile.readLines()
-        val generatedLines = generatedFile.readLines()
+        val goldenText = goldenFile.readText()
+        val generatedText = generatedFile.readText()
 
-        if (goldenLines != generatedLines) {
-            val diffOutput = StringBuilder()
-            diffOutput.appendLine(
-                "Generated badging is different from golden badging! " +
-                    "If this change is intended, run ./gradlew ${updateBadgingTaskName.get()}",
-            )
-            diffOutput.appendLine("--- Diff ---")
+        if (goldenText == generatedText) {
+            return // Files are identical, task is successful.
+        }
 
-            val maxLines = max(goldenLines.size, generatedLines.size)
-            var differencesFound = false
-            for (i in 0 until maxLines) {
-                val goldenLine = goldenLines.getOrNull(i)
-                val generatedLine = generatedLines.getOrNull(i)
+        // Files differ, generate a diff for the error message.
+        val goldenLines = goldenText.lines()
+        val generatedLines = generatedText.lines()
 
-                when {
-                    goldenLine == generatedLine -> {
-                        // For context, you might want to show a few matching lines around differences
-                        // For simplicity here, we'll only show differences.
-                        // If you want context, uncomment the next line.
-                        // diffOutput.appendLine("  $goldenLine")
-                    }
-                    goldenLine != null && generatedLine == null -> {
-                        diffOutput.appendLine("- $goldenLine")
-                        differencesFound = true
-                    }
-                    goldenLine == null && generatedLine != null -> {
-                        diffOutput.appendLine("+ $generatedLine")
-                        differencesFound = true
-                    }
-                    goldenLine != generatedLine -> {
-                        diffOutput.appendLine("- $goldenLine")
-                        diffOutput.appendLine("+ $generatedLine")
-                        differencesFound = true
-                    }
+        val diffOutput = StringBuilder()
+        diffOutput.appendLine(
+            "Generated badging is different from golden badging! " +
+                "If this change is intended, run ./gradlew ${updateBadgingTaskName.get()}",
+        )
+        diffOutput.appendLine("--- Diff ---")
+
+        val maxLines = max(goldenLines.size, generatedLines.size)
+        for (i in 0 until maxLines) {
+            val goldenLine = goldenLines.getOrNull(i)
+            val generatedLine = generatedLines.getOrNull(i)
+
+            when {
+                goldenLine == generatedLine -> {
+                    // Lines are same, do nothing for a concise diff.
+                }
+                goldenLine != null && generatedLine == null -> {
+                    diffOutput.appendLine("- $goldenLine") // Line removed
+                }
+                goldenLine == null && generatedLine != null -> {
+                    diffOutput.appendLine("+ $generatedLine") // Line added
+                }
+                else -> { // Both are non-null and different
+                    diffOutput.appendLine("- $goldenLine")
+                    diffOutput.appendLine("+ $generatedLine")
                 }
             }
+        }
 
-            // Fallback if line-by-line diff doesn't pinpoint changes well (e.g. completely different files)
-            if (!differencesFound && goldenFile.readText() != generatedFile.readText()) {
-                diffOutput.appendLine("Files differ, but no line-by-line differences captured by simple diff.")
-                diffOutput.appendLine("--- Golden Badging (${goldenFile.name}) ---")
-                diffOutput.appendLine(goldenFile.readText())
-                diffOutput.appendLine("--- Generated Badging (${generatedFile.name}) ---")
-                diffOutput.appendLine(generatedFile.readText())
-            }
-
-            throw AssertionError(diffOutput.toString())
+        throw AssertionError(diffOutput.toString())
         }
     }
-}
+
 
 
 fun Project.configureBadgingTasks(
