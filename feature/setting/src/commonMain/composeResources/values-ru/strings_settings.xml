@@ -63,6 +63,7 @@
     <string-array name="general">
         <item>Внешний вид</item>
         <item>Язык</item>
+        <item>Проверить обновления</item>
     </string-array>
 
     <string-array name="support">

@@ -63,6 +63,7 @@
     <string-array name="general">
         <item>Görünüm</item>
         <item>Dil</item>
+        <item>Güncellemeleri kontrol et</item>
     </string-array>
 
     <string-array name="support">
