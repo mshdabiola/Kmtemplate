@@ -48,10 +48,12 @@ fun KmtNavHost(
         detailScreen(
             modifier = Modifier,
             onBack = navController::popBackStack,
+            setNotification = appState::onNotification,
         )
         settingScreen(
             modifier = Modifier,
             onDrawer = appState.onDrawer,
+            setNotification = appState::onNotification,
         )
     }
 }

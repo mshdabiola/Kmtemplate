@@ -30,6 +30,7 @@ import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
+import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.adaptive.currentWindowAdaptiveInfo
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
@@ -139,6 +140,9 @@ fun KmtApp(
                                     containerColor = Color.Transparent,
                                     contentWindowInsets = WindowInsets(0, 0, 0, 0),
                                     appState = appState,
+                                    snackbarHost = {
+                                        SnackbarHost(appState.snackbarHostState)
+                                    }
                                 ) { padding ->
                                     Column(
                                         Modifier

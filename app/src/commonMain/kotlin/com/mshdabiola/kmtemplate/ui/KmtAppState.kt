@@ -18,6 +18,8 @@ package com.mshdabiola.kmtemplate.ui
 import androidx.compose.material3.DrawerState
 import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
+import androidx.compose.material3.SnackbarHostState
+import androidx.compose.material3.SnackbarResult
 import androidx.compose.material3.WideNavigationRailState
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.material3.rememberWideNavigationRailState
@@ -31,6 +33,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.window.core.layout.WindowSizeClass
 import com.mshdabiola.main.navigation.Main
 import com.mshdabiola.main.navigation.navigateToMain
+import com.mshdabiola.model.Notification
 import com.mshdabiola.setting.navigation.Setting
 import com.mshdabiola.setting.navigation.navigateToSetting
 import kotlinx.coroutines.CoroutineScope
@@ -44,15 +47,19 @@ fun rememberKmtAppState(
     navController: NavHostController = rememberNavController(),
     wideNavigationRailState: WideNavigationRailState = rememberWideNavigationRailState(),
     drawerState: DrawerState = rememberDrawerState(initialValue = DrawerValue.Closed),
+    snackbarHostState: SnackbarHostState = remember { SnackbarHostState() },
 ): KmtAppState {
     return remember(
         navController,
         windowSizeClass,
     ) {
         when {
-            windowSizeClass.isWidthExpanded -> Expand(navController)
-            windowSizeClass.isWidthMedium -> Medium(navController, coroutineScope, wideNavigationRailState)
-            else -> Compact(navController, coroutineScope, drawerState)
+            windowSizeClass.isWidthExpanded -> Expand(navController,snackbarHostState, coroutineScope)
+            windowSizeClass.isWidthMedium -> Medium(navController,
+                snackbarHostState,
+                coroutineScope,
+                wideNavigationRailState)
+            else -> Compact(navController, snackbarHostState,coroutineScope, drawerState)
         }
     }
 }
@@ -61,6 +68,8 @@ fun rememberKmtAppState(
 @Stable
 sealed class KmtAppState(
     open val navController: NavHostController,
+    open val snackbarHostState: SnackbarHostState,
+    open val coroutineScope: CoroutineScope,
 ) {
 
     abstract val onDrawer: (() -> Unit)?
@@ -76,14 +85,35 @@ sealed class KmtAppState(
     fun isInCurrentRoute(any: Any): Boolean {
         return navController.currentDestination?.hasRoute(any::class) == true
     }
+
+    fun onNotification(notification: Notification) {
+        coroutineScope.launch {
+            when (notification) {
+                is Notification.Message ->
+                    snackbarHostState.showSnackbar(notification.message)
+                is Notification.MessageWithAction ->{
+                    val result = snackbarHostState.showSnackbar(
+                        message = notification.message,
+                        actionLabel = notification.action,
+                    )
+                    if (result == SnackbarResult.ActionPerformed) {
+                        notification.actionCallback()
+                    }
+                }
+
+            }
+        }
+
+    }
 }
 
 data class Compact(
     override val navController: NavHostController,
-    val coroutineScope: CoroutineScope,
+    override val snackbarHostState: SnackbarHostState,
+    override val coroutineScope: CoroutineScope,
 
     val drawerState: DrawerState,
-) : KmtAppState(navController) {
+) : KmtAppState(navController, snackbarHostState,coroutineScope) {
 
     override val onDrawer: (() -> Unit)?
         get() = {
@@ -108,10 +138,11 @@ data class Medium
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
 constructor(
     override val navController: NavHostController,
-    val coroutineScope: CoroutineScope,
+    override val snackbarHostState: SnackbarHostState,
+    override val coroutineScope: CoroutineScope,
 
     val wideNavigationRailState: WideNavigationRailState,
-) : KmtAppState(navController) {
+) : KmtAppState(navController, snackbarHostState,coroutineScope) {
 
     override val onDrawer: (() -> Unit)?
         get() = null
@@ -133,7 +164,10 @@ constructor(
 
 data class Expand(
     override val navController: NavHostController,
-) : KmtAppState(navController) {
+    override val snackbarHostState: SnackbarHostState,
+    override val coroutineScope: CoroutineScope,
+
+    ) : KmtAppState(navController,snackbarHostState, coroutineScope) {
 
     override val onDrawer: (() -> Unit)?
         get() = null
