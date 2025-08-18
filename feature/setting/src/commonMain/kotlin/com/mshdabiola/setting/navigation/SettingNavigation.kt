@@ -27,6 +27,7 @@ import androidx.navigation.NavOptions
 import androidx.navigation.compose.composable
 import androidx.navigation.navOptions
 import com.mshdabiola.designsystem.strings.KmtStrings
+import com.mshdabiola.model.Notification
 import com.mshdabiola.model.ReleaseInfo
 import com.mshdabiola.setting.SettingScreen
 import com.mshdabiola.setting.SettingViewModel
@@ -48,6 +49,8 @@ fun NavController.navigateToSetting(
 fun NavGraphBuilder.settingScreen(
     modifier: Modifier,
     onDrawer: (() -> Unit)?,
+    setNotification: (Notification)-> Unit
+
 ) {
     composable<Setting> {
         val viewModel: SettingViewModel = koinViewModel()

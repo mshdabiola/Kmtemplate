@@ -26,6 +26,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.toRoute
 import com.mshdabiola.detail.DetailScreen
 import com.mshdabiola.detail.DetailViewModel
+import com.mshdabiola.model.Notification
 import com.mshdabiola.ui.LocalNavAnimatedContentScope
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.annotation.KoinExperimentalAPI
@@ -42,6 +43,7 @@ fun NavController.navigateToDetail(detail: Detail) {
 fun NavGraphBuilder.detailScreen(
     modifier: Modifier = Modifier,
     onBack: () -> Unit,
+    setNotification: (Notification)-> Unit
 ) {
     composable<Detail> { backStack ->
 
