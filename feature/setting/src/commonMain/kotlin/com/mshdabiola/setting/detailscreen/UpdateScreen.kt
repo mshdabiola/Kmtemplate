@@ -19,8 +19,10 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
@@ -29,6 +31,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -38,13 +41,16 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import com.mshdabiola.designsystem.component.KmtTextButton
+import com.mshdabiola.designsystem.component.KmtTextField
 import com.mshdabiola.designsystem.drawable.KmtIcons
 import com.mshdabiola.designsystem.strings.KmtStrings
 import com.mshdabiola.designsystem.theme.KmtTheme
 import com.mshdabiola.model.UserSettings
 import com.mshdabiola.model.testtag.AboutScreenTestTags
+import com.mshdabiola.model.testtag.AppearanceScreenTestTags
 import kmtemplate.feature.setting.generated.resources.Res
 import kmtemplate.feature.setting.generated.resources.about
+import kmtemplate.feature.setting.generated.resources.appearance_gradient_background_text
 import kmtemplate.feature.setting.generated.resources.contact_us
 import kmtemplate.feature.setting.generated.resources.developed_by
 import kmtemplate.feature.setting.generated.resources.developer
@@ -69,9 +75,54 @@ fun UpdateScreen(
             .fillMaxSize()
             .verticalScroll(rememberScrollState())
             .padding(horizontal = 24.dp, vertical = 32.dp),
-        verticalArrangement = Arrangement.Top, // Changed from SpacedBy to Top for more control with Spacers
+        verticalArrangement = Arrangement.spacedBy(16.dp, Alignment.Top), // Changed from SpacedBy to Top for more control with Spacers
         horizontalAlignment = Alignment.Start,
     ) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .clickable { onSetUpdateDialog(!userSettings.showUpdateDialog)}
+                .padding(vertical = 12.dp),
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            Text(
+                text = "Show Update Dialog",
+                modifier = Modifier.weight(1f),
+                style = MaterialTheme.typography.bodyLarge,
+                color = MaterialTheme.colorScheme.onSurface,
+            )
+            Switch(
+                checked = userSettings.showUpdateDialog,
+                onCheckedChange = { onSetUpdateDialog(it) },
+                modifier = Modifier,
+            )
+        }
+
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .clickable { onSetUpdateFromPreRelease(!userSettings.updateFromPreRelease)}
+                .padding(vertical = 12.dp),
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            Text(
+                text = "Join beta release",
+                modifier = Modifier.weight(1f),
+                style = MaterialTheme.typography.bodyLarge,
+                color = MaterialTheme.colorScheme.onSurface,
+            )
+            Switch(
+                checked = userSettings.updateFromPreRelease,
+                onCheckedChange = { onSetUpdateFromPreRelease(it) },
+                modifier = Modifier,
+            )
+        }
+        Spacer(modifier = Modifier.height(8.dp))
+
+        KmtTextButton(modifier= Modifier.align(Alignment.CenterHorizontally),
+            onClick = onCheckForUpdate){
+            Text(text = "Check For Update")
+        }
 
     }
 }
