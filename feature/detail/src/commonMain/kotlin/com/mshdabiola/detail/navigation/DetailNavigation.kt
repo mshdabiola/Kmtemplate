@@ -27,6 +27,8 @@ import androidx.navigation.toRoute
 import com.mshdabiola.detail.DetailScreen
 import com.mshdabiola.detail.DetailViewModel
 import com.mshdabiola.model.Notification
+import com.mshdabiola.model.SnackbarDuration
+import com.mshdabiola.model.Type
 import com.mshdabiola.ui.LocalNavAnimatedContentScope
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.annotation.KoinExperimentalAPI
@@ -68,8 +70,18 @@ fun NavGraphBuilder.detailScreen(
                 detail = detail,
                 onBack = onBack,
                 onDelete = {
-                    viewModel.onDelete()
-                    onBack()
+                    setNotification(
+                        Notification.MessageWithAction(
+                            type = Type.Warning,
+                            duration = SnackbarDuration.Indefinite,
+                            message = "Are you sure you want to delete this note?",
+                            action = "Delete",
+                            actionCallback = {
+                                viewModel.onDelete()
+                                onBack()
+                            }
+                        )
+                    )
                 },
 
             )
