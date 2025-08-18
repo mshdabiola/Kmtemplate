@@ -196,8 +196,8 @@ class SettingScreenTest {
             }
         }
 
-        val issueItemTag = "${SettingScreenListTestTags.LIST_ITEM_CARD_PREFIX}${SettingNav.Issue.name}"
-        composeRule.onNodeWithTag(issueItemTag).performClick()
+        val reportBugItemTag = "${SettingScreenListTestTags.LIST_ITEM_CARD_PREFIX}${SettingNav.ReportBug.name}"
+        composeRule.onNodeWithTag(reportBugItemTag).performClick()
 
         // composeRule.mainClock.advanceTimeUntilIdle() // Good practice if any async ops were triggered
 
