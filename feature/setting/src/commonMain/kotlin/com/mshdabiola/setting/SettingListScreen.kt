@@ -105,7 +105,7 @@ internal fun SettingListScreen(
                 .padding(paddingValues)
                 .padding(16.dp)
                 .testTag(SettingScreenListTestTags.SETTINGS_LAZY_COLUMN),
-            verticalArrangement = Arrangement.spacedBy(4.dp),
+            verticalArrangement = Arrangement.spacedBy(8.dp),
         ) {
             settingsMap.forEach { (mapIndex, settingList) ->
                 item {
@@ -128,7 +128,7 @@ internal fun SettingListScreen(
                     )
                 }
                 item {
-                    Spacer(modifier = Modifier.height(8.dp))
+                    Spacer(modifier = Modifier.height(16.dp))
                 }
             }
         }
