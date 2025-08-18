@@ -53,7 +53,7 @@ class SettingDetailScreenTest {
             SettingNav.Appearance -> "Appearance" // Expected from generalArrayString[0]
             SettingNav.Faq -> "FAQ" // Expected from supportArrayString[0]
             SettingNav.About -> "About" // Expected from supportArrayString[1]
-            SettingNav.Issue -> "Report an Issue" // Expected from supportArrayString[2]
+            SettingNav.ReportBug -> "Report an Issue" // Expected from supportArrayString[2]
             SettingNav.Language -> "Language" // Expected from generalArrayString[1]
             // Add other cases as needed
         }
@@ -201,7 +201,7 @@ class SettingDetailScreenTest {
             KmtTheme {
                 SettingDetailScreen(
                     onBack = {},
-                    settingNav = SettingNav.Issue, // The "Issue" case in the when statement
+                    settingNav = SettingNav.ReportBug, // The "Issue" case in the when statement
                     settingState = sampleSettingState,
                 )
             }
