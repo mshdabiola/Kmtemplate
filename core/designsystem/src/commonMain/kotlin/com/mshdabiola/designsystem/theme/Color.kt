@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 package com.mshdabiola.designsystem.theme
+import androidx.compose.runtime.Immutable
 import androidx.compose.ui.graphics.Color
 
 val primaryLight = Color(0xFF79542E)
@@ -231,3 +232,66 @@ val surfaceContainerLowDarkHighContrast = Color(0xFF231F1B)
 val surfaceContainerDarkHighContrast = Color(0xFF34302C)
 val surfaceContainerHighDarkHighContrast = Color(0xFF3F3A37)
 val surfaceContainerHighestDarkHighContrast = Color(0xFF4B4642)
+
+
+
+@Immutable
+data class ExtendedColorScheme(
+    val success: ColorFamily,
+    val warning: ColorFamily,
+)
+
+
+val successLight = Color(0xFF3C6838)
+val onSuccessLight = Color(0xFFFFFFFF)
+val successContainerLight = Color(0xFFBDF0B3)
+val onSuccessContainerLight = Color(0xFF255023)
+val warningLight = Color(0xFF8E4D2F)
+val onWarningLight = Color(0xFFFFFFFF)
+val warningContainerLight = Color(0xFFFFDBCD)
+val onWarningContainerLight = Color(0xFF71361A)
+
+val successLightMediumContrast = Color(0xFF133F14)
+val onSuccessLightMediumContrast = Color(0xFFFFFFFF)
+val successContainerLightMediumContrast = Color(0xFF4B7846)
+val onSuccessContainerLightMediumContrast = Color(0xFFFFFFFF)
+val warningLightMediumContrast = Color(0xFF5C260B)
+val onWarningLightMediumContrast = Color(0xFFFFFFFF)
+val warningContainerLightMediumContrast = Color(0xFF9F5B3C)
+val onWarningContainerLightMediumContrast = Color(0xFFFFFFFF)
+
+val successLightHighContrast = Color(0xFF06340A)
+val onSuccessLightHighContrast = Color(0xFFFFFFFF)
+val successContainerLightHighContrast = Color(0xFF275225)
+val onSuccessContainerLightHighContrast = Color(0xFFFFFFFF)
+val warningLightHighContrast = Color(0xFF4F1D03)
+val onWarningLightHighContrast = Color(0xFFFFFFFF)
+val warningContainerLightHighContrast = Color(0xFF74391C)
+val onWarningContainerLightHighContrast = Color(0xFFFFFFFF)
+
+val successDark = Color(0xFFA2D399)
+val onSuccessDark = Color(0xFF0C390E)
+val successContainerDark = Color(0xFF255023)
+val onSuccessContainerDark = Color(0xFFBDF0B3)
+val warningDark = Color(0xFFFFB596)
+val onWarningDark = Color(0xFF542106)
+val warningContainerDark = Color(0xFF71361A)
+val onWarningContainerDark = Color(0xFFFFDBCD)
+
+val successDarkMediumContrast = Color(0xFFB7EAAD)
+val onSuccessDarkMediumContrast = Color(0xFF002D05)
+val successContainerDarkMediumContrast = Color(0xFF6E9C67)
+val onSuccessContainerDarkMediumContrast = Color(0xFF000000)
+val warningDarkMediumContrast = Color(0xFFFFD3C1)
+val onWarningDarkMediumContrast = Color(0xFF461600)
+val warningContainerDarkMediumContrast = Color(0xFFCA7E5C)
+val onWarningContainerDarkMediumContrast = Color(0xFF000000)
+
+val successDarkHighContrast = Color(0xFFCAFEC0)
+val onSuccessDarkHighContrast = Color(0xFF000000)
+val successContainerDarkHighContrast = Color(0xFF9ECF95)
+val onSuccessContainerDarkHighContrast = Color(0xFF000F01)
+val warningDarkHighContrast = Color(0xFFFFECE5)
+val onWarningDarkHighContrast = Color(0xFF000000)
+val warningContainerDarkHighContrast = Color(0xFFFFB08D)
+val onWarningContainerDarkHighContrast = Color(0xFF1B0500)
