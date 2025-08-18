@@ -17,6 +17,7 @@ package com.mshdabiola.setting.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
@@ -85,8 +86,20 @@ fun NavGraphBuilder.settingScreen(
                             onDownloadClick = { windowRepository.openUrl(releaseInfo.asset) },
                         )
                     }
-                    is ReleaseInfo.UpToDate -> {}
-                    else -> {}
+                    is ReleaseInfo.UpToDate -> {
+                        LaunchedEffect(Unit) {
+                            setNotification(
+                                Notification.Message("You are up to date")
+                            )
+                        }
+                    }
+                    else -> {
+                        LaunchedEffect(Unit) {
+                            setNotification(
+                                Notification.Message("Error checking for updates")
+                            )
+                        }
+                    }
 
                 }
 
