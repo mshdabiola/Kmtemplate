@@ -34,9 +34,12 @@ import androidx.window.core.layout.WindowSizeClass
 import com.mshdabiola.main.navigation.Main
 import com.mshdabiola.main.navigation.navigateToMain
 import com.mshdabiola.model.Notification
+import com.mshdabiola.model.SnackbarDuration
+import com.mshdabiola.model.Type
 import com.mshdabiola.setting.navigation.Setting
 import com.mshdabiola.setting.navigation.navigateToSetting
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
@@ -54,12 +57,15 @@ fun rememberKmtAppState(
         windowSizeClass,
     ) {
         when {
-            windowSizeClass.isWidthExpanded -> Expand(navController,snackbarHostState, coroutineScope)
-            windowSizeClass.isWidthMedium -> Medium(navController,
+            windowSizeClass.isWidthExpanded -> Expand(navController, snackbarHostState, coroutineScope)
+            windowSizeClass.isWidthMedium -> Medium(
+                navController,
                 snackbarHostState,
                 coroutineScope,
-                wideNavigationRailState)
-            else -> Compact(navController, snackbarHostState,coroutineScope, drawerState)
+                wideNavigationRailState,
+            )
+
+            else -> Compact(navController, snackbarHostState, coroutineScope, drawerState)
         }
     }
 }
@@ -72,6 +78,8 @@ sealed class KmtAppState(
     open val coroutineScope: CoroutineScope,
 ) {
 
+    var notificationType: Type = Type.Default
+    var currentNotificationJob : Job?=null
     abstract val onDrawer: (() -> Unit)?
 
     open fun navigateTopRoute(any: Any) {
@@ -87,14 +95,26 @@ sealed class KmtAppState(
     }
 
     fun onNotification(notification: Notification) {
-        coroutineScope.launch {
+        notificationType = notification.type
+        val duration = when (notification.duration) {
+            SnackbarDuration.Short -> androidx.compose.material3.SnackbarDuration.Short
+            SnackbarDuration.Long -> androidx.compose.material3.SnackbarDuration.Long
+            SnackbarDuration.Indefinite -> androidx.compose.material3.SnackbarDuration.Indefinite
+        }
+
+      currentNotificationJob=  coroutineScope.launch {
             when (notification) {
                 is Notification.Message ->
-                    snackbarHostState.showSnackbar(notification.message)
-                is Notification.MessageWithAction ->{
+                    snackbarHostState.showSnackbar(
+                        notification.message,
+                        duration = duration,
+                    )
+
+                is Notification.MessageWithAction -> {
                     val result = snackbarHostState.showSnackbar(
                         message = notification.message,
                         actionLabel = notification.action,
+                        duration = duration,
                     )
                     if (result == SnackbarResult.ActionPerformed) {
                         notification.actionCallback()
@@ -113,7 +133,7 @@ data class Compact(
     override val coroutineScope: CoroutineScope,
 
     val drawerState: DrawerState,
-) : KmtAppState(navController, snackbarHostState,coroutineScope) {
+) : KmtAppState(navController, snackbarHostState, coroutineScope) {
 
     override val onDrawer: (() -> Unit)?
         get() = {
@@ -142,7 +162,7 @@ constructor(
     override val coroutineScope: CoroutineScope,
 
     val wideNavigationRailState: WideNavigationRailState,
-) : KmtAppState(navController, snackbarHostState,coroutineScope) {
+) : KmtAppState(navController, snackbarHostState, coroutineScope) {
 
     override val onDrawer: (() -> Unit)?
         get() = null
@@ -167,7 +187,7 @@ data class Expand(
     override val snackbarHostState: SnackbarHostState,
     override val coroutineScope: CoroutineScope,
 
-    ) : KmtAppState(navController,snackbarHostState, coroutineScope) {
+    ) : KmtAppState(navController, snackbarHostState, coroutineScope) {
 
     override val onDrawer: (() -> Unit)?
         get() = null

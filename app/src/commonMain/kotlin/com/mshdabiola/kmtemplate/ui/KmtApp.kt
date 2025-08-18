@@ -30,7 +30,13 @@ import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Snackbar
+import androidx.compose.material3.SnackbarData
+import androidx.compose.material3.SnackbarDefaults
+import androidx.compose.material3.SnackbarDuration
 import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarVisuals
 import androidx.compose.material3.adaptive.currentWindowAdaptiveInfo
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
@@ -42,7 +48,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.testTag // Ensure this is imported
+import androidx.compose.ui.platform.testTag
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.window.core.layout.WindowSizeClass
 import com.mshdabiola.analytics.AnalyticsHelper
@@ -53,16 +59,19 @@ import com.mshdabiola.designsystem.strings.KmtStrings
 import com.mshdabiola.designsystem.theme.GradientColors
 import com.mshdabiola.designsystem.theme.KmtTheme
 import com.mshdabiola.designsystem.theme.LocalGradientColors
+import com.mshdabiola.designsystem.theme.extendedColorScheme
 import com.mshdabiola.kmtemplate.LocalAppLocale
 import com.mshdabiola.kmtemplate.MainActivityUiState
 import com.mshdabiola.kmtemplate.MainAppViewModel
 import com.mshdabiola.kmtemplate.navigation.KmtNavHost
 import com.mshdabiola.model.DarkThemeConfig
 import com.mshdabiola.model.ReleaseInfo
+import com.mshdabiola.model.Type
 import com.mshdabiola.setting.navigation.getWindowRepository
 import com.mshdabiola.ui.LocalSharedTransitionScope
 import com.mshdabiola.ui.ReleaseUpdateDialog
 import com.mshdabiola.ui.semanticsCommon
+import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.koin.compose.koinInject
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.annotation.KoinExperimentalAPI
@@ -141,7 +150,11 @@ fun KmtApp(
                                     contentWindowInsets = WindowInsets(0, 0, 0, 0),
                                     appState = appState,
                                     snackbarHost = {
-                                        SnackbarHost(appState.snackbarHostState)
+                                        SnackbarHost(
+                                            appState.snackbarHostState,
+                                            snackbar = { snackbarData ->
+                                                KmtSnackerBar(appState.notificationType,snackbarData) }
+                                        )
                                     }
                                 ) { padding ->
                                     Column(
@@ -218,3 +231,67 @@ fun getLanguage(uiState: MainActivityUiState): String =
         is MainActivityUiState.Success ->
             uiState.userSettings.language
     }
+
+@Composable
+fun KmtSnackerBar(type: Type,snackbarData: SnackbarData) {
+    val containerColor: Color =when (type) {
+        Type.Default -> SnackbarDefaults.color
+        Type.Error -> MaterialTheme.colorScheme.errorContainer
+        Type.Success -> extendedColorScheme.success.colorContainer
+        Type.Warning -> extendedColorScheme.warning.colorContainer
+    }
+    val contentColor: Color =  when (type) {
+        Type.Default -> SnackbarDefaults.contentColor
+        Type.Error -> MaterialTheme.colorScheme.onErrorContainer
+        Type.Success -> extendedColorScheme.success.onColorContainer
+        Type.Warning -> extendedColorScheme.warning.onColorContainer
+    }
+    val actionColor: Color = when (type) {
+        Type.Default -> SnackbarDefaults.actionColor
+        Type.Error -> MaterialTheme.colorScheme.error
+        Type.Success -> extendedColorScheme.success.color
+        Type.Warning -> extendedColorScheme.warning.color
+    }
+    val actionContentColor: Color = when (type) {
+        Type.Default -> SnackbarDefaults.actionContentColor
+        Type.Error -> MaterialTheme.colorScheme.onError
+        Type.Success -> extendedColorScheme.success.onColor
+        Type.Warning -> extendedColorScheme.warning.onColor
+    }
+
+        Snackbar(
+            snackbarData = snackbarData,
+            containerColor = containerColor,
+            contentColor = contentColor,
+            actionColor = actionColor,
+            actionContentColor = actionContentColor,
+            dismissActionContentColor = actionContentColor,
+        )
+
+}
+
+@Preview
+@Composable
+fun KmtSnackerBarPreview() {
+   val visuals= object : SnackbarVisuals{
+        override val message: String
+            get() = "Snackbar message"
+        override val actionLabel: String?
+            get() = "Testing"
+        override val withDismissAction: Boolean
+            get() = false
+        override val duration: SnackbarDuration
+            get() = SnackbarDuration.Short
+    }
+    KmtTheme {
+        KmtSnackerBar(
+            type = Type.Default,
+            snackbarData = object : SnackbarData {
+                override val visuals = visuals
+                override fun performAction() {}
+                override fun dismiss() {}
+            }
+        )
+    }
+}
+
