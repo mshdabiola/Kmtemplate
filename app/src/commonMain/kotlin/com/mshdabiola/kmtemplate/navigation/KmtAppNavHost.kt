@@ -48,7 +48,7 @@ fun KmtNavHost(
         detailScreen(
             modifier = Modifier,
             onBack = {
-                appState.currentNotificationJob?.cancel()
+                appState.dismissIndefiniteSnackbar()
                 navController.popBackStack()
             },
             setNotification = appState::onNotification,
