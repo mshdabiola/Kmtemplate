@@ -42,6 +42,9 @@ fun SettingScreen(
     onLanguageChange: (String) -> Unit = {},
     openUrl: (String) -> Unit = {},
     openEmail: (String, String, String) -> Unit = { _, _, _ -> },
+    onSetUpdateDialog: (Boolean) -> Unit = {},
+    onSetUpdateFromPreRelease: (Boolean) -> Unit = {},
+    onCheckForUpdate: () -> Unit = {},
 
 ) {
     val navigator = rememberListDetailPaneScaffoldNavigator<SettingNav>()
@@ -62,7 +65,7 @@ fun SettingScreen(
                     settingsMap = settingsBySegment,
                     onDrawer = onDrawer,
                     onSettingClick = {
-                        if (it == SettingNav.Issue) {
+                        if (it == SettingNav.ReportBug) {
                             openUrl("https://github.com/mshdabiola/Kmtemplate/issues")
                         } else {
                             coroutineScope.launch {
@@ -97,6 +100,9 @@ fun SettingScreen(
                     onLanguageChange = onLanguageChange,
                     openUrl = openUrl,
                     openEmail = openEmail,
+                    onSetUpdateDialog = onSetUpdateDialog,
+                    onSetUpdateFromPreRelease = onSetUpdateFromPreRelease,
+                    onCheckForUpdate = onCheckForUpdate,
                 )
             }
         },

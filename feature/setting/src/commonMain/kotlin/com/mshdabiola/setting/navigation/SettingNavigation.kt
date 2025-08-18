@@ -26,10 +26,13 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavOptions
 import androidx.navigation.compose.composable
 import androidx.navigation.navOptions
+import com.mshdabiola.designsystem.strings.KmtStrings
+import com.mshdabiola.model.ReleaseInfo
 import com.mshdabiola.setting.SettingScreen
 import com.mshdabiola.setting.SettingViewModel
 import com.mshdabiola.setting.WindowRepository
 import com.mshdabiola.ui.LocalNavAnimatedContentScope
+import com.mshdabiola.ui.ReleaseUpdateDialog
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.annotation.KoinExperimentalAPI
 
@@ -50,6 +53,7 @@ fun NavGraphBuilder.settingScreen(
         val viewModel: SettingViewModel = koinViewModel()
         val settingState = viewModel.settingState.collectAsStateWithLifecycle()
         val windowRepository: WindowRepository = getWindowRepository()
+        val version = KmtStrings.version
 
         CompositionLocalProvider(
             LocalNavAnimatedContentScope provides this,
@@ -64,7 +68,26 @@ fun NavGraphBuilder.settingScreen(
                 onLanguageChange = { viewModel.setLanguage(it) },
                 openUrl = { windowRepository.openUrl(it) },
                 openEmail = { email, subject, body -> windowRepository.openEmail(email, subject, body) },
+                onSetUpdateDialog = { viewModel.setShowDialog(it) },
+                onSetUpdateFromPreRelease = { viewModel.setUpdateFromPreRelease(it) },
+                onCheckForUpdate = {viewModel.checkForUpdate(version) },
             )
+            val releaseInfo = settingState.value.releaseInfo
+            if (releaseInfo!=null){
+                when(releaseInfo){
+                    is ReleaseInfo.NewUpdate ->{
+                        ReleaseUpdateDialog(
+                            releaseInfo = releaseInfo,
+                            onDismissRequest = { viewModel.hideUpdateDialog() },
+                            onDownloadClick = { windowRepository.openUrl(releaseInfo.asset) },
+                        )
+                    }
+                    is ReleaseInfo.UpToDate -> {}
+                    else -> {}
+
+                }
+
+            }
         }
     }
 }
