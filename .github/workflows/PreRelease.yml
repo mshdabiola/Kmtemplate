@@ -197,7 +197,7 @@ jobs:
           ./gradlew setPreReleaseVersionTag -PnewVersionName=${{ github.ref_name }}
 
       - name: Build web app
-        run: ./gradlew wasmJsBrowserDistribution
+        run: ./gradlew app:wasmJsBrowserDistribution
 
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4.7.3

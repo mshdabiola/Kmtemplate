@@ -332,4 +332,4 @@ jobs:
         run: ./gradlew kotlinUpgradeYarnLock
 
       - name: Build wasmJsBrowserDevelopmentWebpack
-        run: ./gradlew wasmJsBrowserDevelopmentWebpack
+        run: ./gradlew app:wasmJsBrowserDevelopmentWebpack
