@@ -87,14 +87,19 @@ fun NavGraphBuilder.settingScreen(
                         )
                     }
                     is ReleaseInfo.UpToDate -> {
-                        LaunchedEffect(Unit) {
+                        LaunchedEffect(releaseInfo) {
+                            viewModel.hideUpdateDialog()
+
                             setNotification(
                                 Notification.Message(message = "You are up to date")
                             )
                         }
                     }
-                    else -> {
-                        LaunchedEffect(Unit) {
+                    is ReleaseInfo.Error  -> {
+                        LaunchedEffect(releaseInfo) {
+                            println("Error checking for updates")
+                            println(releaseInfo.message)
+                            viewModel.hideUpdateDialog()
                             setNotification(
                                 Notification.Message(
                                     duration = SnackbarDuration.Long,

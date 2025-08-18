@@ -65,16 +65,14 @@ fun SettingScreen(
                     settingsMap = settingsBySegment,
                     onDrawer = onDrawer,
                     onSettingClick = {
-                        if (it == SettingNav.ReportBug) {
-                            openUrl("https://github.com/mshdabiola/Kmtemplate/issues")
-                        } else {
+
                             coroutineScope.launch {
                                 navigator.navigateTo(
                                     pane = ListDetailPaneScaffoldRole.Detail,
                                     contentKey = it,
                                 )
                             }
-                        }
+
                     },
                 )
             }
