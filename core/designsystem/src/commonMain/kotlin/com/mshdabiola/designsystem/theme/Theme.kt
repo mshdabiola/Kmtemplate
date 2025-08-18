@@ -255,6 +255,97 @@ private val highContrastDarkColorScheme = darkColorScheme(
     surfaceContainerHighest = surfaceContainerHighestDarkHighContrast,
 )
 
+
+val extendedLight = ExtendedColorScheme(
+    success = ColorFamily(
+        successLight,
+        onSuccessLight,
+        successContainerLight,
+        onSuccessContainerLight,
+    ),
+    warning = ColorFamily(
+        warningLight,
+        onWarningLight,
+        warningContainerLight,
+        onWarningContainerLight,
+    ),
+)
+
+val extendedDark = ExtendedColorScheme(
+    success = ColorFamily(
+        successDark,
+        onSuccessDark,
+        successContainerDark,
+        onSuccessContainerDark,
+    ),
+    warning = ColorFamily(
+        warningDark,
+        onWarningDark,
+        warningContainerDark,
+        onWarningContainerDark,
+    ),
+)
+
+val extendedLightMediumContrast = ExtendedColorScheme(
+    success = ColorFamily(
+        successLightMediumContrast,
+        onSuccessLightMediumContrast,
+        successContainerLightMediumContrast,
+        onSuccessContainerLightMediumContrast,
+    ),
+    warning = ColorFamily(
+        warningLightMediumContrast,
+        onWarningLightMediumContrast,
+        warningContainerLightMediumContrast,
+        onWarningContainerLightMediumContrast,
+    ),
+)
+
+val extendedLightHighContrast = ExtendedColorScheme(
+    success = ColorFamily(
+        successLightHighContrast,
+        onSuccessLightHighContrast,
+        successContainerLightHighContrast,
+        onSuccessContainerLightHighContrast,
+    ),
+    warning = ColorFamily(
+        warningLightHighContrast,
+        onWarningLightHighContrast,
+        warningContainerLightHighContrast,
+        onWarningContainerLightHighContrast,
+    ),
+)
+
+val extendedDarkMediumContrast = ExtendedColorScheme(
+    success = ColorFamily(
+        successDarkMediumContrast,
+        onSuccessDarkMediumContrast,
+        successContainerDarkMediumContrast,
+        onSuccessContainerDarkMediumContrast,
+    ),
+    warning = ColorFamily(
+        warningDarkMediumContrast,
+        onWarningDarkMediumContrast,
+        warningContainerDarkMediumContrast,
+        onWarningContainerDarkMediumContrast,
+    ),
+)
+
+val extendedDarkHighContrast = ExtendedColorScheme(
+    success = ColorFamily(
+        successDarkHighContrast,
+        onSuccessDarkHighContrast,
+        successContainerDarkHighContrast,
+        onSuccessContainerDarkHighContrast,
+    ),
+    warning = ColorFamily(
+        warningDarkHighContrast,
+        onWarningDarkHighContrast,
+        warningContainerDarkHighContrast,
+        onWarningContainerDarkHighContrast,
+    ),
+)
+
 @Immutable
 data class ColorFamily(
     val color: Color,
@@ -270,6 +361,8 @@ val unspecified_scheme = ColorFamily(
     Color.Unspecified,
 )
 
+var extendedColorScheme: ExtendedColorScheme = extendedLight
+
 @Composable
 fun KmtTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
@@ -277,7 +370,19 @@ fun KmtTheme(
     disableDynamicTheming: Boolean = true,
     content: @Composable () -> Unit,
 ) {
-//    extendedColorScheme = if (darkTheme) extendedDark else extendedLight
+    extendedColorScheme =
+        when {
+            !disableDynamicTheming && supportsDynamicTheming() -> {
+                if (darkTheme) extendedDark else extendedLight
+            }
+
+            else -> when (contrast) {
+                0 -> if (darkTheme) extendedDark else extendedLight
+                1 -> if (darkTheme) extendedDarkMediumContrast else extendedLightMediumContrast
+                else -> if (darkTheme) extendedDarkHighContrast else extendedLightHighContrast
+            }
+        }
+
     val colorScheme =
         when {
             !disableDynamicTheming && supportsDynamicTheming() -> {
