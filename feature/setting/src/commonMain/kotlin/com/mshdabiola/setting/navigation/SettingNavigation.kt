@@ -18,8 +18,6 @@ package com.mshdabiola.setting.navigation
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
@@ -30,6 +28,8 @@ import androidx.navigation.navOptions
 import com.mshdabiola.designsystem.strings.KmtStrings
 import com.mshdabiola.model.Notification
 import com.mshdabiola.model.ReleaseInfo
+import com.mshdabiola.model.SnackbarDuration
+import com.mshdabiola.model.Type
 import com.mshdabiola.setting.SettingScreen
 import com.mshdabiola.setting.SettingViewModel
 import com.mshdabiola.setting.WindowRepository
@@ -89,14 +89,17 @@ fun NavGraphBuilder.settingScreen(
                     is ReleaseInfo.UpToDate -> {
                         LaunchedEffect(Unit) {
                             setNotification(
-                                Notification.Message("You are up to date")
+                                Notification.Message(message = "You are up to date")
                             )
                         }
                     }
                     else -> {
                         LaunchedEffect(Unit) {
                             setNotification(
-                                Notification.Message("Error checking for updates")
+                                Notification.Message(
+                                    duration = SnackbarDuration.Long,
+                                    type = Type.Error,
+                                    message = "Error checking for updates")
                             )
                         }
                     }
