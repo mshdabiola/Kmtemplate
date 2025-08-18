@@ -39,7 +39,6 @@ import com.mshdabiola.model.Type
 import com.mshdabiola.setting.navigation.Setting
 import com.mshdabiola.setting.navigation.navigateToSetting
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
@@ -79,7 +78,6 @@ sealed class KmtAppState(
 ) {
 
     var notificationType: Type = Type.Default
-    var currentNotificationJob : Job?=null
     abstract val onDrawer: (() -> Unit)?
 
     open fun navigateTopRoute(any: Any) {
@@ -101,8 +99,7 @@ sealed class KmtAppState(
             SnackbarDuration.Long -> androidx.compose.material3.SnackbarDuration.Long
             SnackbarDuration.Indefinite -> androidx.compose.material3.SnackbarDuration.Indefinite
         }
-
-      currentNotificationJob=  coroutineScope.launch {
+        coroutineScope.launch {
             when (notification) {
                 is Notification.Message ->
                     snackbarHostState.showSnackbar(
@@ -124,6 +121,17 @@ sealed class KmtAppState(
             }
         }
 
+    }
+
+    fun dismissIndefiniteSnackbar() {
+        if (snackbarHostState.currentSnackbarData != null) {
+            val snackbarData = snackbarHostState.currentSnackbarData!!
+            if (snackbarData.visuals.duration == androidx.compose.material3.SnackbarDuration.Indefinite) {
+                snackbarData.dismiss()
+
+            }
+
+        }
     }
 }
 
