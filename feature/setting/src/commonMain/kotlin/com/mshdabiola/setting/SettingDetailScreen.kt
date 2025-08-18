@@ -37,6 +37,8 @@ import com.mshdabiola.setting.detailscreen.AboutScreen
 import com.mshdabiola.setting.detailscreen.AppearanceScreen
 import com.mshdabiola.setting.detailscreen.FaqScreen
 import com.mshdabiola.setting.detailscreen.LanguageScreen
+import com.mshdabiola.setting.detailscreen.ReportBugScreen
+import com.mshdabiola.setting.detailscreen.UpdateScreen
 import kmtemplate.feature.setting.generated.resources.Res
 import kmtemplate.feature.setting.generated.resources.general
 import kmtemplate.feature.setting.generated.resources.support
@@ -55,6 +57,9 @@ internal fun SettingDetailScreen(
     onLanguageChange: (String) -> Unit = {},
     openUrl: (String) -> Unit = {},
     openEmail: (String, String, String) -> Unit = { _, _, _ -> },
+    onSetUpdateDialog: (Boolean) -> Unit = {},
+    onSetUpdateFromPreRelease: (Boolean) -> Unit = {},
+    onCheckForUpdate: () -> Unit = {},
 ) {
     val generalArrayString = stringArrayResource(Res.array.general)
     val supportArrayString = stringArrayResource(Res.array.support)
@@ -129,8 +134,20 @@ internal fun SettingDetailScreen(
                     )
                 }
 
-                SettingNav.Issue -> {
-                    /* TODO: Implement Issue Screen */
+                SettingNav.ReportBug -> {
+                    ReportBugScreen (
+                        modifier = Modifier.fillMaxSize(),
+                        openEmail = openEmail)
+                }
+                SettingNav.Update -> {
+                    UpdateScreen(
+                        modifier = Modifier.fillMaxSize(),
+                        userSettings = settingState.userSettings,
+                        onSetUpdateDialog = onSetUpdateDialog,
+                        onSetUpdateFromPreRelease = onSetUpdateFromPreRelease,
+                        onCheckForUpdate = onCheckForUpdate
+
+                    )
                 }
             }
         }

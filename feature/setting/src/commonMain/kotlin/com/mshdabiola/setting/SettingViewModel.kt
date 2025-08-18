@@ -98,4 +98,8 @@ class SettingViewModel(
 
         }
     }
+
+    fun hideUpdateDialog() {
+        releaseInfoFlow.value = null
+    }
 }
