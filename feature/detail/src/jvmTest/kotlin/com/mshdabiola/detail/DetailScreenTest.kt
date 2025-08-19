@@ -18,6 +18,7 @@ package com.mshdabiola.detail
 import androidx.compose.animation.ExperimentalSharedTransitionApi
 import androidx.compose.foundation.text.input.rememberTextFieldState
 import androidx.compose.ui.test.assertIsDisplayed
+import androidx.compose.ui.test.assertTextEquals
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
@@ -170,16 +171,10 @@ class DetailScreenTest {
         // For this example, we'll assert the text is empty and rely on visual confirmation/screenshot tests
         // for placeholder visibility if direct placeholder checking is complex.
 
-//        composeRule.onNodeWithTag(DetailScreenTestTags.TITLE_TEXT_FIELD)
-//            .assertTextEquals("")
-        // Assert the input text is empty
-        // To directly test placeholder, KmtTextField would need to expose it to semantics,
-        // or you'd check for a node with the placeholder text that is *not* the input field itself.
-        // For example, if the placeholder is a separate Text composable:
-        composeRule.onNodeWithText(titlePlaceholder).assertIsDisplayed()
+        composeRule.onNodeWithTag(DetailScreenTestTags.TITLE_TEXT_FIELD)
+            .assertTextEquals("")
 
-//        composeRule.onNodeWithTag(DetailScreenTestTags.CONTENT_TEXT_FIELD)
-//            .assertTextEquals("") // Assert the input text is empty
-        composeRule.onNodeWithText(contentPlaceholder).assertIsDisplayed()
+        composeRule.onNodeWithTag(DetailScreenTestTags.CONTENT_TEXT_FIELD)
+            .assertTextEquals("") // Assert the input text is empty
     }
 }

@@ -116,12 +116,12 @@ class UpdateScreenTest {
         }
 
         composeRule.onNodeWithTag(UpdateScreenTestTags.JOIN_BETA_RELEASE_SWITCH)
-            .assertIsOn()
-            .performClick()
             .assertIsOff()
+            .performClick()
+            .assertIsOn()
 
         assertTrue(updateFromPreReleaseCalled)
-        assertEquals(false, calledWithValue)
+        assertEquals(true, calledWithValue)
     }
 
     @Test

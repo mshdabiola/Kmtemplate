@@ -17,6 +17,7 @@ package com.mshdabiola.detail.navigation
 
 import androidx.compose.animation.ExperimentalSharedTransitionApi
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
@@ -32,6 +33,8 @@ import com.mshdabiola.ui.LocalNavAnimatedContentScope
 import kmtemplate.feature.detail.generated.resources.Res
 import kmtemplate.feature.detail.generated.resources.detail_delete_action_text
 import kmtemplate.feature.detail.generated.resources.detail_delete_confirmation_message
+import kotlinx.coroutines.launch
+import org.jetbrains.compose.resources.getString
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.annotation.KoinExperimentalAPI
@@ -53,6 +56,7 @@ fun NavGraphBuilder.detailScreen(
     composable<Detail> { backStack ->
 
         val detail: Detail = backStack.toRoute()
+        val coroutineScope = rememberCoroutineScope()
 
 //        val viewModel= koinViewModel<DetailViewModel>{ parametersOf(id)}
         val viewModel: DetailViewModel =
@@ -73,18 +77,22 @@ fun NavGraphBuilder.detailScreen(
                 detail = detail,
                 onBack = onBack,
                 onDelete = {
-                    setNotification(
-                        Notification.MessageWithAction(
-                            type = Type.Warning,
-                            duration = SnackbarDuration.Indefinite,
-                            message = stringResource(Res.string.detail_delete_confirmation_message),
-                            action = stringResource(Res.string.detail_delete_action_text),
-                            actionCallback = {
-                                viewModel.onDelete()
-                                onBack()
-                            },
-                        ),
-                    )
+                    coroutineScope.launch {
+                        setNotification(
+                            Notification.MessageWithAction(
+                                type = Type.Warning,
+                                duration = SnackbarDuration.Indefinite,
+                                message = getString(Res.string.detail_delete_confirmation_message),
+                                action = getString(Res.string.detail_delete_action_text),
+                                actionCallback = {
+                                    viewModel.onDelete()
+                                    onBack()
+                                },
+                            ),
+                        )
+                    }
+
+
                 },
 
             )
