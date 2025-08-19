@@ -255,7 +255,6 @@ private val highContrastDarkColorScheme = darkColorScheme(
     surfaceContainerHighest = surfaceContainerHighestDarkHighContrast,
 )
 
-
 val extendedLight = ExtendedColorScheme(
     success = ColorFamily(
         successLight,
