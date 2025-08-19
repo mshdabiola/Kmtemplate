@@ -55,6 +55,16 @@
     <string name="faq_preview_shared_code_answer_collapsed">Jaettu koodi sijaitsee tyypillisesti nimetyissä moduuleissa...</string>
     <string name="faq_preview_shared_code_answer_expanded">Jaettu koodi sijaitsee tyypillisesti `commonMain`-nimisissä moduuleissa...</string>
 
+    <string name="report_bug_title_label">Otsikko</string>
+    <string name="report_bug_title_placeholder">Kuvaile lyhyesti löytämäsi virhe</string>
+    <string name="report_bug_description_label">Kuvaus</string>
+    <string name="report_bug_description_placeholder">Kuvaile ongelma yksityiskohtaisesti</string>
+    <string name="report_bug_submit_email_button">Lähetä sähköpostitse</string>
+    <string name="report_bug_submit_github_button">Ilmoita virheestä GitHubissa</string>
+    <string name="report_bug_email_subject_format">Virheraportti sovelluksesta %1$s: %2$s</string>
+    <string name="report_bug_contact_email">mshdabiola@gmail.com</string>
+    <string name="report_bug_github_url">https://github.com/mshdabiola/Kmtemplate/issues</string>
+
     <string-array name="segment">
         <item>Yleistä</item>
         <item>Tuki</item>
