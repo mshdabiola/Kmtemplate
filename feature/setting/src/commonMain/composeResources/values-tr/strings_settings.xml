@@ -70,6 +70,9 @@
     <string name="update_screen_join_beta_release_text">Beta sürümüne katıl</string>
     <string name="update_screen_check_for_update_button">Güncellemeleri kontrol et</string>
 
+    <string name="notification_message_up_to_date">Güncelsiniz</string>
+    <string name="notification_message_error_checking_update">Güncellemeler kontrol edilirken hata oluştu</string>
+
     <string-array name="segment">
         <item>Genel</item>
         <item>Destek</item>

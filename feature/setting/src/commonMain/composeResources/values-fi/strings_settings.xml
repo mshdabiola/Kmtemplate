@@ -70,6 +70,9 @@
     <string name="update_screen_join_beta_release_text">Liity beta-julkaisuun</string>
     <string name="update_screen_check_for_update_button">Tarkista päivitykset</string>
 
+    <string name="notification_message_up_to_date">Olet ajan tasalla</string>
+    <string name="notification_message_error_checking_update">Virhe päivityksiä tarkistettaessa</string>
+
     <string-array name="segment">
         <item>Yleistä</item>
         <item>Tuki</item>

@@ -70,6 +70,9 @@
     <string name="update_screen_join_beta_release_text">Tham gia bản phát hành beta</string>
     <string name="update_screen_check_for_update_button">Kiểm tra cập nhật</string>
 
+    <string name="notification_message_up_to_date">Bạn đã cập nhật</string>
+    <string name="notification_message_error_checking_update">Lỗi kiểm tra cập nhật</string>
+
     <string-array name="segment">
         <item>Chung</item>
         <item>Hỗ trợ</item>

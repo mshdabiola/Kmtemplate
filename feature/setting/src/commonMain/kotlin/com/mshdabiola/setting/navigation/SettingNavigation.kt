@@ -35,6 +35,11 @@ import com.mshdabiola.setting.SettingViewModel
 import com.mshdabiola.setting.WindowRepository
 import com.mshdabiola.ui.LocalNavAnimatedContentScope
 import com.mshdabiola.ui.ReleaseUpdateDialog
+import kmtemplate.feature.setting.generated.resources.Res
+import kmtemplate.feature.setting.generated.resources.notification_message_error_checking_update
+import kmtemplate.feature.setting.generated.resources.notification_message_up_to_date
+import org.jetbrains.compose.resources.getString
+import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.annotation.KoinExperimentalAPI
 
@@ -91,20 +96,21 @@ fun NavGraphBuilder.settingScreen(
                             viewModel.hideUpdateDialog()
 
                             setNotification(
-                                Notification.Message(message = "You are up to date"),
+                                Notification.Message(message = getString(
+                                    Res.string.notification_message_up_to_date)),
                             )
                         }
                     }
                     is ReleaseInfo.Error -> {
                         LaunchedEffect(releaseInfo) {
-                            println("Error checking for updates")
-                            println(releaseInfo.message)
+
                             viewModel.hideUpdateDialog()
                             setNotification(
                                 Notification.Message(
                                     duration = SnackbarDuration.Long,
                                     type = Type.Error,
-                                    message = "Error checking for updates",
+                                    message = getString(
+                                        Res.string.notification_message_error_checking_update),
                                 ),
                             )
                         }

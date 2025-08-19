@@ -70,6 +70,9 @@
     <string name="update_screen_join_beta_release_text">Beta-Release beitreten</string>
     <string name="update_screen_check_for_update_button">Nach Updates suchen</string>
 
+    <string name="notification_message_up_to_date">Sie sind auf dem neuesten Stand</string>
+    <string name="notification_message_error_checking_update">Fehler beim Prüfen auf Updates</string>
+
     <string-array name="segment">
         <item>Allgemein</item>
         <item>Support</item>
