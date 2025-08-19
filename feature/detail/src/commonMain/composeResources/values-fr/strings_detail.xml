@@ -20,4 +20,6 @@
     <string name="detail_back_icon_content_description">retour</string>
     <string name="detail_title_placeholder">Titre</string>
     <string name="detail_content_placeholder">contenu</string>
+    <string name="detail_delete_confirmation_message">Êtes-vous sûr de vouloir supprimer cette note ?</string>
+    <string name="detail_delete_action_text">Supprimer</string>
 </resources>

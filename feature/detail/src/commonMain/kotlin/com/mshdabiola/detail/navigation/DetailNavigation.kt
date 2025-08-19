@@ -19,7 +19,6 @@ import androidx.compose.animation.ExperimentalSharedTransitionApi
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
@@ -30,6 +29,10 @@ import com.mshdabiola.model.Notification
 import com.mshdabiola.model.SnackbarDuration
 import com.mshdabiola.model.Type
 import com.mshdabiola.ui.LocalNavAnimatedContentScope
+import kmtemplate.feature.detail.generated.resources.Res
+import kmtemplate.feature.detail.generated.resources.detail_delete_action_text
+import kmtemplate.feature.detail.generated.resources.detail_delete_confirmation_message
+import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.annotation.KoinExperimentalAPI
 import org.koin.core.parameter.parameterSetOf
@@ -74,8 +77,8 @@ fun NavGraphBuilder.detailScreen(
                         Notification.MessageWithAction(
                             type = Type.Warning,
                             duration = SnackbarDuration.Indefinite,
-                            message = "Are you sure you want to delete this note?",
-                            action = "Delete",
+                            message = stringResource(Res.string.detail_delete_confirmation_message),
+                            action = stringResource(Res.string.detail_delete_action_text),
                             actionCallback = {
                                 viewModel.onDelete()
                                 onBack()
