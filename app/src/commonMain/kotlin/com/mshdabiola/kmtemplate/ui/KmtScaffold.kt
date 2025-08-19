@@ -419,7 +419,6 @@ fun DrawerContent(
                                 appState.onDrawerToggle()
                             }
                         }
-
                     },
                 )
             }

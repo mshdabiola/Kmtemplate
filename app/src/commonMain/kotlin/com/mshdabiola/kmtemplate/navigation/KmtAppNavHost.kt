@@ -36,7 +36,7 @@ fun KmtNavHost(
     modifier: Modifier = Modifier,
 ) {
     val navController = appState.navController
-    val onDrawer = if (appState is Compact){
+    val onDrawer = if (appState is Compact) {
         {
             appState.coroutineScope.launch {
                 appState.drawerState.open()
@@ -54,7 +54,7 @@ fun KmtNavHost(
     ) {
         mainScreen(
             modifier = Modifier,
-            onDrawer =onDrawer,
+            onDrawer = onDrawer,
             navigateToDetail = { navController.navigateToDetail(Detail(it)) },
         )
         detailScreen(
@@ -67,7 +67,7 @@ fun KmtNavHost(
         )
         settingScreen(
             modifier = Modifier,
-            onDrawer =onDrawer,
+            onDrawer = onDrawer,
             setNotification = appState::onNotification,
         )
     }
