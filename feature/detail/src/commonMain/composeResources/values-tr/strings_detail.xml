@@ -20,4 +20,6 @@
     <string name="detail_back_icon_content_description">geri</string>
     <string name="detail_title_placeholder">Başlık</string>
     <string name="detail_content_placeholder">içerik</string>
+    <string name="detail_delete_confirmation_message">Bu notu silmek istediğinizden emin misiniz?</string>
+    <string name="detail_delete_action_text">Sil</string>
 </resources>
