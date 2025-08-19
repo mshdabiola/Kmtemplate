@@ -135,9 +135,10 @@ internal fun SettingDetailScreen(
                 }
 
                 SettingNav.ReportBug -> {
-                    ReportBugScreen (
+                    ReportBugScreen(
                         modifier = Modifier.fillMaxSize(),
-                        openEmail = openEmail)
+                        openEmail = openEmail,
+                    )
                 }
                 SettingNav.Update -> {
                     UpdateScreen(
@@ -145,7 +146,7 @@ internal fun SettingDetailScreen(
                         userSettings = settingState.userSettings,
                         onSetUpdateDialog = onSetUpdateDialog,
                         onSetUpdateFromPreRelease = onSetUpdateFromPreRelease,
-                        onCheckForUpdate = onCheckForUpdate
+                        onCheckForUpdate = onCheckForUpdate,
 
                     )
                 }

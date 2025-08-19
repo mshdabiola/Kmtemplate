@@ -45,7 +45,7 @@ fun NavController.navigateToDetail(detail: Detail) {
 fun NavGraphBuilder.detailScreen(
     modifier: Modifier = Modifier,
     onBack: () -> Unit,
-    setNotification: (Notification)-> Unit
+    setNotification: (Notification) -> Unit,
 ) {
     composable<Detail> { backStack ->
 
@@ -79,8 +79,8 @@ fun NavGraphBuilder.detailScreen(
                             actionCallback = {
                                 viewModel.onDelete()
                                 onBack()
-                            }
-                        )
+                            },
+                        ),
                     )
                 },
 

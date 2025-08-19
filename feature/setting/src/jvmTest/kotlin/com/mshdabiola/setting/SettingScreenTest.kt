@@ -41,9 +41,10 @@ class SettingScreenTest {
 
     private val initialSettingState = SettingState(
         userSettings = UserSettings(
-        contrast = 0,
-        darkThemeConfig = DarkThemeConfig.FOLLOW_SYSTEM,
-    ))
+            contrast = 0,
+            darkThemeConfig = DarkThemeConfig.FOLLOW_SYSTEM,
+        ),
+    )
 
     // Expected titles for quick verification (adjust if your resource loading differs in test)
     // These should ideally come from your string resources in a real app for better maintenance

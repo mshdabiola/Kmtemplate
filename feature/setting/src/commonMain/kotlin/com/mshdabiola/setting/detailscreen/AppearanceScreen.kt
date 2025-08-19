@@ -52,7 +52,6 @@ import com.mshdabiola.designsystem.theme.KmtTheme // For Preview
 import com.mshdabiola.model.DarkThemeConfig
 import com.mshdabiola.model.UserSettings
 import com.mshdabiola.model.testtag.AppearanceScreenTestTags
-import com.mshdabiola.setting.SettingState
 import kmtemplate.feature.setting.generated.resources.Res
 import kmtemplate.feature.setting.generated.resources.appearance_background_title
 import kmtemplate.feature.setting.generated.resources.appearance_contrast_option_high_cd
