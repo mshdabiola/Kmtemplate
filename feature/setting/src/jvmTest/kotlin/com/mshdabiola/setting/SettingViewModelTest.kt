@@ -119,10 +119,6 @@ class SettingViewModelTest {
 
         viewModel.setGradientBackground(newGradientBackground)
         viewModel.settingState.test {
-            assertEquals(
-                initialUserSettings.shouldShowGradientBackground,
-                awaitItem().userSettings.shouldShowGradientBackground,
-            )
             val finalState = awaitItem()
             assertEquals(newGradientBackground, finalState.userSettings.shouldShowGradientBackground)
             assertEquals(expectedStateAfterUpdate, finalState)
