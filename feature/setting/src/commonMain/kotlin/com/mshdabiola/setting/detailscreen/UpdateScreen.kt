@@ -36,6 +36,11 @@ import androidx.compose.ui.unit.dp
 import com.mshdabiola.designsystem.component.KmtTextButton
 import com.mshdabiola.designsystem.theme.KmtTheme
 import com.mshdabiola.model.UserSettings
+import kmtemplate.feature.setting.generated.resources.Res
+import kmtemplate.feature.setting.generated.resources.update_screen_check_for_update_button
+import kmtemplate.feature.setting.generated.resources.update_screen_join_beta_release_text
+import kmtemplate.feature.setting.generated.resources.update_screen_show_update_dialog_text
+import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
@@ -63,7 +68,7 @@ fun UpdateScreen(
             verticalAlignment = Alignment.CenterVertically,
         ) {
             Text(
-                text = "Show Update Dialog",
+                text = stringResource(Res.string.update_screen_show_update_dialog_text),
                 modifier = Modifier.weight(1f),
                 style = MaterialTheme.typography.bodyLarge,
                 color = MaterialTheme.colorScheme.onSurface,
@@ -83,7 +88,7 @@ fun UpdateScreen(
             verticalAlignment = Alignment.CenterVertically,
         ) {
             Text(
-                text = "Join beta release",
+                text = stringResource(Res.string.update_screen_join_beta_release_text),
                 modifier = Modifier.weight(1f),
                 style = MaterialTheme.typography.bodyLarge,
                 color = MaterialTheme.colorScheme.onSurface,
@@ -100,7 +105,7 @@ fun UpdateScreen(
             modifier = Modifier.align(Alignment.CenterHorizontally),
             onClick = onCheckForUpdate,
         ) {
-            Text(text = "Check For Update")
+            Text(text = stringResource(Res.string.update_screen_check_for_update_button))
         }
     }
 }

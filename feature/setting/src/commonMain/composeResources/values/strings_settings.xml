@@ -73,6 +73,10 @@
     <string name="report_bug_contact_email">mshdabiola@gmail.com</string>
     <string name="report_bug_github_url">https://github.com/mshdabiola/Kmtemplate/issues</string>
 
+    <string name="update_screen_show_update_dialog_text">Show Update Dialog</string>
+    <string name="update_screen_join_beta_release_text">Join beta release</string>
+    <string name="update_screen_check_for_update_button">Check For Update</string>
+
     <string-array name="segment">
         <item>General</item>
         <item>Support</item>

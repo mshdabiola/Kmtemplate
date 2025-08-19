@@ -16,6 +16,7 @@
 -->
 <resources>
     <string name="screen_name">Cài đặt</string>
+    <string name="feature_update_screen_name">Cập nhật</string>
     <string name="version">Phiên bản</string>
     <string name="version_code">Mã phiên bản</string>
     <string name="last_update">Cập nhật lần cuối</string>
@@ -64,6 +65,10 @@
     <string name="report_bug_email_subject_format">Báo cáo lỗi của %1$s : %2$s</string>
     <string name="report_bug_contact_email">mshdabiola@gmail.com</string>
     <string name="report_bug_github_url">https://github.com/mshdabiola/Kmtemplate/issues</string>
+
+    <string name="update_screen_show_update_dialog_text">Hiển thị hộp thoại cập nhật</string>
+    <string name="update_screen_join_beta_release_text">Tham gia bản phát hành beta</string>
+    <string name="update_screen_check_for_update_button">Kiểm tra cập nhật</string>
 
     <string-array name="segment">
         <item>Chung</item>

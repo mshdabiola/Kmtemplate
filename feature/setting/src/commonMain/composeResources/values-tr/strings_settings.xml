@@ -16,6 +16,7 @@
 -->
 <resources>
     <string name="screen_name">Ayarlar</string>
+    <string name="feature_update_screen_name">Güncelle</string>
     <string name="version">Sürüm</string>
     <string name="version_code">Sürüm Kodu</string>
     <string name="last_update">Son Güncelleme</string>
@@ -64,6 +65,10 @@
     <string name="report_bug_email_subject_format">%1$s Hata Raporu: %2$s</string>
     <string name="report_bug_contact_email">mshdabiola@gmail.com</string>
     <string name="report_bug_github_url">https://github.com/mshdabiola/Kmtemplate/issues</string>
+
+    <string name="update_screen_show_update_dialog_text">Güncelleme iletişim kutusunu göster</string>
+    <string name="update_screen_join_beta_release_text">Beta sürümüne katıl</string>
+    <string name="update_screen_check_for_update_button">Güncellemeleri kontrol et</string>
 
     <string-array name="segment">
         <item>Genel</item>

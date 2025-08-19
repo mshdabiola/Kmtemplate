@@ -16,6 +16,7 @@
 -->
 <resources>
     <string name="screen_name">Ajustes</string>
+    <string name="feature_update_screen_name">Actualizar</string>
     <string name="version">Versión</string>
     <string name="version_code">Código de versión</string>
     <string name="last_update">Última actualización</string>
@@ -64,6 +65,10 @@
     <string name="report_bug_email_subject_format">Informe de error de %1$s: %2$s</string>
     <string name="report_bug_contact_email">mshdabiola@gmail.com</string>
     <string name="report_bug_github_url">https://github.com/mshdabiola/Kmtemplate/issues</string>
+
+    <string name="update_screen_show_update_dialog_text">Mostrar diálogo de actualización</string>
+    <string name="update_screen_join_beta_release_text">Unirse a la versión beta</string>
+    <string name="update_screen_check_for_update_button">Buscar actualizaciones</string>
 
     <string-array name="segment">
         <item>General</item>
