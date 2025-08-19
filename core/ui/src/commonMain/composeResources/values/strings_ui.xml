@@ -15,7 +15,8 @@
      limitations under the License.
 -->
 <resources>
-    <string name="release_update_dialog_title">New Update Available</string>
-    <string name="release_update_dialog_download_button">Download</string>
-    <string name="release_update_dialog_cancel_button">Cancel</string>
+    <string name="release_update_dialog_title">Update Available</string>
+    <string name="release_update_dialog_download_button">Update now</string>
+    <string name="release_update_dialog_cancel_button">Update Later</string>
+    <string name="release_update_dialog_body">Version %1$s is now available. This update includes performance improvement and bug fixes.</string>
 </resources>

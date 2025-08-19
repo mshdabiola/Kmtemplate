@@ -15,7 +15,8 @@
      limitations under the License.
 -->
 <resources>
-    <string name="release_update_dialog_title">Uusi päivitys saatavilla</string>
-    <string name="release_update_dialog_download_button">Lataa</string>
-    <string name="release_update_dialog_cancel_button">Peruuta</string>
+    <string name="release_update_dialog_title">Aggiornamento disponibile</string>
+    <string name="release_update_dialog_download_button">Aggiorna ora</string>
+    <string name="release_update_dialog_cancel_button">Aggiorna più tardi</string>
+    <string name="release_update_dialog_body">La versione %1$s è ora disponibile. Questo aggiornamento include miglioramenti delle prestazioni e correzioni di bug.</string>
 </resources>

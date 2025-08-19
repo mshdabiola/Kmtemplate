@@ -15,7 +15,8 @@
      limitations under the License.
 -->
 <resources>
-    <string name="release_update_dialog_title">Nova atualização disponível</string>
-    <string name="release_update_dialog_download_button">Baixar</string>
-    <string name="release_update_dialog_cancel_button">Cancelar</string>
+    <string name="release_update_dialog_title">Güncelleme Mevcut</string>
+    <string name="release_update_dialog_download_button">Şimdi Güncelle</string>
+    <string name="release_update_dialog_cancel_button">Daha Sonra Güncelle</string>
+    <string name="release_update_dialog_body">%1$s sürümü artık mevcut. Bu güncelleme performans iyileştirmeleri ve hata düzeltmeleri içermektedir.</string>
 </resources>
