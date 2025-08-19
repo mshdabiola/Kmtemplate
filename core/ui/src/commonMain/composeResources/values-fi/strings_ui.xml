@@ -15,7 +15,8 @@
      limitations under the License.
 -->
 <resources>
-    <string name="release_update_dialog_title">Nouvelle mise à jour disponible</string>
-    <string name="release_update_dialog_download_button">Télécharger</string>
-    <string name="release_update_dialog_cancel_button">Annuler</string>
+    <string name="release_update_dialog_title">Päivitys saatavilla</string>
+    <string name="release_update_dialog_download_button">Päivitä nyt</string>
+    <string name="release_update_dialog_cancel_button">Päivitä myöhemmin</string>
+    <string name="release_update_dialog_body">Versio %1$s on nyt saatavilla. Tämä päivitys sisältää suorituskykyparannuksia ja virheenkorjauksia.</string>
 </resources>

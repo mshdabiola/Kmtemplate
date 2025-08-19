@@ -15,7 +15,8 @@
      limitations under the License.
 -->
 <resources>
-    <string name="release_update_dialog_title">Nueva actualización disponible</string>
-    <string name="release_update_dialog_download_button">Descargar</string>
-    <string name="release_update_dialog_cancel_button">Cancelar</string>
+    <string name="release_update_dialog_title">Update verfügbar</string>
+    <string name="release_update_dialog_download_button">Jetzt aktualisieren</string>
+    <string name="release_update_dialog_cancel_button">Später aktualisieren</string>
+    <string name="release_update_dialog_body">Version %1$s ist jetzt verfügbar. Dieses Update enthält Leistungsverbesserungen und Fehlerbehebungen.</string>
 </resources>
