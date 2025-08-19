@@ -55,6 +55,16 @@
     <string name="faq_preview_shared_code_answer_collapsed">Paylaşılan kod genellikle şu adlı modüllerde bulunur...</string>
     <string name="faq_preview_shared_code_answer_expanded">Paylaşılan kod genellikle `commonMain` adlı modüllerde bulunur...</string>
 
+    <string name="report_bug_title_label">Başlık</string>
+    <string name="report_bug_title_placeholder">Bulduğunuz hatayı kısaca açıklayın</string>
+    <string name="report_bug_description_label">Açıklama</string>
+    <string name="report_bug_description_placeholder">Sorunu ayrıntılı olarak açıklayın</string>
+    <string name="report_bug_submit_email_button">E-posta ile Gönder</string>
+    <string name="report_bug_submit_github_button">GitHub'da Hata Bildir</string>
+    <string name="report_bug_email_subject_format">%1$s Hata Raporu: %2$s</string>
+    <string name="report_bug_contact_email">mshdabiola@gmail.com</string>
+    <string name="report_bug_github_url">https://github.com/mshdabiola/Kmtemplate/issues</string>
+
     <string-array name="segment">
         <item>Genel</item>
         <item>Destek</item>

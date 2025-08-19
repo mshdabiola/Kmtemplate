@@ -55,6 +55,16 @@
     <string name="faq_preview_shared_code_answer_collapsed">El código compartido se encuentra típicamente en módulos llamados...</string>
     <string name="faq_preview_shared_code_answer_expanded">El código compartido se encuentra típicamente en módulos llamados `commonMain`...</string>
 
+    <string name="report_bug_title_label">Título</string>
+    <string name="report_bug_title_placeholder">Describe brevemente el error que encontraste</string>
+    <string name="report_bug_description_label">Descripción</string>
+    <string name="report_bug_description_placeholder">Describe el problema en detalle</string>
+    <string name="report_bug_submit_email_button">Enviar por correo electrónico</string>
+    <string name="report_bug_submit_github_button">Informar error en GitHub</string>
+    <string name="report_bug_email_subject_format">Informe de error de %1$s: %2$s</string>
+    <string name="report_bug_contact_email">mshdabiola@gmail.com</string>
+    <string name="report_bug_github_url">https://github.com/mshdabiola/Kmtemplate/issues</string>
+
     <string-array name="segment">
         <item>General</item>
         <item>Soporte</item>

@@ -55,6 +55,16 @@
     <string name="faq_preview_shared_code_answer_collapsed">Freigegebener Code befindet sich typischerweise in Modulen namens...</string>
     <string name="faq_preview_shared_code_answer_expanded">Freigegebener Code befindet sich typischerweise in Modulen namens `commonMain`...</string>
 
+    <string name="report_bug_title_label">Titel</string>
+    <string name="report_bug_title_placeholder">Beschreiben Sie kurz den gefundenen Fehler</string>
+    <string name="report_bug_description_label">Beschreibung</string>
+    <string name="report_bug_description_placeholder">Beschreiben Sie das Problem detailliert</string>
+    <string name="report_bug_submit_email_button">Per E-Mail senden</string>
+    <string name="report_bug_submit_github_button">Fehler auf GitHub melden</string>
+    <string name="report_bug_email_subject_format">Fehlerbericht von %1$s: %2$s</string>
+    <string name="report_bug_contact_email">mshdabiola@gmail.com</string>
+    <string name="report_bug_github_url">https://github.com/mshdabiola/Kmtemplate/issues</string>
+
     <string-array name="segment">
         <item>Allgemein</item>
         <item>Support</item>
