@@ -63,6 +63,15 @@
     <string name="faq_preview_shared_code_answer_collapsed">Shared code is typically located in modules named...</string>
     <string name="faq_preview_shared_code_answer_expanded">Shared code is typically located in modules named `commonMain`...</string>
 
+    <string name="report_bug_title_label">Title</string>
+    <string name="report_bug_title_placeholder">Briefly describe the bug you found</string>
+    <string name="report_bug_description_label">Description</string>
+    <string name="report_bug_description_placeholder">Describe the problem in detail</string>
+    <string name="report_bug_submit_email_button">Submit via Email</string>
+    <string name="report_bug_submit_github_button">Report Bug on GitHub</string>
+    <string name="report_bug_email_subject_format">Bug Report of %1$s : %2$s</string>
+    <string name="report_bug_contact_email">mshdabiola@gmail.com</string>
+    <string name="report_bug_github_url">https://github.com/mshdabiola/Kmtemplate/issues</string>
 
     <string-array name="segment">
         <item>General</item>

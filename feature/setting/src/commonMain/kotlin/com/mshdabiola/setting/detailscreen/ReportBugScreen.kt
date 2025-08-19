@@ -29,6 +29,7 @@ import androidx.compose.foundation.text.input.rememberTextFieldState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
@@ -39,6 +40,17 @@ import com.mshdabiola.designsystem.component.KmtTextField
 import com.mshdabiola.designsystem.strings.KmtStrings
 import com.mshdabiola.designsystem.theme.KmtTheme
 import com.mshdabiola.model.testtag.ReportBugScreenTestTags
+import kmtemplate.feature.setting.generated.resources.Res
+import kmtemplate.feature.setting.generated.resources.report_bug_description_label
+import kmtemplate.feature.setting.generated.resources.report_bug_description_placeholder
+import kmtemplate.feature.setting.generated.resources.report_bug_email_subject_format
+import kmtemplate.feature.setting.generated.resources.report_bug_submit_email_button
+import kmtemplate.feature.setting.generated.resources.report_bug_submit_github_button
+import kmtemplate.feature.setting.generated.resources.report_bug_title_label
+import kmtemplate.feature.setting.generated.resources.report_bug_title_placeholder
+import kotlinx.coroutines.launch
+import org.jetbrains.compose.resources.getString
+import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 
@@ -59,15 +71,16 @@ fun ReportBugScreen(
     ) {
         val heading = rememberTextFieldState()
         val content = rememberTextFieldState()
-        val appName = KmtStrings.brand
+        val appName = KmtStrings.brand // Assuming KmtStrings.brand is already localized or a constant brand name
+        val coroutineScope= rememberCoroutineScope()
 
         KmtTextField(
             modifier = Modifier
                 .fillMaxWidth()
                 .testTag(ReportBugScreenTestTags.TITLE_TEXT_FIELD),
             state = heading,
-            label = "Title",
-            placeholder = "Briefly describe the bug you found",
+            label = stringResource(Res.string.report_bug_title_label),
+            placeholder = stringResource(Res.string.report_bug_title_placeholder),
             imeAction = ImeAction.Next,
             maxNum = TextFieldLineLimits.SingleLine,
         )
@@ -78,8 +91,8 @@ fun ReportBugScreen(
                 .fillMaxWidth()
                 .testTag(ReportBugScreenTestTags.DESCRIPTION_TEXT_FIELD),
             state = content,
-            label = "Description",
-            placeholder = "Describe the problem in detail",
+            label = stringResource(Res.string.report_bug_description_label),
+            placeholder = stringResource(Res.string.report_bug_description_placeholder),
             imeAction = ImeAction.Done,
 
         )
@@ -92,11 +105,15 @@ fun ReportBugScreen(
                 modifier = Modifier.testTag(ReportBugScreenTestTags.SUBMIT_EMAIL_BUTTON),
                 enabled = heading.text.isNotEmpty() && content.text.isNotEmpty(),
                 onClick = {
-                    val title = "Bug Report of $appName : ${heading.text}"
-                    openEmail("mshdabiola@gmail.com", title, content.text.toString())
+                    coroutineScope.launch {
+                        val emailSubject = getString(Res.string.report_bug_email_subject_format,
+                            appName, heading.text.toString())
+                        openEmail("mshdabiola@gmail.com", emailSubject, content.text.toString())
+                    }
+
                 },
             ) {
-                Text(text = "Submit via Email")
+                Text(text = stringResource(Res.string.report_bug_submit_email_button))
             }
             KmtButton(
                 modifier = Modifier.testTag(ReportBugScreenTestTags.SUBMIT_GITHUB_BUTTON),
@@ -104,7 +121,7 @@ fun ReportBugScreen(
 
                 onClick = { openUrl("https://github.com/mshdabiola/Kmtemplate/issues") },
             ) {
-                Text(text = "Report Bug on GitHub")
+                Text(text = stringResource(Res.string.report_bug_submit_github_button))
             }
         }
     }
