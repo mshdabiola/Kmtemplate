@@ -79,7 +79,6 @@ sealed class KmtAppState(
 
     var notificationType: Type = Type.Default
 
-
     open fun navigateTopRoute(any: Any) {
         when (any) {
             is Main -> navController.navigateToMain()
@@ -117,10 +116,8 @@ sealed class KmtAppState(
                         notification.actionCallback()
                     }
                 }
-
             }
         }
-
     }
 
     fun dismissIndefiniteSnackbar() {
@@ -128,9 +125,7 @@ sealed class KmtAppState(
             val snackbarData = snackbarHostState.currentSnackbarData!!
             if (snackbarData.visuals.duration == androidx.compose.material3.SnackbarDuration.Indefinite) {
                 snackbarData.dismiss()
-
             }
-
         }
     }
 }
@@ -143,19 +138,13 @@ data class Compact(
     val drawerState: DrawerState,
 ) : KmtAppState(navController, snackbarHostState, coroutineScope) {
 
-
-
-     suspend fun onDrawerToggle() {
+    suspend fun onDrawerToggle() {
         if (drawerState.isOpen) {
-                drawerState.close()
-
+            drawerState.close()
         } else {
-                drawerState.open()
-
+            drawerState.open()
         }
     }
-
-
 }
 
 data class Medium
@@ -167,8 +156,6 @@ constructor(
 
     val wideNavigationRailState: WideNavigationRailState,
 ) : KmtAppState(navController, snackbarHostState, coroutineScope) {
-
-
 
     @OptIn(ExperimentalMaterial3ExpressiveApi::class)
     fun expand() {
@@ -190,10 +177,7 @@ data class Expand(
     override val snackbarHostState: SnackbarHostState,
     override val coroutineScope: CoroutineScope,
 
-    ) : KmtAppState(navController, snackbarHostState, coroutineScope) {
-
-
-}
+) : KmtAppState(navController, snackbarHostState, coroutineScope)
 
 @Stable
 val WindowSizeClass.isWidthCompact: Boolean

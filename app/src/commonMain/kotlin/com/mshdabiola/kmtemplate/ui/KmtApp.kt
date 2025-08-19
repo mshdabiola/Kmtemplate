@@ -153,9 +153,10 @@ fun KmtApp(
                                         SnackbarHost(
                                             appState.snackbarHostState,
                                             snackbar = { snackbarData ->
-                                                KmtSnackerBar(appState.notificationType,snackbarData) }
+                                                KmtSnackerBar(appState.notificationType, snackbarData)
+                                            },
                                         )
-                                    }
+                                    },
                                 ) { padding ->
                                     Column(
                                         Modifier
@@ -233,14 +234,14 @@ fun getLanguage(uiState: MainActivityUiState): String =
     }
 
 @Composable
-fun KmtSnackerBar(type: Type,snackbarData: SnackbarData) {
-    val containerColor: Color =when (type) {
+fun KmtSnackerBar(type: Type, snackbarData: SnackbarData) {
+    val containerColor: Color = when (type) {
         Type.Default -> SnackbarDefaults.color
         Type.Error -> MaterialTheme.colorScheme.errorContainer
         Type.Success -> extendedColorScheme.success.colorContainer
         Type.Warning -> extendedColorScheme.warning.colorContainer
     }
-    val contentColor: Color =  when (type) {
+    val contentColor: Color = when (type) {
         Type.Default -> SnackbarDefaults.contentColor
         Type.Error -> MaterialTheme.colorScheme.onErrorContainer
         Type.Success -> extendedColorScheme.success.onColorContainer
@@ -259,21 +260,20 @@ fun KmtSnackerBar(type: Type,snackbarData: SnackbarData) {
         Type.Warning -> extendedColorScheme.warning.onColor
     }
 
-        Snackbar(
-            snackbarData = snackbarData,
-            containerColor = containerColor,
-            contentColor = contentColor,
-            actionColor = actionColor,
-            actionContentColor = actionContentColor,
-            dismissActionContentColor = actionContentColor,
-        )
-
+    Snackbar(
+        snackbarData = snackbarData,
+        containerColor = containerColor,
+        contentColor = contentColor,
+        actionColor = actionColor,
+        actionContentColor = actionContentColor,
+        dismissActionContentColor = actionContentColor,
+    )
 }
 
 @Preview
 @Composable
 fun KmtSnackerBarPreview() {
-   val visuals= object : SnackbarVisuals{
+    val visuals = object : SnackbarVisuals {
         override val message: String
             get() = "Snackbar message"
         override val actionLabel: String?
@@ -290,8 +290,7 @@ fun KmtSnackerBarPreview() {
                 override val visuals = visuals
                 override fun performAction() {}
                 override fun dismiss() {}
-            }
+            },
         )
     }
 }
-
