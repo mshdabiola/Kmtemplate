@@ -31,13 +31,16 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import com.mshdabiola.designsystem.component.KmtButton
 import com.mshdabiola.designsystem.component.KmtTextField
 import com.mshdabiola.designsystem.strings.KmtStrings
 import com.mshdabiola.designsystem.theme.KmtTheme
+import com.mshdabiola.model.testtag.ReportBugScreenTestTags
 import org.jetbrains.compose.ui.tooling.preview.Preview
+
 
 @Composable
 fun ReportBugScreen(
@@ -49,8 +52,9 @@ fun ReportBugScreen(
         modifier = modifier
             .fillMaxSize()
             .verticalScroll(rememberScrollState())
-            .padding(horizontal = 24.dp, vertical = 32.dp), // Tag for the root
-        verticalArrangement = Arrangement.Top, // Changed from SpacedBy to Top for more control with Spacers
+            .padding(horizontal = 24.dp, vertical = 32.dp)
+            .testTag(ReportBugScreenTestTags.ROOT_COLUMN),
+        verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.Start,
     ) {
         val heading = rememberTextFieldState()
@@ -58,7 +62,9 @@ fun ReportBugScreen(
         val appName = KmtStrings.brand
 
         KmtTextField(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .fillMaxWidth()
+                .testTag(ReportBugScreenTestTags.TITLE_TEXT_FIELD),
             state = heading,
             label = "Title",
             placeholder = "Briefly describe the bug you found",
@@ -67,7 +73,10 @@ fun ReportBugScreen(
         )
         Spacer(modifier = Modifier.height(16.dp))
         KmtTextField(
-            modifier = Modifier.height(200.dp).fillMaxWidth(),
+            modifier = Modifier
+                .height(200.dp)
+                .fillMaxWidth()
+                .testTag(ReportBugScreenTestTags.DESCRIPTION_TEXT_FIELD),
             state = content,
             label = "Description",
             placeholder = "Describe the problem in detail",
@@ -80,6 +89,7 @@ fun ReportBugScreen(
             horizontalArrangement = Arrangement.SpaceAround,
         ) {
             KmtButton(
+                modifier = Modifier.testTag(ReportBugScreenTestTags.SUBMIT_EMAIL_BUTTON),
                 enabled = heading.text.isNotEmpty() && content.text.isNotEmpty(),
                 onClick = {
                     val title = "Bug Report of $appName : ${heading.text}"
@@ -89,6 +99,7 @@ fun ReportBugScreen(
                 Text(text = "Submit via Email")
             }
             KmtButton(
+                modifier = Modifier.testTag(ReportBugScreenTestTags.SUBMIT_GITHUB_BUTTON),
                 enabled = !(heading.text.isNotEmpty() && content.text.isNotEmpty()),
 
                 onClick = { openUrl("https://github.com/mshdabiola/Kmtemplate/issues") },
