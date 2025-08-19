@@ -22,6 +22,6 @@ data class UserSettings(
     val shouldHideOnboarding: Boolean = false,
     val shouldShowGradientBackground: Boolean = false,
     val language: String = "en-US",
-    val updateFromPreRelease: Boolean = true,
-    val showUpdateDialog: Boolean = true,
+    val updateFromPreRelease: Boolean = false,
+    val showUpdateDialog: Boolean = false,
 )
