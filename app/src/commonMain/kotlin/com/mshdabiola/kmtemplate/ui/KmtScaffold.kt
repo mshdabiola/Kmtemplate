@@ -86,6 +86,7 @@ import com.mshdabiola.model.testtag.KmtScaffoldTestTags
 import com.mshdabiola.setting.navigation.Setting
 import com.mshdabiola.ui.LocalSharedTransitionScope
 import com.mshdabiola.ui.SharedTransitionContainer
+import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.stringArrayResource
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
@@ -413,6 +414,12 @@ fun DrawerContent(
                     selected = appState.isInCurrentRoute(item.route),
                     onClick = {
                         appState.navigateTopRoute(item.route)
+                        if (appState is Compact) {
+                            appState.coroutineScope.launch {
+                                appState.onDrawerToggle()
+                            }
+                        }
+
                     },
                 )
             }
