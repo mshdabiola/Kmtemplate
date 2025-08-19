@@ -17,6 +17,7 @@
 <resources>
 
     <string name="screen_name">Settings</string>
+    <string name="feature_update_screen_name">Update</string>
     <string name="version">Version</string>
     <string name="version_code">Version Code</string>
     <string name="last_update">Last Update</string>
@@ -104,5 +105,8 @@
         <item>Light</item>
         <item>Dark</item>
     </string-array>
+
+    <string name="notification_message_up_to_date">You are up to date</string>
+    <string name="notification_message_error_checking_update">Error checking for updates</string>
 
 </resources>

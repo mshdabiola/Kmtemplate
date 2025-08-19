@@ -70,6 +70,9 @@
     <string name="update_screen_join_beta_release_text">Присоединиться к бета-версии</string>
     <string name="update_screen_check_for_update_button">Проверить обновления</string>
 
+    <string name="notification_message_up_to_date">Все обновлено</string>
+    <string name="notification_message_error_checking_update">Ошибка проверки обновлений</string>
+
     <string-array name="segment">
         <item>Общие</item>
         <item>Поддержка</item>
