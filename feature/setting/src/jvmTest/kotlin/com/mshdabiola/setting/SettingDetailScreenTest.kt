@@ -57,6 +57,7 @@ class SettingDetailScreenTest {
             SettingNav.ReportBug -> "Report an Issue" // Expected from supportArrayString[2]
             SettingNav.Language -> "Language" // Expected from generalArrayString[1]
             // Add other cases as needed
+            SettingNav.Update -> "Update"
         }
     }
 

@@ -204,7 +204,7 @@ class SettingViewModelTest {
 
     @Test
     fun `checkForUpdate success updates releaseInfo in state`() = runTest(mainDispatcherRule.testDispatcher) {
-        val testReleaseInfo = ReleaseInfo.Success("v1.0.0", "Release 1", "Body", "asset.apk")
+        val testReleaseInfo = ReleaseInfo.NewUpdate("v1.0.0", "Release 1", "Body", "asset.apk")
         networkRepository.setNextReleaseInfo(testReleaseInfo) // Configure fake repository
 
         val currentVersion = "0.9.0"
