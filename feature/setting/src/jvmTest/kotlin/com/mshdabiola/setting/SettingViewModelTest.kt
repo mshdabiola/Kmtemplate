@@ -41,18 +41,15 @@ class SettingViewModelTest {
     private lateinit var viewModel: SettingViewModel
     private lateinit var userDataRepository: FakeUserDataRepository
     private lateinit var networkRepository: FakeNetworkRepository // Assuming this exists
-    private lateinit var platform: Platform
 
     private val initialUserSettings = UserSettings()
-    private val testPlatform = Platform.Desktop("testOs", "1.0")
 
     @Before
     fun setUp() {
         userDataRepository = FakeUserDataRepository()
         userDataRepository.setFakeUserData(initialUserSettings)
         networkRepository = FakeNetworkRepository() // Assuming this can be instantiated
-        platform = testPlatform
-        viewModel = SettingViewModel(userDataRepository, networkRepository, platform)
+        viewModel = SettingViewModel(userDataRepository, networkRepository)
     }
 
     @Test
@@ -60,7 +57,6 @@ class SettingViewModelTest {
         val expectedInitialState = SettingState(
             userSettings = initialUserSettings,
             releaseInfo = null, // Initially no release info
-            platform = Platform.Desktop("desktop", "11"),
         )
 
         viewModel.settingState.test {
@@ -76,7 +72,6 @@ class SettingViewModelTest {
         val expectedStateAfterUpdate = SettingState(
             userSettings = updatedUserSettings,
             releaseInfo = null,
-            platform = testPlatform,
         )
         viewModel.setContrast(newContrast)
 
@@ -101,7 +96,6 @@ class SettingViewModelTest {
         val expectedStateAfterUpdate = SettingState(
             userSettings = updatedUserSettings,
             releaseInfo = null,
-            platform = testPlatform,
         )
         viewModel.setDarkThemeConfig(newDarkThemeConfig)
         viewModel.settingState.test {
@@ -121,7 +115,6 @@ class SettingViewModelTest {
         val expectedStateAfterUpdate = SettingState(
             userSettings = updatedUserSettings,
             releaseInfo = null,
-            platform = testPlatform,
         )
 
         viewModel.setGradientBackground(newGradientBackground)
@@ -145,7 +138,6 @@ class SettingViewModelTest {
         val expectedStateAfterUpdate = SettingState(
             userSettings = updatedUserSettings,
             releaseInfo = null,
-            platform = testPlatform,
         )
         viewModel.setLanguage(newLanguage)
 
@@ -167,7 +159,6 @@ class SettingViewModelTest {
         val expectedStateAfterUpdate = SettingState(
             userSettings = updatedUserSettings,
             releaseInfo = null,
-            platform = testPlatform,
         )
         viewModel.setUpdateFromPreRelease(newUpdateFromPreRelease)
 
@@ -188,7 +179,6 @@ class SettingViewModelTest {
         val expectedStateAfterUpdate = SettingState(
             userSettings = updatedUserSettings,
             releaseInfo = null,
-            platform = testPlatform,
         )
         viewModel.setShowDialog(newShowDialog)
 
@@ -213,7 +203,6 @@ class SettingViewModelTest {
         val expectedStateAfterUpdate = SettingState(
             userSettings = initialUserSettings, // User settings remain unchanged
             releaseInfo = testReleaseInfo,
-            platform = testPlatform,
         )
 
         viewModel.settingState.test {
@@ -238,7 +227,6 @@ class SettingViewModelTest {
         val expectedStateAfterUpdate = SettingState(
             userSettings = initialUserSettings, // User settings remain unchanged
             releaseInfo = testErrorReleaseInfo,
-            platform = testPlatform,
         )
 
         viewModel.settingState.test {

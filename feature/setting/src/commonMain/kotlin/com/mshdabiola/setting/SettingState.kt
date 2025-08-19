@@ -22,5 +22,4 @@ import com.mshdabiola.model.UserSettings
 data class SettingState(
     val userSettings: UserSettings = UserSettings(),
     val releaseInfo: ReleaseInfo? = null,
-    val platform: Platform = Platform.Desktop("desktop", "11"),
 )
