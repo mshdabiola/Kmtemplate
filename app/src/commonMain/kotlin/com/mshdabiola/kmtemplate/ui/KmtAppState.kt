@@ -78,7 +78,7 @@ sealed class KmtAppState(
 ) {
 
     var notificationType: Type = Type.Default
-    abstract val onDrawer: (() -> Unit)?
+
 
     open fun navigateTopRoute(any: Any) {
         when (any) {
@@ -143,23 +143,19 @@ data class Compact(
     val drawerState: DrawerState,
 ) : KmtAppState(navController, snackbarHostState, coroutineScope) {
 
-    override val onDrawer: (() -> Unit)?
-        get() = {
-            if (drawerState.isOpen) {
-                coroutineScope.launch {
-                    drawerState.close()
-                }
-            } else {
-                coroutineScope.launch {
-                    drawerState.open()
-                }
-            }
-        }
 
-    override fun navigateTopRoute(any: Any) {
-        super.navigateTopRoute(any)
-        onDrawer?.invoke()
+
+     suspend fun onDrawerToggle() {
+        if (drawerState.isOpen) {
+                drawerState.close()
+
+        } else {
+                drawerState.open()
+
+        }
     }
+
+
 }
 
 data class Medium
@@ -172,8 +168,7 @@ constructor(
     val wideNavigationRailState: WideNavigationRailState,
 ) : KmtAppState(navController, snackbarHostState, coroutineScope) {
 
-    override val onDrawer: (() -> Unit)?
-        get() = null
+
 
     @OptIn(ExperimentalMaterial3ExpressiveApi::class)
     fun expand() {
@@ -197,8 +192,7 @@ data class Expand(
 
     ) : KmtAppState(navController, snackbarHostState, coroutineScope) {
 
-    override val onDrawer: (() -> Unit)?
-        get() = null
+
 }
 
 @Stable
