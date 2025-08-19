@@ -32,10 +32,12 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 import com.mshdabiola.designsystem.component.KmtTextButton
 import com.mshdabiola.designsystem.theme.KmtTheme
 import com.mshdabiola.model.UserSettings
+import com.mshdabiola.model.testtag.UpdateScreenTestTags
 import kmtemplate.feature.setting.generated.resources.Res
 import kmtemplate.feature.setting.generated.resources.update_screen_check_for_update_button
 import kmtemplate.feature.setting.generated.resources.update_screen_join_beta_release_text
@@ -55,7 +57,8 @@ fun UpdateScreen(
         modifier = modifier
             .fillMaxSize()
             .verticalScroll(rememberScrollState())
-            .padding(horizontal = 24.dp, vertical = 32.dp),
+            .padding(horizontal = 24.dp, vertical = 32.dp)
+            .testTag(UpdateScreenTestTags.ROOT_COLUMN),
         verticalArrangement = Arrangement.spacedBy(16.dp, Alignment.Top),
         // Changed from SpacedBy to Top for more control with Spacers
         horizontalAlignment = Alignment.Start,
@@ -76,7 +79,7 @@ fun UpdateScreen(
             Switch(
                 checked = userSettings.showUpdateDialog,
                 onCheckedChange = { onSetUpdateDialog(it) },
-                modifier = Modifier,
+                modifier = Modifier.testTag(UpdateScreenTestTags.SHOW_UPDATE_DIALOG_SWITCH),
             )
         }
 
@@ -96,13 +99,15 @@ fun UpdateScreen(
             Switch(
                 checked = userSettings.updateFromPreRelease,
                 onCheckedChange = { onSetUpdateFromPreRelease(it) },
-                modifier = Modifier,
+                modifier = Modifier.testTag(UpdateScreenTestTags.JOIN_BETA_RELEASE_SWITCH),
             )
         }
         Spacer(modifier = Modifier.height(8.dp))
 
         KmtTextButton(
-            modifier = Modifier.align(Alignment.CenterHorizontally),
+            modifier = Modifier
+                .align(Alignment.CenterHorizontally)
+                .testTag(UpdateScreenTestTags.CHECK_FOR_UPDATE_BUTTON),
             onClick = onCheckForUpdate,
         ) {
             Text(text = stringResource(Res.string.update_screen_check_for_update_button))
