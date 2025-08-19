@@ -50,7 +50,7 @@ fun NavController.navigateToSetting(
 fun NavGraphBuilder.settingScreen(
     modifier: Modifier,
     onDrawer: (() -> Unit)?,
-    setNotification: (Notification)-> Unit
+    setNotification: (Notification) -> Unit,
 
 ) {
     composable<Setting> {
@@ -74,12 +74,12 @@ fun NavGraphBuilder.settingScreen(
                 openEmail = { email, subject, body -> windowRepository.openEmail(email, subject, body) },
                 onSetUpdateDialog = { viewModel.setShowDialog(it) },
                 onSetUpdateFromPreRelease = { viewModel.setUpdateFromPreRelease(it) },
-                onCheckForUpdate = {viewModel.checkForUpdate(version) },
+                onCheckForUpdate = { viewModel.checkForUpdate(version) },
             )
             val releaseInfo = settingState.value.releaseInfo
-            if (releaseInfo!=null){
-                when(releaseInfo){
-                    is ReleaseInfo.NewUpdate ->{
+            if (releaseInfo != null) {
+                when (releaseInfo) {
+                    is ReleaseInfo.NewUpdate -> {
                         ReleaseUpdateDialog(
                             releaseInfo = releaseInfo,
                             onDismissRequest = { viewModel.hideUpdateDialog() },
@@ -91,11 +91,11 @@ fun NavGraphBuilder.settingScreen(
                             viewModel.hideUpdateDialog()
 
                             setNotification(
-                                Notification.Message(message = "You are up to date")
+                                Notification.Message(message = "You are up to date"),
                             )
                         }
                     }
-                    is ReleaseInfo.Error  -> {
+                    is ReleaseInfo.Error -> {
                         LaunchedEffect(releaseInfo) {
                             println("Error checking for updates")
                             println(releaseInfo.message)
@@ -104,13 +104,12 @@ fun NavGraphBuilder.settingScreen(
                                 Notification.Message(
                                     duration = SnackbarDuration.Long,
                                     type = Type.Error,
-                                    message = "Error checking for updates")
+                                    message = "Error checking for updates",
+                                ),
                             )
                         }
                     }
-
                 }
-
             }
         }
     }

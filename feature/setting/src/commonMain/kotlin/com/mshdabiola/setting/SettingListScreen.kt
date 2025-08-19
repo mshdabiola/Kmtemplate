@@ -55,7 +55,7 @@ import org.jetbrains.compose.resources.stringResource
 enum class SettingNav(val segment: Int, val index: Int) {
     Appearance(0, 0),
     Language(0, 1),
-    Update(0,2),
+    Update(0, 2),
     ReportBug(1, 0),
     Faq(1, 1),
     About(1, 2),

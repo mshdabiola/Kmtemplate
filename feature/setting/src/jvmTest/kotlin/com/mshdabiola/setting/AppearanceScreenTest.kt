@@ -42,11 +42,10 @@ class AppearanceScreenTest {
     val composeRule = createComposeRule()
 
     private val initialSettingsState = UserSettings(
-            contrast = 0, // Low contrast (id=0)
-            darkThemeConfig = DarkThemeConfig.FOLLOW_SYSTEM,
-            shouldShowGradientBackground = true,
-        )
-
+        contrast = 0, // Low contrast (id=0)
+        darkThemeConfig = DarkThemeConfig.FOLLOW_SYSTEM,
+        shouldShowGradientBackground = true,
+    )
 
     @Test
     fun appearanceScreen_initialState_displaysCorrectly() {

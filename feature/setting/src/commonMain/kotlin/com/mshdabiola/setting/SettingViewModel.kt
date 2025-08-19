@@ -25,7 +25,6 @@ import com.mshdabiola.model.ReleaseInfo
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
@@ -39,14 +38,12 @@ class SettingViewModel(
     val settingState = combine(
         userDataRepository.userSettings,
         releaseInfoFlow,
-    )
-    { userSettings, releaseInfo ->
+    ) { userSettings, releaseInfo ->
         SettingState(
             userSettings = userSettings,
             releaseInfo = releaseInfo,
             platform = platform,
         )
-
     }
         .stateIn(
             scope = viewModelScope,
@@ -95,7 +92,6 @@ class SettingViewModel(
             val allowPreRelease = settingState.value.userSettings.updateFromPreRelease
             val releaseInfo = networkRepository.getLatestReleaseInfo(currentVersion, allowPreRelease)
             releaseInfoFlow.value = releaseInfo
-
         }
     }
 

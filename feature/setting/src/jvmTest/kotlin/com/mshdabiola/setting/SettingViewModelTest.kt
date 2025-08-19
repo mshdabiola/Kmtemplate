@@ -60,7 +60,7 @@ class SettingViewModelTest {
         val expectedInitialState = SettingState(
             userSettings = initialUserSettings,
             releaseInfo = null, // Initially no release info
-            platform =  Platform.Desktop("desktop", "11"),
+            platform = Platform.Desktop("desktop", "11"),
         )
 
         viewModel.settingState.test {
@@ -126,7 +126,10 @@ class SettingViewModelTest {
 
         viewModel.setGradientBackground(newGradientBackground)
         viewModel.settingState.test {
-             assertEquals(initialUserSettings.shouldShowGradientBackground, awaitItem().userSettings.shouldShowGradientBackground)
+            assertEquals(
+                initialUserSettings.shouldShowGradientBackground,
+                awaitItem().userSettings.shouldShowGradientBackground,
+            )
             val finalState = awaitItem()
             assertEquals(newGradientBackground, finalState.userSettings.shouldShowGradientBackground)
             assertEquals(expectedStateAfterUpdate, finalState)
@@ -215,7 +218,7 @@ class SettingViewModelTest {
 
         viewModel.settingState.test {
             // Initial state or state before releaseInfoFlow emits
-             assertNull(awaitItem().releaseInfo)
+            assertNull(awaitItem().releaseInfo)
 
             val finalState = awaitItem() // State after releaseInfoFlow emits
             assertEquals(testReleaseInfo, finalState.releaseInfo)

@@ -41,7 +41,8 @@ class SettingDetailScreenTest {
         userSettings = UserSettings(
             contrast = 0,
             darkThemeConfig = DarkThemeConfig.FOLLOW_SYSTEM,
-        ))
+        ),
+    )
 
     // Helper to get expected titles. In a real scenario with complex resource setup for tests,
     // you might predefine these or ensure stringArrayResource works as expected.

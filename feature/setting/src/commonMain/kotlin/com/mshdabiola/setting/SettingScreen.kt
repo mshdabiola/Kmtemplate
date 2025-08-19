@@ -65,14 +65,12 @@ fun SettingScreen(
                     settingsMap = settingsBySegment,
                     onDrawer = onDrawer,
                     onSettingClick = {
-
-                            coroutineScope.launch {
-                                navigator.navigateTo(
-                                    pane = ListDetailPaneScaffoldRole.Detail,
-                                    contentKey = it,
-                                )
-                            }
-
+                        coroutineScope.launch {
+                            navigator.navigateTo(
+                                pane = ListDetailPaneScaffoldRole.Detail,
+                                contentKey = it,
+                            )
+                        }
                     },
                 )
             }
