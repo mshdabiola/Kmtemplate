@@ -20,7 +20,6 @@ import androidx.lifecycle.viewModelScope
 import com.mshdabiola.data.repository.NetworkRepository
 import com.mshdabiola.data.repository.UserDataRepository
 import com.mshdabiola.model.DarkThemeConfig
-import com.mshdabiola.model.Platform
 import com.mshdabiola.model.ReleaseInfo
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted

@@ -17,7 +17,6 @@ package com.mshdabiola.setting
 
 import app.cash.turbine.test
 import com.mshdabiola.model.DarkThemeConfig
-import com.mshdabiola.model.Platform
 import com.mshdabiola.model.ReleaseInfo
 import com.mshdabiola.model.UserSettings
 import com.mshdabiola.testing.fake.repository.FakeNetworkRepository // Assuming this exists
@@ -253,7 +252,11 @@ class SettingViewModelTest {
             // emits multiple times before the network operation completes.
             // For truly robust testing of complex combine scenarios, awaitItemMatching or specific predicate
             // with a timeout is usually best. However, this check is more robust than a fixed skip.
-            assertEquals(testReleaseInfo, currentState.releaseInfo, "ReleaseInfo should be populated by checkForUpdate before hiding.")
+            assertEquals(
+                testReleaseInfo,
+                currentState.releaseInfo,
+                "ReleaseInfo should be populated by checkForUpdate before hiding.",
+            )
 
             // 2. Call hideUpdateDialog
             viewModel.hideUpdateDialog()

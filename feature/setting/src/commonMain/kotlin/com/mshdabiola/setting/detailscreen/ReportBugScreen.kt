@@ -53,7 +53,6 @@ import org.jetbrains.compose.resources.getString
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
-
 @Composable
 fun ReportBugScreen(
     modifier: Modifier = Modifier,
@@ -72,7 +71,7 @@ fun ReportBugScreen(
         val heading = rememberTextFieldState()
         val content = rememberTextFieldState()
         val appName = KmtStrings.brand // Assuming KmtStrings.brand is already localized or a constant brand name
-        val coroutineScope= rememberCoroutineScope()
+        val coroutineScope = rememberCoroutineScope()
 
         KmtTextField(
             modifier = Modifier
@@ -106,11 +105,13 @@ fun ReportBugScreen(
                 enabled = heading.text.isNotEmpty() && content.text.isNotEmpty(),
                 onClick = {
                     coroutineScope.launch {
-                        val emailSubject = getString(Res.string.report_bug_email_subject_format,
-                            appName, heading.text.toString())
+                        val emailSubject = getString(
+                            Res.string.report_bug_email_subject_format,
+                            appName,
+                            heading.text.toString(),
+                        )
                         openEmail("mshdabiola@gmail.com", emailSubject, content.text.toString())
                     }
-
                 },
             ) {
                 Text(text = stringResource(Res.string.report_bug_submit_email_button))

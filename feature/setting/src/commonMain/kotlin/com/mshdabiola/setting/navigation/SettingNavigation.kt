@@ -39,7 +39,6 @@ import kmtemplate.feature.setting.generated.resources.Res
 import kmtemplate.feature.setting.generated.resources.notification_message_error_checking_update
 import kmtemplate.feature.setting.generated.resources.notification_message_up_to_date
 import org.jetbrains.compose.resources.getString
-import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.annotation.KoinExperimentalAPI
 
@@ -96,21 +95,24 @@ fun NavGraphBuilder.settingScreen(
                             viewModel.hideUpdateDialog()
 
                             setNotification(
-                                Notification.Message(message = getString(
-                                    Res.string.notification_message_up_to_date)),
+                                Notification.Message(
+                                    message = getString(
+                                        Res.string.notification_message_up_to_date,
+                                    ),
+                                ),
                             )
                         }
                     }
                     is ReleaseInfo.Error -> {
                         LaunchedEffect(releaseInfo) {
-
                             viewModel.hideUpdateDialog()
                             setNotification(
                                 Notification.Message(
                                     duration = SnackbarDuration.Long,
                                     type = Type.Error,
                                     message = getString(
-                                        Res.string.notification_message_error_checking_update),
+                                        Res.string.notification_message_error_checking_update,
+                                    ),
                                 ),
                             )
                         }
