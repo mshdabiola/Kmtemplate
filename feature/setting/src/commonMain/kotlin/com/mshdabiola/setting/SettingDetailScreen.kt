@@ -138,6 +138,7 @@ internal fun SettingDetailScreen(
                     ReportBugScreen(
                         modifier = Modifier.fillMaxSize(),
                         openEmail = openEmail,
+                        openUrl = openUrl,
                     )
                 }
                 SettingNav.Update -> {
