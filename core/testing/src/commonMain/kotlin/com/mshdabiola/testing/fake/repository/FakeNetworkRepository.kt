@@ -60,7 +60,7 @@ class FakeNetworkRepository : NetworkRepository {
         }
     }
 
-    fun setNextReleaseInfo(expectedReleaseInfo: ReleaseInfo.NewUpdate) {
+    fun setNextReleaseInfo(expectedReleaseInfo: ReleaseInfo) {
         this.nextReleaseInfo = expectedReleaseInfo
         this.shouldThrowError = false
     }
