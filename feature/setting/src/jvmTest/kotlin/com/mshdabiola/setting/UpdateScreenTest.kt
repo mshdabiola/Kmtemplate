@@ -30,7 +30,6 @@ import com.mshdabiola.model.UserSettings
 import com.mshdabiola.model.testtag.UpdateScreenTestTags
 import com.mshdabiola.setting.detailscreen.UpdateScreen
 import org.junit.Assert.assertEquals
-import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Rule
 import org.junit.Test
@@ -73,7 +72,7 @@ class UpdateScreenTest {
         var calledWithValue: Boolean? = null
 
         composeRule.setContent {
-            var initialSettings by remember { mutableStateOf(UserSettings(showUpdateDialog = false))}
+            var initialSettings by remember { mutableStateOf(UserSettings(showUpdateDialog = false)) }
             KmtTheme {
                 UpdateScreen(
                     userSettings = initialSettings,
@@ -101,7 +100,7 @@ class UpdateScreenTest {
         var calledWithValue: Boolean? = null
 
         composeRule.setContent {
-            var initialSettings by remember { mutableStateOf(UserSettings(showUpdateDialog = false))}
+            var initialSettings by remember { mutableStateOf(UserSettings(showUpdateDialog = false)) }
 
             KmtTheme {
                 UpdateScreen(

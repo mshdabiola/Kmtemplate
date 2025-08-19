@@ -59,7 +59,8 @@ class ReportBugScreenTest {
         }
 
         composeRule.onNodeWithTag(ReportBugScreenTestTags.SUBMIT_EMAIL_BUTTON).assertIsNotEnabled()
-        composeRule.onNodeWithTag(ReportBugScreenTestTags.SUBMIT_GITHUB_BUTTON).assertIsEnabled() // Initially enabled as per logic
+        composeRule.onNodeWithTag(ReportBugScreenTestTags.SUBMIT_GITHUB_BUTTON).assertIsEnabled()
+        // Initially enabled as per logic
     }
 
     @Test
@@ -70,8 +71,10 @@ class ReportBugScreenTest {
             }
         }
 
-        composeRule.onNodeWithTag(ReportBugScreenTestTags.TITLE_TEXT_FIELD).performTextInput("Bug Title")
-        composeRule.onNodeWithTag(ReportBugScreenTestTags.DESCRIPTION_TEXT_FIELD).performTextInput("Bug Description")
+        composeRule.onNodeWithTag(ReportBugScreenTestTags.TITLE_TEXT_FIELD)
+            .performTextInput("Bug Title")
+        composeRule.onNodeWithTag(ReportBugScreenTestTags.DESCRIPTION_TEXT_FIELD)
+            .performTextInput("Bug Description")
 
         composeRule.onNodeWithTag(ReportBugScreenTestTags.SUBMIT_EMAIL_BUTTON).assertIsEnabled()
         composeRule.onNodeWithTag(ReportBugScreenTestTags.SUBMIT_GITHUB_BUTTON).assertIsNotEnabled()
@@ -100,8 +103,10 @@ class ReportBugScreenTest {
             }
         }
 
-        composeRule.onNodeWithTag(ReportBugScreenTestTags.TITLE_TEXT_FIELD).performTextInput(expectedTitleText)
-        composeRule.onNodeWithTag(ReportBugScreenTestTags.DESCRIPTION_TEXT_FIELD).performTextInput(expectedContentText)
+        composeRule.onNodeWithTag(ReportBugScreenTestTags.TITLE_TEXT_FIELD)
+            .performTextInput(expectedTitleText)
+        composeRule.onNodeWithTag(ReportBugScreenTestTags.DESCRIPTION_TEXT_FIELD)
+            .performTextInput(expectedContentText)
         composeRule.onNodeWithTag(ReportBugScreenTestTags.SUBMIT_EMAIL_BUTTON).performClick()
 
         assertTrue(emailOpened)

@@ -15,7 +15,6 @@
  */
 package com.mshdabiola.setting
 
-import com.mshdabiola.model.Platform
 import com.mshdabiola.model.ReleaseInfo
 import com.mshdabiola.model.UserSettings
 

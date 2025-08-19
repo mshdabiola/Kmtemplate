@@ -35,7 +35,6 @@ import kmtemplate.feature.detail.generated.resources.detail_delete_action_text
 import kmtemplate.feature.detail.generated.resources.detail_delete_confirmation_message
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.getString
-import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.annotation.KoinExperimentalAPI
 import org.koin.core.parameter.parameterSetOf
@@ -91,8 +90,6 @@ fun NavGraphBuilder.detailScreen(
                             ),
                         )
                     }
-
-
                 },
 
             )
