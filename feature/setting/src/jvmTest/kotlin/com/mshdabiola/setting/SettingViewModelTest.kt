@@ -249,4 +249,36 @@ class SettingViewModelTest {
             cancelAndConsumeRemainingEvents()
         }
     }
+
+    @Test
+    fun `hideUpdateDialog sets releaseInfo to null in state`() = runTest(mainDispatcherRule.testDispatcher) {
+        // 1. Ensure releaseInfo is not null initially
+        val testReleaseInfo = ReleaseInfo.NewUpdate("v1.0.1", "Update Available", "New features", "download.url")
+        networkRepository.setNextReleaseInfo(testReleaseInfo)
+        viewModel.checkForUpdate("v1.0.0")
+
+        // Check that releaseInfo is indeed set
+        viewModel.settingState.test {
+            var currentState = awaitItem()
+            // If the first emission's releaseInfo is null (expected after initialization or from userSettings flow),
+            // await the next emission which should have the releaseInfo populated by checkForUpdate.
+            if (currentState.releaseInfo == null) {
+                currentState = awaitItem()
+            }
+            // It's possible that even the second emission might not have the releaseInfo if the combine
+            // emits multiple times before the network operation completes.
+            // For truly robust testing of complex combine scenarios, awaitItemMatching or specific predicate
+            // with a timeout is usually best. However, this check is more robust than a fixed skip.
+            assertEquals(testReleaseInfo, currentState.releaseInfo, "ReleaseInfo should be populated by checkForUpdate before hiding.")
+
+            // 2. Call hideUpdateDialog
+            viewModel.hideUpdateDialog()
+
+            // 3. Assert releaseInfo is null
+            // After hideUpdateDialog, releaseInfoFlow is set to null, triggering a new emission.
+            val stateAfterHide = awaitItem()
+            assertNull(stateAfterHide.releaseInfo, "ReleaseInfo should be null after hideUpdateDialog.")
+            cancelAndConsumeRemainingEvents()
+        }
+    }
 }
