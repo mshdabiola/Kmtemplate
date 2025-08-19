@@ -19,7 +19,6 @@ import com.android.SdkConstants
 import com.android.build.api.artifact.SingleArtifact
 import com.android.build.api.variant.ApplicationAndroidComponentsExtension
 import com.android.build.gradle.BaseExtension
-import com.google.common.truth.Truth.assertWithMessage
 import org.gradle.api.DefaultTask
 import org.gradle.api.Project
 import org.gradle.api.file.DirectoryProperty
@@ -40,6 +39,7 @@ import org.gradle.process.ExecOperations
 import java.io.File
 import java.util.Locale
 import javax.inject.Inject
+import kotlin.math.max
 
 @CacheableTask
 abstract class GenerateBadgingTask : DefaultTask() {
@@ -75,9 +75,6 @@ abstract class GenerateBadgingTask : DefaultTask() {
 @CacheableTask
 abstract class CheckBadgingTask : DefaultTask() {
 
-    // In order for the task to be up-to-date when the inputs have not changed,
-    // the task must declare an output, even if it's not used. Tasks with no
-    // output are always run regardless of whether the inputs changed
     @get:OutputDirectory
     abstract val output: DirectoryProperty
 
@@ -96,12 +93,50 @@ abstract class CheckBadgingTask : DefaultTask() {
 
     @TaskAction
     fun taskAction() {
-        assertWithMessage(
+        val goldenFile = goldenBadging.get().asFile
+        val generatedFile = generatedBadging.get().asFile
+
+        val goldenText = goldenFile.readText()
+        val generatedText = generatedFile.readText()
+
+        if (goldenText == generatedText) {
+            return // Files are identical, task is successful.
+        }
+
+        // Files differ, generate a diff for the error message.
+        val goldenLines = goldenText.lines()
+        val generatedLines = generatedText.lines()
+
+        val diffOutput = StringBuilder()
+        diffOutput.appendLine(
             "Generated badging is different from golden badging! " +
                 "If this change is intended, run ./gradlew ${updateBadgingTaskName.get()}",
         )
-            .that(generatedBadging.get().asFile.readText())
-            .isEqualTo(goldenBadging.get().asFile.readText())
+        diffOutput.appendLine("--- Diff ---")
+
+        val maxLines = max(goldenLines.size, generatedLines.size)
+        for (i in 0 until maxLines) {
+            val goldenLine = goldenLines.getOrNull(i)
+            val generatedLine = generatedLines.getOrNull(i)
+
+            when {
+                goldenLine == generatedLine -> {
+                    // Lines are same, do nothing for a concise diff.
+                }
+                goldenLine != null && generatedLine == null -> {
+                    diffOutput.appendLine("- $goldenLine") // Line removed
+                }
+                goldenLine == null && generatedLine != null -> {
+                    diffOutput.appendLine("+ $generatedLine") // Line added
+                }
+                else -> { // Both are non-null and different
+                    diffOutput.appendLine("- $goldenLine")
+                    diffOutput.appendLine("+ $generatedLine")
+                }
+            }
+        }
+
+        throw AssertionError(diffOutput.toString())
     }
 }
 

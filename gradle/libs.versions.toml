@@ -7,7 +7,7 @@ androidxComposeMaterial3Adaptive = "1.2.0-alpha04"
 androidxCore = "1.16.0"
 androidxCoreSplashscreen = "1.0.1"
 androidxDataStore = "1.1.7"
-androidx-lifecycle = "2.9.1"
+androidx-lifecycle = "2.9.2"
 androidxMacroBenchmark = "1.4.0"
 androidxProfileinstaller = "1.4.1"
 androidxTestCore = "1.7.0"
@@ -18,44 +18,43 @@ androidxUiAutomator = "2.3.0"
 androidxWindowManager = "1.4.0"
 bugsnag = "3.8.0"
 coil = "3.3.0"
-compose = "1.8.3"
-compose-plugin = "1.9.0-beta01"
-composehot = "1.0.0-beta04"
+compose = "1.9.0"
+compose-plugin = "1.9.0-beta03"
+composehot = "1.0.0-beta05"
 composeNavigation = "2.9.0-beta04"
 compottie = "2.0.0-rc04"
 conveyor = "1.12"
 dependencyGuard = "0.5.0"
 detekt = "1.23.8"
-firebaseBom = "33.16.0"
-firebaseCrashlyticsPlugin = "3.0.4"
-firebasePerfPlugin = "1.4.2"
+firebaseBom = "34.1.0"
+firebaseCrashlyticsPlugin = "3.0.6"
+firebasePerfPlugin = "2.0.1"
 gmsPlugin = "4.4.3"
 kermit = "2.0.6"
 koin = "4.1.0"
 koinCompose = "4.1.0"
-kotlin = "2.2.0"
+kotlin = "2.2.10"
 kotlinxBrowser = "0.3"
 kotlinxCollectionImmutable = "0.4.0"
 kotlinxCoroutines = "1.10.2"
 kotlinxDatetime = "0.7.1-0.6.x-compat"
 kotlinxSerializationJson = "1.9.0"
 kover = "0.9.1"
-ksp = "2.2.0-2.0.2"
+ksp = "2.2.10-2.0.2"
 kstore = "1.0.0"
 ktlint = "13.0.0"
-ktlintRuleEngine = "1.6.0"
-ktlintRulesetStandard = "1.6.0"
-ktlintTest = "1.6.0"
+ktlintRuleEngine = "1.7.1"
+ktlintRulesetStandard = "1.7.1"
+ktlintTest = "1.7.1"
 ktor = "3.2.3"
 material3 = "1.9.0-alpha04"
-room = "2.8.0-beta01"
+room = "2.8.0-rc01"
 screenshot = "0.0.1-alpha11"
 slf4jSimple = "2.0.17"
 spotless = "7.2.1"
-sqlite = "2.6.0-beta01"
-truth = "1.4.4"
+sqlite = "2.6.0-rc01"
 turbine = "1.2.1"
-uiTextGoogleFonts = "1.8.3"
+uiTextGoogleFonts = "1.9.0"
 versionCode = "17"
 versionName = "1.2.16"
 
@@ -95,14 +94,14 @@ compose-hot-gradlePlugin = { module = "org.jetbrains.compose.hot-reload:hot-relo
 compottie = { module = "io.github.alexzhirkevich:compottie", version.ref = "compottie" }
 compottie-resources = { module = "io.github.alexzhirkevich:compottie-resources", version.ref = "compottie" }
 detekt-gradlePlugin = { module = "io.gitlab.arturbosch.detekt:detekt-gradle-plugin", version.ref = "detekt" }
-firebase-analytics = { group = "com.google.firebase", name = "firebase-analytics-ktx" }
+firebase-analytics = { group = "com.google.firebase", name = "firebase-analytics" }
 firebase-auth = { group = "com.google.firebase", name = "firebase-auth" }
 firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.ref = "firebaseBom" }
-firebase-cloud-messaging = { group = "com.google.firebase", name = "firebase-messaging-ktx" }
-firebase-crashlytics = { group = "com.google.firebase", name = "firebase-crashlytics-ktx" }
+firebase-cloud-messaging = { group = "com.google.firebase", name = "firebase-messaging" }
+firebase-crashlytics = { group = "com.google.firebase", name = "firebase-crashlytics" }
 firebase-crashlytics-gradlePlugin = { group = "com.google.firebase", name = "firebase-crashlytics-gradle", version.ref = "firebaseCrashlyticsPlugin" }
 firebase-message = { group = "com.google.firebase", name = "firebase-inappmessaging-display" }
-firebase-performance = { group = "com.google.firebase", name = "firebase-perf-ktx" }
+firebase-performance = { group = "com.google.firebase", name = "firebase-perf" }
 firebase-performance-gradlePlugin = { group = "com.google.firebase", name = "perf-plugin", version.ref = "firebasePerfPlugin" }
 firebase-remoteconfig = { group = "com.google.firebase", name = "firebase-config" }
 jlleitschuh-gradlePlugin = { module = "org.jlleitschuh.gradle:ktlint-gradle", version.ref = "ktlint" }
@@ -156,7 +155,6 @@ screenshot-validation-api = { group = "com.android.tools.screenshot", name = "sc
 slf4j-simple = { module = "org.slf4j:slf4j-simple", version.ref = "slf4jSimple" }
 spotless-gradlePlugin = { group = "com.diffplug.spotless", name = "spotless-plugin-gradle", version.ref = "spotless" }
 sqlite-bundled = { module = "androidx.sqlite:sqlite-bundled", version.ref = "sqlite" }
-truth = { group = "com.google.truth", name = "truth", version.ref = "truth" }
 turbine = { group = "app.cash.turbine", name = "turbine", version.ref = "turbine" }
 
 

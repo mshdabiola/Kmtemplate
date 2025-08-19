@@ -62,7 +62,7 @@ jobs:
         run: ./gradlew lintCheck
 
       - name: Upload merge detekt
-        uses: github/codeql-action/upload-sarif@v3.29.2
+        uses: github/codeql-action/upload-sarif@v3.29.9
         if: success() || failure()
         with:
           sarif_file: build/reports/detekt/merge.sarif
@@ -152,7 +152,7 @@ jobs:
       - name: Check lint
         run: ./gradlew lintFossReliantRelease
 
-      - uses: github/codeql-action/upload-sarif@v3.29.2
+      - uses: github/codeql-action/upload-sarif@v3.29.9
         if: success() || failure()
         with:
           sarif_file: app/build/reports/lint-results-fossReliantRelease.sarif
@@ -200,7 +200,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Copy CI gradle.properties
         run: mkdir -p ~/.gradle ; cp .github/ci-gradle.properties ~/.gradle/gradle.properties
@@ -246,7 +246,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Copy CI gradle.properties
         run: mkdir -p ~/.gradle ; cp .github/ci-gradle.properties ~/.gradle/gradle.properties

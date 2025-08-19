@@ -79,15 +79,15 @@ internal class RealNetworkRepository(
                     throw Exception("Asset not found")
                 onlineParsedVersion == null || currentParsedVersion == null ->
                     throw Exception("Invalid version format")
-                !allowPreRelease && onlineParsedVersion.preReleaseType != null ->
+                !allowPreRelease && gitHubReleaseInfo.prerelease == true ->
                     throw Exception("Pre-release versions are not allowed")
                 currentParsedVersion > onlineParsedVersion ->
                     throw Exception("Current version is greater than latest version")
                 currentParsedVersion == onlineParsedVersion ->
-                    throw Exception("Current version is equal to latest version")
+                    return ReleaseInfo.UpToDate
             }
 
-            ReleaseInfo.Success(
+            ReleaseInfo.NewUpdate(
                 tagName = gitHubReleaseInfo.tagName ?: "",
                 releaseName = gitHubReleaseInfo.releaseName ?: "",
                 body = gitHubReleaseInfo.body ?: "",

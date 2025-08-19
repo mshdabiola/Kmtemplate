@@ -15,6 +15,7 @@
  */
 package com.mshdabiola.network
 
+import com.mshdabiola.network.model.GitHubReleaseInfo
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.mock.MockEngine
 import io.ktor.client.engine.mock.respond
@@ -25,10 +26,13 @@ import io.ktor.http.HttpStatusCode
 import io.ktor.http.headersOf
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.coroutines.test.runTest
+import kotlinx.serialization.builtins.ListSerializer
 import kotlinx.serialization.json.Json
+import java.io.InputStreamReader
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertNotNull
+import kotlin.test.assertTrue
 import kotlin.test.fail
 
 class NetworkDataSourceTest {
@@ -87,6 +91,7 @@ class NetworkDataSourceTest {
     @Test
     fun `goToGoogle handles network error (engine failure)`() = runTest {
         val mockEngine = MockEngine {
+            // No specific URL check needed here as we are testing general IOException
             throw java.io.IOException("Simulated network problem")
         }
 
@@ -107,24 +112,17 @@ class NetworkDataSourceTest {
 
     @Test
     fun `getLatestKmtemplateRelease successfully returns release info including assets`() = runTest {
-        val expectedReleaseJson = """{
-            "tag_name": "v1.0.0",
-            "name": "Initial Release",
-            "body": "This is the first release.",
-            "html_url": "https://github.com/mshdabiola/kmtemplate/releases/tag/v1.0.0",
-            "assets": [
-                {
-                    "browser_download_url": "https://github.com/mshdabiola/kmtemplate/releases/download/v1.0.0/kmtemplate.apk",
-                    "size": 1234567
-                },
-                {
-                    "browser_download_url": "https://github.com/mshdabiola/kmtemplate/releases/download/v1.0.0/source.zip",
-                    "size": 7654321
-                }
-            ]
-        }"""
+        val expectedReleaseJson = getResourceAsText("github.json") // Make sure the path is correct
+        val gitHubReleaseInfo = testJson.decodeFromString(
+            ListSerializer(GitHubReleaseInfo.serializer()),
+            expectedReleaseJson,
+        ).first()
+
         val mockEngine = MockEngine { request ->
-            assertEquals("https://api.github.com/repos/mshdabiola/kmtemplate/releases/latest", request.url.toString())
+            assertEquals(
+                "https://api.github.com/repos/mshdabiola/kmtemplate/releases",
+                request.url.toString(),
+            )
             respond(
                 content = expectedReleaseJson,
                 status = HttpStatusCode.OK,
@@ -142,29 +140,36 @@ class NetworkDataSourceTest {
         val result = networkDataSource.getLatestKmtemplateRelease()
 
         assertNotNull(result)
-        assertEquals("v1.0.0", result.tagName)
-        assertEquals("Initial Release", result.releaseName)
-        assertEquals("This is the first release.", result.body)
-        assertEquals("https://github.com/mshdabiola/kmtemplate/releases/tag/v1.0.0", result.htmlUrl)
+        assertEquals(gitHubReleaseInfo.tagName, result.tagName)
+        assertEquals(gitHubReleaseInfo.releaseName, result.releaseName)
+        assertEquals(gitHubReleaseInfo.body, result.body)
+        assertTrue(result.prerelease == true)
+        assertEquals(
+            gitHubReleaseInfo.htmlUrl,
+            result.htmlUrl,
+        )
 
         assertNotNull(result.assets)
-        assertEquals(2, result.assets.size)
+        assertEquals(gitHubReleaseInfo.assets?.size, result.assets.size)
 
         val firstAsset = result.assets[0]
+        val expectAssetFirst = gitHubReleaseInfo.assets?.first()
         assertNotNull(firstAsset)
         assertEquals(
-            "https://github.com/mshdabiola/kmtemplate/releases/download/v1.0.0/kmtemplate.apk",
-            firstAsset?.browserDownloadUrl,
+            expectAssetFirst?.browserDownloadUrl,
+            firstAsset.browserDownloadUrl,
         )
-        assertEquals(1234567, firstAsset.size)
+        assertEquals(expectAssetFirst?.size, firstAsset.size)
 
-        val secondAsset = result.assets.get(1)
+        val secondAsset = result.assets[1]
+        val expectAssetSecond = gitHubReleaseInfo.assets?.getOrNull(1)
+
         assertNotNull(secondAsset)
         assertEquals(
-            "https://github.com/mshdabiola/kmtemplate/releases/download/v1.0.0/source.zip",
-            secondAsset?.browserDownloadUrl,
+            expectAssetSecond?.browserDownloadUrl,
+            secondAsset.browserDownloadUrl,
         )
-        assertEquals(7654321, secondAsset.size)
+        assertEquals(expectAssetSecond?.size, secondAsset.size)
 
         mockEngine.close()
     }
@@ -172,7 +177,10 @@ class NetworkDataSourceTest {
     @Test
     fun `getLatestKmtemplateRelease handles HTTP error`() = runTest {
         val mockEngine = MockEngine { request ->
-            assertEquals("https://api.github.com/repos/mshdabiola/kmtemplate/releases/latest", request.url.toString())
+            assertEquals(
+                "https://api.github.com/repos/mshdabiola/kmtemplate/releases",
+                request.url.toString(),
+            )
             respond(
                 content = "Error: Repository Not Found",
                 status = HttpStatusCode.NotFound,
@@ -202,6 +210,7 @@ class NetworkDataSourceTest {
     @Test
     fun `getLatestKmtemplateRelease handles network error`() = runTest {
         val mockEngine = MockEngine {
+            // No specific URL check needed here for the general IOException test for this endpoint
             throw java.io.IOException("Simulated network problem for GitHub API")
         }
 
@@ -222,5 +231,45 @@ class NetworkDataSourceTest {
         } finally {
             mockEngine.close()
         }
+    }
+
+    @Test
+    fun `getLatestKmtemplateRelease throws NoSuchElementException for empty release list`() = runTest {
+        val mockEngine = MockEngine { request ->
+            assertEquals(
+                "https://api.github.com/repos/mshdabiola/kmtemplate/releases",
+                request.url.toString(),
+            )
+            respond(
+                content = "[]", // Empty list of releases
+                status = HttpStatusCode.OK,
+                headers = headersOf(HttpHeaders.ContentType, "application/json"),
+            )
+        }
+
+        val httpClient = HttpClient(mockEngine) {
+            install(ContentNegotiation) {
+                json(testJson)
+            }
+        }
+        val networkDataSource = RealNetworkDataSource(httpClient)
+
+        try {
+            networkDataSource.getLatestKmtemplateRelease()
+            fail("Expected NoSuchElementException for empty release list")
+        } catch (e: NoSuchElementException) {
+            assertEquals("No releases found for mshdabiola/kmtemplate", e.message)
+        } catch (e: Exception) {
+            fail("An unexpected exception was thrown: ${e::class.simpleName} - ${e.message}")
+        } finally {
+            mockEngine.close()
+        }
+    }
+
+    // Helper function to read a resource file
+    fun getResourceAsText(path: String): String {
+        val stream = ClassLoader.getSystemResourceAsStream(path)
+        requireNotNull(stream) { "Resource not found: $path" }
+        return InputStreamReader(stream).readText()
     }
 }

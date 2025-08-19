@@ -54,6 +54,7 @@ internal fun Project.configureKotlinMultiplatform(
                     }
                 }
             }
+//            binaries.executable() // Or other binary types
         }
     }
 }
@@ -65,7 +66,7 @@ internal fun Project.configureKotlinAndroid(
     commonExtension: CommonExtension<*, *, *, *, *, *>,
 ) {
     commonExtension.apply {
-        compileSdk = 35
+        compileSdk = 36
 
         defaultConfig {
             minSdk = 26 // 24

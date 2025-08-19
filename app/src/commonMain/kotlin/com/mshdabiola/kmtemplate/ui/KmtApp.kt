@@ -92,13 +92,13 @@ fun KmtApp(
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     val darkTheme = shouldUseDarkTheme(uiState)
     val languageCode = getLanguage(uiState)
-    var releaseInfo by remember { mutableStateOf<ReleaseInfo.Success?>(null) }
+    var releaseInfo by remember { mutableStateOf<ReleaseInfo.NewUpdate?>(null) }
     val windowRepository = getWindowRepository()
     val currentVersion = KmtStrings.version
 
     LaunchedEffect(Unit) {
         val info = viewModel.getLatestReleaseInfo(currentVersion).await()
-        if (info is ReleaseInfo.Success) {
+        if (info is ReleaseInfo.NewUpdate) {
             viewModel.log("$info")
             releaseInfo = info
         } else {
