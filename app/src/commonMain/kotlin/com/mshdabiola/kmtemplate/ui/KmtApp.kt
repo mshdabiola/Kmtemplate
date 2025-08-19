@@ -108,7 +108,7 @@ fun KmtApp(
 
     LaunchedEffect(Unit) {
         val info = viewModel.getLatestReleaseInfo(currentVersion).await()
-        when(info){
+        when (info) {
             is ReleaseInfo.NewUpdate -> {
                 viewModel.log("$info")
                 releaseInfo = info
