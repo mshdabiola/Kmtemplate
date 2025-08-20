@@ -95,6 +95,8 @@ class KmtApplication : Application() {
 
     private fun getPlatform(): Platform.Android {
         val sdk = Build.VERSION.SDK_INT
+//        append(BuildConfig.APP_FLAVOR_SUFFIX)
+//        append(BuildConfig.APP_BUILD_TYPE_SUFFIX)
         val flavor = if (packageName.contains("foss")) {
             Flavor.FossReliant
         } else {
