@@ -7,7 +7,9 @@ import androidx.compose.material3.SnackbarDefaults
 import androidx.compose.material3.SnackbarDuration
 import androidx.compose.material3.SnackbarVisuals
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.testTag
 import com.mshdabiola.designsystem.theme.KmtExtendedTheme
 import com.mshdabiola.designsystem.theme.KmtTheme
 import com.mshdabiola.model.Type
@@ -15,7 +17,11 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 
 
 @Composable
-fun KmtSnackerBar(type: Type, snackbarData: SnackbarData) {
+fun KmtSnackerBar(
+    type: Type,
+    snackbarData: SnackbarData,
+    modifier: Modifier = Modifier
+) {
     data class SnackbarColors(
         val containerColor: Color,
         val contentColor: Color,
@@ -52,6 +58,7 @@ fun KmtSnackerBar(type: Type, snackbarData: SnackbarData) {
     }
 
     Snackbar(
+        modifier = modifier.testTag("KmtSnackBar"),
         snackbarData = snackbarData,
         containerColor = colors.containerColor,
         contentColor = colors.contentColor,
