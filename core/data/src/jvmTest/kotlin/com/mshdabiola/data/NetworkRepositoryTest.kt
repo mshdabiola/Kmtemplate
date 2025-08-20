@@ -108,7 +108,7 @@ class NetworkRepositoryTest {
         repository = RealNetworkRepository(networkDataSource, nonAndroidPlatform)
         val result = repository.getLatestReleaseInfo("1.0.0", allowPreRelease = false)
         assertTrue("Expected Error, got $result", result is ReleaseInfo.Error)
-        assertEquals("Device not supported", (result as ReleaseInfo.Error).message)
+        assertEquals("Device not supported", (result as ReleaseInfo.Error).exception.message)
     }
 
     @Test
@@ -120,7 +120,7 @@ class NetworkRepositoryTest {
         networkDataSource.setNextReleaseInfo(releaseInfo)
         val result = repository.getLatestReleaseInfo("0.1.0", allowPreRelease = false)
         assertTrue("Expected Error, got $result", result is ReleaseInfo.Error)
-        assertEquals("Asset not found", (result as ReleaseInfo.Error).message)
+        assertEquals("Asset not found", (result as ReleaseInfo.Error).exception.message)
     }
 
     @Test
@@ -130,7 +130,7 @@ class NetworkRepositoryTest {
         networkDataSource.setNextReleaseInfo(releaseInfo)
         val result = repository.getLatestReleaseInfo("0.1.0", allowPreRelease = false)
         assertTrue("Expected Error, got $result", result is ReleaseInfo.Error)
-        assertEquals("Asset not found", (result as ReleaseInfo.Error).message)
+        assertEquals("Asset not found", (result as ReleaseInfo.Error).exception.message)
     }
 
     @Test
@@ -140,7 +140,7 @@ class NetworkRepositoryTest {
         networkDataSource.setNextReleaseInfo(releaseInfo)
         val result = repository.getLatestReleaseInfo("0.1.0", allowPreRelease = false)
         assertTrue("Expected Error, got $result", result is ReleaseInfo.Error)
-        assertEquals("Asset not found", (result as ReleaseInfo.Error).message)
+        assertEquals("Asset not found", (result as ReleaseInfo.Error).exception.message)
     }
 
     @Test
@@ -150,7 +150,7 @@ class NetworkRepositoryTest {
         networkDataSource.setNextReleaseInfo(releaseInfo)
         val result = repository.getLatestReleaseInfo("0.1.0", allowPreRelease = false)
         assertTrue("Expected Error, got $result", result is ReleaseInfo.Error)
-        assertEquals("Asset not found", (result as ReleaseInfo.Error).message)
+        assertEquals("Asset not found", (result as ReleaseInfo.Error).exception.message)
     }
 
     @Test
@@ -159,7 +159,7 @@ class NetworkRepositoryTest {
         networkDataSource.setNextReleaseInfo(createGitHubReleaseInfo())
         val result = repository.getLatestReleaseInfo("1.bad.0", allowPreRelease = false)
         assertTrue("Expected Error, got $result", result is ReleaseInfo.Error)
-        assertEquals("Invalid version format", (result as ReleaseInfo.Error).message)
+        assertEquals("Invalid version format", (result as ReleaseInfo.Error).exception.message)
     }
 
     @Test
@@ -168,7 +168,7 @@ class NetworkRepositoryTest {
         networkDataSource.setNextReleaseInfo(createGitHubReleaseInfo(tagName = "v-bad.1.0"))
         val result = repository.getLatestReleaseInfo("1.0.0", allowPreRelease = false)
         assertTrue("Expected Error, got $result", result is ReleaseInfo.Error)
-        assertEquals("Invalid version format", (result as ReleaseInfo.Error).message)
+        assertEquals("Invalid version format", (result as ReleaseInfo.Error).exception.message)
     }
 
     @Test
@@ -177,7 +177,7 @@ class NetworkRepositoryTest {
         networkDataSource.setNextReleaseInfo(createGitHubReleaseInfo(tagName = null))
         val result = repository.getLatestReleaseInfo("1.0.0", allowPreRelease = false)
         assertTrue("Expected Error, got $result", result is ReleaseInfo.Error)
-        assertEquals("Invalid version format", (result as ReleaseInfo.Error).message)
+        assertEquals("Invalid version format", (result as ReleaseInfo.Error).exception.message)
     }
 
     @Test
@@ -186,17 +186,20 @@ class NetworkRepositoryTest {
         networkDataSource.setNextReleaseInfo(createGitHubReleaseInfo(tagName = ""))
         val result = repository.getLatestReleaseInfo("1.0.0", allowPreRelease = false)
         assertTrue("Expected Error, got $result", result is ReleaseInfo.Error)
-        assertEquals("Invalid version format", (result as ReleaseInfo.Error).message)
+        assertEquals("Invalid version format", (result as ReleaseInfo.Error).exception.message)
     }
 
     @Test
     fun `getLatestReleaseInfo returns UpToDate when versions are equal (full release)`() = runTest {
         repository = RealNetworkRepository(networkDataSource, fossReleasePlatform)
-        networkDataSource.setNextReleaseInfo(createGitHubReleaseInfo(tagName = "v1.0.0"))
+        // Ensure the asset name matches the platform for this test to be valid for UpToDate
+        val releaseInfo = createGitHubReleaseInfo(
+            tagName = "v1.0.0",
+            assets = listOf(Asset("app-fossReliant-release-unsigned-signed.apk", 100)),
+            prerelease = false
+        )
+        networkDataSource.setNextReleaseInfo(releaseInfo)
         val result = repository.getLatestReleaseInfo("1.0.0", allowPreRelease = false)
-        // This assertion will FAIL until RealNetworkRepository is updated
-        // to return ReleaseInfo.UpToDate for equal versions.
-        // Currently, it returns Error("Current version is equal to latest version")
         assertEquals(ReleaseInfo.UpToDate, result)
     }
 
@@ -208,12 +211,12 @@ class NetworkRepositoryTest {
         assertTrue("Expected Error, got $result", result is ReleaseInfo.Error)
         assertEquals(
             "Current version is greater than latest version",
-            (result as ReleaseInfo.Error).message,
+            (result as ReleaseInfo.Error).exception.message,
         )
     }
 
     @Test
-    fun `getLatestReleaseInfo NewUpdate when online is newer pre-release and allowPreRelease is true`() = runTest {
+    fun `getLatestReleaseInfo returns NewUpdate when online is newer pre-release and allowPreRelease is true`() = runTest {
         repository = RealNetworkRepository(networkDataSource, fossReleasePlatform)
         val releaseInfo = createGitHubReleaseInfo(tagName = "v1.0.1-alpha1", prerelease = true)
         networkDataSource.setNextReleaseInfo(releaseInfo)
@@ -223,7 +226,7 @@ class NetworkRepositoryTest {
     }
 
     @Test
-    fun `getLatestReleaseInfo NewUpdate when online is newer pre-release (same base) and allowPreRelease is true`() =
+    fun `getLatestReleaseInfo returns NewUpdate when online is newer pre-release (same base) and allowPreRelease is true`() =
         runTest {
             repository = RealNetworkRepository(networkDataSource, fossReleasePlatform)
             val releaseInfo = createGitHubReleaseInfo(tagName = "v1.0.0-beta1", prerelease = true)
@@ -234,49 +237,52 @@ class NetworkRepositoryTest {
         }
 
     @Test
-    fun `getLatestReleaseInfo error when online is pre-release and allowPreRelease is false`() = runTest {
+    fun `getLatestReleaseInfo returns Error when online is pre-release and allowPreRelease is false`() = runTest {
         repository = RealNetworkRepository(networkDataSource, fossReleasePlatform)
         networkDataSource.setNextReleaseInfo(createGitHubReleaseInfo(tagName = "v1.0.1-alpha1", prerelease = true))
         val result = repository.getLatestReleaseInfo("1.0.0", allowPreRelease = false)
         assertTrue("Expected Error, got $result", result is ReleaseInfo.Error)
-        assertEquals("Pre-release versions are not allowed", (result as ReleaseInfo.Error).message)
+        assertEquals("Pre-release versions are not allowed", (result as ReleaseInfo.Error).exception.message)
     }
 
     @Test
-    fun `getLatestReleaseInfo NewUpdate when online prerelease is null and allowPreRelease is false`() = runTest {
+    fun `getLatestReleaseInfo returns NewUpdate when online prerelease is null and allowPreRelease is false`() = runTest {
         repository = RealNetworkRepository(networkDataSource, fossReleasePlatform)
-        val releaseInfo = createGitHubReleaseInfo(tagName = "v1.1.0", prerelease = null) // prerelease is null
+        val releaseInfo = createGitHubReleaseInfo(tagName = "v1.1.0", prerelease = null) // prerelease is null, treated as false
         networkDataSource.setNextReleaseInfo(releaseInfo)
         val result = repository.getLatestReleaseInfo("1.0.0", allowPreRelease = false)
-        assertTrue("Expected NewUpdate, got $result", result is ReleaseInfo.NewUpdate)
+        assertTrue("Expected NewUpdate, got $result: ${result::class.simpleName}", result is ReleaseInfo.NewUpdate)
         assertEquals("v1.1.0", (result as ReleaseInfo.NewUpdate).tagName)
     }
 
     @Test
-    fun `getLatestReleaseInfo error when online is older pre-release type and allowPreRelease is true`() = runTest {
+    fun `getLatestReleaseInfo returns Error when online is older pre-release type and allowPreRelease is true`() = runTest {
         repository = RealNetworkRepository(networkDataSource, fossReleasePlatform)
         networkDataSource.setNextReleaseInfo(createGitHubReleaseInfo(tagName = "v1.0.0-alpha2", prerelease = true))
         val result = repository.getLatestReleaseInfo("1.0.0-beta1", allowPreRelease = true)
         assertTrue("Expected Error, got $result", result is ReleaseInfo.Error)
         assertEquals(
             "Current version is greater than latest version",
-            (result as ReleaseInfo.Error).message,
+            (result as ReleaseInfo.Error).exception.message,
         )
     }
 
     @Test
-    fun `getLatestReleaseInfo UpToDate when versions are equal (pre-release) and allowPreRelease is true`() = runTest {
+    fun `getLatestReleaseInfo returns UpToDate when versions are equal (pre-release) and allowPreRelease is true`() = runTest {
         repository = RealNetworkRepository(networkDataSource, fossReleasePlatform)
-        networkDataSource.setNextReleaseInfo(createGitHubReleaseInfo(tagName = "v1.0.0-rc1", prerelease = true))
+        // Ensure the asset name matches the platform for this test to be valid for UpToDate
+        val releaseInfo = createGitHubReleaseInfo(
+            tagName = "v1.0.0-rc1",
+            assets = listOf(Asset("app-fossReliant-release-unsigned-signed.apk", 100)),
+            prerelease = true
+        )
+        networkDataSource.setNextReleaseInfo(releaseInfo)
         val result = repository.getLatestReleaseInfo("1.0.0-rc1", allowPreRelease = true)
-        // This assertion will FAIL until RealNetworkRepository is updated
-        // to return ReleaseInfo.UpToDate for equal versions.
-        // Currently, it returns Error("Current version is equal to latest version")
         assertEquals(ReleaseInfo.UpToDate, result)
     }
 
     @Test
-    fun `gtNewUpdate when current is pre-release and online is newer full release (allowPreRelease false)`() =
+    fun `getLatestReleaseInfo returns NewUpdate when current is pre-release and online is newer full release (allowPreRelease false)`() =
         runTest {
             repository = RealNetworkRepository(networkDataSource, fossReleasePlatform)
             networkDataSource.setNextReleaseInfo(createGitHubReleaseInfo(tagName = "v1.0.0", prerelease = false))
@@ -286,7 +292,7 @@ class NetworkRepositoryTest {
         }
 
     @Test
-    fun `gi NewUpdate when current is pre-release and online is newer full release (allowPreRelease true)`() =
+    fun `getLatestReleaseInfo returns NewUpdate when current is pre-release and online is newer full release (allowPreRelease true)`() =
         runTest {
             repository = RealNetworkRepository(networkDataSource, fossReleasePlatform)
             networkDataSource.setNextReleaseInfo(createGitHubReleaseInfo(tagName = "v1.0.0", prerelease = false))
@@ -296,29 +302,30 @@ class NetworkRepositoryTest {
         }
 
     @Test
-    fun `gi error when current is full release and online is older pre-release (allowPreRelease true)`() = runTest {
+    fun `getLatestReleaseInfo returns Error when current is full release and online is older pre-release (allowPreRelease true)`() = runTest {
         repository = RealNetworkRepository(networkDataSource, fossReleasePlatform)
         networkDataSource.setNextReleaseInfo(createGitHubReleaseInfo(tagName = "v0.9.0-rc1", prerelease = true))
         val result = repository.getLatestReleaseInfo("1.0.0", allowPreRelease = true)
         assertTrue("Expected Error, got $result", result is ReleaseInfo.Error)
         assertEquals(
             "Current version is greater than latest version",
-            (result as ReleaseInfo.Error).message,
+            (result as ReleaseInfo.Error).exception.message,
         )
     }
 
     @Test
-    fun `getLatestReleaseInfo error when network call itself fails`() = runTest {
+    fun `getLatestReleaseInfo returns Error when network call itself fails`() = runTest {
         repository = RealNetworkRepository(networkDataSource, fossReleasePlatform)
-        networkDataSource.setShouldThrowError(true)
+        networkDataSource.setShouldThrowError(true) // Simulate network source throwing a generic Exception
         val result = repository.getLatestReleaseInfo("0.1.0", allowPreRelease = false)
         assertTrue("Expected Error, got $result", result is ReleaseInfo.Error)
-        assertEquals("Simulated network error", (result as ReleaseInfo.Error).message)
+        // Check for the generic exception message if TestNetworkDataSource throws a simple Exception
+        assertEquals("Simulated network error", (result as ReleaseInfo.Error).exception.message)
     }
 
     @Test
     fun `gotoGoogle returns empty string as per current placeholder implementation`() = runTest {
-        repository = RealNetworkRepository(networkDataSource, fossReleasePlatform)
+        repository = RealNetworkRepository(networkDataSource, fossReleasePlatform) // Platform doesn't matter for this test
         val result = repository.gotoGoogle()
         assertEquals("", result)
     }

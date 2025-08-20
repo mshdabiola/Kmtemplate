@@ -42,27 +42,30 @@ internal class RealNetworkRepository(
     /**
      * Fetches the latest release information for the app and compares it to the provided current version.
      *
-     * Returns ReleaseInfo.Success with release metadata and the matching APK asset URL when:
+     * Returns [ReleaseInfo.NewUpdate] with release metadata and the matching APK asset URL when:
      * - running on Android,
      * - a release asset matching the current platform flavor/build type exists,
      * - both the current and online versions parse successfully,
      * - pre-release versions are allowed (or the online release is not a pre-release),
      * - and the online version is strictly newer than the current version.
+     * Returns [ReleaseInfo.UpToDate] if the current version is the same as the latest online version
+     * (and all other conditions for a valid release are met, e.g., asset found, versions parseable).
      *
-     * Otherwise returns ReleaseInfo.Error with a short message describing the failure:
-     * - "Device not supported" if not running on Android,
-     * - "Asset not found" if no matching APK asset is present,
-     * - "Invalid version format" if either version string cannot be parsed,
-     * - "Pre-release versions are not allowed" if a pre-release is encountered while disallowed,
-     * - "Current version is greater than latest version" or "Current version is equal to latest version" for non-upgrade cases,
-     * - or a generic "Unknown error" when an unexpected exception occurs.
+     * Otherwise returns [ReleaseInfo.Error] containing an exception that describes the failure:
+     * - [UpdateException] ("Device not supported") if not running on Android.
+     * - [AssetNotFoundException] ("Asset not found") if no matching APK asset is present.
+     * - [InvalidVersionFormatException] ("Invalid version format") if either version string cannot be parsed.
+     * - [PreReleaseNotAllowedException] ("Pre-release versions are not allowed") if a pre-release is encountered while disallowed.
+     * - [NoUpdateAvailableException] ("Current version is greater than latest version") if the current version is newer.
+     * - Or a generic [Exception] for other unexpected issues, wrapped in [ReleaseInfo.Error].
      *
      * @param currentVersion the currently installed app version string to compare against the latest release tag.
      * @param allowPreRelease if false, pre-release online versions will be ignored and treated as an error.
-     * @return ReleaseInfo.Success when an upgradeable release is found; otherwise ReleaseInfo.Error with a brief reason.
+     * @return A [ReleaseInfo] sealed type: [ReleaseInfo.NewUpdate], [ReleaseInfo.UpToDate], or [ReleaseInfo.Error].
      */
     override suspend fun getLatestReleaseInfo(currentVersion: String, allowPreRelease: Boolean): ReleaseInfo {
         if (platform !is Platform.Android) {
+            // Explicitly return Error with UpdateException for non-Android platform
             return ReleaseInfo.Error(UpdateException("Device not supported"))
         }
 
@@ -76,33 +79,39 @@ internal class RealNetworkRepository(
                     it?.browserDownloadUrl?.contains(name) ?: false
                 }
 
+            // Perform mandatory checks that throw specific UpdateExceptions
+            if (asset == null) {
+                throw AssetNotFoundException("Asset not found")
+            }
+
             val currentParsedVersion = ParsedVersion.fromString(currentVersion)
             val onlineParsedVersion = ParsedVersion.fromString(gitHubReleaseInfo.tagName ?: "")
 
-            when {
-                asset == null ->
-                    throw AssetNotFoundException("Asset not found")
-                onlineParsedVersion == null || currentParsedVersion == null ->
-                    throw InvalidVersionFormatException("Invalid version format")
-                !allowPreRelease && gitHubReleaseInfo.prerelease == true ->
-                    throw PreReleaseNotAllowedException("Pre-release versions are not allowed")
-                currentParsedVersion > onlineParsedVersion ->
-                    throw NoUpdateAvailableException("Current version is greater than latest version")
-                currentParsedVersion == onlineParsedVersion ->
-                    throw NoUpdateAvailableException("Current version is equal to latest version")
+            if (onlineParsedVersion == null || currentParsedVersion == null) {
+                throw InvalidVersionFormatException("Invalid version format")
+            }
+            if (!allowPreRelease && gitHubReleaseInfo.prerelease == true) {
+                throw PreReleaseNotAllowedException("Pre-release versions are not allowed")
+            }
+            if (currentParsedVersion > onlineParsedVersion) {
+                throw NoUpdateAvailableException("Current version is greater than latest version")
             }
 
-            ReleaseInfo.NewUpdate(
-                tagName = gitHubReleaseInfo.tagName ?: "",
-                releaseName = gitHubReleaseInfo.releaseName ?: "",
-                body = gitHubReleaseInfo.body ?: "",
-                asset = asset.browserDownloadUrl ?: "",
-            )
-        } catch (e: UpdateException){
+            // If all checks pass, determine if it's an update or up-to-date
+            if (currentParsedVersion == onlineParsedVersion) {
+                ReleaseInfo.UpToDate
+            } else { // Implies currentParsedVersion < onlineParsedVersion
+                ReleaseInfo.NewUpdate(
+                    tagName = gitHubReleaseInfo.tagName ?: "",
+                    releaseName = gitHubReleaseInfo.releaseName ?: "",
+                    body = gitHubReleaseInfo.body ?: "",
+                    asset = asset.browserDownloadUrl ?: "", // asset is non-null here
+                )
+            }
+        } catch (e: UpdateException) { // Catch specific UpdateExceptions from checks
             ReleaseInfo.Error(e)
-        }
-        catch (e: Exception) {
-            ReleaseInfo.Error(e)
+        } catch (e: Exception) { // Catch any other unexpected exceptions
+            ReleaseInfo.Error(e) // Wrap in ReleaseInfo.Error
         }
     }
 }
