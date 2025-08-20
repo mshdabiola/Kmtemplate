@@ -72,7 +72,6 @@ internal fun SettingDetailScreen(
     val coroutineScope = rememberCoroutineScope()
     val appName = KmtStrings.brand
 
-
     Scaffold(
         modifier = modifier.testTag(SettingDetailScreenTestTags.SCREEN_ROOT),
         topBar = {

@@ -115,7 +115,7 @@ fun NavGraphBuilder.settingScreen(
                         }
                     }
                     is ReleaseInfo.Error -> {
-                        when(releaseInfo.exception){
+                        when (releaseInfo.exception) {
                             is AssetNotFoundException -> {
                                 LaunchedEffect(releaseInfo) {
                                     viewModel.hideUpdateDialog()
@@ -143,9 +143,8 @@ fun NavGraphBuilder.settingScreen(
                                         ),
                                     )
                                 }
-
                             }
-                            is DeviceNotSupportedException ->{
+                            is DeviceNotSupportedException -> {
                                 LaunchedEffect(releaseInfo) {
                                     viewModel.hideUpdateDialog()
                                     setNotification(
@@ -158,9 +157,8 @@ fun NavGraphBuilder.settingScreen(
                                         ),
                                     )
                                 }
-
                             }
-                            is NoUpdateAvailableException ->{
+                            is NoUpdateAvailableException -> {
                                 LaunchedEffect(releaseInfo) {
                                     viewModel.hideUpdateDialog()
                                     setNotification(
@@ -174,7 +172,7 @@ fun NavGraphBuilder.settingScreen(
                                     )
                                 }
                             }
-                            is InvalidVersionFormatException->{
+                            is InvalidVersionFormatException -> {
                                 LaunchedEffect(releaseInfo) {
                                     viewModel.hideUpdateDialog()
                                     setNotification(
@@ -188,7 +186,7 @@ fun NavGraphBuilder.settingScreen(
                                     )
                                 }
                             }
-                            else ->{
+                            else -> {
                                 LaunchedEffect(releaseInfo) {
                                     viewModel.hideUpdateDialog()
                                     setNotification(
@@ -202,9 +200,7 @@ fun NavGraphBuilder.settingScreen(
                                     )
                                 }
                             }
-
                         }
-
                     }
                 }
             }
