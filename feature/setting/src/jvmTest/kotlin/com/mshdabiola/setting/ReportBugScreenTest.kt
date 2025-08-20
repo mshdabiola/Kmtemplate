@@ -77,43 +77,43 @@ class ReportBugScreenTest {
             .performTextInput("Bug Description")
 
         composeRule.onNodeWithTag(ReportBugScreenTestTags.SUBMIT_EMAIL_BUTTON).assertIsEnabled()
-        composeRule.onNodeWithTag(ReportBugScreenTestTags.SUBMIT_GITHUB_BUTTON).assertIsNotEnabled()
+        composeRule.onNodeWithTag(ReportBugScreenTestTags.SUBMIT_GITHUB_BUTTON).assertIsEnabled()
     }
 
-//    @Test
-//    fun reportBugScreen_submitEmailButton_callsOpenEmail() {
-//        var emailOpened = false
-//        var actualTo = ""
-//        var actualSubject = ""
-//        var actualBody = ""
-//        val appName = "Kmtemplate"
-//        val expectedTitleText = "Test Bug"
-//        val expectedContentText = "This is a test bug report."
-//
-//        composeRule.setContent {
-//            KmtTheme {
-//                ReportBugScreen(
-//                    openEmail = { to, subject, body ->
-//                        emailOpened = true
-//                        actualTo = to
-//                        actualSubject = subject
-//                        actualBody = body
-//                    },
-//                )
-//            }
-//        }
-//
-//        composeRule.onNodeWithTag(ReportBugScreenTestTags.TITLE_TEXT_FIELD)
-//            .performTextInput(expectedTitleText)
-//        composeRule.onNodeWithTag(ReportBugScreenTestTags.DESCRIPTION_TEXT_FIELD)
-//            .performTextInput(expectedContentText)
-//        composeRule.onNodeWithTag(ReportBugScreenTestTags.SUBMIT_EMAIL_BUTTON).performClick()
-//
-//        assertTrue(emailOpened)
-//        assertEquals("mshdabiola@gmail.com", actualTo)
-//        assertEquals("Bug Report of $appName : $expectedTitleText", actualSubject)
-//        assertEquals(expectedContentText, actualBody)
-//    }
+    @Test
+    fun reportBugScreen_submitEmailButton_callsOpenEmail() {
+        var emailOpened = false
+        var actualTo = ""
+        var actualSubject = ""
+        var actualBody = ""
+        val appName = "Kmtemplate"
+        val expectedTitleText = "Test Bug"
+        val expectedContentText = "This is a test bug report."
+
+        composeRule.setContent {
+            KmtTheme {
+                ReportBugScreen(
+                    openEmail = { to, subject, body ->
+                        emailOpened = true
+                        actualTo = to
+                        actualSubject = subject
+                        actualBody = body
+                    },
+                )
+            }
+        }
+
+        composeRule.onNodeWithTag(ReportBugScreenTestTags.TITLE_TEXT_FIELD)
+            .performTextInput(expectedTitleText)
+        composeRule.onNodeWithTag(ReportBugScreenTestTags.DESCRIPTION_TEXT_FIELD)
+            .performTextInput(expectedContentText)
+        composeRule.onNodeWithTag(ReportBugScreenTestTags.SUBMIT_EMAIL_BUTTON).performClick()
+
+        assertTrue(emailOpened)
+        assertEquals("mshdabiola@gmail.com", actualTo)
+        assertEquals("Bug Report of $appName : $expectedTitleText", actualSubject)
+        assertEquals(expectedContentText, actualBody)
+    }
 
     @Test
     fun reportBugScreen_submitGitHubButton_callsOpenUrl() {

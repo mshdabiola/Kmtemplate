@@ -54,7 +54,7 @@
     <string name="faq_icon_cd_expand">Développer</string>
     <string name="faq_preview_shared_code_question">Où puis-je trouver le code partagé dans ce modèle ?</string>
     <string name="faq_preview_shared_code_answer_collapsed">Le code partagé se trouve généralement dans des modules nommés...</string>
-    <string name="faq_preview_shared_code_answer_expanded">Le code partagé se trouve geralmente dans des modules nommés `commonMain`...</string>
+    <string name="faq_preview_shared_code_answer_expanded">Le code partagé se trouve généralement dans des modules nommés `commonMain`...</string>
 
     <string name="report_bug_title_label">Titre</string>
     <string name="report_bug_title_placeholder">Décrivez brièvement le bug que vous avez trouvé</string>

@@ -118,7 +118,7 @@ fun ReportBugScreen(
             }
             KmtButton(
                 modifier = Modifier.testTag(ReportBugScreenTestTags.SUBMIT_GITHUB_BUTTON),
-                enabled = !(heading.text.isNotEmpty() && content.text.isNotEmpty()),
+                enabled = true,
 
                 onClick = { openUrl("https://github.com/mshdabiola/Kmtemplate/issues") },
             ) {
