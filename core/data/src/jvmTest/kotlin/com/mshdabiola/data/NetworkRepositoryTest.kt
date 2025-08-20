@@ -17,8 +17,6 @@ package com.mshdabiola.data
 
 import com.mshdabiola.data.doubles.TestNetworkDataSource
 import com.mshdabiola.data.repository.RealNetworkRepository
-import com.mshdabiola.model.BuildType
-import com.mshdabiola.model.Flavor
 import com.mshdabiola.model.Platform
 import com.mshdabiola.model.ReleaseInfo
 import com.mshdabiola.network.model.Asset
