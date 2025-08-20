@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.mshdabiola.kmtemplate.ui
+package com.mshdabiola.designsystem.component
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
