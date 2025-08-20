@@ -121,8 +121,7 @@ sealed class KmtAppState(
     }
 
     fun dismissIndefiniteSnackbar() {
-        if (snackbarHostState.currentSnackbarData != null) {
-            val snackbarData = snackbarHostState.currentSnackbarData!!
+        snackbarHostState.currentSnackbarData?.let { snackbarData ->
             if (snackbarData.visuals.duration == androidx.compose.material3.SnackbarDuration.Indefinite) {
                 snackbarData.dismiss()
             }

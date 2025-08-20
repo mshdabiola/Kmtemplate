@@ -57,9 +57,9 @@ import com.mshdabiola.designsystem.component.KmtBackground
 import com.mshdabiola.designsystem.component.KmtGradientBackground
 import com.mshdabiola.designsystem.strings.KmtStrings
 import com.mshdabiola.designsystem.theme.GradientColors
+import com.mshdabiola.designsystem.theme.KmtExtendedTheme
 import com.mshdabiola.designsystem.theme.KmtTheme
 import com.mshdabiola.designsystem.theme.LocalGradientColors
-import com.mshdabiola.designsystem.theme.extendedColorScheme
 import com.mshdabiola.kmtemplate.LocalAppLocale
 import com.mshdabiola.kmtemplate.MainActivityUiState
 import com.mshdabiola.kmtemplate.MainAppViewModel
@@ -241,38 +241,48 @@ fun getLanguage(uiState: MainActivityUiState): String =
 
 @Composable
 fun KmtSnackerBar(type: Type, snackbarData: SnackbarData) {
-    val containerColor: Color = when (type) {
-        Type.Default -> SnackbarDefaults.color
-        Type.Error -> MaterialTheme.colorScheme.errorContainer
-        Type.Success -> extendedColorScheme.success.colorContainer
-        Type.Warning -> extendedColorScheme.warning.colorContainer
-    }
-    val contentColor: Color = when (type) {
-        Type.Default -> SnackbarDefaults.contentColor
-        Type.Error -> MaterialTheme.colorScheme.onErrorContainer
-        Type.Success -> extendedColorScheme.success.onColorContainer
-        Type.Warning -> extendedColorScheme.warning.onColorContainer
-    }
-    val actionColor: Color = when (type) {
-        Type.Default -> SnackbarDefaults.actionColor
-        Type.Error -> MaterialTheme.colorScheme.error
-        Type.Success -> extendedColorScheme.success.color
-        Type.Warning -> extendedColorScheme.warning.color
-    }
-    val actionContentColor: Color = when (type) {
-        Type.Default -> SnackbarDefaults.actionContentColor
-        Type.Error -> MaterialTheme.colorScheme.onError
-        Type.Success -> extendedColorScheme.success.onColor
-        Type.Warning -> extendedColorScheme.warning.onColor
+    data class SnackbarColors(
+        val containerColor: Color,
+        val contentColor: Color,
+        val actionColor: Color,
+        val actionContentColor: Color,
+    )
+    val extendedColorScheme = KmtExtendedTheme.colors
+
+    val colors = when (type) {
+        Type.Default -> SnackbarColors(
+            containerColor = SnackbarDefaults.color,
+            contentColor = SnackbarDefaults.contentColor,
+            actionColor = SnackbarDefaults.actionColor,
+            actionContentColor = SnackbarDefaults.actionContentColor,
+        )
+        Type.Error -> SnackbarColors(
+            containerColor = MaterialTheme.colorScheme.errorContainer,
+            contentColor = MaterialTheme.colorScheme.onErrorContainer,
+            actionColor = MaterialTheme.colorScheme.error,
+            actionContentColor = MaterialTheme.colorScheme.onError,
+        )
+        Type.Success -> SnackbarColors(
+            containerColor = extendedColorScheme.success.colorContainer,
+            contentColor = extendedColorScheme.success.onColorContainer,
+            actionColor = extendedColorScheme.success.color,
+            actionContentColor = extendedColorScheme.success.onColor,
+        )
+        Type.Warning -> SnackbarColors(
+            containerColor = extendedColorScheme.warning.colorContainer,
+            contentColor = extendedColorScheme.warning.onColorContainer,
+            actionColor = extendedColorScheme.warning.color,
+            actionContentColor = extendedColorScheme.warning.onColor,
+        )
     }
 
     Snackbar(
         snackbarData = snackbarData,
-        containerColor = containerColor,
-        contentColor = contentColor,
-        actionColor = actionColor,
-        actionContentColor = actionContentColor,
-        dismissActionContentColor = actionContentColor,
+        containerColor = colors.containerColor,
+        contentColor = colors.contentColor,
+        actionColor = colors.actionColor,
+        actionContentColor = colors.actionContentColor,
+        dismissActionContentColor = colors.actionContentColor,
     )
 }
 

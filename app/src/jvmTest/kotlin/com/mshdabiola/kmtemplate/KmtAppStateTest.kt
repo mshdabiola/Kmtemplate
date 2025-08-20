@@ -161,7 +161,7 @@ class KmtAppStateTest {
         assertEquals(DrawerValue.Closed, state.drawerState.currentValue)
 
         state.onDrawerToggle()
-        advanceUntilIdle()
+        composeTestRule.awaitIdle()
 
         assertTrue(state.drawerState.isOpen)
     }
@@ -172,24 +172,25 @@ class KmtAppStateTest {
         assertEquals(DrawerValue.Open, state.drawerState.currentValue)
 
         state.onDrawerToggle()
-        advanceUntilIdle()
+        composeTestRule.awaitIdle()
 
         assertTrue(state.drawerState.isClosed)
     }
 
     @Test
-    fun compactState_navigateTopRoute_alsoInvokesOnDrawerAndTogglesIt() = runTest {
+    fun compactState_navigateTopRoute_alsoInvokesOnDrawerAndTogglesIt() = runTest(testDispatcher) {
         // Test with drawer initially open
         val drawerOpenState = getCompactStateWithDrawer(DrawerValue.Open)
         assertEquals(DrawerValue.Open, drawerOpenState.drawerState.currentValue)
 
-        composeTestRule.runOnUiThread { drawerOpenState.navigateTopRoute(Main) }
+        composeTestRule.runOnUiThread {
+            drawerOpenState.navigateTopRoute(Main)
+        }
         drawerOpenState.onDrawerToggle()
-        advanceUntilIdle()
+        composeTestRule.awaitIdle()
 
         assertTrue(navController.currentBackStackEntry?.destination?.hasRoute(Main::class) ?: false)
-        println(drawerOpenState.drawerState.isAnimationRunning)
-        println(drawerOpenState.drawerState.targetValue)
+
         assertTrue(
             "Drawer should be closed after navigateTopRoute invoked onDrawer (was open)",
             drawerOpenState.drawerState.isClosed,
@@ -201,7 +202,7 @@ class KmtAppStateTest {
 
         composeTestRule.runOnUiThread { drawerClosedState.navigateTopRoute(Setting) }
         drawerClosedState.onDrawerToggle()
-        advanceUntilIdle()
+        composeTestRule.awaitIdle()
         assertTrue(navController.currentBackStackEntry?.destination?.hasRoute(Setting::class) ?: false)
         assertTrue(
             "Drawer should be open after navigateTopRoute invoked onDrawer (was closed)",
@@ -227,7 +228,7 @@ class KmtAppStateTest {
         assertFalse("Initially, rail should not be expanded", wideNavigationRailState.isExpanded)
 
         state.expand()
-        advanceUntilIdle()
+        composeTestRule.awaitIdle()
 
         assertTrue("Rail should be expanded after expand()", wideNavigationRailState.isExpanded)
         assertFalse("Rail should not be collapsed after expand()", wideNavigationRailState.isCollapsed)
@@ -239,7 +240,7 @@ class KmtAppStateTest {
 
         // First, expand it to ensure collapse has an effect
         state.expand()
-        advanceUntilIdle()
+        composeTestRule.awaitIdle()
         assertTrue("Rail should be expanded before collapsing", wideNavigationRailState.isExpanded)
         assertFalse(
             "Rail should not be collapsed before attempting to collapse an expanded rail",
@@ -247,15 +248,15 @@ class KmtAppStateTest {
         )
 
         state.collapse()
-        advanceUntilIdle()
+        composeTestRule.awaitIdle()
 
         assertFalse("Rail should not be expanded after collapse()", wideNavigationRailState.isExpanded)
         assertTrue("Rail should be collapsed after collapse()", wideNavigationRailState.isCollapsed)
     }
 
     val WideNavigationRailState.isExpanded
-        get() = this.targetValue == WideNavigationRailValue.Expanded
+        get() = this.currentValue == WideNavigationRailValue.Expanded
 
     val WideNavigationRailState.isCollapsed
-        get() = targetValue == WideNavigationRailValue.Collapsed
+        get() = currentValue == WideNavigationRailValue.Collapsed
 }
