@@ -23,6 +23,7 @@ import com.mshdabiola.data.repository.UserDataRepository
 import com.mshdabiola.kmtemplate.MainActivityUiState.Loading
 import com.mshdabiola.kmtemplate.MainActivityUiState.Success
 import com.mshdabiola.model.ReleaseInfo
+import com.mshdabiola.model.UpdateException
 import com.mshdabiola.model.UserSettings
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.async
@@ -67,7 +68,7 @@ class MainAppViewModel(
                     allowPreRelease = userSettings.updateFromPreRelease,
                 )
             } else {
-                ReleaseInfo.Error("Update dialog is disabled")
+                ReleaseInfo.Error(UpdateException("Update dialog is disabled"))
             }
         }
     }
