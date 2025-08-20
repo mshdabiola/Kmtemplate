@@ -148,9 +148,9 @@ class SettingListScreenTest {
         // "Support & Feedback"
 
         // Verify items in Support section
-        val issueNav = SettingNav.Issue
+        val reportBugNav = SettingNav.ReportBug
         composeRule.onNodeWithTag(
-            "${SettingScreenListTestTags.LIST_ITEM_CARD_PREFIX}${issueNav.name}",
+            "${SettingScreenListTestTags.LIST_ITEM_CARD_PREFIX}${reportBugNav.name}",
             useUnmergedTree = true,
         )
             .assertIsDisplayed()

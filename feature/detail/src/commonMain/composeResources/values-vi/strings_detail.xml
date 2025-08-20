@@ -20,4 +20,6 @@
     <string name="detail_back_icon_content_description">quay lại</string>
     <string name="detail_title_placeholder">Tiêu đề</string>
     <string name="detail_content_placeholder">nội dung</string>
+    <string name="detail_delete_confirmation_message">Bạn có chắc chắn muốn xóa ghi chú này không?</string>
+    <string name="detail_delete_action_text">Xóa</string>
 </resources>

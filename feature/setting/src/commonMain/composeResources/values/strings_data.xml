@@ -15,7 +15,11 @@
      limitations under the License.
 -->
 <resources>
-    <string name="release_update_dialog_title">Доступно новое обновление</string>
-    <string name="release_update_dialog_download_button">Скачать</string>
-    <string name="release_update_dialog_cancel_button">Отмена</string>
+    <string name="data_error_device_not_supported">Device not supported</string>
+    <string name="data_error_asset_not_found">Asset not found</string>
+    <string name="data_error_invalid_version_format">Invalid version format</string>
+    <string name="data_error_prerelease_not_allowed">Pre-release versions are not allowed</string>
+    <string name="data_error_current_version_greater">Current version is greater than latest version</string>
+    <string name="data_error_current_version_equal">Current version is equal to latest version</string>
+    <string name="data_error_unknown">Unknown error</string>
 </resources>

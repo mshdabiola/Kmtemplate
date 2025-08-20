@@ -15,7 +15,8 @@
      limitations under the License.
 -->
 <resources>
-    <string name="release_update_dialog_title">Cập nhật mới có sẵn</string>
-    <string name="release_update_dialog_download_button">Tải xuống</string>
-    <string name="release_update_dialog_cancel_button">Hủy</string>
+    <string name="release_update_dialog_title">Доступно обновление</string>
+    <string name="release_update_dialog_download_button">Обновить сейчас</string>
+    <string name="release_update_dialog_cancel_button">Обновить позже</string>
+    <string name="release_update_dialog_body">Версия %1$s теперь доступна. Это обновление включает улучшения производительности и исправления ошибок.</string>
 </resources>

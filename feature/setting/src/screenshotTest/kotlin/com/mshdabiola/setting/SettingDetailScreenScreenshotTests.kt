@@ -160,7 +160,7 @@ class SettingDetailScreenScreenshotTests {
             Surface(modifier = Modifier.fillMaxSize()) {
                 SettingDetailScreen(
                     onBack = sampleOnBack,
-                    settingNav = SettingNav.Issue,
+                    settingNav = SettingNav.ReportBug,
                     settingState = defaultSettingState,
                 )
             }
@@ -174,7 +174,7 @@ class SettingDetailScreenScreenshotTests {
             Surface(modifier = Modifier.fillMaxSize()) {
                 SettingDetailScreen(
                     onBack = null, // No back action
-                    settingNav = SettingNav.Issue,
+                    settingNav = SettingNav.ReportBug,
                     settingState = defaultSettingState,
                 )
             }

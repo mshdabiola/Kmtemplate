@@ -22,10 +22,12 @@ import androidx.navigation.compose.NavHost
 import com.mshdabiola.detail.navigation.Detail
 import com.mshdabiola.detail.navigation.detailScreen
 import com.mshdabiola.detail.navigation.navigateToDetail
+import com.mshdabiola.kmtemplate.ui.Compact
 import com.mshdabiola.kmtemplate.ui.KmtAppState
 import com.mshdabiola.main.navigation.Main
 import com.mshdabiola.main.navigation.mainScreen
 import com.mshdabiola.setting.navigation.settingScreen
+import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
@@ -34,6 +36,16 @@ fun KmtNavHost(
     modifier: Modifier = Modifier,
 ) {
     val navController = appState.navController
+    val onDrawer = if (appState is Compact) {
+        {
+            appState.coroutineScope.launch {
+                appState.drawerState.open()
+            }
+            Unit
+        }
+    } else {
+        null
+    }
 
     NavHost(
         modifier = modifier,
@@ -42,16 +54,21 @@ fun KmtNavHost(
     ) {
         mainScreen(
             modifier = Modifier,
-            onDrawer = appState.onDrawer,
+            onDrawer = onDrawer,
             navigateToDetail = { navController.navigateToDetail(Detail(it)) },
         )
         detailScreen(
             modifier = Modifier,
-            onBack = navController::popBackStack,
+            onBack = {
+                appState.dismissIndefiniteSnackbar()
+                navController.popBackStack()
+            },
+            setNotification = appState::onNotification,
         )
         settingScreen(
             modifier = Modifier,
-            onDrawer = appState.onDrawer,
+            onDrawer = onDrawer,
+            setNotification = appState::onNotification,
         )
     }
 }

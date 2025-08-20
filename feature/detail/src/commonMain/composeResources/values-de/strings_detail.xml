@@ -20,4 +20,6 @@
     <string name="detail_back_icon_content_description">zurück</string>
     <string name="detail_title_placeholder">Titel</string>
     <string name="detail_content_placeholder">Inhalt</string>
+    <string name="detail_delete_confirmation_message">Möchtest du diese Notiz wirklich löschen?</string>
+    <string name="detail_delete_action_text">Löschen</string>
 </resources>

@@ -15,7 +15,8 @@
      limitations under the License.
 -->
 <resources>
-    <string name="release_update_dialog_title">Yeni Güncelleme Mevcut</string>
-    <string name="release_update_dialog_download_button">İndir</string>
-    <string name="release_update_dialog_cancel_button">İptal</string>
+    <string name="release_update_dialog_title">Actualización disponible</string>
+    <string name="release_update_dialog_download_button">Actualizar ahora</string>
+    <string name="release_update_dialog_cancel_button">Actualizar más tarde</string>
+    <string name="release_update_dialog_body">La versión %1$s ya está disponible. Esta actualización incluye mejoras de rendimiento y correcciones de errores.</string>
 </resources>

@@ -15,7 +15,11 @@
      limitations under the License.
 -->
 <resources>
-    <string name="release_update_dialog_title">Dostępna nowa aktualizacja</string>
-    <string name="release_update_dialog_download_button">Pobierz</string>
-    <string name="release_update_dialog_cancel_button">Anuluj</string>
+    <string name="data_error_device_not_supported">Laitetta ei tueta</string>
+    <string name="data_error_asset_not_found">Resurssia ei löydy</string>
+    <string name="data_error_invalid_version_format">Virheellinen versioformaatti</string>
+    <string name="data_error_prerelease_not_allowed">Ennakkojulkaisut eivät ole sallittuja</string>
+    <string name="data_error_current_version_greater">Nykyinen versio on uudempi kuin uusin versio</string>
+    <string name="data_error_current_version_equal">Nykyinen versio on sama kuin uusin versio</string>
+    <string name="data_error_unknown">Tuntematon virhe</string>
 </resources>

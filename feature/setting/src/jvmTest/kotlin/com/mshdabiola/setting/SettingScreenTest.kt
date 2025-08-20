@@ -23,6 +23,7 @@ import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.performClick
 import com.mshdabiola.designsystem.theme.KmtTheme
 import com.mshdabiola.model.DarkThemeConfig
+import com.mshdabiola.model.UserSettings
 import com.mshdabiola.model.testtag.AppearanceScreenTestTags
 import com.mshdabiola.model.testtag.FaqScreenTestTags
 import com.mshdabiola.model.testtag.SettingDetailScreenTestTags
@@ -39,8 +40,10 @@ class SettingScreenTest {
     val composeRule = createComposeRule()
 
     private val initialSettingState = SettingState(
-        contrast = 0,
-        darkThemeConfig = DarkThemeConfig.FOLLOW_SYSTEM,
+        userSettings = UserSettings(
+            contrast = 0,
+            darkThemeConfig = DarkThemeConfig.FOLLOW_SYSTEM,
+        ),
     )
 
     // Expected titles for quick verification (adjust if your resource loading differs in test)
@@ -194,8 +197,8 @@ class SettingScreenTest {
             }
         }
 
-        val issueItemTag = "${SettingScreenListTestTags.LIST_ITEM_CARD_PREFIX}${SettingNav.Issue.name}"
-        composeRule.onNodeWithTag(issueItemTag).performClick()
+        val reportBugItemTag = "${SettingScreenListTestTags.LIST_ITEM_CARD_PREFIX}${SettingNav.ReportBug.name}"
+        composeRule.onNodeWithTag(reportBugItemTag).performClick()
 
         // composeRule.mainClock.advanceTimeUntilIdle() // Good practice if any async ops were triggered
 

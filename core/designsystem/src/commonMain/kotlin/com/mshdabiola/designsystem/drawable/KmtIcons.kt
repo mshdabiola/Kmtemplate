@@ -36,6 +36,7 @@ import androidx.compose.material.icons.rounded.Language
 import androidx.compose.material.icons.rounded.LightMode
 import androidx.compose.material.icons.rounded.Menu
 import androidx.compose.material.icons.rounded.Settings
+import androidx.compose.material.icons.rounded.SystemUpdateAlt
 
 object KmtIcons {
     val Check = Icons.Rounded.Check
@@ -60,6 +61,7 @@ object KmtIcons {
     val Menu = Icons.Rounded.Menu
     val MenuOpen = Icons.AutoMirrored.Rounded.MenuOpen
 
+    val Update = Icons.Rounded.SystemUpdateAlt
     val Appearance = Icons.Rounded.DisplaySettings
 
     val BugReport = Icons.Rounded.BugReport

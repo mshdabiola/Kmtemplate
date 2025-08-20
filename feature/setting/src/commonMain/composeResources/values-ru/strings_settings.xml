@@ -16,6 +16,7 @@
 -->
 <resources>
     <string name="screen_name">Настройки</string>
+    <string name="feature_update_screen_name">Обновить</string>
     <string name="version">Версия</string>
     <string name="version_code">Код версии</string>
     <string name="last_update">Последнее обновление</string>
@@ -55,6 +56,23 @@
     <string name="faq_preview_shared_code_answer_collapsed">Общий код обычно находится в модулях с именем...</string>
     <string name="faq_preview_shared_code_answer_expanded">Общий код обычно находится в модулях с именем `commonMain`...</string>
 
+    <string name="report_bug_title_label">Заголовок</string>
+    <string name="report_bug_title_placeholder">Кратко опишите найденную ошибку</string>
+    <string name="report_bug_description_label">Описание</string>
+    <string name="report_bug_description_placeholder">Подробно опишите проблему</string>
+    <string name="report_bug_submit_email_button">Отправить по электронной почте</string>
+    <string name="report_bug_submit_github_button">Сообщить об ошибке на GitHub</string>
+    <string name="report_bug_email_subject_format">Отчет об ошибке %1$s : %2$s</string>
+    <string name="report_bug_contact_email">mshdabiola@gmail.com</string>
+    <string name="report_bug_github_url">https://github.com/mshdabiola/Kmtemplate/issues</string>
+
+    <string name="update_screen_show_update_dialog_text">Показать диалоговое окно обновления</string>
+    <string name="update_screen_join_beta_release_text">Присоединиться к бета-версии</string>
+    <string name="update_screen_check_for_update_button">Проверить обновления</string>
+
+    <string name="notification_message_up_to_date">Все обновлено</string>
+    <string name="notification_message_error_checking_update">Ошибка проверки обновлений</string>
+
     <string-array name="segment">
         <item>Общие</item>
         <item>Поддержка</item>
@@ -63,10 +81,11 @@
     <string-array name="general">
         <item>Внешний вид</item>
         <item>Язык</item>
+        <item>Проверить обновления</item>
     </string-array>
 
     <string-array name="support">
-        <item>Сообщить о проблеме</item>
+        <item>Сообщить об ошибке</item>
         <item>Вопросы и ответы</item>
         <item>О программе</item>
     </string-array>

@@ -16,6 +16,7 @@
 -->
 <resources>
     <string name="screen_name">Ustawienia</string>
+    <string name="feature_update_screen_name">Aktualizacja</string>
     <string name="version">Wersja</string>
     <string name="version_code">Kod wersji</string>
     <string name="last_update">Ostatnia aktualizacja</string>
@@ -55,6 +56,23 @@
     <string name="faq_preview_shared_code_answer_collapsed">Udostępniony kod znajduje się zazwyczaj w modułach o nazwie...</string>
     <string name="faq_preview_shared_code_answer_expanded">Udostępniony kod znajduje się zazwyczaj w modułach o nazwie `commonMain`...</string>
 
+    <string name="report_bug_title_label">Tytuł</string>
+    <string name="report_bug_title_placeholder">Krótko opisz znaleziony błąd</string>
+    <string name="report_bug_description_label">Opis</string>
+    <string name="report_bug_description_placeholder">Opisz problem szczegółowo</string>
+    <string name="report_bug_submit_email_button">Wyślij e-mailem</string>
+    <string name="report_bug_submit_github_button">Zgłoś błąd na GitHub</string>
+    <string name="report_bug_email_subject_format">Zgłoszenie błędu %1$s: %2$s</string>
+    <string name="report_bug_contact_email">mshdabiola@gmail.com</string>
+    <string name="report_bug_github_url">https://github.com/mshdabiola/Kmtemplate/issues</string>
+
+    <string name="update_screen_show_update_dialog_text">Pokaż okno dialogowe aktualizacji</string>
+    <string name="update_screen_join_beta_release_text">Dołącz do wersji beta</string>
+    <string name="update_screen_check_for_update_button">Sprawdź aktualizacje</string>
+
+    <string name="notification_message_up_to_date">Jesteś na bieżąco</string>
+    <string name="notification_message_error_checking_update">Błąd podczas sprawdzania aktualizacji</string>
+
     <string-array name="segment">
         <item>Ogólne</item>
         <item>Wsparcie</item>
@@ -63,10 +81,11 @@
     <string-array name="general">
         <item>Wygląd</item>
         <item>Język</item>
+        <item>Sprawdź aktualizacje</item>
     </string-array>
 
     <string-array name="support">
-        <item>Zgłoś problem</item>
+        <item>Zgłoś błąd</item>
         <item>FAQ</item>
         <item>O aplikacji</item>
     </string-array>

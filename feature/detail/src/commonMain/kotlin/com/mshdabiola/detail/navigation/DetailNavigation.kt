@@ -17,16 +17,24 @@ package com.mshdabiola.detail.navigation
 
 import androidx.compose.animation.ExperimentalSharedTransitionApi
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import androidx.navigation.toRoute
 import com.mshdabiola.detail.DetailScreen
 import com.mshdabiola.detail.DetailViewModel
+import com.mshdabiola.model.Notification
+import com.mshdabiola.model.SnackbarDuration
+import com.mshdabiola.model.Type
 import com.mshdabiola.ui.LocalNavAnimatedContentScope
+import kmtemplate.feature.detail.generated.resources.Res
+import kmtemplate.feature.detail.generated.resources.detail_delete_action_text
+import kmtemplate.feature.detail.generated.resources.detail_delete_confirmation_message
+import kotlinx.coroutines.launch
+import org.jetbrains.compose.resources.getString
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.annotation.KoinExperimentalAPI
 import org.koin.core.parameter.parameterSetOf
@@ -42,10 +50,12 @@ fun NavController.navigateToDetail(detail: Detail) {
 fun NavGraphBuilder.detailScreen(
     modifier: Modifier = Modifier,
     onBack: () -> Unit,
+    setNotification: (Notification) -> Unit,
 ) {
     composable<Detail> { backStack ->
 
         val detail: Detail = backStack.toRoute()
+        val coroutineScope = rememberCoroutineScope()
 
 //        val viewModel= koinViewModel<DetailViewModel>{ parametersOf(id)}
         val viewModel: DetailViewModel =
@@ -66,8 +76,20 @@ fun NavGraphBuilder.detailScreen(
                 detail = detail,
                 onBack = onBack,
                 onDelete = {
-                    viewModel.onDelete()
-                    onBack()
+                    coroutineScope.launch {
+                        setNotification(
+                            Notification.MessageWithAction(
+                                type = Type.Warning,
+                                duration = SnackbarDuration.Indefinite,
+                                message = getString(Res.string.detail_delete_confirmation_message),
+                                action = getString(Res.string.detail_delete_action_text),
+                                actionCallback = {
+                                    viewModel.onDelete()
+                                    onBack()
+                                },
+                            ),
+                        )
+                    }
                 },
 
             )

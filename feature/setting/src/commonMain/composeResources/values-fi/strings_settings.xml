@@ -16,6 +16,7 @@
 -->
 <resources>
     <string name="screen_name">Asetukset</string>
+    <string name="feature_update_screen_name">Päivitä</string>
     <string name="version">Versio</string>
     <string name="version_code">Version koodi</string>
     <string name="last_update">Viimeisin päivitys</string>
@@ -55,6 +56,23 @@
     <string name="faq_preview_shared_code_answer_collapsed">Jaettu koodi sijaitsee tyypillisesti nimetyissä moduuleissa...</string>
     <string name="faq_preview_shared_code_answer_expanded">Jaettu koodi sijaitsee tyypillisesti `commonMain`-nimisissä moduuleissa...</string>
 
+    <string name="report_bug_title_label">Otsikko</string>
+    <string name="report_bug_title_placeholder">Kuvaile lyhyesti löytämäsi virhe</string>
+    <string name="report_bug_description_label">Kuvaus</string>
+    <string name="report_bug_description_placeholder">Kuvaile ongelma yksityiskohtaisesti</string>
+    <string name="report_bug_submit_email_button">Lähetä sähköpostitse</string>
+    <string name="report_bug_submit_github_button">Ilmoita virheestä GitHubissa</string>
+    <string name="report_bug_email_subject_format">Virheraportti sovelluksesta %1$s: %2$s</string>
+    <string name="report_bug_contact_email">mshdabiola@gmail.com</string>
+    <string name="report_bug_github_url">https://github.com/mshdabiola/Kmtemplate/issues</string>
+
+    <string name="update_screen_show_update_dialog_text">Näytä päivitysikkuna</string>
+    <string name="update_screen_join_beta_release_text">Liity beta-julkaisuun</string>
+    <string name="update_screen_check_for_update_button">Tarkista päivitykset</string>
+
+    <string name="notification_message_up_to_date">Olet ajan tasalla</string>
+    <string name="notification_message_error_checking_update">Virhe päivityksiä tarkistettaessa</string>
+
     <string-array name="segment">
         <item>Yleistä</item>
         <item>Tuki</item>
@@ -63,10 +81,11 @@
     <string-array name="general">
         <item>Ulkoasu</item>
         <item>Kieli</item>
+        <item>Tarkista päivitykset</item>
     </string-array>
 
     <string-array name="support">
-        <item>Ilmoita ongelmasta</item>
+        <item>Ilmoita bugista</item>
         <item>UKK</item>
         <item>Tietoja</item>
     </string-array>
