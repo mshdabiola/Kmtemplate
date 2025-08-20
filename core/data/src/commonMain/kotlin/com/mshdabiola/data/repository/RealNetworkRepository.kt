@@ -16,6 +16,7 @@
 package com.mshdabiola.data.repository
 
 import com.mshdabiola.model.AssetNotFoundException
+import com.mshdabiola.model.DeviceNotSupportedException
 import com.mshdabiola.model.InvalidVersionFormatException
 import com.mshdabiola.model.NoUpdateAvailableException
 import com.mshdabiola.model.Platform
@@ -66,7 +67,7 @@ internal class RealNetworkRepository(
     override suspend fun getLatestReleaseInfo(currentVersion: String, allowPreRelease: Boolean): ReleaseInfo {
         if (platform !is Platform.Android) {
             // Explicitly return Error with UpdateException for non-Android platform
-            return ReleaseInfo.Error(UpdateException("Device not supported"))
+            return ReleaseInfo.Error(DeviceNotSupportedException("Device not supported"))
         }
 
         val name = "app-${platform.flavor.id}-${platform.buildType.id}-unsigned-signed.apk"

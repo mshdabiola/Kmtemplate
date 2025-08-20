@@ -64,3 +64,9 @@ class NoUpdateAvailableException(
     override val cause: Throwable? = null,
 ) : UpdateException(message, cause)
 
+class DeviceNotSupportedException(
+    override val message: String,
+    override val cause: Throwable? = null,
+) : UpdateException(message, cause)
+
+
