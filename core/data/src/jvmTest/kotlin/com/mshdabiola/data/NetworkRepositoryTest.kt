@@ -34,8 +34,8 @@ class NetworkRepositoryTest {
     private lateinit var networkDataSource: TestNetworkDataSource
     private lateinit var repository: RealNetworkRepository
 
-    private val fossReleasePlatform = Platform.Android(Flavor.FossReliant, BuildType.Release, 30)
-    private val googlePlayDebugPlatform = Platform.Android(Flavor.GooglePlay, BuildType.Debug, 31)
+    private val fossReleasePlatform = Platform.Android("fossReliant", "release", 30)
+    private val googlePlayDebugPlatform = Platform.Android("googlePlay", "debug", 31)
     private val nonAndroidPlatform = Platform.Desktop("linux", "kernel6")
 
     @Before

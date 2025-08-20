@@ -19,15 +19,39 @@ sealed class Platform {
 //    object Ios : Platform()
     object Web : Platform()
     data class Desktop(val os: String, val javaVersion: String) : Platform()
-    data class Android(val flavor: Flavor, val buildType: BuildType, val sdk: Int) : Platform()
+    data class Android(val flavorStr:String, val buildTypeStr: String, val sdk: Int) : Platform(){
+        val flavor : Flavor
+            get() {
+               return when(flavorStr){
+                    "googlePlay" -> {
+                        Flavor.GooglePlay
+                    }
+                   else -> {
+                        Flavor.FossReliant
+                    }
+
+               }
+            }
+        val buildType : BuildType
+        get() {
+            return when(buildTypeStr){
+                "release" -> {
+                    BuildType.Release
+                }
+                else -> {
+                    BuildType.Debug
+                }
+        }
+    }
+    }
 }
 
-enum class Flavor(val id: String) {
-    GooglePlay("googlePlay"),
-    FossReliant("fossReliant"),
+enum class Flavor {
+    GooglePlay,
+    FossReliant
 }
 
-enum class BuildType(val id: String) {
-    Release("release"),
-    Debug("debug"),
+enum class BuildType {
+    Release,
+    Debug
 }
