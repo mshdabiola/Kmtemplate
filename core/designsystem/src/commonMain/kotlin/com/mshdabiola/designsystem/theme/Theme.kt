@@ -24,6 +24,7 @@ import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.Immutable
+import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 
@@ -360,7 +361,7 @@ val unspecified_scheme = ColorFamily(
     Color.Unspecified,
 )
 
-var extendedColorScheme: ExtendedColorScheme = extendedLight
+val LocalExtendedColorScheme = staticCompositionLocalOf { extendedLight }
 
 @Composable
 fun KmtTheme(
@@ -369,7 +370,7 @@ fun KmtTheme(
     disableDynamicTheming: Boolean = true,
     content: @Composable () -> Unit,
 ) {
-    extendedColorScheme =
+    val extendedColorScheme =
         when {
             !disableDynamicTheming && supportsDynamicTheming() -> {
                 if (darkTheme) extendedDark else extendedLight
@@ -426,6 +427,7 @@ fun KmtTheme(
         LocalGradientColors provides gradientColors,
         LocalBackgroundTheme provides defaultBackgroundTheme,
         LocalTintTheme provides tintTheme,
+        LocalExtendedColorScheme provides extendedColorScheme,
     ) {
         MaterialTheme(
             colorScheme = colorScheme,
@@ -433,6 +435,11 @@ fun KmtTheme(
             content = content,
         )
     }
+}
+
+object KmtExtendedTheme {
+    val colors: ExtendedColorScheme
+        @Composable get() = LocalExtendedColorScheme.current
 }
 
 expect fun supportsDynamicTheming(): Boolean
