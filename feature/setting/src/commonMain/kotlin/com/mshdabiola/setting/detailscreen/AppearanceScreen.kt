@@ -108,7 +108,7 @@ fun AppearanceScreen(
     Column(
         modifier = modifier
             .fillMaxWidth()
-            .padding(16.dp)
+            .padding(8.dp)
             .verticalScroll(scrollState)
             .testTag(AppearanceScreenTestTags.SCREEN_ROOT),
     ) {

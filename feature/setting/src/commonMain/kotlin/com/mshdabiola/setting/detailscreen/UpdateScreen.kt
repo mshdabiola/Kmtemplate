@@ -57,7 +57,7 @@ fun UpdateScreen(
         modifier = modifier
             .fillMaxSize()
             .verticalScroll(rememberScrollState())
-            .padding(horizontal = 24.dp, vertical = 32.dp)
+            .padding(horizontal = 8.dp)
             .testTag(UpdateScreenTestTags.ROOT_COLUMN),
         verticalArrangement = Arrangement.spacedBy(16.dp, Alignment.Top),
         // Changed from SpacedBy to Top for more control with Spacers

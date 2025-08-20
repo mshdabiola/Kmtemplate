@@ -17,6 +17,7 @@ package com.mshdabiola.setting.detailscreen
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -58,7 +59,7 @@ fun ReportBugScreen(
         modifier = modifier
             .fillMaxSize()
             .verticalScroll(rememberScrollState())
-            .padding(horizontal = 24.dp, vertical = 32.dp)
+            .padding(horizontal = 8.dp)
             .testTag(ReportBugScreenTestTags.ROOT_COLUMN),
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.Start,
@@ -89,7 +90,7 @@ fun ReportBugScreen(
 
         )
         Spacer(modifier = Modifier.height(16.dp))
-        Row(
+        FlowRow (
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceAround,
         ) {
