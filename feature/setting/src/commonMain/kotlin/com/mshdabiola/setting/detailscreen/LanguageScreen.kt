@@ -53,7 +53,7 @@ fun LanguageScreen(
     LazyColumn(
         modifier = modifier
             .fillMaxWidth()
-            .padding(horizontal = 8.dp, vertical = 8.dp)
+            .padding(horizontal = 8.dp)
             .testTag(LanguageScreenTestTags.LANGUAGE_LIST),
         verticalArrangement = Arrangement.spacedBy(8.dp),
     ) {

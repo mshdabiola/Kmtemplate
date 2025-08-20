@@ -107,7 +107,7 @@ fun FaqScreen(
         Column(
             modifier = modifier
                 .fillMaxWidth()
-                .padding(16.dp)
+                .padding(8.dp)
                 .testTag(FaqScreenTestTags.SCREEN_ROOT),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
