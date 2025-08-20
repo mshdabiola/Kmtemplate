@@ -20,7 +20,7 @@ sealed class ReleaseInfo {
      * Represents an error that occurred while fetching or processing release information.
      * @param message A descriptive message of the error.
      */
-    data class Error(val message: String) : ReleaseInfo()
+    data class Error(val exception: Exception) : ReleaseInfo()
 
     /**
      * Represents a successful check where a new update is available.

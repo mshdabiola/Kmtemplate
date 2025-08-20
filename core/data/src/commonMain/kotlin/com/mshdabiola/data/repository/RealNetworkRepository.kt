@@ -15,8 +15,13 @@
  */
 package com.mshdabiola.data.repository
 
+import com.mshdabiola.model.AssetNotFoundException
+import com.mshdabiola.model.InvalidVersionFormatException
+import com.mshdabiola.model.NoUpdateAvailableException
 import com.mshdabiola.model.Platform
+import com.mshdabiola.model.PreReleaseNotAllowedException
 import com.mshdabiola.model.ReleaseInfo
+import com.mshdabiola.model.UpdateException
 import com.mshdabiola.network.NetworkDataSource
 
 internal class RealNetworkRepository(
@@ -58,7 +63,7 @@ internal class RealNetworkRepository(
      */
     override suspend fun getLatestReleaseInfo(currentVersion: String, allowPreRelease: Boolean): ReleaseInfo {
         if (platform !is Platform.Android) {
-            return ReleaseInfo.Error("Device not supported")
+            return ReleaseInfo.Error(UpdateException("Device not supported"))
         }
 
         val name = "app-${platform.flavor.id}-${platform.buildType.id}-unsigned-signed.apk"
@@ -76,15 +81,15 @@ internal class RealNetworkRepository(
 
             when {
                 asset == null ->
-                    throw Exception("Asset not found")
+                    throw AssetNotFoundException("Asset not found")
                 onlineParsedVersion == null || currentParsedVersion == null ->
-                    throw Exception("Invalid version format")
+                    throw InvalidVersionFormatException("Invalid version format")
                 !allowPreRelease && gitHubReleaseInfo.prerelease == true ->
-                    throw Exception("Pre-release versions are not allowed")
+                    throw PreReleaseNotAllowedException("Pre-release versions are not allowed")
                 currentParsedVersion > onlineParsedVersion ->
-                    throw Exception("Current version is greater than latest version")
+                    throw NoUpdateAvailableException("Current version is greater than latest version")
                 currentParsedVersion == onlineParsedVersion ->
-                    return ReleaseInfo.UpToDate
+                    throw NoUpdateAvailableException("Current version is equal to latest version")
             }
 
             ReleaseInfo.NewUpdate(
@@ -93,8 +98,11 @@ internal class RealNetworkRepository(
                 body = gitHubReleaseInfo.body ?: "",
                 asset = asset.browserDownloadUrl ?: "",
             )
-        } catch (e: Exception) {
-            ReleaseInfo.Error(e.message ?: "Unknown error")
+        } catch (e: UpdateException){
+            ReleaseInfo.Error(e)
+        }
+        catch (e: Exception) {
+            ReleaseInfo.Error(e)
         }
     }
 }
