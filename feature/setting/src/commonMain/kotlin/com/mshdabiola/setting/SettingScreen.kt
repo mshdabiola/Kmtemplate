@@ -42,6 +42,9 @@ fun SettingScreen(
     onLanguageChange: (String) -> Unit = {},
     openUrl: (String) -> Unit = {},
     openEmail: (String, String, String) -> Unit = { _, _, _ -> },
+    onSetUpdateDialog: (Boolean) -> Unit = {},
+    onSetUpdateFromPreRelease: (Boolean) -> Unit = {},
+    onCheckForUpdate: () -> Unit = {},
 
 ) {
     val navigator = rememberListDetailPaneScaffoldNavigator<SettingNav>()
@@ -62,15 +65,11 @@ fun SettingScreen(
                     settingsMap = settingsBySegment,
                     onDrawer = onDrawer,
                     onSettingClick = {
-                        if (it == SettingNav.Issue) {
-                            openUrl("https://github.com/mshdabiola/Kmtemplate/issues")
-                        } else {
-                            coroutineScope.launch {
-                                navigator.navigateTo(
-                                    pane = ListDetailPaneScaffoldRole.Detail,
-                                    contentKey = it,
-                                )
-                            }
+                        coroutineScope.launch {
+                            navigator.navigateTo(
+                                pane = ListDetailPaneScaffoldRole.Detail,
+                                contentKey = it,
+                            )
                         }
                     },
                 )
@@ -97,6 +96,9 @@ fun SettingScreen(
                     onLanguageChange = onLanguageChange,
                     openUrl = openUrl,
                     openEmail = openEmail,
+                    onSetUpdateDialog = onSetUpdateDialog,
+                    onSetUpdateFromPreRelease = onSetUpdateFromPreRelease,
+                    onCheckForUpdate = onCheckForUpdate,
                 )
             }
         },
@@ -106,10 +108,7 @@ fun SettingScreen(
 @Preview()
 @Composable
 internal fun SettingScreenPreview() {
-    val settingState = SettingState(
-        contrast = 0,
-        darkThemeConfig = DarkThemeConfig.DARK,
-    )
+    val settingState = SettingState()
     SharedTransitionContainer {
         SettingScreen(
             modifier = Modifier,

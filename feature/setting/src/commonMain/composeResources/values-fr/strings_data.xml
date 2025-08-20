@@ -15,7 +15,11 @@
      limitations under the License.
 -->
 <resources>
-    <string name="release_update_dialog_title">Nueva actualización disponible</string>
-    <string name="release_update_dialog_download_button">Descargar</string>
-    <string name="release_update_dialog_cancel_button">Cancelar</string>
+    <string name="data_error_device_not_supported">Appareil non pris en charge</string>
+    <string name="data_error_asset_not_found">Asset non trouvé</string>
+    <string name="data_error_invalid_version_format">Format de version invalide</string>
+    <string name="data_error_prerelease_not_allowed">Les versions préliminaires ne sont pas autorisées</string>
+    <string name="data_error_current_version_greater">La version actuelle est supérieure à la dernière version</string>
+    <string name="data_error_current_version_equal">La version actuelle est égale à la dernière version</string>
+    <string name="data_error_unknown">Erreur inconnue</string>
 </resources>

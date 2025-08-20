@@ -20,4 +20,6 @@
     <string name="detail_back_icon_content_description">atrás</string>
     <string name="detail_title_placeholder">Título</string>
     <string name="detail_content_placeholder">contenido</string>
+    <string name="detail_delete_confirmation_message">¿Estás seguro de que quieres eliminar esta nota?</string>
+    <string name="detail_delete_action_text">Eliminar</string>
 </resources>

@@ -16,6 +16,7 @@
 -->
 <resources>
     <string name="screen_name">Ayarlar</string>
+    <string name="feature_update_screen_name">Güncelle</string>
     <string name="version">Sürüm</string>
     <string name="version_code">Sürüm Kodu</string>
     <string name="last_update">Son Güncelleme</string>
@@ -55,6 +56,23 @@
     <string name="faq_preview_shared_code_answer_collapsed">Paylaşılan kod genellikle şu adlı modüllerde bulunur...</string>
     <string name="faq_preview_shared_code_answer_expanded">Paylaşılan kod genellikle `commonMain` adlı modüllerde bulunur...</string>
 
+    <string name="report_bug_title_label">Başlık</string>
+    <string name="report_bug_title_placeholder">Bulduğunuz hatayı kısaca açıklayın</string>
+    <string name="report_bug_description_label">Açıklama</string>
+    <string name="report_bug_description_placeholder">Sorunu ayrıntılı olarak açıklayın</string>
+    <string name="report_bug_submit_email_button">E-posta ile Gönder</string>
+    <string name="report_bug_submit_github_button">GitHub'da Hata Bildir</string>
+    <string name="report_bug_email_subject_format">%1$s Hata Raporu: %2$s</string>
+    <string name="report_bug_contact_email">mshdabiola@gmail.com</string>
+    <string name="report_bug_github_url">https://github.com/mshdabiola/Kmtemplate/issues</string>
+
+    <string name="update_screen_show_update_dialog_text">Güncelleme iletişim kutusunu göster</string>
+    <string name="update_screen_join_beta_release_text">Beta sürümüne katıl</string>
+    <string name="update_screen_check_for_update_button">Güncellemeleri kontrol et</string>
+
+    <string name="notification_message_up_to_date">Güncelsiniz</string>
+    <string name="notification_message_error_checking_update">Güncellemeler kontrol edilirken hata oluştu</string>
+
     <string-array name="segment">
         <item>Genel</item>
         <item>Destek</item>
@@ -63,10 +81,11 @@
     <string-array name="general">
         <item>Görünüm</item>
         <item>Dil</item>
+        <item>Güncellemeleri kontrol et</item>
     </string-array>
 
     <string-array name="support">
-        <item>Sorun Bildir</item>
+        <item>Hata bildir</item>
         <item>SSS</item>
         <item>Hakkında</item>
     </string-array>

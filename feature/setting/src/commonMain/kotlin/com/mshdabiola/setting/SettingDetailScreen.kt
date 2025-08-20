@@ -24,6 +24,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.testTag
@@ -31,15 +32,21 @@ import androidx.compose.ui.unit.dp
 import com.mshdabiola.designsystem.component.KmtIconButton
 import com.mshdabiola.designsystem.component.KmtTopAppBar
 import com.mshdabiola.designsystem.drawable.KmtIcons
+import com.mshdabiola.designsystem.strings.KmtStrings
 import com.mshdabiola.model.DarkThemeConfig
 import com.mshdabiola.model.testtag.SettingDetailScreenTestTags
 import com.mshdabiola.setting.detailscreen.AboutScreen
 import com.mshdabiola.setting.detailscreen.AppearanceScreen
 import com.mshdabiola.setting.detailscreen.FaqScreen
 import com.mshdabiola.setting.detailscreen.LanguageScreen
+import com.mshdabiola.setting.detailscreen.ReportBugScreen
+import com.mshdabiola.setting.detailscreen.UpdateScreen
 import kmtemplate.feature.setting.generated.resources.Res
 import kmtemplate.feature.setting.generated.resources.general
+import kmtemplate.feature.setting.generated.resources.report_bug_email_subject_format
 import kmtemplate.feature.setting.generated.resources.support
+import kotlinx.coroutines.launch
+import org.jetbrains.compose.resources.getString
 import org.jetbrains.compose.resources.stringArrayResource
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -55,10 +62,15 @@ internal fun SettingDetailScreen(
     onLanguageChange: (String) -> Unit = {},
     openUrl: (String) -> Unit = {},
     openEmail: (String, String, String) -> Unit = { _, _, _ -> },
+    onSetUpdateDialog: (Boolean) -> Unit = {},
+    onSetUpdateFromPreRelease: (Boolean) -> Unit = {},
+    onCheckForUpdate: () -> Unit = {},
 ) {
     val generalArrayString = stringArrayResource(Res.array.general)
     val supportArrayString = stringArrayResource(Res.array.support)
     val stringArray = listOf(generalArrayString, supportArrayString)
+    val coroutineScope = rememberCoroutineScope()
+    val appName = KmtStrings.brand
 
     Scaffold(
         modifier = modifier.testTag(SettingDetailScreenTestTags.SCREEN_ROOT),
@@ -114,7 +126,7 @@ internal fun SettingDetailScreen(
                 SettingNav.Appearance -> {
                     AppearanceScreen(
                         modifier = Modifier.fillMaxSize(),
-                        settingsState = settingState,
+                        userSettings = settingState.userSettings,
                         onContrastChange = onContrastChange,
                         onDarkModeChange = onDarkModeChange,
                         onGradientBackgroundChange = onGradientBackgroundChange,
@@ -124,13 +136,36 @@ internal fun SettingDetailScreen(
                 SettingNav.Language -> {
                     LanguageScreen(
                         modifier = Modifier.fillMaxSize(),
-                        currentLanguageCode = settingState.language,
+                        currentLanguageCode = settingState.userSettings.language,
                         onLanguageSelected = onLanguageChange,
                     )
                 }
 
-                SettingNav.Issue -> {
-                    /* TODO: Implement Issue Screen */
+                SettingNav.ReportBug -> {
+                    ReportBugScreen(
+                        modifier = Modifier.fillMaxSize(),
+                        openEmail = { email, subject, body ->
+                            coroutineScope.launch {
+                                val emailSubject = getString(
+                                    Res.string.report_bug_email_subject_format,
+                                    appName,
+                                    subject,
+                                )
+                                openEmail("mshdabiola@gmail.com", emailSubject, body)
+                            }
+                        },
+                        openUrl = openUrl,
+                    )
+                }
+                SettingNav.Update -> {
+                    UpdateScreen(
+                        modifier = Modifier.fillMaxSize(),
+                        userSettings = settingState.userSettings,
+                        onSetUpdateDialog = onSetUpdateDialog,
+                        onSetUpdateFromPreRelease = onSetUpdateFromPreRelease,
+                        onCheckForUpdate = onCheckForUpdate,
+
+                    )
                 }
             }
         }

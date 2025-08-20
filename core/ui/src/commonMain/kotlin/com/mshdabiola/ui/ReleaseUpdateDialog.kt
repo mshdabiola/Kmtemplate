@@ -15,7 +15,6 @@
  */
 package com.mshdabiola.ui
 
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.AlertDialog
@@ -23,12 +22,12 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
-import androidx.compose.ui.unit.dp
 import com.mshdabiola.designsystem.component.KmtButton
 import com.mshdabiola.designsystem.component.KmtTextButton
 import com.mshdabiola.model.ReleaseInfo
 import com.mshdabiola.model.testtag.ReleaseUpdateTags
 import kmtemplate.core.ui.generated.resources.Res
+import kmtemplate.core.ui.generated.resources.release_update_dialog_body
 import kmtemplate.core.ui.generated.resources.release_update_dialog_cancel_button
 import kmtemplate.core.ui.generated.resources.release_update_dialog_download_button
 import kmtemplate.core.ui.generated.resources.release_update_dialog_title
@@ -53,10 +52,9 @@ fun ReleaseUpdateDialog(
         },
         text = {
             Text(
-                text = releaseInfo.body,
+                text = stringResource(Res.string.release_update_dialog_body, releaseInfo.tagName),
                 modifier = Modifier
                     .testTag(ReleaseUpdateTags.RELEASE_UPDATE_DIALOG_BODY_TAG)
-                    .height(200.dp)
                     .verticalScroll(scrollState),
             )
         },

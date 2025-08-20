@@ -16,6 +16,7 @@
 -->
 <resources>
     <string name="screen_name">Paramètres</string>
+    <string name="feature_update_screen_name">Mise à jour</string>
     <string name="version">Version</string>
     <string name="version_code">Code de version</string>
     <string name="last_update">Dernière mise à jour</string>
@@ -55,6 +56,23 @@
     <string name="faq_preview_shared_code_answer_collapsed">Le code partagé se trouve généralement dans des modules nommés...</string>
     <string name="faq_preview_shared_code_answer_expanded">Le code partagé se trouve généralement dans des modules nommés `commonMain`...</string>
 
+    <string name="report_bug_title_label">Titre</string>
+    <string name="report_bug_title_placeholder">Décrivez brièvement le bug que vous avez trouvé</string>
+    <string name="report_bug_description_label">Description</string>
+    <string name="report_bug_description_placeholder">Décrivez le problème en détail</string>
+    <string name="report_bug_submit_email_button">Envoyer par e-mail</string>
+    <string name="report_bug_submit_github_button">Signaler un bug sur GitHub</string>
+    <string name="report_bug_email_subject_format">Rapport de bug de %1$s : %2$s</string>
+    <string name="report_bug_contact_email">mshdabiola@gmail.com</string>
+    <string name="report_bug_github_url">https://github.com/mshdabiola/Kmtemplate/issues</string>
+
+    <string name="update_screen_show_update_dialog_text">Afficher la boîte de dialogue de mise à jour</string>
+    <string name="update_screen_join_beta_release_text">Rejoindre la version bêta</string>
+    <string name="update_screen_check_for_update_button">Vérifier les mises à jour</string>
+
+    <string name="notification_message_up_to_date">Vous êtes à jour</string>
+    <string name="notification_message_error_checking_update">Erreur lors de la vérification des mises à jour</string>
+
     <string-array name="segment">
         <item>Général</item>
         <item>Support</item>
@@ -63,10 +81,11 @@
     <string-array name="general">
         <item>Apparence</item>
         <item>Langue</item>
+        <item>Vérifier les mises à jour</item>
     </string-array>
 
     <string-array name="support">
-        <item>Signaler un problème</item>
+        <item>Signaler un bug</item>
         <item>FAQ</item>
         <item>À propos</item>
     </string-array>

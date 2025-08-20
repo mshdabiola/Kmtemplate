@@ -20,4 +20,6 @@
     <string name="detail_back_icon_content_description">voltar</string>
     <string name="detail_title_placeholder">Título</string>
     <string name="detail_content_placeholder">conteúdo</string>
+    <string name="detail_delete_confirmation_message">Tem certeza de que deseja excluir esta nota?</string>
+    <string name="detail_delete_action_text">Excluir</string>
 </resources>

@@ -183,7 +183,7 @@ class MainAppViewModelTest {
             val result = viewModel.getLatestReleaseInfo("0.0.1").await()
 
             assertTrue(result is ReleaseInfo.Error)
-            assertEquals(errorMessage, (result as ReleaseInfo.Error).message)
+            assertEquals(errorMessage, (result as ReleaseInfo.Error).exception.message)
         }
 
     @Test
@@ -195,7 +195,7 @@ class MainAppViewModelTest {
             val result = viewModel.getLatestReleaseInfo("0.0.1").await()
 
             assertTrue(result is ReleaseInfo.Error)
-            assertEquals("Update dialog is disabled", (result as ReleaseInfo.Error).message)
+            assertEquals("Update dialog is disabled", (result as ReleaseInfo.Error).exception.message)
         }
 
     @Test

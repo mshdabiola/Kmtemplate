@@ -20,4 +20,6 @@
     <string name="detail_back_icon_content_description">takaisin</string>
     <string name="detail_title_placeholder">Otsikko</string>
     <string name="detail_content_placeholder">sisältö</string>
+    <string name="detail_delete_confirmation_message">Haluatko varmasti poistaa tämän muistiinpanon?</string>
+    <string name="detail_delete_action_text">Poista</string>
 </resources>
