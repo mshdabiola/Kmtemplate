@@ -19,15 +19,31 @@ sealed class Platform {
 //    object Ios : Platform()
     object Web : Platform()
     data class Desktop(val os: String, val javaVersion: String) : Platform()
-    data class Android(val flavor: Flavor, val buildType: BuildType, val sdk: Int) : Platform()
+    data class Android(val flavorStr: String, val buildTypeStr: String, val sdk: Int) : Platform() {
+        val flavor: Flavor
+            get() = when (flavorStr) {
+                "googlePlay" -> Flavor.GooglePlay
+                "fossReliant" -> Flavor.FossReliant
+                else -> throw IllegalArgumentException("Unknown flavor: $flavorStr")
+            }
+
+        val buildType: BuildType
+            get() = when (buildTypeStr) {
+                "release" -> BuildType.Release
+                "debug" -> BuildType.Debug
+                "benchmark" -> BuildType.Benchmark
+                else -> throw IllegalArgumentException("Unknown build type: $buildTypeStr")
+            }
+    }
 }
 
-enum class Flavor(val id: String) {
-    GooglePlay("googlePlay"),
-    FossReliant("fossReliant"),
+enum class Flavor {
+    GooglePlay,
+    FossReliant,
 }
 
-enum class BuildType(val id: String) {
-    Release("release"),
-    Debug("debug"),
+enum class BuildType {
+    Release,
+    Debug,
+    Benchmark,
 }

@@ -140,6 +140,10 @@ android {
             useSupportLibrary = true
         }
     }
+    buildFeatures {
+        buildConfig = true
+    }
+
 
     buildTypes {
         debug {

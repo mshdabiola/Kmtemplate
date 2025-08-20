@@ -70,7 +70,7 @@ internal class RealNetworkRepository(
             return ReleaseInfo.Error(DeviceNotSupportedException("Device not supported"))
         }
 
-        val name = "app-${platform.flavor.id}-${platform.buildType.id}-unsigned-signed.apk"
+        val name = "app-${platform.flavorStr}-${platform.buildTypeStr}-unsigned-signed.apk"
 
         return try {
             val gitHubReleaseInfo = networkSource.getLatestKmtemplateRelease()
