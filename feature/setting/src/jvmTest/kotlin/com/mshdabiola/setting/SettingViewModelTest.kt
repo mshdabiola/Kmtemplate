@@ -18,6 +18,7 @@ package com.mshdabiola.setting
 import app.cash.turbine.test
 import com.mshdabiola.model.DarkThemeConfig
 import com.mshdabiola.model.ReleaseInfo
+import com.mshdabiola.model.UpdateException
 import com.mshdabiola.model.UserSettings
 import com.mshdabiola.testing.fake.repository.FakeNetworkRepository // Assuming this exists
 import com.mshdabiola.testing.fake.repository.FakeUserDataRepository
@@ -213,7 +214,7 @@ class SettingViewModelTest {
 
     @Test
     fun `checkForUpdate error updates releaseInfo in state`() = runTest(mainDispatcherRule.testDispatcher) {
-        val testErrorReleaseInfo = ReleaseInfo.Error("Failed to fetch")
+        val testErrorReleaseInfo = ReleaseInfo.Error(UpdateException("Failed to fetch"))
         networkRepository.setNextReleaseInfo(testErrorReleaseInfo) // Configure fake repository
 
         val currentVersion = "0.9.0"

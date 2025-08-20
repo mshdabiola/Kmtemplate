@@ -86,7 +86,6 @@ class ReportBugScreenTest {
         var actualTo = ""
         var actualSubject = ""
         var actualBody = ""
-        val appName = "Kmtemplate"
         val expectedTitleText = "Test Bug"
         val expectedContentText = "This is a test bug report."
 
@@ -111,7 +110,7 @@ class ReportBugScreenTest {
 
         assertTrue(emailOpened)
         assertEquals("mshdabiola@gmail.com", actualTo)
-        assertEquals("Bug Report of $appName : $expectedTitleText", actualSubject)
+        assertEquals(expectedTitleText, actualSubject)
         assertEquals(expectedContentText, actualBody)
     }
 
