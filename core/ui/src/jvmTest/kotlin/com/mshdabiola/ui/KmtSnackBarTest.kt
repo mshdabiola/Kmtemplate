@@ -28,60 +28,25 @@ class KmtSnackBarTest {
         override fun performAction() {}
         override fun dismiss() {}
     }
-
     @Test
-    fun kmtSnackBar_defaultType_isDisplayed() {
-        composeTestRule.setContent {
-            KmtTheme {
-                KmtSnackerBar(
-                    type = Type.Default,
-                    snackbarData = dummySnackbarData
-                )
+    fun kmtSnackBar_isDisplayedForAllTypes() {
+        listOf(
+            Type.Default,
+            Type.Error,
+            Type.Success,
+            Type.Warning,
+        ).forEach { type ->
+            composeTestRule.setContent {
+                KmtTheme {
+                    KmtSnackerBar(
+                        type = type,
+                        snackbarData = dummySnackbarData,
+                    )
+                }
             }
+
+            composeTestRule.onNodeWithTag("KmtSnackBar")
+                .assertIsDisplayed()
         }
-
-        composeTestRule.onNodeWithTag("KmtSnackBar").assertIsDisplayed()
-    }
-
-    @Test
-    fun kmtSnackBar_errorType_isDisplayed() {
-        composeTestRule.setContent {
-            KmtTheme {
-                KmtSnackerBar(
-                    type = Type.Error,
-                    snackbarData = dummySnackbarData
-                )
-            }
-        }
-
-        composeTestRule.onNodeWithTag("KmtSnackBar").assertIsDisplayed()
-    }
-
-    @Test
-    fun kmtSnackBar_successType_isDisplayed() {
-        composeTestRule.setContent {
-            KmtTheme {
-                KmtSnackerBar(
-                    type = Type.Success,
-                    snackbarData = dummySnackbarData
-                )
-            }
-        }
-
-        composeTestRule.onNodeWithTag("KmtSnackBar").assertIsDisplayed()
-    }
-
-    @Test
-    fun kmtSnackBar_warningType_isDisplayed() {
-        composeTestRule.setContent {
-            KmtTheme {
-                KmtSnackerBar(
-                    type = Type.Warning,
-                    snackbarData = dummySnackbarData
-                )
-            }
-        }
-
-        composeTestRule.onNodeWithTag("KmtSnackBar").assertIsDisplayed()
     }
 }
