@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="data_error_device_not_supported">Dispositivo não suportado</string>
+    <string name="data_error_asset_not_found">Recurso não encontrado</string>
+    <string name="data_error_invalid_version_format">Formato de versão inválido</string>
+    <string name="data_error_prerelease_not_allowed">Versões de pré-lançamento não são permitidas</string>
+    <string name="data_error_current_version_greater">A versão atual é superior à versão mais recente</string>
+    <string name="data_error_current_version_equal">A versão atual é igual à versão mais recente</string>
+    <string name="data_error_unknown">Erro desconhecido</string>
+</resources>

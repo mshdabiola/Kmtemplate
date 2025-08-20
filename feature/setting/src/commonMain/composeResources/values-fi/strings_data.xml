@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="data_error_device_not_supported">Laitetta ei tueta</string>
+    <string name="data_error_asset_not_found">Resurssia ei löydy</string>
+    <string name="data_error_invalid_version_format">Virheellinen versioformaatti</string>
+    <string name="data_error_prerelease_not_allowed">Ennakkojulkaisut eivät ole sallittuja</string>
+    <string name="data_error_current_version_greater">Nykyinen versio on uudempi kuin uusin versio</string>
+    <string name="data_error_current_version_equal">Nykyinen versio on sama kuin uusin versio</string>
+    <string name="data_error_unknown">Tuntematon virhe</string>
+</resources>

@@ -26,7 +26,12 @@ import androidx.navigation.NavOptions
 import androidx.navigation.compose.composable
 import androidx.navigation.navOptions
 import com.mshdabiola.designsystem.strings.KmtStrings
+import com.mshdabiola.model.AssetNotFoundException
+import com.mshdabiola.model.DeviceNotSupportedException
+import com.mshdabiola.model.InvalidVersionFormatException
+import com.mshdabiola.model.NoUpdateAvailableException
 import com.mshdabiola.model.Notification
+import com.mshdabiola.model.PreReleaseNotAllowedException
 import com.mshdabiola.model.ReleaseInfo
 import com.mshdabiola.model.SnackbarDuration
 import com.mshdabiola.model.Type
@@ -36,6 +41,11 @@ import com.mshdabiola.setting.WindowRepository
 import com.mshdabiola.ui.LocalNavAnimatedContentScope
 import com.mshdabiola.ui.ReleaseUpdateDialog
 import kmtemplate.feature.setting.generated.resources.Res
+import kmtemplate.feature.setting.generated.resources.data_error_asset_not_found
+import kmtemplate.feature.setting.generated.resources.data_error_current_version_greater
+import kmtemplate.feature.setting.generated.resources.data_error_device_not_supported
+import kmtemplate.feature.setting.generated.resources.data_error_invalid_version_format
+import kmtemplate.feature.setting.generated.resources.data_error_prerelease_not_allowed
 import kmtemplate.feature.setting.generated.resources.notification_message_error_checking_update
 import kmtemplate.feature.setting.generated.resources.notification_message_up_to_date
 import org.jetbrains.compose.resources.getString
@@ -93,9 +103,10 @@ fun NavGraphBuilder.settingScreen(
                     is ReleaseInfo.UpToDate -> {
                         LaunchedEffect(releaseInfo) {
                             viewModel.hideUpdateDialog()
-
                             setNotification(
                                 Notification.Message(
+                                    duration = SnackbarDuration.Short,
+                                    type = Type.Success,
                                     message = getString(
                                         Res.string.notification_message_up_to_date,
                                     ),
@@ -104,18 +115,96 @@ fun NavGraphBuilder.settingScreen(
                         }
                     }
                     is ReleaseInfo.Error -> {
-                        LaunchedEffect(releaseInfo) {
-                            viewModel.hideUpdateDialog()
-                            setNotification(
-                                Notification.Message(
-                                    duration = SnackbarDuration.Long,
-                                    type = Type.Error,
-                                    message = getString(
-                                        Res.string.notification_message_error_checking_update,
-                                    ),
-                                ),
-                            )
+                        when(releaseInfo.exception){
+                            is AssetNotFoundException -> {
+                                LaunchedEffect(releaseInfo) {
+                                    viewModel.hideUpdateDialog()
+                                    setNotification(
+                                        Notification.Message(
+                                            duration = SnackbarDuration.Short,
+                                            type = Type.Default,
+                                            message = getString(
+                                                Res.string.data_error_asset_not_found,
+                                            ),
+                                        ),
+                                    )
+                                }
+                            }
+                            is PreReleaseNotAllowedException -> {
+                                LaunchedEffect(releaseInfo) {
+                                    viewModel.hideUpdateDialog()
+                                    setNotification(
+                                        Notification.Message(
+                                            duration = SnackbarDuration.Short,
+                                            type = Type.Default,
+                                            message = getString(
+                                                Res.string.data_error_prerelease_not_allowed,
+                                            ),
+                                        ),
+                                    )
+                                }
+
+                            }
+                            is DeviceNotSupportedException ->{
+                                LaunchedEffect(releaseInfo) {
+                                    viewModel.hideUpdateDialog()
+                                    setNotification(
+                                        Notification.Message(
+                                            duration = SnackbarDuration.Short,
+                                            type = Type.Default,
+                                            message = getString(
+                                                Res.string.data_error_device_not_supported,
+                                            ),
+                                        ),
+                                    )
+                                }
+
+                            }
+                            is NoUpdateAvailableException ->{
+                                LaunchedEffect(releaseInfo) {
+                                    viewModel.hideUpdateDialog()
+                                    setNotification(
+                                        Notification.Message(
+                                            duration = SnackbarDuration.Short,
+                                            type = Type.Success,
+                                            message = getString(
+                                                Res.string.data_error_current_version_greater,
+                                            ),
+                                        ),
+                                    )
+                                }
+                            }
+                            is InvalidVersionFormatException->{
+                                LaunchedEffect(releaseInfo) {
+                                    viewModel.hideUpdateDialog()
+                                    setNotification(
+                                        Notification.Message(
+                                            duration = SnackbarDuration.Short,
+                                            type = Type.Error,
+                                            message = getString(
+                                                Res.string.data_error_invalid_version_format,
+                                            ),
+                                        ),
+                                    )
+                                }
+                            }
+                            else ->{
+                                LaunchedEffect(releaseInfo) {
+                                    viewModel.hideUpdateDialog()
+                                    setNotification(
+                                        Notification.Message(
+                                            duration = SnackbarDuration.Long,
+                                            type = Type.Error,
+                                            message = getString(
+                                                Res.string.notification_message_error_checking_update,
+                                            ),
+                                        ),
+                                    )
+                                }
+                            }
+
                         }
+
                     }
                 }
             }

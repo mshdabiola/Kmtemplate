@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="data_error_device_not_supported">Thiết bị không được hỗ trợ</string>
+    <string name="data_error_asset_not_found">Không tìm thấy tài sản</string>
+    <string name="data_error_invalid_version_format">Định dạng phiên bản không hợp lệ</string>
+    <string name="data_error_prerelease_not_allowed">Phiên bản tiền phát hành không được phép</string>
+    <string name="data_error_current_version_greater">Phiên bản hiện tại lớn hơn phiên bản mới nhất</string>
+    <string name="data_error_current_version_equal">Phiên bản hiện tại bằng phiên bản mới nhất</string>
+    <string name="data_error_unknown">Lỗi không xác định</string>
+</resources>

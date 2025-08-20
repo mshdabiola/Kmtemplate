@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="data_error_device_not_supported">Cihaz desteklenmiyor</string>
+    <string name="data_error_asset_not_found">Varlık bulunamadı</string>
+    <string name="data_error_invalid_version_format">Geçersiz sürüm formatı</string>
+    <string name="data_error_prerelease_not_allowed">Ön sürüm versiyonlarına izin verilmiyor</string>
+    <string name="data_error_current_version_greater">Mevcut sürüm en son sürümden daha yeni</string>
+    <string name="data_error_current_version_equal">Mevcut sürüm en son sürüme eşit</string>
+    <string name="data_error_unknown">Bilinmeyen hata</string>
+</resources>

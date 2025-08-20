@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="data_error_device_not_supported">Устройство не поддерживается</string>
+    <string name="data_error_asset_not_found">Ресурс не найден</string>
+    <string name="data_error_invalid_version_format">Неверный формат версии</string>
+    <string name="data_error_prerelease_not_allowed">Предварительные версии не допускаются</string>
+    <string name="data_error_current_version_greater">Текущая версия новее последней версии</string>
+    <string name="data_error_current_version_equal">Текущая версия совпадает с последней версией</string>
+    <string name="data_error_unknown">Неизвестная ошибка</string>
+</resources>
