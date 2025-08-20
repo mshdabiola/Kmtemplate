@@ -155,7 +155,8 @@ fun KmtApp(
                                                 KmtSnackerBar(
                                                     appState.notificationType,
                                                     snackbarData,
-                                                    Modifier.navigationBarsPadding()
+                                                    modifier = Modifier
+                                                        .windowInsetsPadding(WindowInsets.safeDrawing)
                                                 )
                                             },
                                         )
