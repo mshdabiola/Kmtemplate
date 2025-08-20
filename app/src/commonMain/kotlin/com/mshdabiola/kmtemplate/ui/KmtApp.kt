@@ -30,13 +30,7 @@ import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Snackbar
-import androidx.compose.material3.SnackbarData
-import androidx.compose.material3.SnackbarDefaults
-import androidx.compose.material3.SnackbarDuration
 import androidx.compose.material3.SnackbarHost
-import androidx.compose.material3.SnackbarVisuals
 import androidx.compose.material3.adaptive.currentWindowAdaptiveInfo
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
@@ -57,7 +51,6 @@ import com.mshdabiola.designsystem.component.KmtBackground
 import com.mshdabiola.designsystem.component.KmtGradientBackground
 import com.mshdabiola.designsystem.strings.KmtStrings
 import com.mshdabiola.designsystem.theme.GradientColors
-import com.mshdabiola.designsystem.theme.KmtExtendedTheme
 import com.mshdabiola.designsystem.theme.KmtTheme
 import com.mshdabiola.designsystem.theme.LocalGradientColors
 import com.mshdabiola.kmtemplate.LocalAppLocale
@@ -66,13 +59,11 @@ import com.mshdabiola.kmtemplate.MainAppViewModel
 import com.mshdabiola.kmtemplate.navigation.KmtNavHost
 import com.mshdabiola.model.DarkThemeConfig
 import com.mshdabiola.model.ReleaseInfo
-import com.mshdabiola.model.Type
 import com.mshdabiola.setting.navigation.getWindowRepository
 import com.mshdabiola.ui.KmtSnackerBar
 import com.mshdabiola.ui.LocalSharedTransitionScope
 import com.mshdabiola.ui.ReleaseUpdateDialog
 import com.mshdabiola.ui.semanticsCommon
-import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.koin.compose.koinInject
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.annotation.KoinExperimentalAPI
