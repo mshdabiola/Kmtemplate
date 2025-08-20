@@ -70,8 +70,6 @@ fun ReportBugScreen(
     ) {
         val heading = rememberTextFieldState()
         val content = rememberTextFieldState()
-        val appName = KmtStrings.brand // Assuming KmtStrings.brand is already localized or a constant brand name
-        val coroutineScope = rememberCoroutineScope()
 
         KmtTextField(
             modifier = Modifier
@@ -104,14 +102,9 @@ fun ReportBugScreen(
                 modifier = Modifier.testTag(ReportBugScreenTestTags.SUBMIT_EMAIL_BUTTON),
                 enabled = heading.text.isNotEmpty() && content.text.isNotEmpty(),
                 onClick = {
-                    coroutineScope.launch {
-                        val emailSubject = getString(
-                            Res.string.report_bug_email_subject_format,
-                            appName,
-                            heading.text.toString(),
-                        )
-                        openEmail("mshdabiola@gmail.com", emailSubject, content.text.toString())
-                    }
+
+                        openEmail("mshdabiola@gmail.com", heading.text.toString(), content.text.toString())
+
                 },
             ) {
                 Text(text = stringResource(Res.string.report_bug_submit_email_button))
