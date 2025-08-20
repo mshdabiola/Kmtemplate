@@ -17,6 +17,7 @@ package com.mshdabiola.testing.fake.repository
 
 import com.mshdabiola.data.repository.NetworkRepository
 import com.mshdabiola.model.ReleaseInfo
+import com.mshdabiola.model.UpdateException
 
 class FakeNetworkRepository : NetworkRepository {
     private var nextReleaseInfo: ReleaseInfo = ReleaseInfo.NewUpdate(
@@ -54,7 +55,7 @@ class FakeNetworkRepository : NetworkRepository {
         allowPreRelease: Boolean,
     ): ReleaseInfo {
         return if (shouldThrowError) {
-            ReleaseInfo.Error(errorMessage)
+            ReleaseInfo.Error(UpdateException(errorMessage))
         } else {
             nextReleaseInfo
         }
