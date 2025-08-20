@@ -146,8 +146,7 @@ jobs:
           token: ${{ secrets.CODECOV_TOKEN }}
           files: "app/build/reports/kover/reportJvm.xml"
           verbose: true
-
-
+          flags: jvm
 
       - name: Check lint
         run: ./gradlew lintFossReliantRelease
