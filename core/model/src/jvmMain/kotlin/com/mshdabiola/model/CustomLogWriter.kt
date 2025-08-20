@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.mshdabiola.kmtemplate
+package com.mshdabiola.model
 
 import co.touchlab.kermit.DefaultFormatter
 import co.touchlab.kermit.LogWriter

@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.mshdabiola.kmtemplate.ui
+package com.mshdabiola.designsystem.component
 
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.material3.NavigationDrawerItem
@@ -26,10 +26,10 @@ import androidx.compose.ui.unit.dp
 actual fun CustomWideNavigationRailItem(
     selected: Boolean,
     onClick: () -> Unit,
-    icon: @Composable () -> Unit,
-    label: @Composable () -> Unit,
+    icon: @Composable (() -> Unit),
+    label: @Composable (() -> Unit),
     modifier: Modifier,
-    railExpanded: Boolean, // Control whether to show the wider version
+    railExpanded: Boolean,
 ) {
     if (railExpanded) {
         // Custom layout for expanded state (e.g., icon and label side-by-side)
