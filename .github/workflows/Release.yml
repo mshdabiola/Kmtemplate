@@ -43,8 +43,8 @@ jobs:
           build-scan-terms-of-use-url: "https://gradle.com/terms-of-service"
           build-scan-terms-of-use-agree: "yes"
 
-      - name: Run setVersionFromTag
-        run: ./gradlew setVersionFromTag -PnewVersionName=${{ github.ref_name }}
+#      - name: Run setVersionFromTag
+#        run: ./gradlew setVersionFromTag -PnewVersionName=${{ github.ref_name }}
 
       - name: Run updateFossReliantReleaseBadging
         run: ./gradlew updateFossReliantReleaseBadging
@@ -66,8 +66,8 @@ jobs:
       - name: Remove Firebase References
         run: ./gradlew removeFirebaseReferences
 
-#      - name: Downgrade Build Tools
-#        run: ./gradlew downgradeBuildLogicAndAgp
+      - name: Downgrade Build Tools
+        run: ./gradlew downgradeBuildLogicAndAgp
 
       - name: Build foss reliant release variant apk
         run: ./gradlew assembleFossReliantRelease
