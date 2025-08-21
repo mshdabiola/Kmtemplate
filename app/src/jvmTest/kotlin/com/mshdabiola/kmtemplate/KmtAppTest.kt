@@ -37,13 +37,13 @@ import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.viewmodel.compose.LocalViewModelStoreOwner
 import androidx.window.core.layout.WindowSizeClass
 import co.touchlab.kermit.koin.kermitLoggerModule
+import com.mshdabiola.designsystem.component.SplashScreen
+import com.mshdabiola.designsystem.component.SplashScreenTestTags
 import com.mshdabiola.detail.detailModule
 import com.mshdabiola.detail.navigation.Detail
 import com.mshdabiola.detail.navigation.navigateToDetail
 import com.mshdabiola.kmtemplate.ui.KmtAppState
 import com.mshdabiola.kmtemplate.ui.KmtAppTestTags
-import com.mshdabiola.designsystem.component.SplashScreen
-import com.mshdabiola.designsystem.component.SplashScreenTestTags
 import com.mshdabiola.kmtemplate.ui.rememberKmtAppState
 import com.mshdabiola.kmtemplate.util.KoinTestRule
 import com.mshdabiola.kmtemplate.util.TestLifecycleOwner
