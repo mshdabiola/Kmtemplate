@@ -63,7 +63,7 @@ class KoverConventionPlugin : Plugin<Project> {
                             files(
                                 // Navigation helpers
                                 "*.*NavigationKt.kt",
-                                "*.*MainAppKt.kt",
+                                "*.*MainApp.kt", // Changed from *.*MainAppKt.kt
 
                             )
                             classes(

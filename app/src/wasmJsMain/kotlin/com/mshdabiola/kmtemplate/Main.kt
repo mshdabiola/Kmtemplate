@@ -38,7 +38,7 @@ import co.touchlab.kermit.platformLogWriter
 import com.mshdabiola.kmtemplate.di.appModule
 import com.mshdabiola.kmtemplate.ui.KmtApp
 import com.mshdabiola.kmtemplate.ui.KmtAppState
-import com.mshdabiola.kmtemplate.ui.SplashScreen
+import com.mshdabiola.designsystem.component.SplashScreen
 import com.mshdabiola.kmtemplate.ui.rememberKmtAppState
 import com.mshdabiola.model.Platform
 import kotlinx.browser.document

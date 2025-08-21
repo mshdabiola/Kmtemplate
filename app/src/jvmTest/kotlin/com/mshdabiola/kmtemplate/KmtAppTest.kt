@@ -42,7 +42,7 @@ import com.mshdabiola.detail.navigation.Detail
 import com.mshdabiola.detail.navigation.navigateToDetail
 import com.mshdabiola.kmtemplate.ui.KmtAppState
 import com.mshdabiola.kmtemplate.ui.KmtAppTestTags
-import com.mshdabiola.kmtemplate.ui.SplashScreen
+import com.mshdabiola.designsystem.component.SplashScreen
 import com.mshdabiola.kmtemplate.ui.rememberKmtAppState
 import com.mshdabiola.kmtemplate.util.KoinTestRule
 import com.mshdabiola.kmtemplate.util.TestLifecycleOwner
