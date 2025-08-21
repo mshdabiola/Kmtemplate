@@ -1,6 +1,8 @@
 version:0
 string|detail_back_icon_content_description|aW5kaWV0cm8=
 string|detail_content_placeholder|Y29udGVudXRv
+string|detail_delete_action_text|RWxpbWluYQ==
+string|detail_delete_confirmation_message|U2VpIHNpY3VybyBkaSB2b2xlciBlbGltaW5hcmUgcXVlc3RhIG5vdGE/
 string|detail_delete_icon_content_description|ZWxpbWluYQ==
 string|detail_screen_title|RGV0dGFnbGk=
 string|detail_title_placeholder|VGl0b2xv
