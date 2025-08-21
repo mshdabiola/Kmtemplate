@@ -9,12 +9,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [Unreleased]: https://github.com/mshdabiola/kmtemplate/compare/1.2.16...HEAD
 
 ### Added
+- UI tests for `KmtSnackBar` to verify its display for different states (`Default`, `Error`, `Success`, `Warning`).
 - Baseline profile generation support.
 - `showUpdateDialog` setting to `UserPreferences` and `UserDataRepository` to control update notification visibility.
 - `updateFromPreRelease` setting to `UserDataRepository` to control whether pre-release versions are considered for updates.
 - Corresponding tests for the new user preference settings in relevant test files.
 
 ### Changed
+- Refined version checking in `RealNetworkRepository` to correctly return `ReleaseInfo.UpToDate` when the installed version is identical to the latest online version. Updated `NetworkRepositoryTest` accordingly.
+- Added a `Modifier` parameter and a `testTag("KmtSnackBar")` to the `KmtSnackBar` composable to facilitate UI testing.
+- Updated the Play Store full description file (`fastlane/metadata/android/en-US/full_description.txt`) to use HTML tags for formatting instead of Markdown.
 - Updated Android Gradle Plugin to 8.12.0.
 - Refactored version check to use version name.
 - Enhanced version validation logic in `RealNetworkRepository`.

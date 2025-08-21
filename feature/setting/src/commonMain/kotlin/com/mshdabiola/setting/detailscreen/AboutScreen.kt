@@ -65,7 +65,7 @@ fun AboutScreen(
         modifier = modifier
             .fillMaxSize()
             .verticalScroll(rememberScrollState())
-            .padding(horizontal = 24.dp, vertical = 32.dp)
+            .padding(horizontal = 8.dp, vertical = 8.dp)
             .testTag(AboutScreenTestTags.SCREEN_ROOT), // Tag for the root
         verticalArrangement = Arrangement.Top, // Changed from SpacedBy to Top for more control with Spacers
         horizontalAlignment = Alignment.Start,
