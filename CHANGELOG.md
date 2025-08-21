@@ -6,7 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
-[Unreleased]: https://github.com/mshdabiola/kmtemplate/compare/1.2.16...HEAD
+[Unreleased]: https://github.com/mshdabiola/kmtemplate/compare/1.2.17...HEAD
+
+## [1.2.17] - 2025-08-21
+[1.2.17]: https://github.com/mshdabiola/kmtemplate/1.2.17
 
 ### Added
 - UI tests for `KmtSnackBar` to verify its display for different states (`Default`, `Error`, `Success`, `Warning`).
