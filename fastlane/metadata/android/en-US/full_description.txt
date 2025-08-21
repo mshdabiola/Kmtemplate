@@ -1,25 +1,29 @@
-Transform the way you manage your tasks with **Kmtemplate**, a cutting-edge, multiplatform application designed for ultimate productivity and seamless synchronization. Built on a robust, modern architecture, this isn't just another todo list – it's a powerful tool to organize your life, available wherever you are, on Android, Desktop (Windows, macOS, Linux), and Web.
+Transform the way you manage your tasks with <b>Kmtemplate</b>, a cutting-edge, multiplatform application designed for ultimate productivity and seamless synchronization. Built on a robust, modern architecture, this isn't just another todo list – it's a powerful tool to organize your life, available wherever you are, on Android, Desktop (Windows, macOS, Linux), and Web.
 
-**Master Your Tasks with Powerful Features:**
+<b>Master Your Tasks with Powerful Features:</b>
 
-*   **Cross-Platform Sync:** Create a task on your phone, organize on your desktop, and check it off on your web browser. Your todos are always up-to-date, everywhere with Kmtemplate.
-*   **Intuitive Interface:** Enjoy a clean, beautiful, and easy-to-use interface built with Jetpack Compose and Material You, ensuring a delightful user experience on every platform.
-*   **Offline Access:** Your tasks are available even when you're offline. Changes sync automatically once you're back online.
-*   **Light & Dark Themes:** Choose the theme that best suits your preference and environment.
-*   **Data Security & Privacy:** (Optional: Add if relevant to Kmtemplate's philosophy) Your data is yours. Kmtemplate prioritizes security and offers options for local-first storage or secure cloud sync.
+<ul>
+    <li><b>Cross-Platform Sync:</b> Create a task on your phone, organize on your desktop, and check it off on your web browser. Your todos are always up-to-date, everywhere with Kmtemplate.</li>
+    <li><b>Intuitive Interface:</b> Enjoy a clean, beautiful, and easy-to-use interface built with Jetpack Compose and Material You, ensuring a delightful user experience on every platform.</li>
+    <li><b>Offline Access:</b> Your tasks are available even when you're offline. Changes sync automatically once you're back online.</li>
+    <li><b>Light & Dark Themes:</b> Choose the theme that best suits your preference and environment.</li>
+    <li><b>Data Security & Privacy:</b> (Optional: Add if relevant to Kmtemplate's philosophy) Your data is yours. Kmtemplate prioritizes security and offers options for local-first storage or secure cloud sync.</li>
+</ul>
 
-**Why Choose Kmtemplate?**
+<b>Why Choose Kmtemplate?</b>
 
 Kmtemplate is more than just a list-maker. It's engineered for reliability and scalability, leveraging Kotlin Multiplatform to share logic across platforms while delivering native performance. Our commitment to Clean Architecture and modern development practices means you get a fast, responsive, and dependable application designed for the long haul.
 
-**Key Architectural Highlights (For the Tech-Savvy):**
+<b>Key Architectural Highlights (For the Tech-Savvy):</b>
 
-*   **Kotlin Multiplatform (KMP):** Share business logic across Android, JVM (Desktop), and WASM (Web) for consistency and efficiency.
-*   **Jetpack Compose & Compose Multiplatform:** Modern, declarative UI toolkit for native user interfaces from a single codebase.
-*   **Clean Architecture:** Ensures a scalable, maintainable, and testable application.
-*   **Modular Design:** Features and core functionalities are separated into independent modules for better organization and faster builds.
-*   **Asynchronous Operations:** Utilizes Kotlin Coroutines & Flow for smooth and responsive performance.
+<ul>
+    <li><b>Kotlin Multiplatform (KMP):</b> Share business logic across Android, JVM (Desktop), and WASM (Web) for consistency and efficiency.</li>
+    <li><b>Jetpack Compose & Compose Multiplatform:</b> Modern, declarative UI toolkit for native user interfaces from a single codebase.</li>
+    <li><b>Clean Architecture:</b> Ensures a scalable, maintainable, and testable application.</li>
+    <li><b>Modular Design:</b> Features and core functionalities are separated into independent modules for better organization and faster builds.</li>
+    <li><b>Asynchronous Operations:</b> Utilizes Kotlin Coroutines & Flow for smooth and responsive performance.</li>
+</ul>
 
-Whether you're managing personal projects, team tasks, or daily errands, **Kmtemplate** provides the tools and flexibility you need to stay organized and achieve your goals.
+Whether you're managing personal projects, team tasks, or daily errands, <b>Kmtemplate</b> provides the tools and flexibility you need to stay organized and achieve your goals.
 
-Download **Kmtemplate** today and experience the future of task management!
+Download <b>Kmtemplate</b> today and experience the future of task management!

@@ -157,6 +157,8 @@ See the app in action across all supported screens:
   <img src="./fastlane/metadata/android/en-US/images/phoneScreenshots/1.png" width="200" alt="Android Home Screen Screenshot" />
   <img src="./fastlane/metadata/android/en-US/images/phoneScreenshots/2.png" width="200" alt="Android Settings Screen Screenshot" />
   <img src="./fastlane/metadata/android/en-US/images/phoneScreenshots/3.png" width="200" alt="Android Detail Screen Screenshot" />
+  <img src="./fastlane/metadata/android/en-US/images/phoneScreenshots/4.png" width="200" alt="Android Detail Screen Screenshot" />
+  <img src="./fastlane/metadata/android/en-US/images/phoneScreenshots/5.png" width="200" alt="Android Detail Screen Screenshot" />
 </p>
 
 ### 💻 Large Screen
