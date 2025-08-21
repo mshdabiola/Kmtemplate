@@ -15,8 +15,8 @@ Repo: https://github.com/mshdabiola/kmtemplate.git
 Binaries: https://github.com/mshdabiola/kmtemplate/releases/download/%v/app-fossReliant-release-unsigned-signed.apk
 
 Builds:
-  - versionName: 1.2.17
-    versionCode: 24
+  - versionName: 1.2.18
+    versionCode: 25
     commit: 4a85e995048686a919363e66d336ba2239479d2c
     sudo:
       - echo "deb https://deb.debian.org/debian trixie main" > /etc/apt/sources.list.d/trixie.list
@@ -32,7 +32,6 @@ Builds:
     output: app/build/outputs/apk/fossReliant/release/app-fossReliant-release-unsigned.apk
     prebuild:
       - gradle clean
-      - gradle setVersionFromTag -PnewVersionName=1.2.17
       - gradle removeFirebaseReferences
       - gradle downgradeBuildLogicAndAgp
     scandelete:
@@ -54,5 +53,5 @@ AllowedAPKSigningKeys: 7966373797459065b77517aadbecc04b484abcf693d23ef1a6ccfb955
 AutoUpdateMode: Version
 UpdateCheckMode: Tags
 UpdateCheckData: gradle/libs.versions.toml|versionCode = "(\d+)"|.|versionName = "([\d.]+)"
-CurrentVersion: 1.2.17
-CurrentVersionCode: 24
+CurrentVersion: 1.2.18
+CurrentVersionCode: 25
