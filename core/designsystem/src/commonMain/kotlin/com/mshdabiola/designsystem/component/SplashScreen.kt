@@ -28,6 +28,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag // Ensure this is imported
 import androidx.compose.ui.unit.dp
 import com.mshdabiola.designsystem.drawable.KmtIcons
 import com.mshdabiola.designsystem.strings.KmtStrings
@@ -41,7 +42,8 @@ fun SplashScreen(
 ) {
     Surface(
         modifier = modifier
-            .fillMaxSize(),
+            .fillMaxSize() // Apply fillMaxSize to the Surface as well for the root
+            .testTag(SplashScreenTestTags.SCREEN_ROOT), // Apply root tag here
         color = primaryLight,
     ) {
         Column(
@@ -53,13 +55,15 @@ fun SplashScreen(
         ) {
             Image(
                 modifier = Modifier
-                    .sizeIn(maxWidth = 200.dp, maxHeight = 200.dp),
+                    .sizeIn(maxWidth = 200.dp, maxHeight = 200.dp)
+                    .testTag(SplashScreenTestTags.BRAND_IMAGE), // Tag for the image
                 imageVector = KmtIcons.AppIcon,
                 contentDescription = "app icon", // Keep contentDescription for accessibility
             )
 
             Spacer(Modifier.height(32.dp))
             Text(
+                modifier = Modifier.testTag(SplashScreenTestTags.BRAND_TEXT), // Tag for the text
                 text = KmtStrings.brand,
                 style = MaterialTheme.typography.headlineSmall,
                 color = onPrimaryLight,
