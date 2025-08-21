@@ -117,6 +117,7 @@ jobs:
           path: '**/build/reports/tests/jvmTest'
 
       - name: Publish Test Results
+        if: success() || failure()
         uses: EnricoMi/publish-unit-test-result-action@v2.20.0
         with:
             check_name: Test results
@@ -126,12 +127,14 @@ jobs:
             files: ./**/build/test-results/**/*.xml
 
       - name: Upload test results to Codecov
+        if: success() || failure()
         uses: codecov/test-results-action@v1
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           files: ./**/build/test-results/**/*.xml
 
       - name: Upload local coverage reports (XML + HTML)
+        if: success() || failure()
         uses: actions/upload-artifact@v4
         with:
           name: coverage-reports
@@ -141,6 +144,7 @@ jobs:
           path: '**/build/reports/kover/'
 
       - name: Upload coverage
+        if: success() || failure()
         uses: codecov/codecov-action@v5.5.0
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
@@ -168,6 +172,7 @@ jobs:
         run: ./gradlew checkFossReliantReleaseBadging
 
       - name: Push new Spotless Apply if available
+        if: success() || failure()
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           file_pattern: '**/*.kt **/*.kts **/*.xml'
