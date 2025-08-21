@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.mshdabiola.kmtemplate.ui
+package com.mshdabiola.designsystem.component
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -34,7 +34,6 @@ import com.mshdabiola.designsystem.drawable.KmtIcons
 import com.mshdabiola.designsystem.strings.KmtStrings
 import com.mshdabiola.designsystem.theme.onPrimaryLight
 import com.mshdabiola.designsystem.theme.primaryLight
-import com.mshdabiola.model.testtag.SplashScreenTestTags
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable

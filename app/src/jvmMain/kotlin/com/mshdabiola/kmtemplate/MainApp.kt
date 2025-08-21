@@ -37,12 +37,12 @@ import co.touchlab.kermit.koin.kermitLoggerModule
 import co.touchlab.kermit.loggerConfigInit
 import co.touchlab.kermit.platformLogWriter
 import com.bugsnag.Bugsnag
+import com.mshdabiola.designsystem.component.SplashScreen
 import com.mshdabiola.designsystem.strings.KmtStrings
 import com.mshdabiola.kmtemplate.app.generated.resources.Res
 import com.mshdabiola.kmtemplate.app.generated.resources.desktopicon
 import com.mshdabiola.kmtemplate.di.appModule
 import com.mshdabiola.kmtemplate.ui.KmtApp
-import com.mshdabiola.kmtemplate.ui.SplashScreen
 import com.mshdabiola.model.CustomLogWriter
 import com.mshdabiola.model.Platform
 import kotlinx.coroutines.delay
