@@ -50,7 +50,14 @@ abstract class UpdateBuildVersionsTask : DefaultTask() {
         val buildConfig = buildConfigFile.asFile.get()
         val conveyorConf = conveyorConfFile.asFile.get()
         val libsVersionsToml = libsVersionsTomlFile.asFile.get()
-        val newTagName = newVersionName.get()
+        val versionGet = newVersionName.get()
+        val newTagName = if (versionGet.isNotEmpty() && versionGet[0].isLetter()) {
+            versionGet
+                .substring(1)
+
+        } else {
+            versionGet
+        }
 
         println("Starting version updates with TAG: $newTagName")
 
