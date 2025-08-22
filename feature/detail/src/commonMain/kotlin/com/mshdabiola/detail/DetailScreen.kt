@@ -111,7 +111,7 @@ internal fun DetailScreen(
                         .fillMaxWidth()
                         .testTag(DetailScreenTestTags.TITLE_TEXT_FIELD),
                     state = state.title,
-                    placeholder = stringResource(Res.string.detail_title_placeholder),
+                    label = stringResource(Res.string.detail_title_placeholder),
                     maxNum = TextFieldLineLimits.SingleLine,
                     imeAction = ImeAction.Next,
                 )
@@ -121,7 +121,8 @@ internal fun DetailScreen(
                         .weight(1f)
                         .testTag(DetailScreenTestTags.CONTENT_TEXT_FIELD),
                     state = state.detail,
-                    placeholder = stringResource(Res.string.detail_content_placeholder),
+                    label = stringResource(Res.string.detail_content_placeholder),
+                    maxNum = TextFieldLineLimits.MultiLine(),
                 )
             }
         }
