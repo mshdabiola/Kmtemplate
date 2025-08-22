@@ -81,12 +81,18 @@ abstract class UpdateBuildVersionsTask : DefaultTask() {
         var buildConfigContent = buildConfig.readText()
         var newVersionCode = -1
 
+        val revisionCodeRegex = """(const val REVISION_CODE\s*=\s*)(\d+)""".toRegex()
         val versionCodeRegex = """(const val VERSION_CODE\s*=\s*)(\d+)""".toRegex()
         val versionNameRegex = """(const val VERSION_NAME\s*=\s*")([^"]+)(")""".toRegex()
         // Also update VERSION_CODE_DESKTOP if present, with the newTagName
         val versionCodeDesktopRegex = """(const val VERSION_CODE_DESKTOP\s*=\s*")([^"]+)(")""".toRegex()
 
 
+        buildConfigContent = revisionCodeRegex.replace(buildConfigContent) { matchResult ->
+            val (prefix, currentValue) = matchResult.destructured
+            println("BuildConfig.kt: REVISION_CODE changed from $currentValue to 1")
+            "${prefix}1"
+        }
 
         buildConfigContent = versionCodeRegex.replace(buildConfigContent) { matchResult ->
             val (prefix, currentValue) = matchResult.destructured
