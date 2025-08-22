@@ -49,6 +49,7 @@ import com.mshdabiola.kmtemplate.util.KoinTestRule
 import com.mshdabiola.kmtemplate.util.TestLifecycleOwner
 import com.mshdabiola.main.mainModule
 import com.mshdabiola.main.navigation.Main
+import com.mshdabiola.model.BuildConfig
 import com.mshdabiola.model.testtag.DetailScreenTestTags
 import com.mshdabiola.model.testtag.MainScreenTestTags
 import com.mshdabiola.model.testtag.SettingScreenTestTags
@@ -143,7 +144,7 @@ class KmtAppTest : KoinTest {
             Box(Modifier.fillMaxSize()) {
                 com.mshdabiola.kmtemplate.ui.KmtApp(appState = appState)
                 if (show.value) {
-                    SplashScreen()
+                    SplashScreen(brand = BuildConfig.BRAND_NAME)
                 }
             }
         }

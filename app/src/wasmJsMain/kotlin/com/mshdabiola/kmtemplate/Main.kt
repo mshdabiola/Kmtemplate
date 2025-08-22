@@ -40,6 +40,7 @@ import com.mshdabiola.kmtemplate.di.appModule
 import com.mshdabiola.kmtemplate.ui.KmtApp
 import com.mshdabiola.kmtemplate.ui.KmtAppState
 import com.mshdabiola.kmtemplate.ui.rememberKmtAppState
+import com.mshdabiola.model.BuildConfig
 import com.mshdabiola.model.Platform
 import kotlinx.browser.document
 import kotlinx.coroutines.delay
@@ -82,7 +83,7 @@ fun mainApp() {
         Box(Modifier.fillMaxSize()) {
             KmtApp(windowSizeClass = windowSizeClass, appState = appState)
             if (show.value) {
-                SplashScreen()
+                SplashScreen(brand = BuildConfig.BRAND_NAME)
             } else {
                 LaunchedEffect(navController) {
                     navController.bindToBrowserNavigation(null)

@@ -84,7 +84,7 @@ class KmtApplication : Application() {
                 )
                 mailSender {
                     reportAsFile = true
-                    mailTo = getString(R.string.email)
+                    mailTo = com.mshdabiola.model.BuildConfig.DEVELOPER_EMAIL
                     subject = getString(R.string.crash_title)
                     body = getString(R.string.crash_body)
                     reportFileName = "Kmtemplate_Bug_Report.txt"

@@ -43,6 +43,7 @@ import com.mshdabiola.kmtemplate.app.generated.resources.Res
 import com.mshdabiola.kmtemplate.app.generated.resources.desktopicon
 import com.mshdabiola.kmtemplate.di.appModule
 import com.mshdabiola.kmtemplate.ui.KmtApp
+import com.mshdabiola.model.BuildConfig
 import com.mshdabiola.model.CustomLogWriter
 import com.mshdabiola.model.Platform
 import kotlinx.coroutines.delay
@@ -62,7 +63,7 @@ fun mainApp() {
 
         Window(
             onCloseRequest = ::exitApplication,
-            title = "${KmtStrings.brand} v${KmtStrings.version}",
+            title = "${BuildConfig.BRAND_NAME} v${BuildConfig.VERSION_NAME}",
             icon = painterResource(Res.drawable.desktopicon),
             state = windowState,
         ) {
@@ -74,7 +75,7 @@ fun mainApp() {
             Box(Modifier.fillMaxSize()) {
                 KmtApp()
                 if (show.value) {
-                    SplashScreen()
+                    SplashScreen(brand = BuildConfig.BRAND_NAME)
                 }
             }
         }
