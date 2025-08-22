@@ -17,7 +17,6 @@ package com.mshdabiola.setting.detailscreen
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -58,7 +57,6 @@ fun ReportBugScreen(
     openEmail: (String, String, String) -> Unit = { _, _, _ -> },
     openUrl: (String) -> Unit = {},
 ) {
-
     Column(
         modifier = modifier
             .fillMaxSize()
@@ -70,7 +68,6 @@ fun ReportBugScreen(
     ) {
         val heading = rememberTextFieldState()
         val content = rememberTextFieldState()
-
 
         KmtButton(
             modifier = Modifier
@@ -114,7 +111,7 @@ fun ReportBugScreen(
                 .align(Alignment.CenterHorizontally)
                 .testTag(ReportBugScreenTestTags.SUBMIT_EMAIL_BUTTON),
             enabled = heading.text.isNotEmpty() && content.text.isNotEmpty(),
-           onClick = {
+            onClick = {
                 openEmail("mshdabiola@gmail.com", heading.text.toString(), content.text.toString())
             },
         ) {

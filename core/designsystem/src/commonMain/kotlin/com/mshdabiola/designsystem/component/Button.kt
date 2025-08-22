@@ -26,7 +26,6 @@ import androidx.compose.material3.ButtonShapes
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.IconButtonDefaults
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -41,14 +40,14 @@ fun KmtButton(
     colors: ButtonColors = ButtonDefaults.buttonColors(),
     content: @Composable RowScope.() -> Unit,
 
-    ) {
+) {
     Button(
         onClick = onClick,
         modifier = modifier,
         enabled = enabled,
         content = content,
         shapes = shape,
-        colors = colors
+        colors = colors,
 
     )
 }
