@@ -171,10 +171,10 @@ class DetailScreenTest {
         // For this example, we'll assert the text is empty and rely on visual confirmation/screenshot tests
         // for placeholder visibility if direct placeholder checking is complex.
 
-        composeRule.onNodeWithTag(DetailScreenTestTags.TITLE_TEXT_FIELD)
+        composeRule.onNodeWithTag(DetailScreenTestTags.TITLE_TEXT_FIELD,true)
             .assertTextEquals("")
 
-        composeRule.onNodeWithTag(DetailScreenTestTags.CONTENT_TEXT_FIELD)
+        composeRule.onNodeWithTag(DetailScreenTestTags.CONTENT_TEXT_FIELD,true)
             .assertTextEquals("") // Assert the input text is empty
     }
 }

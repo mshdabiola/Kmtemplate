@@ -70,7 +70,8 @@ fun NoteCard(
                 Spacer(modifier = Modifier.width(8.dp))
                 Text(
                     text = noteUiState.content,
-                    modifier = Modifier.testTag(NoteCardTestTags.CONTENT), // Add test tag to the content
+                    modifier = Modifier.testTag(NoteCardTestTags.CONTENT),
+                    maxLines = 2
                 )
             }
         }
