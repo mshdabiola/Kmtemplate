@@ -39,6 +39,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 @Composable
 fun SplashScreen(
     modifier: Modifier = Modifier,
+    brand: String
 ) {
     Surface(
         modifier = modifier
@@ -64,7 +65,7 @@ fun SplashScreen(
             Spacer(Modifier.height(32.dp))
             Text(
                 modifier = Modifier.testTag(SplashScreenTestTags.BRAND_TEXT), // Tag for the text
-                text = KmtStrings.brand,
+                text = brand,
                 style = MaterialTheme.typography.headlineSmall,
                 color = onPrimaryLight,
             )
@@ -75,5 +76,5 @@ fun SplashScreen(
 @Preview
 @Composable
 fun SplashScreenPreview() {
-    SplashScreen()
+    SplashScreen(brand ="Kmtemplate")
 }

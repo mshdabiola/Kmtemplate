@@ -15,11 +15,13 @@
  */
 package com.mshdabiola.model
 
-sealed class Platform {
+sealed class Platform(val versionTag: String, val versionCode: String) {
 //    object Ios : Platform()
-    object Web : Platform()
-    data class Desktop(val os: String, val javaVersion: String) : Platform()
-    data class Android(val flavorStr: String, val buildTypeStr: String, val sdk: Int) : Platform() {
+    object Web : Platform(BuildConfig.VERSION_NAME, BuildConfig.VERSION_CODE.toString())
+    data class Desktop(val os: String, val javaVersion: String) :
+        Platform(BuildConfig.VERSION_NAME, BuildConfig.VERSION_CODE_DESKTOP)
+    data class Android(val flavorStr: String, val buildTypeStr: String, val sdk: Int) :
+        Platform(BuildConfig.VERSION_NAME, BuildConfig.VERSION_CODE.toString()) {
         val flavor: Flavor
             get() = when (flavorStr) {
                 "googlePlay" -> Flavor.GooglePlay
