@@ -38,7 +38,6 @@ import co.touchlab.kermit.loggerConfigInit
 import co.touchlab.kermit.platformLogWriter
 import com.bugsnag.Bugsnag
 import com.mshdabiola.designsystem.component.SplashScreen
-import com.mshdabiola.designsystem.strings.KmtStrings
 import com.mshdabiola.kmtemplate.app.generated.resources.Res
 import com.mshdabiola.kmtemplate.app.generated.resources.desktopicon
 import com.mshdabiola.kmtemplate.di.appModule

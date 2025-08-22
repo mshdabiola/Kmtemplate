@@ -39,7 +39,6 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import com.mshdabiola.designsystem.component.KmtTextButton
 import com.mshdabiola.designsystem.drawable.KmtIcons
-import com.mshdabiola.designsystem.strings.KmtStrings
 import com.mshdabiola.designsystem.theme.KmtTheme
 import com.mshdabiola.model.BuildConfig
 import com.mshdabiola.model.Platform
@@ -48,8 +47,6 @@ import kmtemplate.feature.setting.generated.resources.Res
 import kmtemplate.feature.setting.generated.resources.about
 import kmtemplate.feature.setting.generated.resources.contact_us
 import kmtemplate.feature.setting.generated.resources.developed_by
-import kmtemplate.feature.setting.generated.resources.developer
-import kmtemplate.feature.setting.generated.resources.last_update
 import kmtemplate.feature.setting.generated.resources.privacy_policy
 import kmtemplate.feature.setting.generated.resources.terms_and_condition
 import kmtemplate.feature.setting.generated.resources.version
@@ -139,7 +136,6 @@ fun AboutScreen(
             color = MaterialTheme.colorScheme.onSurface,
             modifier = Modifier.testTag(AboutScreenTestTags.VERSION_CODE_VALUE),
         )
-
 
         Spacer(Modifier.height(16.dp))
         Text(

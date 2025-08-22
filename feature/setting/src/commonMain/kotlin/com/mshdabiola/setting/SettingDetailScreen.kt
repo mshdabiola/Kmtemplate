@@ -32,7 +32,6 @@ import androidx.compose.ui.unit.dp
 import com.mshdabiola.designsystem.component.KmtIconButton
 import com.mshdabiola.designsystem.component.KmtTopAppBar
 import com.mshdabiola.designsystem.drawable.KmtIcons
-import com.mshdabiola.designsystem.strings.KmtStrings
 import com.mshdabiola.model.BuildConfig
 import com.mshdabiola.model.DarkThemeConfig
 import com.mshdabiola.model.testtag.SettingDetailScreenTestTags

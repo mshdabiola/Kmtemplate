@@ -31,7 +31,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag // Ensure this is imported
 import androidx.compose.ui.unit.dp
 import com.mshdabiola.designsystem.drawable.KmtIcons
-import com.mshdabiola.designsystem.strings.KmtStrings
 import com.mshdabiola.designsystem.theme.onPrimaryLight
 import com.mshdabiola.designsystem.theme.primaryLight
 import org.jetbrains.compose.ui.tooling.preview.Preview
@@ -39,7 +38,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 @Composable
 fun SplashScreen(
     modifier: Modifier = Modifier,
-    brand: String
+    brand: String,
 ) {
     Surface(
         modifier = modifier
@@ -76,5 +75,5 @@ fun SplashScreen(
 @Preview
 @Composable
 fun SplashScreenPreview() {
-    SplashScreen(brand ="Kmtemplate")
+    SplashScreen(brand = "Kmtemplate")
 }
