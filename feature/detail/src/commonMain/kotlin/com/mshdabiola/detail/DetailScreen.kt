@@ -122,7 +122,7 @@ internal fun DetailScreen(
                         .testTag(DetailScreenTestTags.CONTENT_TEXT_FIELD),
                     state = state.detail,
                     label = stringResource(Res.string.detail_content_placeholder),
-                    maxNum = TextFieldLineLimits.MultiLine()
+                    maxNum = TextFieldLineLimits.MultiLine(),
                 )
             }
         }

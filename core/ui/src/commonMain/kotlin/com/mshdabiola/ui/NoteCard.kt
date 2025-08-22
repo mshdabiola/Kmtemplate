@@ -71,7 +71,7 @@ fun NoteCard(
                 Text(
                     text = noteUiState.content,
                     modifier = Modifier.testTag(NoteCardTestTags.CONTENT),
-                    maxLines = 2
+                    maxLines = 2,
                 )
             }
         }
