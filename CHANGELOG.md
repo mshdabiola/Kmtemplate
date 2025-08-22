@@ -8,6 +8,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 [Unreleased]: https://github.com/mshdabiola/kmtemplate/compare/1.2.18...HEAD
 
+### Added
+- UI tests for `SplashScreen.kt` to verify its display and content.
+
 ## [1.2.18] - 2025-08-21
 [1.2.18]: https://github.com/mshdabiola/kmtemplate/1.2.18
 
