@@ -33,6 +33,7 @@ import com.mshdabiola.designsystem.component.KmtIconButton
 import com.mshdabiola.designsystem.component.KmtTopAppBar
 import com.mshdabiola.designsystem.drawable.KmtIcons
 import com.mshdabiola.designsystem.strings.KmtStrings
+import com.mshdabiola.model.BuildConfig
 import com.mshdabiola.model.DarkThemeConfig
 import com.mshdabiola.model.testtag.SettingDetailScreenTestTags
 import com.mshdabiola.setting.detailscreen.AboutScreen
@@ -70,7 +71,6 @@ internal fun SettingDetailScreen(
     val supportArrayString = stringArrayResource(Res.array.support)
     val stringArray = listOf(generalArrayString, supportArrayString)
     val coroutineScope = rememberCoroutineScope()
-    val appName = KmtStrings.brand
 
     Scaffold(
         modifier = modifier.testTag(SettingDetailScreenTestTags.SCREEN_ROOT),
@@ -120,6 +120,7 @@ internal fun SettingDetailScreen(
                         modifier = Modifier.fillMaxSize(),
                         openUrl = openUrl,
                         openEmail = openEmail,
+                        platform = settingState.platform,
                     )
                 }
 
@@ -148,7 +149,7 @@ internal fun SettingDetailScreen(
                             coroutineScope.launch {
                                 val emailSubject = getString(
                                     Res.string.report_bug_email_subject_format,
-                                    appName,
+                                    BuildConfig.BRAND_NAME,
                                     subject,
                                 )
                                 openEmail("mshdabiola@gmail.com", emailSubject, body)

@@ -19,6 +19,7 @@ import com.mshdabiola.model.ReleaseInfo
 import com.mshdabiola.model.UserSettings
 
 data class SettingState(
+    val platform: Platform = Platform.Web,
     val userSettings: UserSettings = UserSettings(),
     val releaseInfo: ReleaseInfo? = null,
 )

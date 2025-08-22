@@ -30,6 +30,7 @@ import kotlinx.coroutines.launch
 class SettingViewModel(
     private val userDataRepository: UserDataRepository,
     private val networkRepository: NetworkRepository,
+    private val platform: Platform,
 ) : ViewModel() {
 
     private val releaseInfoFlow = MutableStateFlow<ReleaseInfo?>(null)
@@ -38,6 +39,7 @@ class SettingViewModel(
         releaseInfoFlow,
     ) { userSettings, releaseInfo ->
         SettingState(
+            platform = platform,
             userSettings = userSettings,
             releaseInfo = releaseInfo,
         )
@@ -45,7 +47,7 @@ class SettingViewModel(
         .stateIn(
             scope = viewModelScope,
             started = SharingStarted.WhileSubscribed(),
-            initialValue = SettingState(),
+            initialValue = SettingState(platform = platform),
         )
 
     fun setContrast(contrast: Int) {
