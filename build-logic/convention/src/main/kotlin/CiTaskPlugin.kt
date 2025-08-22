@@ -20,6 +20,7 @@ import com.mshdabiola.app.RemoveFirebaseReferencesTask
 import com.mshdabiola.app.RenameProjectArtifactsTask
 import com.mshdabiola.app.SetPreReleaseVersionTag
 import com.mshdabiola.app.SetVersionFromTagTask
+import com.mshdabiola.app.UpdateBuildVersionsPreReleaseTask
 import com.mshdabiola.app.UpdateBuildVersionsTask
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -133,6 +134,17 @@ class CiTaskPlugin : Plugin<Project> {
             group = "CI Utilities"
 
             newVersionName.set(project.providers.gradleProperty("newVersionName").orElse("0.0.1"))
+            buildConfigFile.set(target.rootProject.file("core/model/src/commonMain/kotlin/com/mshdabiola/model/BuildConfig.kt"))
+            conveyorConfFile.set(target.rootProject.file("ci.conveyor.conf"))
+            libsVersionsTomlFile.set(target.rootProject.file("gradle/libs.versions.toml"))
+
+            outputs.upToDateWhen { false } // Ensure it always runs if invoked
+        }
+        target.tasks.register<UpdateBuildVersionsPreReleaseTask>("updateBuildVersionsPreRelease") {
+            description = "Updates version information in BuildConfig.kt, ci.conveyor.conf, and gradle/libs.versions.toml."
+            group = "CI Utilities"
+
+            newVersionName.set(project.providers.gradleProperty("newVersionName").orElse("0.0.1-alpha01"))
             buildConfigFile.set(target.rootProject.file("core/model/src/commonMain/kotlin/com/mshdabiola/model/BuildConfig.kt"))
             conveyorConfFile.set(target.rootProject.file("ci.conveyor.conf"))
             libsVersionsTomlFile.set(target.rootProject.file("gradle/libs.versions.toml"))
