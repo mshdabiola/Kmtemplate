@@ -28,13 +28,13 @@ import java.io.File
 /**
  * A Gradle task to update version information across BuildConfig.kt, ci.conveyor.conf, and gradle/libs.versions.toml.
  * It reads BuildConfig.kt to increment REVISION_CODE and VERSION_CODE,
- * sets VERSION_NAME to a new input TAG, updates the revision in ci.conveyor.conf,
+ * sets VERSION_NAME to a new input TAG (with patch incremented), updates the revision in ci.conveyor.conf,
  * and updates VERSION_NAME and VERSION_CODE in gradle/libs.versions.toml.
  */
 abstract class UpdateBuildVersionsTask : DefaultTask() {
 
     @get:Input
-    abstract val newVersionName: Property<String> // This will be the new TAG for VERSION_NAME
+    abstract val newVersionName: Property<String> // This will be the original TAG for VERSION_NAME
 
     @get:InputFile
     abstract val buildConfigFile: RegularFileProperty
@@ -50,35 +50,43 @@ abstract class UpdateBuildVersionsTask : DefaultTask() {
         val buildConfig = buildConfigFile.asFile.get()
         val conveyorConf = conveyorConfFile.asFile.get()
         val libsVersionsToml = libsVersionsTomlFile.asFile.get()
-        val versionGet = newVersionName.get()
-        val newTagName = if (versionGet.isNotEmpty() && versionGet[0].isLetter()) {
-            versionGet
-                .substring(1)
+        val originalTag = newVersionName.get()
 
+        // Remove 'v' prefix if it exists
+        val tagWithoutPrefix = if (originalTag.startsWith("v") && originalTag.length > 1) {
+            originalTag.substring(1)
         } else {
-            versionGet
+            originalTag
         }
 
-        println("Starting version updates with TAG: $newTagName")
+        // Separate numeric part from suffix (e.g., -alpha01, -RC2)
+        val parts = tagWithoutPrefix.split("-")
+        val numericVersion = parts[0]
+        val suffix = if (parts.size > 1) "-${parts.subList(1, parts.size).joinToString("-")}" else ""
+
+        val versionNumbers = numericVersion.split(".").mapNotNull { it.toIntOrNull() }.toMutableList()
+
+        if (versionNumbers.size < 3) {
+            throw GradleException("Version tag '$originalTag' must have at least 3 numeric parts (major.minor.patch). Found: $numericVersion")
+        }
+
+        // Increment patch version
+        versionNumbers[2] = versionNumbers[2] + 1
+
+        val newTagName = "${versionNumbers.joinToString(".")}$suffix"
+        println("Original TAG: $originalTag, Processed newTagName for updates: $newTagName")
+
 
         // Update BuildConfig.kt
         var buildConfigContent = buildConfig.readText()
-        var newRevisionCode = -1
         var newVersionCode = -1
 
-        val revisionCodeRegex = """(const val REVISION_CODE\s*=\s*)(\d+)""".toRegex()
         val versionCodeRegex = """(const val VERSION_CODE\s*=\s*)(\d+)""".toRegex()
         val versionNameRegex = """(const val VERSION_NAME\s*=\s*")([^"]+)(")""".toRegex()
         // Also update VERSION_CODE_DESKTOP if present, with the newTagName
         val versionCodeDesktopRegex = """(const val VERSION_CODE_DESKTOP\s*=\s*")([^"]+)(")""".toRegex()
 
 
-        buildConfigContent = revisionCodeRegex.replace(buildConfigContent) { matchResult ->
-            val (prefix, currentValue) = matchResult.destructured
-            newRevisionCode = currentValue.toInt() + 1
-            println("BuildConfig.kt: REVISION_CODE changed from $currentValue to $newRevisionCode")
-            "${prefix}$newRevisionCode"
-        }
 
         buildConfigContent = versionCodeRegex.replace(buildConfigContent) { matchResult ->
             val (prefix, currentValue) = matchResult.destructured
@@ -88,29 +96,26 @@ abstract class UpdateBuildVersionsTask : DefaultTask() {
         }
 
         buildConfigContent = versionNameRegex.replace(buildConfigContent) { matchResult ->
-            val (prefix, _, suffix) = matchResult.destructured
+            val (prefix, _, suffixValue) = matchResult.destructured
             println("BuildConfig.kt: VERSION_NAME changed to $newTagName")
-            "${prefix}$newTagName$suffix"
+            "${prefix}$newTagName$suffixValue"
         }
          buildConfigContent = versionCodeDesktopRegex.replace(buildConfigContent) { matchResult ->
             val (prefix, _, suffix) = matchResult.destructured
             println("BuildConfig.kt: VERSION_CODE_DESKTOP changed to $newTagName")
-            "${prefix}$newTagName$suffix"
+            "${prefix}$numericVersion$suffix"
         }
 
         buildConfig.writeText(buildConfigContent)
         println("BuildConfig.kt updated successfully.")
 
-        // Update ci.conveyor.conf
-        if (newRevisionCode == -1) {
-            throw GradleException("Could not read REVISION_CODE from BuildConfig.kt for conveyor.conf update")
-        }
+
         var conveyorConfContent = conveyorConf.readText()
         val conveyorRevisionRegex = """(revision\s*=\s*")([^"]+)(")""".toRegex()
         conveyorConfContent = conveyorRevisionRegex.replace(conveyorConfContent) { matchResult ->
-            val (prefix, _, suffix) = matchResult.destructured
-            println("ci.conveyor.conf: revision changed to $newRevisionCode")
-            "${prefix}$newRevisionCode$suffix"
+            val (prefix, _, suffixValue) = matchResult.destructured
+            println("ci.conveyor.conf: revision changed to 1")
+            "${prefix}1$suffixValue"
         }
         conveyorConf.writeText(conveyorConfContent)
         println("ci.conveyor.conf updated successfully.")
@@ -127,15 +132,15 @@ abstract class UpdateBuildVersionsTask : DefaultTask() {
 
 
         libsVersionsTomlContent = tomlVersionNameRegex.replace(libsVersionsTomlContent) { matchResult ->
-            val (prefix, suffix) = matchResult.destructured
+            val (prefix, suffixValue) = matchResult.destructured
             println("libs.versions.toml: versionName changed to $newTagName")
-            "${prefix}$newTagName$suffix"
+            "${prefix}$newTagName$suffixValue"
         }
 
         libsVersionsTomlContent = tomlDesktopCodeRegex.replace(libsVersionsTomlContent) { matchResult ->
-            val (prefix, suffix) = matchResult.destructured
-            println("libs.versions.toml: desktopCode changed to $newTagName")
-            "${prefix}$newTagName$suffix"
+            val (prefix, suffixValue) = matchResult.destructured
+            println("libs.versions.toml: desktopCode changed to $numericVersion")
+            "${prefix}$numericVersion$suffixValue"
         }
 
         libsVersionsTomlContent = tomlVersionCodeRegex.replace(libsVersionsTomlContent) { matchResult ->
