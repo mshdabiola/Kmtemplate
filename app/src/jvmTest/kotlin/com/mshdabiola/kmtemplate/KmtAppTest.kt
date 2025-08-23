@@ -50,6 +50,7 @@ import com.mshdabiola.kmtemplate.util.TestLifecycleOwner
 import com.mshdabiola.main.mainModule
 import com.mshdabiola.main.navigation.Main
 import com.mshdabiola.model.BuildConfig
+import com.mshdabiola.model.Platform
 import com.mshdabiola.model.testtag.DetailScreenTestTags
 import com.mshdabiola.model.testtag.MainScreenTestTags
 import com.mshdabiola.model.testtag.SettingScreenTestTags
@@ -66,6 +67,7 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.koin.core.module.dsl.viewModel
+import org.koin.dsl.bind
 import org.koin.dsl.module
 import org.koin.test.KoinTest
 
@@ -75,9 +77,13 @@ class KmtAppTest : KoinTest {
     val composeTestRule = createComposeRule()
     private lateinit var testLifecycleOwner: TestLifecycleOwner
     private lateinit var appState: KmtAppState
+
+    val applicationModule = module {
+        single { getPlatform() } bind Platform::class
+    }
     val appModule =
         module {
-            includes(testDataModule, detailModule, mainModule, settingModule)
+            includes(applicationModule,testDataModule, detailModule, mainModule, settingModule)
             viewModel {
                 MainAppViewModel(
                     userDataRepository = get(),

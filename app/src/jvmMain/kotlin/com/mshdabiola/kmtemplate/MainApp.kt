@@ -114,7 +114,7 @@ fun main() {
     }
 }
 
-private fun getPlatform(): Platform.Desktop {
+fun getPlatform(): Platform.Desktop {
     val operSys = System.getProperty("os.name").lowercase()
     val os = when {
         operSys.contains("win") -> "Windows"
