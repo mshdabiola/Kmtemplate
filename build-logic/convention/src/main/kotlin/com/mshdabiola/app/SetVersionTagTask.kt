@@ -45,9 +45,10 @@ abstract class SetVersionTagTask : DefaultTask() {
         val buildConfig = buildConfigFile.asFile.get()
         val libsVersionsToml = libsVersionsTomlFile.asFile.get()
         val versionGet = newVersionName.get()
-        val newTagName = if (versionGet.isNotEmpty() && versionGet[0].isLetter()) {
+        val newTagName = if (versionGet.startsWith("v")) {
+
             versionGet
-                .substring(1)
+                .removePrefix("v")
 
         } else {
             versionGet

@@ -96,11 +96,6 @@ abstract class UpdateBuildVersionsPreReleaseTask : DefaultTask() {
             println("BuildConfig.kt: VERSION_NAME changed to $newTagName")
             "${prefix}$newTagName$suffix"
         }
-//         buildConfigContent = versionCodeDesktopRegex.replace(buildConfigContent) { matchResult ->
-//            val (prefix, _, suffix) = matchResult.destructured
-//            println("BuildConfig.kt: VERSION_CODE_DESKTOP changed to $newTagName")
-//            "${prefix}$newTagName$suffix"
-//        }
 
         buildConfig.writeText(buildConfigContent)
         println("BuildConfig.kt updated successfully.")
@@ -126,8 +121,6 @@ abstract class UpdateBuildVersionsPreReleaseTask : DefaultTask() {
         var libsVersionsTomlContent = libsVersionsToml.readText()
         val tomlVersionNameRegex = """(versionName\s*=\s*")[^"]+(")""".toRegex()
         val tomlVersionCodeRegex = """(versionCode\s*=\s*)(["']?)(\d+)\2""".toRegex()
-         // Also update desktopCode in toml if present
-//        val tomlDesktopCodeRegex = """(desktopCode\s*=\s*")[^"]+(")""".toRegex()
 
 
         libsVersionsTomlContent = tomlVersionNameRegex.replace(libsVersionsTomlContent) { matchResult ->
@@ -135,12 +128,6 @@ abstract class UpdateBuildVersionsPreReleaseTask : DefaultTask() {
             println("libs.versions.toml: versionName changed to $newTagName")
             "${prefix}$newTagName$suffix"
         }
-
-//        libsVersionsTomlContent = tomlDesktopCodeRegex.replace(libsVersionsTomlContent) { matchResult ->
-//            val (prefix, suffix) = matchResult.destructured
-//            println("libs.versions.toml: desktopCode changed to $newTagName")
-//            "${prefix}$newTagName$suffix"
-//        }
 
         libsVersionsTomlContent = tomlVersionCodeRegex.replace(libsVersionsTomlContent) { matchResult ->
             val (prefix, quote, _) = matchResult.destructured
