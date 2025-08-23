@@ -145,16 +145,7 @@ internal fun SettingDetailScreen(
                 SettingNav.ReportBug -> {
                     ReportBugScreen(
                         modifier = Modifier.fillMaxSize(),
-                        openEmail = { email, subject, body ->
-                            coroutineScope.launch {
-                                val emailSubject = getString(
-                                    Res.string.report_bug_email_subject_format,
-                                    BuildConfig.BRAND_NAME,
-                                    subject,
-                                )
-                                openEmail(BuildConfig.DEVELOPER_EMAIL, emailSubject, body)
-                            }
-                        },
+                        openEmail = openEmail,
                         openUrl = openUrl,
                     )
                 }
