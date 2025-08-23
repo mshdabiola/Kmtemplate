@@ -37,7 +37,6 @@ abstract class ReleaseChangeLogTask : DefaultTask() {
 
     @TaskAction
     fun updateVersions() {
-
         val versionGet = newVersionName.get()
         val newVersion = if (versionGet.startsWith("v")) {
             versionGet
@@ -63,7 +62,5 @@ abstract class ReleaseChangeLogTask : DefaultTask() {
 
         changelog.writeText(lines.joinToString("\n"))
         println("Successfully updated ${changelog.name} with version $newVersion.")
-
     }
-
 }
