@@ -19,10 +19,8 @@
     <string name="feature_update_screen_name">Päivitä</string>
     <string name="version">Versio</string>
     <string name="version_code">Version koodi</string>
-    <string name="last_update">Viimeisin päivitys</string>
     <string name="about">Kmtemplate: Kotlin Multiplatform -projekteillesi tarkoitettu aloituspiste, joka tarjoaa vankan perustan ja parhaat käytännöt.</string>
     <string name="developed_by">Kehittäjä</string>
-    <string name="developer">Mshdabiola</string>
     <string name="contact_us">Ota yhteyttä</string>
     <string name="privacy_policy">Tietosuojakäytäntö</string>
     <string name="terms_and_condition">Käyttöehdot</string>

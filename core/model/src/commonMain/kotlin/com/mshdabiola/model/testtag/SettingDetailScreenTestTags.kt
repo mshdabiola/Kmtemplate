@@ -5,7 +5,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- * http://www.apache.org/licenses/LICENSE-2.
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,6 +16,7 @@
 package com.mshdabiola.model.testtag
 
 object SettingDetailScreenTestTags {
+    val TOP_APP_BAR_TITLE = "setting_detail:top_app_bar_title"
     const val SCREEN_ROOT = "setting_detail:screen_root"
     const val TOP_APP_BAR = "setting_detail:top_app_bar"
     const val BACK_ICON_BUTTON = "setting_detail:back_icon_button"

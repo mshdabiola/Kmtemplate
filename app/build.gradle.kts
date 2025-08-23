@@ -28,7 +28,7 @@ plugins {
 }
 
 group = "com.mshdabiola.kmtemplate"
-version = libs.versions.versionName.get()
+version = libs.versions.desktopCode.get()
 
 dependencies {
     linuxAmd64(compose.desktop.linux_x64)

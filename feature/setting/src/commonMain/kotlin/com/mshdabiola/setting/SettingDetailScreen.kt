@@ -5,7 +5,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- * http://www.apache.org/licenses/LICENSE-2.
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -32,7 +32,6 @@ import androidx.compose.ui.unit.dp
 import com.mshdabiola.designsystem.component.KmtIconButton
 import com.mshdabiola.designsystem.component.KmtTopAppBar
 import com.mshdabiola.designsystem.drawable.KmtIcons
-import com.mshdabiola.designsystem.strings.KmtStrings
 import com.mshdabiola.model.DarkThemeConfig
 import com.mshdabiola.model.testtag.SettingDetailScreenTestTags
 import com.mshdabiola.setting.detailscreen.AboutScreen
@@ -43,10 +42,7 @@ import com.mshdabiola.setting.detailscreen.ReportBugScreen
 import com.mshdabiola.setting.detailscreen.UpdateScreen
 import kmtemplate.feature.setting.generated.resources.Res
 import kmtemplate.feature.setting.generated.resources.general
-import kmtemplate.feature.setting.generated.resources.report_bug_email_subject_format
 import kmtemplate.feature.setting.generated.resources.support
-import kotlinx.coroutines.launch
-import org.jetbrains.compose.resources.getString
 import org.jetbrains.compose.resources.stringArrayResource
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -70,7 +66,6 @@ internal fun SettingDetailScreen(
     val supportArrayString = stringArrayResource(Res.array.support)
     val stringArray = listOf(generalArrayString, supportArrayString)
     val coroutineScope = rememberCoroutineScope()
-    val appName = KmtStrings.brand
 
     Scaffold(
         modifier = modifier.testTag(SettingDetailScreenTestTags.SCREEN_ROOT),
@@ -79,7 +74,8 @@ internal fun SettingDetailScreen(
                 modifier = Modifier.testTag(SettingDetailScreenTestTags.TOP_APP_BAR),
                 title = {
                     Text(
-                        stringArray
+                        modifier = Modifier.testTag(SettingDetailScreenTestTags.TOP_APP_BAR_TITLE),
+                        text = stringArray
                             .getOrNull(settingNav.segment)
                             ?.getOrNull(settingNav.index)
                             ?: "",
@@ -120,6 +116,7 @@ internal fun SettingDetailScreen(
                         modifier = Modifier.fillMaxSize(),
                         openUrl = openUrl,
                         openEmail = openEmail,
+                        platform = settingState.platform,
                     )
                 }
 
@@ -144,16 +141,7 @@ internal fun SettingDetailScreen(
                 SettingNav.ReportBug -> {
                     ReportBugScreen(
                         modifier = Modifier.fillMaxSize(),
-                        openEmail = { email, subject, body ->
-                            coroutineScope.launch {
-                                val emailSubject = getString(
-                                    Res.string.report_bug_email_subject_format,
-                                    appName,
-                                    subject,
-                                )
-                                openEmail("mshdabiola@gmail.com", emailSubject, body)
-                            }
-                        },
+                        openEmail = openEmail,
                         openUrl = openUrl,
                     )
                 }

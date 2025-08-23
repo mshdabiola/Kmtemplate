@@ -5,7 +5,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- * http://www.apache.org/licenses/LICENSE-2.
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -13,13 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import com.mshdabiola.app.BumpConveyorRevisionTask
 import com.mshdabiola.app.DowngradeBuildToolsTask
 import com.mshdabiola.app.PrependUnreleasedToChangelogTask
 import com.mshdabiola.app.RemoveFirebaseReferencesTask
 import com.mshdabiola.app.RenameProjectArtifactsTask
-import com.mshdabiola.app.SetPreReleaseVersionTag
-import com.mshdabiola.app.SetVersionFromTagTask
+import com.mshdabiola.app.SetVersionTagTask
+import com.mshdabiola.app.UpdateBuildVersionsPreReleaseTask
+import com.mshdabiola.app.UpdateBuildVersionsTask
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.register
@@ -27,43 +27,6 @@ import org.gradle.kotlin.dsl.register
 class CiTaskPlugin : Plugin<Project> {
 
     override fun apply(target: Project) {
-        target.tasks.register<BumpConveyorRevisionTask>("bumpConveyorRevision") {
-            description = "Reads, increments, and updates the Conveyor revision number in files."
-            group = "CI Utilities" // Good practice to group tasks
-
-            revisionFile.set(target.rootProject.file("version.txt"))
-            outputRevisionFile.set(target.rootProject.file("version.txt"))
-            conveyorConfigFile.set(target.rootProject.file("ci.conveyor.conf"))
-            newVersionName.set(project.providers.gradleProperty("newVersionName").orElse("0.0.1"))
-
-            outputs.upToDateWhen { false }
-        }
-
-        target.tasks.register<SetPreReleaseVersionTag>("setPreReleaseVersionTag") {
-            description =
-                "Sets the versionName and versionCode in gradle/libs.versions.toml based on provided tag values."
-            group = "CI Utilities"
-
-            newVersionName.set(project.providers.gradleProperty("newVersionName").orElse("0.0.1"))
-            // newVersionCode is derived from newVersionName in the task if not explicitly set via property
-            libsVersionsTomlFile.set(target.rootProject.file("gradle/libs.versions.toml"))
-            outputRevisionFile.set(target.rootProject.file("version.txt"))
-            outputs.upToDateWhen { false }
-        }
-
-        target.tasks.register<SetVersionFromTagTask>("setVersionFromTag") {
-            description =
-                "Sets the versionName and versionCode in gradle/libs.versions.toml based on provided tag values."
-            group = "CI Utilities"
-
-            newVersionName.set(project.providers.gradleProperty("newVersionName").orElse("0.0.1"))
-            // newVersionCode is derived from newVersionName in the task if not explicitly set via property
-            libsVersionsTomlFile.set(target.rootProject.file("gradle/libs.versions.toml"))
-            changelogFile.set(target.rootProject.file("CHANGELOG.md"))
-            outputRevisionFile.set(target.rootProject.file("version.txt"))
-            outputs.upToDateWhen { false }
-        }
-
         target.tasks.register<RemoveFirebaseReferencesTask>("removeFirebaseReferences") {
             description = "Removes all known Firebase-related declarations from various Gradle files."
             group = "CI Utilities"
@@ -125,6 +88,48 @@ class CiTaskPlugin : Plugin<Project> {
             // Output files (pointing to the same files as inputs for in-place modification)
             outputGradleWrapperPropertiesFile.set(project.file("build-logic/gradle/wrapper/gradle-wrapper.properties"))
             outputLibsVersionsTomlFile.set(project.file("gradle/libs.versions.toml"))
+        }
+
+        target.tasks.register<UpdateBuildVersionsTask>("updateBuildVersions") {
+            description =
+                "Updates version information in BuildConfig.kt, ci.conveyor.conf, and gradle/libs.versions.toml."
+            group = "CI Utilities"
+
+            newVersionName.set(project.providers.gradleProperty("newVersionName").orElse("0.0.1"))
+            buildConfigFile.set(
+                target.rootProject.file("core/model/src/commonMain/kotlin/com/mshdabiola/model/BuildConfig.kt"),
+            )
+            conveyorConfFile.set(target.rootProject.file("ci.conveyor.conf"))
+            libsVersionsTomlFile.set(target.rootProject.file("gradle/libs.versions.toml"))
+
+            outputs.upToDateWhen { false } // Ensure it always runs if invoked
+        }
+        target.tasks.register<UpdateBuildVersionsPreReleaseTask>("updateBuildVersionsPreRelease") {
+            description =
+                "Updates version information in BuildConfig.kt, ci.conveyor.conf, and gradle/libs.versions.toml."
+            group = "CI Utilities"
+
+            newVersionName.set(project.providers.gradleProperty("newVersionName").orElse("0.0.1-alpha01"))
+            buildConfigFile.set(
+                target.rootProject.file("core/model/src/commonMain/kotlin/com/mshdabiola/model/BuildConfig.kt"),
+            )
+            conveyorConfFile.set(target.rootProject.file("ci.conveyor.conf"))
+            libsVersionsTomlFile.set(target.rootProject.file("gradle/libs.versions.toml"))
+
+            outputs.upToDateWhen { false } // Ensure it always runs if invoked
+        }
+        target.tasks.register<SetVersionTagTask>("setVersionTag") {
+            description =
+                "Updates version information in BuildConfig.kt, ci.conveyor.conf, and gradle/libs.versions.toml."
+            group = "CI Utilities"
+
+            newVersionName.set(project.providers.gradleProperty("newVersionName").orElse("0.0.1-alpha01"))
+            buildConfigFile.set(
+                target.rootProject.file("core/model/src/commonMain/kotlin/com/mshdabiola/model/BuildConfig.kt"),
+            )
+            libsVersionsTomlFile.set(target.rootProject.file("gradle/libs.versions.toml"))
+
+            outputs.upToDateWhen { false } // Ensure it always runs if invoked
         }
     }
 }

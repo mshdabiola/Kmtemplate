@@ -54,5 +54,6 @@ fun MacrobenchmarkScope.startActivityAndAllowNotifications() {
 }
 
 fun MacrobenchmarkScope.startActivity() {
+    pressHome()
     startActivityAndWait()
 }
