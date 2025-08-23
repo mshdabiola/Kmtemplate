@@ -15,6 +15,7 @@
  */
 import com.mshdabiola.app.DowngradeBuildToolsTask
 import com.mshdabiola.app.PrependUnreleasedToChangelogTask
+import com.mshdabiola.app.ReleaseChangeLogTask
 import com.mshdabiola.app.RemoveFirebaseReferencesTask
 import com.mshdabiola.app.RenameProjectArtifactsTask
 import com.mshdabiola.app.SetVersionTagTask
@@ -23,7 +24,7 @@ import com.mshdabiola.app.UpdateBuildVersionsTask
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.register
-import kotlin.text.set
+// Removed import kotlin.text.set
 
 class CiTaskPlugin : Plugin<Project> {
 
@@ -107,7 +108,7 @@ class CiTaskPlugin : Plugin<Project> {
         }
         target.tasks.register<UpdateBuildVersionsPreReleaseTask>("updateBuildVersionsPreRelease") {
             description =
-                "Updates version information in BuildConfig.kt, ci.conveyor.conf, and gradle/libs.versions.toml."
+                "Updates version information in BuildConfig.kt, ci.conveyor.conf, and gradle/libs.versions.toml for pre-releases."
             group = "CI Utilities"
 
             newVersionName.set(project.providers.gradleProperty("newVersionName").orElse("0.0.1-alpha01"))
@@ -121,7 +122,7 @@ class CiTaskPlugin : Plugin<Project> {
         }
         target.tasks.register<SetVersionTagTask>("setVersionTag") {
             description =
-                "Updates version information in BuildConfig.kt, ci.conveyor.conf, and gradle/libs.versions.toml."
+                "Updates version information in BuildConfig.kt and gradle/libs.versions.toml from a Git tag."
             group = "CI Utilities"
 
             newVersionName.set(project.providers.gradleProperty("newVersionName").orElse("0.0.1-alpha01"))
@@ -129,6 +130,15 @@ class CiTaskPlugin : Plugin<Project> {
                 target.rootProject.file("core/model/src/commonMain/kotlin/com/mshdabiola/model/BuildConfig.kt"),
             )
             libsVersionsTomlFile.set(target.rootProject.file("gradle/libs.versions.toml"))
+
+            outputs.upToDateWhen { false } // Ensure it always runs if invoked
+        }
+
+        target.tasks.register<ReleaseChangeLogTask>("releaseChangeLog") {
+            description = "Updates the CHANGELOG.md for a new release version."
+            group = "CI Utilities"
+
+            newVersionName.set(project.providers.gradleProperty("newVersionName").orElse("0.0.1-alpha01"))
             changelogFile.set(target.rootProject.file("CHANGELOG.md"))
 
             outputs.upToDateWhen { false } // Ensure it always runs if invoked
