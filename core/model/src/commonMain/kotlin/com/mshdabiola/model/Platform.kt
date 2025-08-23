@@ -25,16 +25,14 @@ sealed class Platform(val versionTag: String, val versionCode: String) {
         val flavor: Flavor
             get() = when (flavorStr) {
                 "googlePlay" -> Flavor.GooglePlay
-                "fossReliant" -> Flavor.FossReliant
-                else -> throw IllegalArgumentException("Unknown flavor: $flavorStr")
+                else -> Flavor.FossReliant
             }
 
         val buildType: BuildType
             get() = when (buildTypeStr) {
                 "release" -> BuildType.Release
-                "debug" -> BuildType.Debug
                 "benchmark" -> BuildType.Benchmark
-                else -> throw IllegalArgumentException("Unknown build type: $buildTypeStr")
+                else -> BuildType.Debug
             }
     }
 }
