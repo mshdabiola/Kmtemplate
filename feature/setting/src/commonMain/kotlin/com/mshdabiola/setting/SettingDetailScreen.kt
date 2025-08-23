@@ -78,7 +78,8 @@ internal fun SettingDetailScreen(
                 modifier = Modifier.testTag(SettingDetailScreenTestTags.TOP_APP_BAR),
                 title = {
                     Text(
-                        stringArray
+                        modifier = Modifier.testTag(SettingDetailScreenTestTags.TOP_APP_BAR_TITLE),
+                      text=  stringArray
                             .getOrNull(settingNav.segment)
                             ?.getOrNull(settingNav.index)
                             ?: "",

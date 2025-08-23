@@ -16,6 +16,7 @@
 package com.mshdabiola.model.testtag
 
 object SettingDetailScreenTestTags {
+    val TOP_APP_BAR_TITLE = "setting_detail:top_app_bar_title"
     const val SCREEN_ROOT = "setting_detail:screen_root"
     const val TOP_APP_BAR = "setting_detail:top_app_bar"
     const val BACK_ICON_BUTTON = "setting_detail:back_icon_button"
