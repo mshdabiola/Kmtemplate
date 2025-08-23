@@ -16,17 +16,12 @@
 package com.mshdabiola.setting
 
 import androidx.compose.ui.test.assertIsDisplayed
-import androidx.compose.ui.test.assertTextContains
 import androidx.compose.ui.test.assertTextEquals
 import androidx.compose.ui.test.junit4.createComposeRule
-import androidx.compose.ui.test.onChild
-import androidx.compose.ui.test.onChildAt
-import androidx.compose.ui.test.onChildren
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performTextInput
-import androidx.compose.ui.test.printToLog
 import com.mshdabiola.designsystem.theme.KmtTheme
 import com.mshdabiola.model.DarkThemeConfig
 import com.mshdabiola.model.Platform
@@ -43,7 +38,6 @@ import org.junit.Assert.assertTrue
 import org.junit.Rule
 import org.junit.Test
 import kotlin.test.assertNotNull
-
 
 class SettingDetailScreenTest {
 
@@ -160,14 +154,14 @@ class SettingDetailScreenTest {
         composeRule.onNodeWithTag(AboutScreenTestTags.SCREEN_ROOT).assertIsDisplayed()
 
         // Assuming AboutScreen has these buttons/links with the specified tags
-         composeRule.onNodeWithTag(AboutScreenTestTags.PRIVACY_POLICY_BUTTON).performClick()
-         assertNotNull(privacyPolicyUrlOpened)
+        composeRule.onNodeWithTag(AboutScreenTestTags.PRIVACY_POLICY_BUTTON).performClick()
+        assertNotNull(privacyPolicyUrlOpened)
 
-         composeRule.onNodeWithTag(AboutScreenTestTags.TERMS_AND_CONDITIONS_BUTTON).performClick()
-         assertNotNull(termsUrlOpened)
+        composeRule.onNodeWithTag(AboutScreenTestTags.TERMS_AND_CONDITIONS_BUTTON).performClick()
+        assertNotNull(termsUrlOpened)
 
-         composeRule.onNodeWithTag(AboutScreenTestTags.EMAIL_LINK).performClick()
-         assertNotNull(contactEmailOpened)
+        composeRule.onNodeWithTag(AboutScreenTestTags.EMAIL_LINK).performClick()
+        assertNotNull(contactEmailOpened)
 
         composeRule.onNodeWithTag(FaqScreenTestTags.FAQ_LIST).assertDoesNotExist()
         composeRule.onNodeWithTag(AppearanceScreenTestTags.SCREEN_ROOT).assertDoesNotExist()
@@ -206,8 +200,8 @@ class SettingDetailScreenTest {
         assertEquals(targetDarkModeConfig, darkModeChangedValue)
 
         // // Assuming AppearanceScreen has a switch for gradient background
-         composeRule.onNodeWithTag(AppearanceScreenTestTags.GRADIENT_BACKGROUND_ROW).performClick()
-         assertEquals(true, gradientChangedValue) // Or based on initial state
+        composeRule.onNodeWithTag(AppearanceScreenTestTags.GRADIENT_BACKGROUND_ROW).performClick()
+        assertEquals(true, gradientChangedValue) // Or based on initial state
 
         composeRule.onNodeWithTag(FaqScreenTestTags.FAQ_LIST).assertDoesNotExist()
     }
@@ -232,9 +226,9 @@ class SettingDetailScreenTest {
         composeRule.onNodeWithTag(LanguageScreenTestTags.LANGUAGE_LIST).assertIsDisplayed()
 
         // Assuming LanguageScreen has options with tags like LanguageOption_en
-         composeRule.onNodeWithTag(LanguageScreenTestTags.languageItem(targetLanguage))
-             .performClick()
-         assertEquals(targetLanguage, languageChangedTo)
+        composeRule.onNodeWithTag(LanguageScreenTestTags.languageItem(targetLanguage))
+            .performClick()
+        assertEquals(targetLanguage, languageChangedTo)
 
         composeRule.onNodeWithTag(FaqScreenTestTags.FAQ_LIST).assertDoesNotExist()
     }
@@ -259,7 +253,7 @@ class SettingDetailScreenTest {
 //        getExpectedTitle(currentNav),true
         composeRule.onNodeWithTag(SettingDetailScreenTestTags.TOP_APP_BAR).assertIsDisplayed()
         composeRule.onNodeWithTag(SettingDetailScreenTestTags.TOP_APP_BAR_TITLE)
-            .assertTextEquals( getExpectedTitle(currentNav))
+            .assertTextEquals(getExpectedTitle(currentNav))
         // Check for ReportBugScreen root if it has one, or specific content.
         // For now, ensure it's the active context by checking others aren't shown.
         composeRule.onNodeWithTag(ReportBugScreenTestTags.ROOT_COLUMN).assertIsDisplayed()
@@ -269,12 +263,12 @@ class SettingDetailScreenTest {
             .performTextInput("Title")
         composeRule.onNodeWithTag(ReportBugScreenTestTags.DESCRIPTION_TEXT_FIELD)
             .performTextInput("Title")
-         composeRule.onNodeWithTag(ReportBugScreenTestTags.SUBMIT_EMAIL_BUTTON)
-             .performClick()
-         assertNotNull(emailOpened)
-         composeRule.onNodeWithTag(ReportBugScreenTestTags.SUBMIT_GITHUB_BUTTON)
-             .performClick()
-         assertNotNull(urlOpened)
+        composeRule.onNodeWithTag(ReportBugScreenTestTags.SUBMIT_EMAIL_BUTTON)
+            .performClick()
+        assertNotNull(emailOpened)
+        composeRule.onNodeWithTag(ReportBugScreenTestTags.SUBMIT_GITHUB_BUTTON)
+            .performClick()
+        assertNotNull(urlOpened)
 
         composeRule.onNodeWithTag(FaqScreenTestTags.FAQ_LIST).assertDoesNotExist()
     }
@@ -299,18 +293,18 @@ class SettingDetailScreenTest {
             }
         }
         composeRule.onNodeWithTag(SettingDetailScreenTestTags.TOP_APP_BAR_TITLE)
-            .assertTextEquals( getExpectedTitle(currentNav))
+            .assertTextEquals(getExpectedTitle(currentNav))
         composeRule.onNodeWithTag(UpdateScreenTestTags.ROOT_COLUMN).assertIsDisplayed()
 
         // Assuming UpdateScreen has UI elements for these actions
-         composeRule.onNodeWithTag(UpdateScreenTestTags.SHOW_UPDATE_DIALOG_SWITCH).performClick()
-         assertNotNull(updateDialogSet) // Check actual value based on initial state
+        composeRule.onNodeWithTag(UpdateScreenTestTags.SHOW_UPDATE_DIALOG_SWITCH).performClick()
+        assertNotNull(updateDialogSet) // Check actual value based on initial state
 
-         composeRule.onNodeWithTag(UpdateScreenTestTags.JOIN_BETA_RELEASE_SWITCH).performClick()
-         assertNotNull(preReleaseSet) // Check actual value
+        composeRule.onNodeWithTag(UpdateScreenTestTags.JOIN_BETA_RELEASE_SWITCH).performClick()
+        assertNotNull(preReleaseSet) // Check actual value
 
-         composeRule.onNodeWithTag(UpdateScreenTestTags.CHECK_FOR_UPDATE_BUTTON).performClick()
-         assertTrue(checkForUpdateClicked)
+        composeRule.onNodeWithTag(UpdateScreenTestTags.CHECK_FOR_UPDATE_BUTTON).performClick()
+        assertTrue(checkForUpdateClicked)
 
         composeRule.onNodeWithTag(FaqScreenTestTags.FAQ_LIST).assertDoesNotExist()
     }
