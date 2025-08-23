@@ -23,8 +23,8 @@ object BuildConfig {
     const val PRIVACY_POLICY_URL = "https://github.com/mshdabiola/Kmtemplate/blob/main/PRIVACY.md"
     const val TERMS_AND_CONDITIONS_URL = "https://github.com/mshdabiola/Kmtemplate/blob/main/TERMS.md"
 
-    const val REVISION_CODE = 2
+    const val REVISION_CODE = 3
     const val VERSION_CODE_DESKTOP = "1.2.18"
-    const val VERSION_CODE = 27
+    const val VERSION_CODE = 28
     const val VERSION_NAME = "1.2.19"
 }
