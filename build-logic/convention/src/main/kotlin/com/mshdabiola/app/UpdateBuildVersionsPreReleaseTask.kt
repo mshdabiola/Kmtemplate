@@ -21,9 +21,7 @@ import org.gradle.api.file.RegularFileProperty
 import org.gradle.api.provider.Property
 import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.InputFile
-// import org.gradle.api.tasks.OutputFile // OutputFile is removed as we are modifying input files directly
 import org.gradle.api.tasks.TaskAction
-import java.io.File
 
 /**
  * A Gradle task to update version information across BuildConfig.kt, ci.conveyor.conf, and gradle/libs.versions.toml.
@@ -56,7 +54,6 @@ abstract class UpdateBuildVersionsPreReleaseTask : DefaultTask() {
                 .substring(1)
                 .split('-')
                 .first()
-
         } else {
             versionGet
                 .split('-')
@@ -75,7 +72,6 @@ abstract class UpdateBuildVersionsPreReleaseTask : DefaultTask() {
         val versionNameRegex = """(const val VERSION_NAME\s*=\s*")([^"]+)(")""".toRegex()
         // Also update VERSION_CODE_DESKTOP if present, with the newTagName
 //        val versionCodeDesktopRegex = """(const val VERSION_CODE_DESKTOP\s*=\s*")([^"]+)(")""".toRegex()
-
 
         buildConfigContent = revisionCodeRegex.replace(buildConfigContent) { matchResult ->
             val (prefix, currentValue) = matchResult.destructured
@@ -116,12 +112,11 @@ abstract class UpdateBuildVersionsPreReleaseTask : DefaultTask() {
 
         // Update gradle/libs.versions.toml
         if (newVersionCode == -1) {
-             throw GradleException("Could not read VERSION_CODE from BuildConfig.kt for toml update")
+            throw GradleException("Could not read VERSION_CODE from BuildConfig.kt for toml update")
         }
         var libsVersionsTomlContent = libsVersionsToml.readText()
         val tomlVersionNameRegex = """(versionName\s*=\s*")[^"]+(")""".toRegex()
         val tomlVersionCodeRegex = """(versionCode\s*=\s*)(["']?)(\d+)\2""".toRegex()
-
 
         libsVersionsTomlContent = tomlVersionNameRegex.replace(libsVersionsTomlContent) { matchResult ->
             val (prefix, suffix) = matchResult.destructured

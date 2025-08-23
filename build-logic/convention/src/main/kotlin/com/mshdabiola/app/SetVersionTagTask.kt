@@ -20,7 +20,6 @@ import org.gradle.api.file.RegularFileProperty
 import org.gradle.api.provider.Property
 import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.InputFile
-// import org.gradle.api.tasks.OutputFile // OutputFile is removed as we are modifying input files directly
 import org.gradle.api.tasks.TaskAction
 
 /**
@@ -46,10 +45,8 @@ abstract class SetVersionTagTask : DefaultTask() {
         val libsVersionsToml = libsVersionsTomlFile.asFile.get()
         val versionGet = newVersionName.get()
         val newTagName = if (versionGet.startsWith("v")) {
-
             versionGet
                 .removePrefix("v")
-
         } else {
             versionGet
         }
@@ -61,7 +58,6 @@ abstract class SetVersionTagTask : DefaultTask() {
 
         val versionNameRegex = """(const val VERSION_NAME\s*=\s*")([^"]+)(")""".toRegex()
         val versionCodeDesktopRegex = """(const val VERSION_CODE_DESKTOP\s*=\s*")([^"]+)(")""".toRegex()
-
 
         buildConfigContent = versionNameRegex.replace(buildConfigContent) { matchResult ->
             val (prefix, _, suffix) = matchResult.destructured
@@ -81,7 +77,6 @@ abstract class SetVersionTagTask : DefaultTask() {
         var libsVersionsTomlContent = libsVersionsToml.readText()
         val tomlVersionNameRegex = """(versionName\s*=\s*")[^"]+(")""".toRegex()
         val tomlDesktopCodeRegex = """(desktopCode\s*=\s*")[^"]+(")""".toRegex()
-
 
         libsVersionsTomlContent = tomlVersionNameRegex.replace(libsVersionsTomlContent) { matchResult ->
             val (prefix, suffix) = matchResult.destructured
