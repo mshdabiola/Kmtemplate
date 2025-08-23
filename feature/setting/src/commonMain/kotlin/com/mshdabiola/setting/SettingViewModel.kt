@@ -5,7 +5,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- * http://www.apache.org/licenses/LICENSE-2.
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -20,6 +20,7 @@ import androidx.lifecycle.viewModelScope
 import com.mshdabiola.data.repository.NetworkRepository
 import com.mshdabiola.data.repository.UserDataRepository
 import com.mshdabiola.model.DarkThemeConfig
+import com.mshdabiola.model.Platform
 import com.mshdabiola.model.ReleaseInfo
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -30,6 +31,7 @@ import kotlinx.coroutines.launch
 class SettingViewModel(
     private val userDataRepository: UserDataRepository,
     private val networkRepository: NetworkRepository,
+    private val platform: Platform,
 ) : ViewModel() {
 
     private val releaseInfoFlow = MutableStateFlow<ReleaseInfo?>(null)
@@ -38,6 +40,7 @@ class SettingViewModel(
         releaseInfoFlow,
     ) { userSettings, releaseInfo ->
         SettingState(
+            platform = platform,
             userSettings = userSettings,
             releaseInfo = releaseInfo,
         )
@@ -45,7 +48,7 @@ class SettingViewModel(
         .stateIn(
             scope = viewModelScope,
             started = SharingStarted.WhileSubscribed(),
-            initialValue = SettingState(),
+            initialValue = SettingState(platform = platform),
         )
 
     fun setContrast(contrast: Int) {

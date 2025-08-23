@@ -5,7 +5,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- * http://www.apache.org/licenses/LICENSE-2.
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -70,7 +70,8 @@ fun NoteCard(
                 Spacer(modifier = Modifier.width(8.dp))
                 Text(
                     text = noteUiState.content,
-                    modifier = Modifier.testTag(NoteCardTestTags.CONTENT), // Add test tag to the content
+                    modifier = Modifier.testTag(NoteCardTestTags.CONTENT),
+                    maxLines = 2,
                 )
             }
         }

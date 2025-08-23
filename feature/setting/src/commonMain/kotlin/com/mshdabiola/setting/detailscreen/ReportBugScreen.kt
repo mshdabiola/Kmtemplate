@@ -5,7 +5,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- * http://www.apache.org/licenses/LICENSE-2.
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -17,7 +17,6 @@ package com.mshdabiola.setting.detailscreen
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -27,6 +26,9 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.input.TextFieldLineLimits
 import androidx.compose.foundation.text.input.rememberTextFieldState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -37,6 +39,7 @@ import androidx.compose.ui.unit.dp
 import com.mshdabiola.designsystem.component.KmtButton
 import com.mshdabiola.designsystem.component.KmtTextField
 import com.mshdabiola.designsystem.theme.KmtTheme
+import com.mshdabiola.model.BuildConfig
 import com.mshdabiola.model.testtag.ReportBugScreenTestTags
 import kmtemplate.feature.setting.generated.resources.Res
 import kmtemplate.feature.setting.generated.resources.report_bug_description_label
@@ -48,6 +51,7 @@ import kmtemplate.feature.setting.generated.resources.report_bug_title_placehold
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
+@OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 fun ReportBugScreen(
     modifier: Modifier = Modifier,
@@ -65,6 +69,20 @@ fun ReportBugScreen(
     ) {
         val heading = rememberTextFieldState()
         val content = rememberTextFieldState()
+
+        KmtButton(
+            modifier = Modifier
+                .align(Alignment.CenterHorizontally)
+                .testTag(ReportBugScreenTestTags.SUBMIT_GITHUB_BUTTON),
+            enabled = true,
+            colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.tertiaryContainer),
+            shape = ButtonDefaults.shapes(MaterialTheme.shapes.medium),
+            onClick = { openUrl(BuildConfig.ISSUE_GITHUB_URL) },
+        ) {
+            Text(text = stringResource(Res.string.report_bug_submit_github_button))
+        }
+
+        Spacer(Modifier.height(24.dp))
 
         KmtTextField(
             modifier = Modifier
@@ -89,27 +107,16 @@ fun ReportBugScreen(
 
         )
         Spacer(modifier = Modifier.height(16.dp))
-        FlowRow(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceAround,
+        KmtButton(
+            modifier = Modifier
+                .align(Alignment.CenterHorizontally)
+                .testTag(ReportBugScreenTestTags.SUBMIT_EMAIL_BUTTON),
+            enabled = heading.text.isNotEmpty() && content.text.isNotEmpty(),
+            onClick = {
+                openEmail(BuildConfig.DEVELOPER_EMAIL, heading.text.toString(), content.text.toString())
+            },
         ) {
-            KmtButton(
-                modifier = Modifier.testTag(ReportBugScreenTestTags.SUBMIT_EMAIL_BUTTON),
-                enabled = heading.text.isNotEmpty() && content.text.isNotEmpty(),
-                onClick = {
-                    openEmail("mshdabiola@gmail.com", heading.text.toString(), content.text.toString())
-                },
-            ) {
-                Text(text = stringResource(Res.string.report_bug_submit_email_button))
-            }
-            KmtButton(
-                modifier = Modifier.testTag(ReportBugScreenTestTags.SUBMIT_GITHUB_BUTTON),
-                enabled = true,
-
-                onClick = { openUrl("https://github.com/mshdabiola/Kmtemplate/issues") },
-            ) {
-                Text(text = stringResource(Res.string.report_bug_submit_github_button))
-            }
+            Text(text = stringResource(Res.string.report_bug_submit_email_button))
         }
     }
 }

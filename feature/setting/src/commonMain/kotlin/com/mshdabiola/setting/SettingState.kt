@@ -5,7 +5,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- * http://www.apache.org/licenses/LICENSE-2.
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,10 +15,12 @@
  */
 package com.mshdabiola.setting
 
+import com.mshdabiola.model.Platform
 import com.mshdabiola.model.ReleaseInfo
 import com.mshdabiola.model.UserSettings
 
 data class SettingState(
+    val platform: Platform = Platform.Web,
     val userSettings: UserSettings = UserSettings(),
     val releaseInfo: ReleaseInfo? = null,
 )

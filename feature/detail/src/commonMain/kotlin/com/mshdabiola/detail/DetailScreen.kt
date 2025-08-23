@@ -5,7 +5,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- * http://www.apache.org/licenses/LICENSE-2.
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -111,7 +111,7 @@ internal fun DetailScreen(
                         .fillMaxWidth()
                         .testTag(DetailScreenTestTags.TITLE_TEXT_FIELD),
                     state = state.title,
-                    placeholder = stringResource(Res.string.detail_title_placeholder),
+                    label = stringResource(Res.string.detail_title_placeholder),
                     maxNum = TextFieldLineLimits.SingleLine,
                     imeAction = ImeAction.Next,
                 )
@@ -121,7 +121,8 @@ internal fun DetailScreen(
                         .weight(1f)
                         .testTag(DetailScreenTestTags.CONTENT_TEXT_FIELD),
                     state = state.detail,
-                    placeholder = stringResource(Res.string.detail_content_placeholder),
+                    label = stringResource(Res.string.detail_content_placeholder),
+                    maxNum = TextFieldLineLimits.MultiLine(),
                 )
             }
         }

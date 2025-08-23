@@ -5,6 +5,7 @@
   ./gradlew dependencyGuardBaseline;
   ./gradlew updateFossReliantDebugScreenshotTest;
 
+  ./gradlew setVersionFromTag -PnewVersionName=1.2.18
 
   ./gradlew generateFossReliantReleaseBaselineProfile
 

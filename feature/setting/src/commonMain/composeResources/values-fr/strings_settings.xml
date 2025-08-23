@@ -19,10 +19,8 @@
     <string name="feature_update_screen_name">Mise à jour</string>
     <string name="version">Version</string>
     <string name="version_code">Code de version</string>
-    <string name="last_update">Dernière mise à jour</string>
     <string name="about">Kmtemplate : Un point de départ pour vos projets Kotlin Multiplatform, fournissant une base solide et les meilleures pratiques.</string>
     <string name="developed_by">Développé par</string>
-    <string name="developer">Mshdabiola</string>
     <string name="contact_us">Nous contacter</string>
     <string name="privacy_policy">Politique de confidentialité</string>
     <string name="terms_and_condition">Conditions générales</string>

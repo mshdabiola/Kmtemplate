@@ -5,7 +5,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- * http://www.apache.org/licenses/LICENSE-2.
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -47,8 +47,8 @@ import com.mshdabiola.designsystem.component.KmtIconButton
 import com.mshdabiola.designsystem.component.KmtLoading
 import com.mshdabiola.designsystem.component.KmtTopAppBar
 import com.mshdabiola.designsystem.drawable.KmtIcons
-import com.mshdabiola.designsystem.strings.KmtStrings
 import com.mshdabiola.designsystem.theme.LocalTintTheme
+import com.mshdabiola.model.BuildConfig
 import com.mshdabiola.model.testtag.MainScreenTestTags
 import com.mshdabiola.ui.NoteCard
 import io.github.alexzhirkevich.compottie.Compottie
@@ -82,7 +82,7 @@ internal fun MainScreen(
                         if (onDrawer !=
                             null
                         ) {
-                            KmtStrings.brand
+                            BuildConfig.BRAND_NAME
                         } else {
                             stringResource(Res.string.features_main_screen_title_home)
                         },

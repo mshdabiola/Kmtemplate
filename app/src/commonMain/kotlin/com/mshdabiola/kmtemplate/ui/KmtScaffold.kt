@@ -5,7 +5,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- * http://www.apache.org/licenses/LICENSE-2.
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -71,7 +71,6 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.createGraph
 import com.mshdabiola.designsystem.component.CustomWideNavigationRailItem
 import com.mshdabiola.designsystem.drawable.KmtIcons
-import com.mshdabiola.designsystem.strings.KmtStrings
 import com.mshdabiola.detail.navigation.Detail
 import com.mshdabiola.detail.navigation.navigateToDetail
 import com.mshdabiola.kmtemplate.app.generated.resources.Res
@@ -84,6 +83,7 @@ import com.mshdabiola.kmtemplate.app.generated.resources.rail_state_collapsed
 import com.mshdabiola.kmtemplate.app.generated.resources.rail_state_expanded
 import com.mshdabiola.kmtemplate.app.generated.resources.route
 import com.mshdabiola.main.navigation.Main
+import com.mshdabiola.model.BuildConfig
 import com.mshdabiola.model.testtag.KmtScaffoldTestTags
 import com.mshdabiola.setting.navigation.Setting
 import com.mshdabiola.ui.LocalSharedTransitionScope
@@ -347,7 +347,7 @@ fun DrawerContent(
                     tint = MaterialTheme.colorScheme.primary,
                 )
                 Text(
-                    KmtStrings.brand, // Assuming KmtStrings.brand is already a resource or intended to be so.
+                    BuildConfig.BRAND_NAME, // Assuming KmtStrings.brand is already a resource or intended to be so.
                     style = MaterialTheme.typography.titleLarge,
                     modifier = Modifier.testTag(KmtScaffoldTestTags.DrawerContentTestTags.BRAND_TEXT),
                     color = MaterialTheme.colorScheme.primary,

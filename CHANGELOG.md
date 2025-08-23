@@ -5,6 +5,57 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+[Unreleased]: https://github.com/mshdabiola/kmtemplate/compare/1.2.18...HEAD
+
+- Refactor: Update baseline profile generation workflow
+- Docs: Update app version in badging file
+- Refactor: Simplify email functionality in ReportBugScreen
+- Refactor: Complete SettingDetailScreenTest
+- Refactor: Enhance SettingDetailScreenTest and add test tags
+- Fix: Update license URL and email address, add missing test assertion
+- Add pressHome() call in startActivity() to ensure home screen is active before starting activity
+- Add missing 'runs-on' specification for update-baseline-profile job
+- Fix indentation for 'Copy CI gradle.properties' step in workflow
+- Add GitHub Actions workflow to update baseline profile
+- Refactor: Make getPlatform() public and update tests
+- Refactor Release and PreRelease workflows
+- Update version information and reset revision
+- Refactor: Remove version management tasks
+- Refactor: Remove unused test tags from AboutScreenTestTags
+- Refactor: Use Platform specific version in SettingScreen
+- Refactor: Use BRAND_NAME from BuildConfig in MainScreen
+- Update KmtApp to use BuildConfig for version check
+- Refactor: Remove unused imports and trailing spaces
+- Refactor: Update SettingViewModel to use Platform model
+- Refactor: Update version handling in Gradle tasks
+- Refactor: Use BuildConfig for app constants
+- feat: Centralize build config and update Platform model
+- Refactor: Update AboutScreen to use BuildConfig and Platform for dynamic data
+- feat: Add SetVersionTagTask to update version info
+- Update REVISION_CODE in UpdateBuildVersionsTask
+- Refactor: Improve version update logic in UpdateBuildVersionsTask
+- Update `UpdateBuildVersionsTask` to handle version names
+- feat: Add task to update versions for pre-releases
+- feat: Add UpdateBuildVersionsTask
+- Add BuildConfig with version details
+- Use desktopCode for app version
+- Refactor KmtButton and update ReportBugScreen
+- Refactor TextField and NoteCard content
+- Update Build.yaml to run Codecov and Spotless on failure
+- Refactor: Move SplashScreenTestTags to designsystem module
+- Refactor: Move SplashScreen to designsystem module
+- Update Build.yaml to run Codecov and Spotless on failure
+- Refactor: Move SplashScreenTestTags to designsystem module
+- Refactor: Move SplashScreen to designsystem module
+- chore(deps): update codecov/codecov-action action to v5.5.0
+- chore(deps): update github/codeql-action action to v3.29.11
+- Update libs.versions.toml
+- Update release instructions
+
+### Added
+- UI tests for `SplashScreen.kt` to verify its display and content.
+
 ## [1.2.18] - 2025-08-21
 [1.2.18]: https://github.com/mshdabiola/kmtemplate/1.2.18
 

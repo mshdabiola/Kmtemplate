@@ -17,7 +17,7 @@ Binaries: https://github.com/mshdabiola/kmtemplate/releases/download/%v/app-foss
 Builds:
   - versionName: 1.2.18
     versionCode: 25
-    commit: 4a85e995048686a919363e66d336ba2239479d2c
+    commit: 03eb5ed845de22e793913e67d83a8ef50a127b08
     sudo:
       - echo "deb https://deb.debian.org/debian trixie main" > /etc/apt/sources.list.d/trixie.list
       - apt-get update

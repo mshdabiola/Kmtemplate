@@ -5,7 +5,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- * http://www.apache.org/licenses/LICENSE-2.
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.mshdabiola.kmtemplate.ui
+package com.mshdabiola.designsystem.component
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -31,15 +31,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag // Ensure this is imported
 import androidx.compose.ui.unit.dp
 import com.mshdabiola.designsystem.drawable.KmtIcons
-import com.mshdabiola.designsystem.strings.KmtStrings
 import com.mshdabiola.designsystem.theme.onPrimaryLight
 import com.mshdabiola.designsystem.theme.primaryLight
-import com.mshdabiola.model.testtag.SplashScreenTestTags
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
 fun SplashScreen(
     modifier: Modifier = Modifier,
+    brand: String,
 ) {
     Surface(
         modifier = modifier
@@ -65,7 +64,7 @@ fun SplashScreen(
             Spacer(Modifier.height(32.dp))
             Text(
                 modifier = Modifier.testTag(SplashScreenTestTags.BRAND_TEXT), // Tag for the text
-                text = KmtStrings.brand,
+                text = brand,
                 style = MaterialTheme.typography.headlineSmall,
                 color = onPrimaryLight,
             )
@@ -76,5 +75,5 @@ fun SplashScreen(
 @Preview
 @Composable
 fun SplashScreenPreview() {
-    SplashScreen()
+    SplashScreen(brand = "Kmtemplate")
 }
