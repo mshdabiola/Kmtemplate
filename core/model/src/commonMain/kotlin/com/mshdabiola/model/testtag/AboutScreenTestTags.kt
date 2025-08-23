@@ -28,9 +28,6 @@ object AboutScreenTestTags {
     const val VERSION_CODE_LABEL = "about:version_code_label"
     const val VERSION_CODE_VALUE = "about:version_code_value"
 
-    const val LAST_UPDATE_LABEL = "about:last_update_label"
-    const val LAST_UPDATE_VALUE = "about:last_update_value"
-
     const val DEVELOPED_BY_LABEL = "about:developed_by_label"
     const val DEVELOPER_NAME = "about:developer_name"
 
