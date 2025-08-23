@@ -43,6 +43,10 @@ jobs:
       - name: Run updateFossReliantReleaseBadging
         run: ./gradlew updateFossReliantReleaseBadging
 
+      - name: Release changelog
+        id: changelog
+        run: ./gradlew releaseChangeLog -PnewVersionName=${{ github.ref_name }}
+
       - name: Prepend Unreleased To Changelog
         id: prepend_unreleased
         run: ./gradlew prependUnreleasedChangelog -PnewVersionName=${{ github.ref_name }}
@@ -124,6 +128,10 @@ jobs:
           keyPassword: ${{ secrets.KEY_PASSWORD }}
         env:
           BUILD_TOOLS_VERSION: "34.0.0"
+
+      - name: Release changelog
+        id: changelog
+        run: ./gradlew releaseChangeLog -PnewVersionName=${{ github.ref_name }}
 
       - name: Extract release notes
         id: release_notes
