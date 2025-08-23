@@ -25,6 +25,7 @@ import androidx.compose.ui.test.onChildren
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
+import androidx.compose.ui.test.performTextInput
 import androidx.compose.ui.test.printToLog
 import com.mshdabiola.designsystem.theme.KmtTheme
 import com.mshdabiola.model.DarkThemeConfig
@@ -41,6 +42,7 @@ import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Rule
 import org.junit.Test
+import kotlin.test.assertNotNull
 
 
 class SettingDetailScreenTest {
@@ -158,18 +160,17 @@ class SettingDetailScreenTest {
         composeRule.onNodeWithTag(AboutScreenTestTags.SCREEN_ROOT).assertIsDisplayed()
 
         // Assuming AboutScreen has these buttons/links with the specified tags
-        // composeRule.onNodeWithTag(ABOUT_PRIVACY_POLICY_LINK_TAG).performClick()
-        // assertNotNull(privacyPolicyUrlOpened)
+         composeRule.onNodeWithTag(AboutScreenTestTags.PRIVACY_POLICY_BUTTON).performClick()
+         assertNotNull(privacyPolicyUrlOpened)
 
-        // composeRule.onNodeWithTag(ABOUT_TERMS_LINK_TAG).performClick()
-        // assertNotNull(termsUrlOpened)
+         composeRule.onNodeWithTag(AboutScreenTestTags.TERMS_AND_CONDITIONS_BUTTON).performClick()
+         assertNotNull(termsUrlOpened)
 
-        // composeRule.onNodeWithTag(ABOUT_CONTACT_EMAIL_LINK_TAG).performClick()
-        // assertNotNull(contactEmailOpened)
+         composeRule.onNodeWithTag(AboutScreenTestTags.EMAIL_LINK).performClick()
+         assertNotNull(contactEmailOpened)
 
         composeRule.onNodeWithTag(FaqScreenTestTags.FAQ_LIST).assertDoesNotExist()
         composeRule.onNodeWithTag(AppearanceScreenTestTags.SCREEN_ROOT).assertDoesNotExist()
-        // ... assert other screens are not displayed
     }
 
     @Test
@@ -205,18 +206,17 @@ class SettingDetailScreenTest {
         assertEquals(targetDarkModeConfig, darkModeChangedValue)
 
         // // Assuming AppearanceScreen has a switch for gradient background
-        // composeRule.onNodeWithTag(GRADIENT_BACKGROUND_SWITCH_TAG).performClick()
-        // assertEquals(true, gradientChangedValue) // Or based on initial state
+         composeRule.onNodeWithTag(AppearanceScreenTestTags.GRADIENT_BACKGROUND_ROW).performClick()
+         assertEquals(true, gradientChangedValue) // Or based on initial state
 
         composeRule.onNodeWithTag(FaqScreenTestTags.FAQ_LIST).assertDoesNotExist()
-        // ... assert other screens are not displayed
     }
 
     @Test
     fun settingDetailScreen_showsLanguageScreen_andHandlesCallback_whenNavIsLanguage() {
         val currentNav = SettingNav.Language
         var languageChangedTo: String? = null
-        val targetLanguage = "en" // Example language code
+        val targetLanguage = "en-US" // Example language code
 
         composeRule.setContent {
             KmtTheme {
@@ -232,11 +232,11 @@ class SettingDetailScreenTest {
         composeRule.onNodeWithTag(LanguageScreenTestTags.LANGUAGE_LIST).assertIsDisplayed()
 
         // Assuming LanguageScreen has options with tags like LanguageOption_en
-        // composeRule.onNodeWithTag(LANGUAGE_OPTION_EN_TAG).performClick()
-        // assertEquals(targetLanguage, languageChangedTo)
+         composeRule.onNodeWithTag(LanguageScreenTestTags.languageItem(targetLanguage))
+             .performClick()
+         assertEquals(targetLanguage, languageChangedTo)
 
         composeRule.onNodeWithTag(FaqScreenTestTags.FAQ_LIST).assertDoesNotExist()
-        // ... assert other screens are not displayed
     }
 
     @Test
@@ -265,13 +265,18 @@ class SettingDetailScreenTest {
         composeRule.onNodeWithTag(ReportBugScreenTestTags.ROOT_COLUMN).assertIsDisplayed()
 
         // Assuming ReportBugScreen has buttons/links for these actions
-        // composeRule.onNodeWithTag(REPORT_BUG_EMAIL_BUTTON_TAG).performClick()
-        // assertNotNull(emailOpened)
-        // composeRule.onNodeWithTag(REPORT_BUG_GITHUB_LINK_TAG).performClick()
-        // assertNotNull(urlOpened)
+        composeRule.onNodeWithTag(ReportBugScreenTestTags.TITLE_TEXT_FIELD)
+            .performTextInput("Title")
+        composeRule.onNodeWithTag(ReportBugScreenTestTags.DESCRIPTION_TEXT_FIELD)
+            .performTextInput("Title")
+         composeRule.onNodeWithTag(ReportBugScreenTestTags.SUBMIT_EMAIL_BUTTON)
+             .performClick()
+         assertNotNull(emailOpened)
+         composeRule.onNodeWithTag(ReportBugScreenTestTags.SUBMIT_GITHUB_BUTTON)
+             .performClick()
+         assertNotNull(urlOpened)
 
         composeRule.onNodeWithTag(FaqScreenTestTags.FAQ_LIST).assertDoesNotExist()
-        // ... assert other screens are not displayed
     }
 
     @Test
@@ -298,16 +303,15 @@ class SettingDetailScreenTest {
         composeRule.onNodeWithTag(UpdateScreenTestTags.ROOT_COLUMN).assertIsDisplayed()
 
         // Assuming UpdateScreen has UI elements for these actions
-        // composeRule.onNodeWithTag(UPDATE_DIALOG_SWITCH_TAG).performClick()
-        // assertNotNull(updateDialogSet) // Check actual value based on initial state
+         composeRule.onNodeWithTag(UpdateScreenTestTags.SHOW_UPDATE_DIALOG_SWITCH).performClick()
+         assertNotNull(updateDialogSet) // Check actual value based on initial state
 
-        // composeRule.onNodeWithTag(PRE_RELEASE_SWITCH_TAG).performClick()
-        // assertNotNull(preReleaseSet) // Check actual value
+         composeRule.onNodeWithTag(UpdateScreenTestTags.JOIN_BETA_RELEASE_SWITCH).performClick()
+         assertNotNull(preReleaseSet) // Check actual value
 
-        // composeRule.onNodeWithTag(CHECK_FOR_UPDATE_BUTTON_TAG).performClick()
-        // assertTrue(checkForUpdateClicked)
+         composeRule.onNodeWithTag(UpdateScreenTestTags.CHECK_FOR_UPDATE_BUTTON).performClick()
+         assertTrue(checkForUpdateClicked)
 
         composeRule.onNodeWithTag(FaqScreenTestTags.FAQ_LIST).assertDoesNotExist()
-        // ... assert other screens are not displayed
     }
 }
