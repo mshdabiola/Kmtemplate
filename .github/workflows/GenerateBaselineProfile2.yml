@@ -1,0 +1,76 @@
+name: Update baseline profile2
+
+on:
+  push:
+    branches:
+      - main
+    paths-ignore: # don't recursively update baseline profiles or startup profiles
+      - '**/baseline-prof.txt'
+      - '**/startup-prof.txt'
+  workflow_dispatch:
+
+jobs:
+  update-baseline-profile:
+    steps:
+      - name: Free Disk Space
+        uses: jlumbroso/free-disk-space@v1.3.1
+        with:
+          tool-cache: false
+          android: false
+          dotnet: true
+          haskell: true
+          large-packages: true
+          docker-images: true
+          swap-storage: false
+
+      - name: Set ANDROID_USER_HOME
+        run: echo "ANDROID_USER_HOME=$HOME/.android" >> $GITHUB_ENV
+
+      - name: Enable KVM group perms
+        run: |
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+          sudo udevadm control --reload-rules
+          sudo udevadm trigger --name-match=kvm
+          ls /dev/kvm
+
+      - name: Download emulator package
+        run: $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager emulator
+
+      - name: Checkout
+        uses: actions/checkout@v5
+        with:
+          ref: ${{ github.head_ref }}
+          # token: ${{ secrets.PAT }}
+
+       - name: Copy CI gradle.properties
+        run: mkdir -p ~/.gradle ; cp .github/ci-gradle.properties ~/.gradle/gradle.properties
+
+      - name: Cache AVD
+        if: false
+        uses: actions/cache@v4
+        with:
+          path: |
+            ${{ env.ANDROID_USER_HOME }}/avd/gradle-managed/*
+            ${{ env.ANDROID_USER_HOME }}/adb*
+          key: v7-${{ runner.os }}-baseline-profile
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version-file: .github/workflows/.java-version
+
+      - name: Accept licenses
+        run: yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --licenses
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          cache-read-only: true # Don't write caches for baseline profile generation
+
+      - name: Generate baseline profile for app
+        id: app-baseline-profile
+        run: |
+          # generate the baseline profile, with one retry attempt
+          generate_profile () { ./gradlew :app:generateBaselineProfile --stacktrace; }
+          (echo "==== Attempt 1 ====" && generate_profile) || (echo "==== Attempt 2 ====" && generate_profile) || (echo "==== Both attempts failed ====" && exit 1)
