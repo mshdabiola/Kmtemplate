@@ -8,6 +8,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 [Unreleased]: https://github.com/mshdabiola/kmtemplate/compare/1.2.19...HEAD
 
+- Refactor: Remove unused code in build-logic tasks
+- CI: Update Release.yml
+- Refactor: Separate changelog update into new task
+- Refactor: Automate CHANGELOG.md updates in SetVersionTagTask
+
 ## [1.2.19] - 2025-08-24
 [1.2.19]: https://github.com/mshdabiola/kmtemplate/1.2.19
 
