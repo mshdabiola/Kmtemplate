@@ -71,7 +71,6 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.createGraph
 import com.mshdabiola.designsystem.component.CustomWideNavigationRailItem
 import com.mshdabiola.designsystem.drawable.KmtIcons
-import com.mshdabiola.designsystem.strings.KmtStrings
 import com.mshdabiola.detail.navigation.Detail
 import com.mshdabiola.detail.navigation.navigateToDetail
 import com.mshdabiola.kmtemplate.app.generated.resources.Res

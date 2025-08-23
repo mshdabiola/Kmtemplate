@@ -43,7 +43,7 @@ class AboutScreenTest {
                 AboutScreen(
                     openEmail = { _, _, _ -> emailOpened = true },
                     openUrl = { urlOpened = it },
-                    platform = Platform.Web
+                    platform = Platform.Web,
                 )
             }
         }
@@ -85,7 +85,7 @@ class AboutScreenTest {
             KmtTheme {
                 AboutScreen(
                     openEmail = { _, _, _ -> emailOpened = true },
-                    platform = Platform.Web
+                    platform = Platform.Web,
                 )
             }
         }
@@ -111,7 +111,7 @@ class AboutScreenTest {
                     // To truly test the openUrl, AboutScreen needs to be modified:
                     // onClick = { openUrl(privacyPolicyUrl) } in KmtTextButton for privacy policy
                     openUrl = { url -> urlOpened = url },
-                    platform = Platform.Web
+                    platform = Platform.Web,
 
                 )
             }
@@ -138,7 +138,7 @@ class AboutScreenTest {
                     // For action verification, AboutScreen needs to call openUrl from KmtTextButton's onClick.
                     // onClick = { openUrl(termsUrl) } in KmtTextButton for terms
                     openUrl = { url -> urlOpened = url },
-                    platform = Platform.Web
+                    platform = Platform.Web,
 
                 )
             }

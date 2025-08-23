@@ -25,7 +25,6 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavOptions
 import androidx.navigation.compose.composable
 import androidx.navigation.navOptions
-import com.mshdabiola.designsystem.strings.KmtStrings
 import com.mshdabiola.model.AssetNotFoundException
 import com.mshdabiola.model.BuildConfig
 import com.mshdabiola.model.DeviceNotSupportedException

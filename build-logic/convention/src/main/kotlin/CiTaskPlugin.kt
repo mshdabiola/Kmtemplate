@@ -27,7 +27,6 @@ import org.gradle.kotlin.dsl.register
 class CiTaskPlugin : Plugin<Project> {
 
     override fun apply(target: Project) {
-
         target.tasks.register<RemoveFirebaseReferencesTask>("removeFirebaseReferences") {
             description = "Removes all known Firebase-related declarations from various Gradle files."
             group = "CI Utilities"

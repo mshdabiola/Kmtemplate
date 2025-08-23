@@ -83,7 +83,7 @@ class KmtAppTest : KoinTest {
     }
     val appModule =
         module {
-            includes(applicationModule,testDataModule, detailModule, mainModule, settingModule)
+            includes(applicationModule, testDataModule, detailModule, mainModule, settingModule)
             viewModel {
                 MainAppViewModel(
                     userDataRepository = get(),
