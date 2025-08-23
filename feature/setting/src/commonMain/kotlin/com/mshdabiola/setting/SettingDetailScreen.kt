@@ -151,7 +151,7 @@ internal fun SettingDetailScreen(
                                     BuildConfig.BRAND_NAME,
                                     subject,
                                 )
-                                openEmail("mshdabiola@gmail.com", emailSubject, body)
+                                openEmail(BuildConfig.DEVELOPER_EMAIL, emailSubject, body)
                             }
                         },
                         openUrl = openUrl,

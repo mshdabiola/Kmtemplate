@@ -64,6 +64,7 @@ class AboutScreenTest {
 
         // Verify Version Code Info
         composeRule.onNodeWithTag(AboutScreenTestTags.VERSION_CODE_LABEL).assertIsDisplayed()
+        composeRule.onNodeWithTag(AboutScreenTestTags.VERSION_CODE_VALUE).assertIsDisplayed()
         // Verify Developed By Info
         composeRule.onNodeWithTag(AboutScreenTestTags.DEVELOPED_BY_LABEL).assertIsDisplayed()
         composeRule.onNodeWithTag(AboutScreenTestTags.DEVELOPER_NAME).assertIsDisplayed()
