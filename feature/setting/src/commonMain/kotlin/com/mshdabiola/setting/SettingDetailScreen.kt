@@ -79,7 +79,7 @@ internal fun SettingDetailScreen(
                 title = {
                     Text(
                         modifier = Modifier.testTag(SettingDetailScreenTestTags.TOP_APP_BAR_TITLE),
-                      text=  stringArray
+                        text = stringArray
                             .getOrNull(settingNav.segment)
                             ?.getOrNull(settingNav.index)
                             ?: "",
