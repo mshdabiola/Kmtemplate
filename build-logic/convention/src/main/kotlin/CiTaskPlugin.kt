@@ -13,13 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import com.mshdabiola.app.BumpConveyorRevisionTask
 import com.mshdabiola.app.DowngradeBuildToolsTask
 import com.mshdabiola.app.PrependUnreleasedToChangelogTask
 import com.mshdabiola.app.RemoveFirebaseReferencesTask
 import com.mshdabiola.app.RenameProjectArtifactsTask
-import com.mshdabiola.app.SetPreReleaseVersionTag
-import com.mshdabiola.app.SetVersionFromTagTask
 import com.mshdabiola.app.SetVersionTagTask
 import com.mshdabiola.app.UpdateBuildVersionsPreReleaseTask
 import com.mshdabiola.app.UpdateBuildVersionsTask
@@ -30,42 +27,6 @@ import org.gradle.kotlin.dsl.register
 class CiTaskPlugin : Plugin<Project> {
 
     override fun apply(target: Project) {
-        target.tasks.register<BumpConveyorRevisionTask>("bumpConveyorRevision") {
-            description = "Reads, increments, and updates the Conveyor revision number in files."
-            group = "CI Utilities" // Good practice to group tasks
-
-            revisionFile.set(target.rootProject.file("version.txt"))
-            outputRevisionFile.set(target.rootProject.file("version.txt"))
-            conveyorConfigFile.set(target.rootProject.file("ci.conveyor.conf"))
-            newVersionName.set(project.providers.gradleProperty("newVersionName").orElse("0.0.1"))
-
-            outputs.upToDateWhen { false }
-        }
-
-        target.tasks.register<SetPreReleaseVersionTag>("setPreReleaseVersionTag") {
-            description =
-                "Sets the versionName and versionCode in gradle/libs.versions.toml based on provided tag values."
-            group = "CI Utilities"
-
-            newVersionName.set(project.providers.gradleProperty("newVersionName").orElse("0.0.1"))
-            // newVersionCode is derived from newVersionName in the task if not explicitly set via property
-            libsVersionsTomlFile.set(target.rootProject.file("gradle/libs.versions.toml"))
-            outputRevisionFile.set(target.rootProject.file("version.txt"))
-            outputs.upToDateWhen { false }
-        }
-
-        target.tasks.register<SetVersionFromTagTask>("setVersionFromTag") {
-            description =
-                "Sets the versionName and versionCode in gradle/libs.versions.toml based on provided tag values."
-            group = "CI Utilities"
-
-            newVersionName.set(project.providers.gradleProperty("newVersionName").orElse("0.0.1"))
-            // newVersionCode is derived from newVersionName in the task if not explicitly set via property
-            libsVersionsTomlFile.set(target.rootProject.file("gradle/libs.versions.toml"))
-            changelogFile.set(target.rootProject.file("CHANGELOG.md"))
-            outputRevisionFile.set(target.rootProject.file("version.txt"))
-            outputs.upToDateWhen { false }
-        }
 
         target.tasks.register<RemoveFirebaseReferencesTask>("removeFirebaseReferences") {
             description = "Removes all known Firebase-related declarations from various Gradle files."
