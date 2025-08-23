@@ -57,6 +57,7 @@ import com.mshdabiola.kmtemplate.LocalAppLocale
 import com.mshdabiola.kmtemplate.MainActivityUiState
 import com.mshdabiola.kmtemplate.MainAppViewModel
 import com.mshdabiola.kmtemplate.navigation.KmtNavHost
+import com.mshdabiola.model.BuildConfig
 import com.mshdabiola.model.DarkThemeConfig
 import com.mshdabiola.model.ReleaseInfo
 import com.mshdabiola.setting.navigation.getWindowRepository
@@ -96,10 +97,9 @@ fun KmtApp(
     val languageCode = getLanguage(uiState)
     var releaseInfo by remember { mutableStateOf<ReleaseInfo.NewUpdate?>(null) }
     val windowRepository = getWindowRepository()
-    val currentVersion = KmtStrings.version
 
     LaunchedEffect(Unit) {
-        val info = viewModel.getLatestReleaseInfo(currentVersion).await()
+        val info = viewModel.getLatestReleaseInfo(BuildConfig.VERSION_NAME).await()
         when (info) {
             is ReleaseInfo.NewUpdate -> {
                 viewModel.log("$info")

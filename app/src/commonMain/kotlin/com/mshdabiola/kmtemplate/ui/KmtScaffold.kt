@@ -84,6 +84,7 @@ import com.mshdabiola.kmtemplate.app.generated.resources.rail_state_collapsed
 import com.mshdabiola.kmtemplate.app.generated.resources.rail_state_expanded
 import com.mshdabiola.kmtemplate.app.generated.resources.route
 import com.mshdabiola.main.navigation.Main
+import com.mshdabiola.model.BuildConfig
 import com.mshdabiola.model.testtag.KmtScaffoldTestTags
 import com.mshdabiola.setting.navigation.Setting
 import com.mshdabiola.ui.LocalSharedTransitionScope
@@ -347,7 +348,7 @@ fun DrawerContent(
                     tint = MaterialTheme.colorScheme.primary,
                 )
                 Text(
-                    KmtStrings.brand, // Assuming KmtStrings.brand is already a resource or intended to be so.
+                    BuildConfig.BRAND_NAME, // Assuming KmtStrings.brand is already a resource or intended to be so.
                     style = MaterialTheme.typography.titleLarge,
                     modifier = Modifier.testTag(KmtScaffoldTestTags.DrawerContentTestTags.BRAND_TEXT),
                     color = MaterialTheme.colorScheme.primary,
