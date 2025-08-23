@@ -49,6 +49,7 @@ import com.mshdabiola.designsystem.component.KmtTopAppBar
 import com.mshdabiola.designsystem.drawable.KmtIcons
 import com.mshdabiola.designsystem.strings.KmtStrings
 import com.mshdabiola.designsystem.theme.LocalTintTheme
+import com.mshdabiola.model.BuildConfig
 import com.mshdabiola.model.testtag.MainScreenTestTags
 import com.mshdabiola.ui.NoteCard
 import io.github.alexzhirkevich.compottie.Compottie
@@ -82,7 +83,7 @@ internal fun MainScreen(
                         if (onDrawer !=
                             null
                         ) {
-                            KmtStrings.brand
+                            BuildConfig.BRAND_NAME
                         } else {
                             stringResource(Res.string.features_main_screen_title_home)
                         },
