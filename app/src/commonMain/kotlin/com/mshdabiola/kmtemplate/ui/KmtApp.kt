@@ -5,7 +5,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- * http://www.apache.org/licenses/LICENSE-2.
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -49,7 +49,6 @@ import com.mshdabiola.analytics.AnalyticsHelper
 import com.mshdabiola.analytics.LocalAnalyticsHelper
 import com.mshdabiola.designsystem.component.KmtBackground
 import com.mshdabiola.designsystem.component.KmtGradientBackground
-import com.mshdabiola.designsystem.strings.KmtStrings
 import com.mshdabiola.designsystem.theme.GradientColors
 import com.mshdabiola.designsystem.theme.KmtTheme
 import com.mshdabiola.designsystem.theme.LocalGradientColors
@@ -57,6 +56,7 @@ import com.mshdabiola.kmtemplate.LocalAppLocale
 import com.mshdabiola.kmtemplate.MainActivityUiState
 import com.mshdabiola.kmtemplate.MainAppViewModel
 import com.mshdabiola.kmtemplate.navigation.KmtNavHost
+import com.mshdabiola.model.BuildConfig
 import com.mshdabiola.model.DarkThemeConfig
 import com.mshdabiola.model.ReleaseInfo
 import com.mshdabiola.setting.navigation.getWindowRepository
@@ -96,10 +96,9 @@ fun KmtApp(
     val languageCode = getLanguage(uiState)
     var releaseInfo by remember { mutableStateOf<ReleaseInfo.NewUpdate?>(null) }
     val windowRepository = getWindowRepository()
-    val currentVersion = KmtStrings.version
 
     LaunchedEffect(Unit) {
-        val info = viewModel.getLatestReleaseInfo(currentVersion).await()
+        val info = viewModel.getLatestReleaseInfo(BuildConfig.VERSION_NAME).await()
         when (info) {
             is ReleaseInfo.NewUpdate -> {
                 viewModel.log("$info")

@@ -12,6 +12,53 @@ permissions:
 
 jobs:
 
+  revision:
+    name: Bump Revision
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version-file: .github/workflows/.java-version
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          build-scan-publish: true
+          build-scan-terms-of-use-url: "https://gradle.com/terms-of-service"
+          build-scan-terms-of-use-agree: "yes"
+
+      - name: Read and increment revision
+        id: bump_conveyor_revision
+        run: |
+          ./gradlew updateBuildVersions -PnewVersionName=${{ github.ref_name }}
+
+      - name: Run updateFossReliantReleaseBadging
+        run: ./gradlew updateFossReliantReleaseBadging
+
+      - name: Prepend Unreleased To Changelog
+        id: prepend_unreleased
+        run: ./gradlew prependUnreleasedChangelog -PnewVersionName=${{ github.ref_name }}
+
+      # Create Pull Request
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v7.0.8
+        with:
+          commit-message: "Release ${{ github.ref_name }}"
+          title: "Release ${{ github.ref_name }}"
+          delete-branch: true
+          reviewers: mshdabiola
+          branch: actions/release
+          signoff: false
+          base: develop
+
   android:
     name: Build and  Deploy Android Release
     runs-on: ubuntu-latest
@@ -43,11 +90,6 @@ jobs:
           build-scan-terms-of-use-url: "https://gradle.com/terms-of-service"
           build-scan-terms-of-use-agree: "yes"
 
-#      - name: Run setVersionFromTag
-#        run: ./gradlew setVersionFromTag -PnewVersionName=${{ github.ref_name }}
-
-      - name: Run updateFossReliantReleaseBadging
-        run: ./gradlew updateFossReliantReleaseBadging
 
       - name: Build  google play release variant apk
         run: ./gradlew assembleGooglePlayRelease
@@ -98,27 +140,6 @@ jobs:
           prerelease: false
       #   discussionCategory: Announcements
 
-      - name: Prepend Unreleased To Changelog
-        id: prepend_unreleased
-        run: ./gradlew prependUnreleasedChangelog -PnewVersionName=${{ github.ref_name }}
-
-      # Create Pull Request
-      - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v7.0.8
-        with:
-          commit-message: "Release ${{ github.ref_name }}"
-          title: "Release ${{ github.ref_name }}"
-          delete-branch: true
-          reviewers: mshdabiola
-          branch: actions/release
-          signoff: false
-          base: develop
-          add-paths: |
-            *.toml
-            *.md
-            *.txt
-            *.xml
-
   desktop:
     name: Build and  Deploy Desktop Release
     runs-on: ubuntu-latest
@@ -138,8 +159,8 @@ jobs:
           build-scan-terms-of-use-url: "https://gradle.com/terms-of-service"
           build-scan-terms-of-use-agree: "yes"
 
-      - name: Run setVersionFromTag
-        run: ./gradlew setVersionFromTag -PnewVersionName=${{ github.ref_name }}
+      - name: Run setVersionTag
+        run: ./gradlew setVersionTag -PnewVersionName=${{ github.ref_name }}
 
       - name: Build jar
         run: ./gradlew createReleaseDistributable

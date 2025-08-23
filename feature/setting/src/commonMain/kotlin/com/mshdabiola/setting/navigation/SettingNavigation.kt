@@ -5,7 +5,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- * http://www.apache.org/licenses/LICENSE-2.
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -25,8 +25,8 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavOptions
 import androidx.navigation.compose.composable
 import androidx.navigation.navOptions
-import com.mshdabiola.designsystem.strings.KmtStrings
 import com.mshdabiola.model.AssetNotFoundException
+import com.mshdabiola.model.BuildConfig
 import com.mshdabiola.model.DeviceNotSupportedException
 import com.mshdabiola.model.InvalidVersionFormatException
 import com.mshdabiola.model.NoUpdateAvailableException
@@ -71,7 +71,6 @@ fun NavGraphBuilder.settingScreen(
         val viewModel: SettingViewModel = koinViewModel()
         val settingState = viewModel.settingState.collectAsStateWithLifecycle()
         val windowRepository: WindowRepository = getWindowRepository()
-        val version = KmtStrings.version
 
         CompositionLocalProvider(
             LocalNavAnimatedContentScope provides this,
@@ -88,7 +87,7 @@ fun NavGraphBuilder.settingScreen(
                 openEmail = { email, subject, body -> windowRepository.openEmail(email, subject, body) },
                 onSetUpdateDialog = { viewModel.setShowDialog(it) },
                 onSetUpdateFromPreRelease = { viewModel.setUpdateFromPreRelease(it) },
-                onCheckForUpdate = { viewModel.checkForUpdate(version) },
+                onCheckForUpdate = { viewModel.checkForUpdate(BuildConfig.VERSION_NAME) },
             )
             val releaseInfo = settingState.value.releaseInfo
             if (releaseInfo != null) {

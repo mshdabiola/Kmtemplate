@@ -5,7 +5,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- * http://www.apache.org/licenses/LICENSE-2.
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -39,15 +39,14 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import com.mshdabiola.designsystem.component.KmtTextButton
 import com.mshdabiola.designsystem.drawable.KmtIcons
-import com.mshdabiola.designsystem.strings.KmtStrings
 import com.mshdabiola.designsystem.theme.KmtTheme
+import com.mshdabiola.model.BuildConfig
+import com.mshdabiola.model.Platform
 import com.mshdabiola.model.testtag.AboutScreenTestTags
 import kmtemplate.feature.setting.generated.resources.Res
 import kmtemplate.feature.setting.generated.resources.about
 import kmtemplate.feature.setting.generated.resources.contact_us
 import kmtemplate.feature.setting.generated.resources.developed_by
-import kmtemplate.feature.setting.generated.resources.developer
-import kmtemplate.feature.setting.generated.resources.last_update
 import kmtemplate.feature.setting.generated.resources.privacy_policy
 import kmtemplate.feature.setting.generated.resources.terms_and_condition
 import kmtemplate.feature.setting.generated.resources.version
@@ -58,6 +57,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 @Composable
 fun AboutScreen(
     modifier: Modifier = Modifier,
+    platform: Platform,
     openUrl: (String) -> Unit = {},
     openEmail: (String, String, String) -> Unit = { _, _, _ -> },
 ) {
@@ -81,7 +81,7 @@ fun AboutScreen(
         )
 
         Text(
-            text = KmtStrings.brand,
+            text = BuildConfig.BRAND_NAME,
             style = MaterialTheme.typography.headlineMedium,
             color = MaterialTheme.colorScheme.primary,
             modifier = Modifier
@@ -117,7 +117,7 @@ fun AboutScreen(
             modifier = Modifier.testTag(AboutScreenTestTags.VERSION_NAME_LABEL),
         )
         Text(
-            text = KmtStrings.version,
+            text = platform.versionTag,
             style = MaterialTheme.typography.bodyLarge,
             color = MaterialTheme.colorScheme.onSurface,
             modifier = Modifier.testTag(AboutScreenTestTags.VERSION_NAME_VALUE),
@@ -131,24 +131,10 @@ fun AboutScreen(
             modifier = Modifier.testTag(AboutScreenTestTags.VERSION_CODE_LABEL),
         )
         Text(
-            text = KmtStrings.versionCode,
+            text = platform.versionCode,
             style = MaterialTheme.typography.bodyLarge,
             color = MaterialTheme.colorScheme.onSurface,
             modifier = Modifier.testTag(AboutScreenTestTags.VERSION_CODE_VALUE),
-        )
-
-        Spacer(Modifier.height(16.dp))
-        Text(
-            text = stringResource(Res.string.last_update),
-            color = MaterialTheme.colorScheme.onSurfaceVariant,
-            style = MaterialTheme.typography.labelLarge,
-            modifier = Modifier.testTag(AboutScreenTestTags.LAST_UPDATE_LABEL),
-        )
-        Text(
-            text = KmtStrings.lastUpdate,
-            style = MaterialTheme.typography.bodyLarge,
-            color = MaterialTheme.colorScheme.onSurface,
-            modifier = Modifier.testTag(AboutScreenTestTags.LAST_UPDATE_VALUE),
         )
 
         Spacer(Modifier.height(16.dp))
@@ -159,7 +145,7 @@ fun AboutScreen(
             modifier = Modifier.testTag(AboutScreenTestTags.DEVELOPED_BY_LABEL),
         )
         Text(
-            text = stringResource(Res.string.developer),
+            text = BuildConfig.DEVELOPER,
             style = MaterialTheme.typography.bodyLarge,
             color = MaterialTheme.colorScheme.onSurface,
             modifier = Modifier.testTag(AboutScreenTestTags.DEVELOPER_NAME),
@@ -174,7 +160,7 @@ fun AboutScreen(
         )
 
         Text(
-            text = "mshdabiola@gmail.com",
+            text = BuildConfig.DEVELOPER_EMAIL,
             style = MaterialTheme.typography.bodyLarge.copy(
                 color = MaterialTheme.colorScheme.primary,
                 fontWeight = FontWeight.Medium,
@@ -183,7 +169,7 @@ fun AboutScreen(
             modifier = Modifier
                 .clickable {
                     openEmail(
-                        "mshdabiola@gmail.com",
+                        BuildConfig.DEVELOPER_EMAIL,
                         "Feedback for Kmtemplate",
                         "",
                     )
@@ -193,7 +179,9 @@ fun AboutScreen(
         )
 
         KmtTextButton(
-            onClick = {},
+            onClick = {
+                openUrl(BuildConfig.PRIVACY_POLICY_URL)
+            },
             contentPadding = PaddingValues(vertical = 4.dp),
             modifier = Modifier.testTag(AboutScreenTestTags.PRIVACY_POLICY_BUTTON),
         ) {
@@ -201,7 +189,9 @@ fun AboutScreen(
         }
 
         KmtTextButton(
-            onClick = {},
+            onClick = {
+                openUrl(BuildConfig.TERMS_AND_CONDITIONS_URL)
+            },
             contentPadding = PaddingValues(vertical = 4.dp),
             modifier = Modifier.testTag(AboutScreenTestTags.TERMS_AND_CONDITIONS_BUTTON),
         ) {
@@ -215,6 +205,6 @@ fun AboutScreen(
 @Composable
 fun AboutScreenPreview() {
     KmtTheme {
-        AboutScreen()
+        AboutScreen(platform = Platform.Web)
     }
 }

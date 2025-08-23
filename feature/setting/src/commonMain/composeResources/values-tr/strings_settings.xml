@@ -19,10 +19,8 @@
     <string name="feature_update_screen_name">Güncelle</string>
     <string name="version">Sürüm</string>
     <string name="version_code">Sürüm Kodu</string>
-    <string name="last_update">Son Güncelleme</string>
     <string name="about">Kmtemplate: Kotlin Multiplatform projeleriniz için sağlam bir temel ve en iyi uygulamalar sunan bir başlangıç noktası.</string>
     <string name="developed_by">Geliştirici</string>
-    <string name="developer">Mshdabiola</string>
     <string name="contact_us">Bize Ulaşın</string>
     <string name="privacy_policy">Gizlilik Politikası</string>
     <string name="terms_and_condition">Şartlar ve Koşullar</string>

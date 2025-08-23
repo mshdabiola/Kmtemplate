@@ -55,8 +55,9 @@ spotless = "7.2.1"
 sqlite = "2.6.0-rc01"
 turbine = "1.2.1"
 uiTextGoogleFonts = "1.9.0"
-versionCode = "25"
-versionName = "1.2.18"
+versionCode = "26"
+versionName = "1.2.19"
+desktopCode = "1.2.18"
 
 
 [libraries]

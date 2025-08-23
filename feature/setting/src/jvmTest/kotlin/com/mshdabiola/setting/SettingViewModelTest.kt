@@ -5,7 +5,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- * http://www.apache.org/licenses/LICENSE-2.
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -17,6 +17,7 @@ package com.mshdabiola.setting
 
 import app.cash.turbine.test
 import com.mshdabiola.model.DarkThemeConfig
+import com.mshdabiola.model.Platform
 import com.mshdabiola.model.ReleaseInfo
 import com.mshdabiola.model.UpdateException
 import com.mshdabiola.model.UserSettings
@@ -49,7 +50,7 @@ class SettingViewModelTest {
         userDataRepository = FakeUserDataRepository()
         userDataRepository.setFakeUserData(initialUserSettings)
         networkRepository = FakeNetworkRepository() // Assuming this can be instantiated
-        viewModel = SettingViewModel(userDataRepository, networkRepository)
+        viewModel = SettingViewModel(userDataRepository, networkRepository, Platform.Web)
     }
 
     @Test

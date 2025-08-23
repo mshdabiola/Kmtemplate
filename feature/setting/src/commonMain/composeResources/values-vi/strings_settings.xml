@@ -19,10 +19,8 @@
     <string name="feature_update_screen_name">Cập nhật</string>
     <string name="version">Phiên bản</string>
     <string name="version_code">Mã phiên bản</string>
-    <string name="last_update">Cập nhật lần cuối</string>
     <string name="about">Kmtemplate: Một điểm khởi đầu cho các dự án Kotlin Multiplatform của bạn, cung cấp nền tảng vững chắc và các phương pháp hay nhất.</string>
     <string name="developed_by">Được phát triển bởi</string>
-    <string name="developer">Mshdabiola</string>
     <string name="contact_us">Liên hệ với chúng tôi</string>
     <string name="privacy_policy">Chính sách bảo mật</string>
     <string name="terms_and_condition">Điều khoản và điều kiện</string>

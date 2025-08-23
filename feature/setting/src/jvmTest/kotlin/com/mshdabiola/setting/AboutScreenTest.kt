@@ -5,7 +5,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- * http://www.apache.org/licenses/LICENSE-2.
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -21,6 +21,7 @@ import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import com.mshdabiola.designsystem.theme.KmtTheme
+import com.mshdabiola.model.Platform
 import com.mshdabiola.model.testtag.AboutScreenTestTags
 import com.mshdabiola.setting.detailscreen.AboutScreen
 import org.junit.Assert.assertTrue
@@ -42,6 +43,7 @@ class AboutScreenTest {
                 AboutScreen(
                     openEmail = { _, _, _ -> emailOpened = true },
                     openUrl = { urlOpened = it },
+                    platform = Platform.Web,
                 )
             }
         }
@@ -63,11 +65,6 @@ class AboutScreenTest {
         // Verify Version Code Info
         composeRule.onNodeWithTag(AboutScreenTestTags.VERSION_CODE_LABEL).assertIsDisplayed()
         composeRule.onNodeWithTag(AboutScreenTestTags.VERSION_CODE_VALUE).assertIsDisplayed()
-
-        // Verify Last Update Info
-        composeRule.onNodeWithTag(AboutScreenTestTags.LAST_UPDATE_LABEL).assertIsDisplayed()
-        composeRule.onNodeWithTag(AboutScreenTestTags.LAST_UPDATE_VALUE).assertIsDisplayed()
-
         // Verify Developed By Info
         composeRule.onNodeWithTag(AboutScreenTestTags.DEVELOPED_BY_LABEL).assertIsDisplayed()
         composeRule.onNodeWithTag(AboutScreenTestTags.DEVELOPER_NAME).assertIsDisplayed()
@@ -89,6 +86,7 @@ class AboutScreenTest {
             KmtTheme {
                 AboutScreen(
                     openEmail = { _, _, _ -> emailOpened = true },
+                    platform = Platform.Web,
                 )
             }
         }
@@ -114,6 +112,8 @@ class AboutScreenTest {
                     // To truly test the openUrl, AboutScreen needs to be modified:
                     // onClick = { openUrl(privacyPolicyUrl) } in KmtTextButton for privacy policy
                     openUrl = { url -> urlOpened = url },
+                    platform = Platform.Web,
+
                 )
             }
         }
@@ -139,6 +139,8 @@ class AboutScreenTest {
                     // For action verification, AboutScreen needs to call openUrl from KmtTextButton's onClick.
                     // onClick = { openUrl(termsUrl) } in KmtTextButton for terms
                     openUrl = { url -> urlOpened = url },
+                    platform = Platform.Web,
+
                 )
             }
         }

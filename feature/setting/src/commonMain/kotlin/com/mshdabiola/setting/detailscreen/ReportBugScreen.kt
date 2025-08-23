@@ -5,7 +5,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- * http://www.apache.org/licenses/LICENSE-2.
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -39,6 +39,7 @@ import androidx.compose.ui.unit.dp
 import com.mshdabiola.designsystem.component.KmtButton
 import com.mshdabiola.designsystem.component.KmtTextField
 import com.mshdabiola.designsystem.theme.KmtTheme
+import com.mshdabiola.model.BuildConfig
 import com.mshdabiola.model.testtag.ReportBugScreenTestTags
 import kmtemplate.feature.setting.generated.resources.Res
 import kmtemplate.feature.setting.generated.resources.report_bug_description_label
@@ -76,7 +77,7 @@ fun ReportBugScreen(
             enabled = true,
             colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.tertiaryContainer),
             shape = ButtonDefaults.shapes(MaterialTheme.shapes.medium),
-            onClick = { openUrl("https://github.com/mshdabiola/Kmtemplate/issues") },
+            onClick = { openUrl(BuildConfig.ISSUE_GITHUB_URL) },
         ) {
             Text(text = stringResource(Res.string.report_bug_submit_github_button))
         }
@@ -112,7 +113,7 @@ fun ReportBugScreen(
                 .testTag(ReportBugScreenTestTags.SUBMIT_EMAIL_BUTTON),
             enabled = heading.text.isNotEmpty() && content.text.isNotEmpty(),
             onClick = {
-                openEmail("mshdabiola@gmail.com", heading.text.toString(), content.text.toString())
+                openEmail(BuildConfig.DEVELOPER_EMAIL, heading.text.toString(), content.text.toString())
             },
         ) {
             Text(text = stringResource(Res.string.report_bug_submit_email_button))
