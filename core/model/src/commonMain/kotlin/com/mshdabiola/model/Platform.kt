@@ -32,9 +32,8 @@ sealed class Platform(val versionTag: String, val versionCode: String) {
         val buildType: BuildType
             get() = when (buildTypeStr) {
                 "release" -> BuildType.Release
-                "debug" -> BuildType.Debug
                 "benchmark" -> BuildType.Benchmark
-                else -> throw IllegalArgumentException("Unknown build type: $buildTypeStr")
+                else -> BuildType.Debug
             }
     }
 }
