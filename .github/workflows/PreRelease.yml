@@ -13,7 +13,7 @@ permissions:
 jobs:
 
   revision:
-    name: Bump Revision
+    name: Bump Pre Release Version
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -35,8 +35,8 @@ jobs:
           build-scan-terms-of-use-url: "https://gradle.com/terms-of-service"
           build-scan-terms-of-use-agree: "yes"
 
-      - name: Read and increment revision
-        id: bump_conveyor_revision
+      - name: Update build Pre Release versions
+        id: update_version
         run: |
           ./gradlew updateBuildVersionsPreRelease -PnewVersionName=${{ github.ref_name }}
 

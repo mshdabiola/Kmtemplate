@@ -121,6 +121,7 @@ internal fun DetailScreen(
                         .weight(1f)
                         .testTag(DetailScreenTestTags.CONTENT_TEXT_FIELD),
                     state = state.detail,
+                    imeAction = ImeAction.Default,
                     label = stringResource(Res.string.detail_content_placeholder),
                     maxNum = TextFieldLineLimits.MultiLine(),
                 )
