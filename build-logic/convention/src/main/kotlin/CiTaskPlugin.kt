@@ -23,6 +23,7 @@ import com.mshdabiola.app.UpdateBuildVersionsTask
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.register
+import kotlin.text.set
 
 class CiTaskPlugin : Plugin<Project> {
 
@@ -128,6 +129,7 @@ class CiTaskPlugin : Plugin<Project> {
                 target.rootProject.file("core/model/src/commonMain/kotlin/com/mshdabiola/model/BuildConfig.kt"),
             )
             libsVersionsTomlFile.set(target.rootProject.file("gradle/libs.versions.toml"))
+            changelogFile.set(target.rootProject.file("CHANGELOG.md"))
 
             outputs.upToDateWhen { false } // Ensure it always runs if invoked
         }

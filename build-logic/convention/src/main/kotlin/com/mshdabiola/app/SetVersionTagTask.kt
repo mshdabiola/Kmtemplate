@@ -21,6 +21,11 @@ import org.gradle.api.provider.Property
 import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.InputFile
 import org.gradle.api.tasks.TaskAction
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
+import kotlin.io.readLines
+import kotlin.io.writeText
 
 /**
  * A Gradle task to update version information across BuildConfig.kt, ci.conveyor.conf, and gradle/libs.versions.toml.
@@ -38,6 +43,9 @@ abstract class SetVersionTagTask : DefaultTask() {
 
     @get:InputFile
     abstract val libsVersionsTomlFile: RegularFileProperty
+
+    @get:InputFile // Added for the changelog
+    abstract val changelogFile: RegularFileProperty
 
     @TaskAction
     fun updateVersions() {
@@ -94,5 +102,26 @@ abstract class SetVersionTagTask : DefaultTask() {
         println("gradle/libs.versions.toml updated successfully.")
 
         println("All version updates completed successfully for TAG: $newTagName.")
+        updateChangelog(newTagName)
+    }
+
+    private fun updateChangelog(newVersion: String) {
+        val changelog = changelogFile.asFile.get()
+        val lines = changelog.readLines().toMutableList()
+        val currentDate = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())
+
+        val unreleasedHeaderIndex = lines.indexOfFirst { it.trim() == "## [Unreleased]" }
+        if (unreleasedHeaderIndex != -1) {
+            lines[unreleasedHeaderIndex] = "## [$newVersion] - $currentDate"
+        }
+
+        val newVersionLink = "[$newVersion]: https://github.com/mshdabiola/kmtemplate/$newVersion"
+        val versionLinkIndex = lines.indexOfFirst { it.contains("[Unreleased]") }
+        if (versionLinkIndex != -1) {
+            lines[versionLinkIndex] = newVersionLink
+        }
+
+        changelog.writeText(lines.joinToString("\n"))
+        println("Successfully updated ${changelog.name} with version $newVersion.")
     }
 }
