@@ -70,10 +70,10 @@ androidx.concurrent:concurrent-futures:1.1.0
 androidx.constraintlayout:constraintlayout-core:1.0.4
 androidx.constraintlayout:constraintlayout:2.1.4
 androidx.coordinatorlayout:coordinatorlayout:1.0.0
-androidx.core:core-ktx:1.16.0
+androidx.core:core-ktx:1.17.0
 androidx.core:core-splashscreen:1.0.1
 androidx.core:core-viewtree:1.0.0
-androidx.core:core:1.16.0
+androidx.core:core:1.17.0
 androidx.credentials:credentials-play-services-auth:1.2.0-rc01
 androidx.credentials:credentials:1.2.0-rc01
 androidx.cursoradapter:cursoradapter:1.0.0
