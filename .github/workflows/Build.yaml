@@ -145,7 +145,7 @@ jobs:
 
       - name: Upload coverage
         if: success() || failure()
-        uses: codecov/codecov-action@v5.5.0
+        uses: codecov/codecov-action@v5.5.1
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           files: "app/build/reports/kover/reportJvm.xml"
