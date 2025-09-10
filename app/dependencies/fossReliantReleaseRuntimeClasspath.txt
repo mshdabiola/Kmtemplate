@@ -190,10 +190,10 @@ io.github.alexzhirkevich:keight-core-android:0.0.03
 io.github.alexzhirkevich:keight-core:0.0.03
 io.github.alexzhirkevich:keight:0.0.03
 io.insert-koin:koin-android:4.1.1
-io.insert-koin:koin-compose-android:4.1.0
-io.insert-koin:koin-compose-viewmodel-android:4.1.0
-io.insert-koin:koin-compose-viewmodel:4.1.0
-io.insert-koin:koin-compose:4.1.0
+io.insert-koin:koin-compose-android:4.1.1
+io.insert-koin:koin-compose-viewmodel-android:4.1.1
+io.insert-koin:koin-compose-viewmodel:4.1.1
+io.insert-koin:koin-compose:4.1.1
 io.insert-koin:koin-core-jvm:4.1.1
 io.insert-koin:koin-core-viewmodel-android:4.1.1
 io.insert-koin:koin-core-viewmodel:4.1.1
