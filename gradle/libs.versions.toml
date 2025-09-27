@@ -3,11 +3,11 @@ acraMail = "5.12.0"
 androidGradlePlugin = "8.13.0"
 androidTools = "31.13.0"
 androidxActivity = "1.11.0"
-androidxComposeMaterial3Adaptive = "1.2.0-alpha04"
+androidxComposeMaterial3Adaptive = "1.2.0-alpha06"
 androidxCore = "1.17.0"
 androidxCoreSplashscreen = "1.0.1"
 androidxDataStore = "1.1.7"
-androidx-lifecycle = "2.9.4"
+androidx-lifecycle = "2.10.0-alpha01"
 androidxMacroBenchmark = "1.4.1"
 androidxProfileinstaller = "1.4.1"
 androidxTestCore = "1.7.0"
@@ -19,7 +19,7 @@ androidxWindowManager = "1.5.0"
 bugsnag = "3.8.0"
 coil = "3.3.0"
 compose = "1.9.2"
-compose-plugin = "1.9.0"
+compose-plugin = "1.10.0-alpha01"
 composehot = "1.0.0-beta08"
 composeNavigation = "2.9.0"
 compottie = "2.0.1"
@@ -52,9 +52,11 @@ room = "2.8.1"
 screenshot = "0.0.1-alpha11"
 slf4jSimple = "2.0.17"
 spotless = "8.0.0"
-sqlite = "2.6.1"
+sqlite = "2.6.0"
 turbine = "1.2.1"
 uiTextGoogleFonts = "1.9.2"
+zoomable = "2.8.1"
+
 versionCode = "29"
 versionName = "1.2.20"
 desktopCode = "1.2.19"
@@ -157,6 +159,7 @@ slf4j-simple = { module = "org.slf4j:slf4j-simple", version.ref = "slf4jSimple" 
 spotless-gradlePlugin = { group = "com.diffplug.spotless", name = "spotless-plugin-gradle", version.ref = "spotless" }
 sqlite-bundled = { module = "androidx.sqlite:sqlite-bundled", version.ref = "sqlite" }
 turbine = { group = "app.cash.turbine", name = "turbine", version.ref = "turbine" }
+zoomable = { module = "net.engawapg.lib:zoomable", version.ref = "zoomable" }
 
 
 [plugins]
