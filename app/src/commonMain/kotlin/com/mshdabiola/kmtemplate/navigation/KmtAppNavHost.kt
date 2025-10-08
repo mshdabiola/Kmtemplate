@@ -18,13 +18,16 @@ package com.mshdabiola.kmtemplate.navigation
 import androidx.compose.animation.ExperimentalSharedTransitionApi
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.navigation.compose.NavHost
+import androidx.navigation3.runtime.entryProvider
+import androidx.navigation3.runtime.rememberSavedStateNavEntryDecorator
+import androidx.navigation3.scene.rememberSceneSetupNavEntryDecorator
+import androidx.navigation3.ui.NavDisplay
 import com.mshdabiola.detail.navigation.Detail
 import com.mshdabiola.detail.navigation.detailScreen
 import com.mshdabiola.detail.navigation.navigateToDetail
 import com.mshdabiola.kmtemplate.ui.Compact
 import com.mshdabiola.kmtemplate.ui.KmtAppState
-import com.mshdabiola.main.navigation.Main
+import com.mshdabiola.kmtemplate.ui.pop
 import com.mshdabiola.main.navigation.mainScreen
 import com.mshdabiola.setting.navigation.settingScreen
 import kotlinx.coroutines.launch
@@ -47,28 +50,35 @@ fun KmtNavHost(
         null
     }
 
-    NavHost(
+    NavDisplay(
         modifier = modifier,
-        navController = navController,
-        startDestination = Main,
-    ) {
-        mainScreen(
-            modifier = Modifier,
-            onDrawer = onDrawer,
-            navigateToDetail = { navController.navigateToDetail(Detail(it)) },
-        )
-        detailScreen(
-            modifier = Modifier,
-            onBack = {
-                appState.dismissIndefiniteSnackbar()
-                navController.popBackStack()
-            },
-            setNotification = appState::onNotification,
-        )
-        settingScreen(
-            modifier = Modifier,
-            onDrawer = onDrawer,
-            setNotification = appState::onNotification,
-        )
-    }
+        backStack = navController,
+        onBack = { navController.removeLastOrNull() },
+        entryDecorators = listOf(
+            rememberSceneSetupNavEntryDecorator(),
+            rememberSavedStateNavEntryDecorator(),
+            //  rememberViewModelStoreNavEntryDecorator() //TODO
+        ),
+        entryProvider = entryProvider {
+            mainScreen(
+                modifier = Modifier,
+                onDrawer = onDrawer,
+                navigateToDetail = { navController.navigateToDetail(Detail(it)) },
+            )
+            detailScreen(
+                modifier = Modifier,
+                onBack = {
+                    appState.dismissIndefiniteSnackbar()
+                    navController.pop()
+                },
+                setNotification = appState::onNotification,
+            )
+            settingScreen(
+                modifier = Modifier,
+                onDrawer = onDrawer,
+                setNotification = appState::onNotification,
+            )
+        },
+    )
+
 }

@@ -16,8 +16,9 @@
 package com.mshdabiola.kmtemplate.ui
 
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.navigation3.runtime.NavKey
 
-data class TopLevelRoute<T : Any>(
+data class TopLevelRoute<T : NavKey>(
     val route: T,
     val selectedIcon: ImageVector,
     val unSelectedIcon: ImageVector,
