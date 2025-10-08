@@ -1,10 +1,11 @@
 [versions]
 acraMail = "5.13.1"
-androidGradlePlugin = "8.13.0"
+androidGradlePlugin = "9.0.0-alpha09"
 androidTools = "31.13.0"
 androidxActivity = "1.11.0"
-androidxComposeMaterial3Adaptive = "1.2.0-alpha06"
+androidxComposeMaterial3Adaptive = "1.2.0+dev3015"
 androidxCore = "1.17.0"
+androidx-nav3 = "1.0.0-SNAPSHOT+parallel-upload-1"
 androidxCoreSplashscreen = "1.0.1"
 androidxDataStore = "1.1.7"
 androidx-lifecycle = "2.10.0-alpha01"
@@ -19,9 +20,8 @@ androidxWindowManager = "1.5.0"
 bugsnag = "3.8.0"
 coil = "3.3.0"
 compose = "1.9.2"
-compose-plugin = "1.10.0-alpha01"
+compose-plugin = "1.10.0-alpha02"
 composehot = "1.0.0-rc01"
-composeNavigation = "2.9.0"
 compottie = "2.0.1"
 conveyor = "1.12"
 dependencyGuard = "0.5.0"
@@ -40,18 +40,18 @@ kotlinxCoroutines = "1.10.2"
 kotlinxDatetime = "0.7.1-0.6.x-compat"
 kotlinxSerializationJson = "1.9.0"
 kover = "0.9.2"
-ksp = "2.2.20-2.0.3"
+ksp = "2.2.20-2.0.4"
 kstore = "1.0.0"
 ktlint = "13.1.0"
 ktlintRuleEngine = "1.7.1"
 ktlintRulesetStandard = "1.7.1"
 ktlintTest = "1.7.1"
-ktor = "3.3.0"
+ktor = "3.3.1"
 material3 = "1.9.0-alpha04"
 room = "2.8.1"
 screenshot = "0.0.1-alpha11"
 slf4jSimple = "2.0.17"
-spotless = "8.0.0"
+spotless = "7.2.1"
 sqlite = "2.6.1"
 turbine = "1.2.1"
 uiTextGoogleFonts = "1.9.2"
@@ -69,6 +69,7 @@ android-tools-common = { group = "com.android.tools", name = "common", version.r
 androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "androidxActivity" }
 androidx-benchmark-macro = { group = "androidx.benchmark", name = "benchmark-macro-junit4", version.ref = "androidxMacroBenchmark" }
 androidx-compose-material3-adaptive = { group = "org.jetbrains.compose.material3.adaptive", name = "adaptive", version.ref = "androidxComposeMaterial3Adaptive" }
+androidx-nav3-ui = { module = "org.jetbrains.androidx.navigation3:navigation3-ui", version.ref = "androidx-nav3" }
 androidx-compose-material3-adaptive-layout = { group = "org.jetbrains.compose.material3.adaptive", name = "adaptive-layout", version.ref = "androidxComposeMaterial3Adaptive" }
 androidx-compose-material3-adaptive-navigation = { group = "org.jetbrains.compose.material3.adaptive", name = "adaptive-navigation", version.ref = "androidxComposeMaterial3Adaptive" }
 androidx-compose-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling", version.ref = "compose" }
@@ -78,7 +79,6 @@ androidx-dataStore-core = { module = "androidx.datastore:datastore-preferences-c
 androidx-datastore-core-okio = { group = "androidx.datastore", name = "datastore-core-okio", version.ref = "androidxDataStore" }
 androidx-lifecycle-runtimeCompose = { module = "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose", version.ref = "androidx-lifecycle" }
 androidx-lifecycle-viewmodelCompose = { module = "org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "androidx-lifecycle" }
-androidx-navigation-compose = { module = "org.jetbrains.androidx.navigation:navigation-compose", version.ref = "composeNavigation" }
 androidx-profileinstaller = { group = "androidx.profileinstaller", name = "profileinstaller", version.ref = "androidxProfileinstaller" }
 androidx-test-core = { group = "androidx.test", name = "core", version.ref = "androidxTestCore" }
 androidx-test-ext = { group = "androidx.test.ext", name = "junit-ktx", version.ref = "androidxTestExt" }
