@@ -17,28 +17,28 @@ package com.mshdabiola.model.testtag
 
 // Test Tags for KmtScaffold and its inner components
 object KmtScaffoldTestTags {
-    const val MODAL_NAVIGATION_DRAWER = "SynScaffold:ModalNavigationDrawer"
-    const val PERMANENT_NAVIGATION_DRAWER = "SynScaffold:PermanentNavigationDrawer"
-    const val MODAL_DRAWER_SHEET = "SynScaffold:ModalDrawerSheet"
-    const val WIDE_NAVIGATION_RAIL = "SynScaffold:WideNavigationRail"
-    const val PERMANENT_DRAWER_SHEET = "SynScaffold:PermanentDrawerSheet"
-    const val RAIL_TOGGLE_BUTTON = "SynScaffold:RailToggleButton"
-    const val SCAFFOLD_CONTENT_AREA = "SynScaffold:ScaffoldContentArea"
+    const val MODAL_NAVIGATION_DRAWER = "KmtScaffold:ModalNavigationDrawer"
+    const val PERMANENT_NAVIGATION_DRAWER = "KmtScaffold:PermanentNavigationDrawer"
+    const val MODAL_DRAWER_SHEET = "KmtScaffold:ModalDrawerSheet"
+    const val WIDE_NAVIGATION_RAIL = "KmtScaffold:WideNavigationRail"
+    const val PERMANENT_DRAWER_SHEET = "KmtScaffold:PermanentDrawerSheet"
+    const val RAIL_TOGGLE_BUTTON = "KmtScaffold:RailToggleButton"
+    const val SCAFFOLD_CONTENT_AREA = "KmtScaffold:ScaffoldContentArea"
 
     object FabTestTags {
-        const val FAB_ANIMATED_CONTENT = "SynScaffold:FabAnimatedContent"
-        const val SMALL_FAB = "SynScaffold:SmallFab"
-        const val EXTENDED_FAB = "SynScaffold:ExtendedFab"
-        const val FAB_ADD_ICON = "SynScaffold:FabAddIcon"
-        const val FAB_ADD_TEXT = "SynScaffold:FabAddText"
+        const val FAB_ANIMATED_CONTENT = "KmtScaffold:FabAnimatedContent"
+        const val SMALL_FAB = "KmtScaffold:SmallFab"
+        const val EXTENDED_FAB = "KmtScaffold:ExtendedFab"
+        const val FAB_ADD_ICON = "KmtScaffold:FabAddIcon"
+        const val FAB_ADD_TEXT = "KmtScaffold:FabAddText"
     }
 
     object DrawerContentTestTags {
-        const val DRAWER_CONTENT_COLUMN = "SynScaffold:DrawerContentColumn"
-        const val BRAND_ROW = "SynScaffold:BrandRow"
-        const val BRAND_ICON = "SynScaffold:BrandIcon"
-        const val BRAND_TEXT = "SynScaffold:BrandText"
-        fun navigationItemTag(route: Any) = "SynScaffold:NavigationItem:$route"
-        fun wideNavigationRailItemTag(route: Any) = "SynScaffold:WideNavigationRailItem:$route"
+        const val DRAWER_CONTENT_COLUMN = "KmtScaffold:DrawerContentColumn"
+        const val BRAND_ROW = "KmtScaffold:BrandRow"
+        const val BRAND_ICON = "KmtScaffold:BrandIcon"
+        const val BRAND_TEXT = "KmtScaffold:BrandText"
+        fun navigationItemTag(route: Any) = "KmtScaffold:NavigationItem:$route"
+        fun wideNavigationRailItemTag(route: Any) = "KmtScaffold:WideNavigationRailItem:$route"
     }
 }
