@@ -21,6 +21,7 @@ import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.SnackbarResult
 import androidx.compose.material3.WideNavigationRailState
+import androidx.compose.material3.WideNavigationRailValue
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.material3.rememberWideNavigationRailState
 import androidx.compose.runtime.Composable
@@ -102,7 +103,7 @@ sealed class KmtAppState(
 
     val isTopRoute = currentRoute
         .map { curr -> levels.any { it == curr } }
-    open val isExpanded = true
+    abstract val isExpanded: Boolean
     var notificationType: Type = Type.Default
 
     open fun navigateTopRoute(route: NavKey) {
@@ -163,6 +164,7 @@ data class Compact(
     val drawerState: DrawerState,
 ) : KmtAppState(navController, snackbarHostState, coroutineScope) {
 
+    override val isExpanded: Boolean = false
     suspend fun onDrawerToggle() {
         if (drawerState.isOpen) {
             drawerState.close()
@@ -181,6 +183,9 @@ constructor(
 
     val wideNavigationRailState: WideNavigationRailState,
 ) : KmtAppState(navController, snackbarHostState, coroutineScope) {
+
+    override val isExpanded: Boolean
+        get() = wideNavigationRailState.currentValue == WideNavigationRailValue.Expanded
 
     @OptIn(ExperimentalMaterial3ExpressiveApi::class)
     fun expand() {
@@ -202,7 +207,9 @@ data class Expand(
     override val snackbarHostState: SnackbarHostState,
     override val coroutineScope: CoroutineScope,
 
-) : KmtAppState(navController, snackbarHostState, coroutineScope)
+) : KmtAppState(navController, snackbarHostState, coroutineScope){
+    override val isExpanded: Boolean = true
+}
 
 @Stable
 val WindowSizeClass.isWidthCompact: Boolean

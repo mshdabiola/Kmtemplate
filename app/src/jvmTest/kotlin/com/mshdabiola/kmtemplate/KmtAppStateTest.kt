@@ -22,14 +22,13 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.navigation3.runtime.NavBackStack
 import androidx.window.core.layout.WindowSizeClass
-import com.hobit.synapse.ui.Compact
-import com.hobit.synapse.ui.Expand
-import com.hobit.synapse.ui.Medium
-import com.hobit.synapse.ui.Route
-import com.hobit.synapse.ui.SynAppState
-import com.hobit.synapse.ui.rememberSynAppState
+import com.mshdabiola.kmtemplate.ui.Compact
+import com.mshdabiola.kmtemplate.ui.Expand
+import com.mshdabiola.kmtemplate.ui.KmtAppState
+import com.mshdabiola.kmtemplate.ui.Medium
+import com.mshdabiola.kmtemplate.ui.rememberKmtAppState
+import com.mshdabiola.main.navigation.Main
 import com.mshdabiola.model.Notification
-import com.mshdabiola.model.note.NoteDisplayCategory
 import com.mshdabiola.setting.navigation.Setting
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -41,17 +40,13 @@ import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.runTest
 import kotlinx.coroutines.test.setMain
 import org.junit.After
-import org.junit.Assert.assertEquals
-import org.junit.Assert.assertFalse
-import org.junit.Assert.assertNotNull
-import org.junit.Assert.assertTrue
+import org.junit.Assert
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-import com.mshdabiola.main.navigation.Main as MainRouteKey
 
 @OptIn(ExperimentalCoroutinesApi::class, ExperimentalMaterial3ExpressiveApi::class)
-class SynAppStateTest {
+class KmtAppStateTest {
     @get:Rule
     val composeTestRule = createComposeRule()
 
@@ -69,17 +64,17 @@ class SynAppStateTest {
     }
 
     /**
-     * Helper to initialize the [SynAppState] and a [NavBackStack] within a Composable context.
+     * Helper to initialize the [KmtAppState] and a [NavBackStack] within a Composable context.
      */
     private fun initializeAppState(
         width: Int,
         height: Int = 600,
-    ): SynAppState {
-        lateinit var appState: SynAppState
+    ): KmtAppState {
+        lateinit var appState: KmtAppState
         composeTestRule.setContent {
             val windowSizeClass = WindowSizeClass(width, height)
             testCoroutineScope = rememberCoroutineScope()
-            appState = rememberSynAppState(
+            appState = rememberKmtAppState(
                 windowSizeClass = windowSizeClass,
                 coroutineScope = testCoroutineScope,
             )
@@ -88,28 +83,28 @@ class SynAppStateTest {
     }
 
     @Test
-    fun `rememberSynAppState returns Compact for compact width`() {
+    fun `rememberKmtAppState returns Compact for compact width`() {
         val state = initializeAppState(width = 400)
-        assertTrue("State should be Compact for compact width", state is Compact)
+        Assert.assertTrue("State should be Compact for compact width", state is Compact)
     }
 
     @Test
-    fun `rememberSynAppState returns Medium for medium width`() {
+    fun `rememberKmtAppState returns Medium for medium width`() {
         val state = initializeAppState(width = 700)
-        assertTrue("State should be Medium for medium width", state is Medium)
+        Assert.assertTrue("State should be Medium for medium width", state is Medium)
     }
 
     @Test
-    fun `rememberSynAppState returns Expand for expanded width`() {
+    fun `rememberKmtAppState returns Expand for expanded width`() {
         val state = initializeAppState(width = 900)
-        assertTrue("State should be Expand for expanded width", state is Expand)
+        Assert.assertTrue("State should be Expand for expanded width", state is Expand)
     }
 
     @Test
     fun `initial state has Main as current destination`() = runTest {
         val state = initializeAppState(width = 400)
         advanceUntilIdle()
-        assertTrue(state.isMain.first())
+        Assert.assertTrue(state.isMain.first())
     }
 
     @Test
@@ -118,16 +113,16 @@ class SynAppStateTest {
         advanceUntilIdle()
 
         // Navigate to Settings
-        state.navigateTopRoute(Route.Setting)
+        state.navigateTopRoute(Setting)
         advanceUntilIdle()
 
-        assertTrue(state.currentRoute.first() == Setting)
+        Assert.assertTrue(state.currentRoute.first() == Setting)
 
         // Navigate back to Main
-        state.navigateTopRoute(Route.Main(NoteDisplayCategory()))
+        state.navigateTopRoute(Main)
         advanceUntilIdle()
 
-        assertTrue(state.currentRoute.first() == MainRouteKey)
+        Assert.assertTrue(state.currentRoute.first() == Main)
     }
 
     @Test
@@ -136,57 +131,60 @@ class SynAppStateTest {
         advanceUntilIdle()
 
         // Initial route is Main
-        assertTrue(state.isInCurrentRoute(Route.Main(NoteDisplayCategory()), NoteDisplayCategory()))
-        assertFalse(state.isInCurrentRoute(Route.Setting, NoteDisplayCategory()))
+        Assert.assertTrue(state.isInCurrentRoute(Main))
+        Assert.assertFalse(state.isInCurrentRoute(Setting))
 
         // Navigate to Setting
-        state.navigateTopRoute(Route.Setting)
+        state.navigateTopRoute(Setting)
         advanceUntilIdle()
 
-        assertTrue(state.isInCurrentRoute(Route.Setting, NoteDisplayCategory()))
-        assertFalse(state.isInCurrentRoute(Route.Main(NoteDisplayCategory()), NoteDisplayCategory()))
+        Assert.assertTrue(state.isInCurrentRoute(Setting))
+        Assert.assertFalse(state.isInCurrentRoute(Main))
     }
 
     @Test
     fun `Compact state onDrawerToggle opens and closes drawer`() = runTest {
         val state = initializeAppState(width = 400) as Compact
-        assertEquals(DrawerValue.Closed, state.drawerState.currentValue)
+        Assert.assertEquals(DrawerValue.Closed, state.drawerState.currentValue)
 
         // Open drawer
         state.onDrawerToggle()
         advanceUntilIdle()
-        assertEquals(DrawerValue.Open, state.drawerState.currentValue)
+        Assert.assertEquals(DrawerValue.Open, state.drawerState.currentValue)
 
         // Close drawer
         state.onDrawerToggle()
         advanceUntilIdle()
-        assertEquals(DrawerValue.Closed, state.drawerState.currentValue)
+        Assert.assertEquals(DrawerValue.Closed, state.drawerState.currentValue)
     }
 
     @Test
     fun `Medium state expand and collapse updates rail state and isExpanded`() = runTest {
         val state = initializeAppState(width = 700) as Medium
-        assertEquals(WideNavigationRailValue.Collapsed, state.wideNavigationRailState.currentValue)
-        assertFalse(state.isExpanded)
+        Assert.assertEquals(WideNavigationRailValue.Collapsed, state.wideNavigationRailState.currentValue)
+        Assert.assertFalse(state.isExpanded)
 
         // Expand rail
         state.expand()
 
         advanceUntilIdle()
-        assertEquals(WideNavigationRailValue.Expanded, state.wideNavigationRailState.targetValue)
-//        assertTrue(state.isExpanded)
+        composeTestRule.mainClock.advanceTimeBy(1000)
+
+        Assert.assertEquals(WideNavigationRailValue.Expanded, state.wideNavigationRailState.currentValue)
+        Assert.assertTrue(state.isExpanded)
 
         // Collapse rail
         state.collapse()
         advanceUntilIdle()
-        assertEquals(WideNavigationRailValue.Collapsed, state.wideNavigationRailState.targetValue)
-//        assertFalse(state.isExpanded)
+        composeTestRule.mainClock.advanceTimeBy(1000)
+        Assert.assertEquals(WideNavigationRailValue.Collapsed, state.wideNavigationRailState.currentValue)
+        Assert.assertFalse(state.isExpanded)
     }
 
     @Test
     fun `Expand state isExpanded is always true`() {
         val state = initializeAppState(width = 900) as Expand
-        assertTrue(state.isExpanded)
+        Assert.assertTrue(state.isExpanded)
     }
 
     @Test
@@ -195,15 +193,15 @@ class SynAppStateTest {
         val testMessage = "Test Snackbar"
 
         // Pre-condition: no snackbar is visible
-        assertEquals(null, state.snackbarHostState.currentSnackbarData)
+        Assert.assertEquals(null, state.snackbarHostState.currentSnackbarData)
 
         // Trigger notification
         state.onNotification(Notification.Message(message = testMessage))
         advanceUntilIdle() // Allow snackbar coroutine to launch
 
         // Assert snackbar is shown with the correct message
-        assertNotNull(state.snackbarHostState.currentSnackbarData)
-        assertEquals(testMessage, state.snackbarHostState.currentSnackbarData?.visuals?.message)
+        Assert.assertNotNull(state.snackbarHostState.currentSnackbarData)
+        Assert.assertEquals(testMessage, state.snackbarHostState.currentSnackbarData?.visuals?.message)
 
         // Dismiss to clean up state for other tests
         state.snackbarHostState.currentSnackbarData?.dismiss()
