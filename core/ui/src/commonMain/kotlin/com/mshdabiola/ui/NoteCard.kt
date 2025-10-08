@@ -31,6 +31,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag // Import testTag
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.navigation3.ui.LocalNavAnimatedContentScope
 import com.mshdabiola.model.Note
 import com.mshdabiola.model.testtag.NoteCardTestTags
 import org.jetbrains.compose.ui.tooling.preview.Preview

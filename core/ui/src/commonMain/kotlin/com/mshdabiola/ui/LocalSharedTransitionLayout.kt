@@ -23,18 +23,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.ProvidableCompositionLocal
 import androidx.compose.runtime.compositionLocalOf
+import androidx.navigation3.ui.LocalNavAnimatedContentScope
 import com.mshdabiola.designsystem.theme.KmtTheme
 
 @OptIn(ExperimentalSharedTransitionApi::class)
 val LocalSharedTransitionScope: ProvidableCompositionLocal<SharedTransitionScope> =
-    compositionLocalOf {
-        throw IllegalStateException(
-            "Not declare",
-        )
-    }
-
-@OptIn(ExperimentalSharedTransitionApi::class)
-val LocalNavAnimatedContentScope: ProvidableCompositionLocal<AnimatedContentScope> =
     compositionLocalOf {
         throw IllegalStateException(
             "Not declare",

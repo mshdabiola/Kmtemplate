@@ -62,7 +62,7 @@ kotlin {
                 api(compose.material3)
 
 
-                api(libs.androidx.navigation.compose.get())
+             api(libs.androidx.nav3.ui.get())
                 api(libs.kotlinx.collection.immutable)
                 api(libs.androidx.lifecycle.viewmodelCompose)
                 api(libs.androidx.lifecycle.runtimeCompose)
