@@ -15,7 +15,8 @@
  */
 package com.mshdabiola.detail.navigation
 
+import androidx.navigation3.runtime.NavKey
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class Detail(val id: Long)
+data class Detail(val id: Long) : NavKey

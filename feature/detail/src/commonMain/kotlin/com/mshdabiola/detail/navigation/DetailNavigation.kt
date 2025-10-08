@@ -20,16 +20,15 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.navigation.NavController
-import androidx.navigation.NavGraphBuilder
-import androidx.navigation.compose.composable
-import androidx.navigation.toRoute
+import androidx.navigation3.runtime.EntryProviderBuilder
+import androidx.navigation3.runtime.NavBackStack
+import androidx.navigation3.runtime.NavKey
+import androidx.navigation3.ui.LocalNavAnimatedContentScope
 import com.mshdabiola.detail.DetailScreen
 import com.mshdabiola.detail.DetailViewModel
 import com.mshdabiola.model.Notification
 import com.mshdabiola.model.SnackbarDuration
 import com.mshdabiola.model.Type
-import com.mshdabiola.ui.LocalNavAnimatedContentScope
 import kmtemplate.feature.detail.generated.resources.Res
 import kmtemplate.feature.detail.generated.resources.detail_delete_action_text
 import kmtemplate.feature.detail.generated.resources.detail_delete_confirmation_message
@@ -39,22 +38,18 @@ import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.annotation.KoinExperimentalAPI
 import org.koin.core.parameter.parameterSetOf
 
-fun NavController.navigateToDetail(detail: Detail) {
-    // val encodedId = URLEncoder.encode(topicId, URL_CHARACTER_ENCODING)
-    navigate(detail) {
-        launchSingleTop = true
-    }
+fun NavBackStack<NavKey>.navigateToDetail(detail: Detail) {
+    add(detail)
 }
 
 @OptIn(KoinExperimentalAPI::class, ExperimentalSharedTransitionApi::class)
-fun NavGraphBuilder.detailScreen(
+fun EntryProviderBuilder<NavKey>.detailScreen(
     modifier: Modifier = Modifier,
     onBack: () -> Unit,
     setNotification: (Notification) -> Unit,
 ) {
-    composable<Detail> { backStack ->
+    entry <Detail> { detail ->
 
-        val detail: Detail = backStack.toRoute()
         val coroutineScope = rememberCoroutineScope()
 
 //        val viewModel= koinViewModel<DetailViewModel>{ parametersOf(id)}
@@ -67,9 +62,7 @@ fun NavGraphBuilder.detailScreen(
                 },
             )
         val detailState = viewModel.detailState.collectAsStateWithLifecycle()
-        CompositionLocalProvider(
-            LocalNavAnimatedContentScope provides this,
-        ) {
+
             DetailScreen(
                 modifier = modifier,
                 state = detailState.value,
@@ -93,6 +86,6 @@ fun NavGraphBuilder.detailScreen(
                 },
 
             )
-        }
+
     }
 }

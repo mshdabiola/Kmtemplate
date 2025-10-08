@@ -16,15 +16,12 @@
 package com.mshdabiola.setting.navigation
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.navigation.NavController
-import androidx.navigation.NavGraphBuilder
-import androidx.navigation.NavOptions
-import androidx.navigation.compose.composable
-import androidx.navigation.navOptions
+import androidx.navigation3.runtime.EntryProviderBuilder
+import androidx.navigation3.runtime.NavBackStack
+import androidx.navigation3.runtime.NavKey
 import com.mshdabiola.model.AssetNotFoundException
 import com.mshdabiola.model.BuildConfig
 import com.mshdabiola.model.DeviceNotSupportedException
@@ -38,7 +35,6 @@ import com.mshdabiola.model.Type
 import com.mshdabiola.setting.SettingScreen
 import com.mshdabiola.setting.SettingViewModel
 import com.mshdabiola.setting.WindowRepository
-import com.mshdabiola.ui.LocalNavAnimatedContentScope
 import com.mshdabiola.ui.ReleaseUpdateDialog
 import kmtemplate.feature.setting.generated.resources.Res
 import kmtemplate.feature.setting.generated.resources.data_error_asset_not_found
@@ -52,29 +48,21 @@ import org.jetbrains.compose.resources.getString
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.annotation.KoinExperimentalAPI
 
-fun NavController.navigateToSetting(
-    navOptions: NavOptions = navOptions { launchSingleTop = true },
-) =
-    navigate(
-        Setting,
-        navOptions,
-    )
+fun NavBackStack<NavKey>.navigateToSetting()=add(Setting)
 
 @OptIn(KoinExperimentalAPI::class)
-fun NavGraphBuilder.settingScreen(
+fun EntryProviderBuilder<NavKey>.settingScreen(
     modifier: Modifier,
     onDrawer: (() -> Unit)?,
     setNotification: (Notification) -> Unit,
 
 ) {
-    composable<Setting> {
+    entry<Setting> {
         val viewModel: SettingViewModel = koinViewModel()
         val settingState = viewModel.settingState.collectAsStateWithLifecycle()
         val windowRepository: WindowRepository = getWindowRepository()
 
-        CompositionLocalProvider(
-            LocalNavAnimatedContentScope provides this,
-        ) {
+
             SettingScreen(
                 modifier = modifier,
                 onDrawer = onDrawer,
@@ -203,7 +191,7 @@ fun NavGraphBuilder.settingScreen(
                     }
                 }
             }
-        }
+
     }
 }
 

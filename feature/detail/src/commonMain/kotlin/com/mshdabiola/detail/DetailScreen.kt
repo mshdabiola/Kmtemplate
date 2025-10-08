@@ -30,13 +30,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag // Import testTag
 import androidx.compose.ui.text.input.ImeAction
+import androidx.navigation3.ui.LocalNavAnimatedContentScope
 import com.mshdabiola.designsystem.component.KmtIconButton
 import com.mshdabiola.designsystem.component.KmtTextField
 import com.mshdabiola.designsystem.component.KmtTopAppBar
 import com.mshdabiola.designsystem.drawable.KmtIcons
 import com.mshdabiola.detail.navigation.Detail
 import com.mshdabiola.model.testtag.DetailScreenTestTags
-import com.mshdabiola.ui.LocalNavAnimatedContentScope
 import com.mshdabiola.ui.LocalSharedTransitionScope
 import kmtemplate.feature.detail.generated.resources.Res
 import kmtemplate.feature.detail.generated.resources.detail_back_icon_content_description
