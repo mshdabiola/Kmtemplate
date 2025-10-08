@@ -16,7 +16,6 @@
 package com.mshdabiola.ui
 
 import androidx.compose.animation.AnimatedContent
-import androidx.compose.animation.AnimatedContentScope
 import androidx.compose.animation.ExperimentalSharedTransitionApi
 import androidx.compose.animation.SharedTransitionScope
 import androidx.compose.runtime.Composable

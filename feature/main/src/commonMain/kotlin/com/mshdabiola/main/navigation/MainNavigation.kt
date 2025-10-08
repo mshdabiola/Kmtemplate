@@ -25,7 +25,7 @@ import com.mshdabiola.main.MainScreen
 import com.mshdabiola.main.MainViewModel
 import org.koin.compose.viewmodel.koinViewModel
 
-fun NavBackStack<NavKey>.navigateToMain() =add(Main)
+fun NavBackStack<NavKey>.navigateToMain() = add(Main)
 
 @OptIn(ExperimentalSharedTransitionApi::class)
 fun EntryProviderBuilder<NavKey>.mainScreen(
@@ -37,12 +37,11 @@ fun EntryProviderBuilder<NavKey>.mainScreen(
         val viewModel = koinViewModel<MainViewModel>()
         val mainState = viewModel.mainState.collectAsStateWithLifecycle()
 
-            MainScreen(
-                modifier = modifier,
-                mainState = mainState.value,
-                onDrawer = onDrawer,
-                navigateToDetail = navigateToDetail,
-            )
-        }
-
+        MainScreen(
+            modifier = modifier,
+            mainState = mainState.value,
+            onDrawer = onDrawer,
+            navigateToDetail = navigateToDetail,
+        )
+    }
 }

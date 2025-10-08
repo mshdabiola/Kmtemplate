@@ -47,7 +47,6 @@ import kotlinx.coroutines.launch
 import kotlinx.serialization.modules.SerializersModule
 import kotlinx.serialization.modules.polymorphic
 
-
 val config = SavedStateConfiguration {
     serializersModule = SerializersModule {
         polymorphic(NavKey::class) {
@@ -58,13 +57,12 @@ val config = SavedStateConfiguration {
     }
 }
 
-
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 fun rememberKmtAppState(
     windowSizeClass: WindowSizeClass,
     coroutineScope: CoroutineScope = rememberCoroutineScope(),
-    navController: NavBackStack<NavKey> =  rememberNavBackStack(config, Main),
+    navController: NavBackStack<NavKey> = rememberNavBackStack(config, Main),
     wideNavigationRailState: WideNavigationRailState = rememberWideNavigationRailState(),
     drawerState: DrawerState = rememberDrawerState(initialValue = DrawerValue.Closed),
     snackbarHostState: SnackbarHostState = remember { SnackbarHostState() },
@@ -116,7 +114,7 @@ sealed class KmtAppState(
 
     fun isInCurrentRoute(route: NavKey): Boolean {
         val current = navController.lastOrNull()
-       return current==route
+        return current == route
     }
 
     fun onNotification(notification: Notification) {
@@ -218,7 +216,6 @@ inline val WindowSizeClass.isWidthMedium: Boolean
 @Stable
 inline val WindowSizeClass.isWidthExpanded: Boolean
     get() = minWidthDp >= WindowSizeClass.WIDTH_DP_EXPANDED_LOWER_BOUND
-
 
 fun NavBackStack<NavKey>.pop() {
     if (this.size > 1) {

@@ -16,14 +16,12 @@
 package com.mshdabiola.detail.navigation
 
 import androidx.compose.animation.ExperimentalSharedTransitionApi
-import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation3.runtime.EntryProviderBuilder
 import androidx.navigation3.runtime.NavBackStack
 import androidx.navigation3.runtime.NavKey
-import androidx.navigation3.ui.LocalNavAnimatedContentScope
 import com.mshdabiola.detail.DetailScreen
 import com.mshdabiola.detail.DetailViewModel
 import com.mshdabiola.model.Notification
@@ -48,7 +46,7 @@ fun EntryProviderBuilder<NavKey>.detailScreen(
     onBack: () -> Unit,
     setNotification: (Notification) -> Unit,
 ) {
-    entry <Detail> { detail ->
+    entry<Detail> { detail ->
 
         val coroutineScope = rememberCoroutineScope()
 
@@ -63,29 +61,28 @@ fun EntryProviderBuilder<NavKey>.detailScreen(
             )
         val detailState = viewModel.detailState.collectAsStateWithLifecycle()
 
-            DetailScreen(
-                modifier = modifier,
-                state = detailState.value,
-                detail = detail,
-                onBack = onBack,
-                onDelete = {
-                    coroutineScope.launch {
-                        setNotification(
-                            Notification.MessageWithAction(
-                                type = Type.Warning,
-                                duration = SnackbarDuration.Indefinite,
-                                message = getString(Res.string.detail_delete_confirmation_message),
-                                action = getString(Res.string.detail_delete_action_text),
-                                actionCallback = {
-                                    viewModel.onDelete()
-                                    onBack()
-                                },
-                            ),
-                        )
-                    }
-                },
+        DetailScreen(
+            modifier = modifier,
+            state = detailState.value,
+            detail = detail,
+            onBack = onBack,
+            onDelete = {
+                coroutineScope.launch {
+                    setNotification(
+                        Notification.MessageWithAction(
+                            type = Type.Warning,
+                            duration = SnackbarDuration.Indefinite,
+                            message = getString(Res.string.detail_delete_confirmation_message),
+                            action = getString(Res.string.detail_delete_action_text),
+                            actionCallback = {
+                                viewModel.onDelete()
+                                onBack()
+                            },
+                        ),
+                    )
+                }
+            },
 
-            )
-
+        )
     }
 }

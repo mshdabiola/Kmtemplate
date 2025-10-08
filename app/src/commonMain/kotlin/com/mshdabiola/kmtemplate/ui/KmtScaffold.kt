@@ -124,7 +124,6 @@ fun KmtScaffold(
         )
     }
 
-
     val isMain = appState.isMain.collectAsState(false).value
     val isTopDestination = appState.isTopRoute.collectAsState(false).value
 
