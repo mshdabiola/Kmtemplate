@@ -34,8 +34,13 @@ internal fun Project.configureKotlinMultiplatform(
     with(kotlinMultiplatformExtension) {
         jvmToolchain(21)
 
-        androidTarget()
-        // jvm("desktop")
+        androidTarget {
+            compilations.all {
+                compilerOptions.configure {
+                    jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_1_8)
+                }
+            }
+        }
         jvm()
 
         @OptIn(ExperimentalWasmDsl::class)
