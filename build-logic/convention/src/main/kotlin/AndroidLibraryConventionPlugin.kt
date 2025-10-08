@@ -15,7 +15,6 @@
  */
 import com.android.build.api.variant.LibraryAndroidComponentsExtension
 import com.android.build.gradle.LibraryExtension
-import com.mshdabiola.app.configureFlavors
 import com.mshdabiola.app.configureKotlinAndroid
 import com.mshdabiola.app.configureKotlinMultiplatform
 import com.mshdabiola.app.configurePrintApksTask
@@ -54,7 +53,7 @@ class AndroidLibraryConventionPlugin : Plugin<Project> {
                 configureKotlinAndroid(this)
                 defaultConfig.targetSdk = 35
 
-                configureFlavors(this)
+//                configureFlavors(this)
 
                 // The resource prefix is derived from the module name,
                 // so resources inside ":core:module1" must be prefixed with "core_module1_"
