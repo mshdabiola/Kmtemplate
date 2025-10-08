@@ -33,6 +33,7 @@ class KoverConventionPlugin : Plugin<Project> {
                 "ktlint",
                 "designsystem",
                 "testing",
+                "player",
             )
 
             rootProject.subprojects {

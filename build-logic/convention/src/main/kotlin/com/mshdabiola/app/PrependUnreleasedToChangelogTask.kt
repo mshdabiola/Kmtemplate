@@ -68,7 +68,7 @@ abstract class PrependUnreleasedToChangelogTask : DefaultTask() {
         }
 
         val unreleasedHeader = "## [Unreleased]"
-        val unreleasedLink = "[Unreleased]: https://github.com/mshdabiola/kmtemplate/compare/$versionNameToSet...HEAD"
+        val unreleasedLink = "[Unreleased]: https://github.com/mshdabiola/synapse/compare/$versionNameToSet...HEAD"
 
         val newLines = originalLines.toMutableList()
         val versionHeaderRegex = Regex("^## \\[.+\\]") // Matches "## [some.version.string]"
@@ -82,7 +82,8 @@ abstract class PrependUnreleasedToChangelogTask : DefaultTask() {
             insertAt = firstVersionHeaderIndex
         } else {
             // No version header found, try to insert after "# Changelog" and any preamble
-            val changelogTitleIndex = newLines.indexOfFirst { it.trim().equals("# Changelog", ignoreCase = true) }
+            val changelogTitleIndex = newLines
+                .indexOfFirst { it.trim().equals("# Changelog", ignoreCase = true) }
             if (changelogTitleIndex != -1) {
                 insertAt = changelogTitleIndex + 1
                 // Skip standard preamble lines or blank lines after title

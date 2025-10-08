@@ -54,7 +54,7 @@ abstract class ReleaseChangeLogTask : DefaultTask() {
             lines[unreleasedHeaderIndex] = "## [$newVersion] - $currentDate"
         }
 
-        val newVersionLink = "[$newVersion]: https://github.com/mshdabiola/kmtemplate/$newVersion"
+        val newVersionLink = "[$newVersion]: https://github.com/mshdabiola/synapse/$newVersion"
         val versionLinkIndex = lines.indexOfFirst { it.contains("[Unreleased]") }
         if (versionLinkIndex != -1) {
             lines[versionLinkIndex] = newVersionLink

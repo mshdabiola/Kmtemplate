@@ -37,7 +37,9 @@ abstract class RenameProjectArtifactsTask : DefaultTask() {
     @TaskAction
     fun execute() {
         val newPkg = newPackageName.get()
-        val newApp = newPkg.split(".").last()
+        val newApp = newPkg.split(".")
+            .last()
+            .replaceFirstChar { it.uppercase() }
         val newPfx = newPrefix.get()
         // Ensure these functions correctly handle the case where they might not find the values
         val oldPkg = extractPackageFromAppBuildGradle(rootProject = project.rootProject) ?: ""
@@ -326,7 +328,7 @@ abstract class RenameProjectArtifactsTask : DefaultTask() {
             "androidMain",
             "kotlin",
             packageAsPath,
-            "KmtApplication.kt", // Specific to your example
+            "SynApplication.kt", // Specific to your example
             // Add more common Application class names if needed:
             // "src", "androidMain", "kotlin", packageAsPath, "MainApplication.kt"
             // "src", "androidMain", "kotlin", packageAsPath, "App.kt"

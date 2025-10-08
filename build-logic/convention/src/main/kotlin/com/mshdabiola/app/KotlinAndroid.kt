@@ -51,14 +51,12 @@ internal fun Project.configureKotlinMultiplatform(
  * Configure base Kotlin with Android options
  */
 internal fun Project.configureKotlinAndroid(
-    commonExtension: CommonExtension<*, *, *, *, *, *>,
+    commonExtension: CommonExtension,
 ) {
     commonExtension.apply {
         compileSdk = 36
 
-        defaultConfig {
-            minSdk = 26 // 24
-        }
+        defaultConfig.minSdk = 26
 
         compileOptions {
 //            sourceCompatibility = JavaVersion.VERSION_21
