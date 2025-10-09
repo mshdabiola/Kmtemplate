@@ -54,7 +54,7 @@ slf4jSimple = "2.0.17"
 spotless = "8.0.0"
 sqlite = "2.6.1"
 turbine = "1.2.1"
-uiTextGoogleFonts = "1.9.2"
+uiTextGoogleFonts = "1.9.3"
 zoomable = "2.8.2"
 
 versionCode = "29"
