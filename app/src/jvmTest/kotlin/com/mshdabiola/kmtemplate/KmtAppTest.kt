@@ -158,7 +158,9 @@ class KmtAppTest : KoinTest {
             KmtApp(widthSizeClass = WindowSizeClass.WIDTH_DP_EXPANDED_LOWER_BOUND)
         }
 
-        composeTestRule.onNodeWithTag(KmtScaffoldTestTags.DrawerContentTestTags.navigationItemTag(Setting)).performClick()
+        composeTestRule.onNodeWithTag(
+            KmtScaffoldTestTags.DrawerContentTestTags.navigationItemTag(Setting),
+        ).performClick()
 
         composeTestRule.waitForIdle()
 
@@ -195,7 +197,9 @@ class KmtAppTest : KoinTest {
             KmtApp(widthSizeClass = WindowSizeClass.WIDTH_DP_EXPANDED_LOWER_BOUND)
         }
 
-        composeTestRule.onNodeWithTag(KmtScaffoldTestTags.DrawerContentTestTags.navigationItemTag(Setting)).performClick()
+        composeTestRule.onNodeWithTag(
+            KmtScaffoldTestTags.DrawerContentTestTags.navigationItemTag(Setting),
+        ).performClick()
 
         composeTestRule.waitForIdle()
 

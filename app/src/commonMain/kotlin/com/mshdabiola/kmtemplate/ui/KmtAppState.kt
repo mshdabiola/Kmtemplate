@@ -207,7 +207,7 @@ data class Expand(
     override val snackbarHostState: SnackbarHostState,
     override val coroutineScope: CoroutineScope,
 
-) : KmtAppState(navController, snackbarHostState, coroutineScope){
+) : KmtAppState(navController, snackbarHostState, coroutineScope) {
     override val isExpanded: Boolean = true
 }
 
