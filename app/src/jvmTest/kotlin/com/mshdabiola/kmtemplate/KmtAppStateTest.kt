@@ -15,40 +15,32 @@
  */
 package com.mshdabiola.kmtemplate
 
-import androidx.compose.material3.DrawerState
 import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
-import androidx.compose.material3.SnackbarHostState
-import androidx.compose.material3.WideNavigationRailState
 import androidx.compose.material3.WideNavigationRailValue
-import androidx.compose.material3.rememberDrawerState
-import androidx.compose.material3.rememberWideNavigationRailState
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.test.junit4.createComposeRule
-import androidx.navigation.NavDestination.Companion.hasRoute
-import androidx.navigation.NavHostController
-import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
-import androidx.navigation.createGraph
+import androidx.navigation3.runtime.NavBackStack
 import androidx.window.core.layout.WindowSizeClass
-import com.mshdabiola.detail.navigation.Detail
 import com.mshdabiola.kmtemplate.ui.Compact
+import com.mshdabiola.kmtemplate.ui.Expand
 import com.mshdabiola.kmtemplate.ui.KmtAppState
 import com.mshdabiola.kmtemplate.ui.Medium
 import com.mshdabiola.kmtemplate.ui.rememberKmtAppState
 import com.mshdabiola.main.navigation.Main
+import com.mshdabiola.model.Notification
 import com.mshdabiola.setting.navigation.Setting
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.advanceUntilIdle
 import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.runTest
+import kotlinx.coroutines.test.setMain
 import org.junit.After
-import org.junit.Assert.assertEquals
-import org.junit.Assert.assertFalse
-import org.junit.Assert.assertTrue
+import org.junit.Assert
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -58,26 +50,12 @@ class KmtAppStateTest {
     @get:Rule
     val composeTestRule = createComposeRule()
 
-    private lateinit var navController: NavHostController
     private val testDispatcher = StandardTestDispatcher()
     private lateinit var testCoroutineScope: CoroutineScope
-    private lateinit var wideNavigationRailState: WideNavigationRailState
 
     @Before
     fun setUp() {
-//        Dispatchers.setMain(testDispatcher)
-        composeTestRule.setContent {
-            navController = rememberNavController().apply {
-                graph =
-                    createGraph(startDestination = Main) {
-                        composable<Main> { }
-                        composable<Detail> { }
-                        composable<Setting> { }
-                    }
-            }
-            testCoroutineScope = rememberCoroutineScope()
-            wideNavigationRailState = rememberWideNavigationRailState() // Initial state is Collapsed
-        }
+        Dispatchers.setMain(testDispatcher)
     }
 
     @After
@@ -85,178 +63,147 @@ class KmtAppStateTest {
         Dispatchers.resetMain()
     }
 
-    private fun initializeStateAndNavHostForNavigationTests(width: Int): KmtAppState {
+    /**
+     * Helper to initialize the [KmtAppState] and a [NavBackStack] within a Composable context.
+     */
+    private fun initializeAppState(
+        width: Int,
+        height: Int = 600,
+    ): KmtAppState {
         lateinit var appState: KmtAppState
         composeTestRule.setContent {
-            // For navigation tests, we can use any state, e.g., Compact
-            val compactWindowSize = WindowSizeClass(width, 600)
-            val drawerState = rememberDrawerState(DrawerValue.Closed)
+            val windowSizeClass = WindowSizeClass(width, height)
+            testCoroutineScope = rememberCoroutineScope()
             appState = rememberKmtAppState(
-                windowSizeClass = compactWindowSize,
+                windowSizeClass = windowSizeClass,
                 coroutineScope = testCoroutineScope,
-                navController = navController,
-                drawerState = drawerState,
-                wideNavigationRailState = wideNavigationRailState,
             )
         }
         return appState
     }
 
     @Test
-    fun navigateTopRoute_navigatesToMainCorrectly() = runTest(testDispatcher) {
-        val state = initializeStateAndNavHostForNavigationTests(300)
-        advanceUntilIdle() // Allow navigation to complete
-
-        assertTrue(navController.currentBackStackEntry?.destination?.hasRoute(Main::class) ?: false)
-        assertTrue(state.isInCurrentRoute(Main))
+    fun `rememberKmtAppState returns Compact for compact width`() {
+        val state = initializeAppState(width = 400)
+        Assert.assertTrue("State should be Compact for compact width", state is Compact)
     }
 
     @Test
-    fun navigateTopRoute_navigatesToSettingCorrectly() = runTest(testDispatcher) {
-        val state = initializeStateAndNavHostForNavigationTests(300)
+    fun `rememberKmtAppState returns Medium for medium width`() {
+        val state = initializeAppState(width = 700)
+        Assert.assertTrue("State should be Medium for medium width", state is Medium)
+    }
 
-        composeTestRule.runOnUiThread { state.navigateTopRoute(Setting) }
+    @Test
+    fun `rememberKmtAppState returns Expand for expanded width`() {
+        val state = initializeAppState(width = 900)
+        Assert.assertTrue("State should be Expand for expanded width", state is Expand)
+    }
+
+    @Test
+    fun `initial state has Main as current destination`() = runTest {
+        val state = initializeAppState(width = 400)
+        advanceUntilIdle()
+        Assert.assertTrue(state.isMain.first())
+    }
+
+    @Test
+    fun `navigateTopRoute navigates correctly`() = runTest {
+        val state = initializeAppState(width = 400)
         advanceUntilIdle()
 
-        assertTrue(navController.currentBackStackEntry?.destination?.hasRoute(Setting::class) ?: false)
-        assertTrue(state.isInCurrentRoute(Setting))
-    }
-
-    @Test
-    fun isInCurrentRoute_returnsTrueForCurrentRoute() = runTest(testDispatcher) {
-        val state = initializeStateAndNavHostForNavigationTests(300)
-        composeTestRule.runOnUiThread { state.navigateTopRoute(Main) }
+        // Navigate to Settings
+        state.navigateTopRoute(Setting)
         advanceUntilIdle()
-        assertTrue(state.isInCurrentRoute(Main))
-    }
 
-    @Test
-    fun isInCurrentRoute_returnsFalseForOtherRoute() = runTest(testDispatcher) {
-        val state = initializeStateAndNavHostForNavigationTests(300)
-        composeTestRule.runOnUiThread { state.navigateTopRoute(Main) }
+        Assert.assertTrue(state.currentRoute.first() == Setting)
+
+        // Navigate back to Main
+        state.navigateTopRoute(Main)
         advanceUntilIdle()
-        assertFalse(state.isInCurrentRoute(Setting))
-    }
 
-    private fun getCompactStateWithDrawer(initialDrawerValue: DrawerValue = DrawerValue.Closed): Compact {
-        // Need to ensure drawerState is created within a composition for it to be managed correctly if not passed.
-        // However, for testing specific logic with a given state, direct instantiation is fine.
-        lateinit var drawerState: DrawerState
-        composeTestRule.setContent {
-            // Recompose to get a fresh drawer state if needed, or use a passed one
-            drawerState = rememberDrawerState(initialValue = initialDrawerValue)
-        }
-
-        return Compact(
-            navController = navController,
-            coroutineScope = testCoroutineScope,
-            drawerState = drawerState,
-            snackbarHostState = SnackbarHostState(),
-        )
+        Assert.assertTrue(state.currentRoute.first() == Main)
     }
 
     @Test
-    fun compactState_onDrawer_opensDrawerWhenClosed() = runTest(testDispatcher) {
-        val state = getCompactStateWithDrawer(DrawerValue.Closed)
-        assertEquals(DrawerValue.Closed, state.drawerState.currentValue)
+    fun `isInCurrentRoute correctly identifies the current route`() = runTest {
+        val state = initializeAppState(width = 400)
+        advanceUntilIdle()
 
+        // Initial route is Main
+        Assert.assertTrue(state.isInCurrentRoute(Main))
+        Assert.assertFalse(state.isInCurrentRoute(Setting))
+
+        // Navigate to Setting
+        state.navigateTopRoute(Setting)
+        advanceUntilIdle()
+
+        Assert.assertTrue(state.isInCurrentRoute(Setting))
+        Assert.assertFalse(state.isInCurrentRoute(Main))
+    }
+
+    @Test
+    fun `Compact state onDrawerToggle opens and closes drawer`() = runTest {
+        val state = initializeAppState(width = 400) as Compact
+        Assert.assertEquals(DrawerValue.Closed, state.drawerState.currentValue)
+
+        // Open drawer
         state.onDrawerToggle()
-        composeTestRule.awaitIdle()
+        advanceUntilIdle()
+        Assert.assertEquals(DrawerValue.Open, state.drawerState.currentValue)
 
-        assertTrue(state.drawerState.isOpen)
-    }
-
-    @Test
-    fun compactState_onDrawer_closesDrawerWhenOpen() = runTest(testDispatcher) {
-        val state = getCompactStateWithDrawer(DrawerValue.Open)
-        assertEquals(DrawerValue.Open, state.drawerState.currentValue)
-
+        // Close drawer
         state.onDrawerToggle()
-        composeTestRule.awaitIdle()
-
-        assertTrue(state.drawerState.isClosed)
+        advanceUntilIdle()
+        Assert.assertEquals(DrawerValue.Closed, state.drawerState.currentValue)
     }
 
     @Test
-    fun compactState_navigateTopRoute_alsoInvokesOnDrawerAndTogglesIt() = runTest(testDispatcher) {
-        // Test with drawer initially open
-        val drawerOpenState = getCompactStateWithDrawer(DrawerValue.Open)
-        assertEquals(DrawerValue.Open, drawerOpenState.drawerState.currentValue)
+    fun `Medium state expand and collapse updates rail state and isExpanded`() = runTest {
+        val state = initializeAppState(width = 700) as Medium
+        Assert.assertEquals(WideNavigationRailValue.Collapsed, state.wideNavigationRailState.currentValue)
+        Assert.assertFalse(state.isExpanded)
 
-        composeTestRule.runOnUiThread {
-            drawerOpenState.navigateTopRoute(Main)
-        }
-        drawerOpenState.onDrawerToggle()
-        composeTestRule.awaitIdle()
-
-        assertTrue(navController.currentBackStackEntry?.destination?.hasRoute(Main::class) ?: false)
-
-        assertTrue(
-            "Drawer should be closed after navigateTopRoute invoked onDrawer (was open)",
-            drawerOpenState.drawerState.isClosed,
-        )
-
-        // Test with drawer initially closed
-        val drawerClosedState = getCompactStateWithDrawer(DrawerValue.Closed)
-        assertEquals(DrawerValue.Closed, drawerClosedState.drawerState.currentValue)
-
-        composeTestRule.runOnUiThread { drawerClosedState.navigateTopRoute(Setting) }
-        drawerClosedState.onDrawerToggle()
-        composeTestRule.awaitIdle()
-        assertTrue(navController.currentBackStackEntry?.destination?.hasRoute(Setting::class) ?: false)
-        assertTrue(
-            "Drawer should be open after navigateTopRoute invoked onDrawer (was closed)",
-            drawerClosedState.drawerState.isOpen,
-        )
-    }
-
-    private fun getMediumStateWithRail(): Medium {
-        // wideNavigationRailState is initialized in setUp and reset for each test via setContent
-        return Medium(
-            navController = navController,
-            coroutineScope = testCoroutineScope,
-            wideNavigationRailState = wideNavigationRailState,
-            snackbarHostState = SnackbarHostState(),
-        )
-    }
-
-    @Test
-    fun mediumState_expand_expandsWideNavigationRail() = runTest(testDispatcher) {
-        val state = getMediumStateWithRail()
-        // wideNavigationRailState is initialValue = WideNavigationRailValue.Collapsed by default from rememberWideNavigationRailState()
-        assertTrue("Initially, rail should be collapsed", wideNavigationRailState.isCollapsed)
-        assertFalse("Initially, rail should not be expanded", wideNavigationRailState.isExpanded)
-
+        // Expand rail
         state.expand()
-        composeTestRule.awaitIdle()
 
-        assertTrue("Rail should be expanded after expand()", wideNavigationRailState.isExpanded)
-        assertFalse("Rail should not be collapsed after expand()", wideNavigationRailState.isCollapsed)
-    }
+        advanceUntilIdle()
+        composeTestRule.mainClock.advanceTimeBy(1000)
 
-    @Test
-    fun mediumState_collapse_collapsesWideNavigationRail() = runTest(testDispatcher) {
-        val state = getMediumStateWithRail()
+        Assert.assertEquals(WideNavigationRailValue.Expanded, state.wideNavigationRailState.currentValue)
+        Assert.assertTrue(state.isExpanded)
 
-        // First, expand it to ensure collapse has an effect
-        state.expand()
-        composeTestRule.awaitIdle()
-        assertTrue("Rail should be expanded before collapsing", wideNavigationRailState.isExpanded)
-        assertFalse(
-            "Rail should not be collapsed before attempting to collapse an expanded rail",
-            wideNavigationRailState.isCollapsed,
-        )
-
+        // Collapse rail
         state.collapse()
-        composeTestRule.awaitIdle()
-
-        assertFalse("Rail should not be expanded after collapse()", wideNavigationRailState.isExpanded)
-        assertTrue("Rail should be collapsed after collapse()", wideNavigationRailState.isCollapsed)
+        advanceUntilIdle()
+        composeTestRule.mainClock.advanceTimeBy(1000)
+        Assert.assertEquals(WideNavigationRailValue.Collapsed, state.wideNavigationRailState.currentValue)
+        Assert.assertFalse(state.isExpanded)
     }
 
-    val WideNavigationRailState.isExpanded
-        get() = this.currentValue == WideNavigationRailValue.Expanded
+    @Test
+    fun `Expand state isExpanded is always true`() {
+        val state = initializeAppState(width = 900) as Expand
+        Assert.assertTrue(state.isExpanded)
+    }
 
-    val WideNavigationRailState.isCollapsed
-        get() = currentValue == WideNavigationRailValue.Collapsed
+    @Test
+    fun `onNotification shows snackbar`() = runTest {
+        val state = initializeAppState(width = 400)
+        val testMessage = "Test Snackbar"
+
+        // Pre-condition: no snackbar is visible
+        Assert.assertEquals(null, state.snackbarHostState.currentSnackbarData)
+
+        // Trigger notification
+        state.onNotification(Notification.Message(message = testMessage))
+        advanceUntilIdle() // Allow snackbar coroutine to launch
+
+        // Assert snackbar is shown with the correct message
+        Assert.assertNotNull(state.snackbarHostState.currentSnackbarData)
+        Assert.assertEquals(testMessage, state.snackbarHostState.currentSnackbarData?.visuals?.message)
+
+        // Dismiss to clean up state for other tests
+        state.snackbarHostState.currentSnackbarData?.dismiss()
+    }
 }

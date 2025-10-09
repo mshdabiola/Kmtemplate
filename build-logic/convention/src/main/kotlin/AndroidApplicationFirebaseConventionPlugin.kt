@@ -15,7 +15,6 @@
  */
 import com.android.build.api.variant.ApplicationAndroidComponentsExtension
 import com.google.firebase.crashlytics.buildtools.gradle.CrashlyticsExtension
-import com.google.firebase.perf.plugin.FirebasePerfExtension
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure
@@ -25,7 +24,7 @@ class AndroidApplicationFirebaseConventionPlugin : Plugin<Project> {
         with(target) {
             with(pluginManager) {
                 apply("com.google.gms.google-services")
-                apply("com.google.firebase.firebase-perf")
+//                apply("com.google.firebase.firebase-perf")
                 apply("com.google.firebase.crashlytics")
             }
 
@@ -34,9 +33,10 @@ class AndroidApplicationFirebaseConventionPlugin : Plugin<Project> {
                     it.productFlavors.forEach { flavor ->
                         val isGoogle = flavor.name
                             .contains("google", true)
-                        flavor.configure<FirebasePerfExtension> {
-                            setInstrumentationEnabled(isGoogle)
-                        }
+                        // https://github.com/firebase/firebase-android-sdk/issues/7293
+//                        flavor.configure<FirebasePerfExtension> {
+//                            setInstrumentationEnabled(isGoogle)
+//                        }
                         flavor.configure<CrashlyticsExtension> {
                             mappingFileUploadEnabled = isGoogle
                         }

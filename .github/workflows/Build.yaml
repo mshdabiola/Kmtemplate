@@ -33,7 +33,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Copy CI gradle.properties
         run: mkdir -p ~/.gradle ; cp .github/ci-gradle.properties ~/.gradle/gradle.properties
@@ -120,11 +120,11 @@ jobs:
         if: success() || failure()
         uses: EnricoMi/publish-unit-test-result-action@v2.20.0
         with:
-            check_name: Test results
-            comment_title: Test results
-            large_files: true
-            ignore_runs: false
-            files: ./**/build/test-results/**/*.xml
+          check_name: Test results
+          comment_title: Test results
+          large_files: true
+          ignore_runs: false
+          files: ./**/build/test-results/**/*.xml
 
       - name: Upload test results to Codecov
         if: success() || failure()
@@ -150,7 +150,7 @@ jobs:
           token: ${{ secrets.CODECOV_TOKEN }}
           files: "app/build/reports/kover/reportJvm.xml"
           verbose: true
-#          flags: jvm
+      #          flags: jvm
 
       - name: Check lint
         run: ./gradlew lintFossReliantRelease
@@ -222,11 +222,11 @@ jobs:
           build-scan-terms-of-use-url: "https://gradle.com/terms-of-service"
           build-scan-terms-of-use-agree: "yes"
 
-      - name: Remove Firebase References
-        run: ./gradlew removeFirebaseReferences
+      #      - name: Remove Firebase References
+      #        run: ./gradlew removeFirebaseReferences
 
-      - name: Downgrade Build Tools
-        run: ./gradlew downgradeBuildLogicAndAgp
+      #      - name: Downgrade Build Tools
+      #        run: ./gradlew downgradeBuildLogicAndAgp
 
       - name: Build all Foss Reliant APKs
         run: ./gradlew assembleFossReliant :benchmarks:assembleFossReliant

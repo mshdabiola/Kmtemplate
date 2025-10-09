@@ -16,15 +16,12 @@
 package com.mshdabiola.setting.navigation
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.navigation.NavController
-import androidx.navigation.NavGraphBuilder
-import androidx.navigation.NavOptions
-import androidx.navigation.compose.composable
-import androidx.navigation.navOptions
+import androidx.navigation3.runtime.EntryProviderBuilder
+import androidx.navigation3.runtime.NavBackStack
+import androidx.navigation3.runtime.NavKey
 import com.mshdabiola.model.AssetNotFoundException
 import com.mshdabiola.model.BuildConfig
 import com.mshdabiola.model.DeviceNotSupportedException
@@ -38,7 +35,6 @@ import com.mshdabiola.model.Type
 import com.mshdabiola.setting.SettingScreen
 import com.mshdabiola.setting.SettingViewModel
 import com.mshdabiola.setting.WindowRepository
-import com.mshdabiola.ui.LocalNavAnimatedContentScope
 import com.mshdabiola.ui.ReleaseUpdateDialog
 import kmtemplate.feature.setting.generated.resources.Res
 import kmtemplate.feature.setting.generated.resources.data_error_asset_not_found
@@ -52,152 +48,142 @@ import org.jetbrains.compose.resources.getString
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.annotation.KoinExperimentalAPI
 
-fun NavController.navigateToSetting(
-    navOptions: NavOptions = navOptions { launchSingleTop = true },
-) =
-    navigate(
-        Setting,
-        navOptions,
-    )
+fun NavBackStack<NavKey>.navigateToSetting() = add(Setting)
 
 @OptIn(KoinExperimentalAPI::class)
-fun NavGraphBuilder.settingScreen(
+fun EntryProviderBuilder<NavKey>.settingScreen(
     modifier: Modifier,
     onDrawer: (() -> Unit)?,
     setNotification: (Notification) -> Unit,
 
 ) {
-    composable<Setting> {
+    entry<Setting> {
         val viewModel: SettingViewModel = koinViewModel()
         val settingState = viewModel.settingState.collectAsStateWithLifecycle()
         val windowRepository: WindowRepository = getWindowRepository()
 
-        CompositionLocalProvider(
-            LocalNavAnimatedContentScope provides this,
-        ) {
-            SettingScreen(
-                modifier = modifier,
-                onDrawer = onDrawer,
-                settingState = settingState.value,
-                onContrastChange = { viewModel.setContrast(it) },
-                onDarkModeChange = { viewModel.setDarkThemeConfig(it) },
-                onGradientBackgroundChange = { viewModel.setGradientBackground(it) },
-                onLanguageChange = { viewModel.setLanguage(it) },
-                openUrl = { windowRepository.openUrl(it) },
-                openEmail = { email, subject, body -> windowRepository.openEmail(email, subject, body) },
-                onSetUpdateDialog = { viewModel.setShowDialog(it) },
-                onSetUpdateFromPreRelease = { viewModel.setUpdateFromPreRelease(it) },
-                onCheckForUpdate = { viewModel.checkForUpdate(BuildConfig.VERSION_NAME) },
-            )
-            val releaseInfo = settingState.value.releaseInfo
-            if (releaseInfo != null) {
-                when (releaseInfo) {
-                    is ReleaseInfo.NewUpdate -> {
-                        ReleaseUpdateDialog(
-                            releaseInfo = releaseInfo,
-                            onDismissRequest = { viewModel.hideUpdateDialog() },
-                            onDownloadClick = { windowRepository.openUrl(releaseInfo.asset) },
+        SettingScreen(
+            modifier = modifier,
+            onDrawer = onDrawer,
+            settingState = settingState.value,
+            onContrastChange = { viewModel.setContrast(it) },
+            onDarkModeChange = { viewModel.setDarkThemeConfig(it) },
+            onGradientBackgroundChange = { viewModel.setGradientBackground(it) },
+            onLanguageChange = { viewModel.setLanguage(it) },
+            openUrl = { windowRepository.openUrl(it) },
+            openEmail = { email, subject, body -> windowRepository.openEmail(email, subject, body) },
+            onSetUpdateDialog = { viewModel.setShowDialog(it) },
+            onSetUpdateFromPreRelease = { viewModel.setUpdateFromPreRelease(it) },
+            onCheckForUpdate = { viewModel.checkForUpdate(BuildConfig.VERSION_NAME) },
+        )
+        val releaseInfo = settingState.value.releaseInfo
+        if (releaseInfo != null) {
+            when (releaseInfo) {
+                is ReleaseInfo.NewUpdate -> {
+                    ReleaseUpdateDialog(
+                        releaseInfo = releaseInfo,
+                        onDismissRequest = { viewModel.hideUpdateDialog() },
+                        onDownloadClick = { windowRepository.openUrl(releaseInfo.asset) },
+                    )
+                }
+                is ReleaseInfo.UpToDate -> {
+                    LaunchedEffect(releaseInfo) {
+                        viewModel.hideUpdateDialog()
+                        setNotification(
+                            Notification.Message(
+                                duration = SnackbarDuration.Short,
+                                type = Type.Success,
+                                message = getString(
+                                    Res.string.notification_message_up_to_date,
+                                ),
+                            ),
                         )
                     }
-                    is ReleaseInfo.UpToDate -> {
-                        LaunchedEffect(releaseInfo) {
-                            viewModel.hideUpdateDialog()
-                            setNotification(
-                                Notification.Message(
-                                    duration = SnackbarDuration.Short,
-                                    type = Type.Success,
-                                    message = getString(
-                                        Res.string.notification_message_up_to_date,
+                }
+                is ReleaseInfo.Error -> {
+                    when (releaseInfo.exception) {
+                        is AssetNotFoundException -> {
+                            LaunchedEffect(releaseInfo) {
+                                viewModel.hideUpdateDialog()
+                                setNotification(
+                                    Notification.Message(
+                                        duration = SnackbarDuration.Short,
+                                        type = Type.Default,
+                                        message = getString(
+                                            Res.string.data_error_asset_not_found,
+                                        ),
                                     ),
-                                ),
-                            )
+                                )
+                            }
                         }
-                    }
-                    is ReleaseInfo.Error -> {
-                        when (releaseInfo.exception) {
-                            is AssetNotFoundException -> {
-                                LaunchedEffect(releaseInfo) {
-                                    viewModel.hideUpdateDialog()
-                                    setNotification(
-                                        Notification.Message(
-                                            duration = SnackbarDuration.Short,
-                                            type = Type.Default,
-                                            message = getString(
-                                                Res.string.data_error_asset_not_found,
-                                            ),
+                        is PreReleaseNotAllowedException -> {
+                            LaunchedEffect(releaseInfo) {
+                                viewModel.hideUpdateDialog()
+                                setNotification(
+                                    Notification.Message(
+                                        duration = SnackbarDuration.Short,
+                                        type = Type.Default,
+                                        message = getString(
+                                            Res.string.data_error_prerelease_not_allowed,
                                         ),
-                                    )
-                                }
+                                    ),
+                                )
                             }
-                            is PreReleaseNotAllowedException -> {
-                                LaunchedEffect(releaseInfo) {
-                                    viewModel.hideUpdateDialog()
-                                    setNotification(
-                                        Notification.Message(
-                                            duration = SnackbarDuration.Short,
-                                            type = Type.Default,
-                                            message = getString(
-                                                Res.string.data_error_prerelease_not_allowed,
-                                            ),
+                        }
+                        is DeviceNotSupportedException -> {
+                            LaunchedEffect(releaseInfo) {
+                                viewModel.hideUpdateDialog()
+                                setNotification(
+                                    Notification.Message(
+                                        duration = SnackbarDuration.Short,
+                                        type = Type.Default,
+                                        message = getString(
+                                            Res.string.data_error_device_not_supported,
                                         ),
-                                    )
-                                }
+                                    ),
+                                )
                             }
-                            is DeviceNotSupportedException -> {
-                                LaunchedEffect(releaseInfo) {
-                                    viewModel.hideUpdateDialog()
-                                    setNotification(
-                                        Notification.Message(
-                                            duration = SnackbarDuration.Short,
-                                            type = Type.Default,
-                                            message = getString(
-                                                Res.string.data_error_device_not_supported,
-                                            ),
+                        }
+                        is NoUpdateAvailableException -> {
+                            LaunchedEffect(releaseInfo) {
+                                viewModel.hideUpdateDialog()
+                                setNotification(
+                                    Notification.Message(
+                                        duration = SnackbarDuration.Short,
+                                        type = Type.Success,
+                                        message = getString(
+                                            Res.string.data_error_current_version_greater,
                                         ),
-                                    )
-                                }
+                                    ),
+                                )
                             }
-                            is NoUpdateAvailableException -> {
-                                LaunchedEffect(releaseInfo) {
-                                    viewModel.hideUpdateDialog()
-                                    setNotification(
-                                        Notification.Message(
-                                            duration = SnackbarDuration.Short,
-                                            type = Type.Success,
-                                            message = getString(
-                                                Res.string.data_error_current_version_greater,
-                                            ),
+                        }
+                        is InvalidVersionFormatException -> {
+                            LaunchedEffect(releaseInfo) {
+                                viewModel.hideUpdateDialog()
+                                setNotification(
+                                    Notification.Message(
+                                        duration = SnackbarDuration.Short,
+                                        type = Type.Error,
+                                        message = getString(
+                                            Res.string.data_error_invalid_version_format,
                                         ),
-                                    )
-                                }
+                                    ),
+                                )
                             }
-                            is InvalidVersionFormatException -> {
-                                LaunchedEffect(releaseInfo) {
-                                    viewModel.hideUpdateDialog()
-                                    setNotification(
-                                        Notification.Message(
-                                            duration = SnackbarDuration.Short,
-                                            type = Type.Error,
-                                            message = getString(
-                                                Res.string.data_error_invalid_version_format,
-                                            ),
+                        }
+                        else -> {
+                            LaunchedEffect(releaseInfo) {
+                                viewModel.hideUpdateDialog()
+                                setNotification(
+                                    Notification.Message(
+                                        duration = SnackbarDuration.Long,
+                                        type = Type.Error,
+                                        message = getString(
+                                            Res.string.notification_message_error_checking_update,
                                         ),
-                                    )
-                                }
-                            }
-                            else -> {
-                                LaunchedEffect(releaseInfo) {
-                                    viewModel.hideUpdateDialog()
-                                    setNotification(
-                                        Notification.Message(
-                                            duration = SnackbarDuration.Long,
-                                            type = Type.Error,
-                                            message = getString(
-                                                Res.string.notification_message_error_checking_update,
-                                            ),
-                                        ),
-                                    )
-                                }
+                                    ),
+                                )
                             }
                         }
                     }

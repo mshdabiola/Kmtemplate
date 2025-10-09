@@ -55,6 +55,7 @@ import androidx.compose.material3.WideNavigationRailDefaults
 import androidx.compose.material3.WideNavigationRailValue
 import androidx.compose.material3.contentColorFor
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
@@ -64,11 +65,8 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavDestination.Companion.hasRoute
-import androidx.navigation.compose.composable
-import androidx.navigation.compose.currentBackStackEntryAsState
-import androidx.navigation.compose.rememberNavController
-import androidx.navigation.createGraph
+import androidx.navigation3.runtime.NavKey
+import androidx.navigation3.runtime.rememberNavBackStack
 import com.mshdabiola.designsystem.component.CustomWideNavigationRailItem
 import com.mshdabiola.designsystem.drawable.KmtIcons
 import com.mshdabiola.detail.navigation.Detail
@@ -126,18 +124,8 @@ fun KmtScaffold(
         )
     }
 
-    val currentDestination = appState.navController
-        .currentBackStackEntryAsState().value?.destination
-    val isMain = remember(currentDestination) {
-        currentDestination?.hasRoute(Main::class) == true
-    }
-    val isTopDestination = remember(currentDestination) {
-        topDestination.any {
-            currentDestination
-                ?.hasRoute(it.route::class)
-                ?: false
-        }
-    }
+    val isMain = appState.isMain.collectAsState(false).value
+    val isTopDestination = appState.isTopRoute.collectAsState(false).value
 
     with(sharedScope) {
         if (appState is Compact) {
@@ -280,14 +268,8 @@ fun KmtScaffold(
 @Preview
 @Composable
 fun KmtScaffoldPreview() {
-    val navController = rememberNavController().apply {
-        graph =
-            createGraph(startDestination = Main) {
-                composable<Main> { }
-                composable<Detail> { }
-                composable<Setting> { }
-            }
-    }
+    val navController = rememberNavBackStack(config, Main)
+
     val appState = Expand(
         navController = navController,
         snackbarHostState = SnackbarHostState(),
@@ -321,7 +303,7 @@ fun DrawerContent(
     modifier: Modifier = Modifier,
     appState: KmtAppState,
     isMain: Boolean,
-    topDestination: Set<TopLevelRoute<out Any>>,
+    topDestination: Set<TopLevelRoute<out NavKey>>,
 ) {
     val scrollState = rememberScrollState()
     val routeArray = stringArrayResource(Res.array.route)

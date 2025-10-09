@@ -31,10 +31,10 @@ group = "com.mshdabiola.kmtemplate"
 version = libs.versions.desktopCode.get()
 
 dependencies {
-    linuxAmd64(compose.desktop.linux_x64)
-    macAmd64(compose.desktop.macos_x64)
-    macAarch64(compose.desktop.macos_arm64)
-    windowsAmd64(compose.desktop.windows_x64)
+//    linuxAmd64(compose.desktop.linux_x64)
+//    macAmd64(compose.desktop.macos_x64)
+//    macAarch64(compose.desktop.macos_arm64)
+//    windowsAmd64(compose.desktop.windows_x64)
 
     implementation(libs.koin.android)
 
@@ -44,7 +44,6 @@ dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.core.splashscreen)
     implementation(libs.androidx.lifecycle.runtimeCompose)
-    implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.profileinstaller)
     implementation(libs.androidx.tracing.ktx)
     implementation(libs.androidx.window.core)
@@ -89,6 +88,7 @@ kotlin {
             implementation(projects.core.ui)
             implementation(projects.core.model)
             implementation(projects.core.analytics)
+            implementation(libs.androidx.nav3.ui)
 
 
             implementation(projects.feature.main)
@@ -204,13 +204,6 @@ compose.desktop {
     }
 
 
-}
-
-configurations.all {
-    attributes {
-        // https://github.com/JetBrains/compose-jb/issues/1404#issuecomment-1146894731
-        attribute(Attribute.of("ui", String::class.java), "awt")
-    }
 }
 
 

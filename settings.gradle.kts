@@ -5,22 +5,24 @@ pluginManagement {
         google()
         mavenCentral()
         gradlePluginPortal()
+        maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
+
     }
 }
 
-plugins {
-    id("org.gradle.toolchains.foojay-resolver") version "1.0.0"
-}
+//plugins {
+//    id("org.gradle.toolchains.foojay-resolver") version "1.0.0"
+//}
 
-toolchainManagement {
-    jvm {
-        javaRepositories {
-            repository("foojay") {
-                resolverClass.set(org.gradle.toolchains.foojay.FoojayToolchainResolver::class.java)
-            }
-        }
-    }
-}
+//toolchainManagement {
+//    jvm {
+//        javaRepositories {
+//            repository("foojay") {
+//                resolverClass.set(org.gradle.toolchains.foojay.FoojayToolchainResolver::class.java)
+//            }
+//        }
+//    }
+//}
 
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 

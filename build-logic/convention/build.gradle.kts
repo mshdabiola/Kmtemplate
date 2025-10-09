@@ -110,6 +110,10 @@ gradlePlugin {
             id = "mshdabiola.android.library.compose"
             implementationClass = "AndroidLibraryComposeConventionPlugin"
         }
+        register("androidLibraryFlavor") {
+            id = "mshdabiola.android.library.flavor"
+            implementationClass = "AndroidLibraryFlavorsConventionPlugin"
+        }
         register("androidLibrary") {
             id = "mshdabiola.android.library"
             implementationClass = "AndroidLibraryConventionPlugin"
