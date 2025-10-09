@@ -328,7 +328,8 @@ abstract class RenameProjectArtifactsTask : DefaultTask() {
             "androidMain",
             "kotlin",
             packageAsPath,
-            "KmtApplication.kt", // Specific to your example            // Add more common Application class names if needed:
+            "KmtApplication.kt", // Specific to your example
+            // Add more common Application class names if needed:
             // "src", "androidMain", "kotlin", packageAsPath, "MainApplication.kt"
             // "src", "androidMain", "kotlin", packageAsPath, "App.kt"
         )
