@@ -121,10 +121,10 @@ androidx.navigation:navigation-runtime:2.9.1
 androidx.print:print:1.0.0
 androidx.profileinstaller:profileinstaller:1.4.1
 androidx.resourceinspection:resourceinspection-annotation:1.0.1
-androidx.room:room-common-jvm:2.8.1
-androidx.room:room-common:2.8.1
-androidx.room:room-runtime-android:2.8.1
-androidx.room:room-runtime:2.8.1
+androidx.room:room-common-jvm:2.8.2
+androidx.room:room-common:2.8.2
+androidx.room:room-runtime-android:2.8.2
+androidx.room:room-runtime:2.8.2
 androidx.savedstate:savedstate-android:1.4.0-alpha03
 androidx.savedstate:savedstate-compose-android:1.4.0-alpha03
 androidx.savedstate:savedstate-compose:1.4.0-alpha03
