@@ -1,6 +1,6 @@
 [versions]
 acraMail = "5.13.1"
-androidGradlePlugin = "9.0.0-alpha09"
+androidGradlePlugin = "9.0.0-alpha10"
 androidTools = "31.13.0"
 androidxActivity = "1.11.0"
 androidxComposeMaterial3Adaptive = "1.2.0+dev3015"
