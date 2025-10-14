@@ -86,12 +86,9 @@ internal fun SettingDetailScreen(
                         KmtIconButton(
                             onClick = onBack,
                             modifier = Modifier.testTag(SettingDetailScreenTestTags.BACK_ICON_BUTTON),
-                        ) {
-                            Icon(
-                                imageVector = KmtIcons.ArrowBack,
-                                contentDescription = "back",
-                            )
-                        }
+                            imageVector = KmtIcons.ArrowBack,
+                            contentDescription = "back",
+                        )
                     }
                 },
             )

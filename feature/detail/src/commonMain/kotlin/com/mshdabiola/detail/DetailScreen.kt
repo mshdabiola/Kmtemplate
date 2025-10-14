@@ -74,28 +74,22 @@ internal fun DetailScreen(
                             KmtIconButton(
                                 onClick = onDelete,
                                 modifier = Modifier.testTag(DetailScreenTestTags.DELETE_BUTTON),
-                            ) {
-                                Icon(
-                                    imageVector = KmtIcons.Delete,
-                                    contentDescription = stringResource(
-                                        Res.string.detail_delete_icon_content_description,
-                                    ),
-                                )
-                            }
+                                imageVector = KmtIcons.Delete,
+                                contentDescription = stringResource(
+                                    Res.string.detail_delete_icon_content_description,
+                                ),
+                            )
                         }
                     },
                     navigationIcon = {
                         KmtIconButton(
                             onClick = onBack,
                             modifier = Modifier.testTag(DetailScreenTestTags.BACK_BUTTON),
-                        ) {
-                            Icon(
-                                imageVector = KmtIcons.ArrowBack,
-                                contentDescription = stringResource(
-                                    Res.string.detail_back_icon_content_description,
-                                ),
-                            )
-                        }
+                            imageVector = KmtIcons.ArrowBack,
+                            contentDescription = stringResource(
+                                Res.string.detail_back_icon_content_description,
+                            ),
+                        )
                     },
                 )
             },

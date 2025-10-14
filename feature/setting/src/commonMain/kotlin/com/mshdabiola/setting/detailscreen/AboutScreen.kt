@@ -37,7 +37,7 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
-import com.mshdabiola.designsystem.component.KmtTextButton
+import com.mshdabiola.designsystem.component.KmtSecondaryButton
 import com.mshdabiola.designsystem.drawable.KmtIcons
 import com.mshdabiola.designsystem.theme.KmtTheme
 import com.mshdabiola.model.BuildConfig
@@ -178,25 +178,23 @@ fun AboutScreen(
                 .testTag(AboutScreenTestTags.EMAIL_LINK),
         )
 
-        KmtTextButton(
+        KmtSecondaryButton(
             onClick = {
                 openUrl(BuildConfig.PRIVACY_POLICY_URL)
             },
             contentPadding = PaddingValues(vertical = 4.dp),
             modifier = Modifier.testTag(AboutScreenTestTags.PRIVACY_POLICY_BUTTON),
-        ) {
-            Text(stringResource(Res.string.privacy_policy))
-        }
+            label = stringResource(Res.string.privacy_policy)
+        )
 
-        KmtTextButton(
+        KmtSecondaryButton(
             onClick = {
                 openUrl(BuildConfig.TERMS_AND_CONDITIONS_URL)
             },
             contentPadding = PaddingValues(vertical = 4.dp),
             modifier = Modifier.testTag(AboutScreenTestTags.TERMS_AND_CONDITIONS_BUTTON),
-        ) {
-            Text(stringResource(Res.string.terms_and_condition))
-        }
+            label = stringResource(Res.string.terms_and_condition)
+        )
         Spacer(Modifier.height(16.dp))
     }
 }

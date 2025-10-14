@@ -88,12 +88,11 @@ internal fun MainScreen(
                         },
                     )
                 }, // Consider adding a test tag if the title becomes dynamic
-                titleHorizontalAlignment = Alignment.Start,
                 navigationIcon = {
                     if (onDrawer != null) {
-                        KmtIconButton(onClick = onDrawer) {
-                            Icon(KmtIcons.Menu, "menu")
-                        }
+                        KmtIconButton(onClick = onDrawer,
+                            KmtIcons.Menu, "menu"
+                            )
                     }
                 },
             )

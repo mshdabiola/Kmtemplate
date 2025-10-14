@@ -88,12 +88,9 @@ internal fun SettingListScreen(
                         KmtIconButton(
                             onClick = onDrawer,
                             modifier = Modifier.testTag(SettingScreenListTestTags.MENU_ICON_BUTTON),
-                        ) {
-                            Icon(
-                                imageVector = KmtIcons.Menu,
-                                contentDescription = "menu",
-                            )
-                        }
+                            imageVector = KmtIcons.Menu,
+                            contentDescription = "menu",
+                        )
                     }
                 },
             )
