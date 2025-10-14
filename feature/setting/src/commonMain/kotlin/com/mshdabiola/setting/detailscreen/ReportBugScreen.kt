@@ -26,10 +26,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.input.TextFieldLineLimits
 import androidx.compose.foundation.text.input.rememberTextFieldState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -76,7 +73,7 @@ fun ReportBugScreen(
                 .testTag(ReportBugScreenTestTags.SUBMIT_GITHUB_BUTTON),
             enabled = true,
             onClick = { openUrl(BuildConfig.ISSUE_GITHUB_URL) },
-            label = stringResource(Res.string.report_bug_submit_github_button)
+            label = stringResource(Res.string.report_bug_submit_github_button),
         )
         Spacer(Modifier.height(24.dp))
 
@@ -111,7 +108,7 @@ fun ReportBugScreen(
             onClick = {
                 openEmail(BuildConfig.DEVELOPER_EMAIL, heading.text.toString(), content.text.toString())
             },
-            label= stringResource(Res.string.report_bug_submit_email_button)
+            label = stringResource(Res.string.report_bug_submit_email_button),
         )
     }
 }

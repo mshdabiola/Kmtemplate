@@ -184,7 +184,7 @@ fun AboutScreen(
             },
             contentPadding = PaddingValues(vertical = 4.dp),
             modifier = Modifier.testTag(AboutScreenTestTags.PRIVACY_POLICY_BUTTON),
-            label = stringResource(Res.string.privacy_policy)
+            label = stringResource(Res.string.privacy_policy),
         )
 
         KmtSecondaryButton(
@@ -193,7 +193,7 @@ fun AboutScreen(
             },
             contentPadding = PaddingValues(vertical = 4.dp),
             modifier = Modifier.testTag(AboutScreenTestTags.TERMS_AND_CONDITIONS_BUTTON),
-            label = stringResource(Res.string.terms_and_condition)
+            label = stringResource(Res.string.terms_and_condition),
         )
         Spacer(Modifier.height(16.dp))
     }

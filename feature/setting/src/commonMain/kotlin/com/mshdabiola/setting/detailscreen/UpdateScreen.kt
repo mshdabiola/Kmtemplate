@@ -109,7 +109,7 @@ fun UpdateScreen(
                 .align(Alignment.CenterHorizontally)
                 .testTag(UpdateScreenTestTags.CHECK_FOR_UPDATE_BUTTON),
             onClick = onCheckForUpdate,
-            label = stringResource(Res.string.update_screen_check_for_update_button)
+            label = stringResource(Res.string.update_screen_check_for_update_button),
         )
     }
 }

@@ -64,14 +64,14 @@ fun ReleaseUpdateDialog(
             KmtButton(
                 onClick = onDownloadClick,
                 modifier = Modifier.testTag(ReleaseUpdateTags.RELEASE_UPDATE_DIALOG_CONFIRM_BUTTON_TAG),
-                label = stringResource(Res.string.release_update_dialog_download_button)
+                label = stringResource(Res.string.release_update_dialog_download_button),
             )
         },
         dismissButton = {
             KmtSecondaryButton(
                 onClick = onDismissRequest,
                 modifier = Modifier.testTag(ReleaseUpdateTags.RELEASE_UPDATE_DIALOG_DISMISS_BUTTON_TAG),
-                label=stringResource(Res.string.release_update_dialog_cancel_button)
+                label = stringResource(Res.string.release_update_dialog_cancel_button),
             )
         },
 

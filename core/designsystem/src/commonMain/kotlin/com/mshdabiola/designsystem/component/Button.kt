@@ -27,10 +27,8 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
@@ -38,11 +36,11 @@ import androidx.compose.ui.graphics.vector.ImageVector
 fun KmtButton(
     onClick: () -> Unit,
     label: String,
-    icon: ImageVector?=null,
+    icon: ImageVector? = null,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
     contentPadding: PaddingValues? = null,
-    ) {
+) {
     val size = ButtonDefaults.ExtraSmallContainerHeight
     Button(
         onClick = onClick,
@@ -50,9 +48,9 @@ fun KmtButton(
         shapes = ButtonDefaults.shapes(),
         colors = ButtonDefaults.buttonColors(),
         modifier = modifier.heightIn(size),
-        contentPadding = contentPadding?:ButtonDefaults.contentPaddingFor(size),
+        contentPadding = contentPadding ?: ButtonDefaults.contentPaddingFor(size),
     ) {
-        if (icon != null){
+        if (icon != null) {
             Icon(
                 icon,
                 contentDescription = "Localized description",
@@ -70,7 +68,7 @@ fun KmtButton(
 fun KmtSecondaryButton(
     onClick: () -> Unit,
     label: String,
-    icon: ImageVector?=null,
+    icon: ImageVector? = null,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
     contentPadding: PaddingValues? = null,
@@ -84,7 +82,7 @@ fun KmtSecondaryButton(
         modifier = modifier.heightIn(size),
         contentPadding = contentPadding ?: ButtonDefaults.contentPaddingFor(size),
     ) {
-        if (icon != null){
+        if (icon != null) {
             Icon(
                 icon,
                 contentDescription = "Localized description",
@@ -96,8 +94,6 @@ fun KmtSecondaryButton(
         Text(label, style = ButtonDefaults.textStyleFor(size))
     }
 }
-
-
 
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
