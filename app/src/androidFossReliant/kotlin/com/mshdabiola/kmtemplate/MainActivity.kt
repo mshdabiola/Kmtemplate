@@ -16,4 +16,3 @@
 package com.mshdabiola.kmtemplate
 
 class MainActivity : BaseActivity()
-
