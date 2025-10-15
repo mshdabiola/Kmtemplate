@@ -75,5 +75,5 @@ fun SplashScreen(
 @Preview
 @Composable
 fun SplashScreenPreview() {
-    SplashScreen(brand = "Kmtemplate")
+    SplashScreen(brand = "Kmtapse")
 }

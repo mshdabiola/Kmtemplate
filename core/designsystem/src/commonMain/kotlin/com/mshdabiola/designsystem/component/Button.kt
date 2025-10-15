@@ -16,83 +16,82 @@
 package com.mshdabiola.designsystem.component
 
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.ButtonShapes
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
+import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.IconButtonDefaults
-import androidx.compose.material3.TextButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.vector.ImageVector
 
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 fun KmtButton(
     onClick: () -> Unit,
+    label: String,
+    icon: ImageVector? = null,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
-    shape: ButtonShapes = ButtonDefaults.shapes(),
-    colors: ButtonColors = ButtonDefaults.buttonColors(),
-    content: @Composable RowScope.() -> Unit,
-
+    contentPadding: PaddingValues? = null,
 ) {
+    val size = ButtonDefaults.ExtraSmallContainerHeight
     Button(
         onClick = onClick,
-        modifier = modifier,
         enabled = enabled,
-        content = content,
-        shapes = shape,
-        colors = colors,
-
-    )
-}
-
-@OptIn(ExperimentalMaterial3ExpressiveApi::class)
-@Composable
-fun KmtTextButton(
-    onClick: () -> Unit,
-    modifier: Modifier = Modifier,
-    enabled: Boolean = true,
-    contentPadding: PaddingValues = ButtonDefaults.TextButtonContentPadding,
-    content: @Composable RowScope.() -> Unit,
-) {
-    TextButton(
-        onClick = onClick,
-        modifier = modifier,
-        enabled = enabled,
-        content = content,
-        shapes = ButtonDefaults.shapes(),
-        contentPadding = contentPadding,
-
-    )
-}
-
-@OptIn(ExperimentalMaterial3ExpressiveApi::class)
-@Composable
-fun KmtButton(
-    onClick: () -> Unit,
-    modifier: Modifier = Modifier,
-    enabled: Boolean = true,
-    leadingIcon: @Composable (() -> Unit),
-    text: @Composable () -> Unit,
-) {
-    Button(
-        modifier = modifier,
-        onClick = onClick,
-        enabled = enabled,
-        contentPadding = ButtonDefaults.ButtonWithIconContentPadding,
         shapes = ButtonDefaults.shapes(),
         colors = ButtonDefaults.buttonColors(),
-        elevation = ButtonDefaults.buttonElevation(),
+        modifier = modifier.heightIn(size),
+        contentPadding = contentPadding ?: ButtonDefaults.contentPaddingFor(size),
     ) {
-        leadingIcon()
-        Spacer(Modifier.size(ButtonDefaults.IconSpacing))
-        text()
+        if (icon != null) {
+            Icon(
+                icon,
+                contentDescription = "Localized description",
+                modifier = Modifier.size(ButtonDefaults.iconSizeFor(size)),
+            )
+            Spacer(Modifier.size(ButtonDefaults.iconSpacingFor(size)))
+        }
+
+        Text(label, style = ButtonDefaults.textStyleFor(size))
+    }
+}
+
+@OptIn(ExperimentalMaterial3ExpressiveApi::class)
+@Composable
+fun KmtSecondaryButton(
+    onClick: () -> Unit,
+    label: String,
+    icon: ImageVector? = null,
+    modifier: Modifier = Modifier,
+    enabled: Boolean = true,
+    contentPadding: PaddingValues? = null,
+) {
+    val size = ButtonDefaults.ExtraSmallContainerHeight
+    Button(
+        onClick = onClick,
+        enabled = enabled,
+        shapes = ButtonDefaults.shapes(MaterialTheme.shapes.medium),
+        colors = ButtonDefaults.textButtonColors(),
+        modifier = modifier.heightIn(size),
+        contentPadding = contentPadding ?: ButtonDefaults.contentPaddingFor(size),
+    ) {
+        if (icon != null) {
+            Icon(
+                icon,
+                contentDescription = "Localized description",
+                modifier = Modifier.size(ButtonDefaults.iconSizeFor(size)),
+            )
+            Spacer(Modifier.size(ButtonDefaults.iconSpacingFor(size)))
+        }
+
+        Text(label, style = ButtonDefaults.textStyleFor(size))
     }
 }
 
@@ -100,17 +99,18 @@ fun KmtButton(
 @Composable
 fun KmtIconButton(
     onClick: () -> Unit,
+    imageVector: ImageVector,
+    contentDescription: String? = null,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
-    content: @Composable () -> Unit,
-
 ) {
     IconButton(
         modifier = modifier,
         onClick = onClick,
         shapes = IconButtonDefaults.shapes(),
         colors = IconButtonDefaults.iconButtonColors(),
-        content = content,
         enabled = enabled,
-    )
+    ) {
+        Icon(imageVector, contentDescription)
+    }
 }
