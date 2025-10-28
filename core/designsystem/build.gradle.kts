@@ -51,46 +51,47 @@ kotlin {
     }
 
     sourceSets {
-         commonMain.dependencies {
-                api(compose.runtime)
-                api(compose.foundation)
-                api(compose.ui)
-                api(compose.materialIconsExtended)
-                api(compose.components.resources)
-                api(compose.material3AdaptiveNavigationSuite)
-                api(compose.components.uiToolingPreview)
-                api(compose.material3)
+        commonMain.dependencies {
+            api(compose.runtime)
+            api(compose.foundation)
+            api(compose.ui)
+            api(compose.materialIconsExtended)
+            api(compose.components.resources)
+            api(compose.material3AdaptiveNavigationSuite)
+            api(compose.components.uiToolingPreview)
+            api(compose.material3)
 
 
-             api(libs.androidx.nav3.ui.get())
-                api(libs.kotlinx.collection.immutable)
-                api(libs.androidx.lifecycle.viewmodelCompose)
-                api(libs.androidx.lifecycle.runtimeCompose)
+            api(libs.androidx.nav3.ui.get())
+            api(libs.kotlinx.collection.immutable)
+            api(libs.androidx.lifecycle.viewmodelCompose)
+            api(libs.androidx.lifecycle.runtimeCompose)
+            api(libs.lifecycle.viewmodel.navigation3)
+
 //                api(libs.material3)
 
 
-                api(libs.koin.compose)
-                api(libs.koin.composeVM)
+            api(libs.koin.compose)
+            api(libs.koin.composeVM)
 
-                api(libs.coil.kt)
-                api(libs.coil.kt.compose)
-                api(libs.coil.kt.svg)
-                api(libs.coil.kt.network)
-                api(compose.components.resources)
+            api(libs.coil.kt)
+            api(libs.coil.kt.compose)
+            api(libs.coil.kt.svg)
+            api(libs.coil.kt.network)
+            api(compose.components.resources)
 
-            }
+        }
 
         androidMain.dependencies {
 
-                implementation(libs.androidx.ui.text.google.fonts)
+            implementation(libs.androidx.ui.text.google.fonts)
 
-            }
+        }
 
 
 //         jvmMain.dependencies {
 //                api(libs.kotlinx.coroutines.swing)
 //            }
-
 
 
     }

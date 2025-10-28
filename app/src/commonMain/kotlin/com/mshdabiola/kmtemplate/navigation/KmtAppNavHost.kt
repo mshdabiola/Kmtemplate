@@ -18,8 +18,9 @@ package com.mshdabiola.kmtemplate.navigation
 import androidx.compose.animation.ExperimentalSharedTransitionApi
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.lifecycle.viewmodel.navigation3.rememberViewModelStoreNavEntryDecorator
 import androidx.navigation3.runtime.entryProvider
-import androidx.navigation3.runtime.rememberSavedStateNavEntryDecorator
+import androidx.navigation3.runtime.rememberSaveableStateHolderNavEntryDecorator
 import androidx.navigation3.scene.rememberSceneSetupNavEntryDecorator
 import androidx.navigation3.ui.NavDisplay
 import com.mshdabiola.detail.navigation.Detail
@@ -56,8 +57,8 @@ fun KmtNavHost(
         onBack = { navController.removeLastOrNull() },
         entryDecorators = listOf(
             rememberSceneSetupNavEntryDecorator(),
-            rememberSavedStateNavEntryDecorator(),
-            //  rememberViewModelStoreNavEntryDecorator() //TODO
+            rememberSaveableStateHolderNavEntryDecorator(),
+              rememberViewModelStoreNavEntryDecorator()
         ),
         entryProvider = entryProvider {
             mainScreen(

@@ -89,6 +89,7 @@ kotlin {
             implementation(projects.core.model)
             implementation(projects.core.analytics)
             implementation(libs.androidx.nav3.ui)
+            implementation(libs.lifecycle.viewmodel.navigation3)
 
 
             implementation(projects.feature.main)

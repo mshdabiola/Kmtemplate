@@ -8,7 +8,7 @@ androidxCore = "1.17.0"
 androidx-nav3 = "1.0.0-alpha02"
 androidxCoreSplashscreen = "1.0.1"
 androidxDataStore = "1.1.7"
-androidx-lifecycle = "2.10.0-alpha02"
+androidx-lifecycle = "2.10.0-alpha03"
 androidxMacroBenchmark = "1.4.1"
 androidxProfileinstaller = "1.4.1"
 androidxTestCore = "1.7.0"
@@ -147,6 +147,7 @@ ktor-client-logging = { module = "io.ktor:ktor-client-logging-jvm", version.ref 
 ktor-client-mock = { module = "io.ktor:ktor-client-mock", version.ref = "ktor" }
 ktor-client-resources = { module = "io.ktor:ktor-client-resources", version.ref = "ktor" }
 ktor-client-serialization = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor" }
+lifecycle-viewmodel-navigation3 = { module = "org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-navigation3", version.ref = "androidx-lifecycle" }
 lint-api = { group = "com.android.tools.lint", name = "lint-api", version.ref = "androidTools" }
 lint-checks = { group = "com.android.tools.lint", name = "lint-checks", version.ref = "androidTools" }
 lint-tests = { group = "com.android.tools.lint", name = "lint-tests", version.ref = "androidTools" }
