@@ -2,7 +2,7 @@
 acraMail = "5.13.1"
 androidGradlePlugin = "9.0.0-alpha11"
 androidTools = "31.13.1"
-androidxActivity = "1.11.0"
+androidxActivity = "1.12.1"
 androidxComposeMaterial3Adaptive = "1.2.0-alpha07"
 androidxCore = "1.17.0"
 androidx-nav3 = "1.0.0-alpha02"

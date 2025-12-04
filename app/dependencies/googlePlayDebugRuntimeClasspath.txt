@@ -1,6 +1,6 @@
-androidx.activity:activity-compose:1.12.0-alpha09
-androidx.activity:activity-ktx:1.12.0-alpha09
-androidx.activity:activity:1.12.0-alpha09
+androidx.activity:activity-compose:1.12.1
+androidx.activity:activity-ktx:1.12.1
+androidx.activity:activity:1.12.1
 androidx.annotation:annotation-experimental:1.5.1
 androidx.annotation:annotation-jvm:1.9.1
 androidx.annotation:annotation:1.9.1
@@ -134,10 +134,10 @@ androidx.navigation3:navigation3-runtime-android:1.0.0-alpha10
 androidx.navigation3:navigation3-runtime:1.0.0-alpha10
 androidx.navigation3:navigation3-ui-android:1.0.0-alpha10
 androidx.navigation3:navigation3-ui:1.0.0-alpha10
-androidx.navigationevent:navigationevent-android:1.0.0-alpha09
-androidx.navigationevent:navigationevent-compose-android:1.0.0-alpha09
-androidx.navigationevent:navigationevent-compose:1.0.0-alpha09
-androidx.navigationevent:navigationevent:1.0.0-alpha09
+androidx.navigationevent:navigationevent-android:1.0.1
+androidx.navigationevent:navigationevent-compose-android:1.0.1
+androidx.navigationevent:navigationevent-compose:1.0.1
+androidx.navigationevent:navigationevent:1.0.1
 androidx.print:print:1.0.0
 androidx.privacysandbox.ads:ads-adservices-java:1.1.0-beta11
 androidx.privacysandbox.ads:ads-adservices:1.1.0-beta11
