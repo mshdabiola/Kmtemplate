@@ -55,7 +55,7 @@ spotless = "7.2.1"
 sqlite = "2.6.1"
 turbine = "1.2.1"
 uiTextGoogleFonts = "1.9.4"
-zoomable = "2.8.2"
+zoomable = "2.9.0"
 
 versionCode = "29"
 versionName = "1.2.20"
