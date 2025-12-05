@@ -167,9 +167,9 @@ androidx.vectordrawable:vectordrawable-animated:1.1.0
 androidx.vectordrawable:vectordrawable:1.1.0
 androidx.versionedparcelable:versionedparcelable:1.1.1
 androidx.viewpager:viewpager:1.0.0
-androidx.window:window-core-android:1.5.0
-androidx.window:window-core:1.5.0
-androidx.window:window:1.5.0
+androidx.window:window-core-android:1.5.1
+androidx.window:window-core:1.5.1
+androidx.window:window:1.5.1
 ch.acra:acra-core:5.13.1
 ch.acra:acra-mail:5.13.1
 co.touchlab:kermit-android-debug:2.0.8
