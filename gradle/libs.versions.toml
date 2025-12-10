@@ -1,6 +1,6 @@
 [versions]
 acraMail = "5.13.1"
-androidGradlePlugin = "9.0.0-alpha11"
+androidGradlePlugin = "9.0.0-beta03"
 androidTools = "31.13.1"
 androidxActivity = "1.12.1"
 androidxComposeMaterial3Adaptive = "1.2.0"
@@ -54,7 +54,7 @@ slf4jSimple = "2.0.17"
 spotless = "8.1.0"
 sqlite = "2.6.2"
 turbine = "1.2.1"
-uiTextGoogleFonts = "1.10.0"
+uiTextGoogleFonts = "1.9.4"
 zoomable = "2.9.0"
 
 versionCode = "29"
