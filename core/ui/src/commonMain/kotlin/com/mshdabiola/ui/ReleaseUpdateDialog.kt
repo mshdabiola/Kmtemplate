@@ -22,6 +22,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.tooling.preview.Preview
 import com.mshdabiola.designsystem.component.KmtButton
 import com.mshdabiola.designsystem.component.KmtSecondaryButton
 import com.mshdabiola.model.ReleaseInfo
@@ -32,7 +33,6 @@ import kmtemplate.core.ui.generated.resources.release_update_dialog_cancel_butto
 import kmtemplate.core.ui.generated.resources.release_update_dialog_download_button
 import kmtemplate.core.ui.generated.resources.release_update_dialog_title
 import org.jetbrains.compose.resources.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 
 @Composable
 fun ReleaseUpdateDialog(

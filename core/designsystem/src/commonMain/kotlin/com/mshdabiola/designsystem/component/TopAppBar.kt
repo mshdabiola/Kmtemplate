@@ -26,8 +26,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import com.mshdabiola.designsystem.theme.KmtTheme
 import androidx.compose.ui.tooling.preview.Preview
+import com.mshdabiola.designsystem.theme.KmtTheme
 
 @Composable
 fun KmtTopAppBar(

@@ -33,6 +33,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.mshdabiola.designsystem.component.KmtSecondaryButton
 import com.mshdabiola.designsystem.theme.KmtTheme
@@ -43,7 +44,6 @@ import kmtemplate.feature.setting.generated.resources.update_screen_check_for_up
 import kmtemplate.feature.setting.generated.resources.update_screen_join_beta_release_text
 import kmtemplate.feature.setting.generated.resources.update_screen_show_update_dialog_text
 import org.jetbrains.compose.resources.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 
 @Composable
 fun UpdateScreen(

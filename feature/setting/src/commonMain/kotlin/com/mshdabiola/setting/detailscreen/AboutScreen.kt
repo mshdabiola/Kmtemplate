@@ -36,6 +36,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.mshdabiola.designsystem.component.KmtSecondaryButton
 import com.mshdabiola.designsystem.drawable.KmtIcons
@@ -52,7 +53,6 @@ import kmtemplate.feature.setting.generated.resources.terms_and_condition
 import kmtemplate.feature.setting.generated.resources.version
 import kmtemplate.feature.setting.generated.resources.version_code
 import org.jetbrains.compose.resources.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 
 @Composable
 fun AboutScreen(
