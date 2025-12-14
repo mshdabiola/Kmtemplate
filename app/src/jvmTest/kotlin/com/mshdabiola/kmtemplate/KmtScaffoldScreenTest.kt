@@ -17,7 +17,6 @@ package com.mshdabiola.kmtemplate
 
 import androidx.compose.animation.ExperimentalSharedTransitionApi
 import androidx.compose.animation.SharedTransitionLayout
-
 import androidx.compose.material3.WideNavigationRailValue
 import androidx.compose.material3.rememberWideNavigationRailState
 import androidx.compose.runtime.Composable
@@ -41,7 +40,7 @@ import com.mshdabiola.ui.LocalSharedTransitionScope
 import org.junit.Rule
 import org.junit.Test
 
-@OptIn( ExperimentalSharedTransitionApi::class)
+@OptIn(ExperimentalSharedTransitionApi::class)
 class KmtScaffoldScreenTest {
 
     @get:Rule

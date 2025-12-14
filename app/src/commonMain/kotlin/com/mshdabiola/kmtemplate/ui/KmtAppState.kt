@@ -17,7 +17,6 @@ package com.mshdabiola.kmtemplate.ui
 
 import androidx.compose.material3.DrawerState
 import androidx.compose.material3.DrawerValue
-
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.SnackbarResult
 import androidx.compose.material3.WideNavigationRailState
@@ -58,7 +57,6 @@ val config = SavedStateConfiguration {
     }
 }
 
-
 @Composable
 fun rememberKmtAppState(
     windowSizeClass: WindowSizeClass,
@@ -85,7 +83,6 @@ fun rememberKmtAppState(
         }
     }
 }
-
 
 @Stable
 sealed class KmtAppState(
@@ -175,7 +172,6 @@ data class Compact(
 }
 
 data class Medium
-
 constructor(
     override val navController: NavBackStack<NavKey>,
     override val snackbarHostState: SnackbarHostState,
@@ -187,13 +183,11 @@ constructor(
     override val isExpanded: Boolean
         get() = wideNavigationRailState.currentValue == WideNavigationRailValue.Expanded
 
-
     fun expand() {
         coroutineScope.launch {
             wideNavigationRailState.expand()
         }
     }
-
 
     fun collapse() {
         coroutineScope.launch {

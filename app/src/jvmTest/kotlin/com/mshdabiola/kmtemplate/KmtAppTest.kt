@@ -17,7 +17,6 @@ package com.mshdabiola.kmtemplate
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
-
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Modifier
@@ -111,7 +110,6 @@ class KmtAppTest : KoinTest {
         testLifecycleOwner.handleLifecycleEvent(Lifecycle.Event.ON_DESTROY)
         composeTestRule.waitForIdle()
     }
-
 
     @Composable
     fun KmtApp(widthSizeClass: Int = WindowSizeClass.WIDTH_DP_MEDIUM_LOWER_BOUND) {

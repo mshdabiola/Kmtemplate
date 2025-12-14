@@ -36,7 +36,6 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExtendedFloatingActionButton
-
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -91,7 +90,7 @@ import org.jetbrains.compose.resources.stringArrayResource
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
-@OptIn( ExperimentalSharedTransitionApi::class)
+@OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
 fun KmtScaffold(
     modifier: Modifier = Modifier,
@@ -264,7 +263,6 @@ fun KmtScaffold(
     }
 }
 
-
 @Preview
 @Composable
 fun KmtScaffoldPreview() {
@@ -296,7 +294,6 @@ fun KmtScaffoldPreview() {
         }
     }
 }
-
 
 @Composable
 fun DrawerContent(
@@ -409,7 +406,6 @@ fun DrawerContent(
         }
     }
 }
-
 
 @Composable
 fun Fab(
