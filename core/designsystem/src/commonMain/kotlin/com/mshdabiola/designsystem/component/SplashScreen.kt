@@ -33,7 +33,7 @@ import androidx.compose.ui.unit.dp
 import com.mshdabiola.designsystem.drawable.KmtIcons
 import com.mshdabiola.designsystem.theme.onPrimaryLight
 import com.mshdabiola.designsystem.theme.primaryLight
-import org.jetbrains.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.Preview
 
 @Composable
 fun SplashScreen(

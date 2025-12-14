@@ -43,7 +43,7 @@ import kmtemplate.feature.setting.generated.resources.update_screen_check_for_up
 import kmtemplate.feature.setting.generated.resources.update_screen_join_beta_release_text
 import kmtemplate.feature.setting.generated.resources.update_screen_show_update_dialog_text
 import org.jetbrains.compose.resources.stringResource
-import org.jetbrains.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.Preview
 
 @Composable
 fun UpdateScreen(

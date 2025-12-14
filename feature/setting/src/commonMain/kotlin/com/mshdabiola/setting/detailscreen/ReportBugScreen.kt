@@ -45,7 +45,7 @@ import kmtemplate.feature.setting.generated.resources.report_bug_submit_github_b
 import kmtemplate.feature.setting.generated.resources.report_bug_title_label
 import kmtemplate.feature.setting.generated.resources.report_bug_title_placeholder
 import org.jetbrains.compose.resources.stringResource
-import org.jetbrains.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.Preview
 
 @Composable
 fun ReportBugScreen(

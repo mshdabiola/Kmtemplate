@@ -32,7 +32,7 @@ import kmtemplate.core.ui.generated.resources.release_update_dialog_cancel_butto
 import kmtemplate.core.ui.generated.resources.release_update_dialog_download_button
 import kmtemplate.core.ui.generated.resources.release_update_dialog_title
 import org.jetbrains.compose.resources.stringResource
-import org.jetbrains.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.Preview
 
 @Composable
 fun ReleaseUpdateDialog(

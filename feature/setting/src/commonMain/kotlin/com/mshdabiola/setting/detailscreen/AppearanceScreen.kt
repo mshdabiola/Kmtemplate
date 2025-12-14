@@ -69,7 +69,7 @@ import kmtemplate.feature.setting.generated.resources.appearance_select_contrast
 import kmtemplate.feature.setting.generated.resources.daynight
 import org.jetbrains.compose.resources.stringArrayResource
 import org.jetbrains.compose.resources.stringResource
-import org.jetbrains.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.Preview
 
 @Composable
 fun AppearanceScreen(

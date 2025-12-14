@@ -28,7 +28,7 @@ import com.mshdabiola.model.DarkThemeConfig
 import com.mshdabiola.model.testtag.SettingScreenTestTags
 import com.mshdabiola.ui.SharedTransitionContainer
 import kotlinx.coroutines.launch
-import org.jetbrains.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.Preview
 
 @OptIn(ExperimentalMaterial3AdaptiveApi::class)
 @Composable
