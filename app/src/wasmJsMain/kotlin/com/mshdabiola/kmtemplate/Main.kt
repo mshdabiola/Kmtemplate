@@ -17,7 +17,7 @@ package com.mshdabiola.kmtemplate
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
+
 import androidx.compose.material3.adaptive.currentWindowAdaptiveInfo
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
@@ -65,7 +65,7 @@ import org.koin.dsl.module
  */
 @OptIn(
     ExperimentalComposeUiApi::class,
-    ExperimentalMaterial3ExpressiveApi::class,
+
 )
 fun mainApp() {
     ComposeViewport(document.body!!) {

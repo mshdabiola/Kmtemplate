@@ -17,7 +17,7 @@ package com.mshdabiola.kmtemplate
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
+
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Modifier
@@ -112,7 +112,7 @@ class KmtAppTest : KoinTest {
         composeTestRule.waitForIdle()
     }
 
-    @OptIn(ExperimentalMaterial3ExpressiveApi::class)
+
     @Composable
     fun KmtApp(widthSizeClass: Int = WindowSizeClass.WIDTH_DP_MEDIUM_LOWER_BOUND) {
         val testCoroutineScope = CoroutineScope(StandardTestDispatcher())

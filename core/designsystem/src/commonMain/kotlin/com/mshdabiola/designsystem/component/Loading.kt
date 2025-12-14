@@ -15,29 +15,25 @@
  */
 package com.mshdabiola.designsystem.component
 
-import androidx.compose.material3.ContainedLoadingIndicator
-import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
-import androidx.compose.material3.LoadingIndicator
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.mshdabiola.designsystem.theme.KmtTheme
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
-@OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 fun KmtLoading(
     modifier: Modifier = Modifier,
 ) {
-    LoadingIndicator(modifier)
+    CircularProgressIndicator(modifier)
 }
 
-@OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 fun KmtContainedLoading(
     modifier: Modifier = Modifier,
 ) {
-    ContainedLoadingIndicator(modifier)
+    CircularProgressIndicator(modifier)
 }
 
 @Preview

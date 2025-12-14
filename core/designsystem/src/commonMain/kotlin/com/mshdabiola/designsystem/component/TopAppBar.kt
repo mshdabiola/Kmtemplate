@@ -19,7 +19,6 @@ package com.mshdabiola.designsystem.component
 
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.TopAppBarScrollBehavior
@@ -30,7 +29,6 @@ import androidx.compose.ui.graphics.Color
 import com.mshdabiola.designsystem.theme.KmtTheme
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
-@OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 fun KmtTopAppBar(
     title: @Composable () -> Unit,
@@ -44,8 +42,8 @@ fun KmtTopAppBar(
 ) {
     TopAppBar(
         title = title,
-        subtitle = subtitle,
-        titleHorizontalAlignment = if (isCenterAligned) Alignment.CenterHorizontally else Alignment.Start,
+//        subtitle = subtitle,
+//        titleHorizontalAlignment = if (isCenterAligned) Alignment.CenterHorizontally else Alignment.Start,
         modifier = modifier,
         navigationIcon = navigationIcon,
         actions = actions,

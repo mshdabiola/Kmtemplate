@@ -29,7 +29,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
+
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.adaptive.currentWindowAdaptiveInfo
 import androidx.compose.runtime.Composable
@@ -80,7 +80,7 @@ object KmtAppTestTags {
     KoinExperimentalAPI::class,
     ExperimentalMaterial3Api::class,
     ExperimentalSharedTransitionApi::class,
-    ExperimentalMaterial3ExpressiveApi::class,
+
 )
 @Composable
 fun KmtApp(
