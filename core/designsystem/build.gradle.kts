@@ -52,21 +52,21 @@ kotlin {
 
     sourceSets {
          commonMain.dependencies {
-                api(compose.runtime)
-                api(compose.foundation)
-                api(compose.ui)
-                api(compose.materialIconsExtended)
-                api(compose.components.resources)
-                api(compose.material3AdaptiveNavigationSuite)
-                api(compose.components.uiToolingPreview)
-                api(compose.material3)
+                api("org.jetbrains.compose.runtime:runtime:1.10.0-rc02")
+                api("org.jetbrains.compose.foundation:foundation:1.10.0-rc02")
+                api("org.jetbrains.compose.ui:ui:1.10.0-rc02")
+                api("org.jetbrains.compose.material:material-icons-extended:1.7.3")
+                api("org.jetbrains.compose.components:components-resources:1.10.0-rc02")
+                api("org.jetbrains.compose.material3:material3-adaptive-navigation-suite:1.9.0")
+                api("org.jetbrains.compose.ui:ui-tooling-preview:1.10.0-rc02")
+                api("org.jetbrains.compose.material3:material3:1.10.0-alpha05")
 
 
              api(libs.androidx.nav3.ui.get())
                 api(libs.kotlinx.collection.immutable)
                 api(libs.androidx.lifecycle.viewmodelCompose)
                 api(libs.androidx.lifecycle.runtimeCompose)
-//                api(libs.material3)
+                api(libs.material3)
 
 
                 api(libs.koin.compose)
