@@ -19,6 +19,7 @@ androidxUiAutomator = "2.3.0"
 androidxWindowManager = "1.5.1"
 bugsnag = "3.8.0"
 coil = "3.3.0"
+componentsResources = "1.10.0-rc02"
 compose = "1.10.0"
 compose-plugin = "1.10.0-rc02"
 composehot = "1.0.0"
@@ -29,6 +30,7 @@ detekt = "1.23.8"
 firebaseBom = "34.6.0"
 firebaseCrashlyticsPlugin = "3.0.6"
 firebasePerfPlugin = "2.0.2"
+foundation = "1.10.0-rc02"
 gmsPlugin = "4.4.4"
 kermit = "2.0.8"
 koin = "4.1.1"
@@ -48,13 +50,19 @@ ktlintRulesetStandard = "1.8.0"
 ktlintTest = "1.8.0"
 ktor = "3.3.3"
 material3 = "1.9.0"
+material3AdaptiveNavigationSuite = "1.9.0"
+material3Version = "1.10.0-alpha05"
+materialIconsExtended = "1.7.3"
 room = "2.8.4"
+runtime = "1.10.0-rc02"
 screenshot = "0.0.1-alpha12"
 slf4jSimple = "2.0.17"
 spotless = "8.1.0"
 sqlite = "2.6.2"
 turbine = "1.2.1"
+ui = "1.10.0-rc02"
 uiTextGoogleFonts = "1.9.4"
+uiToolingPreview = "1.10.0-rc02"
 zoomable = "2.9.0"
 
 versionCode = "29"
@@ -92,6 +100,7 @@ coil-kt = { module = "io.coil-kt.coil3:coil", version.ref = "coil" }
 coil-kt-compose = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coil" }
 coil-kt-network = { module = "io.coil-kt.coil3:coil-network-ktor3", version.ref = "coil" }
 coil-kt-svg = { module = "io.coil-kt.coil3:coil-svg", version.ref = "coil" }
+components-resources = { module = "org.jetbrains.compose.components:components-resources", version.ref = "componentsResources" }
 compose-gradlePlugin = { module = "org.jetbrains.kotlin:compose-compiler-gradle-plugin", version.ref = "kotlin" }
 compose-hot-gradlePlugin = { module = "org.jetbrains.compose.hot-reload:hot-reload-gradle-plugin", version.ref = "composehot" }
 compottie = { module = "io.github.alexzhirkevich:compottie", version.ref = "compottie" }
@@ -107,6 +116,7 @@ firebase-message = { group = "com.google.firebase", name = "firebase-inappmessag
 firebase-performance = { group = "com.google.firebase", name = "firebase-perf" }
 firebase-performance-gradlePlugin = { group = "com.google.firebase", name = "perf-plugin", version.ref = "firebasePerfPlugin" }
 firebase-remoteconfig = { group = "com.google.firebase", name = "firebase-config" }
+foundation = { module = "org.jetbrains.compose.foundation:foundation", version.ref = "foundation" }
 jlleitschuh-gradlePlugin = { module = "org.jlleitschuh.gradle:ktlint-gradle", version.ref = "ktlint" }
 kermit = { module = "co.touchlab:kermit", version.ref = "kermit" }
 kermit-koin = { module = "co.touchlab:kermit-koin", version.ref = "kermit" }
@@ -150,15 +160,21 @@ ktor-client-serialization = { module = "io.ktor:ktor-serialization-kotlinx-json"
 lint-api = { group = "com.android.tools.lint", name = "lint-api", version.ref = "androidTools" }
 lint-checks = { group = "com.android.tools.lint", name = "lint-checks", version.ref = "androidTools" }
 lint-tests = { group = "com.android.tools.lint", name = "lint-tests", version.ref = "androidTools" }
+material-icons-extended = { module = "org.jetbrains.compose.material:material-icons-extended", version.ref = "materialIconsExtended" }
 material3 = { module = "org.jetbrains.compose.material3:material3", version.ref = "material3" }
+material3-adaptive-navigation-suite = { module = "org.jetbrains.compose.material3:material3-adaptive-navigation-suite", version.ref = "material3AdaptiveNavigationSuite" }
+material3-v1100alpha05 = { module = "org.jetbrains.compose.material3:material3", version.ref = "material3Version" }
 room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
 room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
+runtime = { module = "org.jetbrains.compose.runtime:runtime", version.ref = "runtime" }
 screenShot-gradlePlugin = { module = "com.android.compose.screenshot:screenshot-test-gradle-plugin", version.ref = "screenshot" }
 screenshot-validation-api = { group = "com.android.tools.screenshot", name = "screenshot-validation-api", version.ref = "screenshot" }
 slf4j-simple = { module = "org.slf4j:slf4j-simple", version.ref = "slf4jSimple" }
 spotless-gradlePlugin = { group = "com.diffplug.spotless", name = "spotless-plugin-gradle", version.ref = "spotless" }
 sqlite-bundled = { module = "androidx.sqlite:sqlite-bundled", version.ref = "sqlite" }
 turbine = { group = "app.cash.turbine", name = "turbine", version.ref = "turbine" }
+ui = { module = "org.jetbrains.compose.ui:ui", version.ref = "ui" }
+ui-tooling-preview = { module = "org.jetbrains.compose.ui:ui-tooling-preview", version.ref = "uiToolingPreview" }
 zoomable = { module = "net.engawapg.lib:zoomable", version.ref = "zoomable" }
 
 

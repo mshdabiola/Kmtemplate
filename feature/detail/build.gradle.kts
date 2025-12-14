@@ -25,7 +25,8 @@ android {
 kotlin {
     sourceSets {
         commonMain.dependencies {
-            api(compose.components.resources)
+            implementation(libs.components.resources)
+            implementation(libs.ui.tooling.preview)
         }
     }
 }
