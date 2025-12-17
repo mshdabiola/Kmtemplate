@@ -19,7 +19,7 @@ import androidx.compose.animation.ExperimentalSharedTransitionApi
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.navigation3.runtime.EntryProviderBuilder
+import androidx.navigation3.runtime.EntryProviderScope
 import androidx.navigation3.runtime.NavBackStack
 import androidx.navigation3.runtime.NavKey
 import com.mshdabiola.detail.DetailScreen
@@ -41,7 +41,7 @@ fun NavBackStack<NavKey>.navigateToDetail(detail: Detail) {
 }
 
 @OptIn(KoinExperimentalAPI::class, ExperimentalSharedTransitionApi::class)
-fun EntryProviderBuilder<NavKey>.detailScreen(
+fun EntryProviderScope<NavKey>.detailScreen(
     modifier: Modifier = Modifier,
     onBack: () -> Unit,
     setNotification: (Notification) -> Unit,

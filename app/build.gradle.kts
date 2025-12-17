@@ -90,6 +90,7 @@ kotlin {
             implementation(projects.core.analytics)
             implementation(libs.androidx.nav3.ui)
             implementation(libs.ui.tooling.preview)
+            implementation(libs.lifecycle.viewmodel.navigation3)
 
 
             implementation(projects.feature.main)
@@ -102,7 +103,7 @@ kotlin {
             implementation(libs.androidx.compose.material3.adaptive)
             implementation(libs.androidx.compose.material3.adaptive.layout)
             implementation(libs.androidx.compose.material3.adaptive.navigation)
-            implementation(compose.components.resources)
+            implementation(libs.components.resources)
 
 
         }
