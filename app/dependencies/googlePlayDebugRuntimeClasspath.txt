@@ -230,7 +230,7 @@ com.google.firebase:firebase-annotations:17.0.0
 com.google.firebase:firebase-appcheck-interop:17.0.0
 com.google.firebase:firebase-auth-interop:20.0.0
 com.google.firebase:firebase-auth:24.0.1
-com.google.firebase:firebase-bom:34.6.0
+com.google.firebase:firebase-bom:34.7.0
 com.google.firebase:firebase-common:22.0.1
 com.google.firebase:firebase-components:19.0.0
 com.google.firebase:firebase-config-interop:16.0.1
