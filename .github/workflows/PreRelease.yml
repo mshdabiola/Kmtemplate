@@ -192,7 +192,7 @@ jobs:
         run: ./gradlew app:wasmJsBrowserDistribution
 
       - name: Deploy
-        uses: JamesIves/github-pages-deploy-action@v4.7.4
+        uses: JamesIves/github-pages-deploy-action@v4.7.6
         with:
           GITHUB_TOKEN: ${{ secrets.TOKEN }}
           BRANCH: pre-release-web-app # The branch the action should deploy to.
