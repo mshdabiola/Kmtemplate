@@ -21,17 +21,14 @@ import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.IconButtonDefaults
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 
-@OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 fun KmtButton(
     onClick: () -> Unit,
@@ -41,29 +38,28 @@ fun KmtButton(
     enabled: Boolean = true,
     contentPadding: PaddingValues? = null,
 ) {
-    val size = ButtonDefaults.ExtraSmallContainerHeight
+    val size = ButtonDefaults.MinHeight
     Button(
         onClick = onClick,
         enabled = enabled,
-        shapes = ButtonDefaults.shapes(),
+        shape = ButtonDefaults.shape,
         colors = ButtonDefaults.buttonColors(),
         modifier = modifier.heightIn(size),
-        contentPadding = contentPadding ?: ButtonDefaults.contentPaddingFor(size),
+        contentPadding = contentPadding ?: ButtonDefaults.ContentPadding,
     ) {
         if (icon != null) {
             Icon(
                 icon,
                 contentDescription = "Localized description",
-                modifier = Modifier.size(ButtonDefaults.iconSizeFor(size)),
+                modifier = Modifier.size(ButtonDefaults.IconSize),
             )
-            Spacer(Modifier.size(ButtonDefaults.iconSpacingFor(size)))
+            Spacer(Modifier.size(ButtonDefaults.IconSpacing))
         }
 
-        Text(label, style = ButtonDefaults.textStyleFor(size))
+        Text(label)
     }
 }
 
-@OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 fun KmtSecondaryButton(
     onClick: () -> Unit,
@@ -73,29 +69,27 @@ fun KmtSecondaryButton(
     enabled: Boolean = true,
     contentPadding: PaddingValues? = null,
 ) {
-    val size = ButtonDefaults.ExtraSmallContainerHeight
     Button(
+        modifier = modifier,
         onClick = onClick,
         enabled = enabled,
-        shapes = ButtonDefaults.shapes(MaterialTheme.shapes.medium),
+        shape = ButtonDefaults.shape,
         colors = ButtonDefaults.textButtonColors(),
-        modifier = modifier.heightIn(size),
-        contentPadding = contentPadding ?: ButtonDefaults.contentPaddingFor(size),
+        contentPadding = contentPadding ?: ButtonDefaults.ContentPadding,
     ) {
         if (icon != null) {
             Icon(
                 icon,
                 contentDescription = "Localized description",
-                modifier = Modifier.size(ButtonDefaults.iconSizeFor(size)),
+                modifier = Modifier.size(ButtonDefaults.IconSize),
             )
-            Spacer(Modifier.size(ButtonDefaults.iconSpacingFor(size)))
+            Spacer(Modifier.size(ButtonDefaults.IconSpacing))
         }
 
-        Text(label, style = ButtonDefaults.textStyleFor(size))
+        Text(label)
     }
 }
 
-@OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 fun KmtIconButton(
     onClick: () -> Unit,
@@ -107,7 +101,7 @@ fun KmtIconButton(
     IconButton(
         modifier = modifier,
         onClick = onClick,
-        shapes = IconButtonDefaults.shapes(),
+        shape = IconButtonDefaults.standardShape,
         colors = IconButtonDefaults.iconButtonColors(),
         enabled = enabled,
     ) {

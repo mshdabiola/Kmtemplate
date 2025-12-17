@@ -16,7 +16,6 @@
 package com.mshdabiola.kmtemplate
 
 import androidx.compose.material3.DrawerValue
-import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.WideNavigationRailValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.test.junit4.createComposeRule
@@ -45,7 +44,7 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 
-@OptIn(ExperimentalCoroutinesApi::class, ExperimentalMaterial3ExpressiveApi::class)
+@OptIn(ExperimentalCoroutinesApi::class)
 class KmtAppStateTest {
     @get:Rule
     val composeTestRule = createComposeRule()

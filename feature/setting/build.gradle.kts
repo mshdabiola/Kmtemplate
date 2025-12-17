@@ -25,7 +25,8 @@ android {
 kotlin {
     sourceSets {
          commonMain.dependencies {
-                api(compose.components.resources)
+             implementation(libs.components.resources)
+             implementation(libs.ui.tooling.preview)
                 implementation(libs.androidx.compose.material3.adaptive)
                 implementation(libs.androidx.compose.material3.adaptive.layout)
                 implementation(libs.androidx.compose.material3.adaptive.navigation)

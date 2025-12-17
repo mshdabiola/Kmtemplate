@@ -24,11 +24,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.tooling.preview.Preview
 import com.mshdabiola.model.DarkThemeConfig
 import com.mshdabiola.model.testtag.SettingScreenTestTags
 import com.mshdabiola.ui.SharedTransitionContainer
 import kotlinx.coroutines.launch
-import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @OptIn(ExperimentalMaterial3AdaptiveApi::class)
 @Composable

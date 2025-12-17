@@ -35,7 +35,7 @@ import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
+import androidx.compose.material3.ExtendedFloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -46,7 +46,6 @@ import androidx.compose.material3.PermanentDrawerSheet
 import androidx.compose.material3.PermanentNavigationDrawer
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.ScaffoldDefaults
-import androidx.compose.material3.SmallExtendedFloatingActionButton
 import androidx.compose.material3.SmallFloatingActionButton
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
@@ -64,6 +63,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.stateDescription
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation3.runtime.NavKey
 import androidx.navigation3.runtime.rememberNavBackStack
@@ -89,9 +89,8 @@ import com.mshdabiola.ui.SharedTransitionContainer
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.stringArrayResource
 import org.jetbrains.compose.resources.stringResource
-import org.jetbrains.compose.ui.tooling.preview.Preview
 
-@OptIn(ExperimentalMaterial3ExpressiveApi::class, ExperimentalSharedTransitionApi::class)
+@OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
 fun KmtScaffold(
     modifier: Modifier = Modifier,
@@ -264,7 +263,6 @@ fun KmtScaffold(
     }
 }
 
-@OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Preview
 @Composable
 fun KmtScaffoldPreview() {
@@ -297,7 +295,6 @@ fun KmtScaffoldPreview() {
     }
 }
 
-@OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 fun DrawerContent(
     modifier: Modifier = Modifier,
@@ -410,7 +407,6 @@ fun DrawerContent(
     }
 }
 
-@OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 fun Fab(
     modifier: Modifier = Modifier, // The passed modifier might already include sharedBounds
@@ -435,7 +431,7 @@ fun Fab(
                 )
             }
         } else {
-            SmallExtendedFloatingActionButton(
+            ExtendedFloatingActionButton(
                 modifier = Modifier.testTag(KmtScaffoldTestTags.FabTestTags.EXTENDED_FAB),
                 // Tag the specific FAB type
                 onClick = { appState.navController.navigateToDetail(Detail(-1)) },

@@ -41,6 +41,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.mshdabiola.designsystem.drawable.KmtIcons
 import com.mshdabiola.designsystem.theme.KmtTheme
@@ -63,7 +64,6 @@ import kmtemplate.feature.setting.generated.resources.faq_share_ui_question
 import kmtemplate.feature.setting.generated.resources.faq_template_help_answer
 import kmtemplate.feature.setting.generated.resources.faq_template_help_question
 import org.jetbrains.compose.resources.stringResource
-import org.jetbrains.compose.ui.tooling.preview.Preview
 
 data class FaqItem(
     val id: Int,

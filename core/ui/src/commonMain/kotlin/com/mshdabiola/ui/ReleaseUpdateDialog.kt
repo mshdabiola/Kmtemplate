@@ -18,11 +18,11 @@ package com.mshdabiola.ui
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.AlertDialog
-import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.tooling.preview.Preview
 import com.mshdabiola.designsystem.component.KmtButton
 import com.mshdabiola.designsystem.component.KmtSecondaryButton
 import com.mshdabiola.model.ReleaseInfo
@@ -33,9 +33,7 @@ import kmtemplate.core.ui.generated.resources.release_update_dialog_cancel_butto
 import kmtemplate.core.ui.generated.resources.release_update_dialog_download_button
 import kmtemplate.core.ui.generated.resources.release_update_dialog_title
 import org.jetbrains.compose.resources.stringResource
-import org.jetbrains.compose.ui.tooling.preview.Preview
 
-@OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 fun ReleaseUpdateDialog(
     releaseInfo: ReleaseInfo.NewUpdate,
