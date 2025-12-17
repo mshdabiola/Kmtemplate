@@ -44,7 +44,7 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 
-@OptIn(ExperimentalCoroutinesApi::class, ExperimentalMaterial3ExpressiveApi::class)
+@OptIn(ExperimentalCoroutinesApi::class)
 class KmtAppStateTest {
     @get:Rule
     val composeTestRule = createComposeRule()
