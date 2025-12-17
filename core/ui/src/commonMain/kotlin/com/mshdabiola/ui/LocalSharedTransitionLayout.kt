@@ -41,17 +41,17 @@ fun SharedTransitionContainer(
     content: @Composable () -> Unit,
 ) {
     KmtTheme(darkTheme = isDarkMode) {
-            AnimatedContent(true) {
-                CompositionLocalProvider(
-                    LocalNavAnimatedContentScope provides this,
-                ) {
-                    if (it) {
-                        SharedTransitionLayout {
-                            CompositionLocalProvider(
-                                LocalSharedTransitionScope provides this
-                            ) {
-                                content()
-                            }
+        AnimatedContent(true) {
+            CompositionLocalProvider(
+                LocalNavAnimatedContentScope provides this,
+            ) {
+                if (it) {
+                    SharedTransitionLayout {
+                        CompositionLocalProvider(
+                            LocalSharedTransitionScope provides this,
+                        ) {
+                            content()
+                        }
                     }
                 }
             }
