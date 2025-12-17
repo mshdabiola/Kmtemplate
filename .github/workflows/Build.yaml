@@ -111,7 +111,7 @@ jobs:
 
       - name: Upload JVM local results (HTML)
         if: always()
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: local-test-results
           path: '**/build/reports/tests/jvmTest'
@@ -135,7 +135,7 @@ jobs:
 
       - name: Upload local coverage reports (XML + HTML)
         if: success() || failure()
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: coverage-reports
           if-no-files-found: error
@@ -163,7 +163,7 @@ jobs:
 
       - name: Upload lint reports (HTML)
         if: always()
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: lint-reports
           path: '**/build/reports/lint-results-*.html'
@@ -236,7 +236,7 @@ jobs:
           -x collectFossReliantNonMinifiedBenchmarkBaselineProfile
 
       - name: Upload build artifacts for Foss Reliant
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: Foss Reliant APKs
           path: '**/build/outputs/apk/**/*.apk'
@@ -276,7 +276,7 @@ jobs:
           -x collectGooglePlayNonMinifiedBenchmarkBaselineProfile
 
       - name: Upload build artifacts for Google Play
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: Google Play APKs
           path: '**/build/outputs/apk/**/*.apk'
