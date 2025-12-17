@@ -70,6 +70,7 @@ fun KmtSecondaryButton(
     contentPadding: PaddingValues? = null,
 ) {
     Button(
+        modifier = modifier,
         onClick = onClick,
         enabled = enabled,
         shape = ButtonDefaults.shape,
