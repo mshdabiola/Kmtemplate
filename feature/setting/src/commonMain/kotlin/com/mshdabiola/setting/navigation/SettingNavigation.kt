@@ -19,7 +19,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.navigation3.runtime.EntryProviderBuilder
+import androidx.navigation3.runtime.EntryProviderScope
 import androidx.navigation3.runtime.NavBackStack
 import androidx.navigation3.runtime.NavKey
 import com.mshdabiola.model.AssetNotFoundException
@@ -51,7 +51,7 @@ import org.koin.core.annotation.KoinExperimentalAPI
 fun NavBackStack<NavKey>.navigateToSetting() = add(Setting)
 
 @OptIn(KoinExperimentalAPI::class)
-fun EntryProviderBuilder<NavKey>.settingScreen(
+fun EntryProviderScope<NavKey>.settingScreen(
     modifier: Modifier,
     onDrawer: (() -> Unit)?,
     setNotification: (Notification) -> Unit,

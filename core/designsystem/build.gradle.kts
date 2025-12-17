@@ -67,7 +67,7 @@ kotlin {
                 api(libs.androidx.lifecycle.viewmodelCompose)
                 api(libs.androidx.lifecycle.runtimeCompose)
                 api(libs.material3)
-
+                api(libs.lifecycle.viewmodel.navigation3)
 
                 api(libs.koin.compose)
                 api(libs.koin.composeVM)
@@ -76,7 +76,7 @@ kotlin {
                 api(libs.coil.kt.compose)
                 api(libs.coil.kt.svg)
                 api(libs.coil.kt.network)
-             implementation("org.jetbrains.compose.components:components-resources:1.10.0-rc02")
+                implementation(libs.components.resources)
 
             }
 

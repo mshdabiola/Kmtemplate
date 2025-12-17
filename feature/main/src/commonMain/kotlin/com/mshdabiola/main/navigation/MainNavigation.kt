@@ -18,7 +18,7 @@ package com.mshdabiola.main.navigation
 import androidx.compose.animation.ExperimentalSharedTransitionApi
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.navigation3.runtime.EntryProviderBuilder
+import androidx.navigation3.runtime.EntryProviderScope
 import androidx.navigation3.runtime.NavBackStack
 import androidx.navigation3.runtime.NavKey
 import com.mshdabiola.main.MainScreen
@@ -28,7 +28,7 @@ import org.koin.compose.viewmodel.koinViewModel
 fun NavBackStack<NavKey>.navigateToMain() = add(Main)
 
 @OptIn(ExperimentalSharedTransitionApi::class)
-fun EntryProviderBuilder<NavKey>.mainScreen(
+fun EntryProviderScope<NavKey>.mainScreen(
     modifier: Modifier = Modifier,
     onDrawer: (() -> Unit)?,
     navigateToDetail: (Long) -> Unit,

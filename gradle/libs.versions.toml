@@ -5,7 +5,7 @@ androidTools = "31.13.1"
 androidxActivity = "1.12.1"
 androidxComposeMaterial3Adaptive = "1.2.0"
 androidxCore = "1.17.0"
-androidx-nav3 = "1.0.0-alpha02"
+androidx-nav3 = "1.0.0-alpha06"
 androidxCoreSplashscreen = "1.2.0"
 androidxDataStore = "1.2.0"
 androidx-lifecycle = "2.10.0-alpha02"
@@ -49,6 +49,7 @@ ktlintRuleEngine = "1.8.0"
 ktlintRulesetStandard = "1.8.0"
 ktlintTest = "1.8.0"
 ktor = "3.3.3"
+lifecycleViewmodelNavigation3 = "2.10.0-alpha07"
 material3 = "1.9.0"
 material3AdaptiveNavigationSuite = "1.9.0"
 material3Version = "1.10.0-alpha05"
@@ -157,6 +158,7 @@ ktor-client-logging = { module = "io.ktor:ktor-client-logging-jvm", version.ref 
 ktor-client-mock = { module = "io.ktor:ktor-client-mock", version.ref = "ktor" }
 ktor-client-resources = { module = "io.ktor:ktor-client-resources", version.ref = "ktor" }
 ktor-client-serialization = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor" }
+lifecycle-viewmodel-navigation3 = { module = "org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-navigation3", version.ref = "lifecycleViewmodelNavigation3" }
 lint-api = { group = "com.android.tools.lint", name = "lint-api", version.ref = "androidTools" }
 lint-checks = { group = "com.android.tools.lint", name = "lint-checks", version.ref = "androidTools" }
 lint-tests = { group = "com.android.tools.lint", name = "lint-tests", version.ref = "androidTools" }
