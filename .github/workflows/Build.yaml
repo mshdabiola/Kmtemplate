@@ -118,7 +118,7 @@ jobs:
 
       - name: Publish Test Results
         if: success() || failure()
-        uses: EnricoMi/publish-unit-test-result-action@v2.21.0
+        uses: EnricoMi/publish-unit-test-result-action@v2.22.0
         with:
           check_name: Test results
           comment_title: Test results
